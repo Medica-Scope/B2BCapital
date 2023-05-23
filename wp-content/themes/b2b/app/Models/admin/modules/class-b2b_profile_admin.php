@@ -22,11 +22,7 @@
      */
     class B2b_Profile_Admin extends B2b_Module
     {
-        public array $meta_data = [
-            'application',
-            'mobile_number',
-            'user_id',
-        ];
+        public array $meta_data = [];
 
         public function __construct()
         {
