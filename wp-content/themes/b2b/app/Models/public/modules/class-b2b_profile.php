@@ -68,49 +68,4 @@
             // TODO: Implement filters() method.
         }
 
-        //        public function get_profile_by() {
-        //
-        //        }
-        //
-        //
-        //        public function get_user_profile($userID = 0): B2b_Post
-        //        {
-        //
-        //            $user_obj = new B2b_User();
-        //
-        //            if (!$userID) {
-        //                global $current_user_id;
-        //                $userID = $current_user_id;
-        //            }
-        ////                $user = $user_obj::get_user_by('ID', $userID);
-        //
-        //            $wp_profile = new \WP_Query([
-        //                'post_type'      => $this->type,
-        //                'post_status'    => $this->status,
-        //                'author'         => $userID,
-        //                'posts_per_page' => 1
-        //            ]);
-        //
-        //            $class   = __CLASS__;
-        //            $profile = new $class();
-        //
-        //            $profile = $this->convert($wp_profile->post, $this->meta_data);
-        //
-        //            $wp_applications = new \WP_Query([
-        //                'post_type'      => 'application',
-        //                'post_status'    => [
-        //                    'shortlisted',
-        //                    'rejected',
-        //                    'accepted',
-        //                    'pending'
-        //                ],
-        //                'author'         => $userID,
-        //                'posts_per_page' => -1
-        //            ]);
-        //
-        //            $profile->applications = $wp_applications->posts;
-        //            $profile->user         = $user;
-        //
-        //            return $profile;
-        //        }
     }

@@ -36,9 +36,11 @@
         /**
          * USER ROLES
          */
-        const ADMIN      = 'administrator';
-        const CMS        = 'cmsmanager';
-        const SUBSCRIBER = 'subscriber';
+        const ADMIN    = 'administrator';
+        const CMS      = 'cmsmanager';
+        const OWNER    = 'owner';
+        const INVESTOR = 'investor';
+        const SEO      = 'seomanager';
         /**
          * B2B USER INSTANCE
          *

@@ -44,6 +44,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	- Galleries
 # plugins
 	-
+# Notices
+
 # Utilities
 	- Accessibility
 	- Alignments
@@ -84,6 +86,12 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # Plugins
 --------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Notices
+--------------------------------------------------------------*/
+@import "notices/notices";
+
 
 /*--------------------------------------------------------------
 # Utilities

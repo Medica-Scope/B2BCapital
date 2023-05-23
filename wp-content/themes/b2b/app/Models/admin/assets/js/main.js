@@ -20,6 +20,6 @@ class B2bMain
 (function ($) {
     'use strict';
     $(document).ready(function (e) {
-        const Btc = new B2bMain();
+        const B2b = new B2bMain();
     });
 })($);

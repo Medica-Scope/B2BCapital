@@ -87,6 +87,16 @@
                         'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_blog.php'
                     ],
+                    'Faq' => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_faq.php'
+                    ],
+                    'Opportunity' => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_opportunity.php'
+                    ],
                     'Profile' => [
                         'type'      => 'class',
                         'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',

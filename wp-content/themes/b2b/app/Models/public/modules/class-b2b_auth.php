@@ -337,7 +337,8 @@
          */
         public function restrict_redirections(): void
         {
-            if ((is_page('my-account/login') || is_page('my-account/reset-password') || is_page('my-account/forgot-password')) && is_user_logged_in()) {
+            if ((is_page('my-account/login') || is_page('my-account/registration') || is_page('my-account/reset-password') || is_page('my-account/forgot-password')) &&
+                is_user_logged_in()) {
                 wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
                 exit();
             }

@@ -53,23 +53,6 @@
         }
 
         /**
-         * Description...
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return void
-         */
-        public function restrict_redirections(): void
-        {
-
-            if (is_post_type_archive('post') || is_single('post') || is_page('blogs')) {
-                wp_safe_redirect(home_url());
-                exit();
-            }
-        }
-
-        /**
          * @inheritDoc
          */
         protected function actions($module_name): void
@@ -83,6 +66,5 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
-            $this->hooks->add_filter('template_redirect', $this, 'restrict_redirections');
         }
     }
