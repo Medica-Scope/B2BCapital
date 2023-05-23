@@ -10,6 +10,8 @@
 
     use B2B\APP\HELPERS\B2b_Ajax_Response;
     use B2B\APP\HELPERS\B2b_Hooks;
+    use WP_Error;
+    use WP_Query;
 
     /**
      * Description...
@@ -87,13 +89,14 @@
          * @author Mustafa Shaaban
          * @return array
          */
-        public function get_all(array $status = [ 'any' ], int $limit = 10, string $order = 'DESC'): array
+        public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ]): array
         {
-            $posts     = new \WP_Query([
+            $posts     = new WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
-                "orderby"        => 'ID',
+                "orderby"        => $orderby,
+                "not__in"        => $not_in,
                 "order"          => $order,
             ]);
             $B2b_Posts = [];
@@ -114,20 +117,36 @@
          * @since 1.0.0
          * @package b2b
          * @author Mustafa Shaaban
-         * @return \B2B\APP\CLASSES\B2b_Post
+         * @return \B2B\APP\CLASSES\B2b_Post|\WP_Error
          */
-        public function get_by_id(int $post_id = 0): B2b_Post
+        public function get_by_id(int $post_id = 0): B2b_Post|WP_Error
         {
-            $posts = new \WP_Query([
+            $error = new WP_Error();
+
+            if ($post_id <= 0) {
+                $error->add('invalid_id', __("No invalid post id", 'b2b'), [
+                    'status'  => FALSE,
+                    'details' => [ 'post_id' => $post_id ]
+                ]);
+                return $error;
+            }
+
+            $posts = new WP_Query([
                 "p"           => $post_id,
                 "post_type"   => $this->module,
                 "post_status" => 'any',
             ]);
 
-            $B2b_Posts = new B2b_Post();
+            $posts = get_post($post_id);
 
-            if ($posts->have_posts()) {
-                $B2b_Posts = $this->convert($posts->post, $this->meta_data);
+            if ($posts) {
+                $B2b_Posts = $this->convert($posts, $this->meta_data);
+            } else {
+                $error->add('invalid_id', __("No posts available.", 'b2b'), [
+                    'status'  => FALSE,
+                    'details' => [ 'post_id' => $post_id ]
+                ]);
+                return $error;
             }
 
             return $B2b_Posts;
@@ -147,51 +166,21 @@
          */
         public function get_by_ids(array $post_ids = [], array $status = [ 'publish' ]): array
         {
-            $posts     = new \WP_Query([
+            $B2b_Posts = [];
+
+            if (empty($post_ids)) {
+                return $B2b_Posts;
+            }
+
+            $posts = new WP_Query([
                 "post__in"    => $post_ids,
                 "post_type"   => $this->module,
                 "post_status" => $status,
             ]);
-            $B2b_Posts = [];
 
             foreach ($posts->get_posts() as $post) {
                 $B2b_Posts[] = $this->convert($post, $this->meta_data);
             }
-
-            return $B2b_Posts;
-        }
-
-        /**
-         * Description...
-         *
-         * @param array  $status
-         * @param int    $page
-         * @param int    $limit
-         * @param string $order
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
-         */
-        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC'): array
-        {
-            $posts     = new \WP_Query([
-                "post_type"      => $this->module,
-                "post_status"    => $status,
-                "posts_per_page" => $limit,
-                "orderby"        => 'ID',
-                "order"          => $order,
-                "paged"          => $page,
-            ]);
-            $B2b_Posts = [];
-
-            foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->convert($post, $this->meta_data);
-            }
-
-            $B2b_Posts['count'] = $posts->found_posts;
 
             return $B2b_Posts;
         }
@@ -229,6 +218,41 @@
                 'html' => $html,
                 'last' => $last
             ]);
+        }
+
+        /**
+         * Description...
+         *
+         * @param array  $status
+         * @param int    $page
+         * @param int    $limit
+         * @param string $order
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC'): array
+        {
+            $posts     = new WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => $status,
+                "posts_per_page" => $limit,
+                "orderby"        => 'ID',
+                "order"          => $order,
+                "paged"          => $page,
+            ]);
+            $B2b_Posts = [];
+
+            foreach ($posts->get_posts() as $post) {
+                $B2b_Posts[] = $this->convert($post, $this->meta_data);
+            }
+
+            $B2b_Posts['count'] = $posts->found_posts;
+
+            return $B2b_Posts;
         }
 
     }

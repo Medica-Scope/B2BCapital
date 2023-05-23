@@ -9,6 +9,8 @@
     namespace B2B\APP\CLASSES;
 
     use B2B\B2b;
+    use WP_Error;
+    use WP_Post;
 
     /**
      * Description...
@@ -23,13 +25,22 @@
     {
 
         /**
+         * @var \B2B\APP\CLASSES\B2b_Post|null
+         */
+        private static ?B2b_Post $instance = NULL;
+        /**
+         * The post's meta data
+         *
+         * @var array
+         */
+        public array $meta_data = [];
+        /**
          * Post ID.
          *
          * @since 1.0.0
          * @var int
          */
         protected int $ID = 0;
-
         /**
          * ID of post author.
          *
@@ -39,7 +50,6 @@
          * @var int
          */
         protected int $author = 0;
-
         /**
          * The post's title.
          *
@@ -47,7 +57,6 @@
          * @var string
          */
         protected string $title = '';
-
         /**
          * The post's content.
          *
@@ -55,7 +64,13 @@
          * @var string
          */
         protected string $content = '';
-
+        /**
+         * The post's excerpt.
+         *
+         * @since 1.0.0
+         * @var string
+         */
+        protected string $excerpt = '';
         /**
          * The post's status.
          *
@@ -63,7 +78,6 @@
          * @var string
          */
         protected string $status = 'publish';
-
         /**
          * The post's slug.
          *
@@ -71,7 +85,6 @@
          * @var string
          */
         protected string $name = '';
-
         /**
          * ID of a post's parent post.
          *
@@ -79,7 +92,6 @@
          * @var int
          */
         protected int $parent = 0;
-
         /**
          * The post's type, like post or page.
          *
@@ -87,7 +99,6 @@
          * @var string
          */
         protected string $type = 'post';
-
         /**
          * The post's local publication time.
          *
@@ -95,7 +106,6 @@
          * @var string
          */
         protected string $created_date = '0000-00-00 00:00:00';
-
         /**
          * The post's local modified time.
          *
@@ -103,7 +113,6 @@
          * @var string
          */
         protected string $modified_date = '0000-00-00 00:00:00';
-
         /**
          * The post's featured image.
          *
@@ -111,7 +120,6 @@
          * @var string
          */
         protected string $thumbnail = '';
-
         /**
          * The post's URL.
          *
@@ -119,7 +127,6 @@
          * @var string
          */
         protected string $link = '';
-
         /**
          * The post's category/taxonomy.
          *
@@ -128,32 +135,20 @@
          */
         protected array $taxonomy = [];
 
-        /**
-         * The post's meta data
-         *
-         * @var array
-         */
-        public array $meta_data = [];
-
-        /**
-         * @var \B2B\APP\CLASSES\B2b_Post|null
-         */
-        private static ?B2b_Post $instance = NULL;
-
-        public function __set($name, $value)
-        {
-            $this->{$name} = $value;
-        }
-
-        public function __get($name)
-        {
-            return property_exists($this, $name) ? $this->{$name} : FALSE;
-        }
-
         public function __construct()
         {
             // Reformat class metadata
             $this->meta_data = $this->reformat_metadata($this->meta_data);
+        }
+
+        private function reformat_metadata($meta_data)
+        {
+            foreach ($meta_data as $k => $meta) {
+                $meta_data[$meta] = '';
+                unset($meta_data[$k]);
+            }
+
+            return $meta_data;
         }
 
         /**
@@ -165,7 +160,7 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public static function get_post(\WP_Post $post, array $meta_data = []): B2b_Post
+        public static function get_post(WP_Post $post, array $meta_data = []): B2b_Post
         {
             $class          = __CLASS__;
             self::$instance = new $class();
@@ -185,7 +180,7 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function convert(\WP_Post $post, array $meta_data = []): B2b_Post
+        public function convert(WP_Post $post, array $meta_data = []): B2b_Post
         {
             global $wpdb;
 
@@ -198,6 +193,7 @@
             $new_post->name          = $post->post_name;
             $new_post->title         = $post->post_title;
             $new_post->content       = $post->post_content;
+            $new_post->excerpt       = $post->post_excerpt;
             $new_post->status        = $post->post_status;
             $new_post->parent        = $post->post_parent;
             $new_post->created_date  = $post->post_date;
@@ -210,7 +206,7 @@
 																LEFT JOIN `" . $wpdb->prefix . "term_taxonomy` tt ON tt.term_id = t.term_id
 																WHERE tr.object_id = '$post->ID' AND tt.taxonomy != 'translation_priority';");
 
-            if (empty($meta_data)){
+            if (empty($meta_data)) {
                 $meta_data = $wpdb->get_results("SELECT `meta_key`, `meta_value`
                                                                     FROM `" . $wpdb->prefix . "postmeta` AS meta
                                                                     WHERE meta.`post_id` = '$post->ID';");
@@ -228,19 +224,30 @@
             return $new_post;
         }
 
+        public function __get($name)
+        {
+            return property_exists($this, $name) ? $this->{$name} : FALSE;
+        }
+
+        public function __set($name, $value)
+        {
+            $this->{$name} = $value;
+        }
+
         /**
-         * @return \B2B\APP\CLASSES\B2b_Post
+         * @return \B2B\APP\CLASSES\B2b_Post|\WP_Error
          *
          * @version 1.0
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function update(): B2b_Post
+        public function update(): B2b_Post|WP_Error
         {
             $update = wp_update_post([
                 'ID'           => $this->ID,
                 'post_title'   => $this->title,
                 'post_content' => $this->content,
+                'post_excerpt' => $this->excerpt,
                 'post_status'  => $this->status,
                 'post_parent'  => $this->parent,
                 'post_author'  => $this->author,
@@ -263,18 +270,19 @@
         }
 
         /**
-         * @return \B2B\APP\CLASSES\B2b_Post
+         * @return int|\WP_Error|\B2B\APP\CLASSES\B2b_Post
          *
          * @version 1.0
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function insert(): B2b_Post
+        public function insert(): int|WP_Error|B2b_Post
         {
             $insert = wp_insert_post([
                 'ID'            => $this->ID,
                 'post_title'    => $this->title,
                 'post_content'  => $this->content,
+                'post_excerpt'  => $this->excerpt,
                 'post_status'   => $this->status,
                 'post_parent'   => $this->parent,
                 'post_author'   => $this->author,
@@ -309,7 +317,7 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function delete(bool $force_delete = FALSE): \WP_Post
+        public function delete(bool $force_delete = FALSE): WP_Post
         {
             $delete = wp_delete_post($this->ID, $force_delete);
             do_action(B2b::_DOMAIN_NAME . "_after_delete_" . $this->type, $this->ID);
@@ -338,18 +346,9 @@
             return FALSE;
         }
 
-        private function reformat_metadata($meta_data)
+        public function get($meta_name)
         {
-            foreach ($meta_data as $k => $meta) {
-                $meta_data[$meta] = '';
-                unset($meta_data[$k]);
-            }
-
-            return $meta_data;
-        }
-
-        public function get($meta_name){
-            return get_post_meta($this->ID, $meta_name, true);
+            return get_post_meta($this->ID, $meta_name, TRUE);
         }
 
     }

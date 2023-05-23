@@ -24,6 +24,7 @@
 wp-content/themes/twenty*/
 
 # ignore specific themes files
+/wp-content/themes/b2b/languages/
 /wp-content/themes/b2b/package-lock.json
 /wp-content/themes/b2b/composer.lock
 /wp-content/languages/*.json

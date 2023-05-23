@@ -12,7 +12,6 @@
     use B2B\APP\CLASSES\B2b_Init;
     use B2B\APP\HELPERS\B2b_Hooks;
     use B2B\APP\MODELS\ADMIN\B2b_Admin;
-//    use B2B\APP\MODELS\PUBLIC\B2b_Public;
     use B2B\APP\MODELS\FRONT\B2b_Public;
 
     if (!defined('B2B_lANG')) {
@@ -35,7 +34,6 @@
     require_once THEME_PATH . "/app/Models/public/class-b2b_public.php";
     require_once THEME_PATH . "/app/Models/admin/class-b2b_admin.php";
     require_once THEME_PATH . "/inc/template-tags.php";
-    require_once THEME_PATH . "/inc/custom-functions.php";
 
     /**
      * Description...
@@ -79,7 +77,9 @@
         {
             if (class_exists('B2B\APP\MODELS\FRONT\B2b_Public') && (!is_admin()) || wp_doing_ajax()) {
                 $public = new B2b_Public($hooks);
-            } elseif (class_exists('B2B\APP\MODELS\ADMIN\B2b_Admin') && is_admin()) {
+            }
+
+            if (class_exists('B2B\APP\MODELS\ADMIN\B2b_Admin') && is_admin()) {
                 $admin = new B2b_Admin($hooks);
             }
         }
@@ -230,3 +230,4 @@
 
     new B2b();
 
+    require_once THEME_PATH . "/inc/custom-functions.php";

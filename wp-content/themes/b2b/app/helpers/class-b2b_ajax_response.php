@@ -17,13 +17,13 @@
      * @package b2b
      * @author Mustafa Shaaban
      */
-	class B2b_Ajax_Response
-	{
+    class B2b_Ajax_Response
+    {
 
-		public function __construct(bool $status, string $msg, array $data = [])
-		{
-			$this->response($status, $msg, $data);
-		}
+        public function __construct(bool $status, string $msg, array $data = [])
+        {
+            $this->response($status, $msg, $data);
+        }
 
         /**
          * Description...
@@ -38,18 +38,18 @@
          * @author Mustafa Shaaban
          * @return void
          */
-		protected function response(bool $status, string $msg, array $data = []): void
+        protected function response(bool $status, string $msg, array $data = []): void
         {
-			$response = [
-				'success' => $status,
-				'msg'    => $msg,
-			];
+            $response = [
+                'success' => $status,
+                'msg'     => $msg,
+            ];
 
-			if (!empty($data)) {
-				$response['data'] = $data;
-			}
+            if (!empty($data)) {
+                $response['data'] = $data;
+            }
 
-			wp_send_json($response);
-		}
+            wp_send_json($response);
+        }
 
-	}
+    }

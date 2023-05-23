@@ -8,6 +8,8 @@
 
     namespace B2B\APP\HELPERS;
 
+    use Exception;
+
     /**
      * @class B2b_Mail
      */
@@ -23,14 +25,14 @@
         private string $subject     = 'Medica Scope';
         private string $from        = '';
 
-        private string $templateStart         = THEME_PATH . '/email-template/';
-        private string $headerDefaultTemplate = THEME_PATH . '/email-template/default/header';
+        private string $templateStart         = THEME_PATH . '/app/Views/email-template/';
+        private string $headerDefaultTemplate = THEME_PATH . '/app/Views/email-template/default/header';
         private        $headerTemplate        = FALSE;
         private array  $headerVariables       = [];
-        private string $defaultTemplate       = THEME_PATH . '/email-template/default/body';
+        private string $defaultTemplate       = THEME_PATH . '/app/Views/email-template/default/body';
         private        $template              = FALSE;
         private array  $variables             = [];
-        private string $footerDefaultTemplate = THEME_PATH . '/email-template/default/footer';
+        private string $footerDefaultTemplate = THEME_PATH . '/app/Views/email-template/default/footer';
         private        $footerTemplate        = FALSE;
         private array  $footerVariables       = [];
 
@@ -215,14 +217,14 @@
                 $this->attachments = [];
                 foreach ($path as $path_) {
                     if (!file_exists($path_)) {
-                        throw new \Exception("Attachment not found at $path");
+                        throw new Exception("Attachment not found at $path");
                     } else {
                         $this->attachments[] = $path_;
                     }
                 }
             } else {
                 if (!file_exists($path)) {
-                    throw new \Exception("Attachment not found at $path");
+                    throw new Exception("Attachment not found at $path");
                 }
                 $this->attachments = [ $path ];
             }
@@ -244,7 +246,7 @@
             $template = $this->templateStart . $template . '.php';
 
             if (!file_exists($template)) {
-                throw new \Exception('Template file not found');
+                throw new Exception('Template file not found');
             }
 
             if (is_array($variables)) {
@@ -269,7 +271,7 @@
             $template = $this->templateStart . $template . '.php';
 
             if (!file_exists($template)) {
-                throw new \Exception('File not found');
+                throw new Exception('File not found');
             }
 
             if (is_array($variables)) {
@@ -294,7 +296,7 @@
             $template = $this->templateStart . $template . '.php';
 
             if (!file_exists($template)) {
-                throw new \Exception('Template file not found');
+                throw new Exception('Template file not found');
             }
 
             if (is_array($variables)) {
@@ -303,6 +305,53 @@
 
             $this->footerTemplate = $template;
             return $this;
+        }
+
+        /**
+         * Sends a rendered email using
+         * WordPress's wp_mail() function
+         * @return Bool
+         * @throws \Exception
+         */
+        public function send(): bool
+        {
+            if (count($this->to) === 0) {
+                throw new Exception('You must set at least 1 recipient');
+            }
+
+            //            if (empty($this->template)) {
+            //                throw new \Exception('You must set a template');
+            //            }
+
+            if ($this->sendAsHTML) {
+                add_filter('wp_mail_content_type', [
+                    $this,
+                    'HTMLFilter'
+                ]);
+            }
+
+            return wp_mail($this->to, $this->buildSubject(), $this->render(), $this->buildHeaders(), $this->attachments);
+        }
+
+        public function buildSubject()
+        {
+            return $this->parseAsMustache($this->subject, array_merge($this->headerVariables, $this->variables, $this->footerVariables));
+        }
+
+        public function parseAsMustache($string, $variables = [])
+        {
+
+            preg_match_all('/{{\s*.+?\s*}}/', $string, $matches);
+
+            foreach ($matches[0] as $match) {
+                $var = str_replace('{', '', str_replace('}', '', preg_replace('/\s+/', '', $match)));
+
+                if (isset($variables[$var]) && !is_array($variables[$var])) {
+                    $string = str_replace($match, $variables[$var], $string);
+                }
+            }
+
+            return $string;
         }
 
         /**
@@ -376,29 +425,8 @@
                 return $this->parseAsMustache($template, $variables);
 
             } else {
-                throw new \Exception("Unknown extension {$extension} in path '{$templateFile}'");
+                throw new Exception("Unknown extension {$extension} in path '{$templateFile}'");
             }
-        }
-
-        public function buildSubject()
-        {
-            return $this->parseAsMustache($this->subject, array_merge($this->headerVariables, $this->variables, $this->footerVariables));
-        }
-
-        public function parseAsMustache($string, $variables = [])
-        {
-
-            preg_match_all('/{{\s*.+?\s*}}/', $string, $matches);
-
-            foreach ($matches[0] as $match) {
-                $var = str_replace('{', '', str_replace('}', '', preg_replace('/\s+/', '', $match)));
-
-                if (isset($variables[$var]) && !is_array($variables[$var])) {
-                    $string = str_replace($match, $variables[$var], $string);
-                }
-            }
-
-            return $string;
         }
 
         /**
@@ -424,31 +452,5 @@
             }
 
             return $headers;
-        }
-
-        /**
-         * Sends a rendered email using
-         * WordPress's wp_mail() function
-         * @return Bool
-         * @throws \Exception
-         */
-        public function send(): bool
-        {
-            if (count($this->to) === 0) {
-                throw new \Exception('You must set at least 1 recipient');
-            }
-
-            //            if (empty($this->template)) {
-            //                throw new \Exception('You must set a template');
-            //            }
-
-            if ($this->sendAsHTML) {
-                add_filter('wp_mail_content_type', [
-                    $this,
-                    'HTMLFilter'
-                ]);
-            }
-
-            return wp_mail($this->to, $this->buildSubject(), $this->render(), $this->buildHeaders(), $this->attachments);
         }
     }

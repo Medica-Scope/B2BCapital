@@ -1,32 +1,32 @@
 <?php
-/**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package b2b
- */
+    /**
+     * The template for displaying all single posts
+     *
+     * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+     *
+     * @package b2b
+     */
 
-get_header();
+    get_header();
 ?>
 
-	<main id="primary" class="site-main">
+    <main id="primary" class="site-main">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+        <?php
+            while (have_posts()) :
+                the_post();
 
-			if (empty(locate_template('app/Views/single-' . get_post_type() . '.php'))) {
-				get_template_part('app/Views/single');
-			} else {
-				get_template_part('app/Views/single', get_post_type());
-			}
+                if (empty(locate_template('app/Views/single-' . get_post_type() . '.php'))) {
+                    get_template_part('app/Views/single');
+                } else {
+                    get_template_part('app/Views/single', get_post_type());
+                }
 
-		endwhile; // End of the loop.
-		?>
+            endwhile; // End of the loop.
+        ?>
 
-	</main><!-- #main -->
+    </main><!-- #main -->
 
 <?php
-get_sidebar();
-get_footer();
+    get_sidebar();
+    get_footer();

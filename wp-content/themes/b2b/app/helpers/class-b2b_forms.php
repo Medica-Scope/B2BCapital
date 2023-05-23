@@ -98,6 +98,22 @@
             return $form;
         }
 
+
+
+        private function sort_settings(array $settings = []): array
+        {
+            foreach ($settings as $key => $value) {
+                if ($value['type'] === 'checkbox' && isset($value['choices']) && !empty($value['choices'])) {
+                    $choices = $value['choices'];
+                    usort($choices, fn($a, $b) => $a['order'] <=> $b['order']);
+                    $settings[$key]['choices'] = $choices;
+                }
+            }
+            usort($settings, fn($a, $b) => $a['order'] <=> $b['order']);
+
+            return $settings;
+        }
+
         /**
          * This function responsible for create the start of tag form
          *
@@ -127,64 +143,6 @@
             ?>
             <div class="<?= B2b::_DOMAIN_NAME ?>_form_container <?= $classes ?>">
             <form action="" class="<?= B2b::_DOMAIN_NAME ?>_form <?= $input_data['class'] ?> <?= $input_data['form_class'] ?>" id="<?= $input_data['id'] ?>" <?= $input_data['attr'] ?>>
-            <?php
-            return ob_get_clean();
-        }
-
-        /**
-         * This function responsible for create the form submit button
-         *
-         * @param array $args [
-         * value    => ''
-         * class    => ''
-         * id       => ''
-         * before   => ''
-         * after    => ''
-         * ]
-         *
-         */
-        public function form_submit_button(array $args = []): string
-        {
-            $defaults = [
-                'type'   => 'submit',
-                'value'  => 'Submit',
-                'class'  => '',
-                'id'     => '',
-                'before' => '',
-                'after'  => '',
-                'order'  => 0
-            ];
-
-            $input_data = array_merge($defaults, $args);
-
-            ob_start();
-            ?>
-            <div class="form-group">
-                <?= $input_data['before'] ?>
-                <button class="btn b2b-btn <?= $input_data['class'] ?>" id="<?= $input_data['id'] ?>"
-                        type="<?= $input_data['type'] ?>"><?= $input_data['value'] ?></button>
-                <?= $input_data['after'] ?>
-            </div>
-            <?php
-            return ob_get_clean();
-        }
-
-
-        /**
-         * This function responsible for create the end tag of form
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return false|string
-         */
-        public function form_end(): string
-        {
-            ob_start();
-            ?>
-            </form>
-            </div>
             <?php
             return ob_get_clean();
         }
@@ -239,7 +197,6 @@
                 'before_wrapper' => '',
                 'after_wrapper'  => '',
                 'autocomplete'   => 'on',
-                'step'           => 1,
                 'hint'           => '',
                 'abbr'           => __("This field is required", "b2b"),
                 'order'          => 0,
@@ -249,6 +206,7 @@
                     'minlength' => '',
                     'max'       => '',
                     'min'       => '',
+                    'step'      => 1
                 ]
             ];
 
@@ -278,7 +236,7 @@
                     <?= $this->create_attr($input_data) ?>
                     <?= $input_data['visibility'] ?>
                     <?= $this->create_attr($input_data['extra_attr']) ?>
-                    <?= $input_data['required'] ? 'required="require"' : '' ?> <?= $input_data['type'] == 'number' ? 'step="' . $input_data['step'] . '"' : '' ?>>
+                    <?= $input_data['required'] ? 'required="require"' : '' ?> <?= $input_data['type'] == 'number' && isset($input_data['step']) ? 'step="' . $input_data['step'] . '"' : '' ?>>
                 <?php
                     if (!empty($input_data['hint'])) {
                         ?>
@@ -295,78 +253,68 @@
         }
 
         /**
-         * This function responsible for create the textare field
+         * This function responsible for create extra html attributes.
          *
-         * @param array $args [
-         * label         => ''
-         * name          => ''
-         * required      => ''
-         * placeholder   => ''
-         * class         => ''
-         * id            => default is B2b::_DOMAIN_NAME_name
-         * value         => ''
-         * before        => ''
-         * after         => ''
-         * autocomplete  => default on
-         * rows          => '3'
-         * hint          => ''
-         * abbr          => ''
-         * order         => 0
-         * extra_attr    => []
-         * ]
+         * @param array $args
          *
          * @return string
-         *
          */
-        public function textarea_inputs(array $args = []): string
+        public function create_attr(array $args = []): string
+        {
+            $attrs = '';
+            if (isset($args['extra_attr']) && is_array($args['extra_attr']) && !empty($args['extra_attr'])) {
+                foreach ($args['extra_attr'] as $name => $value) {
+
+                    if (isset($args['type'])) {
+                        if ($args['type'] === 'number') {
+                            if ($name === 'maxlength' || $name === 'minlength') {
+                                continue;
+                            }
+                        } else {
+                            if ($name == 'max' || $name == 'min' || $name == 'step') {
+                                continue;
+                            }
+                        }
+
+                        //                        if ($args['type'] === 'number' && $name === 'maxlength' || $name === 'minlength') {
+                        //                            continue;
+                        //                        }
+                        //                        if ($args['type'] === 'number' && $name !== 'max' || $name !== 'min') {
+                        //                            continue;
+                        //                        }
+                    }
+                    if ($value) {
+                        $attrs .= " $name='$value' ";
+                    }
+                }
+            }
+
+            return $attrs;
+        }
+
+        /**
+         * This function responsible for creating the input field
+         *
+         * @param array $args
+         *
+         * @return string
+         */
+        public function create_hidden_inputs(array $args = []): string
         {
             ob_start();
-            $defaults   = [
-                'label'        => '',
-                'name'         => '',
-                'required'     => '',
-                'placeholder'  => '',
-                'class'        => '',
-                'id'           => (empty($args['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . $args['name'],
-                'value'        => '',
-                'before'       => '',
-                'after'        => '',
-                'inline'       => FALSE,
-                'autocomplete' => 'on',
-                'rows'         => '3',
-                'hint'         => '',
-                'abbr'         => __("This field is required", "b2b"),
-                'order'        => 0,
-                'extra_attr'   => []
+            $defaults = [
+                'id'         => '',
+                'name'       => '',
+                'value'      => '',
+                'order'      => 0,
+                'extra_attr' => []
             ];
-            $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
-            ?>
-            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
-                <?= $input_data['before'] ?>
-                <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                <?= $require ?>
-                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
-                <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                <textarea class="form-control b2b-textarea"
-                          id="<?= $input_data['id'] ?>"
-                          name="<?= $input_data['name'] ?>"
-                          placeholder="<?= $input_data['placeholder'] ?>"
-                          autocomplete="<?= $input_data['autocomplete'] ?>"
-                          rows="<?= $input_data['rows'] ?>"
-                          <?= $input_data['required'] ? 'required="require"' : '' ?>
-                    <?= $this->create_attr($input_data['extra_attr']) ?>><?= $input_data['value'] ?></textarea>
-                <?php
-                    if (!empty($input_data['hint'])) {
-                        ?>
-                        <small id="<?= $input_data['id'] . "_help" ?>" class="form-text text-muted"><?= $input_data['hint'] ?></small><?php
-                    }
-                ?>
-                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
-                <?= $input_data['after'] ?>
-            </div>
+            $input_data = array_merge($defaults, $args);
+
+            ob_start();
+            ?>
+            <input type='hidden' id="<?= $input_data['id'] ?>" name="<?= $input_data['name'] ?>" value='<?= $input_data['value'] ?>'/>
             <?php
             return ob_get_clean();
         }
@@ -407,6 +355,8 @@
                 'hint'           => '',
                 'accept'         => '',
                 'multiple'       => '',
+                'before_wrapper' => '',
+                'after_wrapper'  => '',
                 'inline'         => FALSE,
                 'abbr'           => __("This field is required", "b2b"),
                 'order'          => 0,
@@ -418,7 +368,7 @@
 
             $input_data = array_merge($defaults, $args);
             $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
-
+            echo $input_data['before_wrapper'];
             if (boolval($input_data['admin'])) {
                 ?>
                 <div class="form-group  b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
@@ -455,16 +405,16 @@
 
                     <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
                     <input type="file"
-                           class="form-control b2b-input"
+                           class="form-control b2b-input b2b-attachment-uploader"
                            id="<?= $input_data['id'] ?>"
                            name="<?= $input_data['name'] ?>"
                            aria-describedby="<?= $input_data['id'] . "_help" ?>"
                            aria-label="Upload"
+                           accept="<?= $input_data['accept'] ?>"
                         <?= $this->create_attr($input_data) ?>
-                        <?= $input_data['accept'] ?>
                         <?= $input_data['multiple'] ?>
                         <?= $input_data['required'] ? 'required="require"' : '' ?>>
-                    <label class="input-group-text" for="<?= $input_data['id'] ?>"><?= __('Upload', 'b2b') ?></label>
+                    <label class="input-group-text buttonLow buttonLow-id" for="<?= $input_data['id'] ?>"><?= __('Upload your University ID', 'b2b') ?></label>
                     <?php
                         if (!empty($input_data['hint'])) {
                             ?>
@@ -474,87 +424,10 @@
                     <?= boolval($input_data['inline']) ? '</div>' : '' ?>
                     <?= $input_data['after'] ?>
                 </div>
+                <?= $input_data['after_wrapper'] ?>
                 <?php
 
             }
-            return ob_get_clean();
-        }
-
-        /**
-         * This function responsible for create selectBox input field
-         *
-         * @param array $args [
-         * label          => ''
-         * name           => ''
-         * required       => ''
-         * placeholder    => ''
-         * options        => [option_value => option_title]
-         * default_option => ''
-         * select_option  => ''
-         * class          => ''
-         * id             => default is B2b::_DOMAIN_NAME_name
-         * before         => ''
-         * after          => ''
-         * multiple       => ''
-         * abbr          => ''
-         * order         => 0
-         * extra_attr     => []
-         *
-         * @return string
-         *
-         */
-        public function selectBox_inputs(array $args = []): string
-        {
-            ob_start();
-            $defaults   = [
-                'label'          => '',
-                'name'           => '',
-                'required'       => '',
-                'placeholder'    => '',
-                'options'        => [],
-                'default_option' => '',
-                'select_option'  => '',
-                'class'          => '',
-                'id'             => (empty($args['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . $args['name'],
-                'before'         => '',
-                'after'          => '',
-                'multiple'       => '',
-                'inline'         => FALSE,
-                'abbr'           => __("This field is required", "b2b"),
-                'order'          => 0,
-                'extra_attr'     => []
-            ];
-            $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
-
-            ?>
-            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
-                <?= $input_data['before'] ?>
-                <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                <?= $require ?>
-                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
-
-                <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                <select class="form-control b2b-input" id="<?= $input_data['id'] ?>"
-                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="require"' : '' ?>>
-                    <?php
-                        if (empty($input_data['default_option']) && empty($input_data['select_option'])) {
-                            ?>
-                            <option value="" disabled="disabled" selected><?= $input_data['placeholder'] ?></option> <?php
-                        }
-                        foreach ($input_data['options'] as $value => $title) {
-                            ?>
-                            <option
-                            value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?>><?= $title ?></option><?php
-                        }
-                    ?>
-                </select>
-                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
-
-                <?= $input_data['after'] ?>
-            </div>
-            <?php
             return ob_get_clean();
         }
 
@@ -796,57 +669,156 @@
         }
 
         /**
-         * This function responsible for create extra html attributes.
+         * This function responsible for create the textare field
          *
-         * @param array $args
+         * @param array $args [
+         * label         => ''
+         * name          => ''
+         * required      => ''
+         * placeholder   => ''
+         * class         => ''
+         * id            => default is B2b::_DOMAIN_NAME_name
+         * value         => ''
+         * before        => ''
+         * after         => ''
+         * autocomplete  => default on
+         * rows          => '3'
+         * hint          => ''
+         * abbr          => ''
+         * order         => 0
+         * extra_attr    => []
+         * ]
          *
          * @return string
+         *
          */
-        public function create_attr(array $args = []): string
+        public function textarea_inputs(array $args = []): string
         {
-            $attrs = '';
-            if (isset($args['extra_attr']) && is_array($args['extra_attr']) && !empty($args['extra_attr'])) {
-                foreach ($args['extra_attr'] as $name => $value) {
+            ob_start();
+            $defaults   = [
+                'label'        => '',
+                'name'         => '',
+                'required'     => '',
+                'placeholder'  => '',
+                'class'        => '',
+                'id'           => (empty($args['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . $args['name'],
+                'value'        => '',
+                'before'       => '',
+                'after'        => '',
+                'inline'       => FALSE,
+                'autocomplete' => 'on',
+                'rows'         => '3',
+                'hint'         => '',
+                'abbr'         => __("This field is required", "b2b"),
+                'order'        => 0,
+                'extra_attr'   => []
+            ];
+            $input_data = array_merge($defaults, $args);
+            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
+            ?>
+            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                <?= $input_data['before'] ?>
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
+                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
+                <?= $require ?>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
-                    if (isset($args['type'])) {
-                        if ($args['type'] === 'number' && $name === 'maxlength' || $name === 'minlength') {
-                            continue;
-                        }
-                        if ($args['type'] === 'number' && $name !== 'max' && $name !== 'min') {
-                            continue;
-                        }
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
+                <textarea class="form-control b2b-textarea"
+                          id="<?= $input_data['id'] ?>"
+                          name="<?= $input_data['name'] ?>"
+                          placeholder="<?= $input_data['placeholder'] ?>"
+                          autocomplete="<?= $input_data['autocomplete'] ?>"
+                          rows="<?= $input_data['rows'] ?>"
+                          <?= $input_data['required'] ? 'required="require"' : '' ?>
+                    <?= $this->create_attr($input_data['extra_attr']) ?>><?= $input_data['value'] ?></textarea>
+                <?php
+                    if (!empty($input_data['hint'])) {
+                        ?>
+                        <small id="<?= $input_data['id'] . "_help" ?>" class="form-text text-muted"><?= $input_data['hint'] ?></small><?php
                     }
-
-                    $attrs .= " $name='$value' ";
-                }
-            }
-
-            return $attrs;
+                ?>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+                <?= $input_data['after'] ?>
+            </div>
+            <?php
+            return ob_get_clean();
         }
 
         /**
-         * This function responsible for creating the input field
+         * This function responsible for create selectBox input field
          *
-         * @param array $args
+         * @param array $args [
+         * label          => ''
+         * name           => ''
+         * required       => ''
+         * placeholder    => ''
+         * options        => [option_value => option_title]
+         * default_option => ''
+         * select_option  => ''
+         * class          => ''
+         * id             => default is B2b::_DOMAIN_NAME_name
+         * before         => ''
+         * after          => ''
+         * multiple       => ''
+         * abbr          => ''
+         * order         => 0
+         * extra_attr     => []
          *
          * @return string
+         *
          */
-        public function create_hidden_inputs(array $args = []): string
+        public function selectBox_inputs(array $args = []): string
         {
             ob_start();
-            $defaults = [
-                'id'         => '',
-                'name'       => '',
-                'value'      => '',
-                'order'      => 0,
-                'extra_attr' => []
+            $defaults   = [
+                'label'          => '',
+                'name'           => '',
+                'required'       => '',
+                'placeholder'    => '',
+                'options'        => [],
+                'default_option' => '',
+                'select_option'  => '',
+                'class'          => '',
+                'id'             => (empty($args['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . $args['name'],
+                'before'         => '',
+                'after'          => '',
+                'multiple'       => '',
+                'inline'         => FALSE,
+                'abbr'           => __("This field is required", "b2b"),
+                'order'          => 0,
+                'extra_attr'     => []
             ];
-
             $input_data = array_merge($defaults, $args);
+            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
 
-            ob_start();
             ?>
-            <input type='hidden' id="<?= $input_data['id'] ?>" name="<?= $input_data['name'] ?>" value='<?= $input_data['value'] ?>'/>
+            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                <?= $input_data['before'] ?>
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
+                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
+                <?= $require ?>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
+                <select class="form-control b2b-input" id="<?= $input_data['id'] ?>"
+                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="require"' : '' ?>>
+                    <?php
+                        if (empty($input_data['default_option']) && empty($input_data['select_option'])) {
+                            ?>
+                            <option value="" disabled="disabled" selected><?= $input_data['placeholder'] ?></option> <?php
+                        }
+                        foreach ($input_data['options'] as $value => $title) {
+                            ?>
+                            <option
+                            value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?>><?= $title ?></option><?php
+                        }
+                    ?>
+                </select>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+
+                <?= $input_data['after'] ?>
+            </div>
             <?php
             return ob_get_clean();
         }
@@ -873,13 +845,51 @@
         }
 
         /**
+         * This function responsible for create the form submit button
+         *
+         * @param array $args [
+         * value    => ''
+         * class    => ''
+         * id       => ''
+         * before   => ''
+         * after    => ''
+         * ]
+         *
+         */
+        public function form_submit_button(array $args = []): string
+        {
+            $defaults = [
+                'type'   => 'submit',
+                'value'  => 'Submit',
+                'class'  => '',
+                'id'     => '',
+                'before' => '',
+                'after'  => '',
+                'order'  => 0
+            ];
+
+            $input_data = array_merge($defaults, $args);
+
+            ob_start();
+            ?>
+            <div class="form-group">
+                <?= $input_data['before'] ?>
+                <button class="btn b2b-btn <?= $input_data['class'] ?>" id="<?= $input_data['id'] ?>"
+                        type="<?= $input_data['type'] ?>"><?= $input_data['value'] ?></button>
+                <?= $input_data['after'] ?>
+            </div>
+            <?php
+            return ob_get_clean();
+        }
+
+        /**
          * This functions responsible for sort inputs
          *
          * @param array $settings
          *
          * @return array
          */
-        private function sort_settings(array $settings = []): array
+        /*private function sort_settings(array $settings = []): array
         {
             foreach ($settings as $key => $value) {
                 if ($value['type'] === 'checkbox' && isset($value['choices']) && !empty($value['choices'])) {
@@ -895,5 +905,23 @@
             });
 
             return $settings;
+        }*/
+        /**
+         * This function responsible for create the end tag of form
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return false|string
+         */
+        public function form_end(): string
+        {
+            ob_start();
+            ?>
+            </form>
+            </div>
+            <?php
+            return ob_get_clean();
         }
     }

@@ -1,11 +1,11 @@
-
-B2B - 
+B2B -
 ===============================================
 
 `b2b` is a theme based on starter theme called 'underscores', Requires PHP version 8.1+
 
 Theme Structure
 ---------------
+
 ```bash
 └─── b2b
     │   .eslintrc
@@ -208,6 +208,7 @@ Theme Structure
     └───languages
             b2b.pot
 ```
+
 ### Requirements
 
 `b2b` requires the following dependencies:
@@ -216,7 +217,6 @@ Theme Structure
 - [Composer](https://getcomposer.org/)
 
 ### Quick Start
-
 
 ### Setup
 
@@ -240,7 +240,8 @@ $ npm install
 - `npm run adminStylesRtl` : Convert the css files to rtl version.
 - `npm run adminScripts` : Compile all scripts included in the admin path.
 - `npm run adminImages` : Minify all images included in the admin path and convert them to webp extension.
-- `npm run translate` : Crawl the php files searching for strings added to _() function to be added to the .pot file to make it ready to be translated.
+- `npm run translate` : Crawl the php files searching for strings added to _() function to be added to the .pot file to
+  make it ready to be translated.
 - `npm run all` : Compile all files [SASS, JS, PHP] for just one time - Production purpose.
 - `npm run bundle` : generates a .zip archive for distribution, excluding development and system files.
 

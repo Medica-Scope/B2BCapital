@@ -19,7 +19,7 @@
      * @version 1.0
      * @since 1.0.0
      * @package B2B
-     * @author APPENZA - Mustafa Shaaban
+     * @author Mustafa Shaaban
      */
     class B2b_Public
     {
@@ -76,18 +76,18 @@
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => B2b::_ENVIRONMENT,
                 'phrases'     => [
-                    'default'           => __("This field is required.", "b2b"),
-                    'email'             => __("Please enter a valid email address.", "b2b"),
-                    'number'            => __("Please enter a valid number.", "b2b"),
-                    'equalTo'           => __("Please enter the same value again.", "b2b"),
-                    'maxlength'         => __("Please enter no more than {0} characters.", "b2b"),
-                    'minLength'         => __("Please enter at least {0} characters.", "b2b"),
-                    'max'               => __("Please enter a value less than or equal to {0}.", "b2b"),
-                    'min'               => __("Please enter a value greater than or equal to {0}.", "b2b"),
-                    'pass_regex'        => __("Password doesn't complexity.", "b2b"),
-                    'phone_regex'       => __("Please enter a valid Phone number.", "b2b"),
-                    'email_regex'       => __("Please enter a valid email address.", "b2b"),
-                    'file_extension'    => __("Please upload an image with a valid extension.", "b2b")
+                    'default'        => __("This field is required.", "b2b"),
+                    'email'          => __("Please enter a valid email address.", "b2b"),
+                    'number'         => __("Please enter a valid number.", "b2b"),
+                    'equalTo'        => __("Please enter the same value again.", "b2b"),
+                    'maxlength'      => __("Please enter no more than {0} characters.", "b2b"),
+                    'minLength'      => __("Please enter at least {0} characters.", "b2b"),
+                    'max'            => __("Please enter a value less than or equal to {0}.", "b2b"),
+                    'min'            => __("Please enter a value greater than or equal to {0}.", "b2b"),
+                    'pass_regex'     => __("Password doesn't complexity.", "b2b"),
+                    'phone_regex'    => __("Please enter a valid Phone number.", "b2b"),
+                    'email_regex'    => __("Please enter a valid email address.", "b2b"),
+                    'file_extension' => __("Please upload an image with a valid extension.", "b2b")
                 ]
             ]);
 

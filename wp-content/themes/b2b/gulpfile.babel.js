@@ -39,27 +39,29 @@ const paths = {
         admin: {
             src: [
                 'app/Models/admin/assets/js/**/*.js',
-                '!app/Models/admin/assets/js/inc/*.js',
                 '!app/Models/admin/assets/js/helpers/*.js',
+                '!app/Models/admin/assets/js/inc/*.js',
+                '!app/Models/admin/assets/js/modules/*.js',
             ],
             dest: 'app/Models/admin/js',
         },
         public: {
             src: [
                 'app/Models/public/assets/js/**/*.js',
-                '!app/Models/public/assets/js/inc/*.js',
                 '!app/Models/public/assets/js/helpers/*.js',
+                '!app/Models/public/assets/js/inc/*.js',
+                '!app/Models/public/assets/js/modules/*.js',
             ],
             dest: 'app/Models/public/js',
         },
     },
     images: {
         admin: {
-            src: 'app/Models/admin/assets/images/**/*.{jpg,jpeg,png,gif,svg}',
+            src: 'app/Models/admin/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             dest: 'app/Models/admin/img',
         },
         public: {
-            src: 'app/Models/public/assets/images/**/*.{jpg,jpeg,png,gif,svg}',
+            src: 'app/Models/public/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             dest: 'app/Models/public/img',
         },
     },
@@ -191,7 +193,7 @@ gulp.task('adminStyles', () => {
                .pipe(sourcemaps.write('.'))
                .pipe(gulp.dest(paths.styles.admin.dest))
                .pipe(notify({
-                   message: '\n\n============================================\n====== STYLES ADMIN TASK — COMPLETED!' + ' ======\n============================================\n',
+                   message: '\n\n===========================================\n====== STYLES ADMIN TASK — COMPLETED!' + ' ======\n===========================================\n',
                    onLast: true,
                }));
 });

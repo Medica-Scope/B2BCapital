@@ -22,49 +22,6 @@
     class B2b_Hooks
     {
         /**
-         * The array of actions registered with WordPress.
-         *
-         * @since    1.0.0
-         * @access   protected
-         * @var      array $actions The actions registered with WordPress to fire when the plugin loads.
-         */
-        private array $actions = [];
-
-        /**
-         * The array of filters registered with WordPress.
-         *
-         * @since    1.0.0
-         * @access   protected
-         * @var      array $filters The filters registered with WordPress to fire when the plugin loads.
-         */
-        private array $filters = [];
-
-        /**
-         * @var array
-         */
-        private array $styles = [];
-
-        /**
-         * @var array
-         */
-        private array $scripts = [];
-
-        /**
-         * @var array
-         */
-        private array $localizations = [];
-
-        /**
-         * @var array
-         */
-        private array $short_codes = [];
-
-        /**
-         * @var string
-         */
-        private string $prefix;
-
-        /**
          * paths
          * @cons array
          */
@@ -81,9 +38,46 @@
             'public' => [
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
+                'vid'     => THEME_URI . '/app/Models/public/vid',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
             ]
         ];
+        /**
+         * The array of actions registered with WordPress.
+         *
+         * @since    1.0.0
+         * @access   protected
+         * @var      array $actions The actions registered with WordPress to fire when the plugin loads.
+         */
+        private array $actions = [];
+        /**
+         * The array of filters registered with WordPress.
+         *
+         * @since    1.0.0
+         * @access   protected
+         * @var      array $filters The filters registered with WordPress to fire when the plugin loads.
+         */
+        private array $filters = [];
+        /**
+         * @var array
+         */
+        private array $styles = [];
+        /**
+         * @var array
+         */
+        private array $scripts = [];
+        /**
+         * @var array
+         */
+        private array $localizations = [];
+        /**
+         * @var array
+         */
+        private array $short_codes = [];
+        /**
+         * @var string
+         */
+        private string $prefix;
 
         /**
          * Initialize the collections used to maintain the actions and filters.
@@ -109,76 +103,6 @@
         public function add_action(string $hook, object $component, string $callback, int $priority = 10, int $accepted_args = 1): void
         {
             $this->actions = $this->add($this->actions, $hook, $component, $callback, $priority, $accepted_args);
-        }
-
-        /**
-         * Add a new filter to the collection to be registered with WordPress.
-         *
-         * @param string $hook The name of the WordPress filter that is being registered.
-         * @param object $component A reference to the instance of the object on which the filter is defined.
-         * @param string $callback The name of the function definition on the $component.
-         * @param int    $priority Optional. The priority at which the function should be fired. Default is 10.
-         * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
-         *
-         * @since    1.0.0
-         */
-        public function add_filter(string $hook, object $component, string $callback, int $priority = 10, int $accepted_args = 1): void
-        {
-            $this->filters = $this->add($this->filters, $hook, $component, $callback, $priority, $accepted_args);
-        }
-
-        /**
-         * Add a new short code to the collection to be registered with WordPress.
-         *
-         * @param string $hook
-         * @param object $component
-         * @param array  $callback
-         */
-        public function add_shortcode(string $hook, object $component, string $callback): void
-        {
-            $this->short_codes = $this->add_code($this->short_codes, $hook, $component, $callback);
-        }
-
-        /**
-         * Add a new style to the collection to be registered with WordPress.
-         *
-         * @param string $script_name
-         * @param string $path
-         * @param array  $dependencies
-         * @param null   $version
-         * @param null   $media
-         * @param bool   $is_vendor
-         */
-        public function add_style(string $script_name, string $path, array $dependencies = [], $version = NULL, $media = NULL, $is_vendor = FALSE): void
-        {
-            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
-        }
-
-        /**
-         * Add a new script to the collection to be registered with WordPress.
-         *
-         * @param string $script_name
-         * @param string $path
-         * @param array  $dependencies
-         * @param null   $version
-         * @param null   $position
-         * @param bool   $is_vendor
-         */
-        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, $is_vendor = FALSE): void
-        {
-            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor);
-        }
-
-        /**
-         * Add a new localization to the collection to be registered with WordPress.
-         *
-         * @param string $handle
-         * @param string $object_name
-         * @param array  $object_values
-         */
-        public function add_localization(string $handle, string $object_name, array $object_values): void
-        {
-            $this->localizations = $this->add_local($this->localizations, $handle, $object_name, $object_values);
         }
 
         /**
@@ -212,6 +136,34 @@
         }
 
         /**
+         * Add a new filter to the collection to be registered with WordPress.
+         *
+         * @param string $hook The name of the WordPress filter that is being registered.
+         * @param object $component A reference to the instance of the object on which the filter is defined.
+         * @param string $callback The name of the function definition on the $component.
+         * @param int    $priority Optional. The priority at which the function should be fired. Default is 10.
+         * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
+         *
+         * @since    1.0.0
+         */
+        public function add_filter(string $hook, object $component, string $callback, int $priority = 10, int $accepted_args = 1): void
+        {
+            $this->filters = $this->add($this->filters, $hook, $component, $callback, $priority, $accepted_args);
+        }
+
+        /**
+         * Add a new short code to the collection to be registered with WordPress.
+         *
+         * @param string $hook
+         * @param object $component
+         * @param array  $callback
+         */
+        public function add_shortcode(string $hook, object $component, string $callback): void
+        {
+            $this->short_codes = $this->add_code($this->short_codes, $hook, $component, $callback);
+        }
+
+        /**
          * A utility function that is used to register the shortcode and hooks into a single
          * collection.
          *
@@ -232,6 +184,21 @@
 
             return $hooks;
 
+        }
+
+        /**
+         * Add a new style to the collection to be registered with WordPress.
+         *
+         * @param string $script_name
+         * @param string $path
+         * @param array  $dependencies
+         * @param null   $version
+         * @param null   $media
+         * @param bool   $is_vendor
+         */
+        public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
+        {
+            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
         }
 
         /**
@@ -263,6 +230,33 @@
 
             return $hooks;
 
+        }
+
+        /**
+         * Add a new script to the collection to be registered with WordPress.
+         *
+         * @param string $script_name
+         * @param string $path
+         * @param array  $dependencies
+         * @param null   $version
+         * @param null   $position
+         * @param bool   $is_vendor
+         */
+        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE): void
+        {
+            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor);
+        }
+
+        /**
+         * Add a new localization to the collection to be registered with WordPress.
+         *
+         * @param string $handle
+         * @param string $object_name
+         * @param array  $object_values
+         */
+        public function add_localization(string $handle, string $object_name, array $object_values): void
+        {
+            $this->localizations = $this->add_local($this->localizations, $handle, $object_name, $object_values);
         }
 
         /**
