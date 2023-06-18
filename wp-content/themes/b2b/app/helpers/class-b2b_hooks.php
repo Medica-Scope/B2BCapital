@@ -38,6 +38,7 @@
             'public' => [
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
+                'images'  => THEME_URI . '/app/Models/public/assets/images',
                 'vid'     => THEME_URI . '/app/Models/public/vid',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
             ]
@@ -86,7 +87,7 @@
          */
         public function __construct()
         {
-            $this->prefix = "production" === B2b::_ENVIRONMENT ? "" : ".min";
+            $this->prefix = "production" === B2b::_ENVIRONMENT ? ".min" : "";
         }
 
         /**

@@ -599,9 +599,9 @@
             $error        = new WP_Error();
             $decrypt_data = B2b_Cryptor::Decrypt($key);
 
-            if ($decrypt_data) {
+            if ($decrypt_data && is_serialized($decrypt_data)) {
                 $reset_data = unserialize($decrypt_data);
-                $user       = self::get_user_by('ID', $reset_data['user_id']);
+                $user       = self::get_user_by('ID', (int)$reset_data['user_id']);
 
                 if (!is_wp_error($user)) {
                     if (is_array($user->user_meta['reset_password_key']) && !empty($user->user_meta['reset_password_key'])) {
