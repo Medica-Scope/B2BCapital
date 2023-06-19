@@ -18,7 +18,7 @@
      * @class B2b_Public
      * @version 1.0
      * @since 1.0.0
-     * @package B2B
+     * @package b2b
      * @author Mustafa Shaaban
      */
     class B2b_Public
@@ -70,6 +70,8 @@
 
         public function enqueue_scripts(): void
         {
+            global $gglcptch_options;
+
             $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
                 'jquery'
             ], B2b::_VERSION, NULL, true);
@@ -83,6 +85,7 @@
                 'domain_key'  => B2b::_DOMAIN_NAME,
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => B2b::_ENVIRONMENT,
+                'publicKey' => $gglcptch_options['public_key'],
                 'phrases'     => [
                     'default'        => __("This field is required.", "b2b"),
                     'email'          => __("Please enter a valid email address.", "b2b"),

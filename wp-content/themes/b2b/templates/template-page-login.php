@@ -75,13 +75,13 @@
                                   'order' => 25
                               ],
                               'submit'        => [
-                                  'class'  => '',
-                                  'type'   => 'submit',
-                                  'value'  => __('Login', 'b2b'),
-                                  'before' => '',
-                                  'after'  => '',
-                                  'recaptcha_form_name'  => 'frontend_login',
-                                  'order'  => 25
+                                  'class'               => '',
+                                  'type'                => 'submit',
+                                  'value'               => __('Login', 'b2b'),
+                                  'before'              => '',
+                                  'after'               => '',
+                                  'recaptcha_form_name' => 'frontend_login',
+                                  'order'               => 25
                               ],
                           ], [
                               'class' => B2b::_DOMAIN_NAME . '-login-form',

@@ -24,12 +24,12 @@
             echo do_shortcode('[nextend_social_login]');
             echo B2b_Forms::get_instance()
                           ->create_form([
-                              'custom-html-1'     => [
+                              'custom-html-1'      => [
                                   'type'    => 'html',
                                   'content' => '<div class="row">',
                                   'order'   => 0,
                               ],
-                              'first_name'        => [
+                              'first_name'         => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
                                   'label'       => __('First Name', 'b2b'),
@@ -38,7 +38,7 @@
                                   'placeholder' => __('Enter your first name', 'b2b'),
                                   'order'       => 5,
                               ],
-                              'last_name'         => [
+                              'last_name'          => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
                                   'label'       => __('Last Name', 'b2b'),
@@ -47,7 +47,7 @@
                                   'placeholder' => __('Enter your last name', 'b2b'),
                                   'order'       => 10,
                               ],
-                              'phone_number'      => [
+                              'phone_number'       => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
                                   'label'       => __('Phone Number', 'b2b'),
@@ -56,7 +56,7 @@
                                   'placeholder' => __('Enter your phone number', 'b2b'),
                                   'order'       => 15,
                               ],
-                              'user_email'        => [
+                              'user_email'         => [
                                   'class'       => 'col-6',
                                   'type'        => 'email',
                                   'label'       => __('Email', 'b2b'),
@@ -65,7 +65,7 @@
                                   'placeholder' => __('Enter your email', 'b2b'),
                                   'order'       => 20,
                               ],
-                              'user_password'     => [
+                              'user_password'      => [
                                   'class'       => 'col-6',
                                   'type'        => 'password',
                                   'label'       => __('Password', 'b2b'),
@@ -75,7 +75,7 @@
                                   'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
                                   'order'       => 25,
                               ],
-                              'confirm_password'  => [
+                              'confirm_password'   => [
                                   'class'       => 'col-6',
                                   'type'        => 'password',
                                   'label'       => __('Confirm Password', 'b2b'),
@@ -85,7 +85,7 @@
                                   'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_confirm_password"></i>',
                                   'order'       => 30,
                               ],
-                              'user_type'         => [
+                              'user_type'          => [
                                   'type'           => 'select',
                                   'label'          => __('User Type', 'b2b'),
                                   'name'           => 'user_type',
@@ -100,7 +100,7 @@
                                   'class'          => 'col-6',
                                   'order'          => 35,
                               ],
-                              'verification_type' => [
+                              'verification_type'  => [
                                   'type'           => 'select',
                                   'label'          => __('Account Verification Type', 'b2b'),
                                   'name'           => 'verification_type',
@@ -116,25 +116,25 @@
                                   'class'          => 'col-6',
                                   'order'          => 40,
                               ],
-                              'custom-html-3'     => [
+                              'custom-html-3'      => [
                                   'type'    => 'html',
                                   'content' => '</div>',
                                   'order'   => 45,
                               ],
-                              'registration_nonce'    => [
+                              'registration_nonce' => [
                                   'class' => '',
                                   'type'  => 'nonce',
                                   'name'  => 'registration_nonce',
                                   'value' => B2b::_DOMAIN_NAME . "_registration_form",
                                   'order' => 50
                               ],
-                              'submit'            => [
+                              'submit'             => [
                                   'class'               => '',
                                   'type'                => 'submit',
                                   'value'               => __('Create Account', 'b2b'),
                                   'before'              => '',
                                   'after'               => '',
-                                  'recaptcha_form_name' => 'frontend_register',
+                                  'recaptcha_form_name' => 'frontend_registration',
                                   'order'               => 55
                               ],
                           ], [

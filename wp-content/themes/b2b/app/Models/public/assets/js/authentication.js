@@ -57,12 +57,13 @@ class B2bAuthentication extends B2bAuth
 
     showPassword()
     {
-        $(document).on('click', '.showPassIcon', function (e) {
-            var target_element = $(this).attr('data-target');
-            if ($(target_element).attr('type') == 'password') {
-                $(target_element).attr('type', 'text');
+        $('.showPassIcon').on('click', function (e) {
+            let $this = $(e.currentTarget),
+                $target_element = $this.attr('data-target');
+            if ($target_element.attr('type') === 'password') {
+                $target_element.attr('type', 'text');
             } else {
-                $(target_element).attr('type', 'password');
+                $target_element.attr('type', 'password');
             }
         });
     }

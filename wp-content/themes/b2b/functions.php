@@ -219,7 +219,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-cron.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */

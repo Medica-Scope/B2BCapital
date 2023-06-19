@@ -482,30 +482,19 @@
             $user  = get_user_by('email', $user_email);
 
             if ($user) {
+            $generate_forgot_data = $this->generate_forgot_password_data($user);
 
-                $generate_forgot_data = $this->generate_forgot_password_data($user);
-
-                $email = B2b_Mail::init()
-                                 ->to($user->user_email)
-                                 ->subject('Forgot Password')
-                                 ->template('forgot-password/body', [
-                                     'data' => [
-                                         'user'      => $user,
-                                         'url_query' => $generate_forgot_data['reset_link']
-                                     ]
-                                 ])
-                                 ->send();
-
-            } else {
-                $error->add('invalid_email', __("This email is not exists!.", 'b2b'), [
-                    'status'  => FALSE,
-                    'details' => [ 'email' => $user_email ]
-                ]);
-
-                return $error;
-            }
-
-
+            $email = B2b_Mail::init()
+                             ->to($user->user_email)
+                             ->subject('Forgot Password')
+                             ->template('forgot-password/body', [
+                                 'data' => [
+                                     'user'      => $user,
+                                     'url_query' => $generate_forgot_data['reset_link']
+                                 ]
+                             ])
+                             ->send();
+}
             return $this;
         }
 

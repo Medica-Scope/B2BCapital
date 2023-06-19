@@ -79,9 +79,11 @@
         public function login_ajax(): void
         {
 
-            $form_data     = $_POST['data'];
-            $user_login    = sanitize_text_field($form_data['user_login']);
-            $user_password = sanitize_text_field($form_data['user_password']);
+            $form_data                     = $_POST['data'];
+            $user_login                    = sanitize_text_field($form_data['user_login']);
+            $user_password                 = sanitize_text_field($form_data['user_password']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
 
 
             if (is_user_logged_in()) {
@@ -103,6 +105,13 @@
             if (empty($user_password)) {
                 new B2b_Ajax_Response(FALSE, __("The password field shouldn't be empty!.", 'b2b'));
             }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_login');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+            }
+
 
             $user = $this->login();
 
@@ -127,9 +136,10 @@
         public function forgot_password_ajax(): void
         {
 
-            $form_data  = $_POST['data'];
-            $user_email = sanitize_text_field($form_data['user_email']);
-
+            $form_data                     = $_POST['data'];
+            $user_email                    = sanitize_text_field($form_data['user_email']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
 
             if (is_user_logged_in()) {
                 new B2b_Ajax_Response(FALSE, __('You are already logged In!.', 'b2b'));
@@ -149,6 +159,12 @@
 
             if (!preg_match('/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $user_email)) {
                 new B2b_Ajax_Response(FALSE, __("Your email address is not a valid email!", 'b2b'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_forgot_password');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
             }
 
             $user = $this->forgot_password($user_email);
@@ -174,10 +190,11 @@
         public function change_password_ajax(): void
         {
 
-            $form_data             = $_POST['data'];
-            $user_password         = sanitize_text_field($form_data['user_password']);
-            $user_password_confirm = sanitize_text_field($form_data['user_password_confirm']);
-
+            $form_data                     = $_POST['data'];
+            $user_password                 = sanitize_text_field($form_data['user_password']);
+            $user_password_confirm         = sanitize_text_field($form_data['user_password_confirm']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
 
             if (empty($form_data)) {
                 new B2b_Ajax_Response(FALSE, __("Can't login with empty credentials.", 'b2b'));
@@ -203,6 +220,12 @@
                 new B2b_Ajax_Response(FALSE, __("Your password is not complex enough!", 'b2b'));
             }
 
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_reset_password');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+            }
+
             $user = $this->change_password();
 
             if (is_wp_error($user)) {
@@ -222,16 +245,18 @@
          */
         public function registration_ajax(): void
         {
-            $form_data       = $_POST['data'];
-            $profile_picture = sanitize_text_field($_FILES['data']['profile_picture']);
-            $first_name       = sanitize_text_field($form_data['first_name']);
-            $last_name      = sanitize_text_field($form_data['last_name']);
-            $phone_number       = sanitize_text_field($form_data['phone_number']);
-            $user_email        = sanitize_text_field($form_data['user_email']);
-            $user_password    = sanitize_text_field($form_data['user_password']);
-            $confirm_password      = sanitize_text_field($form_data['confirm_password']);
-            $user_type  = sanitize_text_field($form_data['user_type']);
-            $verification_type  = sanitize_text_field($form_data['verification_type']);
+            $form_data                     = $_POST['data'];
+            $profile_picture               = sanitize_text_field($_FILES['data']['profile_picture']);
+            $first_name                    = sanitize_text_field($form_data['first_name']);
+            $last_name                     = sanitize_text_field($form_data['last_name']);
+            $phone_number                  = sanitize_text_field($form_data['phone_number']);
+            $user_email                    = sanitize_text_field($form_data['user_email']);
+            $user_password                 = sanitize_text_field($form_data['user_password']);
+            $confirm_password              = sanitize_text_field($form_data['confirm_password']);
+            $user_type                     = sanitize_text_field($form_data['user_type']);
+            $verification_type             = sanitize_text_field($form_data['verification_type']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
 
             if (is_user_logged_in()) {
                 new B2b_Ajax_Response(FALSE, __('You are already logged In!.', 'b2b'));
@@ -285,9 +310,11 @@
                 new B2b_Ajax_Response(FALSE, __("You should select a verification type.", 'b2b'));
             }
 
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_registration');
 
-
-
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+            }
 
             $this->username     = $verification_type === 'whatsapp' || $verification_type === 'mobile' ? $phone_number : $user_email;
             $this->password     = $user_password;
@@ -342,8 +369,7 @@
          */
         public function restrict_redirections(): void
         {
-            if ((is_page('my-account/login') || is_page('my-account/registration') || is_page('my-account/reset-password') || is_page('my-account/forgot-password')) &&
-                is_user_logged_in()) {
+            if ((is_page('my-account/login') || is_page('my-account/registration') || is_page('my-account/reset-password') || is_page('my-account/forgot-password')) && is_user_logged_in()) {
                 wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
                 exit();
             }

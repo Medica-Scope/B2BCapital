@@ -834,11 +834,12 @@
 
             $input_data = array_merge($defaults, $args);
 
+            ob_start();
+
             if (is_plugin_active('google-captcha/google-captcha.php') && function_exists('gglcptch_display_custom') && !empty($input_data['recaptcha_form_name'])) {
                 echo apply_filters('gglcptch_display_recaptcha', '', $input_data['recaptcha_form_name']);
             }
 
-            ob_start();
             ?>
             <div class="form-group">
                 <?= $input_data['before'] ?>

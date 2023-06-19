@@ -44,6 +44,7 @@ class B2bAuth extends B2b
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
+                that.createNewToken();
                 $el.find('input, button')
                    .prop('disabled', false);
                 UiCtrl.blockUI($el, false);
@@ -53,6 +54,7 @@ class B2bAuth extends B2b
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
+                that.createNewToken();
             },
         });
     }
@@ -81,6 +83,7 @@ class B2bAuth extends B2b
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
+                that.createNewToken();
                 $el.find('input, button')
                    .prop('disabled', false);
                 UiCtrl.blockUI($el, false);
@@ -90,6 +93,7 @@ class B2bAuth extends B2b
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
+                that.createNewToken();
             },
         });
     }
@@ -117,6 +121,7 @@ class B2bAuth extends B2b
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
+                that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -125,6 +130,7 @@ class B2bAuth extends B2b
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
+                that.createNewToken();
             },
         });
     }
@@ -152,6 +158,7 @@ class B2bAuth extends B2b
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
+                that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -160,7 +167,17 @@ class B2bAuth extends B2b
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
+                that.createNewToken();
             },
+        });
+    }
+
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(b2bGlobals.publicKey).then(function (token) {
+                $('#g-recaptcha-response').val(token);
+            });
         });
     }
 
