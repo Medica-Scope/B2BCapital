@@ -96,6 +96,7 @@
         {
             $hooks->add_action('after_setup_theme', $this, 'b2b_setup');
             $hooks->add_action('widgets_init', $this, 'b2b_widgets_init');
+            $hooks->add_action('customize_register', $this, 'theme_customizer');
         }
 
 
@@ -147,7 +148,13 @@
 
             // This theme uses wp_nav_menu() in one location.
             register_nav_menus([
-                'menu-1' => esc_html__('Primary', 'b2b'),
+                'default-menu'       => esc_html__('Default', 'b2b'),
+                'dashboard-owner-menu'         => esc_html__('Dashboard Owner', 'b2b'),
+                'dashboard-investor-menu'      => esc_html__('Dashboard Investor', 'b2b'),
+                'footer-menu'        => esc_html__('Footer', 'b2b'),
+                'bottom-footer-menu' => esc_html__('Bottom Footer', 'b2b'),
+                'profile-menu-login'       => esc_html__('Account Login', 'b2b'),
+                'profile-menu-logout'       => esc_html__('Account Logout', 'b2b'),
             ]);
 
             /*
@@ -204,6 +211,35 @@
             ]);
         }
 
+
+        /**
+         * Description...
+         *
+         * @param $wp_customize
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package wp-cron.php
+         * @author Mustafa Shaaban
+         * @return void
+         */
+        public function theme_customizer($wp_customize): void
+        {
+            // Register a new setting for the second logo
+            $wp_customize->add_setting('second_logo', [
+                'default'           => '',
+                'sanitize_callback' => 'esc_url_raw',
+            ]);
+
+            // Add a control to upload the second logo
+            $wp_customize->add_control(new \WP_Customize_Image_Control($wp_customize, 'second_logo', [
+                'label'    => __('Second Logo', 'b2b'),
+                'section'  => 'title_tagline',
+                // This places the control in the Site Identity section
+                'settings' => 'second_logo',
+            ]));
+        }
+
         /**
          * Adds custom classes to the array of body classes.
          *
@@ -224,6 +260,29 @@
             }
 
             return $classes;
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         *
+         * @param string $id
+         *
+         * @return string
+         */
+        static function get_site_logo(string $id = 'custom_logo'): string
+        {
+            $logo_id  = get_theme_mod($id);
+            if (is_numeric($logo_id)) {
+                $logo_info = wp_get_attachment_image_src($logo_id, 'full');
+                $logo_url  = $logo_info[0];
+            } else {
+                $logo_url = $logo_id;
+            }
+            return $logo_url;
         }
 
     }

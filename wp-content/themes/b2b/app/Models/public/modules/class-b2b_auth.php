@@ -52,6 +52,7 @@
             $this->hooks->add_action('wp_login', $this, 'after_wp_login');
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_login_ajax', $this, 'login_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_registration_ajax', $this, 'registration_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_forgot_password_ajax', $this, 'forgot_password_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_change_password_ajax', $this, 'change_password_ajax');
         }
@@ -219,18 +220,18 @@
          * @author Mustafa Shaaban
          * @return void
          */
-        public function register_ajax(): void
+        public function registration_ajax(): void
         {
             $form_data       = $_POST['data'];
             $profile_picture = sanitize_text_field($_FILES['data']['profile_picture']);
-            $user_role       = sanitize_text_field($form_data['user_role']);
-            $first_name      = sanitize_text_field($form_data['first_name']);
-            $last_name       = sanitize_text_field($form_data['last_name']);
-            $username        = sanitize_text_field($form_data['username']);
-            $phone_number    = sanitize_text_field($form_data['phone_number']);
-            $user_email      = sanitize_text_field($form_data['user_email']);
-            $user_password1  = sanitize_text_field($form_data['user_password1']);
-            $user_password2  = sanitize_text_field($form_data['user_password2']);
+            $first_name       = sanitize_text_field($form_data['first_name']);
+            $last_name      = sanitize_text_field($form_data['last_name']);
+            $phone_number       = sanitize_text_field($form_data['phone_number']);
+            $user_email        = sanitize_text_field($form_data['user_email']);
+            $user_password    = sanitize_text_field($form_data['user_password']);
+            $confirm_password      = sanitize_text_field($form_data['confirm_password']);
+            $user_type  = sanitize_text_field($form_data['user_type']);
+            $verification_type  = sanitize_text_field($form_data['verification_type']);
 
             if (is_user_logged_in()) {
                 new B2b_Ajax_Response(FALSE, __('You are already logged In!.', 'b2b'));
@@ -244,24 +245,12 @@
                 new B2b_Ajax_Response(FALSE, __("Something went wrong!.", 'b2b'));
             }
 
-            if (empty($user_role)) {
-                new B2b_Ajax_Response(FALSE, __("The role field is empty!.", 'b2b'));
-            }
-
-            if (static::SUBSCRIBER !== $user_role) {
-                new B2b_Ajax_Response(FALSE, __("Invalid user role!.", 'b2b'));
-            }
-
             if (empty($first_name)) {
                 new B2b_Ajax_Response(FALSE, __("The first name field shouldn't be empty!.", 'b2b'));
             }
 
             if (empty($last_name)) {
                 new B2b_Ajax_Response(FALSE, __("The last name field is empty!.", 'b2b'));
-            }
-
-            if (empty($username)) {
-                new B2b_Ajax_Response(FALSE, __("The username field shouldn't be empty!.", 'b2b'));
             }
 
             if (empty($phone_number)) {
@@ -272,23 +261,39 @@
                 new B2b_Ajax_Response(FALSE, __("The E-mail field shouldn't be empty!.", 'b2b'));
             }
 
-            if (empty($user_password1)) {
+            if (empty($user_password)) {
                 new B2b_Ajax_Response(FALSE, __("The password field is empty!.", 'b2b'));
             }
 
-            if (empty($user_password2)) {
+            if (empty($confirm_password)) {
                 new B2b_Ajax_Response(FALSE, __("The confirm password field shouldn't be empty!.", 'b2b'));
             }
 
-            if ($user_password1 !== $user_password2) {
+            if ($user_password !== $confirm_password) {
                 new B2b_Ajax_Response(FALSE, __("The passwords should be identical!.", 'b2b'));
             }
 
-            $this->username     = $username;
-            $this->password     = $user_password1;
+            if (empty($user_type)) {
+                new B2b_Ajax_Response(FALSE, __("The user type is empty!.", 'b2b'));
+            }
+
+            if (static::INVESTOR !== $user_type && static::OWNER !== $user_type) {
+                new B2b_Ajax_Response(FALSE, __("Invalid user type!.", 'b2b'));
+            }
+
+            if (empty($verification_type)) {
+                new B2b_Ajax_Response(FALSE, __("You should select a verification type.", 'b2b'));
+            }
+
+
+
+
+
+            $this->username     = $verification_type === 'whatsapp' || $verification_type === 'mobile' ? $phone_number : $user_email;
+            $this->password     = $user_password;
             $this->email        = $user_email;
             $this->display_name = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
-            $this->role         = $user_role;
+            $this->role         = $user_type;
             $this->avatar       = $profile_picture;
             $this->first_name   = ucfirst(strtolower($first_name));
             $this->last_name    = ucfirst(strtolower($last_name));

@@ -27,16 +27,19 @@ const notify = require('gulp-notify');
 const paths = {
     styles: {
         admin: {
+            watch: 'app/Models/admin/assets/sass/**/*.scss',
             src: 'app/Models/admin/assets/sass/style.scss',
             dest: 'app/Models/admin/css',
         },
         public: {
+            watch: 'app/Models/public/assets/sass/**/*.scss',
             src: 'app/Models/public/assets/sass/style.scss',
             dest: './',
         },
     },
     scripts: {
         admin: {
+            watch: 'app/Models/admin/assets/js/**/*.js',
             src: [
                 'app/Models/admin/assets/js/**/*.js',
                 '!app/Models/admin/assets/js/helpers/*.js',
@@ -46,6 +49,7 @@ const paths = {
             dest: 'app/Models/admin/js',
         },
         public: {
+            watch: 'app/Models/public/assets/js/**/*.js',
             src: [
                 'app/Models/public/assets/js/**/*.js',
                 '!app/Models/public/assets/js/helpers/*.js',
@@ -57,15 +61,18 @@ const paths = {
     },
     images: {
         admin: {
+            watch: 'app/Models/admin/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             src: 'app/Models/admin/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             dest: 'app/Models/admin/img',
         },
         public: {
+            watch: 'app/Models/public/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             src: 'app/Models/public/assets/images/**/*.{jpg,jpeg,png,gif,svg,webp}',
             dest: 'app/Models/public/img',
         },
     },
     php: {
+        watch: './**/*.php',
         src: './**/*.php',
         dest: './languages',
     },
@@ -304,19 +311,19 @@ gulp.task('default', gulp.parallel('publicStyles', 'publicStylesRtl', 'publicScr
     /**
      * Start watching public assets
      */
-    gulp.watch(paths.styles.public.src, gulp.parallel('publicStyles'));
-    gulp.watch(paths.styles.public.src, gulp.parallel('publicStylesRtl'));
-    gulp.watch(paths.scripts.public.src, gulp.parallel('publicScripts'));
-    gulp.watch(paths.images.public.src, gulp.parallel('publicImages'));
+    gulp.watch(paths.styles.public.watch, gulp.parallel('publicStyles'));
+    gulp.watch(paths.styles.public.watch, gulp.parallel('publicStylesRtl'));
+    gulp.watch(paths.scripts.public.watch, gulp.parallel('publicScripts'));
+    gulp.watch(paths.images.public.watch, gulp.parallel('publicImages'));
 
     /**
      * Start watching admin assets
      */
-    gulp.watch(paths.styles.admin.src, gulp.parallel('adminStyles'));
-    gulp.watch(paths.styles.admin.src, gulp.parallel('adminStylesRtl'));
-    gulp.watch(paths.scripts.admin.src, gulp.parallel('adminScripts'));
-    gulp.watch(paths.images.admin.src, gulp.parallel('adminImages'));
+    gulp.watch(paths.styles.admin.watch, gulp.parallel('adminStyles'));
+    gulp.watch(paths.styles.admin.watch, gulp.parallel('adminStylesRtl'));
+    gulp.watch(paths.scripts.admin.watch, gulp.parallel('adminScripts'));
+    gulp.watch(paths.images.admin.watch, gulp.parallel('adminImages'));
 
     // Translation
-    gulp.watch(paths.php.src, gulp.parallel('translate'));
+    gulp.watch(paths.php.watch, gulp.parallel('translate'));
 }));

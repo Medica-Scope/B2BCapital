@@ -56,9 +56,12 @@
 
         public function enqueue_styles(): void
         {
+
             if (B2B_lANG === 'ar') {
+                $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', true);
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-main', B2b_Hooks::PATHS['root']['css'] . '/style-rtl');
             } else {
+                $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', true);
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-main', B2b_Hooks::PATHS['root']['css'] . '/style');
             }
 
@@ -67,8 +70,13 @@
 
         public function enqueue_scripts(): void
         {
-            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-main', B2b_Hooks::PATHS['public']['js'] . '/main', [
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
                 'jquery'
+            ], B2b::_VERSION, NULL, true);
+
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-main', B2b_Hooks::PATHS['public']['js'] . '/main', [
+                'jquery',
+                B2b::_DOMAIN_NAME . '-public-script-bs5'
             ]);
 
             $this->hooks->add_localization(B2b::_DOMAIN_NAME . '-public-script-main', 'b2bGlobals', [

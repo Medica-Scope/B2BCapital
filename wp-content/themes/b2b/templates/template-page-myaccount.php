@@ -20,7 +20,7 @@
     $user         = $user_obj::get_current_user();
 ?>
 
-    <main id="primary" class="">
+    <main id="" class="">
 
     </main><!-- #main -->
 

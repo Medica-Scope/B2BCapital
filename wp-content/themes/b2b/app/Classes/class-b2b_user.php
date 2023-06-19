@@ -36,11 +36,13 @@
         /**
          * USER ROLES
          */
-        const ADMIN    = 'administrator';
-        const CMS      = 'cmsmanager';
-        const OWNER    = 'owner';
-        const INVESTOR = 'investor';
-        const SEO      = 'seomanager';
+        const ADMIN     = 'administrator';
+        const CMS       = 'cmsmanager';
+        const OWNER     = 'owner';
+        const INVESTOR  = 'investor';
+        const SEO       = 'seomanager';
+        const WEBMASTER = 'webmaster';
+        const REVIEWER  = 'reviewer';
         /**
          * B2B USER INSTANCE
          *
@@ -204,13 +206,13 @@
          * @param int  $id : The User ID
          * @param bool $single true to get the first rule, False to get all Roles
          *
-         * @return array of rules if $single : return the first role only
+         * @return string|array of rules if $single : return the first role only
          *
          * @version 1.0
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public static function get_user_role(int $id = 0, bool $single = TRUE): array
+        public static function get_user_role(int $id = 0, bool $single = TRUE): string|array
         {
             global $user_ID;
             $ID   = ($id !== 0 && is_numeric($id)) ? $id : $user_ID;

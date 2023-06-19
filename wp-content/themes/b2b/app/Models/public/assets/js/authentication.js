@@ -27,6 +27,11 @@ class B2bAuthentication extends B2bAuth
                 form: $(`#${KEY}_login_form`),
                 parent: $(`#${KEY}_login_form`).parent(),
             },
+            registration: {
+                form: $(`#${KEY}_registration_form`),
+                parent: $(`#${KEY}_registration_form`).parent(),
+                user_password: $(`#${KEY}_user_password`),
+            },
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
                 parent: $(`#${KEY}_forgot_form`).parent(),
@@ -44,6 +49,7 @@ class B2bAuthentication extends B2bAuth
     initialization()
     {
         this.loginFront();
+        this.registrationFront();
         this.forgotPasswordFront();
         this.changePasswordFront();
         this.showPassword();
@@ -80,6 +86,30 @@ class B2bAuthentication extends B2bAuth
 
             if ($this.valid()) {
                 that.login(formData, $this);
+            }
+
+        });
+    }
+
+    registrationFront()
+    {
+        let that         = this,
+            $registration       = this.$el.registration,
+            ajaxRequests = this.ajaxRequests;
+
+        B2bValidator.initAuthValidation($registration, 'registration');
+
+        $registration.form.on('submit', $registration.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            if (typeof ajaxRequests.registration !== 'undefined') {
+                ajaxRequests.registration.abort();
+            }
+
+            if ($this.valid()) {
+                that.registration(formData, $this);
             }
 
         });

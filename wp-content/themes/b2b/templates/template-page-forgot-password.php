@@ -18,7 +18,7 @@
     get_header();
 ?>
 
-    <main id="primary" class="">
+    <main id="" class="">
         <?php
             echo B2b_Forms::get_instance()
                             ->create_form([

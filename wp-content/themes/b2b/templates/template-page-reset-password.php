@@ -20,7 +20,7 @@
     get_header();
 ?>
 
-    <main id="primary" class="">
+    <main id="" class="">
         <?php
             if (isset($_GET['key'])) {
                 $key = sanitize_text_field($_GET['key']);

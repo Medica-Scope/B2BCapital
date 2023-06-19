@@ -19,40 +19,60 @@
     get_header();
 ?>
 
-    <main id="primary" class="">
+    <main id="" class="">
         <?php
+            echo do_shortcode('[nextend_social_login]');
             echo B2b_Forms::get_instance()
                           ->create_form([
+                              'custom-html-1' => [
+                                  'type'    => 'html',
+                                  'content' => '<div class="row">',
+                                  'order'   => 0,
+                              ],
                               'user_login'    => [
-                                  'class'       => '',
+                                  'class'       => 'col-6',
                                   'type'        => 'text',
-                                  'label'       => __('Email Address', 'b2b'),
+                                  'label'       => __('Phone Number or Email', 'b2b'),
                                   'name'        => 'user_login',
                                   'required'    => TRUE,
-                                  'placeholder' => __('Ex. username Or email@gmail.com', 'b2b'),
-                                  // 'hint'        => __("Lorem ipsum dolor sit amet.", 'b2b'),
-                                  'before'      => "<h3 class='page-head'><?= __('Forget Password', 'b2b') ?></h3>",
-                                  'after'       => '',
-                                  'order'       => 0,
+                                  'placeholder' => __('Enter you phone or email', 'b2b'),
+                                  'order'       => 5,
                               ],
                               'user_password' => [
-                                  'class'       => '',
+                                  'class'       => 'col-6',
                                   'type'        => 'password',
                                   'label'       => __('Password', 'b2b'),
                                   'name'        => 'user_password',
                                   'required'    => TRUE,
-                                  'placeholder' => __('Password', 'b2b'),
-                                  // 'hint'        => __('Lorem ipsum dolor sit amet.', 'b2b'),
+                                  'placeholder' => __('Enter you password', 'b2b'),
                                   'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
-                                  'after'       => '<a href="' . get_permalink(get_page_by_path('my-account')) . '/forgot-password" class="main-color"> ' . __('Forget Password', 'b2b') . ' </a>',
                                   'order'       => 10,
+                              ],
+                              'rememberme'    => [
+                                  'class'   => 'col-6',
+                                  'type'    => 'checkbox',
+                                  'choices' => [
+                                      [
+                                          'class' => '',
+                                          'label' => 'Remember me',
+                                          'name'  => 'rememberme',
+                                          'value' => '1',
+                                          'order' => 0,
+                                      ]
+                                  ],
+                                  'order'   => 15,
+                              ],
+                              'custom-html-3' => [
+                                  'type'    => 'html',
+                                  'content' => '<div class="form-group col-6" ><a href="' . get_permalink(get_page_by_path('my-account')) . 'forgot-password" class="main-color"> ' . __('Forget Password', 'b2b') . ' </a></div></div>',
+                                  'order'   => 20,
                               ],
                               'login_nonce'   => [
                                   'class' => '',
                                   'type'  => 'nonce',
                                   'name'  => 'login_nonce',
                                   'value' => B2b::_DOMAIN_NAME . "_login_form",
-                                  'order' => 15
+                                  'order' => 25
                               ],
                               'submit'        => [
                                   'class'  => '',
@@ -60,8 +80,9 @@
                                   'value'  => __('Login', 'b2b'),
                                   'before' => '',
                                   'after'  => '',
-                                  'order'  => 20
-                              ]
+                                  'recaptcha_form_name'  => 'frontend_login',
+                                  'order'  => 25
+                              ],
                           ], [
                               'class' => B2b::_DOMAIN_NAME . '-login-form',
                               'id'    => B2b::_DOMAIN_NAME . '_login_form'

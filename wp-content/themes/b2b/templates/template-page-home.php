@@ -17,7 +17,7 @@
     get_header();
 ?>
 
-    <main id="primary" class="site-home">
+    <main id="" class="site-home">
 
     </main><!-- #main -->
 
