@@ -53,6 +53,7 @@
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_login_ajax', $this, 'login_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_registration_ajax', $this, 'registration_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_verification_ajax', $this, 'verification_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_forgot_password_ajax', $this, 'forgot_password_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_change_password_ajax', $this, 'change_password_ajax');
         }
@@ -113,14 +114,37 @@
             }
 
 
-            $user = $this->login();
+            $user            = $this->login();
+            $admins          = [
+                self::ADMIN,
+                self::CMS,
+                self::SEO,
+                self::WEBMASTER,
+                self::REVIEWER
+            ];
+            $front_dashboard = [
+                self::OWNER,
+                self::INVESTOR
+            ];
+
+            if (in_array($user->role, $admins)) {
+                $redirect_url = get_admin_url();
+            } elseif (in_array($user->role, $front_dashboard)) {
+                $redirect_url = get_permalink(get_page_by_path('my-account/dashboard'));
+            } else {
+                $redirect_url = home_url();
+            }
 
             if (is_wp_error($user)) {
-                new B2b_Ajax_Response(FALSE, $user->get_error_message(), $user->get_error_data());
+                if ($user->get_error_code() === 'account_confirmation') {
+                    $redirect_url = get_permalink(get_page_by_path('my-account/verification'));
+                } else {
+                    new B2b_Ajax_Response(FALSE, $user->get_error_message(), $user->get_error_data());
+                }
             }
 
             new B2b_Ajax_Response(TRUE, __('You have been logged in successfully.', 'b2b'), [
-                'redirect_url' => self::ADMIN === $user->role || self::CMS === $user->role ? get_admin_url() : home_url()
+                'redirect_url' => $redirect_url
             ]);
         }
 
@@ -177,7 +201,6 @@
                 'redirect_url' => home_url()
             ]);
         }
-
 
         /**
          * Description...
@@ -242,11 +265,13 @@
          * @package b2b
          * @author Mustafa Shaaban
          * @return void
+         * @throws \Exception
          */
         public function registration_ajax(): void
         {
-            $form_data                     = $_POST['data'];
-            $profile_picture               = sanitize_text_field($_FILES['data']['profile_picture']);
+            $form_data = $_POST['data'];
+            //            $profile_picture               = sanitize_text_field($_FILES['data']['profile_picture']);
+            $profile_picture               = '';
             $first_name                    = sanitize_text_field($form_data['first_name']);
             $last_name                     = sanitize_text_field($form_data['last_name']);
             $phone_number                  = sanitize_text_field($form_data['phone_number']);
@@ -310,13 +335,17 @@
                 new B2b_Ajax_Response(FALSE, __("You should select a verification type.", 'b2b'));
             }
 
+            if (!array_key_exists($verification_type, B2b_User::VERIFICATION_TYPES)) {
+                new B2b_Ajax_Response(FALSE, __("Invalid verification type.", 'b2b'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_registration');
 
             if ($check_result !== TRUE) {
                 new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
             }
 
-            $this->username     = $verification_type === 'whatsapp' || $verification_type === 'mobile' ? $phone_number : $user_email;
+            $this->username     = $phone_number;
             $this->password     = $user_password;
             $this->email        = $user_email;
             $this->display_name = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
@@ -327,6 +356,7 @@
             $this->nickname     = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
 
             $this->set_user_meta('phone_number', $phone_number);
+            $this->set_user_meta('verification_type', B2b_User::VERIFICATION_TYPES[$verification_type]);
 
             $user = $this->insert();
 
@@ -335,7 +365,86 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been created successfully, Please check your E-mail to activate your account', 'b2b'), [
-                'redirect_url' => home_url('/')
+                'redirect_url' => get_permalink(get_page_by_path('my-account/verification'))
+            ]);
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return void
+         * @throws \Exception
+         */
+        public function verification_ajax(): void
+        {
+            $form_data                     = $_POST['data'];
+            $code1                         = sanitize_text_field($form_data['code1']);
+            $code2                         = sanitize_text_field($form_data['code2']);
+            $code3                         = sanitize_text_field($form_data['code3']);
+            $code4                         = sanitize_text_field($form_data['code4']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+            if (!is_user_logged_in()) {
+                new B2b_Ajax_Response(FALSE, __('You are not allowed to perform this action!.', 'b2b'));
+            }
+
+            if (empty($form_data)) {
+                new B2b_Ajax_Response(FALSE, __("invalid code.", 'b2b'));
+            }
+
+            if (!wp_verify_nonce($form_data['verification_nonce'], B2b::_DOMAIN_NAME . "_verification_form")) {
+                new B2b_Ajax_Response(FALSE, __("Something went wrong!.", 'b2b'));
+            }
+
+            if ($code1 === NULL || $code1 === '') {
+                new B2b_Ajax_Response(FALSE, __("Please enter the correct code.", 'b2b'));
+            }
+
+            if ($code2 === NULL || $code2 === '') {
+                new B2b_Ajax_Response(FALSE, __("Please enter the correct code.", 'b2b'));
+            }
+
+            if ($code3 === NULL || $code3 === '') {
+                new B2b_Ajax_Response(FALSE, __("Please enter the correct code.", 'b2b'));
+            }
+
+            if ($code4 === NULL || $code4 === '') {
+                new B2b_Ajax_Response(FALSE, __("Please enter the correct code.", 'b2b'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_registration');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+            }
+
+            $user     = self::get_current_user();
+            $validate = self::check_verification_code([
+                'verification_expire_date' => $user->user_meta['verification_expire_date'],
+                'verification_key'         => $user->user_meta['verification_key'],
+                'incoming_code'            => $code1 . $code2 . $code3 . $code4,
+                'current_code'             => $user->user_meta['verification_key'],
+            ]);
+
+            if ($validate) {
+                if ($user->user_meta['verification_type'] === 'email') {
+                    update_user_meta($user->ID, 'email_confirmation_status', 1);
+                } else {
+                    update_user_meta($user->ID, 'phone_confirmation_status', 1);
+                }
+                update_user_meta($user->ID, 'account_confirmation_status', 1);
+                update_user_meta($user->ID, 'verification_key', '');
+                update_user_meta($user->ID, 'verification_expire_date', '');
+            } else {
+                new B2b_Ajax_Response(FALSE, __($validate->get_error_message(), 'icmtc'));
+            }
+
+            new B2b_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'b2b'), [
+                'redirect_url' => get_permalink(get_page_by_path('my-account/industry'))
             ]);
         }
 
@@ -374,9 +483,18 @@
                 exit();
             }
 
-            if (is_page('my-account') && !is_user_logged_in()) {
+            if ((is_page('my-account') || is_page('my-account/verification')) && !is_user_logged_in()) {
                 wp_safe_redirect(get_permalink(get_page_by_path('my-account/login')));
                 exit();
+            }
+
+            if ((is_page('my-account/verification')) && is_user_logged_in()) {
+                global $user_ID;
+                $user_confirmed = get_user_meta($user_ID, 'account_confirmation_status', TRUE);
+                if ((int)$user_confirmed | (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
+                    wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
+                    exit();
+                }
             }
         }
     }

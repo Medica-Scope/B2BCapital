@@ -98,6 +98,45 @@ class B2bAuth extends B2b
         });
     }
 
+    verification(formData, $el)
+    {
+        let that                = this;
+        this.ajaxRequests.verification = $.ajax({
+            url: b2bGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_verification_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+                $el.find('input, button')
+                   .prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                $('input')
+                    .prop('disabled', false);
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                    window.location.href = res.data.redirect_url;
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+                that.createNewToken();
+                $el.find('input, button')
+                   .prop('disabled', false);
+                UiCtrl.blockUI($el, false);
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+                that.createNewToken();
+            },
+        });
+    }
+
     forgotPassword(formData, $el)
     {
         let that                 = this;

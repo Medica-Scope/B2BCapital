@@ -22,7 +22,7 @@
         private array  $headers     = [];
         private array  $attachments = [];
         private bool   $sendAsHTML  = TRUE;
-        private string $subject     = 'Medica Scope';
+        private string $subject     = '';
         private string $from        = '';
 
         private string $templateStart         = THEME_PATH . '/app/Views/email-template/';
@@ -127,7 +127,8 @@
          */
         public function subject(string $subject): B2b_Mail
         {
-            $this->subject = sprintf(__('%s - %s'), $this->subject, $subject);
+//            $this->subject = sprintf(__('%s - %s', 'b2b'), $this->subject, $subject);
+            $this->subject = $subject;
             return $this;
         }
 

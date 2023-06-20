@@ -27,5 +27,5 @@
 <p>If you did not initiate this password reset request, please disregard this email. Your current password will
    remain unchanged.</p>
 
-<p>Please note that for security reasons, the password reset link will expire after 24 hours. If you don't reset
+<p>Please note that for security reasons, the password reset link will expire after 1 hour. If you don't reset
    your password within this timeframe, you may need to request another password reset.</p>

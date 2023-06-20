@@ -21,7 +21,7 @@
 ?>
 
     <main id="" class="">
-
+        <h1>MY ACCOUNT</h1>
     </main><!-- #main -->
 
 <?php get_footer();

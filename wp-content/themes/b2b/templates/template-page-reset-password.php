@@ -38,7 +38,6 @@
                                           'required'    => TRUE,
                                           'placeholder' => __('Your Password', 'b2b'),
                                           'hint'        => __("Password should contain at least 1 special character", 'b2b'),
-                                          'before'      => "<h3 class='page-head'><?= __('Reset Password, 'b2b') ?></h3>",
                                           'after'       => '<i class="fa fa-eye showPassIcon resetCustom" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
                                           'order'       => 0,
                                       ],

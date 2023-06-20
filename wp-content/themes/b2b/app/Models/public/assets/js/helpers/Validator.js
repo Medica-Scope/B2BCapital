@@ -141,6 +141,33 @@ class B2bValidator
                     });
                 }
             },
+            verification: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            code1: {
+                                required: true,
+                                maxlength: 1
+                            },
+                            code2: {
+                                required: true,
+                                maxlength: 1
+                            },
+                            code3: {
+                                required: true,
+                                maxlength: 1
+                            },
+                            code4: {
+                                required: true,
+                                maxlength: 1
+                            },
+                        },
+                    });
+                }
+            },
             forgotPassword: function () {
                 if ($el.form.length > 0) {
                     $el.form.validate({

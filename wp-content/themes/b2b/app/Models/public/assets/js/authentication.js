@@ -32,6 +32,10 @@ class B2bAuthentication extends B2bAuth
                 parent: $(`#${KEY}_registration_form`).parent(),
                 user_password: $(`#${KEY}_user_password`),
             },
+            verification: {
+                form: $(`#${KEY}_verification_form`),
+                parent: $(`#${KEY}_verification_form`).parent(),
+            },
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
                 parent: $(`#${KEY}_forgot_form`).parent(),
@@ -50,6 +54,7 @@ class B2bAuthentication extends B2bAuth
     {
         this.loginFront();
         this.registrationFront();
+        this.verificationFront();
         this.forgotPasswordFront();
         this.changePasswordFront();
         this.showPassword();
@@ -58,7 +63,7 @@ class B2bAuthentication extends B2bAuth
     showPassword()
     {
         $('.showPassIcon').on('click', function (e) {
-            let $this = $(e.currentTarget),
+            let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');
             if ($target_element.attr('type') === 'password') {
                 $target_element.attr('type', 'text');
@@ -94,9 +99,9 @@ class B2bAuthentication extends B2bAuth
 
     registrationFront()
     {
-        let that         = this,
-            $registration       = this.$el.registration,
-            ajaxRequests = this.ajaxRequests;
+        let that          = this,
+            $registration = this.$el.registration,
+            ajaxRequests  = this.ajaxRequests;
 
         B2bValidator.initAuthValidation($registration, 'registration');
 
@@ -111,6 +116,30 @@ class B2bAuthentication extends B2bAuth
 
             if ($this.valid()) {
                 that.registration(formData, $this);
+            }
+
+        });
+    }
+
+    verificationFront()
+    {
+        let that          = this,
+            $verification = this.$el.verification,
+            ajaxRequests  = this.ajaxRequests;
+
+        B2bValidator.initAuthValidation($verification, 'verification');
+
+        $verification.form.on('submit', $verification.parent, function (e) {
+            e.preventDefault();
+            let $this           = $(e.currentTarget),
+                formData        = $this.serializeObject();
+
+            if (typeof ajaxRequests.verification !== 'undefined') {
+                ajaxRequests.verification.abort();
+            }
+
+            if ($this.valid()) {
+                that.verification(formData, $this);
             }
 
         });

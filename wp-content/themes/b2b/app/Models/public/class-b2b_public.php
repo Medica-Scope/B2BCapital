@@ -102,7 +102,7 @@
                 ]
             ]);
 
-            if (is_page('my-account') || is_page('my-account/login') || is_page('my-account/reset-password') || is_page('my-account/forgot-password') || is_page('my-account/registration')) {
+            if (is_page('my-account') || is_page('my-account/login') || is_page('my-account/reset-password') || is_page('my-account/forgot-password') || is_page('my-account/registration') || is_page('my-account/verification')) {
                 $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-authentication', B2b_Hooks::PATHS['public']['js'] . '/authentication');
             }
 

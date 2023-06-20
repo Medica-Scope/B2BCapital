@@ -148,13 +148,13 @@
 
             // This theme uses wp_nav_menu() in one location.
             register_nav_menus([
-                'default-menu'       => esc_html__('Default', 'b2b'),
-                'dashboard-owner-menu'         => esc_html__('Dashboard Owner', 'b2b'),
-                'dashboard-investor-menu'      => esc_html__('Dashboard Investor', 'b2b'),
-                'footer-menu'        => esc_html__('Footer', 'b2b'),
-                'bottom-footer-menu' => esc_html__('Bottom Footer', 'b2b'),
-                'profile-menu-login'       => esc_html__('Account Login', 'b2b'),
-                'profile-menu-logout'       => esc_html__('Account Logout', 'b2b'),
+                'default-menu'            => esc_html__('Default', 'b2b'),
+                'dashboard-owner-menu'    => esc_html__('Dashboard Owner', 'b2b'),
+                'dashboard-investor-menu' => esc_html__('Dashboard Investor', 'b2b'),
+                'footer-menu'             => esc_html__('Footer', 'b2b'),
+                'bottom-footer-menu'      => esc_html__('Bottom Footer', 'b2b'),
+                'profile-menu-login'      => esc_html__('Account Login', 'b2b'),
+                'profile-menu-logout'     => esc_html__('Account Logout', 'b2b'),
             ]);
 
             /*
@@ -275,7 +275,7 @@
          */
         static function get_site_logo(string $id = 'custom_logo'): string
         {
-            $logo_id  = get_theme_mod($id);
+            $logo_id = get_theme_mod($id);
             if (is_numeric($logo_id)) {
                 $logo_info = wp_get_attachment_image_src($logo_id, 'full');
                 $logo_url  = $logo_info[0];

@@ -13,6 +13,7 @@
      *
      */
 
+    use B2B\APP\CLASSES\B2b_User;
     use B2B\APP\HELPERS\B2b_Forms;
     use B2B\B2b;
 
@@ -107,9 +108,9 @@
                                   'required'       => TRUE,
                                   'placeholder'    => __('Enter your verification type', 'b2b'),
                                   'options'        => [
-                                      'email'    => __('Email', 'b2b'),
-                                      'mobile'   => __('Phone Number', 'b2b'),
-                                      'whatsapp' => __('Whatsapp', 'b2b'),
+                                      B2b_User::VERIFICATION_TYPES['email']    => __('Email', 'b2b'),
+                                      B2b_User::VERIFICATION_TYPES['mobile']   => __('Phone Number', 'b2b'),
+                                      B2b_User::VERIFICATION_TYPES['whatsapp'] => __('Whatsapp', 'b2b'),
                                   ],
                                   'default_option' => '',
                                   'select_option'  => '',

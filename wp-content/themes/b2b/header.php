@@ -28,7 +28,6 @@
         <div id="page" class="site">
 
             <?php
-
                 if (is_page('dashboard')) {
                     get_template_part('app/Views/headers/dashboard');
                 } else {
