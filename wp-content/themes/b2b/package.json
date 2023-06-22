@@ -70,7 +70,7 @@
     "browserify": "^17.0.0",
     "event-stream": "^4.0.1",
     "gulp-notify": "^4.0.0",
-    "intl-tel-input": "^18.1.5",
+    "intl-tel-input": "^18.1.6",
     "jquery": "^3.6.4",
     "jquery-validation": "^1.19.5",
     "lodash": "^4.17.21",

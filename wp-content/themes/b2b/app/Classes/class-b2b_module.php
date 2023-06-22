@@ -149,7 +149,7 @@
                 return $error;
             }
 
-            return $B2b_Posts;
+            return $this->assign($B2b_Posts);
         }
 
         /**
@@ -179,10 +179,53 @@
             ]);
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->convert($post, $this->meta_data);
+                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
             }
 
             return $B2b_Posts;
+        }
+
+        /**
+         * Description...
+         *
+         * @param $tax_name
+         *
+         * @return int|string|\WP_Error|\WP_Term
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         */
+        public function get_taxonomy_terms($tax_name):int|string|array|\WP_Error|\WP_Term
+        {
+            return get_terms([
+                'taxonomy'   => $tax_name,
+                'hide_empty' => FALSE,
+            ]);
+        }
+
+        public function assign(B2b_Post $obj): B2b_Module
+        {
+            $this->ID            = $obj->ID;
+            $this->author        = $obj->author;
+            $this->type          = $obj->type;
+            $this->name          = $obj->name;
+            $this->title         = $obj->title;
+            $this->content       = $obj->content;
+            $this->excerpt       = $obj->excerpt;
+            $this->status        = $obj->status;
+            $this->parent        = $obj->parent;
+            $this->created_date  = $obj->created_date;
+            $this->modified_date = $obj->modified_date;
+            $this->thumbnail     = $obj->thumbnail;
+            $this->link          = $obj->link;
+            $this->taxonomy      = $obj->taxonomy;
+
+            foreach ($obj->meta_data as $name => $value) {
+                $this->set_meta_data($name, $value);
+            }
+
+            return $this;
         }
 
         /**
@@ -247,7 +290,7 @@
             $B2b_Posts = [];
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->convert($post, $this->meta_data);
+                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
             }
 
             $B2b_Posts['count'] = $posts->found_posts;

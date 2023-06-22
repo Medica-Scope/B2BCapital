@@ -11,6 +11,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import 'jquery-validation';
+import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/js/utils.js';
 
 class B2bValidator
 {
@@ -66,6 +68,10 @@ class B2bValidator
             // let re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         }, this.phrases.phone_regex);
+        $.validator.addMethod("intlTelNumber", function(value, element, param) {
+            let iti = window.ITIOBJ[param.itiObj];
+            return this.optional(element) || iti.isValidNumber();
+        }, this.phrases.intlTelNumber);
         $.validator.addMethod('password_regex', function (value, element, regexp) {
             let re = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
             return this.optional(element) || re.test(value);
@@ -97,8 +103,24 @@ class B2bValidator
                             user_login: 'required',
                             user_password: {
                                 required: true,
+                                maxlength: 26
                             },
                         },
+                    });
+                }
+            },
+            industries: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            'industries': {
+                                required: true,
+                                minlength: 1
+                            },
+                        }
                     });
                 }
             },
@@ -110,18 +132,25 @@ class B2bValidator
                         },
                         rules: {
                             first_name: {
-                                required: true
+                                required: true,
+                                minlength: 2,
+                                maxlength: 150
                             },
                             last_name: {
-                                required: true
+                                required: true,
+                                minlength: 2,
+                                maxlength: 150
                             },
                             phone_number: {
                                 required: true,
-                                phone_regex: true
+                                intlTelNumber: {itiObj: 'registration'},
+                                maxlength: 50
                             },
                             user_email: {
                                 required: true,
                                 email_regex: true,
+                                minlength: 10,
+                                maxlength: 125
                             },
                             user_password: {
                                 required: true,

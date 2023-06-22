@@ -154,6 +154,12 @@
          * @var string
          */
         public string $activation_key = '';
+
+        /**
+         * @var \B2B\APP\MODELS\FRONT\MODULES\B2b_Profile
+         */
+        public B2b_Profile $profile;
+
         /**
          * The User Meta data
          *
@@ -744,7 +750,7 @@
                 if ($verification_data['incoming_code'] === $verification_data['current_code']) {
                     return TRUE;
                 } else {
-                    $error->add('expire_date', __("Your reset key is invalid!.", 'b2b'), [
+                    $error->add('invalid_key', __("Your reset key is invalid!.", 'b2b'), [
                         'status' => FALSE
                     ]);
                     return $error;
@@ -846,6 +852,11 @@
             $new_user->last_name  = $new_user->user_meta['last_name'];
             $new_user->nickname   = $new_user->user_meta['nickname'];
             $new_user->avatar     = $new_user->get_avatar();
+
+            if ($new_user->user_meta['profile_id'] && class_exists('B2b_Profile')) {
+                $profile_onj       = new B2b_Profile();
+                $new_user->profile = $profile_onj->get_by_id((int)$new_user->user_meta['profile_id']);
+            }
 
             return $new_user;
         }
@@ -974,6 +985,23 @@
                     ]);
                     return $error;
                 }
+
+                $profile_id = get_user_meta($login->ID, 'profile_id', TRUE);
+                if (!$profile_id) {
+                    $error->add('invalid_profile', __("This account is temporary disabled or blocked, Please contact us.", 'b2b'), [
+                        'status' => FALSE
+                    ]);
+                    return $error;
+                }
+                $profile_obj = new B2b_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!isset($profile->taxonomy['industry']) || empty($profile->taxonomy['industry'])) {
+                    $error->add('empty_industry', __("You have to use atl east 1 industry", 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [ 'industry' => $profile->taxonomy['industry'] ]
+                    ]);
+                    return $error;
+                }
             }
 
             return $this;
@@ -1000,7 +1028,7 @@
          * @author Mustafa Shaaban
          * @return \WP_Error|bool
          */
-        private function mobile_verification(): WP_Error|bool
+        public function mobile_verification(): WP_Error|bool
         {
             $error = new WP_Error();
 
@@ -1022,7 +1050,7 @@
          * @author Mustafa Shaaban
          * @return \WP_Error|bool
          */
-        private function whatsapp_verification(): WP_Error|bool
+        public function whatsapp_verification(): WP_Error|bool
         {
             $error = new WP_Error();
 
@@ -1045,12 +1073,12 @@
          * @return bool
          * @throws \Exception
          */
-        private function email_verification(): bool
+        public function email_verification(): bool
         {
             $randomNumber = mt_rand(1000, 9999);
 
             update_user_meta($this->ID, 'verification_key', $randomNumber);
-            update_user_meta($this->ID, 'verification_expire_date', current_time('timestamp') + 3600);
+            update_user_meta($this->ID, 'verification_expire_date', current_time('timestamp') + 300);
 
             $email = B2b_Mail::init()
                              ->to($this->email)

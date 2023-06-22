@@ -16,7 +16,7 @@
 
 <p>Your verification code is: <strong>[<?= $data['digits'] ?>]</strong></p>
 
-<p>Please note, this verification code is only valid for the next 1 hour. If you did not request this verification code, please ignore this email, and consider changing your
+<p>Please note, this verification code is only valid for the next 5 minutes. If you did not request this verification code, please ignore this email, and consider changing your
         password as a precautionary measure.</p>
 
 <p>Should you have any questions or need further assistance, don't hesitate to contact our support team at info@b2b.org.</p>

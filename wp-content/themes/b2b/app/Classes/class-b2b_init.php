@@ -102,10 +102,20 @@
                         'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_opportunity.php'
                     ],
+                    'Partner' => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_partner.php'
+                    ],
                     'Profile' => [
                         'type'      => 'class',
                         'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_profile.php'
+                    ],
+                    'Testimonial' => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_testimonial.php'
                     ],
                 ],
             ];

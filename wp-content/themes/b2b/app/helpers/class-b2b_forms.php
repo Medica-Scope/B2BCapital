@@ -72,7 +72,7 @@
 
             $form = $this->form_start($form_tag);
             foreach ($settings as $key => $field) {
-                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number') {
+                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel') {
                     $form .= $this->std_inputs($field);
                 } elseif ($field['type'] === 'hidden') {
                     $form .= $this->create_hidden_inputs($field);
@@ -470,7 +470,7 @@
                     $id = $name['id'];
                 }
                 ?>
-                <div class="form-check <?= B2b::_DOMAIN_NAME ?>-input-wrapper<?= $name['class'] ?>">
+                <div class="form-check <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $name['class'] ?>">
                     <?= $name['before'] ?>
                     <input type="<?= $input_data['type'] ?>"
                            class="<?= B2b::_DOMAIN_NAME ?>-checkbox"

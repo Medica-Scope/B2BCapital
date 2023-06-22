@@ -17,6 +17,7 @@ class B2bMain
     constructor()
     {
         window.KEY = b2bGlobals.domain_key;
+        window.ITIOBJ = {};
         this.initialization();
     }
 

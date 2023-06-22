@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Filename: class-b2b_opportunity.php
+     * @Filename: class-b2b_testimonial.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 5/10/2023
@@ -17,24 +17,22 @@
     /**
      * Description...
      *
-     * @class B2b_Opportunity
+     * @class B2b_Testimonial
      * @version 1.0
      * @since 1.0.0
      * @package b2b
      * @author Mustafa Shaaban
      */
-    class B2b_Opportunity extends B2b_Module
+    class B2b_Testimonial extends B2b_Module
     {
         public array $meta_data = [
             'cover',
         ];
-        public array $taxonomy  = [
-            'industry'
-        ];
+        public array $taxonomy  = [];
 
         public function __construct()
         {
-            parent::__construct('opportunity');
+            parent::__construct('testimonial');
         }
 
         /**
