@@ -18,7 +18,7 @@
      * @class B2b_Public
      * @version 1.0
      * @since 1.0.0
-     * @package B2B
+     * @package b2b
      * @author Mustafa Shaaban
      */
     class B2b_Public
@@ -56,9 +56,13 @@
 
         public function enqueue_styles(): void
         {
+
+            $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-itl', B2b_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
             if (B2B_lANG === 'ar') {
+                $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-main', B2b_Hooks::PATHS['root']['css'] . '/style-rtl');
             } else {
+                $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', TRUE);
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-main', B2b_Hooks::PATHS['root']['css'] . '/style');
             }
 
@@ -67,31 +71,40 @@
 
         public function enqueue_scripts(): void
         {
-            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-main', B2b_Hooks::PATHS['public']['js'] . '/main', [
+            global $gglcptch_options;
+
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
                 'jquery'
+            ], B2b::_VERSION, NULL, TRUE);
+
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-main', B2b_Hooks::PATHS['public']['js'] . '/main', [
+                'jquery',
+                B2b::_DOMAIN_NAME . '-public-script-bs5'
             ]);
 
             $this->hooks->add_localization(B2b::_DOMAIN_NAME . '-public-script-main', 'b2bGlobals', [
                 'domain_key'  => B2b::_DOMAIN_NAME,
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => B2b::_ENVIRONMENT,
+                'publicKey'   => $gglcptch_options['public_key'],
                 'phrases'     => [
                     'default'        => __("This field is required.", "b2b"),
                     'email'          => __("Please enter a valid email address.", "b2b"),
                     'number'         => __("Please enter a valid number.", "b2b"),
                     'equalTo'        => __("Please enter the same value again.", "b2b"),
                     'maxlength'      => __("Please enter no more than {0} characters.", "b2b"),
-                    'minLength'      => __("Please enter at least {0} characters.", "b2b"),
+                    'minlength'      => __("Please enter at least {0} characters.", "b2b"),
                     'max'            => __("Please enter a value less than or equal to {0}.", "b2b"),
                     'min'            => __("Please enter a value greater than or equal to {0}.", "b2b"),
                     'pass_regex'     => __("Password doesn't complexity.", "b2b"),
                     'phone_regex'    => __("Please enter a valid Phone number.", "b2b"),
+                    'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "b2b"),
                     'email_regex'    => __("Please enter a valid email address.", "b2b"),
                     'file_extension' => __("Please upload an image with a valid extension.", "b2b")
                 ]
             ]);
 
-            if (is_page('my-account') || is_page('my-account/login') || is_page('my-account/reset-password') || is_page('my-account/forgot-password') || is_page('my-account/registration')) {
+            if (is_page('my-account') || is_page('my-account/login') || is_page('my-account/industry') || is_page('my-account/reset-password') || is_page('my-account/forgot-password') || is_page('my-account/registration') || is_page('my-account/verification')) {
                 $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-authentication', B2b_Hooks::PATHS['public']['js'] . '/authentication');
             }
 

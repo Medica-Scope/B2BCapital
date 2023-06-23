@@ -141,14 +141,37 @@
             $this->meta_data = $this->reformat_metadata($this->meta_data);
         }
 
-        private function reformat_metadata($meta_data)
+        /**
+         * Description...
+         *
+         * @param $name
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return false
+         */
+        public function __get($name)
         {
-            foreach ($meta_data as $k => $meta) {
-                $meta_data[$meta] = '';
-                unset($meta_data[$k]);
-            }
+            return property_exists($this, $name) ? $this->{$name} : FALSE;
+        }
 
-            return $meta_data;
+        /**
+         * Description...
+         *
+         * @param $name
+         * @param $value
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return void
+         */
+        public function __set($name, $value)
+        {
+            $this->{$name} = $value;
         }
 
         /**
@@ -200,11 +223,17 @@
             $new_post->modified_date = $post->post_modified;
             $new_post->thumbnail     = get_the_post_thumbnail_url($post);
             $new_post->link          = get_permalink($post->ID);
-            $new_post->taxonomy      = $wpdb->get_results("SELECT tr.term_taxonomy_id AS term_id , t.name, t.slug, tt.parent, tt.taxonomy
+            $new_post->taxonomy      = [];
+
+            $groupedByTaxonomy = $wpdb->get_results("SELECT tr.term_taxonomy_id AS term_id , t.name, t.slug, tt.parent, tt.taxonomy
 																FROM `" . $wpdb->prefix . "term_relationships` tr
 																LEFT JOIN `" . $wpdb->prefix . "terms` t ON t.term_id = tr.term_taxonomy_id
 																LEFT JOIN `" . $wpdb->prefix . "term_taxonomy` tt ON tt.term_id = t.term_id
 																WHERE tr.object_id = '$post->ID' AND tt.taxonomy != 'translation_priority';");
+
+            foreach ($groupedByTaxonomy as $item) {
+                $new_post->taxonomy[$item->taxonomy][] = $item;
+            }
 
             if (empty($meta_data)) {
                 $meta_data = $wpdb->get_results("SELECT `meta_key`, `meta_value`
@@ -224,14 +253,44 @@
             return $new_post;
         }
 
-        public function __get($name)
+        /**
+         * @return int|\WP_Error|\B2B\APP\CLASSES\B2b_Post
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @author Mustafa Shaaban
+         */
+        public function insert(): int|WP_Error|B2b_Post
         {
-            return property_exists($this, $name) ? $this->{$name} : FALSE;
-        }
+            $insert = wp_insert_post([
+                'ID'            => $this->ID,
+                'post_title'    => $this->title,
+                'post_content'  => $this->content,
+                'post_excerpt'  => $this->excerpt,
+                'post_status'   => $this->status,
+                'post_parent'   => $this->parent,
+                'post_author'   => $this->author,
+                'post_name'     => $this->name,
+                'post_type'     => $this->type
+            ]);
 
-        public function __set($name, $value)
-        {
-            $this->{$name} = $value;
+            if (is_wp_error($insert)) {
+                return $insert;
+            }
+
+            if ($insert) {
+                foreach ($this->meta_data as $key => $meta) {
+                    add_post_meta($insert, $key, $meta);
+                }
+                foreach ($this->taxonomy as $tax_name => $taxonomies) {
+                    wp_set_post_terms($this->ID, $taxonomies, $tax_name, false);
+                }
+                $this->ID = $insert;
+
+                do_action(B2b::_DOMAIN_NAME . "_after_insert_" . $this->type, $this);
+            }
+
+            return $this;
         }
 
         /**
@@ -262,47 +321,10 @@
                 foreach ($this->meta_data as $key => $meta) {
                     update_post_meta($update, $key, $meta);
                 }
-
-                do_action(B2b::_DOMAIN_NAME . "_after_update_" . $this->type, $this);
-            }
-
-            return $this;
-        }
-
-        /**
-         * @return int|\WP_Error|\B2B\APP\CLASSES\B2b_Post
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
-         */
-        public function insert(): int|WP_Error|B2b_Post
-        {
-            $insert = wp_insert_post([
-                'ID'            => $this->ID,
-                'post_title'    => $this->title,
-                'post_content'  => $this->content,
-                'post_excerpt'  => $this->excerpt,
-                'post_status'   => $this->status,
-                'post_parent'   => $this->parent,
-                'post_author'   => $this->author,
-                'post_name'     => $this->name,
-                'post_type'     => $this->type,
-                'post_category' => $this->taxonomy
-            ]);
-
-            if (is_wp_error($insert)) {
-                return $insert;
-            }
-
-            if ($insert) {
-                foreach ($this->meta_data as $key => $meta) {
-                    add_post_meta($insert, $key, $meta);
+                foreach ($this->taxonomy as $tax_name => $taxonomies) {
+                    wp_set_post_terms($this->ID, $taxonomies, $tax_name, false);
                 }
-
-                $this->ID = $insert;
-
-                do_action(B2b::_DOMAIN_NAME . "_after_insert_" . $this->type, $this);
+                do_action(B2b::_DOMAIN_NAME . "_after_update_" . $this->type, $this);
             }
 
             return $this;
@@ -326,6 +348,27 @@
         }
 
         /**
+         * Description...
+         *
+         * @param $meta_data
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        private function reformat_metadata($meta_data): array
+        {
+            foreach ($meta_data as $k => $meta) {
+                $meta_data[$meta] = '';
+                unset($meta_data[$k]);
+            }
+
+            return $meta_data;
+        }
+
+        /**
          * @param string $name
          * @param string $value
          *
@@ -346,7 +389,18 @@
             return FALSE;
         }
 
-        public function get($meta_name)
+        /**
+         * Description...
+         *
+         * @param $meta_name
+         *
+         * @return string|bool
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         */
+        public function get($meta_name): string|bool
         {
             return get_post_meta($this->ID, $meta_name, TRUE);
         }

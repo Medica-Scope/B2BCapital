@@ -18,7 +18,7 @@
      * @class B2b_Admin
      * @version 1.0
      * @since 1.0.0
-     * @package B2B
+     * @package b2b
      * @author Mustafa Shaaban
      */
     class B2b_Admin
@@ -51,7 +51,8 @@
 
         public function filters()
         {
-
+            $this->hooks->add_filter('gglcptch_add_custom_form', $this, 'add_custom_recaptcha_forms', 10, 1);
+            $this->hooks->run();
         }
 
         public function enqueue_styles(): void
@@ -68,6 +69,27 @@
             //			));
             $this->hooks->run();
 
+        }
+
+        /**
+         * Description...
+         *
+         * @param $forms
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         */
+        public function add_custom_recaptcha_forms($forms)
+        {
+            $forms['frontend_login']           = [ "form_name" => "Front End Login" ];
+            $forms['frontend_registration']           = [ "form_name" => "Front End Register" ];
+            $forms['frontend_verification']           = [ "form_name" => "Front End Verification" ];
+            $forms['frontend_industries']           = [ "form_name" => "Front End Industries" ];
+            $forms['frontend_reset_password']  = [ "form_name" => "Front End Reset Password" ];
+            $forms['frontend_forgot_password'] = [ "form_name" => "Front End Forgot Password" ];
+            return $forms;
         }
 
     }

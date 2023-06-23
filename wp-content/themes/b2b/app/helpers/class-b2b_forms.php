@@ -72,7 +72,7 @@
 
             $form = $this->form_start($form_tag);
             foreach ($settings as $key => $field) {
-                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number') {
+                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel') {
                     $form .= $this->std_inputs($field);
                 } elseif ($field['type'] === 'hidden') {
                     $form .= $this->create_hidden_inputs($field);
@@ -92,12 +92,13 @@
                     $form .= $this->create_nonce($field);
                 } elseif ($field['type'] === 'submit' || $field['type'] === 'button') {
                     $form .= $this->form_submit_button($field);
+                } elseif ($field['type'] === 'html') {
+                    $form .= $field['content'];
                 }
             }
             $form .= $this->form_end();
             return $form;
         }
-
 
 
         private function sort_settings(array $settings = []): array
@@ -202,7 +203,7 @@
                 'order'          => 0,
                 'inline'         => FALSE,
                 'extra_attr'     => [
-                    'maxlength' => '50',
+                    'maxlength' => '255',
                     'minlength' => '',
                     'max'       => '',
                     'min'       => '',
@@ -211,22 +212,20 @@
             ];
 
             $input_data = array_merge($defaults, $args);
-
-            $require = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
-            $value   = (empty($input_data['default_value']) && $input_data['default_value'] !== 0) ? $input_data['value'] : $input_data['default_value'];
+            $value      = (empty($input_data['default_value']) && $input_data['default_value'] !== 0) ? $input_data['value'] : $input_data['default_value'];
 
             ?>
+
             <?= $input_data['before_wrapper'] ?>
-            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+            <div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                <?= $require ?>
+                <label for="<?= $input_data['id'] ?>" class="<?= B2b::_DOMAIN_NAME ?>-label"><?= $input_data['label'] ?></label>
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
                 <input type="<?= $input_data['type'] ?>"
-                       class="form-control b2b-input"
+                       class="form-control <?= B2b::_DOMAIN_NAME ?>-input"
                        id="<?= $input_data['id'] ?>"
                        name="<?= $input_data['name'] ?>"
                        value="<?= $value ?>"
@@ -236,7 +235,7 @@
                     <?= $this->create_attr($input_data) ?>
                     <?= $input_data['visibility'] ?>
                     <?= $this->create_attr($input_data['extra_attr']) ?>
-                    <?= $input_data['required'] ? 'required="require"' : '' ?> <?= $input_data['type'] == 'number' && isset($input_data['step']) ? 'step="' . $input_data['step'] . '"' : '' ?>>
+                    <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $input_data['type'] == 'number' && isset($input_data['step']) ? 'step="' . $input_data['step'] . '"' : '' ?>>
                 <?php
                     if (!empty($input_data['hint'])) {
                         ?>
@@ -247,6 +246,7 @@
                 <?= $input_data['after'] ?>
             </div>
             <?= $input_data['after_wrapper'] ?>
+
             <?php
 
             return ob_get_clean();
@@ -360,74 +360,44 @@
                 'inline'         => FALSE,
                 'abbr'           => __("This field is required", "b2b"),
                 'order'          => 0,
-                'admin'          => FALSE,
                 'thumbnail'      => '',
                 'thumbnail_name' => __("No file selected", "b2b"),
                 'extra_attr'     => []
             ];
 
             $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
             echo $input_data['before_wrapper'];
-            if (boolval($input_data['admin'])) {
-                ?>
-                <div class="form-group  b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
-                    <?= $input_data['before'] ?>
-                    <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                    <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                    <?= $require ?>
-                    <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+            ?>
+            <div class="input-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                <?= $input_data['before'] ?>
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
+                <label class="<?= B2b::_DOMAIN_NAME ?>-label" for="customFile"><?= $input_data['label'] ?></label>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
-                    <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                    <div class="b2b-upload-file-wrapper">
-                        <button class="btn b2b-btn <?= !empty($input_data['value']) ? 'mb-2' : ''; ?>" id="<?= $input_data['id'] ?>"
-                                type="button"><?= __('Select File') ?></button>
-                        <div class="b2b-uploaded-image <?= empty($input_data['value']) ? 'hidden' : ''; ?> ">
-                            <img class="img-thumbnail-preview w-10 mb-3" src="<?= $input_data['thumbnail'] ?>" alt="icon">
-                            <p class="attachment-name d-block"><?= $input_data['thumbnail_name'] ?></p>
-                        </div>
-                    </div>
-                    <input type="hidden" name="<?= $input_data['name'] ?>" value="<?= $input_data['value'] ?>"
-                           id="<?= $input_data['id'] ?>_hidden" <?= $input_data['required'] ? 'required="require"' : '' ?>>
-                    <?= boolval($input_data['inline']) ? '</div>' : '' ?>
-
-                    <?= $input_data['after'] ?>
-                </div>
+                <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
+                <input type="file"
+                       class="form-control <?= B2b::_DOMAIN_NAME ?>-input <?= B2b::_DOMAIN_NAME ?>-attachment-uploader"
+                       id="<?= $input_data['id'] ?>"
+                       name="<?= $input_data['name'] ?>"
+                       aria-describedby="<?= $input_data['id'] . "_help" ?>"
+                       aria-label="Upload"
+                       accept="<?= $input_data['accept'] ?>"
+                    <?= $this->create_attr($input_data) ?>
+                    <?= $input_data['multiple'] ?>
+                    <?= $input_data['required'] ? 'required="required"' : '' ?>>
+                <label class="input-group-text buttonLow buttonLow-id" for="<?= $input_data['id'] ?>"><?= __('Upload your University ID', 'b2b') ?></label>
                 <?php
-            } else {
+                    if (!empty($input_data['hint'])) {
+                        ?>
+                        <small id="<?= $input_data['id'] . "_help" ?>" class="form-text text-muted"><?= $input_data['hint'] ?></small><?php
+                    }
                 ?>
-                <div class="input-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
-                    <?= $input_data['before'] ?>
-                    <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                    <label class="b2b-label" for="customFile"><?= $input_data['label'] ?></label>
-                    <?= $require ?>
-                    <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+                <?= boolval($input_data['inline']) ? '</div>' : '' ?>
+                <?= $input_data['after'] ?>
+            </div>
+            <?= $input_data['after_wrapper'] ?>
+            <?php
 
-                    <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                    <input type="file"
-                           class="form-control b2b-input b2b-attachment-uploader"
-                           id="<?= $input_data['id'] ?>"
-                           name="<?= $input_data['name'] ?>"
-                           aria-describedby="<?= $input_data['id'] . "_help" ?>"
-                           aria-label="Upload"
-                           accept="<?= $input_data['accept'] ?>"
-                        <?= $this->create_attr($input_data) ?>
-                        <?= $input_data['multiple'] ?>
-                        <?= $input_data['required'] ? 'required="require"' : '' ?>>
-                    <label class="input-group-text buttonLow buttonLow-id" for="<?= $input_data['id'] ?>"><?= __('Upload your University ID', 'b2b') ?></label>
-                    <?php
-                        if (!empty($input_data['hint'])) {
-                            ?>
-                            <small id="<?= $input_data['id'] . "_help" ?>" class="form-text text-muted"><?= $input_data['hint'] ?></small><?php
-                        }
-                    ?>
-                    <?= boolval($input_data['inline']) ? '</div>' : '' ?>
-                    <?= $input_data['after'] ?>
-                </div>
-                <?= $input_data['after_wrapper'] ?>
-                <?php
-
-            }
             return ob_get_clean();
         }
 
@@ -488,11 +458,11 @@
                 $input_data['choices'][$k] = array_merge($defaults['choices'][0], $arr);
             }
 
+            ?><div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>"><?php
             echo $input_data['before'];
 
             $count = 0;
             foreach ($input_data['choices'] as $name) {
-                $require = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $name['abbr'] . '">*</abbr>' : '';
                 if (empty($name['id'])) {
                     $id = (empty($name['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . str_replace('[]', '', $name['name']) . '_' . $count;
                     $count++;
@@ -500,22 +470,21 @@
                     $id = $name['id'];
                 }
                 ?>
-                <div class="form-check b2b-input-wrapper<?= $name['class'] ?>">
+                <div class="form-check <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $name['class'] ?>">
                     <?= $name['before'] ?>
-                    <?= $require ?>
                     <input type="<?= $input_data['type'] ?>"
-                           class="form-control b2b-checkbox"
+                           class="<?= B2b::_DOMAIN_NAME ?>-checkbox"
                            id="<?= $id ?>"
                            name="<?= $name['name'] ?>"
-                           value="<?= $name['value'] ?>" <?= $name['required'] ? 'required="require"' : '' ?> <?= $this->create_attr($name['extra_attr']) ?> <?= $name['checked'] ?>>
-                    <label for="<?= $id ?>" class="b2b-label"><?= $name['label'] ?></label>
+                           value="<?= $name['value'] ?>" <?= $name['required'] ? 'required="required"' : '' ?> <?= $this->create_attr($name['extra_attr']) ?> <?= $name['checked'] ?>>
+                    <label for="<?= $id ?>" class="<?= B2b::_DOMAIN_NAME ?>-label"><?= $name['label'] ?></label>
                     <?= $name['after'] ?>
                 </div>
                 <?php
             }
 
             echo $input_data['after'];
-
+            ?></div><?php
             return ob_get_clean();
         }
 
@@ -574,13 +543,12 @@
             ];
 
             $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
 
             echo $input_data['before'];
 
             ?>
             <div class="<?= $input_data['class'] ?>"><?php
-            ?><label><?= $require ?> <?= $input_data['title'] ?></label><?php
+            ?><label> <?= $input_data['title'] ?></label><?php
 
             $count = 0;
             foreach ($input_data['choices'] as $name) {
@@ -591,14 +559,14 @@
                     $id = $name['id'];
                 }
                 ?>
-                <div class="form-check b2b-input-wrapper <?= $name['class'] ?>">
+                <div class="form-check <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $name['class'] ?>">
                     <?= $name['before'] ?>
                     <input type="<?= $input_data['type'] ?>"
-                           class="form-control b2b-radio"
+                           class="<?= B2b::_DOMAIN_NAME ?>-radio"
                            id="<?= $id ?>"
                            name="<?= $input_data['name'] ?>"
-                           value="<?= $name['value'] ?>" <?= $input_data['required'] ? 'required="require"' : '' ?> <?= $this->create_attr($name['extra_attr']) ?> <?= $name['checked'] ? 'checked' : '' ?>>
-                    <label for="<?= $id ?>" class="b2b-label"><?= $name['label'] ?></label>
+                           value="<?= $name['value'] ?>" <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $this->create_attr($name['extra_attr']) ?> <?= $name['checked'] ? 'checked' : '' ?>>
+                    <label for="<?= $id ?>" class="<?= B2b::_DOMAIN_NAME ?>-label"><?= $name['label'] ?></label>
                     <?= $name['after'] ?>
                 </div>
                 <?php
@@ -649,18 +617,16 @@
                 'extra_attr' => []
             ];
             $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
 
             ?>
 
-            <div class="custom-control custom-switch b2b-input-wrapper <?= $input_data['class'] ?>">
+            <div class="custom-control custom-switch <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
-                <?= $require ?>
                 <input type="checkbox"
-                       class="custom-control-input b2b-input b2b-switch <?= B2b::_DOMAIN_NAME . '-' . $input_data['class'] ?>"
+                       class="custom-control-input <?= B2b::_DOMAIN_NAME ?>-input <?= B2b::_DOMAIN_NAME ?>-switch <?= B2b::_DOMAIN_NAME . '-' . $input_data['class'] ?>"
                        id="<?= $input_data['id'] ?>"
                        name="<?= $input_data['name'] ?>"
-                    <?= $input_data['required'] ? 'required="require"' : '' ?> <?= $this->create_attr($input_data) ?> <?= $input_data['checked'] ?>>
+                    <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $this->create_attr($input_data) ?> <?= $input_data['checked'] ?>>
                 <label class="custom-control-label" for="<?= $input_data['id'] ?>"><?= $input_data['label'] ?></label>
                 <?= $input_data['after'] ?>
             </div>
@@ -714,23 +680,21 @@
                 'extra_attr'   => []
             ];
             $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
             ?>
-            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+            <div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                <?= $require ?>
+                <label for="<?= $input_data['id'] ?>" class="<?= B2b::_DOMAIN_NAME ?>-label"><?= $input_data['label'] ?></label>
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                <textarea class="form-control b2b-textarea"
+                <textarea class="form-control <?= B2b::_DOMAIN_NAME ?>-textarea"
                           id="<?= $input_data['id'] ?>"
                           name="<?= $input_data['name'] ?>"
                           placeholder="<?= $input_data['placeholder'] ?>"
                           autocomplete="<?= $input_data['autocomplete'] ?>"
                           rows="<?= $input_data['rows'] ?>"
-                          <?= $input_data['required'] ? 'required="require"' : '' ?>
+                          <?= $input_data['required'] ? 'required="required"' : '' ?>
                     <?= $this->create_attr($input_data['extra_attr']) ?>><?= $input_data['value'] ?></textarea>
                 <?php
                     if (!empty($input_data['hint'])) {
@@ -790,19 +754,18 @@
                 'extra_attr'     => []
             ];
             $input_data = array_merge($defaults, $args);
-            $require    = (!empty($input_data['required'])) ? '<abbr class="required" title="' . $input_data['abbr'] . '">*</abbr>' : '';
 
             ?>
-            <div class="form-group b2b-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+            <div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
-                <label for="<?= $input_data['id'] ?>" class="b2b-label"><?= $input_data['label'] ?></label>
-                <?= $require ?>
+                <label for="<?= $input_data['id'] ?>" class="<?= B2b::_DOMAIN_NAME ?>-label"><?= $input_data['label'] ?></label>
+
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                <select class="form-control b2b-input" id="<?= $input_data['id'] ?>"
-                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="require"' : '' ?>>
+                <select class="form-control <?= B2b::_DOMAIN_NAME ?>-input" id="<?= $input_data['id'] ?>"
+                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="required"' : '' ?>>
                     <?php
                         if (empty($input_data['default_option']) && empty($input_data['select_option'])) {
                             ?>
@@ -841,7 +804,7 @@
 
             $nonce_data = array_merge($defaults, $args);
 
-            return wp_nonce_field($nonce_data['value'], $nonce_data['name']);
+            return wp_nonce_field($nonce_data['value'], $nonce_data['name'], true, false);
         }
 
         /**
@@ -865,16 +828,22 @@
                 'id'     => '',
                 'before' => '',
                 'after'  => '',
+                'recaptcha_form_name' => '',
                 'order'  => 0
             ];
 
             $input_data = array_merge($defaults, $args);
 
             ob_start();
+
+            if (is_plugin_active('google-captcha/google-captcha.php') && function_exists('gglcptch_display_custom') && !empty($input_data['recaptcha_form_name'])) {
+                echo apply_filters('gglcptch_display_recaptcha', '', $input_data['recaptcha_form_name']);
+            }
+
             ?>
             <div class="form-group">
                 <?= $input_data['before'] ?>
-                <button class="btn b2b-btn <?= $input_data['class'] ?>" id="<?= $input_data['id'] ?>"
+                <button class="btn <?= B2b::_DOMAIN_NAME ?>-btn <?= $input_data['class'] ?>" id="<?= $input_data['id'] ?>"
                         type="<?= $input_data['type'] ?>"><?= $input_data['value'] ?></button>
                 <?= $input_data['after'] ?>
             </div>

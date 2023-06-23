@@ -7,14 +7,7 @@
      */
 ?>
 
-<footer>
-    <div class="container">
-        <p class="text-center"><?= __('footer', 'b2b') ?></p>
-        <small class="text-center"><?= __('Medica Scope', 'b2b') ?></small>
-    </div>
-</footer>
-</div>
-</div>
-</body>
-</html>
 
+</body>
+
+</html>

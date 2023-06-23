@@ -27,8 +27,21 @@
     {
         public array $meta_data = [
             'cover',
+            'short_description',
+            'opportunity_type',
+            'start_bidding_amount',
+            'target_amount',
+            'project_phase',
+            'project_start_date',
+            'project_assets_amount',
+            'project_yearly_cashflow_amount',
+            'project_yearly_net_profit_amount'
         ];
-        public array $taxonomy  = [];
+        public array $taxonomy  = [
+            'opportunity-category',
+            'template-category',
+            'industry'
+        ];
 
         public function __construct()
         {

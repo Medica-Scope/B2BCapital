@@ -20,8 +20,8 @@
     $user         = $user_obj::get_current_user();
 ?>
 
-    <main id="primary" class="">
-
+    <main id="" class="">
+        <h1>MY ACCOUNT</h1>
     </main><!-- #main -->
 
 <?php get_footer();
