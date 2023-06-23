@@ -106,18 +106,18 @@ $selectOptions = array(
 							text: '<?php esc_attr_e('reCAPTCHA Score History', 'wordfence-2fa'); ?>'
 						},
 						scales: {
-							yAxes: [{
+							y: {
 								display: true,
-								scaleLabel: {
+								title: {
 									display: true,
-									labelString: '<?php esc_attr_e('Count', 'wordfence-2fa'); ?>'
+									text: '<?php esc_attr_e('Count', 'wordfence-2fa'); ?>'
 								},
 								ticks: {
 									min: 0,
 									precision: 0,
 									stepSize: <?php echo max(10, pow(10, floor(log10(array_sum($stats['counts']) / 5)))); ?>
 								}
-							}]
+							}
 						}
 					}
 				});

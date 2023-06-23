@@ -85,6 +85,8 @@ class Controller_WordfenceLS {
 	}
 
 	public function _wordpress_init() {
+		if (!WORDFENCE_LS_FROM_CORE)
+			load_plugin_textdomain('wordfence-2fa', false, WORDFENCE_LS_PATH . 'languages');
 		if ($this->is_shortcode_enabled())
 			add_shortcode(self::SHORTCODE_2FA_MANAGEMENT, array($this, '_handle_user_2fa_management_shortcode'));
 	}
@@ -330,7 +332,19 @@ END
 		if ($useCAPTCHA || Controller_Users::shared()->any_2fa_active()) {
 			$this->validate_email_verification_token(null, $verification);
 			
-			wp_enqueue_script('wordfence-ls-login', Model_Asset::js('login.js'), array('jquery'), WORDFENCE_LS_VERSION);
+			Model_Script::create('wordfence-ls-login', Model_Asset::js('login.js'), array('jquery'), WORDFENCE_LS_VERSION)
+				->withTranslations(array(
+					'Message to Support' => __('Message to Support', 'wordfence-2fa'),
+					'Send' => __('Send', 'wordfence-2fa'),
+					'An error was encountered while trying to send the message. Please try again.' => __('An error was encountered while trying to send the message. Please try again.', 'wordfence-2fa'),
+					'<strong>ERROR</strong>: An error was encountered while trying to send the message. Please try again.' => wp_kses(__('<strong>ERROR</strong>: An error was encountered while trying to send the message. Please try again.', 'wordfence-2fa'), array('strong' => array())),
+					'Wordfence 2FA Code' => __('Wordfence 2FA Code', 'wordfence-2fa'),
+					'Remember for 30 days' => __('Remember for 30 days', 'wordfence-2fa'),
+					'Log In' => __('Log In', 'wordfence-2fa'),
+					'<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again.' => wp_kses(__('<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again.', 'wordfence-2fa'), array('strong' => array()))
+				))
+				->setTranslationObjectName('WFLS_LOGIN_TRANSLATIONS')
+				->enqueue();
 			wp_enqueue_style('wordfence-ls-login', Model_Asset::css('login.css'), array(), WORDFENCE_LS_VERSION);
 			wp_localize_script('wordfence-ls-login', 'WFLSVars', array(
 				'ajaxurl' => admin_url('admin-ajax.php'),
@@ -374,9 +388,11 @@ END
 			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.structure', Model_Asset::css('jquery-ui.structure.min.css'), array(), WORDFENCE_LS_VERSION);
 			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.theme', Model_Asset::css('jquery-ui.theme.min.css'), array(), WORDFENCE_LS_VERSION);
 		}
-		$assets[] = Model_Script::create('wordfence-ls-admin', Model_Asset::js('admin.js'), array('jquery'), WORDFENCE_LS_VERSION);
+		$assets[] = Model_Script::create('wordfence-ls-admin', Model_Asset::js('admin.js'), array('jquery'), WORDFENCE_LS_VERSION)
+			->withTranslation('You have unsaved changes to your options. If you leave this page, those changes will be lost.', __('You have unsaved changes to your options. If you leave this page, those changes will be lost.', 'wordfence-2fa'))
+			->setTranslationObjectName('WFLS_ADMIN_TRANSLATIONS');
 		$registered = array(
-			Model_Script::create('chart-js', Model_Asset::js('Chart.bundle.min.js'), array('jquery'), '2.4.0')->setRegistered(),
+			Model_Script::create('chart-js', Model_Asset::js('chart.umd.js'), array('jquery'), '4.2.1')->setRegistered(),
 			Model_Script::create('wordfence-select2-js', Model_Asset::js('wfselect2.min.js'), array('jquery'), WORDFENCE_LS_VERSION)->setRegistered(),
 			Model_Style::create('wordfence-select2-css', Model_Asset::css('wfselect2.min.css'), array(), WORDFENCE_LS_VERSION)->setRegistered()
 		);
