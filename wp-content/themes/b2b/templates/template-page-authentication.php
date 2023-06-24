@@ -1,11 +1,11 @@
 <?php
     /**
-     * @Filename: template-page-verification.php
+     * @Filename: template-page-authentication.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 21/2/2023
      *
-     * Template Name: Verification Page
+     * Template Name: Authentication Page
      * Template Post Type: page
      *
      * @package b2b
@@ -23,7 +23,7 @@
 ?>
 
     <main id="" class="">
-        <h1>VERIFICATION</h1>
+        <h1>AUTHENTICATION</h1>
         <?php
 
             echo B2b_Forms::get_instance()
@@ -83,11 +83,11 @@
                                   'content' => '</div>',
                                   'order'   => 25,
                               ],
-                              'verification_nonce' => [
+                              'authentication_form' => [
                                   'class' => '',
                                   'type'  => 'nonce',
-                                  'name'  => 'verification_nonce',
-                                  'value' => B2b::_DOMAIN_NAME . "_verification_form",
+                                  'name'  => 'authentication_nonce',
+                                  'value' => B2b::_DOMAIN_NAME . "_authentication_form",
                                   'order' => 30
                               ],
                               'custom-html-3'      => [
@@ -97,15 +97,15 @@
                               ],
                               'custom-html-4'      => [
                                   'type'    => 'html',
-                                  'content' => '<div class=""><p class="b2b-resend-code-patent" data-expire="'.$user->user_meta['verification_expire_date'].'">' . sprintf(__("It may take a minute to receive your code. <br> Haven't received it ? <button class='b2b-resend-code b2b-hidden' type='button'>Resend a new code.</button> <span class='b2b-code-count-down'></span>"), $user->user_meta['verification_expire_date']) . '</p></div>',
+                                  'content' => '<div class=""><p class="b2b-resend-code-patent" data-expire="'.$user->user_meta['authentication_expire_date'].'">' . sprintf(__("It may take a minute to receive your code. <br> Haven't received it ? <button class='b2b-resend-code b2b-hidden' type='button'>Resend a new code.</button> <span class='b2b-code-count-down'></span>"), $user->user_meta['authentication_expire_date']) . '</p></div>',
                                   'order'   => 40,
                               ],
                               'submit'             => [
                                   'class'               => 'btn',
-                                  'id'                => 'verificationSubmit',
+                                  'id'                => 'authenticationSubmit',
                                   'type'                => 'submit',
-                                  'value'               => __('Verify', 'b2b'),
-                                  'recaptcha_form_name' => 'frontend_verification',
+                                  'value'               => __('Authenticate', 'b2b'),
+                                  'recaptcha_form_name' => 'frontend_authentication',
                                   'order'               => 45
                               ],
                               'custom-html-5'      => [
@@ -114,8 +114,8 @@
                                   'order'   => 50,
                               ],
                           ], [
-                              'class' => B2b::_DOMAIN_NAME . '-verification-form',
-                              'id'    => B2b::_DOMAIN_NAME . '_verification_form'
+                              'class' => B2b::_DOMAIN_NAME . '-authentication-form',
+                              'id'    => B2b::_DOMAIN_NAME . '_authentication_form'
                           ]);
 
         ?>

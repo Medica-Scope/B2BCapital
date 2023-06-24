@@ -204,9 +204,8 @@ class B2bValidator
                             return $.trim(value);
                         },
                         rules: {
-                            user_email: {
-                                required: true,
-                                email_regex: true,
+                            user_email_phone: {
+                                required: true
                             },
                         },
                     });
