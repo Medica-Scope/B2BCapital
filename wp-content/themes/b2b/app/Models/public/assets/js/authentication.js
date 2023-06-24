@@ -37,7 +37,26 @@ class B2bAuthentication extends B2bAuth
                 form: $(`#${KEY}_verification_form`),
                 parent: $(`#${KEY}_verification_form`).parent(),
                 otpDigit: $(`#${KEY}_verification_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_verification_form`).find('.b2b-resend-code-patent'),
                 resendCode: $(`#${KEY}_verification_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_verification_form`).find('.b2b-code-count-down'),
+                verificationSubmit: $(`#${KEY}_verification_form`).find('#verificationSubmit'),
+            },
+            authentication: {
+                form: $(`#${KEY}_authentication_form`),
+                parent: $(`#${KEY}_authentication_form`).parent(),
+                otpDigit: $(`#${KEY}_authentication_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_authentication_form`).find('.b2b-resend-code-patent'),
+                resendCode: $(`#${KEY}_authentication_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_authentication_form`).find('.b2b-code-count-down'),
+                authenticationSubmit: $(`#${KEY}_authentication_form`).find('#authenticationSubmit'),
+            },
+            codeForm: {
+                // parent: $('.otp-digit').closest('form'),
+                // otpDigit: $('.otp-digit input'),
+                // CodeCountDown: $('.b2b-code-count-down'),
+                resendCode: $('.b2b-resend-code'),
+                // codeSubmit: $('#codeSubmit'),
             },
             industries: {
                 form: $(`#${KEY}_industries_form`),
@@ -65,10 +84,12 @@ class B2bAuthentication extends B2bAuth
         this.registrationFront();
         this.loginFront();
         this.verificationFront();
+        this.authenticationFront();
         this.industriesFront();
         this.forgotPasswordFront();
         this.changePasswordFront();
         this.showPassword();
+        this.codeCountDown();
     }
 
     registrationFront()
@@ -77,15 +98,15 @@ class B2bAuthentication extends B2bAuth
             $registration = this.$el.registration,
             ajaxRequests  = this.ajaxRequests;
 
-        if ($("#b2b_phone_number").length > 0) {
-            const input = $("#b2b_phone_number")[0];
+        if ($('#b2b_phone_number').length > 0) {
+            const input = $('#b2b_phone_number')[0];
 
             window.ITIOBJ.registration = intlTelInput(input, {
-                initialCountry: "EG",
-                separateDialCode:true,
-                autoInsertDialCode:true,
-                allowDropdown:true,
-                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js'
+                initialCountry: 'EG',
+                separateDialCode: true,
+                autoInsertDialCode: true,
+                allowDropdown: true,
+                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
             });
         }
 
@@ -93,9 +114,9 @@ class B2bAuthentication extends B2bAuth
 
         $registration.form.on('submit', $registration.parent, function (e) {
             e.preventDefault();
-            let $this    = $(e.currentTarget),
-                formData = $this.serializeObject();
-            formData.phone_number = window.ITIOBJ.registration.getNumber().replace("+", "");
+            let $this             = $(e.currentTarget),
+                formData          = $this.serializeObject();
+            formData.phone_number = window.ITIOBJ.registration.getNumber().replace('+', '');
 
             if (typeof ajaxRequests.registration !== 'undefined') {
                 ajaxRequests.registration.abort();
@@ -138,13 +159,26 @@ class B2bAuthentication extends B2bAuth
             $verification = this.$el.verification,
             ajaxRequests  = this.ajaxRequests;
 
+        $verification.otpDigit.on('click', $verification.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            $this.select();
+        });
         $verification.otpDigit.on('keyup', $verification.parent, function (e) {
             e.preventDefault();
             let $this = $(e.currentTarget);
 
-            if ($this.val().length == $this.attr('maxLength')) {
-                $this.closest('.otp-digit').next('.otp-digit').find('input').focus();
+            if ($this.val().length == $this.attr('maxlength')) {
+                if ($this.closest('.otp-digit').next('.otp-digit').find('input').length > 0) {
+                    $this.closest('.otp-digit').next('.otp-digit').find('input').focus().select();
+                } else {
+                    $verification.verificationSubmit.trigger('click');
+                }
+            } else {
+                $this.closest('.otp-digit').prev('.otp-digit').find('input').focus().select();
             }
+
         });
 
         B2bValidator.initAuthValidation($verification, 'verification');
@@ -168,19 +202,79 @@ class B2bAuthentication extends B2bAuth
         $verification.resendCode.on('click', $verification.parent, function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget),
-                formObj = $verification.form.serializeObject(),
+                formObj  = $verification.form.serializeObject(),
                 formData = {
-                    'g-recaptcha-response': formObj['g-recaptcha-response']
+                    'g-recaptcha-response': formObj['g-recaptcha-response'],
                 };
 
             if (typeof ajaxRequests.resendVerCode !== 'undefined') {
                 ajaxRequests.resendVerCode.abort();
             }
 
-            console.log(formData['g-recaptcha-response']);
             that.resendVerCode(formData, $this);
 
 
+        });
+    }
+
+    authenticationFront()
+    {
+        let that          = this,
+            $authentication = this.$el.authentication,
+            ajaxRequests  = this.ajaxRequests;
+
+        $authentication.otpDigit.on('click', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            $this.select();
+        });
+        $authentication.otpDigit.on('keyup', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            if ($this.val().length == $this.attr('maxlength')) {
+                if ($this.closest('.otp-digit').next('.otp-digit').find('input').length > 0) {
+                    $this.closest('.otp-digit').next('.otp-digit').find('input').focus().select();
+                } else {
+                    $authentication.authenticationSubmit.trigger('click');
+                }
+            } else {
+                $this.closest('.otp-digit').prev('.otp-digit').find('input').focus().select();
+            }
+
+        });
+
+        B2bValidator.initAuthValidation($authentication, 'authentication');
+
+        $authentication.form.on('submit', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            if (typeof ajaxRequests.authentication !== 'undefined') {
+                ajaxRequests.authentication.abort();
+            }
+
+            if ($this.valid()) {
+                that.authentication(formData, $this);
+            }
+
+        });
+
+        $authentication.resendCode.on('click', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formObj  = $authentication.form.serializeObject(),
+                formData = {
+                    'g-recaptcha-response': formObj['g-recaptcha-response'],
+                };
+
+            if (typeof ajaxRequests.resendAuthCode !== 'undefined') {
+                ajaxRequests.resendAuthCode.abort();
+            }
+
+            that.resendAuthCode(formData, $this);
         });
     }
 

@@ -23,11 +23,11 @@
         <?php
             echo B2b_Forms::get_instance()
                           ->create_form([
-                              'user_email'   => [
+                              'user_email_phone'   => [
                                   'class'       => 'has-header',
-                                  'type'        => 'email',
-                                  'label'       => __('Email Address', 'b2b'),
-                                  'name'        => 'user_email',
+                                  'type'        => 'text',
+                                  'label'       => __('Phone Number or Email', 'b2b'),
+                                  'name'        => 'user_email_phone',
                                   'required'    => TRUE,
                                   'placeholder' => __('Ex. email@gmail.com', 'b2b'),
                                   'order'       => 0,

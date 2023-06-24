@@ -84,9 +84,10 @@
         public function add_custom_recaptcha_forms($forms)
         {
             $forms['frontend_login']           = [ "form_name" => "Front End Login" ];
-            $forms['frontend_registration']           = [ "form_name" => "Front End Register" ];
-            $forms['frontend_verification']           = [ "form_name" => "Front End Verification" ];
-            $forms['frontend_industries']           = [ "form_name" => "Front End Industries" ];
+            $forms['frontend_registration']    = [ "form_name" => "Front End Register" ];
+            $forms['frontend_verification']    = [ "form_name" => "Front End Verification" ];
+            $forms['frontend_authentication']  = [ "form_name" => "Front End Authentication" ];
+            $forms['frontend_industries']      = [ "form_name" => "Front End Industries" ];
             $forms['frontend_reset_password']  = [ "form_name" => "Front End Reset Password" ];
             $forms['frontend_forgot_password'] = [ "form_name" => "Front End Forgot Password" ];
             return $forms;
