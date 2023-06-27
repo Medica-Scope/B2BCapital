@@ -51,6 +51,7 @@
 
         public function filters(): void
         {
+            $this->hooks->add_filter('b2bml_permalink', $this, 'b2bml_permalink', 10, 1);
             $this->hooks->run();
         }
 
@@ -106,13 +107,13 @@
 
             $my_account = [
                 'my-account',
-                'my-account/login',
-                'my-account/industry',
-                'my-account/reset-password',
-                'my-account/forgot-password',
-                'my-account/registration',
-                'my-account/verification',
-                'my-account/authentication',
+                'login',
+                'industry',
+                'reset-password',
+                'forgot-password',
+                'registration',
+                'verification',
+                'authentication',
             ];
 
             if (is_page($my_account)) {
@@ -128,5 +129,24 @@
         public function init(): void
         {
             session_start();
+        }
+
+        public function b2bml_permalink($url)
+        {
+            global $user_ID, $wp;
+            if (is_user_logged_in() && is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                $user_site_language = get_user_meta($user_ID, 'site_language', TRUE);
+                $user_site_language = empty($user_site_language) ? 'en' : $user_site_language;
+
+                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
+                if (!str_contains($url, "/$user_site_language/") && !str_contains($url, "?lang=$user_site_language")) {
+                    $redirect_url     = apply_filters('wpml_permalink', $url, $user_site_language); // Get the Arabic version of the current page or post URL.
+                    if ($redirect_url) {
+                        $url = $redirect_url;
+                    }
+                }
+            }
+
+            return $url;
         }
     }

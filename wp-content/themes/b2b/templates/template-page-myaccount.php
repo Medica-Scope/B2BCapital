@@ -24,7 +24,6 @@
 
     <main id="" class="">
         <h1>MY ACCOUNT</h1>
-
         <?php
             echo B2b_Forms::get_instance()
                           ->create_form([
@@ -36,7 +35,7 @@
                               'first_name'         => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
-                                  'label'       => __('First Name', 'b2b'),
+                                  'label'       => __('First name', 'b2b'),
                                   'name'        => 'first_name',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your first name', 'b2b'),
@@ -45,7 +44,7 @@
                               'last_name'          => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
-                                  'label'       => __('Last Name', 'b2b'),
+                                  'label'       => __('Last name', 'b2b'),
                                   'name'        => 'last_name',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your last name', 'b2b'),
@@ -54,7 +53,7 @@
                               'phone_number'       => [
                                   'class'       => 'col-6',
                                   'type'        => 'text',
-                                  'label'       => __('Phone Number', 'b2b'),
+                                  'label'       => __('Phone number', 'b2b'),
                                   'name'        => 'phone_number',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your phone number', 'b2b'),
@@ -69,20 +68,20 @@
                                   'placeholder' => __('Enter your email', 'b2b'),
                                   'order'       => 20,
                               ],
-                              'old_password'      => [
+                              'current_password'      => [
                                   'class'       => 'col-6',
                                   'type'        => 'password',
-                                  'label'       => __('Old Password', 'b2b'),
-                                  'name'        => 'old_password',
+                                  'label'       => __('Current password', 'b2b'),
+                                  'name'        => 'current_password',
                                   'required'    => TRUE,
-                                  'placeholder' => __('Enter your password', 'b2b'),
+                                  'placeholder' => __('Enter your current password', 'b2b'),
                                   'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
                                   'order'       => 25,
                               ],
                               'new_password'      => [
                                   'class'       => 'col-6',
                                   'type'        => 'password',
-                                  'label'       => __('New Password', 'b2b'),
+                                  'label'       => __('New password', 'b2b'),
                                   'name'        => 'new_password',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your new password', 'b2b'),
@@ -92,11 +91,78 @@
                               'confirm_new_password'   => [
                                   'class'       => 'col-6',
                                   'type'        => 'password',
-                                  'label'       => __('Confirm New Password', 'b2b'),
+                                  'label'       => __('Confirm new password', 'b2b'),
                                   'name'        => 'confirm_new_password',
                                   'required'    => TRUE,
-                                  'placeholder' => __('Enter your confirm password', 'b2b'),
+                                  'placeholder' => __('Re-enter your new password', 'b2b'),
                                   'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_confirm_password"></i>',
+                                  'order'       => 30,
+                              ],
+                              'profile_language'   => [
+                                  'class'       => 'col-6',
+                                  'type'        => 'select',
+                                  'label'       => __('Profile language', 'b2b'),
+                                  'name'        => 'profile_language',
+                                  'required'    => TRUE,
+                                  'placeholder' => __('Select your language', 'b2b'),
+                                  'options'        => [
+                                      'en'    => __('English', 'b2b'),
+                                      'ar'   => __('Arabic', 'b2b')
+                                  ],
+                                  'default_option' => '',
+                                  'select_option'  => '',
+                                  'before'      => '',
+                                  'order'       => 30,
+                              ],
+                              'widget_list'   => [
+                                  'class'       => 'col-6',
+                                  'type'        => 'select',
+                                  'label'       => __('Widget list categories', 'b2b'),
+                                  'name'        => 'widget_list',
+                                  'required'    => TRUE,
+                                  'multiple'    => TRUE,
+                                  'placeholder' => __('Select your widgets', 'b2b'),
+                                  'options'        => [
+                                      '0'    => __('one', 'b2b'),
+                                      '1'   => __('two', 'b2b')
+                                  ],
+                                  'default_option' => '',
+                                  'select_option'  => '',
+                                  'before'      => '',
+                                  'order'       => 30,
+                              ],
+                              'preferred_opportunities_cat_list'   => [
+                                  'class'       => 'col-6',
+                                  'type'        => 'select',
+                                  'label'       => __('Preferred categories list for opportunities', 'b2b'),
+                                  'name'        => 'preferred_opportunities_cat_list',
+                                  'required'    => TRUE,
+                                  'multiple'    => TRUE,
+                                  'placeholder' => __('Select your preferred', 'b2b'),
+                                  'options'        => [
+                                      '0'    => __('one', 'b2b'),
+                                      '1'   => __('two', 'b2b')
+                                  ],
+                                  'default_option' => '',
+                                  'select_option'  => '',
+                                  'before'      => '',
+                                  'order'       => 30,
+                              ],
+                              'preferred_articles_cat_list'   => [
+                                  'class'       => 'col-6',
+                                  'type'        => 'select',
+                                  'label'       => __('preferred categories list for articles', 'b2b'),
+                                  'name'        => 'preferred_articles_cat_list',
+                                  'required'    => TRUE,
+                                  'multiple'    => TRUE,
+                                  'placeholder' => __('Select your preferred', 'b2b'),
+                                  'options'        => [
+                                      '0'    => __('one', 'b2b'),
+                                      '1'   => __('two', 'b2b')
+                                  ],
+                                  'default_option' => '',
+                                  'select_option'  => '',
+                                  'before'      => '',
                                   'order'       => 30,
                               ],
                               'custom-html-3'      => [
@@ -104,20 +170,20 @@
                                   'content' => '</div>',
                                   'order'   => 45,
                               ],
-                              'registration_nonce' => [
+                              'profile_nonce' => [
                                   'class' => '',
                                   'type'  => 'nonce',
-                                  'name'  => 'registration_nonce',
-                                  'value' => B2b::_DOMAIN_NAME . "_registration_form",
+                                  'name'  => 'profile_nonce',
+                                  'value' => B2b::_DOMAIN_NAME . "_profile_form",
                                   'order' => 50
                               ],
                               'submit'             => [
                                   'class'               => '',
                                   'type'                => 'submit',
-                                  'value'               => __('Create Account', 'b2b'),
+                                  'value'               => __('Save', 'b2b'),
                                   'before'              => '',
                                   'after'               => '',
-                                  'recaptcha_form_name' => 'frontend_registration',
+                                  'recaptcha_form_name' => 'frontend_edit_profile',
                                   'order'               => 55
                               ],
                           ], [

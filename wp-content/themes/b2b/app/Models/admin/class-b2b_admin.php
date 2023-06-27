@@ -90,6 +90,7 @@
             $forms['frontend_industries']      = [ "form_name" => "Front End Industries" ];
             $forms['frontend_reset_password']  = [ "form_name" => "Front End Reset Password" ];
             $forms['frontend_forgot_password'] = [ "form_name" => "Front End Forgot Password" ];
+            $forms['frontend_edit_profile']    = [ "form_name" => "Front End Edit Profile" ];
             return $forms;
         }
 

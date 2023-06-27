@@ -290,3 +290,5 @@
     new B2b();
 
     require_once THEME_PATH . "/inc/custom-functions.php";
+
+//    update_user_meta(12, 'site_language', 'ar'); // Replace 'en' with the user's preferred language code.

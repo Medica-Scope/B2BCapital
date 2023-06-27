@@ -157,7 +157,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_registration');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $this->username     = $phone_number;
@@ -234,7 +234,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_login');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
 
@@ -325,7 +325,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_verification');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user     = self::get_current_user();
@@ -347,7 +347,7 @@
                 $user->set_user_meta('verification_key', '', TRUE);
                 $user->set_user_meta('verification_expire_date', '', TRUE);
             } else {
-                new B2b_Ajax_Response(FALSE, __($validate->get_error_message(), 'icmtc'));
+                new B2b_Ajax_Response(FALSE, __($validate->get_error_message(), 'b2b'));
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'b2b'), [
@@ -381,15 +381,15 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_verification');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user = self::get_current_user();
 
             if ($user->user_meta['verification_expire_date'] <= time()) {
-                $user->setup_verification();
+                $user->setup_verification('verification');
             } else {
-                new B2b_Ajax_Response(FALSE, __("Your code didn't expire yet!", 'icmtc'));
+                new B2b_Ajax_Response(FALSE, __("Your code didn't expire yet!", 'b2b'));
             }
 
             new B2b_Ajax_Response(TRUE, __('Your code has been sent successfully!', 'b2b'), [
@@ -448,7 +448,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_authentication');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user     = self::get_current_user();
@@ -463,7 +463,7 @@
                 update_user_meta($user->ID, 'authentication_key', '');
                 update_user_meta($user->ID, 'authentication_expire_date', '');
             } else {
-                new B2b_Ajax_Response(FALSE, __($validate->get_error_message(), 'icmtc'));
+                new B2b_Ajax_Response(FALSE, __($validate->get_error_message(), 'b2b'));
             }
 
             $redirect_page_slug = 'dashboard';
@@ -502,7 +502,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_authentication');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user = self::get_current_user();
@@ -510,7 +510,7 @@
             if ($user->user_meta['authentication_expire_date'] <= time()) {
                 $user->setup_verification('authentication');
             } else {
-                new B2b_Ajax_Response(FALSE, __("Your code didn't expire yet!", 'icmtc'));
+                new B2b_Ajax_Response(FALSE, __("Your code didn't expire yet!", 'b2b'));
             }
 
             new B2b_Ajax_Response(TRUE, __('Your code has been sent successfully!', 'b2b'), [
@@ -555,7 +555,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_industries');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user                                = B2b_User::get_current_user();
@@ -604,7 +604,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_forgot_password');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user = $this->forgot_password($user_email_phone);
@@ -662,7 +662,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_reset_password');
 
             if ($check_result !== TRUE) {
-                new B2b_Ajax_Response(FALSE, __($check_result, 'icmtc'));/* the reCAPTCHA answer  */
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
             }
 
             $user = $this->change_password();
@@ -706,80 +706,124 @@
          */
         public function restrict_redirections(): void
         {
+            global $user_ID, $wp;
 
-            // restrict user from accessing the curd pages
+            // restrict user from accessing the crud pages
             if (is_page([
-                    'my-account/login',
-                    'my-account/registration',
-                    'my-account/reset-password',
-                    'my-account/forgot-password'
+                    'login',
+                    'registration',
+                    'reset-password',
+                    'forgot-password'
                 ]) && is_user_logged_in()) {
-                wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
+                $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')));
+                wp_safe_redirect($url);
                 exit();
             }
 
             // prevent accessing the sensitive pages
             if (is_page([
                     'my-account',
-                    'my-account/verification',
-                    'my-account/authentication',
-                    'my-account/industry',
+                    'verification',
+                    'authentication',
+                    'industry',
                     'dashboard'
                 ]) && !is_user_logged_in()) {
-                wp_safe_redirect(get_permalink(get_page_by_path('my-account/login')));
+                $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/login')));
+                wp_safe_redirect($url);
                 exit();
             }
 
-            // prevent access if is not owner or investor and if is not verified
+            if (is_page([
+                    'industry',
+                    'verification',
+                    'authentication'
+                ]) && is_user_logged_in() && (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
+                $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')));
+                wp_safe_redirect($url);
+                exit();
+            }
+
+            // prevent access if is not owner or investor and if is not verified and authenticated
             if (is_page([
                     'dashboard',
                     'my-account',
-                    'my-account/login',
-                    'my-account/registration',
-                    'my-account/reset-password',
-                    'my-account/forgot-password',
-                    'my-account/industry',
+                    'industry'
                 ]) && is_user_logged_in()) {
-                global $user_ID;
                 $user_verified      = get_user_meta($user_ID, 'account_verification_status', TRUE);
                 $user_authenticated = get_user_meta($user_ID, 'account_authentication_status', TRUE);
-                if (!(int)$user_verified | (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
-                    wp_safe_redirect(get_permalink(get_page_by_path('my-account/verification')));
+                if (!(int)$user_verified && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/verification')));
+                    wp_safe_redirect($url);
                     exit();
                 }
-                if (!(int)$user_authenticated | (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
-                    wp_safe_redirect(get_permalink(get_page_by_path('my-account/authentication')));
+                if (!(int)$user_authenticated && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/authentication')));
+                    wp_safe_redirect($url);
                     exit();
                 }
             }
 
-            if ((is_page('my-account/verification')) && is_user_logged_in()) {
-                global $user_ID;
+            if ((is_page('verification')) && is_user_logged_in()) {
                 $user_confirmed = get_user_meta($user_ID, 'account_verification_status', TRUE);
-                if ((int)$user_confirmed | (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
-                    wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
+                if ((int)$user_confirmed && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')));
+                    wp_safe_redirect($url);
                     exit();
                 }
             }
 
-            if ((is_page('my-account/authentication')) && is_user_logged_in()) {
-                global $user_ID;
+            if ((is_page('authentication')) && is_user_logged_in()) {
                 $user_confirmed = get_user_meta($user_ID, 'account_authentication_status', TRUE);
-                if ((int)$user_confirmed | (B2b_User::get_user_role($user_ID) !== B2b_User::INVESTOR && B2b_User::get_user_role($user_ID) !== B2b_User::OWNER)) {
-                    wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
+                if ((int)$user_confirmed && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')));
+                    wp_safe_redirect($url);
                     exit();
                 }
             }
 
-            if ((is_page('my-account/industry')) && is_user_logged_in()) {
-                global $user_ID;
+            if (is_page('industry') && is_user_logged_in()) {
                 $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
                 $profile_obj = new B2b_Profile();
-                $profile     = $profile_obj->get_by_id($profile_id);
-                if (isset($profile->taxonomy['industry']) && !empty($profile->taxonomy['industry'])) {
-                    wp_safe_redirect(get_permalink(get_page_by_path('my-account')));
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (isset($profile->taxonomy['industry']) && !empty($profile->taxonomy['industry']) && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')));
+                    wp_safe_redirect($url);
                     exit();
                 }
             }
+
+            if (is_page([
+                    'dashboard',
+                    'my-account'
+                ]) && is_user_logged_in() && (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new B2b_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!isset($profile->taxonomy['industry']) || empty($profile->taxonomy['industry'])) {
+                    $url = apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/industry')));
+                    wp_safe_redirect($url);
+                    exit();
+                }
+            }
+
+
+            /**
+             * Temp if there is an error wit redirections
+             */ //            if (is_user_logged_in()) {
+            //                $site_language = get_user_meta($user_ID, 'site_language', TRUE);
+            //                $current_url = home_url(add_query_arg([], $wp->request)); // Get the current URL
+            //
+            //                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
+            //                if (!str_contains($current_url, "/$site_language/") && !str_contains($current_url, "?lang=$site_language")) {
+            //                    $current_protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+            //                    $full_url  = $current_protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            //                    $redirect_url = apply_filters('wpml_permalink', $full_url, $site_language); // Get the Arabic version of the current page or post URL.
+            //                    if ($redirect_url) {
+            //                        wp_redirect($redirect_url);
+            //                        exit;
+            //                    }
+            //                }
+            //            }
+
         }
     }

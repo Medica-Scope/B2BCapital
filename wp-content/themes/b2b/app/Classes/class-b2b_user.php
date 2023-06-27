@@ -45,18 +45,19 @@
             // If account authenticated at all
             'account_authentication_status' => 0,
             // Default user language
-            'default_language'              => 'en'
+            'site_language'                 => 'en'
         ];
         /**
          * USER ROLES
          */
-        const ADMIN     = 'administrator';
-        const CMS       = 'cmsmanager';
-        const OWNER     = 'owner';
-        const INVESTOR  = 'investor';
-        const SEO       = 'seomanager';
-        const WEBMASTER = 'webmaster';
-        const REVIEWER  = 'reviewer';
+        const ADMIN      = 'administrator';
+        const CMS        = 'cmsmanager';
+        const OWNER      = 'owner';
+        const INVESTOR   = 'investor';
+        const SEO        = 'seomanager';
+        const WEBMASTER  = 'webmaster';
+        const REVIEWER   = 'reviewer';
+        const TRANSLATOR = 'translator';
         /**
          * Verification Types
          */
@@ -1082,7 +1083,7 @@
          */
         public function send_phone_otp_code(string $type): WP_Error|bool
         {
-            $error = new WP_Error();
+            $error        = new WP_Error();
             $randomNumber = mt_rand(1000, 9999);
 
             if ($type === 'authentication') {
@@ -1118,7 +1119,7 @@
          */
         public function send_whatsapp_otp_code(string $type): WP_Error|bool
         {
-            $error = new WP_Error();
+            $error        = new WP_Error();
             $randomNumber = mt_rand(1000, 9999);
 
             if ($type === 'authentication') {

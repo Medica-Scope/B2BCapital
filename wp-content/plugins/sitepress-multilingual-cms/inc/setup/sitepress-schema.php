@@ -28,11 +28,9 @@ function icl_reset_language_data() {
 		) {
 			continue;
 		}
-		if ( ! file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $code . '.png' ) ) {
-			$file = 'nil.png';
-		} else {
-			$file = $code . '.png';
-		}
+
+		$file = wpml_get_flag_file_name( $code );
+
 		$wpdb->insert(
 			$wpdb->prefix . 'icl_flags',
 			array(
@@ -393,7 +391,8 @@ function icl_sitepress_activate() {
 	if ( $iclsettings === false ) {
 		$short_v  = implode( '.', array_slice( explode( '.', ICL_SITEPRESS_VERSION ), 0, 3 ) );
 		$settings = array(
-			'hide_upgrade_notice' => $short_v,
+			'hide_upgrade_notice'             => $short_v,
+			'translated_document_status_sync' => 1,
 		);
 		add_option( 'icl_sitepress_settings', $settings, '', true );
 	} else {
