@@ -10,7 +10,9 @@
     namespace B2B\APP\MODELS\ADMIN;
 
     use B2B\APP\CLASSES\B2b_Init;
+    use B2B\APP\CLASSES\B2b_User;
     use B2B\APP\HELPERS\B2b_Hooks;
+    use B2B\B2b;
 
     /**
      * Description...
@@ -46,6 +48,7 @@
         {
             $this->hooks->add_action('admin_enqueue_scripts', $this, 'enqueue_styles');
             $this->hooks->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts');
+            $this->hooks->add_action('admin_init', $this, 'restrict_admin_with_redirect');
             $this->hooks->run();
         }
 
@@ -57,18 +60,35 @@
 
         public function enqueue_styles(): void
         {
-            //			$this->hooks->add_style( B2b::_DOMAIN_NAME.'-admin-style-main', B2b_Hooks::PATHS['admin']['css'] . '/style' );
+            $this->hooks->add_style(B2b::_DOMAIN_NAME . '-admin-style-main', B2b_Hooks::PATHS['admin']['css'] . '/style');
         }
 
         public function enqueue_scripts(): void
         {
-            //			$this->hooks->add_script( B2b::_DOMAIN_NAME.'-admin-script-main', B2b_Hooks::PATHS['admin']['js'] . '/main', [ 'jquery' ] );
-            //			$this->hooks->add_localization(B2b::_DOMAIN_NAME.'-admin-script-main', 'b2bGlobals', array(
-            //				'domain_key'  => B2b::_DOMAIN_NAME,
-            //				'ajaxUrl' => admin_url('admin-ajax.php'),
-            //			));
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-admin-script-main', B2b_Hooks::PATHS['admin']['js'] . '/main', [ 'jquery' ]);
+            $this->hooks->add_localization(B2b::_DOMAIN_NAME . '-admin-script-main', 'b2bGlobals', [
+                'domain_key' => B2b::_DOMAIN_NAME,
+                'ajaxUrl'    => admin_url('admin-ajax.php'),
+            ]);
             $this->hooks->run();
 
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return void
+         */
+        public function restrict_admin_with_redirect(): void
+        {
+            global $user_ID;
+            if ((B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER) && '/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF']) {
+                wp_redirect(home_url());
+                exit;
+            }
         }
 
         /**
@@ -84,11 +104,14 @@
         public function add_custom_recaptcha_forms($forms)
         {
             $forms['frontend_login']           = [ "form_name" => "Front End Login" ];
-            $forms['frontend_registration']           = [ "form_name" => "Front End Register" ];
-            $forms['frontend_verification']           = [ "form_name" => "Front End Verification" ];
-            $forms['frontend_industries']           = [ "form_name" => "Front End Industries" ];
+            $forms['frontend_registration']    = [ "form_name" => "Front End Register" ];
+            $forms['frontend_verification']    = [ "form_name" => "Front End Verification" ];
+            $forms['frontend_authentication']  = [ "form_name" => "Front End Authentication" ];
+            $forms['frontend_industries']      = [ "form_name" => "Front End Industries" ];
             $forms['frontend_reset_password']  = [ "form_name" => "Front End Reset Password" ];
             $forms['frontend_forgot_password'] = [ "form_name" => "Front End Forgot Password" ];
+            $forms['frontend_edit_profile']    = [ "form_name" => "Front End Edit Profile" ];
+            $forms['frontend_edit_password']   = [ "form_name" => "Front End Edit Password" ];
             return $forms;
         }
 

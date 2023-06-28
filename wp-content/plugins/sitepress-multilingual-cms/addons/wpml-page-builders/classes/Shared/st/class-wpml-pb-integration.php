@@ -151,9 +151,41 @@ class WPML_PB_Integration {
 				   && $id === (int) $getPOST( 'post_ID' );
 		};
 
-		$isTranslationWithNativeEditor = ( 'editpost' === $getPOST( 'action' )
-			   && (int) $getPOST( 'ID' ) === $translatedPostId )
-			|| ( $isQuickEditAction( $translatedPostId ) && WPML_PB_Last_Translation_Edit_Mode::is_native_editor( $translatedPostId ) );
+		// $isSavingPostWithREST :: int -> bool
+		$isSavingPostWithREST = function( $translatedPostId ) {
+			if ( ! in_array( $_SERVER['REQUEST_METHOD'], [ 'POST', 'PUT', 'PATCH' ], true ) ) {
+				return false;
+			}
+
+			$postTypeSlugs = wpml_collect( get_post_types( [], 'objects' ) )
+				->map( function( $postType ) {
+					return Obj::prop( 'rest_base', $postType ) ?: Obj::prop( 'name', $postType );
+				} )
+				->filter()
+				->implode( '|' );
+
+			preg_match( '/' . preg_quote( rest_get_url_prefix(), '/' ) . '\/wp\/v2\/(?:' . $postTypeSlugs . ')\/(\d+)/', $_SERVER['REQUEST_URI'], $matches );
+			$RESTPostId = (int) Obj::prop( 1, $matches );
+
+			return $RESTPostId === $translatedPostId;
+		};
+
+		// $getGET :: string -> mixed
+		$getGET = Obj::prop( Fns::__, $_GET ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+
+		// $isBulkEditAction :: int -> bool
+		$isBulkEditAction = function( $id ) use ( $getGET ) {
+			$screenAction = 'edit-' . get_post_type( $id );
+			return $screenAction === $getGET( 'screen' )
+				&& 'edit' === $getGET( 'action' )
+				&& wpml_collect( (array) $getGET( 'post' ) )
+					->map( \WPML\FP\Cast::toInt() )
+					->contains( $id );
+		};
+
+		$isTranslationWithNativeEditor = ( 'editpost' === $getPOST( 'action' ) && (int) $getPOST( 'ID' ) === $translatedPostId )
+			|| ( ( $isQuickEditAction( $translatedPostId ) || $isBulkEditAction( $translatedPostId ) ) && WPML_PB_Last_Translation_Edit_Mode::is_native_editor( $translatedPostId ) )
+			|| $isSavingPostWithREST( $translatedPostId );
 
 		/**
 		 * This filter allows to override the result if a translation

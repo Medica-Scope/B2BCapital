@@ -16,6 +16,7 @@ import B2bUiCtrl    from './inc/UiCtrl';
 import B2bAuth      from './modules/Auth';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/js/utils.js';
+import Choices      from 'choices.js';
 
 class B2bAuthentication extends B2bAuth
 {
@@ -37,7 +38,22 @@ class B2bAuthentication extends B2bAuth
                 form: $(`#${KEY}_verification_form`),
                 parent: $(`#${KEY}_verification_form`).parent(),
                 otpDigit: $(`#${KEY}_verification_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_verification_form`).find('.b2b-resend-code-patent'),
                 resendCode: $(`#${KEY}_verification_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_verification_form`).find('.b2b-code-count-down'),
+                verificationSubmit: $(`#${KEY}_verification_form`).find('#verificationSubmit'),
+            },
+            authentication: {
+                form: $(`#${KEY}_authentication_form`),
+                parent: $(`#${KEY}_authentication_form`).parent(),
+                otpDigit: $(`#${KEY}_authentication_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_authentication_form`).find('.b2b-resend-code-patent'),
+                resendCode: $(`#${KEY}_authentication_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_authentication_form`).find('.b2b-code-count-down'),
+                authenticationSubmit: $(`#${KEY}_authentication_form`).find('#authenticationSubmit'),
+            },
+            codeForm: {
+                resendCode: $('.b2b-resend-code'),
             },
             industries: {
                 form: $(`#${KEY}_industries_form`),
@@ -49,6 +65,16 @@ class B2bAuthentication extends B2bAuth
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
                 parent: $(`#${KEY}_forgot_form`).parent(),
+            },
+            editProfile: {
+                form: $(`#${KEY}_edit_profile_form`),
+                parent: $(`#${KEY}_edit_profile_form`).parent(),
+                selectBoxes: $('select'),
+            },
+            editPassword: {
+                form: $(`#${KEY}_edit_password_form`),
+                parent: $(`#${KEY}_edit_password_form`).parent(),
+                new_password: $(`#${KEY}_new_password`),
             },
             change_password: {
                 form: $(`#${KEY}_change_password_form`),
@@ -65,10 +91,15 @@ class B2bAuthentication extends B2bAuth
         this.registrationFront();
         this.loginFront();
         this.verificationFront();
+        this.authenticationFront();
         this.industriesFront();
         this.forgotPasswordFront();
         this.changePasswordFront();
+        this.editProfileFront();
+        this.editPasswordFront();
         this.showPassword();
+        this.codeCountDown();
+
     }
 
     registrationFront()
@@ -77,15 +108,15 @@ class B2bAuthentication extends B2bAuth
             $registration = this.$el.registration,
             ajaxRequests  = this.ajaxRequests;
 
-        if ($("#b2b_phone_number").length > 0) {
-            const input = $("#b2b_phone_number")[0];
+        if ($('#b2b_phone_number').length > 0) {
+            const input = $('#b2b_phone_number')[0];
 
             window.ITIOBJ.registration = intlTelInput(input, {
-                initialCountry: "EG",
-                separateDialCode:true,
-                autoInsertDialCode:true,
-                allowDropdown:true,
-                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js'
+                initialCountry: 'EG',
+                separateDialCode: true,
+                autoInsertDialCode: true,
+                allowDropdown: true,
+                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
             });
         }
 
@@ -93,9 +124,9 @@ class B2bAuthentication extends B2bAuth
 
         $registration.form.on('submit', $registration.parent, function (e) {
             e.preventDefault();
-            let $this    = $(e.currentTarget),
-                formData = $this.serializeObject();
-            formData.phone_number = window.ITIOBJ.registration.getNumber().replace("+", "");
+            let $this             = $(e.currentTarget),
+                formData          = $this.serializeObject();
+            formData.phone_number = window.ITIOBJ.registration.getNumber().replace('+', '');
 
             if (typeof ajaxRequests.registration !== 'undefined') {
                 ajaxRequests.registration.abort();
@@ -138,13 +169,26 @@ class B2bAuthentication extends B2bAuth
             $verification = this.$el.verification,
             ajaxRequests  = this.ajaxRequests;
 
+        $verification.otpDigit.on('click', $verification.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            $this.select();
+        });
         $verification.otpDigit.on('keyup', $verification.parent, function (e) {
             e.preventDefault();
             let $this = $(e.currentTarget);
 
-            if ($this.val().length == $this.attr('maxLength')) {
-                $this.closest('.otp-digit').next('.otp-digit').find('input').focus();
+            if ($this.val().length == $this.attr('maxlength')) {
+                if ($this.closest('.otp-digit').next('.otp-digit').find('input').length > 0) {
+                    $this.closest('.otp-digit').next('.otp-digit').find('input').focus().select();
+                } else {
+                    $verification.verificationSubmit.trigger('click');
+                }
+            } else {
+                $this.closest('.otp-digit').prev('.otp-digit').find('input').focus().select();
             }
+
         });
 
         B2bValidator.initAuthValidation($verification, 'verification');
@@ -168,19 +212,79 @@ class B2bAuthentication extends B2bAuth
         $verification.resendCode.on('click', $verification.parent, function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget),
-                formObj = $verification.form.serializeObject(),
+                formObj  = $verification.form.serializeObject(),
                 formData = {
-                    'g-recaptcha-response': formObj['g-recaptcha-response']
+                    'g-recaptcha-response': formObj['g-recaptcha-response'],
                 };
 
             if (typeof ajaxRequests.resendVerCode !== 'undefined') {
                 ajaxRequests.resendVerCode.abort();
             }
 
-            console.log(formData['g-recaptcha-response']);
             that.resendVerCode(formData, $this);
 
 
+        });
+    }
+
+    authenticationFront()
+    {
+        let that            = this,
+            $authentication = this.$el.authentication,
+            ajaxRequests    = this.ajaxRequests;
+
+        $authentication.otpDigit.on('click', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            $this.select();
+        });
+        $authentication.otpDigit.on('keyup', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+
+            if ($this.val().length == $this.attr('maxlength')) {
+                if ($this.closest('.otp-digit').next('.otp-digit').find('input').length > 0) {
+                    $this.closest('.otp-digit').next('.otp-digit').find('input').focus().select();
+                } else {
+                    $authentication.authenticationSubmit.trigger('click');
+                }
+            } else {
+                $this.closest('.otp-digit').prev('.otp-digit').find('input').focus().select();
+            }
+
+        });
+
+        B2bValidator.initAuthValidation($authentication, 'authentication');
+
+        $authentication.form.on('submit', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            if (typeof ajaxRequests.authentication !== 'undefined') {
+                ajaxRequests.authentication.abort();
+            }
+
+            if ($this.valid()) {
+                that.authentication(formData, $this);
+            }
+
+        });
+
+        $authentication.resendCode.on('click', $authentication.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formObj  = $authentication.form.serializeObject(),
+                formData = {
+                    'g-recaptcha-response': formObj['g-recaptcha-response'],
+                };
+
+            if (typeof ajaxRequests.resendAuthCode !== 'undefined') {
+                ajaxRequests.resendAuthCode.abort();
+            }
+
+            that.resendAuthCode(formData, $this);
         });
     }
 
@@ -248,6 +352,78 @@ class B2bAuthentication extends B2bAuth
         });
     }
 
+    editProfileFront()
+    {
+        let that         = this,
+            $editProfile = this.$el.editProfile,
+            $selectBoxes = $editProfile.selectBoxes,
+            ajaxRequests = this.ajaxRequests;
+
+        // TODO:: Implement after design
+        // $selectBoxes.each(function (i, v) {
+        //     new Choices(v, {
+        //         itemSelectText: b2bGlobals.phrases.choices_select,
+        //         noChoicesText: b2bGlobals.phrases.noChoicesText,
+        //         removeItemButton: true,
+        //         allowHTML: true,
+        //     });
+        // });
+
+        if ($('#b2b_phone_number').length > 0) {
+            const input = $('#b2b_phone_number')[0];
+
+            window.ITIOBJ.editProfile = intlTelInput(input, {
+                initialCountry: 'EG',
+                separateDialCode: true,
+                autoInsertDialCode: true,
+                allowDropdown: true,
+                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
+            });
+        }
+
+        B2bValidator.initAuthValidation($editProfile, 'editProfile');
+
+        $editProfile.form.on('submit', $editProfile.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+            formData.phone_number = window.ITIOBJ.registration.getNumber().replace('+', '');
+
+            if (typeof ajaxRequests.editProfile !== 'undefined') {
+                ajaxRequests.editProfile.abort();
+            }
+
+            if ($this.valid()) {
+                that.editProfile(formData, $this);
+            }
+
+        });
+    }
+
+    editPasswordFront()
+    {
+        let that          = this,
+            $editPassword = this.$el.editPassword,
+            ajaxRequests  = this.ajaxRequests;
+
+        B2bValidator.initAuthValidation($editPassword, 'editPassword');
+
+        $editPassword.form.on('submit', $editPassword.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            if (typeof ajaxRequests.editPassword !== 'undefined') {
+                ajaxRequests.editPassword.abort();
+            }
+
+            if ($this.valid()) {
+                that.editPassword(formData, $this);
+            }
+
+        });
+    }
+
     changePasswordFront()
     {
 
@@ -278,10 +454,16 @@ class B2bAuthentication extends B2bAuth
         $('.showPassIcon').on('click', function (e) {
             let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');
-            if ($target_element.attr('type') === 'password') {
-                $target_element.attr('type', 'text');
+            $this.removeClass('fa-solid fa-eye');
+            $this.addClass('fa-sharp fa-solid fa-eye-slash');
+            if ($($target_element).attr('type') === 'password') {
+                $($target_element).attr('type', 'text');
+                $this.removeClass('fa-sharp fa-solid fa-eye-slash');
+                $this.addClass('fa-solid fa-eye');
             } else {
-                $target_element.attr('type', 'password');
+                $($target_element).attr('type', 'password');
+                $this.removeClass('fa-solid fa-eye');
+                $this.addClass('fa-sharp fa-solid fa-eye-slash');
             }
         });
     }

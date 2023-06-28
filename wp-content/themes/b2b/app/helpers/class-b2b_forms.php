@@ -458,7 +458,8 @@
                 $input_data['choices'][$k] = array_merge($defaults['choices'][0], $arr);
             }
 
-            ?><div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>"><?php
+            ?>
+            <div class="form-group <?= B2b::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>"><?php
             echo $input_data['before'];
 
             $count = 0;
@@ -742,7 +743,7 @@
                 'placeholder'    => '',
                 'options'        => [],
                 'default_option' => '',
-                'select_option'  => '',
+                'select_option'  => [],
                 'class'          => '',
                 'id'             => (empty($args['name'])) ? "" : B2b::_DOMAIN_NAME . '_' . $args['name'],
                 'before'         => '',
@@ -765,16 +766,27 @@
 
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
                 <select class="form-control <?= B2b::_DOMAIN_NAME ?>-input" id="<?= $input_data['id'] ?>"
-                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="required"' : '' ?>>
+                        name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $input_data['multiple'] ?>>
                     <?php
                         if (empty($input_data['default_option']) && empty($input_data['select_option'])) {
                             ?>
                             <option value="" disabled="disabled" selected><?= $input_data['placeholder'] ?></option> <?php
                         }
+
                         foreach ($input_data['options'] as $value => $title) {
-                            ?>
-                            <option
-                            value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?>><?= $title ?></option><?php
+                            if (empty($input_data['default_option']) && !empty($input_data['select_option'])) {
+                                ?>
+                                <option
+                                value="<?= $value ?>" <?= (in_array($value, $input_data['select_option'])) ? 'selected' : '' ?>><?= $title ?></option><?php
+                            } elseif (!empty($input_data['default_option']) && empty($input_data['select_option'])) {
+                                ?>
+                                <option
+                                value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?>><?= $title ?></option><?php
+                            } else {
+                                ?>
+                                <option
+                                value="<?= $value ?>"><?= $title ?></option><?php
+                            }
                         }
                     ?>
                 </select>
@@ -804,7 +816,7 @@
 
             $nonce_data = array_merge($defaults, $args);
 
-            return wp_nonce_field($nonce_data['value'], $nonce_data['name'], true, false);
+            return wp_nonce_field($nonce_data['value'], $nonce_data['name'], TRUE, FALSE);
         }
 
         /**
@@ -822,14 +834,14 @@
         public function form_submit_button(array $args = []): string
         {
             $defaults = [
-                'type'   => 'submit',
-                'value'  => 'Submit',
-                'class'  => '',
-                'id'     => '',
-                'before' => '',
-                'after'  => '',
+                'type'                => 'submit',
+                'value'               => 'Submit',
+                'class'               => '',
+                'id'                  => '',
+                'before'              => '',
+                'after'               => '',
                 'recaptcha_form_name' => '',
-                'order'  => 0
+                'order'               => 0
             ];
 
             $input_data = array_merge($defaults, $args);

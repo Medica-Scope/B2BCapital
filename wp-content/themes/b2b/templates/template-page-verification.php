@@ -18,6 +18,8 @@
     use B2B\B2b;
 
     get_header();
+
+    $user = B2b_User::get_current_user();
 ?>
 
     <main id="" class="">
@@ -95,11 +97,12 @@
                               ],
                               'custom-html-4'      => [
                                   'type'    => 'html',
-                                  'content' => '<div class=""><p>' . __("It may take a minute to receive your code. <br> Haven't received it ? <a href='javascript:(0)' class='b2b-resend-code'>Resend a new code.</a>") . '</p></div>',
+                                  'content' => '<div class=""><p class="b2b-resend-code-patent" data-expire="'.$user->user_meta['verification_expire_date'].'">' . sprintf(__("It may take a minute to receive your code. <br> Haven't received it ? <button class='b2b-resend-code b2b-hidden' type='button'>Resend a new code.</button> <span class='b2b-code-count-down'></span>"), $user->user_meta['verification_expire_date']) . '</p></div>',
                                   'order'   => 40,
                               ],
                               'submit'             => [
                                   'class'               => 'btn',
+                                  'id'                => 'verificationSubmit',
                                   'type'                => 'submit',
                                   'value'               => __('Verify', 'b2b'),
                                   'recaptcha_form_name' => 'frontend_verification',

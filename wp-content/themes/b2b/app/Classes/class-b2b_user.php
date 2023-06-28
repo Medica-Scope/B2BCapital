@@ -32,23 +32,32 @@
          * Default Meta
          */
         const USER_DEFAULTS = [
-            'profile_id'                  => 0,
-            'avatar_id'                   => 0,
-            'email_confirmation_status'   => 0,
-            'phone_confirmation_status'   => 0,
-            'account_confirmation_status' => 0,
-            'default_language'            => 'en'
+            // User Profile ID
+            'profile_id'                    => 0,
+            // Profile Picture URL
+            'avatar_id'                     => 0,
+            // If verified by email
+            'email_verification_status'     => 0,
+            // If verified by phone
+            'phone_verification_status'     => 0,
+            // If account verified at all
+            'account_verification_status'   => 0,
+            // If account authenticated at all
+            'account_authentication_status' => 0,
+            // Default user language
+            'site_language'                 => 'en'
         ];
         /**
          * USER ROLES
          */
-        const ADMIN     = 'administrator';
-        const CMS       = 'cmsmanager';
-        const OWNER     = 'owner';
-        const INVESTOR  = 'investor';
-        const SEO       = 'seomanager';
-        const WEBMASTER = 'webmaster';
-        const REVIEWER  = 'reviewer';
+        const ADMIN      = 'administrator';
+        const CMS        = 'cmsmanager';
+        const OWNER      = 'owner';
+        const INVESTOR   = 'investor';
+        const SEO        = 'seomanager';
+        const WEBMASTER  = 'webmaster';
+        const REVIEWER   = 'reviewer';
+        const TRANSLATOR = 'translator';
         /**
          * Verification Types
          */
@@ -171,10 +180,12 @@
             'last_name',
             'nickname',
             'phone_number',
-            'verification_type',
             'reset_password_key',
+            'verification_type',
             'verification_key',
             'verification_expire_date',
+            'authentication_key',
+            'authentication_expire_date',
         ];
 
         public function __construct()
@@ -364,40 +375,7 @@
 
             update_user_meta($this->ID, 'profile_id', $profile->ID);
 
-            if ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['mobile']) {
-                $verification = $this->mobile_verification();
-                if (is_wp_error($verification)) {
-                    $error->add('whatsapp_error', __($verification->get_error_message(), 'b2b'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'e' => '',
-                        ]
-                    ]);
-                    return $error;
-                }
-            } elseif ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['whatsapp']) {
-                $verification = $this->whatsapp_verification();
-                if (is_wp_error($verification)) {
-                    $error->add('whatsapp_error', __($verification->get_error_message(), 'b2b'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'e' => '',
-                        ]
-                    ]);
-                    return $error;
-                }
-            } else {
-                $verification = $this->email_verification();
-                if (!$verification) {
-                    $error->add('whatsapp_error', __("The verification code didn't send!", 'b2b'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'email_error' => 'email error',
-                        ]
-                    ]);
-                    return $error;
-                }
-            }
+            $this->setup_verification('verification');
 
             $cred = [
                 'user_login'    => $this->username,
@@ -432,10 +410,29 @@
          */
         public function update(): B2b_User|WP_Error
         {
+            global $current_user;
+            $error = new WP_Error();
+
+            if (strtolower($current_user->data->user_login) !== strtolower($this->username)) {
+                if (username_exists($this->username)) {
+                    $error->add('username_exists', __('Sorry, this phone number is already exists!', 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [ 'username' => $this->username ]
+                    ]);
+                    return $error;
+                }
+
+                global $wpdb;
+                $wpdb->update($wpdb->users, [ 'user_login' => $this->username ], [ 'user_login' => $current_user->data->user_login ]);
+            }
+
+
             $user_id = wp_update_user([
+                'ID'           => $this->ID,
+                'user_email'   => $this->email,
                 'first_name'   => ucfirst(strtolower($this->first_name)),
                 'last_name'    => ucfirst(strtolower($this->last_name)),
-                'display_name' => ucfirst(strtolower($this->first_name)) . ucfirst(strtolower($this->last_name)),
+                'display_name' => ucfirst(strtolower($this->first_name)) . ' ' . ucfirst(strtolower($this->last_name)),
                 'role'         => $this->role
             ]);
 
@@ -451,9 +448,10 @@
                 }
             }
 
-            $user_meta = array_merge($this->user_meta, self::USER_DEFAULTS);
+            $this->profile->title = $this->display_name;
+            $this->profile->update();
 
-            foreach ($user_meta as $key => $value) {
+            foreach ($this->user_meta as $key => $value) {
                 update_user_meta($this->ID, $key, $value);
             }
 
@@ -548,10 +546,14 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function set_user_meta(string $name, string $value): bool
+        public function set_user_meta(string $name, string|array $value, bool $update = FALSE): bool
         {
             if (array_key_exists($name, $this->user_meta)) {
                 $this->user_meta[$name] = $value;
+
+                if ($update) {
+                    update_user_meta($this->ID, $name, $value);
+                }
 
                 return TRUE;
             }
@@ -572,24 +574,37 @@
          * @return \B2B\APP\CLASSES\B2b_User|\WP_Error|$this
          * @throws \Exception
          */
-        public function forgot_password($user_email): B2b_User|WP_Error
+        public function forgot_password($user_email_phone): B2b_User|WP_Error
         {
-            $error = new WP_Error();
-            $user  = get_user_by('email', $user_email);
+            $user = get_user_by('email', $user_email_phone);
+
+            if (!$user) {
+                $user = get_user_by('login', $user_email_phone);
+            }
 
             if ($user) {
                 $generate_forgot_data = $this->generate_forgot_password_data($user);
 
-                $email = B2b_Mail::init()
-                                 ->to($user->user_email)
-                                 ->subject('Forgot Password')
-                                 ->template('forgot-password/body', [
-                                     'data' => [
-                                         'user'      => $user,
-                                         'url_query' => $generate_forgot_data['reset_link']
-                                     ]
-                                 ])
-                                 ->send();
+                $verification_type = get_user_meta($user->ID, 'verification_type', TRUE);
+
+                if ($verification_type === B2b_User::VERIFICATION_TYPES['mobile']) {
+                    //
+                } elseif ($verification_type === B2b_User::VERIFICATION_TYPES['whatsapp']) {
+                    //
+                } else {
+                    $email = B2b_Mail::init()
+                                     ->to($user->user_email)
+                                     ->subject('Forgot Password')
+                                     ->template('forgot-password/body', [
+                                         'data' => [
+                                             'user'      => $user,
+                                             'url_query' => $generate_forgot_data['reset_link']
+                                         ]
+                                     ])
+                                     ->send();
+                }
+
+
             }
             return $this;
         }
@@ -612,7 +627,7 @@
             $reset_data = [
                 'user_id'         => $user->ID,
                 'reset_key'       => $reset_key,
-                'expiration_time' => current_time('timestamp') + 3600
+                'expiration_time' => time() + (1 * 3600)
                 // 1 hour
             ];
 
@@ -742,12 +757,13 @@
             }
         }
 
-        public static function check_verification_code(array $verification_data): bool|WP_Error
+        public static function check_otp_code(array $data, string $type): bool|WP_Error
         {
             $error             = new WP_Error();
             $current_timestamp = time(); // get the current Unix timestamp
-            if ($verification_data['verification_expire_date'] >= $current_timestamp) {
-                if ($verification_data['incoming_code'] === $verification_data['current_code']) {
+            $expire_date       = $type === 'authentication' ? $data['authentication_expire_date'] : $data['verification_expire_date'];
+            if ($expire_date >= $current_timestamp) {
+                if ($data['incoming_code'] === $data['current_code']) {
                     return TRUE;
                 } else {
                     $error->add('invalid_key', __("Your reset key is invalid!.", 'b2b'), [
@@ -853,9 +869,13 @@
             $new_user->nickname   = $new_user->user_meta['nickname'];
             $new_user->avatar     = $new_user->get_avatar();
 
-            if ($new_user->user_meta['profile_id'] && class_exists('B2b_Profile')) {
-                $profile_onj       = new B2b_Profile();
-                $new_user->profile = $profile_onj->get_by_id((int)$new_user->user_meta['profile_id']);
+            if (class_exists('\B2B\APP\MODELS\FRONT\MODULES\B2b_Profile')) {
+                $profile_obj       = new B2b_Profile();
+                $new_user->profile = $profile_obj;
+                $profile           = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                if (!is_wp_error($profile)) {
+                    $new_user->profile = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                }
             }
 
             return $new_user;
@@ -922,6 +942,7 @@
          * @package b2b
          * @author Mustafa Shaaban
          * @return \WP_Error|\static
+         * @throws \Exception
          */
         protected function login(): B2b_User|WP_Error
         {
@@ -979,11 +1000,22 @@
                 }
 
                 if (!$this->is_confirm()) {
-                    $error->add('account_confirmation', __("Your account is pending!, Please check your E-mail/Mobile/WhatsApp to activate your account.", 'b2b'), [
+                    // send verification code
+                    $this->setup_verification('verification');
+                    $error->add('account_verification', __("Your account is pending!, Please check your E-mail/Mobile/WhatsApp to activate your account.", 'b2b'), [
                         'status'  => FALSE,
-                        'details' => [ 'email' => $this->user_meta['account_confirmation_status'] ]
+                        'details' => [ 'email' => $this->user_meta['account_verification_status'] ]
                     ]);
                     return $error;
+                }
+
+                $front_dashboard = [
+                    self::OWNER,
+                    self::INVESTOR
+                ];
+
+                if (in_array($this->role, $front_dashboard)) {
+                    $this->setup_verification('authentication');
                 }
 
                 $profile_id = get_user_meta($login->ID, 'profile_id', TRUE);
@@ -1021,16 +1053,72 @@
         }
 
         /**
+         * @throws \Exception
+         */
+        public function setup_verification(string $type)
+        {
+            $error = new WP_Error();
+            if ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['mobile']) {
+                $verification = $this->send_phone_otp_code($type);
+                if (is_wp_error($verification)) {
+                    $error->add('whatsapp_error', __($verification->get_error_message(), 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'e' => '',
+                        ]
+                    ]);
+                    return $error;
+                }
+            } elseif ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['whatsapp']) {
+                $verification = $this->send_whatsapp_otp_code($type);
+                if (is_wp_error($verification)) {
+                    $error->add('whatsapp_error', __($verification->get_error_message(), 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'e' => '',
+                        ]
+                    ]);
+                    return $error;
+                }
+            } else {
+                $verification = $this->send_email_otp_code($type);
+                if (!$verification) {
+                    $error->add('whatsapp_error', __("The verification code didn't send!", 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'email_error' => 'email error',
+                        ]
+                    ]);
+                    return $error;
+                }
+            }
+        }
+
+        /**
          * Description...
          * @version 1.0
          * @since 1.0.0
          * @package b2b
          * @author Mustafa Shaaban
+         *
+         * @param string $type
+         *
          * @return \WP_Error|bool
          */
-        public function mobile_verification(): WP_Error|bool
+        public function send_phone_otp_code(string $type): WP_Error|bool
         {
-            $error = new WP_Error();
+            $error        = new WP_Error();
+            $randomNumber = mt_rand(1000, 9999);
+
+            if ($type === 'authentication') {
+                $this->set_user_meta('account_authentication_status', 0, TRUE);
+                $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
+            } else {
+                $this->set_user_meta('account_verification_status', 0, TRUE);
+                $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+            }
 
             $error->add('mobile_error', __('NO VERIFICATION', 'b2b'), [
                 'status'  => FALSE,
@@ -1048,11 +1136,25 @@
          * @since 1.0.0
          * @package b2b
          * @author Mustafa Shaaban
+         *
+         * @param string $type
+         *
          * @return \WP_Error|bool
          */
-        public function whatsapp_verification(): WP_Error|bool
+        public function send_whatsapp_otp_code(string $type): WP_Error|bool
         {
-            $error = new WP_Error();
+            $error        = new WP_Error();
+            $randomNumber = mt_rand(1000, 9999);
+
+            if ($type === 'authentication') {
+                $this->set_user_meta('account_authentication_status', 0, TRUE);
+                $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
+            } else {
+                $this->set_user_meta('account_verification_status', 0, TRUE);
+                $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+            }
 
             $error->add('whatsapp_error', __('NO VERIFICATION', 'b2b'), [
                 'status'  => FALSE,
@@ -1070,26 +1172,48 @@
          * @since 1.0.0
          * @package b2b
          * @author Mustafa Shaaban
+         *
+         * @param string $type
+         *
          * @return bool
          * @throws \Exception
          */
-        public function email_verification(): bool
+        public function send_email_otp_code(string $type): bool
         {
             $randomNumber = mt_rand(1000, 9999);
 
-            update_user_meta($this->ID, 'verification_key', $randomNumber);
-            update_user_meta($this->ID, 'verification_expire_date', current_time('timestamp') + 300);
+            if ($type === 'authentication') {
+                $this->set_user_meta('account_authentication_status', 0, TRUE);
+                $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
 
-            $email = B2b_Mail::init()
-                             ->to($this->email)
-                             ->subject('Welcome to B2b - Please Verify Your Email')
-                             ->template('account-verification/body', [
-                                 'data' => [
-                                     'user'   => $this,
-                                     'digits' => $randomNumber
-                                 ]
-                             ])
-                             ->send();
+                $email = B2b_Mail::init()
+                                 ->to($this->email)
+                                 ->subject('Welcome to B2b - Please Authenticate Your Email')
+                                 ->template('account-authentication/body', [
+                                     'data' => [
+                                         'user'   => $this,
+                                         'digits' => $randomNumber
+                                     ]
+                                 ])
+                                 ->send();
+            } else {
+                $this->set_user_meta('account_verification_status', 0, TRUE);
+                $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+
+                $email = B2b_Mail::init()
+                                 ->to($this->email)
+                                 ->subject('Welcome to B2b - Please Verify Your Email')
+                                 ->template('account-verification/body', [
+                                     'data' => [
+                                         'user'   => $this,
+                                         'digits' => $randomNumber
+                                     ]
+                                 ])
+                                 ->send();
+            }
+
             return $email;
         }
 
@@ -1120,7 +1244,7 @@
          */
         private function is_confirm(): bool
         {
-            if (empty($this->user_meta['account_confirmation_status']) || !boolval($this->user_meta['account_confirmation_status'])) {
+            if (empty($this->user_meta['account_verification_status']) || !boolval($this->user_meta['account_verification_status'])) {
                 return FALSE;
             }
 

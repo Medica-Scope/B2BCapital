@@ -204,9 +204,8 @@ class B2bValidator
                             return $.trim(value);
                         },
                         rules: {
-                            user_email: {
-                                required: true,
-                                email_regex: true,
+                            user_email_phone: {
+                                required: true
                             },
                         },
                     });
@@ -226,6 +225,73 @@ class B2bValidator
                             user_password_confirm: {
                                 required: true,
                                 equalTo: $el.user_password,
+                            },
+                        },
+                    });
+                }
+            },
+            editProfile: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        ignore: ":hidden:not(select)",
+                        rules: {
+                            first_name: {
+                                required: true,
+                                minlength: 2,
+                                maxlength: 150
+                            },
+                            last_name: {
+                                required: true,
+                                minlength: 2,
+                                maxlength: 150
+                            },
+                            phone_number: {
+                                required: true,
+                                intlTelNumber: {itiObj: 'editProfile'},
+                                maxlength: 50
+                            },
+                            user_email: {
+                                required: true,
+                                email_regex: true,
+                                minlength: 10,
+                                maxlength: 125
+                            },
+                            site_language: {
+                                required: true,
+                            },
+                            widget_list: {
+                                required: true,
+                            },
+                            preferred_opportunities_cat_list: {
+                                required: true,
+                            },
+                            preferred_articles_cat_list: {
+                                required: true,
+                            }
+                        },
+                    });
+                }
+            },
+            editPassword: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            current_password: {
+                                required: true,
+                            },
+                            new_password: {
+                                required: true,
+                                password_regex: true,
+                            },
+                            confirm_new_password: {
+                                required: true,
+                                equalTo: $el.new_password,
                             },
                         },
                     });
