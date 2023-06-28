@@ -410,10 +410,29 @@
          */
         public function update(): B2b_User|WP_Error
         {
+            global $current_user;
+            $error = new WP_Error();
+
+            if (strtolower($current_user->data->user_login) !== strtolower($this->username)) {
+                if (username_exists($this->username)) {
+                    $error->add('username_exists', __('Sorry, this phone number is already exists!', 'b2b'), [
+                        'status'  => FALSE,
+                        'details' => [ 'username' => $this->username ]
+                    ]);
+                    return $error;
+                }
+
+                global $wpdb;
+                $wpdb->update($wpdb->users, [ 'user_login' => $this->username ], [ 'user_login' => $current_user->data->user_login ]);
+            }
+
+
             $user_id = wp_update_user([
+                'ID'           => $this->ID,
+                'user_email'   => $this->email,
                 'first_name'   => ucfirst(strtolower($this->first_name)),
                 'last_name'    => ucfirst(strtolower($this->last_name)),
-                'display_name' => ucfirst(strtolower($this->first_name)) . ucfirst(strtolower($this->last_name)),
+                'display_name' => ucfirst(strtolower($this->first_name)) . ' ' . ucfirst(strtolower($this->last_name)),
                 'role'         => $this->role
             ]);
 
@@ -429,9 +448,10 @@
                 }
             }
 
-            $user_meta = array_merge($this->user_meta, self::USER_DEFAULTS);
+            $this->profile->title = $this->display_name;
+            $this->profile->update();
 
-            foreach ($user_meta as $key => $value) {
+            foreach ($this->user_meta as $key => $value) {
                 update_user_meta($this->ID, $key, $value);
             }
 
@@ -526,7 +546,7 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function set_user_meta(string $name, string $value, bool $update = FALSE): bool
+        public function set_user_meta(string $name, string|array $value, bool $update = FALSE): bool
         {
             if (array_key_exists($name, $this->user_meta)) {
                 $this->user_meta[$name] = $value;
@@ -849,9 +869,13 @@
             $new_user->nickname   = $new_user->user_meta['nickname'];
             $new_user->avatar     = $new_user->get_avatar();
 
-            if ($new_user->user_meta['profile_id'] && class_exists('\B2B\APP\MODELS\FRONT\MODULES\B2b_Profile')) {
-                $profile_onj       = new B2b_Profile();
-                $new_user->profile = $profile_onj->get_by_id((int)$new_user->user_meta['profile_id']);
+            if (class_exists('\B2B\APP\MODELS\FRONT\MODULES\B2b_Profile')) {
+                $profile_obj       = new B2b_Profile();
+                $new_user->profile = $profile_obj;
+                $profile           = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                if (!is_wp_error($profile)) {
+                    $new_user->profile = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                }
             }
 
             return $new_user;

@@ -16,6 +16,7 @@ import B2bUiCtrl    from './inc/UiCtrl';
 import B2bAuth      from './modules/Auth';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/js/utils.js';
+import Choices      from 'choices.js';
 
 class B2bAuthentication extends B2bAuth
 {
@@ -52,11 +53,7 @@ class B2bAuthentication extends B2bAuth
                 authenticationSubmit: $(`#${KEY}_authentication_form`).find('#authenticationSubmit'),
             },
             codeForm: {
-                // parent: $('.otp-digit').closest('form'),
-                // otpDigit: $('.otp-digit input'),
-                // CodeCountDown: $('.b2b-code-count-down'),
                 resendCode: $('.b2b-resend-code'),
-                // codeSubmit: $('#codeSubmit'),
             },
             industries: {
                 form: $(`#${KEY}_industries_form`),
@@ -68,6 +65,16 @@ class B2bAuthentication extends B2bAuth
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
                 parent: $(`#${KEY}_forgot_form`).parent(),
+            },
+            editProfile: {
+                form: $(`#${KEY}_edit_profile_form`),
+                parent: $(`#${KEY}_edit_profile_form`).parent(),
+                selectBoxes: $('select'),
+            },
+            editPassword: {
+                form: $(`#${KEY}_edit_password_form`),
+                parent: $(`#${KEY}_edit_password_form`).parent(),
+                new_password: $(`#${KEY}_new_password`),
             },
             change_password: {
                 form: $(`#${KEY}_change_password_form`),
@@ -88,8 +95,11 @@ class B2bAuthentication extends B2bAuth
         this.industriesFront();
         this.forgotPasswordFront();
         this.changePasswordFront();
+        this.editProfileFront();
+        this.editPasswordFront();
         this.showPassword();
         this.codeCountDown();
+
     }
 
     registrationFront()
@@ -219,9 +229,9 @@ class B2bAuthentication extends B2bAuth
 
     authenticationFront()
     {
-        let that          = this,
+        let that            = this,
             $authentication = this.$el.authentication,
-            ajaxRequests  = this.ajaxRequests;
+            ajaxRequests    = this.ajaxRequests;
 
         $authentication.otpDigit.on('click', $authentication.parent, function (e) {
             e.preventDefault();
@@ -342,6 +352,78 @@ class B2bAuthentication extends B2bAuth
         });
     }
 
+    editProfileFront()
+    {
+        let that         = this,
+            $editProfile = this.$el.editProfile,
+            $selectBoxes = $editProfile.selectBoxes,
+            ajaxRequests = this.ajaxRequests;
+
+        // TODO:: Implement after design
+        // $selectBoxes.each(function (i, v) {
+        //     new Choices(v, {
+        //         itemSelectText: b2bGlobals.phrases.choices_select,
+        //         noChoicesText: b2bGlobals.phrases.noChoicesText,
+        //         removeItemButton: true,
+        //         allowHTML: true,
+        //     });
+        // });
+
+        if ($('#b2b_phone_number').length > 0) {
+            const input = $('#b2b_phone_number')[0];
+
+            window.ITIOBJ.editProfile = intlTelInput(input, {
+                initialCountry: 'EG',
+                separateDialCode: true,
+                autoInsertDialCode: true,
+                allowDropdown: true,
+                utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
+            });
+        }
+
+        B2bValidator.initAuthValidation($editProfile, 'editProfile');
+
+        $editProfile.form.on('submit', $editProfile.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+            formData.phone_number = window.ITIOBJ.registration.getNumber().replace('+', '');
+
+            if (typeof ajaxRequests.editProfile !== 'undefined') {
+                ajaxRequests.editProfile.abort();
+            }
+
+            if ($this.valid()) {
+                that.editProfile(formData, $this);
+            }
+
+        });
+    }
+
+    editPasswordFront()
+    {
+        let that          = this,
+            $editPassword = this.$el.editPassword,
+            ajaxRequests  = this.ajaxRequests;
+
+        B2bValidator.initAuthValidation($editPassword, 'editPassword');
+
+        $editPassword.form.on('submit', $editPassword.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            if (typeof ajaxRequests.editPassword !== 'undefined') {
+                ajaxRequests.editPassword.abort();
+            }
+
+            if ($this.valid()) {
+                that.editPassword(formData, $this);
+            }
+
+        });
+    }
+
     changePasswordFront()
     {
 
@@ -372,10 +454,16 @@ class B2bAuthentication extends B2bAuth
         $('.showPassIcon').on('click', function (e) {
             let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');
-            if ($target_element.attr('type') === 'password') {
-                $target_element.attr('type', 'text');
+            $this.removeClass('fa-solid fa-eye');
+            $this.addClass('fa-sharp fa-solid fa-eye-slash');
+            if ($($target_element).attr('type') === 'password') {
+                $($target_element).attr('type', 'text');
+                $this.removeClass('fa-sharp fa-solid fa-eye-slash');
+                $this.addClass('fa-solid fa-eye');
             } else {
-                $target_element.attr('type', 'password');
+                $($target_element).attr('type', 'password');
+                $this.removeClass('fa-solid fa-eye');
+                $this.addClass('fa-sharp fa-solid fa-eye-slash');
             }
         });
     }

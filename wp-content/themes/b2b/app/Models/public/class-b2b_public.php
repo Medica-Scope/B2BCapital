@@ -58,7 +58,10 @@
         public function enqueue_styles(): void
         {
 
+            $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-fontawesome', B2b_Hooks::PATHS['public']['vendors'] . '/css/fontawesome/css/all.min', TRUE);
             $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-itl', B2b_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
+            $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-choices', B2b_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
+
             if (B2B_lANG === 'ar') {
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-bs5', B2b_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
                 $this->hooks->add_style(B2b::_DOMAIN_NAME . '-public-style-main', B2b_Hooks::PATHS['root']['css'] . '/style-rtl');
@@ -101,7 +104,9 @@
                     'phone_regex'    => __("Please enter a valid Phone number.", "b2b"),
                     'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "b2b"),
                     'email_regex'    => __("Please enter a valid email address.", "b2b"),
-                    'file_extension' => __("Please upload an image with a valid extension.", "b2b")
+                    'file_extension' => __("Please upload an image with a valid extension.", "b2b"),
+                    'choices_select' => __("Press to select", "b2b"),
+                    'noChoicesText' => __("'No choices to choose from'", "b2b"),
                 ]
             ]);
 
@@ -148,5 +153,26 @@
             }
 
             return $url;
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public static function get_available_languages(): array
+        {
+            $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+            $languages_codes = [];
+
+            if ( ! empty( $languages ) ) {
+                foreach( $languages as $l ) {
+                    $languages_codes[] = ['code' => $l['language_code'], 'name' => $l['translated_name']];
+                }
+            }
+            return $languages_codes;
         }
     }

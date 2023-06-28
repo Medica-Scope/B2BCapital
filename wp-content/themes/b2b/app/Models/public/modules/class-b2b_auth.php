@@ -11,6 +11,7 @@
     use B2B\APP\CLASSES\B2b_User;
     use B2B\APP\HELPERS\B2b_Ajax_Response;
     use B2B\APP\HELPERS\B2b_Hooks;
+    use B2B\APP\MODELS\FRONT\B2b_Public;
     use B2B\B2b;
 
     /**
@@ -59,6 +60,8 @@
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_industries_ajax', $this, 'industries_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_forgot_password_ajax', $this, 'forgot_password_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_change_password_ajax', $this, 'change_password_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_edit_profile_ajax', $this, 'edit_profile_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_edit_password_ajax', $this, 'edit_password_ajax');
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax');
         }
 
@@ -170,6 +173,7 @@
             $this->last_name    = ucfirst(strtolower($last_name));
             $this->nickname     = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
 
+            $this->set_user_meta('nickname', ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)));
             $this->set_user_meta('phone_number', $phone_number);
             $this->set_user_meta('verification_type', B2b_User::VERIFICATION_TYPES[$verification_type]);
 
@@ -188,7 +192,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, sprintf(__('Your account has been created successfully, Please check your %s to activate your account', 'b2b'), $msg), [
-                'redirect_url' => get_permalink(get_page_by_path('my-account/verification'))
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/verification')))
             ]);
         }
 
@@ -255,7 +259,7 @@
                 if ($user->get_error_code() === 'account_verification') {
                     $redirect_url = get_permalink(get_page_by_path('my-account/verification'));
                     new B2b_Ajax_Response(TRUE, __('You have been logged in successfully.', 'b2b'), [
-                        'redirect_url' => $redirect_url
+                        'redirect_url' => apply_filters('b2bml_permalink', $redirect_url)
                     ]);
                 } else {
                     new B2b_Ajax_Response(FALSE, $user->get_error_message(), $user->get_error_data());
@@ -271,7 +275,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('You have been logged in successfully.', 'b2b'), [
-                'redirect_url' => $redirect_url
+                'redirect_url' => apply_filters('b2bml_permalink', $redirect_url)
             ]);
         }
 
@@ -351,7 +355,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'b2b'), [
-                'redirect_url' => get_permalink(get_page_by_path('my-account/industry'))
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/industry')))
             ]);
         }
 
@@ -472,7 +476,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been authenticated successfully!', 'b2b'), [
-                'redirect_url' => get_permalink(get_page_by_path($redirect_page_slug))
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path($redirect_page_slug)))
             ]);
         }
 
@@ -564,7 +568,7 @@
 
 
             new B2b_Ajax_Response(TRUE, __('You have been logged in successfully.', 'b2b'), [
-                'redirect_url' => get_permalink(get_page_by_path('dashboard'))
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('dashboard')))
             ]);
         }
 
@@ -614,7 +618,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Please check your stored email or phone number to get your reset code.', 'b2b'), [
-                'redirect_url' => home_url()
+                'redirect_url' => apply_filters('b2bml_permalink', home_url())
             ]);
         }
 
@@ -682,6 +686,197 @@
          * @package b2b
          * @author Mustafa Shaaban
          * @return void
+         * @throws \Exception
+         */
+        public function edit_profile_ajax(): void
+        {
+            global $current_user;
+
+            $form_data                        = $_POST['data'];
+            $first_name                       = sanitize_text_field($form_data['first_name']);
+            $last_name                        = sanitize_text_field($form_data['last_name']);
+            $phone_number                     = sanitize_text_field($form_data['phone_number']);
+            $user_email                       = sanitize_text_field($form_data['user_email']);
+            $site_language                    = sanitize_text_field($form_data['site_language']);
+            $widget_list                      = !is_array($form_data['widget_list']) ? [] : $form_data['widget_list'];
+            $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
+            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
+            $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"]    = $recaptcha_response;
+
+            if (empty($form_data)) {
+                new B2b_Ajax_Response(FALSE, __("Profile data can't be empty.", 'b2b'));
+            }
+
+            if (!wp_verify_nonce($form_data['edit_profile_nonce'], B2b::_DOMAIN_NAME . "_edit_profile_form")) {
+                new B2b_Ajax_Response(FALSE, __("Something went wrong!.", 'b2b'));
+            }
+
+            if (empty($first_name)) {
+                new B2b_Ajax_Response(FALSE, __("The first name field shouldn't be empty!.", 'b2b'));
+            }
+
+            if (empty($last_name)) {
+                new B2b_Ajax_Response(FALSE, __("The last name field is empty!.", 'b2b'));
+            }
+
+            if (empty($phone_number)) {
+                new B2b_Ajax_Response(FALSE, __("The phone number field is empty!.", 'b2b'));
+            }
+
+            if (empty($user_email)) {
+                new B2b_Ajax_Response(FALSE, __("The E-mail field shouldn't be empty!.", 'b2b'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_edit_profile');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
+            }
+
+
+            $relative_preferred_opportunities_cat_list = $preferred_opportunities_cat_list;
+            foreach ($preferred_opportunities_cat_list as $term) {
+                foreach (B2b_Public::get_available_languages() as $lang) {
+                    if ($lang['code'] !== B2B_lANG) {
+                        // Get the term's ID in the French language
+                        $translated_term_id = wpml_object_id_filter($term, 'opportunity-category', FALSE, $lang['code']);
+                        if ($translated_term_id) {
+                            $relative_preferred_opportunities_cat_list[] = $translated_term_id;
+                        }
+                    }
+
+                }
+
+            }
+
+
+            $relative_preferred_articles_cat_list = $preferred_articles_cat_list;
+            foreach ($preferred_articles_cat_list as $term) {
+                foreach (B2b_Public::get_available_languages() as $lang) {
+                    if ($lang['code'] !== B2B_lANG) {
+                        // Get the term's ID in the French language
+                        $translated_term_id = wpml_object_id_filter($term, 'category', FALSE, $lang['code']);
+                        if ($translated_term_id) {
+                            $relative_preferred_articles_cat_list[] = $translated_term_id;
+                        }
+                    }
+
+                }
+
+            }
+
+            // TODO:: Widget Lists
+
+
+            $current_user_obj               = B2b_User::get_current_user();
+            $current_user_obj->username     = $phone_number;
+            $current_user_obj->email        = $user_email;
+            $current_user_obj->display_name = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
+            $current_user_obj->first_name   = ucfirst(strtolower($first_name));
+            $current_user_obj->last_name    = ucfirst(strtolower($last_name));
+
+            $current_user_obj->set_user_meta('first_name', ucfirst(strtolower($first_name)));
+            $current_user_obj->set_user_meta('last_name', ucfirst(strtolower($last_name)));
+            $current_user_obj->set_user_meta('nickname', ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)));
+            $current_user_obj->set_user_meta('phone_number', $phone_number);
+            $current_user_obj->set_user_meta('site_language', $site_language);
+            $current_user_obj->profile->set_meta_data('widget_list', $widget_list);
+            $current_user_obj->profile->set_meta_data('preferred_opportunities_cat_list', $relative_preferred_opportunities_cat_list);
+            $current_user_obj->profile->set_meta_data('preferred_articles_cat_list', $relative_preferred_articles_cat_list);
+
+            $user = $current_user_obj->update();
+
+            if (is_wp_error($user)) {
+                new B2b_Ajax_Response(FALSE, $user->get_error_message());
+            }
+
+            if ($current_user->data->user_login !== $current_user_obj->username) {
+                new B2b_Ajax_Response(TRUE, __('Your profile has been updated successfully, But you need to re-login again.', 'b2b'), [
+                    'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/login'))),
+                    'redirect'     => TRUE
+                ]);
+            }
+
+            new B2b_Ajax_Response(TRUE, __('Your profile has been updated successfully', 'b2b'), [
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account')))
+            ]);
+        }
+
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return void
+         */
+        public function edit_password_ajax(): void
+        {
+            global $current_user;
+
+            $form_data                     = $_POST['data'];
+            $current_password              = sanitize_text_field($form_data['current_password']);
+            $new_password                  = sanitize_text_field($form_data['new_password']);
+            $confirm_new_password          = sanitize_text_field($form_data['confirm_new_password']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+            if (empty($form_data)) {
+                new B2b_Ajax_Response(FALSE, __("Can't login with empty credentials.", 'b2b'));
+            }
+
+            if (!wp_verify_nonce($form_data['edit_password_nonce'], B2b::_DOMAIN_NAME . "_edit_password_form")) {
+                new B2b_Ajax_Response(FALSE, __("Something went wrong!.", 'b2b'));
+            }
+
+            if (empty($current_password)) {
+                new B2b_Ajax_Response(FALSE, __("The current password field is empty!.", 'b2b'));
+            }
+
+            if (empty($new_password)) {
+                new B2b_Ajax_Response(FALSE, __("The new password field is empty!.", 'b2b'));
+            }
+
+            if (empty($confirm_new_password)) {
+                new B2b_Ajax_Response(FALSE, __("The confirm new password field is empty!.", 'b2b'));
+            }
+
+            if ($new_password !== $confirm_new_password) {
+                new B2b_Ajax_Response(FALSE, __("Your password is not identical!.", 'b2b'));
+            }
+
+            if (!wp_check_password($current_password, $current_user->data->user_pass, $current_user->ID)) {
+                new B2b_Ajax_Response(FALSE, __("Your current password is incorrect!.", 'b2b'));
+            }
+
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $new_password)) {
+                new B2b_Ajax_Response(FALSE, __("Your password is not complex enough!", 'b2b'));
+            }
+
+            // TODO:: Change it to frontend_edit_password after design
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_edit_profile');
+
+            if ($check_result !== TRUE) {
+                new B2b_Ajax_Response(FALSE, __($check_result, 'b2b'));/* the reCAPTCHA answer  */
+            }
+
+            wp_set_password($new_password, $current_user->ID);
+
+            new B2b_Ajax_Response(TRUE, __('Your password has been changed successfully, But you need to re-login again.', 'b2b'), [
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/login')))
+            ]);
+        }
+
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return void
          */
         public function logout_ajax(): void
         {
@@ -691,7 +886,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, '', [
-                'redirect_url' => home_url()
+                'redirect_url' => apply_filters('b2bml_permalink', home_url())
             ]);
 
         }

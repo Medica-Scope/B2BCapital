@@ -11,6 +11,7 @@
 
     use B2B\APP\CLASSES\B2b_Module;
     use B2B\APP\CLASSES\B2b_Post;
+    use B2B\APP\CLASSES\B2b_User;
     use WP_Post;
 
 
@@ -26,6 +27,9 @@
     class B2b_Profile extends B2b_Module
     {
         public array $meta_data = [
+            'widget_list',
+            'preferred_opportunities_cat_list',
+            'preferred_articles_cat_list',
         ];
         public array $taxonomy = [
             'industry'
@@ -67,6 +71,23 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+            $this->hooks->add_filter('show_admin_bar', $this, 'hide_admin_bar');
         }
 
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return bool
+         */
+        public function hide_admin_bar(): bool
+        {
+            global $user_ID;
+            if ((B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+                return FALSE;
+            }
+            return TRUE;
+        }
     }

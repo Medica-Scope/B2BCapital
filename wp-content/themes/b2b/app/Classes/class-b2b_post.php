@@ -321,9 +321,17 @@
                 foreach ($this->meta_data as $key => $meta) {
                     update_post_meta($update, $key, $meta);
                 }
-                foreach ($this->taxonomy as $tax_name => $taxonomies) {
-                    wp_set_post_terms($this->ID, $taxonomies, $tax_name, false);
+
+                foreach ($this->taxonomy as $tax_name => $terms) {
+                    if (is_object($terms[0])) {
+                        $terms = array_map(function($term){
+                            return $term->term_id;
+                        }, $terms);
+                    }
+                    wp_set_post_terms($this->ID, $terms, $tax_name, false);
                 }
+
+
                 do_action(B2b::_DOMAIN_NAME . "_after_update_" . $this->type, $this);
             }
 
@@ -378,7 +386,7 @@
          * @since 1.0.0
          * @author Mustafa Shaaban
          */
-        public function set_meta_data(string $name, string $value): bool
+        public function set_meta_data(string $name, string|array $value): bool
         {
             if (array_key_exists($name, $this->meta_data)) {
                 $this->meta_data[$name] = $value;
