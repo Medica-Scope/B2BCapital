@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wpml/cf7ml',
-        'pretty_version' => '1.2.0',
-        'version' => '1.2.0.0',
-        'reference' => '67c05fbc85af847971d7f808e4d59943a3c7a09b',
+        'pretty_version' => '1.2.1',
+        'version' => '1.2.1.0',
+        'reference' => '106d14b723b193bdd5a93b829601701b82beea9f',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'wpml/cf7ml' => array(
-            'pretty_version' => '1.2.0',
-            'version' => '1.2.0.0',
-            'reference' => '67c05fbc85af847971d7f808e4d59943a3c7a09b',
+            'pretty_version' => '1.2.1',
+            'version' => '1.2.1.0',
+            'reference' => '106d14b723b193bdd5a93b829601701b82beea9f',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

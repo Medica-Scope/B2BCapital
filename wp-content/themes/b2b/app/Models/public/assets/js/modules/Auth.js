@@ -139,7 +139,7 @@ class B2bAuth extends B2b
 
     authentication(formData, $el)
     {
-        let that                       = this;
+        let that                         = this;
         this.ajaxRequests.authentication = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -217,7 +217,7 @@ class B2bAuth extends B2b
 
     resendAuthCode(formData, $el)
     {
-        let that                        = this;
+        let that                         = this;
         this.ajaxRequests.resendAuthCode = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -367,6 +367,80 @@ class B2bAuth extends B2b
         });
     }
 
+    editProfile(formData, $el)
+    {
+        let that                      = this;
+        this.ajaxRequests.editProfile = $.ajax({
+            url: b2bGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_edit_profile_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+                $el.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                $('input').prop('disabled', false);
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                    if (res.data.redirect) {
+                        window.location.href = res.data.redirect_url;
+                    }
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+                that.createNewToken();
+                $el.find('input, button').prop('disabled', false);
+                UiCtrl.blockUI($el, false);
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+                that.createNewToken();
+            },
+        });
+    }
+
+    editPassword(formData, $el)
+    {
+        let that                       = this;
+        this.ajaxRequests.editPassword = $.ajax({
+            url: b2bGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_edit_password_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+                $el.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                $('input').prop('disabled', false);
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                    window.location.href = res.data.redirect_url;
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+                that.createNewToken();
+                $el.find('input, button').prop('disabled', false);
+                UiCtrl.blockUI($el, false);
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+                that.createNewToken();
+            },
+        });
+    }
+
     createNewToken()
     {
         grecaptcha.ready(function () {
@@ -379,7 +453,7 @@ class B2bAuth extends B2b
     codeCountDown()
     {
         let that              = this,
-            $codeForm     = this.$el.codeForm,
+            $codeForm         = this.$el.codeForm,
             $resendCodeParent = $('.b2b-resend-code-patent'),
             $CodeCountDown    = $('<span class="b2b-code-count-down"></span>');
 

@@ -1,6 +1,6 @@
 <?php
 
-    use ICMTC\APP\HELPERS\Icmtc_Hooks;
+    use B2B\APP\HELPERS\B2b_Hooks;
 
     /**
      * @Filename: header.php
@@ -17,7 +17,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ICMTC</title>
+        <title>B2B</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <style>
             p {

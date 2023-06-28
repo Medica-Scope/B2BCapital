@@ -93,7 +93,7 @@ class WPML_TM_Post_Edit_Notices {
 			'wpml-tm-post-edit-alert',
 			WPML_TM_URL . '/res/js/post-edit-alert.js',
 			array( 'jquery', 'jquery-ui-dialog' ),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 
@@ -227,14 +227,14 @@ class WPML_TM_Post_Edit_Notices {
 
 	public function do_not_display_it_again_to_user() {
 		$action = Sanitize::stringProp( 'action', $_POST );
-		if( $this->is_valid_request( $action ) ){
+		if( is_string( $action ) && $this->is_valid_request( $action ) ){
 			update_user_option( get_current_user_id(), $action, 1 );
 		}
 	}
 
 	public function do_not_display_it_again() {
 		$action = Sanitize::stringProp( 'action', $_POST );
-		if( $this->is_valid_request( $action ) ){
+		if( is_string( $action ) && $this->is_valid_request( $action ) ){
 			update_option( $action, 1, false );
 		}
 	}
@@ -321,8 +321,12 @@ class WPML_TM_Post_Edit_Notices {
 		// Sort languages by language name (as usual).
 		usort(
 			$translations,
-			function( $a, $b ) {
-				return $a['to_language'] > $b['to_language'];
+			function ( $a, $b ) {
+				if ( $a['to_language'] == $b['to_language'] ) {
+					return 0;
+				}
+
+				return $a['to_language'] > $b['to_language'] ? 1 : - 1;
 			}
 		);
 
@@ -449,9 +453,8 @@ class WPML_TM_Post_Edit_Notices {
 	 */
 	private function prepare_stale_jobs_for_gui( &$translations ) {
 		$stale_ids = [];
-
 		foreach ( $translations as $k => $translation ) {
-			if ( ! $translation['is_automatic'] ) {
+			if ( $translation === null || ! $translation['is_automatic'] ) {
 				continue;
 			}
 
@@ -509,11 +512,11 @@ class WPML_TM_Post_Edit_Notices {
 	}
 
 	/**
-	 * @param WPML_Post_Element $post_element
+	 * @param WPML_Translation_Element $post_element
 	 *
 	 * @return string
 	 */
-	private function get_translation_editor_link( WPML_Post_Element $post_element ) {
+	private function get_translation_editor_link( $post_element ) {
 		$post_id             = $post_element->get_id();
 		$source_post_element = $post_element->get_source_element();
 

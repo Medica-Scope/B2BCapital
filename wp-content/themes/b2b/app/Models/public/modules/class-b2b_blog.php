@@ -28,7 +28,10 @@
         public array $meta_data = [
             'cover',
         ];
-        public array $taxonomy  = [];
+        public array $taxonomy  = [
+            'category',
+            'post_tag'
+        ];
 
         public function __construct()
         {

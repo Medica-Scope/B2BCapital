@@ -200,7 +200,7 @@
         {
             return get_terms([
                 'taxonomy'   => $tax_name,
-                'hide_empty' => FALSE,
+                'hide_empty' => FALSE, // TODO:: Switch to TRUE on production
             ]);
         }
 

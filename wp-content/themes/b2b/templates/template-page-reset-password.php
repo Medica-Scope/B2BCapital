@@ -38,7 +38,7 @@
                                           'required'    => TRUE,
                                           'placeholder' => __('Your Password', 'b2b'),
                                           'hint'        => __("Password should contain at least 1 special character", 'b2b'),
-                                          'after'       => '<i class="fa fa-eye showPassIcon resetCustom" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
+                                          'after'       => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon resetCustom" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
                                           'order'       => 0,
                                       ],
                                       'user_password_confirm' => [
@@ -50,7 +50,7 @@
                                           'placeholder' => __('Confirm Your Password', 'b2b'),
                                           'hint'        => __("Password should contain at least 1 special character", 'b2b'),
                                           'before'      => '',
-                                          'after'       => '<i class="fa fa-eye showPassIcon reset" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password_confirm"></i>',
+                                          'after'       => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon reset" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password_confirm"></i>',
                                           'order'       => 10,
                                       ],
                                       'user_key'              => [

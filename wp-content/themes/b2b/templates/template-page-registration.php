@@ -73,7 +73,7 @@
                                   'name'        => 'user_password',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your password', 'b2b'),
-                                  'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
+                                  'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_user_password"></i>',
                                   'order'       => 25,
                               ],
                               'confirm_password'   => [
@@ -83,7 +83,7 @@
                                   'name'        => 'confirm_password',
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your confirm password', 'b2b'),
-                                  'before'      => '<i class="fa fa-eye showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_confirm_password"></i>',
+                                  'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_confirm_password"></i>',
                                   'order'       => 30,
                               ],
                               'user_type'          => [
