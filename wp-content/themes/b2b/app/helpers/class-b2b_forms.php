@@ -72,7 +72,8 @@
 
             $form = $this->form_start($form_tag);
             foreach ($settings as $key => $field) {
-                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel') {
+                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel' ||
+                    $field['type'] === 'date') {
                     $form .= $this->std_inputs($field);
                 } elseif ($field['type'] === 'hidden') {
                     $form .= $this->create_hidden_inputs($field);

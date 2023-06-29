@@ -14,6 +14,8 @@
      */
 
 
+    use B2B\APP\MODELS\FRONT\MODULES\B2b_Opportunity;
+
     get_header();
 ?>
 
@@ -25,7 +27,14 @@
 
 
         <h3>Latest Opportunities</h3>
-        
+        <?php
+            $opportunities_obj = new B2b_Opportunity();
+            $opportunities = $opportunities_obj->get_all();
+
+            foreach ($opportunities as $opportunity) {
+                echo "<p>".$opportunity->title."</p>";
+            }
+        ?>
     </main><!-- #main -->
 
 <?php get_footer();

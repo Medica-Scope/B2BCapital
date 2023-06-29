@@ -84,7 +84,7 @@
                     'default_option' => '',
                     'select_option'  => [$user->user_meta['site_language']],
                     'before'      => '',
-                    'order'       => 30,
+                    'order'       => 25,
                 ],
                 'widget_list'   => [
                     'class'       => 'col-6',
@@ -110,7 +110,7 @@
                     'default_option' => '',
                     'select_option'  => $user->profile->meta_data['preferred_opportunities_cat_list'],
                     'before'      => '',
-                    'order'       => 30,
+                    'order'       => 35,
                 ],
                 'preferred_articles_cat_list'   => [
                     'class'       => 'col-6',
@@ -123,7 +123,7 @@
                     'default_option' => '',
                     'select_option'  => $user->profile->meta_data['preferred_articles_cat_list'],
                     'before'      => '',
-                    'order'       => 30,
+                    'order'       => 40,
                 ],
                 'custom-html-3'      => [
                     'type'    => 'html',
@@ -189,7 +189,7 @@
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your current password', 'b2b'),
                                   'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_current_password"></i>',
-                                  'order'       => 25,
+                                  'order'       => 5,
                               ],
                               'new_password'      => [
                                   'class'       => 'col-6',
@@ -199,7 +199,7 @@
                                   'required'    => TRUE,
                                   'placeholder' => __('Enter your new password', 'b2b'),
                                   'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_new_password"></i>',
-                                  'order'       => 25,
+                                  'order'       => 10,
                               ],
                               'confirm_new_password'   => [
                                   'class'       => 'col-6',
@@ -209,14 +209,14 @@
                                   'required'    => TRUE,
                                   'placeholder' => __('Re-enter your new password', 'b2b'),
                                   'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . B2b::_DOMAIN_NAME . '_confirm_new_password"></i>',
-                                  'order'       => 30,
+                                  'order'       => 15,
                               ],
                               'edit_password_nonce' => [
                                   'class' => '',
                                   'type'  => 'nonce',
                                   'name'  => 'edit_password_nonce',
                                   'value' => B2b::_DOMAIN_NAME . "_edit_password_form",
-                                  'order' => 50
+                                  'order' => 20
                               ],
                               'submit'             => [
                                   'class'               => '',
@@ -226,7 +226,7 @@
                                   'before'              => '',
                                   'after'               => '',
                                   'recaptcha_form_name' => 'frontend_edit_profile',
-                                  'order'               => 55
+                                  'order'               => 25
                               ],
                           ], [
                               'class' => B2b::_DOMAIN_NAME . '-edit-password-form',
