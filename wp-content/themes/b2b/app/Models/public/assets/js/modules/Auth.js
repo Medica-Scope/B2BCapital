@@ -401,7 +401,7 @@ class B2bAuth extends B2b
                     console.error(errorMessage);
                 }
                 that.createNewToken();
-            },
+            }
         });
     }
 

@@ -14,7 +14,10 @@
      */
 
 
+    use B2B\APP\MODELS\FRONT\MODULES\B2b_Notification;
     use B2B\APP\MODELS\FRONT\MODULES\B2b_Opportunity;
+
+    global $user_ID;
 
     get_header();
 ?>
@@ -28,6 +31,11 @@
 
         <h3>Latest Opportunities</h3>
         <?php
+
+//            $notifications_obj = new B2b_Notification();
+//            $notifications_obj->send(12,$user_ID,'bidding', ['project_id' => 157]);
+
+
             $opportunities_obj = new B2b_Opportunity();
             $opportunities = $opportunities_obj->get_all();
 

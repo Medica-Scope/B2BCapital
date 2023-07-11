@@ -1,0 +1,65 @@
+/**
+ * @Filename: _notifications.scss
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 7/6/2023
+ */
+
+.b2b-notifications {
+  position: relative;
+
+  .notification-clear-parent {
+    text-align: right;
+    border-bottom: .2px solid #ccc;
+    padding-bottom: 15px;
+  }
+
+  .b2b-notification-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 365px;
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 100;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    padding: 15px 0;
+
+    .b2b-notification-item {
+      padding: 10px;
+
+      .b2b-notification-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+
+      }
+
+      &:hover {
+        background-color: #CCC;
+      }
+    }
+
+    .b2b-notification-item:not(:last-child) {
+      border-bottom: .2px solid #CCC;
+
+    }
+
+    .b2b-new-notification {
+      background-color: #EFEFEF;
+    }
+  }
+}

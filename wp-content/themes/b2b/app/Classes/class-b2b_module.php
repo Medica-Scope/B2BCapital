@@ -10,8 +10,6 @@
 
     use B2B\APP\HELPERS\B2b_Ajax_Response;
     use B2B\APP\HELPERS\B2b_Hooks;
-    use WP_Error;
-    use WP_Query;
 
     /**
      * Description...
@@ -24,6 +22,11 @@
      */
     abstract class B2b_Module extends B2b_Post
     {
+        /**
+         * @var \B2B\APP\CLASSES\B2b_Module|null
+         */
+        private static ?B2b_Module $instance = NULL;
+
         /**
          * @var \B2B\APP\HELPERS\B2b_Hooks
          */
@@ -48,6 +51,15 @@
             $this->filters($module_name);
 
             $this->hooks->run();
+        }
+
+        public static function get_instance() {
+            $class = __CLASS__;
+            if (!self::$instance instanceof $class) {
+                self::$instance = new $class;
+            }
+
+            return self::$instance;
         }
 
         /**
@@ -91,7 +103,7 @@
          */
         public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ]): array
         {
-            $posts     = new WP_Query([
+            $posts     = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
@@ -102,7 +114,7 @@
             $B2b_Posts = [];
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->convert($post, $this->meta_data);
+                $B2b_Posts[] =  $this->convert($post, $this->meta_data);
             }
 
             return $B2b_Posts;
@@ -119,9 +131,9 @@
          * @author Mustafa Shaaban
          * @return \B2B\APP\CLASSES\B2b_Post|\WP_Error
          */
-        public function get_by_id(int $post_id = 0): B2b_Post|WP_Error
+        public function get_by_id(int $post_id = 0): B2b_Post|\WP_Error
         {
-            $error = new WP_Error();
+            $error = new \WP_Error();
 
             if ($post_id <= 0) {
                 $error->add('invalid_id', __("No invalid post id", 'b2b'), [
@@ -131,7 +143,7 @@
                 return $error;
             }
 
-            $posts = new WP_Query([
+            $posts = new \WP_Query([
                 "p"           => $post_id,
                 "post_type"   => $this->module,
                 "post_status" => 'any',
@@ -172,14 +184,14 @@
                 return $B2b_Posts;
             }
 
-            $posts = new WP_Query([
+            $posts = new \WP_Query([
                 "post__in"    => $post_ids,
                 "post_type"   => $this->module,
                 "post_status" => $status,
             ]);
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
+                $B2b_Posts[] = $this->convert($post, $this->meta_data);
             }
 
             return $B2b_Posts;
@@ -290,7 +302,7 @@
             $B2b_Posts = [];
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
+                $B2b_Posts[] = $this->convert($post, $this->meta_data);
             }
 
             $B2b_Posts['count'] = $posts->found_posts;
