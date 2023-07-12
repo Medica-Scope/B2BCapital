@@ -8,7 +8,7 @@
 .b2b-notifications {
   position: relative;
 
-  .notification-clear-parent {
+  .b2b-notification-clear-parent {
     text-align: right;
     border-bottom: .2px solid #ccc;
     padding-bottom: 15px;
@@ -51,6 +51,12 @@
       &:hover {
         background-color: #CCC;
       }
+    }
+
+    .b2b-notification-item-load {
+      background-color: #0a4b78;
+      height: 250px;
+      width: 100%;
     }
 
     .b2b-notification-item:not(:last-child) {

@@ -11,8 +11,8 @@
 import $ from 'jquery';
 
 // import theme modules
-import B2bValidator from './helpers/Validator';
-import B2bUiCtrl    from './inc/UiCtrl';
+import B2bValidator    from './helpers/Validator';
+import B2bUiCtrl       from './inc/UiCtrl';
 import B2bNotification from './modules/Notification';
 
 class B2bNotificationFront extends B2bNotification
@@ -27,8 +27,10 @@ class B2bNotificationFront extends B2bNotification
                 bellBtn: $(`.${KEY}-notification-bell`),
                 bell_counter: $(`.${KEY}-notification-count`),
                 notification_list: $(`.${KEY}-notification-list`),
+                notification_group: $(`.${KEY}-notifications-group`),
                 clearBtn: $(`.${KEY}-notification-clear`),
                 item: $(`.${KEY}-notification-item`),
+                newItem: $(`.${KEY}-new-notification`),
             },
         };
 
@@ -38,33 +40,72 @@ class B2bNotificationFront extends B2bNotification
     initialization()
     {
         this.showNotifications();
+        this.loadMore();
 
     }
 
     showNotifications()
     {
-        let that          = this,
+        let that           = this,
             $notifications = this.$el.notifications,
-            ajaxRequests    = this.ajaxRequests,
-            formData = {IDs: []};
-
-
-
+            ajaxRequests   = this.ajaxRequests;
 
 
         $notifications.bellBtn.on('click', $notifications.bellBtn.parent(), function (e) {
             e.preventDefault();
-            let $this             = $(e.currentTarget);
+            let $this    = $(e.currentTarget),
+                newCount = $this.attr('data-count'),
+                formData = { IDs: [] };
 
             $notifications.notification_list.toggle();
 
-            if (typeof ajaxRequests.notifications !== 'undefined') {
-                ajaxRequests.notifications.abort();
+            if (parseInt(newCount) > 0) {
+                $notifications.newItem.each(function (k, v) {
+                    formData.IDs.push($(v).attr('data-id'));
+                });
+
+                if (typeof ajaxRequests.notifications !== 'undefined') {
+                    ajaxRequests.notifications.abort();
+                }
+
+                that.read(formData, $notifications.notification_group);
+            }
+        });
+    }
+
+    loadMore()
+    {
+        let that           = this,
+            $notifications = this.$el.notifications,
+            ajaxRequests   = this.ajaxRequests;
+
+        var previousScrollPosition = 0;
+
+        $notifications.notification_list.on('scroll', function (e) {
+            e.preventDefault();
+            let $this                 = $(e.currentTarget),
+                formData              = { page: $notifications.notification_list.attr('data-page') },
+                last                  = parseInt($notifications.notification_list.attr('data-last')),
+                scrollTop             = $this.scrollTop(),
+                scrollHeight          = $this.prop('scrollHeight'),
+                clientHeight          = $this.prop('clientHeight'),
+                currentScrollPosition = $(this).scrollTop();
+
+            if (last === 0) {
+                if (currentScrollPosition > previousScrollPosition) {
+                    if (scrollTop + clientHeight >= scrollHeight - 2) {
+
+                        if (typeof ajaxRequests.notificationsLoadMore !== 'undefined') {
+                            ajaxRequests.notificationsLoadMore.abort();
+                        }
+
+                        that.loadMoreNotification(formData, $(`.${KEY}-notifications-group`));
+                    }
+                }
             }
 
-            if ($this.valid()) {
-                that.notifications(formData, $this);
-            }
+            previousScrollPosition = currentScrollPosition;
+
         });
     }
 }

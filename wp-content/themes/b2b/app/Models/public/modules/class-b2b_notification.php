@@ -12,6 +12,8 @@
     use B2B\APP\CLASSES\B2b_Module;
     use B2B\APP\CLASSES\B2b_Post;
     use B2B\APP\CLASSES\B2b_User;
+    use B2B\APP\HELPERS\B2b_Ajax_Response;
+    use B2B\B2b;
     use WP_Post;
 
 
@@ -73,6 +75,10 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
         }
 
         /**
@@ -96,14 +102,22 @@
         {
             global $wpdb, $user_ID;
 
-            $all      = $this->get_all_custom([ 'publish' ], 6);
+            $all      = $this->get_all_custom([ 'publish' ], 1);
             $html_obj = [
                 'notifications' => []
             ];
             foreach ($all as $single) {
                 $html_obj['notifications'][] = $this->notification_html($single);
             }
-            $html_obj['new_count'] = $wpdb->get_var("
+            $html_obj['new_count'] = $this->get_notifications_count();
+            return $html_obj;
+        }
+
+        public function get_notifications_count(): string
+        {
+            global $wpdb, $user_ID;
+
+            $new_count = $wpdb->get_var("
                                                             SELECT COUNT(*) 
                                                             FROM `" . $wpdb->prefix . "posts`
                                                             INNER JOIN `" . $wpdb->prefix . "postmeta` ON (`" . $wpdb->prefix . "posts`.ID = `" . $wpdb->prefix . "postmeta`.post_id) 
@@ -113,7 +127,7 @@
                                                             AND `" . $wpdb->prefix . "postmeta`.meta_key = 'new'
                                                             AND `" . $wpdb->prefix . "postmeta`.meta_value = '1'
                                                         ");
-            return $html_obj;
+            return $new_count;
         }
 
         /**
@@ -185,7 +199,7 @@
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['project_id'], $opportunity_obj->type, FALSE, B2B_lANG);
                     $opportunity     = $opportunity_obj->get_by_id($opportunity_id);
 
-                    $formatted->ID     = $notification->ID;
+                    $formatted->ID        = $notification->ID;
                     $formatted->title     = __($notification->title, 'b2b');
                     $formatted->content   = sprintf(__($notification->content, 'b2b'), $notification->meta_data['notification_data']['from'], $opportunity->title);
                     $formatted->thumbnail = $opportunity->thumbnail;
@@ -210,9 +224,50 @@
 
         }
 
-        public function read()
+        public function read_ajax(): void
         {
+            $form_data = $_POST['data'];
+            $IDs       = $form_data['IDs'];
 
+            $notifications = $this->get_by_ids($IDs);
+            foreach ($notifications as $notification) {
+                $notification->set_meta_data('new', 0);
+                $notification->update();
+            }
+
+            new B2b_Ajax_Response(TRUE, __('Notifications status has been changed successfully', 'b2b'), [
+                'count' => $this->get_notifications_count()
+            ]);
+        }
+
+        public function loadmore_notifications_ajax(): void
+        {
+            $form_data = $_POST['data'];
+            $page      = intval($form_data['page']);
+
+            $notifications = $this->load_more([ 'publish' ], $page, 1);
+
+            $last = FALSE;
+
+            if ($page * 1 >= $notifications['count']) {
+                $last = TRUE;
+            }
+
+            ob_start();
+            foreach ($notifications as $key => $notification) {
+                if ('count' === $key) {
+                    continue;
+                }
+                get_template_part('app/Views/template-parts/notifications/notification', 'ajax', [ 'data' => $notification ]);
+            }
+
+            $html = ob_get_clean();
+
+            new B2b_Ajax_Response(TRUE, __('Successful Response!', 'b2b'), [
+                'html' => $html,
+                'page' => $page + 1,
+                'last' => (int)$last
+            ]);
         }
 
         /**

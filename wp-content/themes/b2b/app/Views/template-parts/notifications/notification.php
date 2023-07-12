@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Filename: c1.php
+     * @Filename: notifications.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 4/26/2023
@@ -17,47 +17,191 @@
 
 <div class="b2b-notifications">
     <div class="bell">
-        <button class="btn b2b-notification-bell">
+        <button class="btn b2b-notification-bell" data-count="<?= $count ?>">
             <span class="b2b-notification-count"><?= $count ?></span>
             <i class="fa-regular fa-bell"></i>
         </button>
     </div>
-    <div class="b2b-notification-list container">
+    <div class="b2b-notification-list container" data-page="2" data-last="0">
         <?php
-            if (!empty($notifications)) {
+            if (!empty($notifications['notifications'])) {
                 ?>
-                <div class="notification-clear-parent">
+                <div class="b2b-notification-clear-parent">
                     <button class="btn b2b-notification-clear">
                         <?= __('clear all') ?>
                     </button>
                 </div>
-                <?php
-            }
-        ?>
-        <?php
-            if (!empty($notifications)) {
-                foreach ($notifications['notifications'] as $notification) {
-                    ?>
-                    <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
-                        <a href="<?= $notification->url ?>">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <div class="b2b-notification-image">
-                                        <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
-                                    </div>
-                                </div>
-                                <div class="col-sm-10">
-                                    <div class="b2b-notification-content">
-                                        <h6><?= $notification->title ?></h6>
-                                        <p><?= $notification->content ?></p>
-                                        <span><?= $notification->date ?></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="b2b-notifications-group">
                     <?php
-                }
+                        foreach ($notifications['notifications'] as $notification) {
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+
+
+                            ?>
+                            <div class="b2b-notification-item <?= $notification->new ? 'b2b-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+                                <a href="<?= $notification->url ?>">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="b2b-notification-image">
+                                                <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail') ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="b2b-notification-content">
+                                                <h6><?= $notification->title ?></h6>
+                                                <p><?= $notification->content ?></p>
+                                                <span><?= $notification->date ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+
+                        }
+                    ?>
+                </div>
+                <?php
             } else {
                 ?>
                 <div class="b2b-notification-group">

@@ -291,7 +291,7 @@
          */
         public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC'): array
         {
-            $posts     = new WP_Query([
+            $posts     = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
