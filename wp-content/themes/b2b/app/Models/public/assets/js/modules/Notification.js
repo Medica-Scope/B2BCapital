@@ -35,8 +35,37 @@ class B2bNotification extends B2b
             },
             success: function (res) {
                 if (res.success) {
+                    $(`.${KEY}-notification-bell`).attr('data-count', res.data.count);
+                    $(`.${KEY}-notification-count`).html(res.data.count);
+                    UiCtrl.blockUI($el, false);
+                }
+
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            }
+        });
+    }
+
+    clear($el)
+    {
+        let that                      = this;
+        this.ajaxRequests.clear_notifications = $.ajax({
+            url: b2bGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_clear_notifications_ajax`
+            },
+            beforeSend: function () {
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                if (res.success) {
                     $(`.${KEY}-notification-bell`).attr('data-count', 0);
-                    $(`.${KEY}-notification-count`).html(0);
+                    $el.html(res.data.html);
                     UiCtrl.blockUI($el, false);
                 }
 
@@ -65,7 +94,6 @@ class B2bNotification extends B2b
                 $(`.${KEY}-notification-item-load`).remove();
                 $el.append($temp);
                 $('.b2b-notification-list').animate({ scrollTop: $('.b2b-notification-list')[0].scrollHeight - 450 }, 250);
-                UiCtrl.beforeSendPrepare($temp);
             },
             success: function (res) {
                 if (res.success) {
@@ -73,7 +101,40 @@ class B2bNotification extends B2b
                     $(`.${KEY}-notification-list`).attr('data-last', res.data.last);
                     $(`.${KEY}-notification-item-load`).remove();
                     $(`.${KEY}-notifications-group`).append(res.data.html);
+                    $('.b2b-notification-list').animate({ scrollTop: $('.b2b-notification-list')[0].scrollHeight - 410 }, 250);
+
+                    if (res.data.newIDs.length > 0) {
+                        that.changeNewNotificationsStatus({IDs: res.data.newIDs});
+                    }
                 }
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            }
+        });
+    }
+
+    changeNewNotificationsStatus(formData)
+    {
+        let that                      = this;
+        this.ajaxRequests.notifications = $.ajax({
+            url: b2bGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_read_new_notifications_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+            },
+            success: function (res) {
+                if (res.success) {
+                    $(`.${KEY}-notification-bell`).attr('data-count', res.data.count);
+                    $(`.${KEY}-notification-count`).html(res.data.count);
+                }
+
             },
             error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;

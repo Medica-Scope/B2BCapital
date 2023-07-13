@@ -305,7 +305,7 @@ gulp.task('translate', () => {
 });
 
 
-gulp.task('default', gulp.parallel('publicStyles', 'publicStylesRtl', 'publicScripts', 'publicImages', 'adminStyles', 'adminStylesRtl', 'adminScripts', 'adminImages',  () => {
+gulp.task('default', gulp.parallel('publicStyles', 'publicStylesRtl', 'publicScripts', 'publicImages', 'adminStyles', 'adminStylesRtl', 'adminScripts', 'adminImages', 'translate', () => {
     'use strict';
 
     /**
@@ -325,5 +325,5 @@ gulp.task('default', gulp.parallel('publicStyles', 'publicStylesRtl', 'publicScr
     gulp.watch(paths.images.admin.watch, gulp.parallel('adminImages'));
 
     // Translation
-    // gulp.watch(paths.php.watch, gulp.parallel('translate'));
+    gulp.watch(paths.php.watch, gulp.parallel('translate'));
 }));

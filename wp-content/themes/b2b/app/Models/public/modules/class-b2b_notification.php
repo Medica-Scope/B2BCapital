@@ -77,8 +77,12 @@
             // TODO: Implement actions() method.
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_read_new_notifications_ajax', $this, 'read_new_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_read_new_notifications_ajax', $this, 'read_new_notifications_ajax');
         }
 
         /**
@@ -102,18 +106,18 @@
         {
             global $wpdb, $user_ID;
 
-            $all      = $this->get_all_custom([ 'publish' ], 1);
+            $all      = $this->get_all_custom([ 'publish' ], 10);
             $html_obj = [
                 'notifications' => []
             ];
             foreach ($all as $single) {
                 $html_obj['notifications'][] = $this->notification_html($single);
             }
-            $html_obj['new_count'] = $this->get_notifications_count();
+            $html_obj['new_count'] = $this->get_new_notifications_count();
             return $html_obj;
         }
 
-        public function get_notifications_count(): string
+        public function get_new_notifications_count(): string
         {
             global $wpdb, $user_ID;
 
@@ -219,11 +223,6 @@
 
         }
 
-        public function remove()
-        {
-
-        }
-
         public function read_ajax(): void
         {
             $form_data = $_POST['data'];
@@ -236,8 +235,25 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Notifications status has been changed successfully', 'b2b'), [
-                'count' => $this->get_notifications_count()
+                'count' => $this->get_new_notifications_count()
             ]);
+        }
+
+        public function clear_notifications_ajax()
+        {
+            global $user_ID;
+
+            $posts     = new \WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => 'any',
+                "posts_per_page" => -1,
+                'author' => $user_ID
+            ]);
+
+            foreach ($posts->get_posts() as $post) {
+                wp_delete_post($post->ID, true);
+            }
+
         }
 
         public function loadmore_notifications_ajax(): void
@@ -245,13 +261,15 @@
             $form_data = $_POST['data'];
             $page      = intval($form_data['page']);
 
-            $notifications = $this->load_more([ 'publish' ], $page, 1);
+            $notifications = $this->load_more([ 'publish' ], $page, 10);
 
             $last = FALSE;
 
-            if ($page * 1 >= $notifications['count']) {
+            if ($page * 10 >= $notifications['count']) {
                 $last = TRUE;
             }
+
+            $newIDs = [];
 
             ob_start();
             foreach ($notifications as $key => $notification) {
@@ -259,6 +277,10 @@
                     continue;
                 }
                 get_template_part('app/Views/template-parts/notifications/notification', 'ajax', [ 'data' => $notification ]);
+
+                if ((int)$notification->meta_data['new'] > 0) {
+                    $newIDs[] = $notification->ID;
+                }
             }
 
             $html = ob_get_clean();
@@ -266,7 +288,24 @@
             new B2b_Ajax_Response(TRUE, __('Successful Response!', 'b2b'), [
                 'html' => $html,
                 'page' => $page + 1,
+                'newIDs' => $newIDs,
                 'last' => (int)$last
+            ]);
+        }
+
+        public function read_new_notifications_ajax(): void
+        {
+            $form_data = $_POST['data'];
+            $IDs      = $form_data['IDs'];
+
+            $notifications = $this->get_by_ids($IDs);
+            foreach ($notifications as $notification) {
+                $notification->set_meta_data('new', 0);
+                $notification->update();
+            }
+
+            new B2b_Ajax_Response(TRUE, __('Successful Response!', 'b2b'), [
+                'count' => $this->get_new_notifications_count()
             ]);
         }
 

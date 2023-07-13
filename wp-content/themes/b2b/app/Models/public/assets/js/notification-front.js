@@ -40,8 +40,8 @@ class B2bNotificationFront extends B2bNotification
     initialization()
     {
         this.showNotifications();
+        this.clearAll();
         this.loadMore();
-
     }
 
     showNotifications()
@@ -70,6 +70,25 @@ class B2bNotificationFront extends B2bNotification
 
                 that.read(formData, $notifications.notification_group);
             }
+        });
+    }
+
+    clearAll()
+    {
+        let that           = this,
+            $notifications = this.$el.notifications,
+            ajaxRequests   = this.ajaxRequests;
+
+
+        $notifications.clearBtn.on('click', $notifications.clearBtn.parent(), function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget);
+
+            if (typeof ajaxRequests.clear_notifications !== 'undefined') {
+                ajaxRequests.clear_notifications.abort();
+            }
+
+            that.clear($notifications.notification_list);
         });
     }
 
