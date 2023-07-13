@@ -13,6 +13,9 @@
 
     $notifications = $notifications_obj->get_notifications();
     $count         = $notifications['new_count'];
+
+    // TODO:: Change object to get found posts
+    // TODO:: Create cronjob to remove old notifications
 ?>
 
 <div class="b2b-notifications">
