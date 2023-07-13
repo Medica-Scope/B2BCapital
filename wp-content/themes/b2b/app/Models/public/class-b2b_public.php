@@ -106,9 +106,11 @@
                     'email_regex'    => __("Please enter a valid email address.", "b2b"),
                     'file_extension' => __("Please upload an image with a valid extension.", "b2b"),
                     'choices_select' => __("Press to select", "b2b"),
-                    'noChoicesText' => __("'No choices to choose from'", "b2b"),
+                    'noChoicesText'  => __("'No choices to choose from'", "b2b"),
                 ]
             ]);
+
+            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-notifications', B2b_Hooks::PATHS['public']['js'] . '/notification-front');
 
             $my_account = [
                 'my-account',
@@ -145,7 +147,7 @@
 
                 // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
                 if (!str_contains($url, "/$user_site_language/") && !str_contains($url, "?lang=$user_site_language")) {
-                    $redirect_url     = apply_filters('wpml_permalink', $url, $user_site_language); // Get the Arabic version of the current page or post URL.
+                    $redirect_url = apply_filters('wpml_permalink', $url, $user_site_language); // Get the Arabic version of the current page or post URL.
                     if ($redirect_url) {
                         $url = $redirect_url;
                     }
@@ -165,12 +167,15 @@
          */
         public static function get_available_languages(): array
         {
-            $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+            $languages       = apply_filters('wpml_active_languages', NULL, 'orderby=id&order=desc');
             $languages_codes = [];
 
-            if ( ! empty( $languages ) ) {
-                foreach( $languages as $l ) {
-                    $languages_codes[] = ['code' => $l['language_code'], 'name' => $l['translated_name']];
+            if (!empty($languages)) {
+                foreach ($languages as $l) {
+                    $languages_codes[] = [
+                        'code' => $l['language_code'],
+                        'name' => $l['translated_name']
+                    ];
                 }
             }
             return $languages_codes;

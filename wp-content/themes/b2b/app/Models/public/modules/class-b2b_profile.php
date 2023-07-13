@@ -85,7 +85,7 @@
         public function hide_admin_bar(): bool
         {
             global $user_ID;
-            if ((B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
+            if (!is_user_logged_in() || (B2b_User::get_user_role($user_ID) === B2b_User::INVESTOR || B2b_User::get_user_role($user_ID) === B2b_User::OWNER)) {
                 return FALSE;
             }
             return TRUE;

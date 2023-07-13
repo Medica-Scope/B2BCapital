@@ -10,8 +10,11 @@
 /**
  * AAM service for RESTful API routes
  *
+ * @since 6.9.13 https://github.com/aamplugin/advanced-access-manager/issues/304
+ * @since 6.9.10 Initial implementation of the class
+ *
  * @package AAM
- * @version 6.9.10
+ * @version 6.9.13
  */
 class AAM_Framework_Service_ApiRoutes
 {
@@ -25,8 +28,11 @@ class AAM_Framework_Service_ApiRoutes
      *
      * @return array
      *
+     * @since 6.9.13 https://github.com/aamplugin/advanced-access-manager/issues/304
+     * @since 6.9.10 Initial implementation of the method
+     *
      * @access public
-     * @version 6.9.10
+     * @version 6.9.13
      */
     public function get_route_list($inline_context = null)
     {
@@ -49,33 +55,16 @@ class AAM_Framework_Service_ApiRoutes
             foreach (array_unique($methods) as $method) {
                 $mask = strtolower("restful|{$route}|{$method}");
 
-                if (isset($options[$mask])) { // Do we have permission defined
-                    array_push(
-                        $response,
-                        $this->_prepare_route(
-                            $mask,
-                            $options[$mask],
-                            !array_key_exists($mask, $explicit)
-                        )
-                    );
-                } else {
-                    array_push($response, $this->_prepare_route($mask));
-                }
+                array_push(
+                    $response,
+                    $this->_prepare_route(
+                        $mask,
+                        $object->isRestricted('restful', $route, $method),
+                        !array_key_exists($mask, $explicit)
+                    )
+                );
             }
         }
-
-        // if (is_array($options) && count($options)) {
-        //     foreach($options as $route => $is_restricted) {
-        //         array_push(
-        //             $response,
-        //             $this->_prepare_route(
-        //                 $route,
-        //                 $is_restricted,
-        //                 !array_key_exists($route, $explicit)
-        //             )
-        //         );
-        //     }
-        // }
 
         return $response;
     }
@@ -137,7 +126,9 @@ class AAM_Framework_Service_ApiRoutes
             throw new Exception('Failed to persist the route permission');
         }
 
-        return $this->_prepare_route($mask, $is_restricted);
+        $subject->flushCache();
+
+        return $this->get_route_by_id($id);
     }
 
     /**
@@ -189,7 +180,9 @@ class AAM_Framework_Service_ApiRoutes
             throw new Exception('Failed to persist the rule');
         }
 
-        return $this->_prepare_route($found['mask'], $found['restricted']);
+        $subject->flushCache();
+
+        return $this->get_route_by_id($id);
     }
 
     /**
@@ -220,6 +213,31 @@ class AAM_Framework_Service_ApiRoutes
     }
 
     /**
+     * Call custom method registered by third-party
+     *
+     * @param string $name
+     * @param array  $args
+     *
+     * @return mixed
+     *
+     * @access public
+     * @version 6.9.13
+     */
+    public function __call($name, $args)
+    {
+        // Assuming that the last argument is always the inline context
+        $context = array_pop($args);
+
+        return apply_filters(
+            "aam_api_route_service_{$name}",
+            null,
+            $args,
+            $this->_get_subject($context),
+            $this
+        );
+    }
+
+    /**
      * Normalize and prepare the route model
      *
      * @param string $route
@@ -232,21 +250,17 @@ class AAM_Framework_Service_ApiRoutes
      * @version 6.9.10
      */
     private function _prepare_route(
-        $route, $is_restricted = null, $is_inherited = false
+        $route, $is_restricted = false, $is_inherited = false
     ) {
-        $parts    = explode('|', $route);
-        $response = array(
-            'id'     => abs(crc32($parts[1].$parts[2])),
-            'route'  => $parts[1],
-            'method' => strtoupper($parts[2])
+        $parts = explode('|', $route);
+
+        return array(
+            'id'            => abs(crc32($parts[1].$parts[2])),
+            'route'         => $parts[1],
+            'method'        => strtoupper($parts[2]),
+            'is_restricted' => $is_restricted,
+            'is_inherited'  => $is_inherited
         );
-
-        if (is_bool($is_restricted)) { // If restriction explicitly defined
-            $response['is_restricted'] = $is_restricted;
-            $response['is_inherited']  = $is_inherited;
-        }
-
-        return $response;
     }
 
 }

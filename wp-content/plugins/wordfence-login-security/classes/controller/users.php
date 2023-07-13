@@ -546,13 +546,13 @@ SQL
 	
 	public function _manage_users_columns($columns = array()) {
 		if (user_can(wp_get_current_user(), Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
-			$columns['wfls_2fa_status'] = esc_html__('2FA Status', 'wordfence-2fa');
+			$columns['wfls_2fa_status'] = esc_html__('2FA Status', 'wordfence-login-security');
 		}
 		
 		if (Controller_Settings::shared()->are_login_history_columns_enabled() && Controller_Permissions::shared()->can_manage_settings(wp_get_current_user())) {
-			$columns['wfls_last_login'] = esc_html__('Last Login', 'wordfence-2fa');
+			$columns['wfls_last_login'] = esc_html__('Last Login', 'wordfence-login-security');
 			if (Controller_CAPTCHA::shared()->enabled()) {
-				$columns['wfls_last_captcha'] = esc_html__('Last CAPTCHA', 'wordfence-2fa');
+				$columns['wfls_last_captcha'] = esc_html__('Last CAPTCHA', 'wordfence-login-security');
 			}
 		}
 		return $columns;
@@ -562,21 +562,21 @@ SQL
 		switch($column_name) {
 			case 'wfls_2fa_status':
 				$user = new \WP_User($user_id);
-				$value = __('Not Allowed', 'wordfence-2fa');
+				$value = __('Not Allowed', 'wordfence-login-security');
 				if (Controller_Users::shared()->can_activate_2fa($user)) {
 					$has2fa = Controller_Users::shared()->has_2fa_active($user);
 					$requires2fa = $this->requires_2fa($user, $inGracePeriod);
 					if ($has2fa) {
-						$value = esc_html__('Active', 'wordfence-2fa');
+						$value = esc_html__('Active', 'wordfence-login-security');
 					}
 					elseif ($inGracePeriod) {
-						$value = wp_kses(__('Inactive<small class="wfls-sub-status">(Grace Period)</small>', 'wordfence-2fa'), array('small'=>array('class'=>array())));
+						$value = wp_kses(__('Inactive<small class="wfls-sub-status">(Grace Period)</small>', 'wordfence-login-security'), array('small'=>array('class'=>array())));
 					}
 					elseif (($requires2fa && !$has2fa)) {
-						$value = wp_kses($inGracePeriod === null ? __('Locked Out<small class="wfls-sub-status">(Grace Period Disabled)</small>', 'wordfence-2fa') : __('Locked Out<small class="wfls-sub-status">(Grace Period Exceeded)</small>', 'wordfence-2fa'), array('small'=>array('class'=>array())));
+						$value = wp_kses($inGracePeriod === null ? __('Locked Out<small class="wfls-sub-status">(Grace Period Disabled)</small>', 'wordfence-login-security') : __('Locked Out<small class="wfls-sub-status">(Grace Period Exceeded)</small>', 'wordfence-login-security'), array('small'=>array('class'=>array())));
 					}
 					else {
-						$value = esc_html__('Inactive', 'wordfence-2fa');
+						$value = esc_html__('Inactive', 'wordfence-login-security');
 					}
 				}
 				break;
@@ -589,7 +589,7 @@ SQL
 			case 'wfls_last_captcha':
 				$user = new \WP_User($user_id);
 				if (Controller_Users::shared()->can_activate_2fa($user) && Controller_Users::shared()->has_2fa_active($user)) {
-					$value = __('(not required)', 'wordfence-2fa');
+					$value = __('(not required)', 'wordfence-login-security');
 				}
 				else {
 					$value = '-';
@@ -683,7 +683,7 @@ SQL
 		//Format is 'view' => '<a href="https://wfpremium.dev1.ryanbritton.com/author/ryan/" aria-label="View posts by ryan">View</a>'
 		if (user_can(wp_get_current_user(), Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS) && (Controller_Users::shared()->can_activate_2fa($user) || Controller_Users::shared()->has_2fa_active($user))) {
 			$url = (is_multisite() ? network_admin_url('admin.php?page=WFLS&user=' . $user->ID) : admin_url('admin.php?page=WFLS&user=' . $user->ID));
-			$actions['wf2fa'] = '<a href="' . esc_url($url) . '" aria-label="' . esc_attr(sprintf(__('Edit two-factor authentication for %s', 'wordfence-2fa'), $user->user_login)) . '">' . esc_html__('2FA', 'wordfence-2fa') . '</a>';
+			$actions['wf2fa'] = '<a href="' . esc_url($url) . '" aria-label="' . esc_attr(sprintf(__('Edit two-factor authentication for %s', 'wordfence-login-security'), $user->user_login)) . '">' . esc_html__('2FA', 'wordfence-login-security') . '</a>';
 		}
 		return $actions;
 	}
@@ -694,8 +694,8 @@ SQL
 		if (user_can(wp_get_current_user(), Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS) && version_compare($wp_version, '4.4.0', '>=')) {
 			$counts = $this->user_counts();
 			$views['all'] = str_replace(' class="current" aria-current="page"', '', $views['all']);
-			$views['wfls-active'] = '<a href="' . esc_url(add_query_arg('wf2fa', 'active', 'users.php')) . '"' . (isset($_GET['wf2fa']) && $_GET['wf2fa'] == 'active' ? ' class="current" aria-current="page"' : '') . '>' . esc_html__('2FA Active', 'wordfence-2fa') . ' <span class="count">(' . number_format($counts['active_users']) . ')</span></a>';
-			$views['wfls-inactive'] = '<a href="' . esc_url(add_query_arg('wf2fa', 'inactive', 'users.php')) . '"' . (isset($_GET['wf2fa']) && $_GET['wf2fa'] == 'inactive' ? ' class="current" aria-current="page"' : '') . '>' . esc_html__('2FA Inactive', 'wordfence-2fa') . ' <span class="count">(' . number_format($counts['inactive_users']) . ')</span></a>';
+			$views['wfls-active'] = '<a href="' . esc_url(add_query_arg('wf2fa', 'active', 'users.php')) . '"' . (isset($_GET['wf2fa']) && $_GET['wf2fa'] == 'active' ? ' class="current" aria-current="page"' : '') . '>' . esc_html__('2FA Active', 'wordfence-login-security') . ' <span class="count">(' . number_format($counts['active_users']) . ')</span></a>';
+			$views['wfls-inactive'] = '<a href="' . esc_url(add_query_arg('wf2fa', 'inactive', 'users.php')) . '"' . (isset($_GET['wf2fa']) && $_GET['wf2fa'] == 'inactive' ? ' class="current" aria-current="page"' : '') . '>' . esc_html__('2FA Inactive', 'wordfence-login-security') . ' <span class="count">(' . number_format($counts['inactive_users']) . ')</span></a>';
 		}
 		return $views;
 	}
