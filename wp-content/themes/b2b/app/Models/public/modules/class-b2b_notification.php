@@ -324,6 +324,14 @@
                 wp_delete_post($post->ID, TRUE);
             }
 
+            ob_start();
+            get_template_part('app/Views/template-parts/notifications/notification', 'empty');
+            $html = ob_get_clean();
+
+            new B2b_Ajax_Response(TRUE, __('Successful Response!', 'b2b'), [
+                'html' => $html
+            ]);
+
         }
 
         /**
@@ -355,6 +363,7 @@
                 if ('count' === $key) {
                     continue;
                 }
+
                 get_template_part('app/Views/template-parts/notifications/notification', 'ajax', [ 'data' => $notification ]);
 
                 if ((int)$notification->meta_data['new'] > 0) {

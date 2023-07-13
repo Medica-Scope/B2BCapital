@@ -59,11 +59,7 @@
                 </div>
                 <?php
             } else {
-                ?>
-                <div class="b2b-notification-group">
-                    <p><?= __('You have no new notifications', 'b2b') ?></p>
-                </div>
-                <?php
+                get_template_part('app/Views/template-parts/notifications/notification', 'empty');
             }
 
 
