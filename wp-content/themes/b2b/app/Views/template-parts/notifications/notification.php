@@ -13,8 +13,10 @@
 
     $notifications = $notifications_obj->get_notifications();
     $count         = $notifications['new_count'];
+    $found_posts   = $notifications['found_posts'];
 
-    // TODO:: Change object to get found posts
+    // TODO:: fix loader
+    // TODO:: Merge read notification after loadmore
     // TODO:: Create cronjob to remove old notifications
 ?>
 
@@ -25,7 +27,7 @@
             <i class="fa-regular fa-bell"></i>
         </button>
     </div>
-    <div class="b2b-notification-list container" data-page="2" data-last="0">
+    <div class="b2b-notification-list container" data-page="2" data-last="<?= $found_posts > 10 ? 0 : 1 ?>">
         <?php
             if (!empty($notifications['notifications'])) {
                 ?>

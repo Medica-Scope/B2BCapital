@@ -65,6 +65,7 @@ class B2bNotification extends B2b
             success: function (res) {
                 if (res.success) {
                     $(`.${KEY}-notification-bell`).attr('data-count', 0);
+                    $(`.${KEY}-notification-count`).html(0);
                     $el.html(res.data.html);
                     UiCtrl.blockUI($el, false);
                 }

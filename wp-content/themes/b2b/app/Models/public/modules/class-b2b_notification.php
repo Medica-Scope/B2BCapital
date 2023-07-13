@@ -119,6 +119,7 @@
          * @since 1.0.0
          * @package wp-config.php
          * @author Mustafa Shaaban
+         * @throws \Exception
          */
         public function get_notifications(): array
         {
@@ -128,10 +129,12 @@
             $html_obj = [
                 'notifications' => []
             ];
-            foreach ($all as $single) {
+            foreach ($all['posts'] as $single) {
                 $html_obj['notifications'][] = $this->notification_html($single);
             }
-            $html_obj['new_count'] = $this->get_new_notifications_count();
+            $html_obj['new_count']   = $this->get_new_notifications_count();
+            $html_obj['found_posts'] = $all['found_posts'];
+
             return $html_obj;
         }
 
@@ -176,7 +179,7 @@
         public function get_all_custom(array $status = [ 'any' ], int $limit = 10): array
         {
             global $user_ID;
-            $posts     = new \WP_Query([
+            $posts = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
@@ -184,15 +187,18 @@
                 "orderby"        => 'ID',
                 "order"          => 'DESC',
             ]);
-            $B2b_Posts = [];
+
+            $B2b_Posts = [ 'posts' => [] ];
 
             foreach ($posts->get_posts() as $post) {
                 $class
 
-                             = __CLASS__;
-                $b2b_module  = new $class;
-                $B2b_Posts[] = $b2b_module->assign($this->convert($post, $this->meta_data));
+                                      = __CLASS__;
+                $b2b_module           = new $class;
+                $B2b_Posts['posts'][] = $b2b_module->assign($this->convert($post, $this->meta_data));
             }
+
+            $B2b_Posts['found_posts'] = $posts->found_posts;
 
             return $B2b_Posts;
         }
@@ -213,19 +219,21 @@
          */
         public function send(int $from = 0, int $to = 0, string $type = '', array $data = []): void
         {
+            $class            = __CLASS__;
+            $notification_obj = new $class();
             switch ($type) {
                 case 'bidding':
-                    $user                                 = B2b_User::get_user_by('ID', $from);
-                    $this->title                          = __("New Bidding", 'b2b');
-                    $this->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'b2b');
-                    $this->author                         = $to;
-                    $this->meta_data['notification_data'] = [
+                    $user                                             = B2b_User::get_user_by('ID', $from);
+                    $notification_obj->title                          = __("New Bidding", 'b2b');
+                    $notification_obj->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'b2b');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
                         'type'       => 'bidding',
                         'from'       => $user->display_name,
                         'project_id' => $data['project_id'],
                     ];
-                    $this->meta_data['new']               = 1;
-                    $this->insert();
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
                     break;
                 default:
                     break;
@@ -287,17 +295,20 @@
         public function read_ajax(): void
         {
             $form_data = $_POST['data'];
-            $IDs       = $form_data['IDs'];
 
-            $notifications = $this->get_by_ids($IDs);
-            foreach ($notifications as $notification) {
-                $notification->set_meta_data('new', 0);
-                $notification->update();
+            if (!empty($form_data)) {
+                $IDs = $form_data['IDs'];
+
+                $notifications = $this->get_by_ids($IDs);
+                foreach ($notifications as $notification) {
+                    $notification->set_meta_data('new', 0);
+                    $notification->update();
+                }
+
+                new B2b_Ajax_Response(TRUE, __('Notifications status has been changed successfully', 'b2b'), [
+                    'count' => $this->get_new_notifications_count()
+                ]);
             }
-
-            new B2b_Ajax_Response(TRUE, __('Notifications status has been changed successfully', 'b2b'), [
-                'count' => $this->get_new_notifications_count()
-            ]);
         }
 
         /**

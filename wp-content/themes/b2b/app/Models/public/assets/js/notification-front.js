@@ -64,11 +64,13 @@ class B2bNotificationFront extends B2bNotification
                     formData.IDs.push($(v).attr('data-id'));
                 });
 
-                if (typeof ajaxRequests.notifications !== 'undefined') {
-                    ajaxRequests.notifications.abort();
-                }
+                if (formData.IDs.length > 0) {
+                    if (typeof ajaxRequests.notifications !== 'undefined') {
+                        ajaxRequests.notifications.abort();
+                    }
 
-                that.read(formData, $notifications.notification_group);
+                    that.read(formData, $notifications.notification_group);
+                }
             }
         });
     }
@@ -82,13 +84,13 @@ class B2bNotificationFront extends B2bNotification
 
         $notifications.clearBtn.on('click', $notifications.clearBtn.parent(), function (e) {
             e.preventDefault();
-            let $this    = $(e.currentTarget);
+            let $this = $(e.currentTarget);
 
             if (typeof ajaxRequests.clear_notifications !== 'undefined') {
                 ajaxRequests.clear_notifications.abort();
             }
 
-            that.clear($notifications.notification_list);
+            that.clear($notifications.notification_group);
         });
     }
 
