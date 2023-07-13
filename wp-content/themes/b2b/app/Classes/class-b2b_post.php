@@ -1,7 +1,7 @@
 <?php
     /**
      * @Filename: class-B2b_Post.php
-     * @Description:
+     * @Description: This file contains the B2b_Post class, which represents a B2B post. It provides methods for retrieving, converting, inserting, updating, and deleting posts.
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 1/4/2023
      */
@@ -13,128 +13,97 @@
     use WP_Post;
 
     /**
-     * Description...
+     * The B2b_Post class represents a B2B post.
      *
      * @class B2b_Post
-     * @version 1.0
-     * @since 1.0.0
      * @package b2b
-     * @author Mustafa Shaaban
      */
     class B2b_Post
     {
 
         /**
-         * @var \B2B\APP\CLASSES\B2b_Post|null
+         * @var \B2B\APP\CLASSES\B2b_Post|null The singleton instance of the B2b_Post class.
          */
         private static ?B2b_Post $instance = NULL;
+
         /**
-         * The post's meta data
-         *
-         * @var array
+         * @var array The metadata of the post.
          */
         public array $meta_data = [];
+
         /**
-         * Post ID.
-         *
-         * @since 1.0.0
-         * @var int
+         * @var int The ID of the post.
          */
         protected int $ID = 0;
+
         /**
-         * ID of post author.
-         *
-         * A numeric string, for compatibility reasons.
-         *
-         * @since 1.0.0
-         * @var int
+         * @var int The author ID of the post.
          */
         protected int $author = 0;
+
         /**
-         * The post's title.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The title of the post.
          */
         protected string $title = '';
+
         /**
-         * The post's content.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The content of the post.
          */
         protected string $content = '';
+
         /**
-         * The post's excerpt.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The excerpt of the post.
          */
         protected string $excerpt = '';
+
         /**
-         * The post's status.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The status of the post.
          */
         protected string $status = 'publish';
+
         /**
-         * The post's slug.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The name/slug of the post.
          */
         protected string $name = '';
+
         /**
-         * ID of a post's parent post.
-         *
-         * @since 1.0.0
-         * @var int
+         * @var int The parent ID of the post.
          */
         protected int $parent = 0;
+
         /**
-         * The post's type, like post or page.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The type of the post.
          */
         protected string $type = 'post';
+
         /**
-         * The post's local publication time.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The created date of the post.
          */
         protected string $created_date = '0000-00-00 00:00:00';
+
         /**
-         * The post's local modified time.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The modified date of the post.
          */
         protected string $modified_date = '0000-00-00 00:00:00';
+
         /**
-         * The post's featured image.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The thumbnail URL of the post.
          */
         protected string $thumbnail = '';
+
         /**
-         * The post's URL.
-         *
-         * @since 1.0.0
-         * @var string
+         * @var string The permalink of the post.
          */
         protected string $link = '';
+
         /**
-         * The post's category/taxonomy.
-         *
-         * @since 1.0.0
-         * @var array
+         * @var array The taxonomies of the post.
          */
         protected array $taxonomy = [];
 
+        /**
+         * Constructs a new B2b_Post object.
+         */
         public function __construct()
         {
             // Reformat class metadata
@@ -142,15 +111,11 @@
         }
 
         /**
-         * Description...
+         * Magic method to get a property value.
          *
-         * @param $name
+         * @param string $name The name of the property.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return false
+         * @return mixed The value of the property or FALSE if the property doesn't exist.
          */
         public function __get($name)
         {
@@ -158,15 +123,11 @@
         }
 
         /**
-         * Description...
+         * Magic method to set a property value.
          *
-         * @param $name
-         * @param $value
+         * @param string $name The name of the property.
+         * @param mixed  $value The value to set.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
          * @return void
          */
         public function __set($name, $value)
@@ -175,13 +136,12 @@
         }
 
         /**
-         * @param \WP_Post $post
-         * @param array    $meta_data
+         * Returns the B2b_Post instance for the given WP_Post object and metadata.
          *
-         * @return \B2B\APP\CLASSES\B2b_Post
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @param WP_Post $post The WP_Post object.
+         * @param array   $meta_data The metadata of the post.
+         *
+         * @return \B2B\APP\CLASSES\B2b_Post The B2b_Post instance.
          */
         public static function get_post(WP_Post $post, array $meta_data = []): B2b_Post
         {
@@ -195,13 +155,12 @@
         }
 
         /**
-         * @param \WP_Post $post
-         * @param array    $meta_data
+         * Converts a WP_Post object to a B2b_Post object.
          *
-         * @return \B2B\APP\CLASSES\B2b_Post
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @param WP_Post $post The WP_Post object.
+         * @param array   $meta_data The metadata of the post.
+         *
+         * @return \B2B\APP\CLASSES\B2b_Post The converted B2b_Post object.
          */
         public function convert(WP_Post $post, array $meta_data = []): B2b_Post
         {
@@ -254,24 +213,22 @@
         }
 
         /**
-         * @return int|\WP_Error|\B2B\APP\CLASSES\B2b_Post
+         * Inserts the post into the database.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @return int|WP_Error|B2b_Post The inserted post ID, WP_Error object on failure, or the B2b_Post instance.
          */
         public function insert(): int|WP_Error|B2b_Post
         {
             $insert = wp_insert_post([
-                'ID'            => $this->ID,
-                'post_title'    => $this->title,
-                'post_content'  => $this->content,
-                'post_excerpt'  => $this->excerpt,
-                'post_status'   => $this->status,
-                'post_parent'   => $this->parent,
-                'post_author'   => $this->author,
-                'post_name'     => $this->name,
-                'post_type'     => $this->type
+                'ID'           => $this->ID,
+                'post_title'   => $this->title,
+                'post_content' => $this->content,
+                'post_excerpt' => $this->excerpt,
+                'post_status'  => $this->status,
+                'post_parent'  => $this->parent,
+                'post_author'  => $this->author,
+                'post_name'    => $this->name,
+                'post_type'    => $this->type
             ]);
 
             if (is_wp_error($insert)) {
@@ -283,7 +240,7 @@
                     add_post_meta($insert, $key, $meta);
                 }
                 foreach ($this->taxonomy as $tax_name => $taxonomies) {
-                    wp_set_post_terms($this->ID, $taxonomies, $tax_name, false);
+                    wp_set_post_terms($this->ID, $taxonomies, $tax_name, FALSE);
                 }
                 $this->ID = $insert;
 
@@ -294,11 +251,9 @@
         }
 
         /**
-         * @return \B2B\APP\CLASSES\B2b_Post|\WP_Error
+         * Updates the post in the database.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @return B2b_Post|WP_Error The updated B2b_Post instance or WP_Error object on failure.
          */
         public function update(): B2b_Post|WP_Error
         {
@@ -324,11 +279,11 @@
 
                 foreach ($this->taxonomy as $tax_name => $terms) {
                     if (is_object($terms[0])) {
-                        $terms = array_map(function($term){
+                        $terms = array_map(function($term) {
                             return $term->term_id;
                         }, $terms);
                     }
-                    wp_set_post_terms($this->ID, $terms, $tax_name, false);
+                    wp_set_post_terms($this->ID, $terms, $tax_name, FALSE);
                 }
 
 
@@ -339,13 +294,11 @@
         }
 
         /**
-         * @param bool $force_delete
+         * Deletes the post from the database.
          *
-         * @return array|false|\WP_Post|null
+         * @param bool $force_delete Whether to bypass trash and force deletion.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @return WP_Post The deleted WP_Post object.
          */
         public function delete(bool $force_delete = FALSE): WP_Post
         {
@@ -356,15 +309,11 @@
         }
 
         /**
-         * Description...
+         * Reformat the metadata array by renaming keys.
          *
-         * @param $meta_data
+         * @param array $meta_data The metadata array to reformat.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
+         * @return array The reformatted metadata array.
          */
         private function reformat_metadata($meta_data): array
         {
@@ -377,14 +326,12 @@
         }
 
         /**
-         * @param string $name
-         * @param string $value
+         * Sets the value of a metadata key.
          *
-         * @return bool
+         * @param string       $name The name of the metadata key.
+         * @param string|array $value The value to set for the metadata key.
          *
-         * @version 1.0
-         * @since 1.0.0
-         * @author Mustafa Shaaban
+         * @return bool True if the metadata key exists and the value is set, False otherwise.
          */
         public function set_meta_data(string $name, string|array $value): bool
         {
@@ -398,15 +345,11 @@
         }
 
         /**
-         * Description...
+         * Retrieves the value of a metadata key.
          *
-         * @param $meta_name
+         * @param string $meta_name The name of the metadata key.
          *
-         * @return string|bool
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
+         * @return string|bool The value of the metadata key or False if the metadata key doesn't exist.
          */
         public function get($meta_name): string|bool
         {
