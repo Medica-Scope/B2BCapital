@@ -1,7 +1,7 @@
 <?php
     /**
      * @Filename: class-b2b_forms.php
-     * @Description:
+     * @Description: This file contains the B2b_Forms class, which provides functionality for creating forms.
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 21/2/2023
      */
@@ -11,7 +11,7 @@
     use B2B\B2b;
 
     /**
-     * Description...
+     * The B2b_Forms class provides functionality for creating forms.
      *
      * @class B2b_Forms
      * @version 1.0
@@ -21,13 +21,15 @@
      */
     class B2b_Forms extends B2b_Hooks
     {
-
+        /**
+         * The instance of the class.
+         *
+         * @var object|null
+         */
         private static ?object $instance = NULL;
 
         /**
-         * Initialize the class and set its properties.
-         *
-         * @since    1.0.0
+         * Constructs a new instance of the B2b_Forms class.
          */
         public function __construct()
         {
@@ -35,14 +37,15 @@
         }
 
         /**
-         * Description...
+         * Retrieves the singleton instance of the B2b_Forms class.
+         *
+         * @return object|null The B2b_Forms instance.
          * @version 1.0
          * @since 1.0.0
          * @package b2b
          * @author Mustafa Shaaban
-         * @return mixed|object|null
          */
-        public static function get_instance()
+        public static function get_instance(): ?object
         {
             $class = __CLASS__;
             if (!self::$instance instanceof $class) {
@@ -53,50 +56,77 @@
         }
 
         /**
-         * The Form Controller
-         * This function responsible fore controlling the form settings and create all form fields
-         * by take them as an array and return the html form.
          *
-         * @param array $form_fields
-         * @param array $form_tag
+         * Generates an HTML form based on the provided form fields and form tag attributes.
          *
-         * @return string
+         * This function creates an HTML form by iterating over the provided $form_fields array and generating the necessary HTML code for each form field.
+         * The generated form
+         * includes the opening and closing form tags, as well as the HTML code for each individual field.
+         *
+         * @since 1.0.0
+         * @version 1.0
+         * @package b2b
+         * @param array $form_fields An array of form fields and their properties.
+         * @param array $form_tag An array of attributes for the form tag.
+         * @return string The generated HTML form.
+         *
+         * @author Mustafa Shaaban
          */
         public function create_form(array $form_fields = [], array $form_tag = []): string
         {
+            // Check if the form fields array is empty
             if (empty($form_fields)) {
                 return "";
             }
 
+            // Sort the form fields based on some criteria (implementation not shown)
             $settings = $this->sort_settings($form_fields);
 
+            // Initialize the form string with the opening form tag
             $form = $this->form_start($form_tag);
+
+            // Iterate over each form field and generate the corresponding HTML code
             foreach ($settings as $key => $field) {
-                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel') {
+                if ($field['type'] === 'text' || $field['type'] === 'email' || $field['type'] === 'password' || $field['type'] === 'number' || $field['type'] === 'tel' || $field['type'] === 'date') {
+                    // Generate HTML code for standard input fields
                     $form .= $this->std_inputs($field);
                 } elseif ($field['type'] === 'hidden') {
+                    // Generate HTML code for hidden input fields
                     $form .= $this->create_hidden_inputs($field);
                 } elseif ($field['type'] === 'file') {
+                    // Generate HTML code for file input fields
                     $form .= $this->file_inputs($field);
                 } elseif ($field['type'] === 'checkbox') {
+                    // Generate HTML code for checkbox input fields
                     $form .= $this->checkbox_inputs($field);
                 } elseif ($field['type'] === 'radio') {
+                    // Generate HTML code for radio input fields
                     $form .= $this->radio_inputs($field);
                 } elseif ($field['type'] === 'switch') {
+                    // Generate HTML code for switch input fields
                     $form .= $this->switch_inputs($field);
                 } elseif ($field['type'] === 'textarea') {
+                    // Generate HTML code for textarea input fields
                     $form .= $this->textarea_inputs($field);
                 } elseif ($field['type'] === 'select') {
+                    // Generate HTML code for select input fields
                     $form .= $this->selectBox_inputs($field);
                 } elseif ($field['type'] === 'nonce') {
+                    // Generate HTML code for nonce input fields
                     $form .= $this->create_nonce($field);
                 } elseif ($field['type'] === 'submit' || $field['type'] === 'button') {
+                    // Generate HTML code for submit and button input fields
                     $form .= $this->form_submit_button($field);
                 } elseif ($field['type'] === 'html') {
+                    // Add raw HTML content to the form
                     $form .= $field['content'];
                 }
             }
+
+            // Append the closing form tag to the form string
             $form .= $this->form_end();
+
+            // Return the generated HTML form
             return $form;
         }
 

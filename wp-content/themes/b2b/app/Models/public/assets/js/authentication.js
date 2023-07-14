@@ -16,7 +16,7 @@ import B2bUiCtrl    from './inc/UiCtrl';
 import B2bAuth      from './modules/Auth';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/js/utils.js';
-import Choices      from 'choices.js';
+// import Choices      from 'choices.js';
 
 class B2bAuthentication extends B2bAuth
 {

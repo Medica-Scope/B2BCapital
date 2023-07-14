@@ -134,7 +134,7 @@ gulp.task('publicScripts', (done) => {
             if (err) throw err;
 
             array.map(function (singlePath) {
-                let explodePathNames = singlePath.split('\\'),
+                let explodePathNames = singlePath.includes('\\') ? singlePath.split('\\') : singlePath.split('/'),
                     scriptFileName   = explodePathNames[explodePathNames.length - 1];
 
                 browserify({

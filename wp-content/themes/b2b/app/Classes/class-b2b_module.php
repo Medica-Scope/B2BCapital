@@ -1,7 +1,9 @@
 <?php
     /**
      * @Filename: class-b2b_Module.php
-     * @Description:
+     * @Description This file contains the abstract class B2b_Module, which serves as the base module for B2B applications.
+     * It provides common functionality and methods that can be extended by specific modules.
+     *
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 1/4/2023
      */
@@ -10,11 +12,9 @@
 
     use B2B\APP\HELPERS\B2b_Ajax_Response;
     use B2B\APP\HELPERS\B2b_Hooks;
-    use WP_Error;
-    use WP_Query;
 
     /**
-     * Description...
+     * The abstract class B2b_Module is the base module for B2B applications.
      *
      * @class abstract B2b_Module
      * @version 1.0
@@ -25,19 +25,26 @@
     abstract class B2b_Module extends B2b_Post
     {
         /**
-         * @var \B2B\APP\HELPERS\B2b_Hooks
+         * @var B2b_Module|null The singleton instance of the B2b_Module class.
+         */
+        private static ?B2b_Module $instance = NULL;
+
+        /**
+         * @var B2b_Hooks The B2b_Hooks instance for managing hooks and actions.
          */
         protected B2b_Hooks $hooks;
 
         /**
-         * @var string
+         * @var string The module name.
          */
         protected string $module = '';
 
         /**
-         * @param $module_name
+         * Constructs a new B2b_Module object.
+         *
+         * @param string $module_name The name of the module.
          */
-        public function __construct($module_name)
+        public function __construct(string $module_name)
         {
             parent::__construct();
 
@@ -51,47 +58,61 @@
         }
 
         /**
-         * Description...
+         * Returns the singleton instance of the B2b_Module class.
          *
-         * @param $module_name
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return void
+         * @return B2b_Module The B2b_Module instance.
          */
-        abstract protected function actions($module_name): void;
+        public static function get_instance(): B2b_Module
+        {
+            $class = __CLASS__;
+            if (!self::$instance instanceof $class) {
+                self::$instance = new $class;
+            }
+
+            return self::$instance;
+        }
 
         /**
-         * Description...
+         * Sets up the actions for the module.
          *
-         * @param $module_name
+         * @param string $module_name The name of the module.
          *
-         * @version 1.0
+         * @return void
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return void
+         * @version 1.0
          */
-        abstract protected function filters($module_name): void;
+        abstract protected function actions(string $module_name): void;
 
         /**
-         * Description...
+         * Sets up the filters for the module.
          *
-         * @param array  $status
-         * @param int    $limit
-         * @param string $order
+         * @param string $module_name The name of the module.
          *
-         * @version 1.0
+         * @return void
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
+         * @version 1.0
+         */
+        abstract protected function filters(string $module_name): void;
+
+        /**
+         * Retrieves all posts of the module.
+         *
+         * @param array  $status The post statuses to retrieve.
+         * @param int    $limit The maximum number of posts to retrieve.
+         * @param string $orderby The field to order the posts by.
+         * @param string $order The order of the posts (ASC or DESC).
+         * @param array  $not_in The post IDs to exclude from the results.
+         *
+         * @return array An array of B2b_Post objects representing the retrieved posts.
+         * @since 1.0.0
+         * @package b2b
+         * @version 1.0
          */
         public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ]): array
         {
-            $posts     = new WP_Query([
+            $posts     = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
@@ -109,19 +130,18 @@
         }
 
         /**
-         * Description...
+         * Retrieves a post of the module by its ID.
          *
-         * @param int $post_id
+         * @param int $post_id The ID of the post to retrieve.
          *
-         * @version 1.0
+         * @return B2b_Post|\WP_Error The B2b_Post object representing the retrieved post, or a WP_Error object on failure.
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return \B2B\APP\CLASSES\B2b_Post|\WP_Error
+         * @version 1.0
          */
-        public function get_by_id(int $post_id = 0): B2b_Post|WP_Error
+        public function get_by_id(int $post_id = 0): B2b_Post|\WP_Error
         {
-            $error = new WP_Error();
+            $error = new \WP_Error();
 
             if ($post_id <= 0) {
                 $error->add('invalid_id', __("No invalid post id", 'b2b'), [
@@ -130,12 +150,6 @@
                 ]);
                 return $error;
             }
-
-            $posts = new WP_Query([
-                "p"           => $post_id,
-                "post_type"   => $this->module,
-                "post_status" => 'any',
-            ]);
 
             $posts = get_post($post_id);
 
@@ -153,16 +167,15 @@
         }
 
         /**
-         * Description...
+         * Retrieves posts of the module by their IDs.
          *
-         * @param array $post_ids
-         * @param array $status
+         * @param array $post_ids The IDs of the posts to retrieve.
+         * @param array $status The post statuses to retrieve.
          *
-         * @version 1.0
+         * @return array An array of B2b_Post objects representing the retrieved posts.
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
+         * @version 1.0
          */
         public function get_by_ids(array $post_ids = [], array $status = [ 'publish' ]): array
         {
@@ -172,38 +185,45 @@
                 return $B2b_Posts;
             }
 
-            $posts = new WP_Query([
+            $posts = new \WP_Query([
                 "post__in"    => $post_ids,
                 "post_type"   => $this->module,
                 "post_status" => $status,
             ]);
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
+                $B2b_Posts[] = $this->convert($post, $this->meta_data);
             }
 
             return $B2b_Posts;
         }
 
         /**
-         * Description...
+         * Retrieves the terms of a taxonomy.
          *
-         * @param $tax_name
+         * @param string $tax_name The name of the taxonomy.
          *
-         * @return int|string|\WP_Error|\WP_Term
+         * @return int|string|array|\WP_Error|\WP_Term The retrieved terms.
          * @version 1.0
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
          */
-        public function get_taxonomy_terms($tax_name):int|string|array|\WP_Error|\WP_Term
+        public function get_taxonomy_terms(string $tax_name): int|string|array|\WP_Error|\WP_Term
         {
             return get_terms([
                 'taxonomy'   => $tax_name,
-                'hide_empty' => FALSE, // TODO:: Switch to TRUE on production
+                'hide_empty' => FALSE,
+                // TODO:: Switch to TRUE on production
             ]);
         }
 
+        /**
+         * Assigns the properties of a B2b_Post object to the B2b_Module object.
+         *
+         * @param B2b_Post $obj The B2b_Post object to assign.
+         *
+         * @return B2b_Module The updated B2b_Module object.
+         */
         public function assign(B2b_Post $obj): B2b_Module
         {
             $this->ID            = $obj->ID;
@@ -229,12 +249,12 @@
         }
 
         /**
-         * Description...
-         * @version 1.0
+         * Handles the loadmore AJAX request.
+         *
+         * @return void
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return void
+         * @version 1.0
          */
         public function loadmore_ajax(): void
         {
@@ -264,33 +284,34 @@
         }
 
         /**
-         * Description...
+         * Retrieves additional posts for the loadmore functionality.
          *
-         * @param array  $status
-         * @param int    $page
-         * @param int    $limit
-         * @param string $order
+         * @param array  $status The post statuses to retrieve.
+         * @param int    $page The current page of posts.
+         * @param int    $limit The maximum number of posts to retrieve.
+         * @param string $order The order of the posts (ASC or DESC).
+         * @param array  $author The array of authors.
          *
-         * @version 1.0
+         * @return array An array of B2b_Post objects representing the retrieved posts, including a 'count' key with the total count of posts.
          * @since 1.0.0
          * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
+         * @version 1.0
          */
-        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC'): array
+        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC', array $author = []): array
         {
-            $posts     = new WP_Query([
+            $posts     = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
                 "orderby"        => 'ID',
                 "order"          => $order,
                 "paged"          => $page,
+                "author__in"     => $author,
             ]);
             $B2b_Posts = [];
 
             foreach ($posts->get_posts() as $post) {
-                $B2b_Posts[] = $this->assign($this->convert($post, $this->meta_data));
+                $B2b_Posts[] = $this->convert($post, $this->meta_data);
             }
 
             $B2b_Posts['count'] = $posts->found_posts;

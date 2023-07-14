@@ -64,21 +64,27 @@
                         'namespace' => 'B2B\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-b2b_cryptor.php'
                     ],
+                    'Cron'        => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\CLASSES',
+                        'path'      => THEME_PATH . '/app/Classes/class-b2b_cron.php'
+                    ],
                     'Post'          => [
                         'type'      => 'class',
                         'namespace' => 'B2B\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-b2b_post.php'
+                    ],
+                    'Module'        => [
+                        'type'      => 'abstract',
+                        'namespace' => 'B2B\APP\CLASSES',
+                        'path'      => THEME_PATH . '/app/Classes/class-b2b_module.php'
                     ],
                     'User'          => [
                         'type'      => 'class',
                         'namespace' => 'B2B\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-b2b_user.php'
                     ],
-                    'Module'        => [
-                        'type'      => 'abstract',
-                        'namespace' => 'B2B\APP\CLASSES',
-                        'path'      => THEME_PATH . '/app/Classes/class-b2b_module.php'
-                    ]
+
                 ],
                 'admin'  => [],
                 'public' => [
@@ -96,6 +102,11 @@
                         'type'      => 'class',
                         'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_faq.php'
+                    ],
+                    'Notification' => [
+                        'type'      => 'class',
+                        'namespace' => 'B2B\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-b2b_notification.php'
                     ],
                     'Opportunity' => [
                         'type'      => 'class',
