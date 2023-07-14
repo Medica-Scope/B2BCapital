@@ -89,6 +89,7 @@
 
 </footer>
 
+<?php wp_body_close(); ?>
 
 </div><!-- #page -->
 

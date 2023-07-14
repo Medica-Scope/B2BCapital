@@ -36,8 +36,6 @@ class B2bMain
                 console.log('%cThis browser feature is intended for developers. If someone told you to copy-paste something here to enable a feature or "hack" someone\'s account, it is a scam and will give them access to your account and personal information.', 'font-size: 18px; font-weight:bold');
             }
         });
-
-
     }
 
     onLoad()
