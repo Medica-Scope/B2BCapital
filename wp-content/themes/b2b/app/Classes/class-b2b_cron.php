@@ -1,15 +1,14 @@
 <?php
     /**
-     * Filename: class-b2b_cron.php
-     * Description:
-     * User: NINJA MASTER - Mustafa Shaaban
-     * Date: 29/6/2023
+     * @Filename: class-b2b_cron.php
+     * @Description:
+     * @User: NINJA MASTER - Mustafa Shaaban
+     * @Date: 29/6/2023
      */
 
     namespace B2B\APP\CLASSES;
 
     use B2B\APP\HELPERS\B2b_Hooks;
-    use B2B\APP\MODELS\FRONT\MODULES\B2b_Notification;
     use B2B\B2b;
 
     /**
@@ -24,6 +23,8 @@
     class B2b_Cron
     {
         private B2b_Hooks $hooks;
+
+        CONST NOTIFICATIONS_LIMIT = 20;
 
         public function __construct()
         {
@@ -48,10 +49,50 @@
          * Check user notifications and automatically remove the exceeded limit notifications
          * @throws \Exception
          */
-        public function check_notifications()
+        public function check_notifications(): void
         {
-            $notifications_obj = new B2b_Notification();
-            $notifications = $notifications_obj->get_all(['publish'], -1);
+            global $wpdb;
+
+            $results = $wpdb->get_results("
+                        SELECT
+                            u.ID,
+                            u.user_login,
+                            COUNT(p.ID) AS post_count
+                        FROM
+                            " . $wpdb->prefix . "users u
+                        LEFT JOIN
+                            " . $wpdb->prefix . "posts p ON u.ID = p.post_author
+                        WHERE
+                            p.post_type = 'notification'
+                            AND p.post_status = 'publish'
+                        GROUP BY
+                            u.ID, u.user_login
+                        ORDER BY
+                            post_count DESC
+                    ");
+
+            foreach ($results as $user) {
+                if ($user->post_count > self::NOTIFICATIONS_LIMIT) {
+                    $IDs = $wpdb->get_results("
+                        SELECT
+                            p.ID
+                        FROM
+                            " . $wpdb->prefix . "posts p
+                        WHERE
+                            p.post_type = 'notification'
+                            AND p.post_status = 'publish'
+                            AND p.post_author = '".$user->ID."'
+                        ORDER BY
+                            p.ID DESC
+                        LIMIT 18446744073709551615
+                        OFFSET ".self::NOTIFICATIONS_LIMIT."
+                    ");
+
+                    foreach ($IDs as $obj) {
+                        wp_delete_post($obj->ID, TRUE);
+                    }
+                }
+            }
         }
 
         public function init_schedules(): void
