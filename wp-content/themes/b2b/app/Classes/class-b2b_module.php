@@ -290,13 +290,14 @@
          * @param int    $page The current page of posts.
          * @param int    $limit The maximum number of posts to retrieve.
          * @param string $order The order of the posts (ASC or DESC).
+         * @param array  $author The array of authors.
          *
          * @return array An array of B2b_Post objects representing the retrieved posts, including a 'count' key with the total count of posts.
          * @since 1.0.0
          * @package b2b
          * @version 1.0
          */
-        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC'): array
+        public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC', array $author = []): array
         {
             $posts     = new \WP_Query([
                 "post_type"      => $this->module,
@@ -305,6 +306,7 @@
                 "orderby"        => 'ID',
                 "order"          => $order,
                 "paged"          => $page,
+                "author__in"     => $author,
             ]);
             $B2b_Posts = [];
 

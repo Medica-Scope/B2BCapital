@@ -7,6 +7,6 @@
      */
 ?>
 
-<div class="b2b-notification-group">
+<div class="b2b-notification-group-empty">
     <p><?= __('You have no new notifications', 'b2b') ?></p>
 </div>

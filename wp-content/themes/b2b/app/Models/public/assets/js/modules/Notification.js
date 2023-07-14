@@ -100,11 +100,9 @@ class B2bNotification extends B2b
                     $(`.${KEY}-notification-list`).attr('data-page', res.data.page);
                     $(`.${KEY}-notification-list`).attr('data-last', res.data.last);
                     $(`.${KEY}-notification-item-load`).remove();
+                    $(`.${KEY}-notification-bell`).attr('data-count', res.data.count);
+                    $(`.${KEY}-notification-count`).html(res.data.count);
                     $(`.${KEY}-notifications-group`).append(res.data.html);
-
-                    if (res.data.newIDs.length > 0) {
-                        that.changeNewNotificationsStatus({IDs: res.data.newIDs});
-                    }
                 }
             },
             error: function (xhr) {
@@ -116,6 +114,10 @@ class B2bNotification extends B2b
         });
     }
 
+    /**
+     * NOT IN USE
+     * @param formData
+     */
     changeNewNotificationsStatus(formData)
     {
         let that                      = this;

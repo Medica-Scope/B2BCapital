@@ -26,6 +26,7 @@ class B2bNotificationFront extends B2bNotification
                 parent: $(`.${KEY}-notifications`),
                 bellBtn: $(`.${KEY}-notification-bell`),
                 bell_counter: $(`.${KEY}-notification-count`),
+                notification_group_container: $(`.${KEY}-notification-group-container`),
                 notification_list: $(`.${KEY}-notification-list`),
                 notification_group: $(`.${KEY}-notifications-group`),
                 clearBtn: $(`.${KEY}-notification-clear`),
@@ -90,7 +91,7 @@ class B2bNotificationFront extends B2bNotification
                 ajaxRequests.clear_notifications.abort();
             }
 
-            that.clear($notifications.notification_group);
+            that.clear($notifications.notification_group_container);
         });
     }
 
@@ -120,7 +121,7 @@ class B2bNotificationFront extends B2bNotification
                             ajaxRequests.notificationsLoadMore.abort();
                         }
 
-                        that.loadMoreNotification(formData, $(`.${KEY}-notifications-group`));
+                        that.loadMoreNotification(formData, $notifications.notification_group);
                     }
                 }
             }

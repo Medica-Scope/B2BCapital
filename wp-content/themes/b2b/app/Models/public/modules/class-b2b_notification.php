@@ -14,7 +14,6 @@
     use B2B\APP\CLASSES\B2b_User;
     use B2B\APP\HELPERS\B2b_Ajax_Response;
     use B2B\B2b;
-    use WP_Post;
 
     /**
      * Class B2b_Notification
@@ -45,7 +44,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          */
         public function __construct()
@@ -54,18 +53,18 @@
         }
 
         /**
-         * Converts a WP_Post object into a B2b_Post object.
+         * Converts a \WP_Post object into a B2b_Post object.
          *
-         * @param WP_Post $post The WP_Post object to convert.
-         * @param array   $meta_data An array of meta data keys associated with notifications.
+         * @param \WP_Post $post The \WP_Post object to convert.
+         * @param array    $meta_data An array of meta data keys associated with notifications.
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return B2b_Post The converted B2b_Post object.
          */
-        public function convert(WP_Post $post, array $meta_data = []): B2b_Post
+        public function convert(\WP_Post $post, array $meta_data = []): B2b_Post
         {
             return parent::convert($post, $this->meta_data);
         }
@@ -77,7 +76,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -101,7 +100,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -117,7 +116,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @throws \Exception
          */
@@ -125,7 +124,7 @@
         {
             global $wpdb, $user_ID;
 
-            $all      = $this->get_all_custom([ 'publish' ], 10);
+            $all      = $this->get_all_custom([ 'publish' ]);
             $html_obj = [
                 'notifications' => []
             ];
@@ -143,7 +142,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return string The count of new notifications.
          */
@@ -161,7 +160,7 @@
                 AND `" . $wpdb->prefix . "postmeta`.meta_key = 'new'
                 AND `" . $wpdb->prefix . "postmeta`.meta_value = '1'
             ");
-            return $new_count;
+            return $new_count > 20 ? '+20' : $new_count;
         }
 
         /**
@@ -172,18 +171,23 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return array An array of notifications.
          */
-        public function get_all_custom(array $status = [ 'any' ], int $limit = 10): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, $author = 0): array
         {
             global $user_ID;
+
+            if (!$author) {
+                $author = $user_ID;
+            }
+
             $posts = new \WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
-                "author"         => $user_ID,
+                "author"         => $author,
                 "orderby"        => 'ID',
                 "order"          => 'DESC',
             ]);
@@ -213,7 +217,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -247,7 +251,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return \stdClass The formatted notification object.
          * @throws \Exception
@@ -278,17 +282,12 @@
             return $formatted;
         }
 
-        public function get_counter()
-        {
-
-        }
-
         /**
          * Handles the AJAX request to mark notifications as read.
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -316,7 +315,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -350,24 +349,23 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
         public function loadmore_notifications_ajax(): void
         {
+            global $user_ID;
             $form_data = $_POST['data'];
             $page      = intval($form_data['page']);
 
-            $notifications = $this->load_more([ 'publish' ], $page, 10);
+            $notifications = $this->load_more([ 'publish' ], $page, 10, 'DESC', [ $user_ID ]);
 
             $last = FALSE;
 
             if ($page * 10 >= $notifications['count']) {
                 $last = TRUE;
             }
-
-            $newIDs = [];
 
             ob_start();
             foreach ($notifications as $key => $notification) {
@@ -378,17 +376,18 @@
                 get_template_part('app/Views/template-parts/notifications/notification', 'ajax', [ 'data' => $notification ]);
 
                 if ((int)$notification->meta_data['new'] > 0) {
-                    $newIDs[] = $notification->ID;
+                    $notification->set_meta_data('new', 0);
+                    $notification->update();
                 }
             }
 
             $html = ob_get_clean();
 
             new B2b_Ajax_Response(TRUE, __('Successful Response!', 'b2b'), [
-                'html'   => $html,
-                'page'   => $page + 1,
-                'newIDs' => $newIDs,
-                'last'   => (int)$last
+                'html'  => $html,
+                'page'  => $page + 1,
+                'count' => $this->get_new_notifications_count(),
+                'last'  => (int)$last
             ]);
         }
 
@@ -397,7 +396,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return void
          */
@@ -425,7 +424,7 @@
          *
          * @version 1.0
          * @since 1.0.0
-         * @package wp-config.php
+         * @package b2b
          * @author Mustafa Shaaban
          * @return string The time elapsed string.
          * @throws \Exception
