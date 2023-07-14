@@ -51,6 +51,7 @@
         {
             // TODO: Implement actions() method.
             $this->hooks->add_action('wp_login', $this, 'after_wp_login');
+            $this->hooks->add_action('wp_body_close', $this, 'wp_body_close');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_registration_ajax', $this, 'registration_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . B2b::_DOMAIN_NAME . '_login_ajax', $this, 'login_ajax');
             $this->hooks->add_action('wp_ajax_' . B2b::_DOMAIN_NAME . '_verification_ajax', $this, 'verification_ajax');
@@ -74,6 +75,16 @@
         public function after_wp_login()
         {
 
+        }
+
+        public function wp_body_close(): void
+        {
+            if (is_page([
+                'verification',
+                'authentication',
+            ])) {
+                require_once B2b_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
+            }
         }
 
         /**
@@ -355,6 +366,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'b2b'), [
+                'redirect_text' => __('GO TO DASHBOARD'),
                 'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path('my-account/industry')))
             ]);
         }
@@ -476,7 +488,7 @@
             }
 
             new B2b_Ajax_Response(TRUE, __('Your account has been authenticated successfully!', 'b2b'), [
-                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path($redirect_page_slug)))
+                'redirect_url' => apply_filters('b2bml_permalink', get_permalink(get_page_by_path($redirect_page_slug))),
             ]);
         }
 

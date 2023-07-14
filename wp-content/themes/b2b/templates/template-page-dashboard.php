@@ -23,6 +23,8 @@
 ?>
 
     <main id="" class="site-home">
+
+        <div id="test"></div>
         <h1>Dashboard</h1>
 
         <h3>Overview</h3>
@@ -43,6 +45,8 @@
                 echo "<p>".$opportunity->title."</p>";
             }
         ?>
+
+        <a href="<?= apply_filters('b2bml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity'))) ?>"><?= __('Create New Opportunity', 'b2b') ?></a>
     </main><!-- #main -->
 
 <?php get_footer();
