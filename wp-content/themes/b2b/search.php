@@ -21,12 +21,12 @@
             <?= B2b_Forms::get_instance()
                          ->create_form([
                              'search' => [
-                                 'class'       => '',
+                                 'class'       => 'b2b-search-input-group',
                                  'type'        => 'text',
                                  'name'        => 's',
                                  'placeholder' => __('Search', 'b2b'),
                                  'before'      => '',
-                                 'after'       => '<i class="fas fa-search"></i>',
+                                 'after'       => '<i class="fas fa-search b2b-search-icon"></i>',
                                  'order'       => 0,
                              ]
                          ], [
