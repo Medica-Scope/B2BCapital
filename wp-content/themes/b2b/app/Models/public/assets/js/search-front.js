@@ -46,7 +46,9 @@ class B2bSearchFront
             e.preventDefault();
             let $this    = $(e.currentTarget);
 
-            $search.input.animate({ opacity: 1, width: '250px' }, 250)
+            $search.input.animate({ opacity: 1, width: '250px' }, 250);
+            $search.input.focus();
+            $search.input.val('');
 
         });
 
