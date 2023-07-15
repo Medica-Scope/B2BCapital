@@ -11,6 +11,7 @@
 import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
 import B2b    from './B2b';
+import _      from 'lodash';
 
 class B2bAuth extends B2b
 {
@@ -114,17 +115,18 @@ class B2bAuth extends B2b
                 UiCtrl.beforeSendPrepare($el);
             },
             success: function (res) {
-                $('input')
-                    .prop('disabled', false);
+                $('input').prop('disabled', false);
                 if (res.success) {
-                    UiCtrl.notices($el, res.msg, 'success');
-                    window.location.href = res.data.redirect_url;
+                    $($el).append(_.template($('#b2b_modal_auth_verif').html())({
+                        msg: res.msg,
+                        redirect_text: res.data.redirect_text,
+                        redirect_url: res.data.redirect_url,
+                    }));
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
                 that.createNewToken();
-                $el.find('input, button')
-                   .prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
             error: function (xhr) {
@@ -153,8 +155,7 @@ class B2bAuth extends B2b
                 UiCtrl.beforeSendPrepare($el);
             },
             success: function (res) {
-                $('input')
-                    .prop('disabled', false);
+                $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     window.location.href = res.data.redirect_url;
@@ -162,8 +163,7 @@ class B2bAuth extends B2b
                     UiCtrl.notices($el, res.msg);
                 }
                 that.createNewToken();
-                $el.find('input, button')
-                   .prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
             error: function (xhr) {
@@ -401,7 +401,7 @@ class B2bAuth extends B2b
                     console.error(errorMessage);
                 }
                 that.createNewToken();
-            }
+            },
         });
     }
 

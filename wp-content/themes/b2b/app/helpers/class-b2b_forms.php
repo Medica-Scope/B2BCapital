@@ -156,10 +156,11 @@
         public function form_start(array $args = []): string
         {
             $defaults = [
+                'action'       => '',
                 'attr'       => '',
                 'class'      => '',
                 'form_class' => '',
-                'id'         => ''
+                'id'         => '',
             ];
 
             $input_data = array_merge($defaults, $args);
@@ -173,7 +174,7 @@
             ob_start();
             ?>
             <div class="<?= B2b::_DOMAIN_NAME ?>_form_container <?= $classes ?>">
-            <form action="" class="<?= B2b::_DOMAIN_NAME ?>_form <?= $input_data['class'] ?> <?= $input_data['form_class'] ?>" id="<?= $input_data['id'] ?>" <?= $input_data['attr'] ?>>
+            <form action="<?= $input_data['action'] ?>" class="<?= B2b::_DOMAIN_NAME ?>_form <?= $input_data['class'] ?> <?= $input_data['form_class'] ?>" id="<?= $input_data['id'] ?>" <?= $input_data['attr'] ?>>
             <?php
             return ob_get_clean();
         }

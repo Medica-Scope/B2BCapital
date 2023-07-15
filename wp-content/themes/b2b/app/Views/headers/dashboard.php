@@ -7,6 +7,7 @@
      */
 
     use B2B\APP\CLASSES\B2b_User;
+    use B2B\APP\HELPERS\B2b_Forms;
     use B2B\APP\MODELS\FRONT\MODULES\B2b_Notification;
     use B2B\B2b;
 
@@ -38,7 +39,22 @@
         ?>
 
         <div>
-            search
+            <?= B2b_Forms::get_instance()
+                         ->create_form([
+                             'search' => [
+                                 'class'       => 'b2b-s',
+                                 'type'        => 'text',
+                                 'name'        => 's',
+                                 'placeholder' => __('Search', 'b2b'),
+                                 'before'      => '',
+                                 'after'       => '<i class="fas fa-search b2b-header-search-icon"></i>',
+                                 'order'       => 0,
+                             ]
+                         ], [
+                             'action' => apply_filters('b2bml_permalink', home_url()),
+                             'class' => B2b::_DOMAIN_NAME . '-header-search-form',
+                             'id'    => B2b::_DOMAIN_NAME . '_header_search_form'
+                         ]); ?>
         </div>
 
 

@@ -110,9 +110,15 @@
                 ]
             ]);
 
-            $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-notifications', B2b_Hooks::PATHS['public']['js'] . '/notification-front');
+            if (is_page([
+                'dashboard',
+                'create-opportunity'
+            ])) {
+                $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-notifications', B2b_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-search', B2b_Hooks::PATHS['public']['js'] . '/search-front');
+            }
 
-            $my_account = [
+            if (is_page([
                 'my-account',
                 'login',
                 'industry',
@@ -121,9 +127,7 @@
                 'registration',
                 'verification',
                 'authentication',
-            ];
-
-            if (is_page($my_account)) {
+            ])) {
                 $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-authentication', B2b_Hooks::PATHS['public']['js'] . '/authentication');
             }
 

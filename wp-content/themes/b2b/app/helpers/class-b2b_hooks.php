@@ -41,7 +41,8 @@
                 'images'  => THEME_URI . '/app/Models/public/assets/images',
                 'vid'     => THEME_URI . '/app/Models/public/vid',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
-            ]
+            ],
+            'views' => THEME_PATH . '/app/Views'
         ];
         /**
          * The array of actions registered with WordPress.

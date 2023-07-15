@@ -23,6 +23,8 @@
 ?>
 
     <main id="" class="site-home">
+
+        <div id="test"></div>
         <h1>Dashboard</h1>
 
         <h3>Overview</h3>
@@ -32,10 +34,6 @@
         <h3>Latest Opportunities</h3>
         <?php
 
-//            $notifications_obj = new B2b_Notification();
-//            $notifications_obj->send(12,$user_ID,'bidding', ['project_id' => 157]);
-
-
             $opportunities_obj = new B2b_Opportunity();
             $opportunities = $opportunities_obj->get_all();
 
@@ -43,6 +41,8 @@
                 echo "<p>".$opportunity->title."</p>";
             }
         ?>
+
+        <a href="<?= apply_filters('b2bml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity'))) ?>"><?= __('Create New Opportunity', 'b2b') ?></a>
     </main><!-- #main -->
 
 <?php get_footer();

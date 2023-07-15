@@ -74,6 +74,13 @@ class B2bNotificationFront extends B2bNotification
                 }
             }
         });
+
+        $(document).on('click', function (e) {
+            let $this = $(e.target);
+            if ($notifications.notification_list.is(':visible') && $this.parents(".b2b-notifications").length !== 1 ) {
+                $notifications.notification_list.hide();
+            }
+        })
     }
 
     clearAll()
