@@ -1,0 +1,27 @@
+/**
+ * @Filename: _notifications.scss
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 7/6/2023
+ */
+
+.b2b-header-search-form {
+  label {
+    display: none;
+  }
+  .b2b-input-wrapper {
+    position: relative;
+  }
+  #b2b_s {
+    opacity: 0;
+    width: 0;
+    padding-left: 30px;
+  }
+  .b2b-header-search-icon {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 10px 10px;
+  }
+}
