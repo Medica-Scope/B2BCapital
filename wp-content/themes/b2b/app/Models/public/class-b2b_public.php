@@ -116,6 +116,7 @@
             ])) {
                 $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-notifications', B2b_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-search', B2b_Hooks::PATHS['public']['js'] . '/search-front');
+                $this->hooks->add_script(B2b::_DOMAIN_NAME . '-public-script-opportunity', B2b_Hooks::PATHS['public']['js'] . '/opportunity-front');
             }
 
             if (is_page([

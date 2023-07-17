@@ -7,23 +7,23 @@
 
 /* global b2bGlobals, KEY */
 
-// import theme 3d party modules
-import $      from 'jquery';
+// Importing the required modules
+import $ from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
-import B2b    from './B2b';
-import _      from 'lodash';
+import B2b from './B2b';
+import _ from 'lodash';
 
-class B2bAuth extends B2b
-{
-    constructor()
-    {
+// Defining the B2bAuth class that extends the B2b class
+class B2bAuth extends B2b {
+    constructor() {
         super();
         this.ajaxRequests = {};
     }
 
-    registration(formData, $el)
-    {
-        let that                       = this;
+    // Method for user registration
+    registration(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for registration
         this.ajaxRequests.registration = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -31,14 +31,12 @@ class B2bAuth extends B2b
                 action: `${KEY}_registration_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
-                $el.find('input, button')
-                   .prop('disabled', true);
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
-                $('input')
-                    .prop('disabled', false);
+            success: function(res) {
+                $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     window.location.href = res.data.redirect_url;
@@ -46,11 +44,10 @@ class B2bAuth extends B2b
                     UiCtrl.notices($el, res.msg);
                 }
                 that.createNewToken();
-                $el.find('input, button')
-                   .prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -60,9 +57,10 @@ class B2bAuth extends B2b
         });
     }
 
-    login(formData, $el)
-    {
-        let that                = this;
+    // Method for user login
+    login(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for login
         this.ajaxRequests.login = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -70,14 +68,12 @@ class B2bAuth extends B2b
                 action: `${KEY}_login_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
-                $el.find('input, button')
-                   .prop('disabled', true);
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
-                $('input')
-                    .prop('disabled', false);
+            success: function(res) {
+                $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     window.location.href = res.data.redirect_url;
@@ -85,11 +81,10 @@ class B2bAuth extends B2b
                     UiCtrl.notices($el, res.msg);
                 }
                 that.createNewToken();
-                $el.find('input, button')
-                   .prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -99,9 +94,10 @@ class B2bAuth extends B2b
         });
     }
 
-    verification(formData, $el)
-    {
-        let that                       = this;
+    // Method for verification
+    verification(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for verification
         this.ajaxRequests.verification = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -109,12 +105,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_verification_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
-                $el.find('input, button')
-                   .prop('disabled', true);
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     $($el).append(_.template($('#b2b_modal_auth_verif').html())({
@@ -129,7 +124,7 @@ class B2bAuth extends B2b
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -139,9 +134,10 @@ class B2bAuth extends B2b
         });
     }
 
-    authentication(formData, $el)
-    {
-        let that                         = this;
+    // Method for authentication
+    authentication(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for authentication
         this.ajaxRequests.authentication = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -149,12 +145,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_authentication_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
-                $el.find('input, button')
-                   .prop('disabled', true);
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -166,7 +161,7 @@ class B2bAuth extends B2b
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -176,9 +171,10 @@ class B2bAuth extends B2b
         });
     }
 
-    resendVerCode(formData, $el)
-    {
-        let that                        = this;
+    // Method for resending verification code
+    resendVerCode(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for resending verification code
         this.ajaxRequests.resendVerCode = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -186,11 +182,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_resendVerCode_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $el.closest('form').find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el.closest('form'));
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el.closest('form'), res.msg, 'success');
@@ -205,7 +201,7 @@ class B2bAuth extends B2b
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -215,9 +211,10 @@ class B2bAuth extends B2b
         });
     }
 
-    resendAuthCode(formData, $el)
-    {
-        let that                         = this;
+    // Method for resending authentication code
+    resendAuthCode(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for resending authentication code
         this.ajaxRequests.resendAuthCode = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -225,11 +222,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_resendAuthCode_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $el.closest('form').find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el.closest('form'));
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el.closest('form'), res.msg, 'success');
@@ -244,7 +241,7 @@ class B2bAuth extends B2b
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -254,9 +251,10 @@ class B2bAuth extends B2b
         });
     }
 
-    industries(formData, $el)
-    {
-        let that                     = this;
+    // Method for selecting industries
+    industries(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for industries
         this.ajaxRequests.industries = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -264,14 +262,12 @@ class B2bAuth extends B2b
                 action: `${KEY}_industries_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
-                $el.find('input, button')
-                   .prop('disabled', true);
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
-                $('input')
-                    .prop('disabled', false);
+            success: function(res) {
+                $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     window.location.href = res.data.redirect_url;
@@ -279,11 +275,10 @@ class B2bAuth extends B2b
                     UiCtrl.notices($el, res.msg);
                 }
                 that.createNewToken();
-                $el.find('input, button')
-                   .prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -293,9 +288,10 @@ class B2bAuth extends B2b
         });
     }
 
-    forgotPassword(formData, $el)
-    {
-        let that                 = this;
+    // Method for forgot password
+    forgotPassword(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for forgot password
         this.ajaxRequests.forgot = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -303,11 +299,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_forgot_password_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -320,7 +316,7 @@ class B2bAuth extends B2b
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -330,9 +326,10 @@ class B2bAuth extends B2b
         });
     }
 
-    changePassword(formData, $el)
-    {
-        let that                         = this;
+    // Method for changing password
+    changePassword(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for changing password
         this.ajaxRequests.changePassword = $.ajax({
             url: b2bGlobals.ajaxUrl,
             type: 'POST',
@@ -340,11 +337,11 @@ class B2bAuth extends B2b
                 action: `${KEY}_change_password_ajax`,
                 data: formData,
             },
-            beforeSend: function () {
+            beforeSend: function() {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function (res) {
+            success: function(res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -357,7 +354,7 @@ class B2bAuth extends B2b
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -367,108 +364,34 @@ class B2bAuth extends B2b
         });
     }
 
-    editProfile(formData, $el)
-    {
-        let that                      = this;
-        this.ajaxRequests.editProfile = $.ajax({
-            url: b2bGlobals.ajaxUrl,
-            type: 'POST',
-            data: {
-                action: `${KEY}_edit_profile_ajax`,
-                data: formData,
-            },
-            beforeSend: function () {
-                $el.find('input, button').prop('disabled', true);
-                UiCtrl.beforeSendPrepare($el);
-            },
-            success: function (res) {
-                $('input').prop('disabled', false);
-                if (res.success) {
-                    UiCtrl.notices($el, res.msg, 'success');
-                    if (res.data.redirect) {
-                        window.location.href = res.data.redirect_url;
-                    }
-                } else {
-                    UiCtrl.notices($el, res.msg);
-                }
-                that.createNewToken();
-                $el.find('input, button').prop('disabled', false);
-                UiCtrl.blockUI($el, false);
-            },
-            error: function (xhr) {
-                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
-                if (xhr.statusText !== 'abort') {
-                    console.error(errorMessage);
-                }
-                that.createNewToken();
-            },
-        });
-    }
-
-    editPassword(formData, $el)
-    {
-        let that                       = this;
-        this.ajaxRequests.editPassword = $.ajax({
-            url: b2bGlobals.ajaxUrl,
-            type: 'POST',
-            data: {
-                action: `${KEY}_edit_password_ajax`,
-                data: formData,
-            },
-            beforeSend: function () {
-                $el.find('input, button').prop('disabled', true);
-                UiCtrl.beforeSendPrepare($el);
-            },
-            success: function (res) {
-                $('input').prop('disabled', false);
-                if (res.success) {
-                    UiCtrl.notices($el, res.msg, 'success');
-                    window.location.href = res.data.redirect_url;
-                } else {
-                    UiCtrl.notices($el, res.msg);
-                }
-                that.createNewToken();
-                $el.find('input, button').prop('disabled', false);
-                UiCtrl.blockUI($el, false);
-            },
-            error: function (xhr) {
-                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
-                if (xhr.statusText !== 'abort') {
-                    console.error(errorMessage);
-                }
-                that.createNewToken();
-            },
-        });
-    }
-
-    createNewToken()
-    {
-        grecaptcha.ready(function () {
-            grecaptcha.execute(b2bGlobals.publicKey).then(function (token) {
+    // Method for creating a new token
+    createNewToken() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute(b2bGlobals.publicKey).then(function(token) {
                 $('#g-recaptcha-response').val(token);
             });
         });
     }
 
-    codeCountDown()
-    {
-        let that              = this,
-            $codeForm         = this.$el.codeForm,
+    // Method for the code countdown
+    codeCountDown() {
+        let that = this,
+            $codeForm = this.$el.codeForm,
             $resendCodeParent = $('.b2b-resend-code-patent'),
-            $CodeCountDown    = $('<span class="b2b-code-count-down"></span>');
+            $CodeCountDown = $('<span class="b2b-code-count-down"></span>');
 
         $('.b2b-code-count-down').remove();
         $resendCodeParent.append($CodeCountDown);
 
         if ($CodeCountDown.length > 0) {
             // Given timestamp
-            let givenTimestamp   = $resendCodeParent.attr('data-expire'),
+            let givenTimestamp = $resendCodeParent.attr('data-expire'),
 
                 // Get the current timestamp
                 currentTimestamp = Math.floor(Date.now() / 1000),
 
                 // Calculate the difference in seconds
-                difference       = givenTimestamp - currentTimestamp;
+                difference = givenTimestamp - currentTimestamp;
 
             if (difference <= 0) {
                 $codeForm.resendCode.show();
@@ -476,7 +399,7 @@ class B2bAuth extends B2b
             }
 
             // Update the countdown timer every second
-            let countdownInterval = setInterval(function () {
+            let countdownInterval = setInterval(function() {
                 // Calculate minutes and seconds
                 let minutes = Math.floor(difference / 60),
                     seconds = difference % 60;
