@@ -34,6 +34,3 @@
 //        echo 'Error:' . curl_error($ch);
 //    }
 //    curl_close($ch);
-
-
-var_dump(json_decode('{"code": 21211, "message": "The \'To\' number +2010169997000 is not a valid phone number.", "more_info": "https://www.twilio.com/docs/errors/21211", "status": 400}'));
