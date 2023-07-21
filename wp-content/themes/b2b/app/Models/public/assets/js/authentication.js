@@ -33,7 +33,57 @@ class B2bAuthentication extends B2bAuth {
                 parent: $(`#${KEY}_registration_form`).parent(),
                 user_password: $(`#${KEY}_user_password`),
             },
-            // ...
+            login: {
+                form: $(`#${KEY}_login_form`),
+                parent: $(`#${KEY}_login_form`).parent(),
+            },
+            verification: {
+                form: $(`#${KEY}_verification_form`),
+                parent: $(`#${KEY}_verification_form`).parent(),
+                otpDigit: $(`#${KEY}_verification_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_verification_form`).find('.b2b-resend-code-patent'),
+                resendCode: $(`#${KEY}_verification_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_verification_form`).find('.b2b-code-count-down'),
+                verificationSubmit: $(`#${KEY}_verification_form`).find('#verificationSubmit'),
+            },
+            authentication: {
+                form: $(`#${KEY}_authentication_form`),
+                parent: $(`#${KEY}_authentication_form`).parent(),
+                otpDigit: $(`#${KEY}_authentication_form`).find('.otp-digit input'),
+                resendCodeParent: $(`#${KEY}_authentication_form`).find('.b2b-resend-code-patent'),
+                resendCode: $(`#${KEY}_authentication_form`).find('.b2b-resend-code'),
+                CodeCountDown: $(`#${KEY}_authentication_form`).find('.b2b-code-count-down'),
+                authenticationSubmit: $(`#${KEY}_authentication_form`).find('#authenticationSubmit'),
+            },
+            codeForm: {
+                resendCode: $('.b2b-resend-code'),
+            },
+            industries: {
+                form: $(`#${KEY}_industries_form`),
+                tags: $(`#${KEY}_industries_form`).find(`.industries-tags`),
+                selectedNumbersSpan: $(`#${KEY}_industries_form`).find(`.selected-number`),
+                showTags: $(`#${KEY}_industries_form`).find(`.show-tags`),
+                parent: $(`#${KEY}_industries_form`).parent(),
+            },
+            forgot: {
+                form: $(`#${KEY}_forgot_form`),
+                parent: $(`#${KEY}_forgot_form`).parent(),
+            },
+            editProfile: {
+                form: $(`#${KEY}_edit_profile_form`),
+                parent: $(`#${KEY}_edit_profile_form`).parent(),
+                selectBoxes: $('select'),
+            },
+            editPassword: {
+                form: $(`#${KEY}_edit_password_form`),
+                parent: $(`#${KEY}_edit_password_form`).parent(),
+                new_password: $(`#${KEY}_new_password`),
+            },
+            change_password: {
+                form: $(`#${KEY}_change_password_form`),
+                parent: $(`#${KEY}_change_password_form`).parent(),
+                user_password: $(`#${KEY}_user_password`),
+            }
         };
 
         // Call the initialization method
