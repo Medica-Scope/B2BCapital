@@ -58,6 +58,7 @@ node_modules/
 *.zip
 *.rar
 
+/local-xdebuginfo.php
 /wp-config.php
 /.htaccess
 /.htaccess.bk
