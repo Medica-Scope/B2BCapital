@@ -2,10 +2,10 @@
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires at least: 5.6
 Requires PHP: 7.4
-Stable tag: 1.0.119
+Stable tag: 1.0.122
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,14 +583,12 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.119 [July 12, 2023] =
-- Added: [Notice] Rank Math support is being phased out for sites with WordPress versions lower than 6.0. We encourage upgrading to WordPress 6.0 or above to receive future updates from Rank Math
-- Improved: SEO Score added in Publish Meta Box of Classic Editor to prevent page jumping when the score is loaded
-- Fixed: [Focus Keyword in Subheading test](https://rankmath.com/kb/score-100-in-tests/#focus-keyword-in-subheading-primary-and-secondary-focus-keywords) was not working when the heading included formatted text
-- Fixed: [Exclude Terms option](https://rankmath.com/kb/configure-sitemaps/#exclude-terms) was not working in the [HTML Sitemap](https://rankmath.com/kb/html-sitemap/)
-- Fixed: Noindexed Taxonomies were appearing in the HTML Sitemap
-- Fixed: [Unpublish when Expired setting in the JobPosting Schema](https://rankmath.com/kb/jobposting-schema/#unpublish-when-expired) was not sticking after updating the post
-- Fixed: [Google Analytics 4 integration](https://rankmath.com/kb/using-ga4/) issue on some setups due to missing medium dimension
-- Fixed: [Site Analytics](https://rankmath.com/kb/analytics/#site-analytics) issue on Multisite sub-directory installation
+= 1.0.122 [Aug 23, 2023] =
+- Added: New option in [Webmaster Tools](https://rankmath.com/kb/general-settings/#webmaster-tools) to add additional verification tags
+- Added: [New filter](https://rankmath.com/kb/filters-hooks-api-developer/#modify-link-counter-content) to modify the content passed to the [Link Counter](https://rankmath.com/kb/link-counter/)
+- Fixed: PHP Warning with WP CLI command `wp rankmath sitemap generate`
+- Fixed: Setup Wizard was not updating [Person/Organization Name](https://rankmath.com/kb/how-to-setup/#your-site)
+- Fixed: PHP warnings on the [Redirections](https://rankmath.com/kb/setting-up-redirections/) page in PHP 8.1, occurring when no Redirections are present on the site
+
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**

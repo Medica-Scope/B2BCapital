@@ -3,8 +3,8 @@ Contributors: vasyltech
 Tags: access control, membership, backend menu, user role, restricted content, security, jwt
 Requires at least: 4.7.0
 Requires PHP: 5.6.0
-Tested up to: 6.2.2
-Stable tag: 6.9.13
+Tested up to: 6.3.1
+Stable tag: 6.9.15
 
 All you need to manage access to WordPress websites on the frontend, backend and API levels for any role, user or visitors.
 
@@ -80,6 +80,14 @@ We take security and privacy very seriously, that is why there are several non-n
 11. Improve your website security
 
 == Changelog ==
+
+= 6.9.14 =
+* Fixed: PHP deprecated notices [https://github.com/aamplugin/advanced-access-manager/issues/305](https://github.com/aamplugin/advanced-access-manager/issues/305)
+* Fixed: Admin Menu get corrupted if the first submenu is restricted [https://github.com/aamplugin/advanced-access-manager/issues/307](https://github.com/aamplugin/advanced-access-manager/issues/307)
+* Fixed: Multipage role list malfunction [https://github.com/aamplugin/advanced-access-manager/issues/306](https://github.com/aamplugin/advanced-access-manager/issues/306)
+* Fixed: Empty error message when role fail to create [https://github.com/aamplugin/advanced-access-manager/issues/310](https://github.com/aamplugin/advanced-access-manager/issues/310)
+* Changed: Adding ref=plugin query param to all links that point to aamportal.com [https://github.com/aamplugin/advanced-access-manager/issues/308](https://github.com/aamplugin/advanced-access-manager/issues/308)
+* Added New: Introduce Access Denied Redirect RESTful API [https://github.com/aamplugin/advanced-access-manager/issues/309](https://github.com/aamplugin/advanced-access-manager/issues/309)
 
 = 6.9.13 =
 * Fixed: User object does not initialize after login [https://github.com/aamplugin/advanced-access-manager/issues/300](https://github.com/aamplugin/advanced-access-manager/issues/300)
