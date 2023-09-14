@@ -97,7 +97,7 @@
                               ],
                               'custom-html-4'      => [
                                   'type'    => 'html',
-                                  'content' => '<div class=""><p class="ninjaresend-code-patent" data-expire="'.$user->user_meta['verification_expire_date'].'">' . sprintf(__("It may take a minute to receive your code. <br> Haven't received it ? <button class='ninjaresend-code ninjahidden' type='button'>Resend a new code.</button> <span class='ninjacode-count-down'></span>"), $user->user_meta['verification_expire_date']) . '</p></div>',
+                                  'content' => '<div class=""><p class="ninja-resend-code-patent" data-expire="'.$user->user_meta['verification_expire_date'].'">' . sprintf(__("It may take a minute to receive your code. <br> Haven't received it ? <button class='ninja-resend-code ninjahidden' type='button'>Resend a new code.</button> <span class='ninja-code-count-down'></span>"), $user->user_meta['verification_expire_date']) . '</p></div>',
                                   'order'   => 40,
                               ],
                               'submit'             => [

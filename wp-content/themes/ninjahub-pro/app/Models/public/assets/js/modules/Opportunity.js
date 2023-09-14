@@ -12,7 +12,7 @@ import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
 import Nh     from './Nh';
 
-class NhOpportunity extends Si
+class NhOpportunity extends Nh
 {
     constructor()
     {

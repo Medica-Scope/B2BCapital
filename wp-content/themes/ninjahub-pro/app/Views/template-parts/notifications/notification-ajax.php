@@ -14,16 +14,16 @@
 
 
 ?>
-<div class="ninjanotification-item <?= $notification->new ? 'ninjanew-notification' : '' ?>" data-id="<?= $notification->ID ?>">
+<div class="ninja-notification-item <?= $notification->new ? 'ninja-new-notification' : '' ?>" data-id="<?= $notification->ID ?>">
     <a href="<?= $notification->url ?>">
         <div class="row">
             <div class="col-sm-2">
-                <div class="ninjanotification-image">
+                <div class="ninja-notification-image">
                     <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail', 'ninja') ?>"/>
                 </div>
             </div>
             <div class="col-sm-10">
-                <div class="ninjanotification-content">
+                <div class="ninja-notification-content">
                     <h6><?= $notification->title ?></h6>
                     <p><?= $notification->content ?></p>
                     <span><?= $notification->date ?></span>

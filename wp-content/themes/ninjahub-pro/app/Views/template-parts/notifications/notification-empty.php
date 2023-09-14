@@ -7,6 +7,6 @@
      */
 ?>
 
-<div class="ninjanotification-group-empty">
+<div class="ninja-notification-group-empty">
     <p><?= __('You have no new notifications', 'ninja') ?></p>
 </div>

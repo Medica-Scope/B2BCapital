@@ -54,7 +54,7 @@ class NhSearchFront
 
         $(document).on('click', function (e) {
             let $this = $(e.target);
-                if ($('#ninja_s').css('opacity') === '1' && !$this.hasClass('ninjaheader-search-icon') && !$this.parent().hasClass('ninjas')) {
+                if ($('#ninja_s').css('opacity') === '1' && !$this.hasClass('ninja-header-search-icon') && !$this.parent().hasClass('ninja-s')) {
                 $search.input.animate({ opacity: 0, width: '0' }, 250)
             }
         })

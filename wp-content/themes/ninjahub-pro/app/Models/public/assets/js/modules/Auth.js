@@ -414,7 +414,7 @@ class NhAuth extends Nh {
         let that = this,
             $codeForm = this.$el.codeForm,
             $resendCodeParent = $('.ninja-resend-code-patent'),
-            $CodeCountDown = $('<span class="ninjacode-count-down"></span>');
+            $CodeCountDown = $('<span class="ninja-code-count-down"></span>');
 
         $('.ninja-code-count-down').remove();
         $resendCodeParent.append($CodeCountDown);
