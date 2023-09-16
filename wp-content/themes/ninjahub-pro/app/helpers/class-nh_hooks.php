@@ -215,7 +215,7 @@
          */
         public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): static
         {
-            $this->styles = $this->enqueue($this->styles, Nh::_DOMAIN_NAME . '-' . $script_name, $path, $dependencies, $version, $media, $is_vendor);
+            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
             return $this;
         }
 
@@ -231,7 +231,7 @@
          */
         public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE): void
         {
-            $this->scripts = $this->enqueue($this->scripts, Nh::_DOMAIN_NAME . '-' . $script_name, $path, $dependencies, $version, $position, $is_vendor);
+            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor);
         }
 
         /**

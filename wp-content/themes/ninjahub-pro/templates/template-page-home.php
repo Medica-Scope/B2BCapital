@@ -17,10 +17,11 @@
     use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Partner;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Testimonial;
+    use NH\Nh;
 
     get_header();
 
-    Nh_Hooks::enqueue_style('public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/home-dashboard');
+    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/home-dashboard');
 ?>
 
     <main id="" class="site-home">
