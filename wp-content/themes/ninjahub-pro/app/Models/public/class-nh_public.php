@@ -58,18 +58,18 @@
         public function enqueue_styles(): void
         {
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-fontawesome', Nh_Hooks::PATHS['public']['vendors'] . '/css/fontawesome/css/all.min', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
+            $this->hooks->add_style('public-style-fontawesome', Nh_Hooks::PATHS['public']['vendors'] . '/css/fontawesome/css/all.min', TRUE);
+            $this->hooks->add_style('public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
+            $this->hooks->add_style('public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
 
             if (NH_lANG === 'ar') {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
+                $this->hooks->add_style('public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
             } else {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', TRUE);
+                $this->hooks->add_style('public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', TRUE);
             }
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style');
+            $this->hooks->add_style('public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
+            $this->hooks->add_style('public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style');
 
 
             $this->hooks->run();
@@ -79,13 +79,13 @@
         {
             global $gglcptch_options;
 
-            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
+            $this->hooks->add_script('public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
                 'jquery'
             ], Nh::_VERSION, NULL, TRUE);
 
-            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
+            $this->hooks->add_script('public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
                 'jquery',
-                Nh::_DOMAIN_NAME . '-public-script-bs5'
+                'public-script-bs5'
             ]);
 
             $this->hooks->add_localization(Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [
@@ -116,9 +116,9 @@
                 'dashboard',
                 'create-opportunity'
             ])) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+                $this->hooks->add_script('public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script('public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
+                $this->hooks->add_script('public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
             }
 
             if (is_page([
@@ -131,7 +131,7 @@
                 'verification',
                 'authentication',
             ])) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
+                $this->hooks->add_script('public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
             }
 
             $this->hooks->run();
