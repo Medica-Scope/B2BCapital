@@ -22,6 +22,19 @@
                 'theme_location' => 'default-menu',
                 'menu_id'        => 'main-menu',
             ]);
+
+//            wp_nav_menu(
+//                array(
+//                    'theme_location'  => 'default-menu',
+//                    'container_class' => 'collapse navbar-collapse',
+//                    'container_id'    => 'navbarNavDropdown',
+//                    'menu_class'      => 'navbar-nav ml-auto',
+//                    'fallback_cb'     => '',
+//                    'menu_id'         => 'main-menu',
+//                    'depth'           => 2,
+//                    'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
+//                )
+//            );
         ?>
 
         <?php
