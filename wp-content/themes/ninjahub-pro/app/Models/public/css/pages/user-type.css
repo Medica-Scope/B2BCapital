@@ -1,0 +1,1543 @@
+/* Imports */
+/* B2B Capital Colors */
+/* B2B Capital Colors */
+/* B2B Capital Colors Names */
+/* B2B Capital Fonts */
+/******************** Montserrat Fonts ********************/
+/* Montserrat Extra Light Font */
+@font-face {
+  font-family: "MontserratExtraLight";
+  src: url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff") format("woff"), url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff2") format("woff2");
+}
+/* Montserrat Light Font */
+@font-face {
+  font-family: "MontserratLight";
+  src: url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff") format("woff"), url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff2") format("woff2");
+}
+/* Montserrat Regular Font */
+@font-face {
+  font-family: "MontserratRegular";
+  src: url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff") format("woff"), url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff2") format("woff2");
+}
+/* Montserrat Medium Font */
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff") format("woff"), url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff2") format("woff2");
+}
+/* Montserrat Semi Bold Font */
+@font-face {
+  font-family: "MontserratSemiBold";
+  src: url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff") format("woff"), url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff2") format("woff2");
+}
+/* Montserrat Bold Font */
+@font-face {
+  font-family: "MontserratBold";
+  src: url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff") format("woff"), url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff2") format("woff2");
+}
+/******************** Space Grotesk Fonts ********************/
+/* Space Grotesk Light Font */
+@font-face {
+  font-family: "SpaceGroteskLight";
+  src: url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff2") format("woff2");
+}
+/* Space Grotesk Regular Font */
+@font-face {
+  font-family: "SpaceGroteskRegular";
+  src: url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff2") format("woff2");
+}
+/* Space Grotesk Medium Font */
+@font-face {
+  font-family: "SpaceGroteskMedium";
+  src: url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff2") format("woff2");
+}
+/* Space Grotesk Bold Font */
+@font-face {
+  font-family: "SpaceGroteskBold";
+  src: url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff2") format("woff2");
+}
+/******************** Tajawal Font ********************/
+/* Tajawal Regular Font */
+@font-face {
+  font-family: "TajawalRegular";
+  src: url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff") format("woff"), url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff2") format("woff2");
+}
+/* Tajawal Medium Font */
+@font-face {
+  font-family: "TajawalMedium";
+  src: url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff") format("woff"), url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff2") format("woff2");
+}
+/* Tajawal Bold Font */
+@font-face {
+  font-family: "TajawalBold";
+  src: url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff") format("woff"), url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff2") format("woff2");
+}
+/* Montserrat Font Family */
+/* Space Grotesk Font Family */
+/* Tajawal Font Family */
+/* B2B Capital Mixins */
+/* Screen Sizes */
+/* B2B Capital Button Styles Start Here */
+.bbc-btn {
+  padding: 0.75rem 1.5rem;
+  color: #FFFFFF;
+  display: inline-block;
+  text-align: center;
+  font-family: "SpaceGroteskMedium", sans-serif !important;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.bbc-btn:hover {
+  text-decoration: none;
+}
+.bbc-btn:focus {
+  outline: none;
+}
+.bbc-btn.apply {
+  background-color: #0E9CFB;
+}
+.bbc-btn.apply:hover {
+  background-color: #0380d3;
+}
+.bbc-btn.cancel {
+  background-color: #E11F26;
+}
+.bbc-btn.cancel:hover {
+  background-color: #b5181e;
+}
+.bbc-btn.outline {
+  border-radius: 0.125rem;
+}
+.bbc-btn.outline.success {
+  color: #58BD7D;
+  border-color: #58BD7D;
+}
+.bbc-btn.outline.success:hover {
+  color: #FFFFFF;
+  background-color: #58BD7D;
+}
+.bbc-btn.outline.action {
+  color: #0E9CFB;
+  border-color: #0E9CFB;
+}
+.bbc-btn.outline.action:hover {
+  color: #FFFFFF;
+  background-color: #0E9CFB;
+}
+.bbc-btn:disabled {
+  color: #727279;
+  border-color: #727279;
+  background-color: transparent;
+}
+.bbc-btn:disabled:hover {
+  cursor: context-menu;
+  background-color: transparent;
+}
+.bbc-btn.large {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+}
+@media only screen and (min-width: 1680px) {
+  .bbc-btn.large {
+    padding: 1.25rem 1.25rem;
+  }
+}
+.bbc-btn.medium {
+  padding: 0.5rem 2rem;
+}
+.bbc-btn.small {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: table;
+}
+.bbc-btn.has-icon {
+  display: flex;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+/* B2B Capital Button Arabic Styles Start Here */
+.rtl .bbc-btn {
+  font-family: "TajawalRegular", sans-serif !important;
+}
+
+/* B2B Capital Colors */
+/* B2B Capital Colors Names */
+.pt-6 {
+  padding-top: 75px !important;
+}
+
+.pb-6 {
+  padding-bottom: 75px !important;
+}
+
+.py-6 {
+  padding-top: 75px !important;
+  padding-bottom: 75px !important;
+}
+
+.px-6 {
+  padding-right: 75px !important;
+  padding-left: 75px !important;
+}
+
+@media only screen and (min-width: 1200px) {
+  .pt-xl-6 {
+    padding-top: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .pb-xl-6 {
+    padding-bottom: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .py-xl-6 {
+    padding-top: 75px !important;
+    padding-bottom: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .px-xl-6 {
+    padding-right: 75px !important;
+    padding-left: 75px !important;
+  }
+}
+
+.mt-6 {
+  margin-top: 75px !important;
+}
+
+.mb-6 {
+  margin-bottom: 75px !important;
+}
+
+.my-6 {
+  margin-top: 75px !important;
+  margin-bottom: 75px !important;
+}
+
+.mx-6 {
+  margin-right: 75px !important;
+  margin-left: 75px !important;
+}
+
+@media only screen and (min-width: 1200px) {
+  .mt-xl-6 {
+    margin-top: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .mb-xl-6 {
+    margin-bottom: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .my-xl-6 {
+    margin-top: 75px !important;
+    margin-bottom: 75px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .mx-xl-6 {
+    margin-right: 75px !important;
+    margin-left: 75px !important;
+  }
+}
+
+/******************** Montserrat Fonts ********************/
+/* Montserrat Extra Light Font */
+@font-face {
+  font-family: "MontserratExtraLight";
+  src: url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff") format("woff"), url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff2") format("woff2");
+}
+/* Montserrat Light Font */
+@font-face {
+  font-family: "MontserratLight";
+  src: url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff") format("woff"), url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff2") format("woff2");
+}
+/* Montserrat Regular Font */
+@font-face {
+  font-family: "MontserratRegular";
+  src: url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff") format("woff"), url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff2") format("woff2");
+}
+/* Montserrat Medium Font */
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff") format("woff"), url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff2") format("woff2");
+}
+/* Montserrat Semi Bold Font */
+@font-face {
+  font-family: "MontserratSemiBold";
+  src: url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff") format("woff"), url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff2") format("woff2");
+}
+/* Montserrat Bold Font */
+@font-face {
+  font-family: "MontserratBold";
+  src: url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff") format("woff"), url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff2") format("woff2");
+}
+/******************** Space Grotesk Fonts ********************/
+/* Space Grotesk Light Font */
+@font-face {
+  font-family: "SpaceGroteskLight";
+  src: url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff2") format("woff2");
+}
+/* Space Grotesk Regular Font */
+@font-face {
+  font-family: "SpaceGroteskRegular";
+  src: url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff2") format("woff2");
+}
+/* Space Grotesk Medium Font */
+@font-face {
+  font-family: "SpaceGroteskMedium";
+  src: url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff2") format("woff2");
+}
+/* Space Grotesk Bold Font */
+@font-face {
+  font-family: "SpaceGroteskBold";
+  src: url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff2") format("woff2");
+}
+/******************** Tajawal Font ********************/
+/* Tajawal Regular Font */
+@font-face {
+  font-family: "TajawalRegular";
+  src: url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff") format("woff"), url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff2") format("woff2");
+}
+/* Tajawal Medium Font */
+@font-face {
+  font-family: "TajawalMedium";
+  src: url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff") format("woff"), url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff2") format("woff2");
+}
+/* Tajawal Bold Font */
+@font-face {
+  font-family: "TajawalBold";
+  src: url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff") format("woff"), url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff2") format("woff2");
+}
+/* Montserrat Font Family */
+/* Space Grotesk Font Family */
+/* Tajawal Font Family */
+/* Screen Sizes */
+/* B2B Capital Colors */
+/* B2B Capital Colors */
+/* B2B Capital Colors Names */
+/* B2B Capital Fonts */
+/******************** Montserrat Fonts ********************/
+/* Montserrat Extra Light Font */
+@font-face {
+  font-family: "MontserratExtraLight";
+  src: url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff") format("woff"), url("../../../assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff2") format("woff2");
+}
+/* Montserrat Light Font */
+@font-face {
+  font-family: "MontserratLight";
+  src: url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff") format("woff"), url("../../../assets/fonts/Montserrat/Light/Montserrat-Light.woff2") format("woff2");
+}
+/* Montserrat Regular Font */
+@font-face {
+  font-family: "MontserratRegular";
+  src: url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff") format("woff"), url("../../../assets/fonts/Montserrat/Regular/Montserrat-Regular.woff2") format("woff2");
+}
+/* Montserrat Medium Font */
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff") format("woff"), url("../../../assets/fonts/Montserrat/Medium/Montserrat-Medium.woff2") format("woff2");
+}
+/* Montserrat Semi Bold Font */
+@font-face {
+  font-family: "MontserratSemiBold";
+  src: url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff") format("woff"), url("../../../assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff2") format("woff2");
+}
+/* Montserrat Bold Font */
+@font-face {
+  font-family: "MontserratBold";
+  src: url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff") format("woff"), url("../../../assets/fonts/Montserrat/Bold/Montserrat-Bold.woff2") format("woff2");
+}
+/******************** Space Grotesk Fonts ********************/
+/* Space Grotesk Light Font */
+@font-face {
+  font-family: "SpaceGroteskLight";
+  src: url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff2") format("woff2");
+}
+/* Space Grotesk Regular Font */
+@font-face {
+  font-family: "SpaceGroteskRegular";
+  src: url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff2") format("woff2");
+}
+/* Space Grotesk Medium Font */
+@font-face {
+  font-family: "SpaceGroteskMedium";
+  src: url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff2") format("woff2");
+}
+/* Space Grotesk Bold Font */
+@font-face {
+  font-family: "SpaceGroteskBold";
+  src: url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff") format("woff"), url("../../../assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff2") format("woff2");
+}
+/******************** Tajawal Font ********************/
+/* Tajawal Regular Font */
+@font-face {
+  font-family: "TajawalRegular";
+  src: url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff") format("woff"), url("../../../assets/fonts/Tajawal/Regular/Tajawal-Regular.woff2") format("woff2");
+}
+/* Tajawal Medium Font */
+@font-face {
+  font-family: "TajawalMedium";
+  src: url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff") format("woff"), url("../../../assets/fonts/Tajawal/Medium/Tajawal-Medium.woff2") format("woff2");
+}
+/* Tajawal Bold Font */
+@font-face {
+  font-family: "TajawalBold";
+  src: url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff") format("woff"), url("../../../assets/fonts/Tajawal/Bold/Tajawal-Bold.woff2") format("woff2");
+}
+/* Montserrat Font Family */
+/* Space Grotesk Font Family */
+/* Tajawal Font Family */
+/* B2B Capital Screen Size */
+/* Screen Sizes */
+/* B2B Capital Animations */
+/* B2B Capital Animations Styles Start Here */
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+  37% {
+    transform: translateX(5px);
+    animation-timing-function: ease-out;
+  }
+  55% {
+    transform: translateX(-5px);
+    animation-timing-function: ease-in;
+  }
+  73% {
+    transform: translateX(4px);
+    animation-timing-function: ease-out;
+  }
+  82% {
+    transform: translateX(-4px);
+    animation-timing-function: ease-in;
+  }
+  91% {
+    transform: translateX(2px);
+    animation-timing-function: ease-out;
+  }
+  96% {
+    transform: translateX(-2px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes scaleDown {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+@keyframes arrowEnglishSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+}
+@keyframes arrowArabicSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+}
+@keyframes arrowEnglishMove {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+@keyframes arrowArabicMove {
+  0%, 100% {
+    transform: translateX(40px) scaleX(-1);
+  }
+  50% {
+    transform: translateX(20px) scaleX(-1);
+  }
+}
+i[class^=bbc-], i[class*=" bbc-"] {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Forms Styles Start Here */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  margin: 0.9rem 0 0;
+}
+@media only screen and (min-width: 1680px) {
+  .form-field {
+    margin: 1.5rem 0 0;
+  }
+}
+.form-field.pl-3 {
+  padding-left: 1rem;
+}
+.form-field.pr-3 {
+  padding-right: 1rem;
+}
+.form-field .form-control-has-icon {
+  position: relative;
+}
+.form-field .form-control-has-icon .icon-show-password,
+.form-field .form-control-has-icon i[class^=bbc-],
+.form-field .form-control-has-icon i[class*=" bbc-"] {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #FFFFFF;
+  padding: 0.3rem;
+  border-radius: 2px;
+  color: #0E9CFB;
+}
+.form-field .form-control-has-icon .icon-show-password {
+  left: initial;
+  right: 0.8rem;
+  background-color: transparent;
+}
+.form-field .form-control-has-icon .icon-show-password .icon-container {
+  position: relative;
+}
+.form-field .form-control-has-icon .icon-show-password i[class^=bbc-],
+.form-field .form-control-has-icon .icon-show-password i[class*=" bbc-"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  transform: initial;
+  visibility: hidden;
+  backface-visibility: hidden;
+  background-color: transparent;
+}
+.form-field .form-control-has-icon .icon-show-password i[class^=bbc-].active,
+.form-field .form-control-has-icon .icon-show-password i[class*=" bbc-"].active {
+  z-index: 12;
+  visibility: visible;
+  backface-visibility: visible;
+}
+.form-field .form-control-has-icon .form-control {
+  padding: 1rem 2rem 1rem 3rem;
+}
+.form-field .form-control-label {
+  color: #071B2E;
+  line-height: 1rem;
+  font-size: 1rem;
+  font-family: "SpaceGroteskMedium", sans-serif;
+  margin-bottom: 0.5rem;
+}
+.form-field .form-control {
+  margin: 0;
+  height: auto;
+  padding: 1rem 2rem;
+  color: #071B2E;
+  font-size: 0.8rem;
+  font-family: "SpaceGroteskLight", sans-serif;
+  border-radius: 3px;
+  border: none;
+  background-color: #F5F7F9;
+}
+@media only screen and (min-width: 1680px) {
+  .form-field .form-control {
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+  }
+}
+.form-field .form-control:focus {
+  box-shadow: none;
+}
+.form-field .error-message {
+  display: none;
+  width: 100%;
+  position: absolute;
+  bottom: -0.25rem;
+  color: #E11F26;
+  font-size: 0.75rem;
+  font-family: "MontserratRegular", sans-serif;
+}
+.form-field .error-message .message {
+  width: 100%;
+  display: block;
+}
+.form-field .error-message .message + .message {
+  position: absolute;
+}
+.form-field.filled .form-control-label {
+  display: none;
+}
+.form-field.has-error {
+  animation: bounce 0.5s;
+  animation-delay: 0.25s;
+}
+.form-field.has-error .form-control-label {
+  display: inline-block;
+  color: #E11F26;
+}
+.form-field.has-error .form-control {
+  outline: 0;
+  border-color: red;
+  border-bottom: 1px solid #E11F26;
+}
+.form-field.has-error .error-message {
+  display: inline-block;
+}
+
+.form-check,
+.form-check-label,
+.form-check-input {
+  cursor: pointer;
+}
+
+/* Forms Arabic Styles Start Here */
+.rtl .form-field .form-control-label {
+  left: auto;
+  right: 0;
+  font-family: "TajawalRegular", sans-serif;
+}
+.rtl .form-field .form-control {
+  font-family: "TajawalRegular", sans-serif;
+}
+.rtl .form-field.has-error .error-message {
+  font-family: "TajawalRegular", sans-serif;
+}
+
+/* Placeholder Styles Start Here */
+::-moz-placeholder {
+  color: #727279;
+  opacity: 1; /* Firefox */
+}
+::placeholder {
+  color: #727279;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #727279;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #727279;
+}
+
+.nh_form .form-control:focus {
+  outline: none;
+  box-shadow: 0 1px 7px 1px rgba(0, 123, 255, 0.25);
+}
+.nh_form .ninja-input-wrapper {
+  margin-bottom: 5px;
+}
+.nh_form .ninja-input-wrapper label {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.nh_form .ninja-input-wrapper .ninja-input {
+  height: 36px;
+  font-size: 16px;
+}
+.nh_form .ninja-input-wrapper .text-muted {
+  font-size: 12px;
+}
+.nh_form .form-check {
+  padding-left: 0;
+  padding-right: 0;
+}
+.nh_form .form-check .ninja-checkbox {
+  height: auto;
+  display: inline-block;
+  width: auto;
+}
+.nh_form .ninja-btn {
+  border-radius: 0;
+  font-size: 16px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+/* B2B Capital Animations Styles Start Here */
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+  37% {
+    transform: translateX(5px);
+    animation-timing-function: ease-out;
+  }
+  55% {
+    transform: translateX(-5px);
+    animation-timing-function: ease-in;
+  }
+  73% {
+    transform: translateX(4px);
+    animation-timing-function: ease-out;
+  }
+  82% {
+    transform: translateX(-4px);
+    animation-timing-function: ease-in;
+  }
+  91% {
+    transform: translateX(2px);
+    animation-timing-function: ease-out;
+  }
+  96% {
+    transform: translateX(-2px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes scaleDown {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+@keyframes arrowEnglishSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+}
+@keyframes arrowArabicSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+}
+@keyframes arrowEnglishMove {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+@keyframes arrowArabicMove {
+  0%, 100% {
+    transform: translateX(40px) scaleX(-1);
+  }
+  50% {
+    transform: translateX(20px) scaleX(-1);
+  }
+}
+i[class^=bbc-], i[class*=" bbc-"] {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Some Resets */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a:link, a:hover, a:visited, a:active {
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* HTML Styles Start Here */
+html {
+  width: 100vw;
+  height: 100vh;
+  font-size: 10px;
+}
+@media only screen and (min-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Body Styles Start Here */
+body {
+  direction: ltr;
+  min-width: 320px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  color: #F5F5F5;
+  line-height: 1.5;
+  font-family: "MontserratRegular", sans-serif;
+  /* Body Arabic Styles Start Here */
+}
+body .index-page-content {
+  width: 70vw;
+  margin: 5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body .index-page-content .index-navigation {
+  width: 100%;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+body .index-page-content .index-navigation .navbar-nav .nav-item.head {
+  margin-bottom: 1rem;
+}
+body .index-page-content .index-navigation .navbar-nav .nav-item.head {
+  color: #082e4c;
+  font-family: "MontserratBold", sans-serif;
+}
+body .index-page-content .index-navigation .navbar-nav .nav-item .nav-link {
+  color: #0E9CFB;
+  font-family: "MontserratRegular", sans-serif;
+}
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+body.rtl .page-title {
+  font-family: "TajawalMedium", sans-serif;
+}
+body.rtl .page-subtitle {
+  font-family: "TajawalRegular", sans-serif;
+}
+body.rtl .home-link {
+  font-family: "TajawalRegular", sans-serif;
+}
+
+/***** All Scrollbars Styles Start Here *****/
+/* Any Scrollbar Width & Height */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Any Scrollbar Track Color */
+::-webkit-scrollbar-track {
+  background: rgba(114, 114, 121, 0.25);
+}
+
+/* Vertical Scrollbar Handle Color */
+::-webkit-scrollbar-thumb {
+  background: #0E9CFB;
+}
+
+/* Vertical Scrollbar Handle Color On Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0370b9;
+}
+
+/* Horizontal Scrollbar Handle Color */
+.partners-logos::-webkit-scrollbar-thumb {
+  background: #FE6500;
+}
+
+/* Horizontal Scrollbar Handle Color On Hover */
+.partners-logos::-webkit-scrollbar-thumb:hover {
+  background: #A64200;
+}
+
+/* Horizontal Scrollbar Handle Color */
+.services-categories-content::-webkit-scrollbar-thumb {
+  background: #FE6500;
+}
+
+/* Horizontal Scrollbar Handle Color On Hover */
+.services-categories-content::-webkit-scrollbar-thumb:hover {
+  background: #A64200;
+}
+
+/*****************************************************************/
+.logos-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.logos-row::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.logos-row::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+/* User Type Styles Start Here */
+.landing-page.main .app-brand {
+  width: 4rem;
+  z-index: 2;
+  position: absolute;
+  top: 2rem;
+  left: 1rem;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main .app-brand {
+    width: 4.6875rem;
+    top: 3rem;
+    left: 1rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main .app-brand {
+    width: 7.875rem;
+    top: 3rem;
+    left: 1rem;
+  }
+}
+.landing-page.main main .layout .page-content {
+  max-height: 100%;
+  padding: 0;
+}
+.landing-page.main main .layout .page-content .user-type-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* User Types Title Styles Start Here */
+  /* User Type Styles Start Here */
+  /* Active User Type Page Styles Start Here */
+}
+.landing-page.main main .layout .page-content .user-type-content .types-title {
+  max-width: 32rem;
+  margin-bottom: 4.85rem;
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.55rem;
+  font-family: "SpaceGroteskBold", sans-serif;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .types-title {
+    margin-bottom: 6rem;
+    font-size: 1.8rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .types-title {
+    max-width: 34rem;
+    margin-bottom: 7.25rem;
+    font-size: 2.5rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types {
+  display: flex;
+  align-items: center;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type {
+  margin: 0 2.75rem;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-image {
+  width: 14.6875rem;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-image {
+    width: 19.375rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-image {
+    width: 27.8125rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper {
+  z-index: 2;
+  position: relative;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border: 1px dashed #FFFFFF;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper::before {
+    height: 1.6875rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper::before {
+    height: 2.375rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder {
+  display: inline-block;
+  width: 1.057rem;
+  height: 1.057rem;
+  border-radius: 50%;
+  border: 1px dashed #FFFFFF;
+  z-index: 1;
+  position: absolute;
+  top: 1.575rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder {
+    width: 1.125rem;
+    height: 1.125rem;
+    top: 1.675rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder {
+    width: 1.875rem;
+    height: 1.875rem;
+    top: 2.375rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner {
+  width: calc(1.057rem - 2px);
+  height: calc(1.057rem - 2px);
+  z-index: 3;
+  border: none;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner {
+    width: calc(1.125rem - 1px);
+    height: calc(1.125rem - 1px);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner {
+    width: calc(1.875rem - 1px);
+    height: calc(1.875rem - 1px);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(50%) translateY(50%);
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  opacity: 0.15;
+  z-index: 3;
+  border: none;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::before {
+    width: 0.58rem;
+    height: 0.58rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::before {
+    width: 0.9375rem;
+    height: 0.9375rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::after {
+  content: "";
+  display: inline-block;
+  width: 0.2125rem;
+  height: 0.2125rem;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-35%);
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::after {
+    width: 0.25rem;
+    height: 0.25rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::after {
+    width: 0.3125rem;
+    height: 0.3125rem;
+    transform: translateX(-25%) translateY(-35%);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .user-type-title {
+  margin-top: 1.5rem;
+  height: 2.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  position: relative;
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  font-family: "SpaceGroteskMedium", sans-serif;
+  border-radius: 0.425rem;
+  border: 1px dashed #FFFFFF;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .user-type-title {
+    margin-top: 1.6875rem;
+    height: 3.125rem;
+    font-size: 0.875rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .user-type-title {
+    margin-top: 2.375rem;
+    height: 5.625rem;
+    font-size: 1.375rem;
+    border-radius: 0.625rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more {
+  display: flex;
+  align-items: center;
+  margin-top: 1.21rem;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-family: "SpaceGroteskLight", sans-serif;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon {
+  margin-top: 0.1rem;
+  position: relative;
+  top: -1px;
+  font-size: 0.4rem;
+  animation: arrowEnglishSliding 2s infinite;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon {
+    top: 0;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon:first-child {
+  margin-left: 0.25rem;
+  animation-delay: -0.2s;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon:last-child {
+  animation-delay: -0.4s;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more {
+    margin-top: 1.375rem;
+    font-size: 0.875rem;
+  }
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon {
+    font-size: 0.6rem;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more {
+    margin-top: 1.875rem;
+    font-size: 0.875rem;
+  }
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon {
+    font-size: 0.6rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+  width: 6.85rem;
+  transform: translateX(-1.2rem);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+    width: 8.125rem;
+    transform: translateX(-1.5rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+    width: 11.375rem;
+    transform: translateX(-2.1rem);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper .holder {
+  background-color: #246567;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper .user-type-title {
+  background-color: #246567;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+  transform: translateX(-1.2rem);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+    transform: translateX(-1.5rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+    transform: translateX(-2.1rem);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+  width: 7.715rem;
+  transform: translateX(1rem);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+    width: 9rem;
+    transform: translateX(1rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+    width: 12.875rem;
+    transform: translateX(1rem);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper .holder {
+  background-color: #0b6eb3;
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper .user-type-title {
+  background-color: #0b6eb3;
+  padding-top: 4px;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper .user-type-title {
+    padding-top: 2px;
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper .user-type-title {
+    padding-top: 0;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+  transform: translateX(1rem);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+    transform: translateX(1rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+    transform: translateX(1rem);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .user-type-video {
+  width: 30%;
+  overflow: hidden;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .user-type-video .video-scene {
+  width: 125%;
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .user-type-video .video-scene {
+    width: 110%;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .user-type-video.investor .video-scene {
+  transform: translateX(-20%);
+}
+@media only screen and (min-width: 1200px) {
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .user-type-video.investor .video-scene {
+    transform: translateX(-10%);
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content {
+  width: 45%;
+  color: #FFFFFF;
+  text-align: initial;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-title {
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  font-family: "SpaceGroteskMedium", sans-serif;
+  border-bottom: 1px solid rgba(114, 114, 121, 0.5);
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-description {
+  font-size: 0.8rem;
+  font-family: "MontserratLight", sans-serif;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-description + .user-type-description {
+  margin-top: 0.5rem;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-action {
+  width: 12rem;
+  margin: 2rem 0 0;
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-title {
+    font-size: 3.5rem;
+  }
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-description {
+    font-size: 1.1rem;
+  }
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-description + .user-type-description {
+    margin-top: 1rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type {
+  width: 15%;
+  overflow: hidden;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user {
+  display: flex;
+  flex-direction: column;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-type-image {
+  width: 145%;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-family: "SpaceGroteskLight", sans-serif;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon {
+  font-size: 0.4rem;
+  animation: arrowEnglishSliding 2s infinite;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon:first-child {
+  margin-left: 0.25rem;
+  animation-delay: -0.2s;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon:last-child {
+  animation-delay: -0.4s;
+}
+@media only screen and (min-width: 1680px) {
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title {
+    font-size: 1rem;
+  }
+  .landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon {
+    font-size: 0.6rem;
+  }
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type.owner .other-user .other-user-title {
+  margin: 0.75rem 0 0 2rem;
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type.investor .other-user .other-type-image {
+  transform: translateX(-32%);
+}
+.landing-page.main main .layout .page-content .user-type-content .active-user-type .other-user-type.investor .other-user .other-user-title {
+  margin: 0.75rem 0 0 3.5rem;
+}
+
+/* User Type Arabic Styles Start Here */
+.rtl .landing-page .app-brand {
+  left: auto;
+  right: 1.5rem;
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page .app-brand {
+    left: auto;
+    right: 1rem;
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content {
+  /* User Types Title Styles Start Here */
+  /* User Type Styles Start Here */
+  /* Active User Type Page Styles Start Here */
+}
+.rtl .landing-page main .layout .page-content .user-type-content .types-title {
+  font-family: "TajawalBold", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper::before {
+  left: auto;
+  right: 50%;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(-50%);
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::before {
+  left: auto;
+  right: 0;
+  transform: translateX(-50%) translateY(50%);
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::after {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(-35%);
+}
+@media only screen and (min-width: 1680px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .holder.inner::after {
+    transform: translateX(25%) translateY(-35%);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .user-type-title-wrapper .user-type-title {
+  font-family: "TajawalMedium", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more {
+  font-family: "TajawalRegular", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon {
+  animation: arrowArabicSliding 2s infinite;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type .user-type-link .know-more .icon:first-child {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+  transform: translateX(-0.9rem);
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+    transform: translateX(-1.3rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .user-type-title-wrapper {
+    transform: translateX(-2.1rem);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+  transform: translateX(-0.9);
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+    transform: translateX(-1.3rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.investor .user-type-link .know-more {
+    transform: translateX(-2.1rem);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+  transform: translateX(1rem);
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+    transform: translateX(1rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .user-type-title-wrapper {
+    transform: translateX(1rem);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+  transform: translateX(1rem);
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+    transform: translateX(1rem);
+  }
+}
+@media only screen and (min-width: 1680px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .user-types .user-type.owner .user-type-link .know-more {
+    transform: translateX(1rem);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .user-type-video.investor .video-scene {
+  transform: translateX(20%) scaleX(-1);
+}
+@media only screen and (min-width: 1200px) {
+  .rtl .landing-page main .layout .page-content .user-type-content .active-user-type .user-type-video.investor .video-scene {
+    transform: translateX(10%) scaleX(-1);
+  }
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .user-type-video.owner .video-scene {
+  transform: scaleX(-1);
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-title {
+  font-family: "TajawalMedium", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .active-user-type-content .user-type-description {
+  font-family: "TajawalRegular", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title {
+  font-family: "TajawalRegular", sans-serif;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon {
+  animation: arrowArabicSliding 2s infinite;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type .other-user .other-user-title .icon:first-child {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type.owner .other-user .other-type-image {
+  transform: scaleX(-1);
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type.owner .other-user .other-user-title {
+  margin: 0.75rem 2rem 0 0;
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type.investor .other-user .other-type-image {
+  transform: translateX(32%) scaleX(-1);
+}
+.rtl .landing-page main .layout .page-content .user-type-content .active-user-type .other-user-type.investor .other-user .other-user-title {
+  margin: 0.75rem 3.5rem 0 0;
+}

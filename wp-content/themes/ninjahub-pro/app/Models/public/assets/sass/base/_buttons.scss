@@ -1,0 +1,90 @@
+/* B2B Capital Colors */
+@import "variables";
+/* B2B Capital Fonts */
+@import "typography";
+/* B2B Capital Mixins */
+@import "mixins";
+
+/* B2B Capital Button Styles Start Here */
+.bbc-btn {
+  padding: 0.75rem 1.5rem;
+  color: $layout-light;
+  display: inline-block;
+  text-align: center;
+  font-family:$bbc-secondary-en-font-medium !important;
+  border: 1px solid transparent;
+	border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+	cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  &.apply {
+    background-color: $primary;
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+  &.cancel {
+    background-color: $error;
+    &:hover {
+      background-color: darken($error, 10%);
+    }
+  }
+  &.outline {
+    border-radius: 0.125rem;
+    &.success {
+      color: $success;
+      border-color: $success;
+      &:hover {
+        color: $layout-light;
+        background-color: $success;
+      }
+    }
+    &.action {
+      color: $primary;
+      border-color: $primary;
+      &:hover {
+        color: $layout-light;
+        background-color: $primary;
+      }
+    }
+  }
+  &:disabled {
+    color: $layout-medium;
+    border-color: $layout-medium;
+    background-color: transparent;
+    &:hover {
+      cursor: context-menu;
+      background-color: transparent;
+    }
+  }
+  &.large {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    @include xLarge-screen {
+      padding: 1.25rem 1.25rem;
+    }
+  }
+  &.medium {
+    padding: 0.5rem 2rem;
+  }
+  &.small {
+    width: fit-content;
+    display: table; // For IE
+  }
+	&.has-icon{
+		    display: flex;
+    align-items: center;
+    width: fit-content;
+	}
+}
+/* B2B Capital Button Arabic Styles Start Here */
+.rtl {
+  .bbc-btn {
+    font-family: $bbc-ar-font-regular !important;
+  }
+}

@@ -1,0 +1,229 @@
+/* B2B Capital Colors */
+@import 'variables';
+/* B2B Capital Fonts */
+@import 'typography';
+/* B2B Capital Screen Size */
+@import 'mixins';
+/* B2B Capital Animations */
+@import 'animations';
+
+/* Forms Styles Start Here */
+.form-field {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 1rem;
+	margin: 0.9rem 0 0;
+	@include xLarge-screen {
+		margin: 1.5rem 0 0;
+	}
+	&.pl-3 {
+		padding-left: 1rem;
+	}
+	&.pr-3 {
+		padding-right: 1rem;
+	}
+	.form-control-has-icon {
+		position: relative;
+		.icon-show-password,
+		i[class^='bbc-'],
+		i[class*=' bbc-'] {
+			position: absolute;
+			left: 0.8rem;
+			top: 50%;
+			transform: translateY(-50%);
+			background-color: $layout-light;
+			padding: 0.3rem;
+			border-radius: 2px;
+			color: $primary;
+		}
+		.icon-show-password {
+			left: initial;
+			right: 0.8rem;
+			background-color: transparent;
+			.icon-container{
+				position: relative;
+			}
+			i[class^='bbc-'],
+			i[class*=' bbc-'] {
+				position: absolute;
+				    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+				z-index: 11;
+				transform: initial;
+				visibility: hidden;
+				backface-visibility: hidden;
+				background-color: transparent;
+			}
+			i[class^='bbc-'].active,
+			i[class*=' bbc-'].active{
+				z-index: 12;
+				visibility: visible;
+				backface-visibility: visible;
+			}
+		}
+		.form-control {
+			padding: 1rem 2rem 1rem 3rem;
+		}
+	}
+	.form-control-label {
+		color: $layout-dark;
+		line-height: 1rem;
+		font-size: 1rem;
+		font-family: $bbc-secondary-en-font-medium;
+		margin-bottom: 0.5rem;
+	}
+	.form-control {
+		margin: 0;
+		height: auto;
+		padding: 1rem 2rem;
+		color: $layout-dark;
+		font-size: 0.8rem;
+		font-family: $bbc-secondary-en-font-light;
+		border-radius: 3px;
+		border: none;
+		background-color: $gray-light;
+		@include xLarge-screen {
+			padding: 0.75rem 0;
+			font-size: 1.1rem;
+		}
+		&:focus {
+			box-shadow: none;
+		}
+	}
+	.error-message {
+		display: none;
+		width: 100%;
+		position: absolute;
+		bottom: -0.25rem;
+		color: $error;
+		font-size: 0.75rem;
+		font-family: $bbc-primary-en-font-regular;
+		.message {
+			width: 100%;
+			display: block;
+			+ .message {
+				position: absolute;
+			}
+		}
+	}
+	&.filled {
+		.form-control-label {
+			display: none;
+		}
+	}
+	&.has-error {
+		animation: bounce 0.5s;
+		animation-delay: 0.25s;
+		.form-control-label {
+			display: inline-block;
+			color: $error;
+		}
+		.form-control {
+			outline: 0;
+			border-color: red;
+			border-bottom: 1px solid $error;
+		}
+		.error-message {
+			display: inline-block;
+		}
+	}
+}
+
+.form-check,
+.form-check-label,
+.form-check-input {
+	cursor: pointer;
+}
+
+/* Forms Arabic Styles Start Here */
+.rtl {
+	.form-field {
+		.form-control-label {
+			left: auto;
+			right: 0;
+			font-family: $bbc-ar-font-regular;
+		}
+		.form-control {
+			font-family: $bbc-ar-font-regular;
+		}
+		&.has-error {
+			.error-message {
+				font-family: $bbc-ar-font-regular;
+			}
+		}
+	}
+}
+/* Placeholder Styles Start Here */
+::placeholder {
+	color: $layout-medium;
+	opacity: 1; /* Firefox */
+}
+:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: $layout-medium;
+}
+::-ms-input-placeholder {
+	/* Microsoft Edge */
+	color: $layout-medium;
+}
+
+
+
+
+
+
+
+
+
+
+.nh_form {
+  .form-control:focus {
+    outline: none;
+    box-shadow: 0 1px 7px 1px rgba(0, 123, 255, .25);
+  }
+
+  .ninja-input-wrapper {
+    margin-bottom: 5px;
+
+    label {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+
+    .ninja-input {
+      height: 36px;
+      font-size: 16px;
+    }
+
+    .text-muted {
+      font-size: 12px;
+    }
+  }
+
+  .form-check {
+    padding-left: 0;
+    padding-right: 0;
+
+    .ninja-checkbox {
+      height: auto;
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  .ninja-btn {
+    border-radius: 0;
+    font-size: 16px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+}
+
+// @import "buttons";
+// @import "fields";
+// @import "login";
+// @import "forgot_password";
+// @import "registration";
+// @import "verify_email";

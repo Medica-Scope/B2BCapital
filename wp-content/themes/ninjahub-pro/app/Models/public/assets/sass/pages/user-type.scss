@@ -1,0 +1,607 @@
+@import "landing-theme";
+/* User Type Styles Start Here */
+.landing-page {
+  &.main {
+    .app-brand {
+      width: 4rem;
+      z-index: 2;
+      position: absolute;
+      top: 2rem;
+      left: 1rem;
+      @include large-screen {
+        width: 4.6875rem;
+        top: 3rem;
+        left: 1rem;
+      }
+      @include xLarge-screen {
+        width: 7.875rem;
+        top: 3rem;
+        left: 1rem;
+      }
+    }
+    main {
+      .layout {
+        .page-content {
+          max-height: 100%;
+          padding: 0;
+          .user-type-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* User Types Title Styles Start Here */
+            .types-title {
+              max-width: 32rem;
+              margin-bottom: 4.85rem;
+              color: $layout-light;
+              text-align: center;
+              text-transform: uppercase;
+              font-size: 1.55rem;
+              font-family: $bbc-secondary-en-font-bold;
+              @include large-screen {
+                margin-bottom: 6rem;
+                font-size: 1.8rem;
+              }
+              @include xLarge-screen {
+                max-width: 34rem;
+                margin-bottom: 7.25rem;
+                font-size: 2.5rem;
+              }
+            }
+            /* User Type Styles Start Here */
+            .user-types {
+              display: flex;
+              align-items: center;
+              .user-type {
+                margin: 0 2.75rem;
+                .user-type-link {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  .user-type-image {
+                    width: 14.6875rem;
+                    @include large-screen {
+                      width: 19.375rem;
+                    }
+                    @include xLarge-screen {
+                      width: 27.8125rem;
+                    }
+                  }
+                  .user-type-title-wrapper {
+                    z-index: 2;
+                    position: relative;
+                    &::before {
+                      content: '';
+                      display: inline-block;
+                      width: 1px;
+                      height: 1.5rem;
+                      position: absolute;
+                      top: 0;
+                      left: 50%;
+                      border: 1px dashed $layout-light;
+                      @include large-screen {
+                        height: 1.6875rem;
+                      }
+                      @include xLarge-screen {
+                        height: 2.375rem;
+                      }
+                    }
+                    .holder {
+                      display: inline-block;
+                      width: 1.057rem;
+                      height: 1.057rem;
+                      border-radius: 50%;
+                      border: 1px dashed $layout-light;
+                      z-index: 1;
+                      position: absolute;
+                      top: 1.575rem;
+                      left: 50%;
+                      transform: translateX(-50%) translateY(-50%);
+                      @include large-screen {
+                        width: 1.125rem;
+                        height: 1.125rem;
+                        top: 1.675rem;
+                      }
+                      @include xLarge-screen {
+                        width: 1.875rem;
+                        height: 1.875rem;
+                        top: 2.375rem;
+                      }
+                      &.inner {
+                        width: calc(1.057rem - 2px);
+                        height: calc(1.057rem - 2px);
+                        z-index: 3;
+                        border: none;
+                        @include large-screen {
+                          width: calc(1.125rem - 1px);
+                          height: calc(1.125rem - 1px);
+                        }
+                        @include xLarge-screen {
+                          width: calc(1.875rem - 1px);
+                          height: calc(1.875rem - 1px);
+                        }
+                        &::before {
+                          content: '';
+                          display: inline-block;
+                          width: 0.45rem;
+                          height: 0.45rem;
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          transform: translateX(50%) translateY(50%);
+                          border-radius: 50%;
+                          background-color: $layout-light;
+                          opacity: 0.15;
+                          z-index: 3;
+                          border: none;
+                          @include large-screen {
+                            width: 0.58rem;
+                            height: 0.58rem;
+                          }
+                          @include xLarge-screen {
+                            width: 0.9375rem;
+                            height: 0.9375rem;
+                          }
+                        }
+                        &::after {
+                          content: '';
+                          display: inline-block;
+                          width: 0.2125rem;
+                          height: 0.2125rem;
+                          z-index: 2;
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translateX(-50%) translateY(-35%);
+                          border-radius: 50%;
+                          background-color: $layout-light;
+                          @include large-screen {
+                            width: 0.25rem;
+                            height: 0.25rem;
+                          }
+                          @include xLarge-screen {
+                            width: 0.3125rem;
+                            height: 0.3125rem;
+                            transform: translateX(-25%) translateY(-35%);
+                          }
+                        }
+                      }
+                    }
+                    .user-type-title {
+                      margin-top: 1.5rem;
+                      height: 2.7rem;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      z-index: 2;
+                      position: relative;
+                      color: $layout-light;
+                      text-align: center;
+                      text-transform: uppercase;
+                      font-size: 0.68rem;
+                      font-family: $bbc-secondary-en-font-medium;
+                      border-radius: 0.425rem;
+                      border: 1px dashed $layout-light;
+                      @include large-screen {
+                        margin-top: 1.6875rem;
+                        height: 3.125rem;
+                        font-size: 0.875rem;
+                      }
+                      @include xLarge-screen {
+                        margin-top: 2.375rem;
+                        height: 5.625rem;
+                        font-size: 1.375rem;
+                        border-radius: 0.625rem;
+                      }
+                    }
+                  }
+                  .know-more {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 1.21rem;
+                    color: $layout-light;
+                    font-size: 0.7rem;
+                    font-family: $bbc-secondary-en-font-light;
+                    .icon {
+                      margin-top: 0.1rem;
+                      position: relative;
+                      top: -1px;
+                      font-size: 0.4rem;
+                      animation: arrowEnglishSliding 2s infinite;
+                      @include large-screen {
+                        top: 0;
+                      }
+                      &:first-child {
+                        margin-left: 0.25rem;
+                        animation-delay: -0.2s;
+                      }
+                      &:last-child {
+                        animation-delay: -0.4s;
+                      }
+                    }
+                    @include large-screen {
+                      margin-top: 1.375rem;
+                      font-size: 0.875rem;
+                      .icon {
+                        font-size: 0.6rem;
+                      }
+                    }
+                    @include xLarge-screen {
+                      margin-top: 1.875rem;
+                      font-size: 0.875rem;
+                      .icon {
+                        font-size: 0.6rem;
+                      }
+                    }
+                  }
+                }
+                &.investor {
+                  .user-type-link {
+                    .user-type-title-wrapper {
+                      width: 6.85rem;
+                      transform: translateX(-1.2rem);
+                      @include large-screen {
+                        width: 8.125rem;
+                        transform: translateX(-1.5rem);
+                      }
+                      @include xLarge-screen {
+                        width: 11.375rem;
+                        transform: translateX(-2.1rem);
+                      }
+                      .holder {
+                        background-color: #246567;
+                      }
+                      .user-type-title {
+                        background-color: #246567;
+                      }
+                    }
+                    .know-more {
+                      transform: translateX(-1.2rem);
+                      @include large-screen {
+                        transform: translateX(-1.5rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(-2.1rem);
+                      }
+                    }
+                  }
+                }
+                &.owner {
+                  .user-type-link {
+                    .user-type-title-wrapper {
+                      width: 7.715rem;
+                      transform: translateX(1rem);
+                      @include large-screen {
+                        width: 9rem;
+                        transform: translateX(1rem);
+                      }
+                      @include xLarge-screen {
+                        width: 12.875rem;
+                        transform: translateX(1rem);
+                      }
+                      .holder {
+                        background-color: #0b6eb3;
+                      }
+                      .user-type-title {
+                        background-color: #0b6eb3;
+                        padding-top: 4px;
+                        @include large-screen {
+                          padding-top: 2px;
+                        }
+                        @include xLarge-screen {
+                          padding-top: 0;
+                        }
+                      }
+                    }
+                    .know-more {
+                      transform: translateX(1rem);
+                      @include large-screen {
+                        transform: translateX(1rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(1rem);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            /* Active User Type Page Styles Start Here */
+            .active-user-type {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              .user-type-video {
+                width: 30%;
+                overflow: hidden;
+                .video-scene {
+                  width: 125%;
+                  @include large-screen {
+                    width: 110%;
+                  }
+                }
+                &.investor {
+                  .video-scene {
+                    transform: translateX(-20%);
+                    @include large-screen {
+                      transform: translateX(-10%);
+                    }
+                  }
+                }
+              }
+              .active-user-type-content {
+                width: 45%;
+                color: $layout-light;
+                text-align: initial;
+                .user-type-title {
+                  padding-bottom: 1rem;
+                  margin-bottom: 1.75rem;
+                  text-transform: uppercase;
+                  font-size: 2.5rem;
+                  font-family: $bbc-secondary-en-font-medium;
+                  border-bottom: 1px solid rgba($layout-medium, 0.5);
+                }
+
+                .user-type-description {
+                  font-size: 0.8rem;
+                  font-family: $bbc-primary-en-font-light;
+
+                  + .user-type-description {
+                    margin-top: 0.5rem;
+                  }
+                }
+
+                .user-type-action {
+                  width: 12rem;
+                  margin: 2rem 0 0;
+                }
+
+                @include xLarge-screen {
+                  .user-type-title {
+                    font-size: 3.5rem;
+                  }
+                  .user-type-description {
+                    font-size: 1.1rem;
+
+                    + .user-type-description {
+                      margin-top: 1rem;
+                    }
+                  }
+                }
+              }
+              .other-user-type {
+                width: 15%;
+                overflow: hidden;
+                .other-user {
+                  display: flex;
+                  flex-direction: column;
+                  .other-type-image {
+                    width: 145%;
+                  }
+                  .other-user-title {
+                    display: flex;
+                    align-items: center;
+                    color: $layout-light;
+                    font-size: 0.7rem;
+                    font-family: $bbc-secondary-en-font-light;
+                    .icon {
+                      font-size: 0.4rem;
+                      animation: arrowEnglishSliding 2s infinite;
+                      &:first-child {
+                        margin-left: 0.25rem;
+                        animation-delay: -0.2s;
+                      }
+                      &:last-child {
+                        animation-delay: -0.4s;
+                      }
+                    }
+                    @include xLarge-screen {
+                      font-size: 1rem;
+                      .icon {
+                        font-size: 0.6rem;
+                      }
+                    }
+                  }
+                }
+                &.owner {
+                  .other-user {
+                    .other-user-title {
+                      margin: 0.75rem 0 0 2rem;
+                    }
+                  }
+                }
+                &.investor {
+                  .other-user {
+                    .other-type-image {
+                      transform: translateX(-32%);
+                    }
+                    .other-user-title {
+                      margin: 0.75rem 0 0 3.5rem;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* User Type Arabic Styles Start Here */
+.rtl {
+  .landing-page {
+    .app-brand {
+      left: auto;
+      right: 1.5rem;
+      @include large-screen {
+        left: auto;
+        right: 1rem;
+      }
+    }
+    main {
+      .layout {
+        .page-content {
+          .user-type-content {
+            /* User Types Title Styles Start Here */
+            .types-title {
+              font-family: $bbc-ar-font-bold;
+            }
+            /* User Type Styles Start Here */
+            .user-types {
+              .user-type {
+                .user-type-link {
+                  .user-type-title-wrapper {
+                    &::before {
+                      left: auto;
+                      right: 50%;
+                    }
+                    .holder {
+                      left: auto;
+                      right: 50%;
+                      transform: translateX(50%) translateY(-50%);
+                      &.inner {
+                        &::before {
+                          left: auto;
+                          right: 0;
+                          transform: translateX(-50%) translateY(50%);
+                        }
+                        &::after {
+                          left: auto;
+                          right: 50%;
+                          transform: translateX(50%) translateY(-35%);
+                          @include xLarge-screen {
+                            transform: translateX(25%) translateY(-35%);
+                          }
+                        }
+                      }
+                    }
+                    .user-type-title {
+                      font-family: $bbc-ar-font-medium;
+                    }
+                  }
+                  .know-more {
+                    font-family: $bbc-ar-font-regular;
+                    .icon {
+                      animation: arrowArabicSliding 2s infinite;
+                      &:first-child {
+                        margin-left: 0;
+                        margin-right: 0.25rem;
+                      }
+                    }
+                  }
+                }
+                &.investor {
+                  .user-type-link {
+                    .user-type-title-wrapper {
+                      transform: translateX(-0.9rem);
+                      @include large-screen {
+                        transform: translateX(-1.3rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(-2.1rem);
+                      }
+                    }
+                    .know-more {
+                      transform: translateX(-0.9);
+                      @include large-screen {
+                        transform: translateX(-1.3rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(-2.1rem);
+                      }
+                    }
+                  }
+                }
+                &.owner {
+                  .user-type-link {
+                    .user-type-title-wrapper {
+                      transform: translateX(1rem);
+                      @include large-screen {
+                        transform: translateX(1rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(1rem);
+                      }
+                    }
+                    .know-more {
+                      transform: translateX(1rem);
+                      @include large-screen {
+                        transform: translateX(1rem);
+                      }
+                      @include xLarge-screen {
+                        transform: translateX(1rem);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            /* Active User Type Page Styles Start Here */
+            .active-user-type {
+              .user-type-video {
+                &.investor {
+                  .video-scene {
+                    transform: translateX(20%) scaleX(-1);
+                    @include large-screen {
+                      transform: translateX(10%) scaleX(-1);
+                    }
+                  }
+                }
+                &.owner {
+                  .video-scene {
+                    transform: scaleX(-1);
+                  }
+                }
+              }
+              .active-user-type-content {
+                .user-type-title {
+                  font-family: $bbc-ar-font-medium;
+                }
+                .user-type-description {
+                  font-family: $bbc-ar-font-regular;
+                }
+              }
+              .other-user-type {
+                .other-user {
+                  .other-user-title {
+                    font-family: $bbc-ar-font-regular;
+                    .icon {
+                      animation: arrowArabicSliding 2s infinite;
+                      &:first-child {
+                        margin-left: 0;
+                        margin-right: 0.25rem;
+                      }
+                    }
+                  }
+                }
+                &.owner {
+                  .other-user {
+                    .other-type-image {
+                      transform: scaleX(-1);
+                    }
+                    .other-user-title {
+                      margin: 0.75rem 2rem 0 0;
+                    }
+                  }
+                }
+                &.investor {
+                  .other-user {
+                    .other-type-image {
+                      transform: translateX(32%) scaleX(-1);
+                    }
+                    .other-user-title {
+                      margin: 0.75rem 3.5rem 0 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
