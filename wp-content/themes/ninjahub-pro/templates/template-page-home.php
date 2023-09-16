@@ -22,9 +22,8 @@
     get_header();
 
     $hooks = new Nh_Hooks();
-//    $hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
-    wp_enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home', [], '', '');
-//    $hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home');
+    $hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home');
+    $hooks->run();
 
 ?>
 
