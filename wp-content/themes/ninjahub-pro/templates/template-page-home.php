@@ -20,7 +20,7 @@
 
     get_header();
 
-    Nh_Hooks::enqueue_style('public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home');
+    Nh_Hooks::enqueue_style('public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/home-dashboard');
 ?>
 
     <main id="" class="site-home">
@@ -48,4 +48,3 @@
     </main><!-- #main -->
 
 <?php get_footer();
-
