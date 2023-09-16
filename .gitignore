@@ -33,14 +33,14 @@ wp-content/themes/twenty*/
 /wp-content/themes/ninjahub-pro/app/Models/admin/img/
 /wp-content/themes/ninjahub-pro/app/Models/public/js/
 /wp-content/themes/ninjahub-pro/app/Models/public/img/
-/wp-content/themes/ninjahub-pro/media.css
-/wp-content/themes/ninjahub-pro/style.css
-/wp-content/themes/ninjahub-pro/style.css.map
-/wp-content/themes/ninjahub-pro/style-rtl.css
-/wp-content/themes/ninjahub-pro/style.min.css
-/wp-content/themes/ninjahub-pro/style.min.css.map
-/wp-content/themes/ninjahub-pro/style-rtl.min.css
-/wp-content/themes/ninjahub-pro/style-rtl.min.css.map
+#/wp-content/themes/ninjahub-pro/media.css
+#/wp-content/themes/ninjahub-pro/style.css
+#/wp-content/themes/ninjahub-pro/style.css.map
+#/wp-content/themes/ninjahub-pro/style-rtl.css
+#/wp-content/themes/ninjahub-pro/style.min.css
+#/wp-content/themes/ninjahub-pro/style.min.css.map
+#/wp-content/themes/ninjahub-pro/style-rtl.min.css
+#/wp-content/themes/ninjahub-pro/style-rtl.min.css.map
 
 /wp-content/themes/ninjahub-pro/woocommerce.css
 /wp-content/themes/ninjahub-pro/woocommerce.css.map

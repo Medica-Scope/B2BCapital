@@ -36,6 +36,7 @@
                 'vendors' => THEME_URI . '/app/Models/admin/vendors'
             ],
             'public' => [
+                'css'      => THEME_URI . '/app/Models/public/css',
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
                 'images'  => THEME_URI . '/app/Models/public/assets/images',
