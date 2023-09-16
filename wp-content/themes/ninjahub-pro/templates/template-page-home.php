@@ -20,14 +20,14 @@
 
     get_header();
 
-    Nh_Hooks::enqueue_style('public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/home-dashboard');
+    Nh_Hooks::enqueue_style('public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/home');
 ?>
 
-    <main id="" class="site-home">
-        <h1>HOME PAGE</h1>
+<main id="" class="site-home">
+	<h1>HOME PAGE</h1>
 
-        <h1>Our Partners</h1>
-        <?php
+	<h1>Our Partners</h1>
+	<?php
             $partners_obj = new Nh_Partner();
             $partners = $partners_obj->get_all();
             foreach ($partners as $single) {
@@ -35,8 +35,8 @@
             }
         ?>
 
-        <h1>Testimonials</h1>
-        <?php
+	<h1>Testimonials</h1>
+	<?php
             $testimonials_obj = new Nh_Testimonial();
             $testimonials = $testimonials_obj->get_all();
             foreach ($testimonials as $single) {
@@ -45,6 +45,6 @@
                 echo $single->content;
             }
         ?>
-    </main><!-- #main -->
+</main><!-- #main -->
 
 <?php get_footer();
