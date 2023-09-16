@@ -36,9 +36,9 @@
 //    require_once THEME_PATH . "/inc/template-tags.php";
 
     locate_template("app/Classes/class-nh_init.php", TRUE);
-    locate_template("app/Classes/class-tgm-plugin-activation.php", TRUE);
     locate_template("app/Models/public/class-nh_public.php", TRUE);
     locate_template("app/Models/admin/class-nh_admin.php", TRUE);
+    locate_template("inc/tgm-plugin-activation.php", TRUE);
     locate_template("inc/template-tags.php", TRUE);
 
     /**

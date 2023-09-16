@@ -64,6 +64,11 @@
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_cryptor.php'
                     ],
+                    'Bootstrap_Navwalker'          => [
+                        'type'      => 'helper',
+                        'namespace' => 'NH\APP\HELPERS',
+                        'path'      => THEME_PATH . '/app/helpers/class-nh_bootstrap_navwalker.php'
+                    ],
                     'Cron'        => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\CLASSES',
