@@ -17,14 +17,10 @@
     use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Partner;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Testimonial;
-    use NH\Nh;
 
     get_header();
 
-    $hooks = new Nh_Hooks();
-    $hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home');
-    $hooks->run();
-
+    Nh_Hooks::enqueue_style('public-style-home', Nh_Hooks::PATHS['public']['css'] . '/pages/home');
 ?>
 
     <main id="" class="site-home">

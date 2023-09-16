@@ -36,15 +36,19 @@
                 'vendors' => THEME_URI . '/app/Models/admin/vendors'
             ],
             'public' => [
-                'css'      => THEME_URI . '/app/Models/public/css',
+                'css'     => THEME_URI . '/app/Models/public/css',
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
                 'images'  => THEME_URI . '/app/Models/public/assets/images',
                 'vid'     => THEME_URI . '/app/Models/public/vid',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
             ],
-            'views' => THEME_PATH . '/app/Views'
+            'views'  => THEME_PATH . '/app/Views'
         ];
+        /**
+         * @var null
+         */
+        private static $instance = NULL;
         /**
          * The array of actions registered with WordPress.
          *
@@ -90,6 +94,16 @@
         public function __construct()
         {
             $this->prefix = "production" === Nh::_ENVIRONMENT ? ".min" : "";
+        }
+
+        public static function get_instance()
+        {
+            $class = __CLASS__;
+            if (!self::$instance instanceof $class) {
+                self::$instance = new $class;
+            }
+
+            return self::$instance;
         }
 
         /**
@@ -199,9 +213,25 @@
          * @param null   $media
          * @param bool   $is_vendor
          */
-        public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
+        public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): static
         {
-            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
+            $this->styles = $this->enqueue($this->styles, Nh::_DOMAIN_NAME . '-' . $script_name, $path, $dependencies, $version, $media, $is_vendor);
+            return $this;
+        }
+
+        /**
+         * Add a new script to the collection to be registered with WordPress.
+         *
+         * @param string $script_name
+         * @param string $path
+         * @param array  $dependencies
+         * @param null   $version
+         * @param null   $position
+         * @param bool   $is_vendor
+         */
+        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE): void
+        {
+            $this->scripts = $this->enqueue($this->scripts, Nh::_DOMAIN_NAME . '-' . $script_name, $path, $dependencies, $version, $position, $is_vendor);
         }
 
         /**
@@ -218,7 +248,7 @@
          *
          * @return array
          */
-        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, $is_vendor = FALSE): array
+        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, bool $is_vendor = FALSE): array
         {
 
             $hooks[] = [
@@ -233,21 +263,6 @@
 
             return $hooks;
 
-        }
-
-        /**
-         * Add a new script to the collection to be registered with WordPress.
-         *
-         * @param string $script_name
-         * @param string $path
-         * @param array  $dependencies
-         * @param null   $version
-         * @param null   $position
-         * @param bool   $is_vendor
-         */
-        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE): void
-        {
-            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor);
         }
 
         /**
@@ -339,5 +354,10 @@
                 }
             }
 
+        }
+
+        public static function enqueue_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
+        {
+            self::get_instance()->add_style($script_name, $path, $is_vendor,$dependencies, $version, $media)->run();
         }
     }
