@@ -58,7 +58,7 @@
         public function enqueue_styles(): void
         {
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-fontawesome', Nh_Hooks::PATHS['public']['vendors'] . '/css/fontawesome/css/all.min', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bbcicons', Nh_Hooks::PATHS['public']['vendors'] . '/css/bbc-icons/style', TRUE);
             $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
             $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
 
