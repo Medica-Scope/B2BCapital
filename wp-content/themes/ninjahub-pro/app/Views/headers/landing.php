@@ -20,22 +20,22 @@
 	<!-- App Sidebar -->
 	<aside class="sidebar">
 		<!-- App Brand -->
-		<a href="./landing-page_en.html" class="app-brand">
+		<a href="/" class="app-brand">
 			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
 				alt="B2B Capital Logo" class="img-fluid">
 		</a>
 		<!-- App Language Switcher -->
-		<a class="language-link" href="./landing-page_ar.html">العربية</a>
+		<a class="language-link" href="#">العربية</a>
 		<!-- App Navigation -->
 		<ul class="navbar-nav app-navigation">
 			<li class="nav-item">
-				<a class="nav-link" href="./contact-us_en.html">Contact Us</a>
+				<a class="nav-link" href="/contact-us">Contact Us</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="./about_en.html">About</a>
+				<a class="nav-link" href="/about">About</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="./services_en.html">Services</a>
+				<a class="nav-link" href="/services">Services</a>
 			</li>
 		</ul>
 	</aside>
@@ -64,8 +64,9 @@
 					</li>
 				</ul>
 				<div class="user-area">
-					<a href="./investor-type_en.html" class="user-action bbc-btn outline success">Join as Investor</a>
-					<a href="./owner-type_en.html" class="user-action bbc-btn outline action">Join as Owner</a>
+					<a href="/my-account/registration" class="user-action bbc-btn outline success">Join as
+						Investor</a>
+					<a href="/my-account/registration" class="user-action bbc-btn outline action">Join as Owner</a>
 					<span class="user-action user-menu">
 						<span class="icon bbc-menu"><span class="path1"></span><span class="path2"></span><span
 								class="path3"></span><span class="path4"></span><span class="path5"></span><span
