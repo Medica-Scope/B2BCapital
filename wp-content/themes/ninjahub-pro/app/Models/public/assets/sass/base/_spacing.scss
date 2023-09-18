@@ -1,0 +1,89 @@
+// Paddings
+.pt-6 {
+	padding-top: 75px !important;
+}
+
+.pb-6 {
+	padding-bottom: 75px !important;
+}
+
+.py-6 {
+	padding-top: 75px !important;
+	padding-bottom: 75px !important;
+}
+
+.px-6 {
+	padding-right: 75px !important;
+	padding-left: 75px !important;
+}
+
+.pt-xl-6 {
+	@include large-screen {
+		padding-top: 75px !important;
+	}
+}
+
+.pb-xl-6 {
+	@include large-screen {
+		padding-bottom: 75px !important;
+	}
+}
+
+.py-xl-6 {
+	@include large-screen {
+		padding-top: 75px !important;
+		padding-bottom: 75px !important;
+	}
+}
+
+.px-xl-6 {
+	@include large-screen {
+		padding-right: 75px !important;
+		padding-left: 75px !important;
+	}
+}
+
+// Margins
+.mt-6 {
+	margin-top: 75px !important;
+}
+
+.mb-6 {
+	margin-bottom: 75px !important;
+}
+
+.my-6 {
+	margin-top: 75px !important;
+	margin-bottom: 75px !important;
+}
+
+.mx-6 {
+	margin-right: 75px !important;
+	margin-left: 75px !important;
+}
+
+.mt-xl-6 {
+	@include large-screen {
+		margin-top: 75px !important;
+	}
+}
+
+.mb-xl-6 {
+	@include large-screen {
+		margin-bottom: 75px !important;
+	}
+}
+
+.my-xl-6 {
+	@include large-screen {
+		margin-top: 75px !important;
+		margin-bottom: 75px !important;
+	}
+}
+
+.mx-xl-6 {
+	@include large-screen {
+		margin-right: 75px !important;
+		margin-left: 75px !important;
+	}
+}

@@ -3,7 +3,7 @@
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
 /wp-content/*
-!wp-content/mu-plugins/
+!wp-content/mu-plugins.hold/
 !wp-content/plugins/
 !wp-content/themes/
 !wp-content/uploads/
@@ -24,27 +24,28 @@
 wp-content/themes/twenty*/
 
 # ignore specific themes files
-/wp-content/themes/b2b/languages/
-/wp-content/themes/b2b/package-lock.json
-/wp-content/themes/b2b/composer.lock
+/wp-content/themes/ninjahub-pro/languages/
+/wp-content/themes/ninjahub-pro/package-lock.json
+/wp-content/themes/ninjahub-pro/composer.lock
 /wp-content/languages/*.json
-/wp-content/themes/b2b/app/Models/admin/css/
-/wp-content/themes/b2b/app/Models/admin/js/
-/wp-content/themes/b2b/app/Models/admin/img/
-/wp-content/themes/b2b/app/Models/public/js/
-/wp-content/themes/b2b/app/Models/public/img/
-/wp-content/themes/b2b/media.css
-/wp-content/themes/b2b/style.css
-/wp-content/themes/b2b/style.css.map
-/wp-content/themes/b2b/style-rtl.css
-/wp-content/themes/b2b/style.min.css
-/wp-content/themes/b2b/style.min.css.map
-/wp-content/themes/b2b/style-rtl.min.css
-/wp-content/themes/b2b/style-rtl.min.css.map
+/wp-content/themes/ninjahub-pro/app/Models/admin/css/
+/wp-content/themes/ninjahub-pro/app/Models/admin/js/
+/wp-content/themes/ninjahub-pro/app/Models/admin/img/
+/wp-content/themes/ninjahub-pro/app/Models/public/css/
+/wp-content/themes/ninjahub-pro/app/Models/public/js/
+/wp-content/themes/ninjahub-pro/app/Models/public/img/
+#/wp-content/themes/ninjahub-pro/media.css
+#/wp-content/themes/ninjahub-pro/style.css
+#/wp-content/themes/ninjahub-pro/style.css.map
+#/wp-content/themes/ninjahub-pro/style-rtl.css
+#/wp-content/themes/ninjahub-pro/style.min.css
+#/wp-content/themes/ninjahub-pro/style.min.css.map
+#/wp-content/themes/ninjahub-pro/style-rtl.min.css
+#/wp-content/themes/ninjahub-pro/style-rtl.min.css.map
 
-/wp-content/themes/b2b/woocommerce.css
-/wp-content/themes/b2b/woocommerce.css.map
-/wp-content/themes/b2b/vendor/
+/wp-content/themes/ninjahub-pro/woocommerce.css
+/wp-content/themes/ninjahub-pro/woocommerce.css.map
+/wp-content/themes/ninjahub-pro/vendor/
 
 # ignore node dependency directories
 node_modules/
@@ -58,6 +59,7 @@ node_modules/
 *.zip
 *.rar
 
+/local-xdebuginfo.php
 /wp-config.php
 /.htaccess
 /.htaccess.bk

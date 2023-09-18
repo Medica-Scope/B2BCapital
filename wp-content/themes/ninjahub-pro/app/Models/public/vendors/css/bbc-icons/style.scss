@@ -1,0 +1,7825 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?mgiikb');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?mgiikb#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?mgiikb') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?mgiikb') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?mgiikb##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="bbc-"], [class*=" bbc-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bbc-asterisk {
+  &:before {
+    content: $bbc-asterisk; 
+  }
+}
+.bbc-plus {
+  &:before {
+    content: $bbc-plus; 
+  }
+}
+.bbc-question {
+  &:before {
+    content: $bbc-question; 
+  }
+}
+.bbc-minus {
+  &:before {
+    content: $bbc-minus; 
+  }
+}
+.bbc-glass {
+  &:before {
+    content: $bbc-glass; 
+  }
+}
+.bbc-music {
+  &:before {
+    content: $bbc-music; 
+  }
+}
+.bbc-search {
+  &:before {
+    content: $bbc-search; 
+  }
+}
+.bbc-envelope-o {
+  &:before {
+    content: $bbc-envelope-o; 
+  }
+}
+.bbc-heart {
+  &:before {
+    content: $bbc-heart; 
+  }
+}
+.bbc-star {
+  &:before {
+    content: $bbc-star; 
+  }
+}
+.bbc-star-o {
+  &:before {
+    content: $bbc-star-o; 
+  }
+}
+.bbc-user {
+  &:before {
+    content: $bbc-user; 
+  }
+}
+.bbc-film {
+  &:before {
+    content: $bbc-film; 
+  }
+}
+.bbc-th-large {
+  &:before {
+    content: $bbc-th-large; 
+  }
+}
+.bbc-th {
+  &:before {
+    content: $bbc-th; 
+  }
+}
+.bbc-th-list {
+  &:before {
+    content: $bbc-th-list; 
+  }
+}
+.bbc-check {
+  &:before {
+    content: $bbc-check; 
+  }
+}
+.bbc-close {
+  &:before {
+    content: $bbc-close; 
+  }
+}
+.bbc-remove {
+  &:before {
+    content: $bbc-remove; 
+  }
+}
+.bbc-times {
+  &:before {
+    content: $bbc-times; 
+  }
+}
+.bbc-search-plus {
+  &:before {
+    content: $bbc-search-plus; 
+  }
+}
+.bbc-search-minus {
+  &:before {
+    content: $bbc-search-minus; 
+  }
+}
+.bbc-power-off {
+  &:before {
+    content: $bbc-power-off; 
+  }
+}
+.bbc-signal {
+  &:before {
+    content: $bbc-signal; 
+  }
+}
+.bbc-cog {
+  &:before {
+    content: $bbc-cog; 
+  }
+}
+.bbc-gear {
+  &:before {
+    content: $bbc-gear; 
+  }
+}
+.bbc-trash-o {
+  &:before {
+    content: $bbc-trash-o; 
+  }
+}
+.bbc-home {
+  &:before {
+    content: $bbc-home; 
+  }
+}
+.bbc-file-o {
+  &:before {
+    content: $bbc-file-o; 
+  }
+}
+.bbc-clock-o {
+  &:before {
+    content: $bbc-clock-o; 
+  }
+}
+.bbc-road {
+  &:before {
+    content: $bbc-road; 
+  }
+}
+.bbc-download {
+  &:before {
+    content: $bbc-download; 
+  }
+}
+.bbc-arrow-circle-o-down {
+  &:before {
+    content: $bbc-arrow-circle-o-down; 
+  }
+}
+.bbc-arrow-circle-o-up {
+  &:before {
+    content: $bbc-arrow-circle-o-up; 
+  }
+}
+.bbc-inbox {
+  &:before {
+    content: $bbc-inbox; 
+  }
+}
+.bbc-play-circle-o {
+  &:before {
+    content: $bbc-play-circle-o; 
+  }
+}
+.bbc-repeat {
+  &:before {
+    content: $bbc-repeat; 
+  }
+}
+.bbc-rotate-right {
+  &:before {
+    content: $bbc-rotate-right; 
+  }
+}
+.bbc-refresh {
+  &:before {
+    content: $bbc-refresh; 
+  }
+}
+.bbc-list-alt {
+  &:before {
+    content: $bbc-list-alt; 
+  }
+}
+.bbc-lock {
+  &:before {
+    content: $bbc-lock; 
+  }
+}
+.bbc-flag {
+  &:before {
+    content: $bbc-flag; 
+  }
+}
+.bbc-headphones {
+  &:before {
+    content: $bbc-headphones; 
+  }
+}
+.bbc-volume-off {
+  &:before {
+    content: $bbc-volume-off; 
+  }
+}
+.bbc-volume-down {
+  &:before {
+    content: $bbc-volume-down; 
+  }
+}
+.bbc-volume-up {
+  &:before {
+    content: $bbc-volume-up; 
+  }
+}
+.bbc-qrcode {
+  &:before {
+    content: $bbc-qrcode; 
+  }
+}
+.bbc-barcode {
+  &:before {
+    content: $bbc-barcode; 
+  }
+}
+.bbc-tag {
+  &:before {
+    content: $bbc-tag; 
+  }
+}
+.bbc-tags {
+  &:before {
+    content: $bbc-tags; 
+  }
+}
+.bbc-book {
+  &:before {
+    content: $bbc-book; 
+  }
+}
+.bbc-bookmark {
+  &:before {
+    content: $bbc-bookmark; 
+  }
+}
+.bbc-print {
+  &:before {
+    content: $bbc-print; 
+  }
+}
+.bbc-camera {
+  &:before {
+    content: $bbc-camera; 
+  }
+}
+.bbc-font {
+  &:before {
+    content: $bbc-font; 
+  }
+}
+.bbc-bold {
+  &:before {
+    content: $bbc-bold; 
+  }
+}
+.bbc-italic {
+  &:before {
+    content: $bbc-italic; 
+  }
+}
+.bbc-text-height {
+  &:before {
+    content: $bbc-text-height; 
+  }
+}
+.bbc-text-width {
+  &:before {
+    content: $bbc-text-width; 
+  }
+}
+.bbc-align-left {
+  &:before {
+    content: $bbc-align-left; 
+  }
+}
+.bbc-align-center {
+  &:before {
+    content: $bbc-align-center; 
+  }
+}
+.bbc-align-right {
+  &:before {
+    content: $bbc-align-right; 
+  }
+}
+.bbc-align-justify {
+  &:before {
+    content: $bbc-align-justify; 
+  }
+}
+.bbc-list {
+  &:before {
+    content: $bbc-list; 
+  }
+}
+.bbc-dedent {
+  &:before {
+    content: $bbc-dedent; 
+  }
+}
+.bbc-outdent {
+  &:before {
+    content: $bbc-outdent; 
+  }
+}
+.bbc-indent {
+  &:before {
+    content: $bbc-indent; 
+  }
+}
+.bbc-video-camera {
+  &:before {
+    content: $bbc-video-camera; 
+  }
+}
+.bbc-image {
+  &:before {
+    content: $bbc-image; 
+  }
+}
+.bbc-photo {
+  &:before {
+    content: $bbc-photo; 
+  }
+}
+.bbc-picture-o {
+  &:before {
+    content: $bbc-picture-o; 
+  }
+}
+.bbc-pencil {
+  &:before {
+    content: $bbc-pencil; 
+  }
+}
+.bbc-map-marker {
+  &:before {
+    content: $bbc-map-marker; 
+  }
+}
+.bbc-adjust {
+  &:before {
+    content: $bbc-adjust; 
+  }
+}
+.bbc-tint {
+  &:before {
+    content: $bbc-tint; 
+  }
+}
+.bbc-edit {
+  &:before {
+    content: $bbc-edit; 
+  }
+}
+.bbc-pencil-square-o {
+  &:before {
+    content: $bbc-pencil-square-o; 
+  }
+}
+.bbc-share-square-o {
+  &:before {
+    content: $bbc-share-square-o; 
+  }
+}
+.bbc-check-square-o {
+  &:before {
+    content: $bbc-check-square-o; 
+  }
+}
+.bbc-arrows {
+  &:before {
+    content: $bbc-arrows; 
+  }
+}
+.bbc-step-backward {
+  &:before {
+    content: $bbc-step-backward; 
+  }
+}
+.bbc-fast-backward {
+  &:before {
+    content: $bbc-fast-backward; 
+  }
+}
+.bbc-backward {
+  &:before {
+    content: $bbc-backward; 
+  }
+}
+.bbc-play {
+  &:before {
+    content: $bbc-play; 
+  }
+}
+.bbc-pause {
+  &:before {
+    content: $bbc-pause; 
+  }
+}
+.bbc-stop {
+  &:before {
+    content: $bbc-stop; 
+  }
+}
+.bbc-forward {
+  &:before {
+    content: $bbc-forward; 
+  }
+}
+.bbc-fast-forward {
+  &:before {
+    content: $bbc-fast-forward; 
+  }
+}
+.bbc-step-forward {
+  &:before {
+    content: $bbc-step-forward; 
+  }
+}
+.bbc-eject {
+  &:before {
+    content: $bbc-eject; 
+  }
+}
+.bbc-chevron-left {
+  &:before {
+    content: $bbc-chevron-left; 
+  }
+}
+.bbc-chevron-right {
+  &:before {
+    content: $bbc-chevron-right; 
+  }
+}
+.bbc-plus-circle {
+  &:before {
+    content: $bbc-plus-circle; 
+  }
+}
+.bbc-minus-circle {
+  &:before {
+    content: $bbc-minus-circle; 
+  }
+}
+.bbc-times-circle {
+  &:before {
+    content: $bbc-times-circle; 
+  }
+}
+.bbc-check-circle {
+  &:before {
+    content: $bbc-check-circle; 
+  }
+}
+.bbc-question-circle {
+  &:before {
+    content: $bbc-question-circle; 
+  }
+}
+.bbc-info-circle {
+  &:before {
+    content: $bbc-info-circle; 
+  }
+}
+.bbc-crosshairs {
+  &:before {
+    content: $bbc-crosshairs; 
+  }
+}
+.bbc-times-circle-o {
+  &:before {
+    content: $bbc-times-circle-o; 
+  }
+}
+.bbc-check-circle-o {
+  &:before {
+    content: $bbc-check-circle-o; 
+  }
+}
+.bbc-ban {
+  &:before {
+    content: $bbc-ban; 
+  }
+}
+.bbc-arrow-left {
+  &:before {
+    content: $bbc-arrow-left; 
+  }
+}
+.bbc-arrow-right {
+  &:before {
+    content: $bbc-arrow-right; 
+  }
+}
+.bbc-arrow-up {
+  &:before {
+    content: $bbc-arrow-up; 
+  }
+}
+.bbc-arrow-down {
+  &:before {
+    content: $bbc-arrow-down; 
+  }
+}
+.bbc-mail-forward {
+  &:before {
+    content: $bbc-mail-forward; 
+  }
+}
+.bbc-share {
+  &:before {
+    content: $bbc-share; 
+  }
+}
+.bbc-expand {
+  &:before {
+    content: $bbc-expand; 
+  }
+}
+.bbc-compress {
+  &:before {
+    content: $bbc-compress; 
+  }
+}
+.bbc-exclamation-circle {
+  &:before {
+    content: $bbc-exclamation-circle; 
+  }
+}
+.bbc-gift {
+  &:before {
+    content: $bbc-gift; 
+  }
+}
+.bbc-leaf {
+  &:before {
+    content: $bbc-leaf; 
+  }
+}
+.bbc-fire {
+  &:before {
+    content: $bbc-fire; 
+  }
+}
+.bbc-eye {
+  &:before {
+    content: $bbc-eye; 
+  }
+}
+.bbc-eye-slash {
+  &:before {
+    content: $bbc-eye-slash; 
+  }
+}
+.bbc-exclamation-triangle {
+  &:before {
+    content: $bbc-exclamation-triangle; 
+  }
+}
+.bbc-warning {
+  &:before {
+    content: $bbc-warning; 
+  }
+}
+.bbc-plane {
+  &:before {
+    content: $bbc-plane; 
+  }
+}
+.bbc-calendar {
+  &:before {
+    content: $bbc-calendar; 
+  }
+}
+.bbc-random {
+  &:before {
+    content: $bbc-random; 
+  }
+}
+.bbc-comment {
+  &:before {
+    content: $bbc-comment; 
+  }
+}
+.bbc-magnet {
+  &:before {
+    content: $bbc-magnet; 
+  }
+}
+.bbc-chevron-up {
+  &:before {
+    content: $bbc-chevron-up; 
+  }
+}
+.bbc-chevron-down {
+  &:before {
+    content: $bbc-chevron-down; 
+  }
+}
+.bbc-retweet {
+  &:before {
+    content: $bbc-retweet; 
+  }
+}
+.bbc-shopping-cart {
+  &:before {
+    content: $bbc-shopping-cart; 
+  }
+}
+.bbc-folder {
+  &:before {
+    content: $bbc-folder; 
+  }
+}
+.bbc-folder-open {
+  &:before {
+    content: $bbc-folder-open; 
+  }
+}
+.bbc-arrows-v {
+  &:before {
+    content: $bbc-arrows-v; 
+  }
+}
+.bbc-arrows-h {
+  &:before {
+    content: $bbc-arrows-h; 
+  }
+}
+.bbc-bar-chart {
+  &:before {
+    content: $bbc-bar-chart; 
+  }
+}
+.bbc-bar-chart-o {
+  &:before {
+    content: $bbc-bar-chart-o; 
+  }
+}
+.bbc-twitter-square {
+  &:before {
+    content: $bbc-twitter-square; 
+  }
+}
+.bbc-facebook-square {
+  &:before {
+    content: $bbc-facebook-square; 
+  }
+}
+.bbc-camera-retro {
+  &:before {
+    content: $bbc-camera-retro; 
+  }
+}
+.bbc-key {
+  &:before {
+    content: $bbc-key; 
+  }
+}
+.bbc-cogs {
+  &:before {
+    content: $bbc-cogs; 
+  }
+}
+.bbc-gears {
+  &:before {
+    content: $bbc-gears; 
+  }
+}
+.bbc-comments {
+  &:before {
+    content: $bbc-comments; 
+  }
+}
+.bbc-thumbs-o-up {
+  &:before {
+    content: $bbc-thumbs-o-up; 
+  }
+}
+.bbc-thumbs-o-down {
+  &:before {
+    content: $bbc-thumbs-o-down; 
+  }
+}
+.bbc-star-half {
+  &:before {
+    content: $bbc-star-half; 
+  }
+}
+.bbc-heart-o {
+  &:before {
+    content: $bbc-heart-o; 
+  }
+}
+.bbc-sign-out {
+  &:before {
+    content: $bbc-sign-out; 
+  }
+}
+.bbc-linkedin-square {
+  &:before {
+    content: $bbc-linkedin-square; 
+  }
+}
+.bbc-thumb-tack {
+  &:before {
+    content: $bbc-thumb-tack; 
+  }
+}
+.bbc-external-link {
+  &:before {
+    content: $bbc-external-link; 
+  }
+}
+.bbc-sign-in {
+  &:before {
+    content: $bbc-sign-in; 
+  }
+}
+.bbc-trophy {
+  &:before {
+    content: $bbc-trophy; 
+  }
+}
+.bbc-github-square {
+  &:before {
+    content: $bbc-github-square; 
+  }
+}
+.bbc-upload {
+  &:before {
+    content: $bbc-upload; 
+  }
+}
+.bbc-lemon-o {
+  &:before {
+    content: $bbc-lemon-o; 
+  }
+}
+.bbc-phone {
+  &:before {
+    content: $bbc-phone; 
+  }
+}
+.bbc-square-o {
+  &:before {
+    content: $bbc-square-o; 
+  }
+}
+.bbc-bookmark-o {
+  &:before {
+    content: $bbc-bookmark-o; 
+  }
+}
+.bbc-phone-square {
+  &:before {
+    content: $bbc-phone-square; 
+  }
+}
+.bbc-twitter {
+  &:before {
+    content: $bbc-twitter; 
+  }
+}
+.bbc-facebook {
+  &:before {
+    content: $bbc-facebook; 
+  }
+}
+.bbc-facebook-f {
+  &:before {
+    content: $bbc-facebook-f; 
+  }
+}
+.bbc-github {
+  &:before {
+    content: $bbc-github; 
+  }
+}
+.bbc-unlock {
+  &:before {
+    content: $bbc-unlock; 
+  }
+}
+.bbc-credit-card {
+  &:before {
+    content: $bbc-credit-card; 
+  }
+}
+.bbc-feed {
+  &:before {
+    content: $bbc-feed; 
+  }
+}
+.bbc-rss {
+  &:before {
+    content: $bbc-rss; 
+  }
+}
+.bbc-hdd-o {
+  &:before {
+    content: $bbc-hdd-o; 
+  }
+}
+.bbc-bullhorn {
+  &:before {
+    content: $bbc-bullhorn; 
+  }
+}
+.bbc-bell-o {
+  &:before {
+    content: $bbc-bell-o; 
+  }
+}
+.bbc-certificate {
+  &:before {
+    content: $bbc-certificate; 
+  }
+}
+.bbc-hand-o-right {
+  &:before {
+    content: $bbc-hand-o-right; 
+  }
+}
+.bbc-hand-o-left {
+  &:before {
+    content: $bbc-hand-o-left; 
+  }
+}
+.bbc-hand-o-up {
+  &:before {
+    content: $bbc-hand-o-up; 
+  }
+}
+.bbc-hand-o-down {
+  &:before {
+    content: $bbc-hand-o-down; 
+  }
+}
+.bbc-arrow-circle-left {
+  &:before {
+    content: $bbc-arrow-circle-left; 
+  }
+}
+.bbc-arrow-circle-right {
+  &:before {
+    content: $bbc-arrow-circle-right; 
+  }
+}
+.bbc-arrow-circle-up {
+  &:before {
+    content: $bbc-arrow-circle-up; 
+  }
+}
+.bbc-arrow-circle-down {
+  &:before {
+    content: $bbc-arrow-circle-down; 
+  }
+}
+.bbc-globe {
+  &:before {
+    content: $bbc-globe; 
+  }
+}
+.bbc-wrench {
+  &:before {
+    content: $bbc-wrench; 
+  }
+}
+.bbc-tasks {
+  &:before {
+    content: $bbc-tasks; 
+  }
+}
+.bbc-filter {
+  &:before {
+    content: $bbc-filter; 
+  }
+}
+.bbc-briefcase {
+  &:before {
+    content: $bbc-briefcase; 
+  }
+}
+.bbc-arrows-alt {
+  &:before {
+    content: $bbc-arrows-alt; 
+  }
+}
+.bbc-group {
+  &:before {
+    content: $bbc-group; 
+  }
+}
+.bbc-users {
+  &:before {
+    content: $bbc-users; 
+  }
+}
+.bbc-chain {
+  &:before {
+    content: $bbc-chain; 
+  }
+}
+.bbc-link {
+  &:before {
+    content: $bbc-link; 
+  }
+}
+.bbc-cloud {
+  &:before {
+    content: $bbc-cloud; 
+  }
+}
+.bbc-flask {
+  &:before {
+    content: $bbc-flask; 
+  }
+}
+.bbc-cut {
+  &:before {
+    content: $bbc-cut; 
+  }
+}
+.bbc-scissors {
+  &:before {
+    content: $bbc-scissors; 
+  }
+}
+.bbc-copy {
+  &:before {
+    content: $bbc-copy; 
+  }
+}
+.bbc-files-o {
+  &:before {
+    content: $bbc-files-o; 
+  }
+}
+.bbc-paperclip {
+  &:before {
+    content: $bbc-paperclip; 
+  }
+}
+.bbc-floppy-o {
+  &:before {
+    content: $bbc-floppy-o; 
+  }
+}
+.bbc-save {
+  &:before {
+    content: $bbc-save; 
+  }
+}
+.bbc-square {
+  &:before {
+    content: $bbc-square; 
+  }
+}
+.bbc-bars {
+  &:before {
+    content: $bbc-bars; 
+  }
+}
+.bbc-navicon {
+  &:before {
+    content: $bbc-navicon; 
+  }
+}
+.bbc-reorder {
+  &:before {
+    content: $bbc-reorder; 
+  }
+}
+.bbc-list-ul {
+  &:before {
+    content: $bbc-list-ul; 
+  }
+}
+.bbc-list-ol {
+  &:before {
+    content: $bbc-list-ol; 
+  }
+}
+.bbc-strikethrough {
+  &:before {
+    content: $bbc-strikethrough; 
+  }
+}
+.bbc-underline {
+  &:before {
+    content: $bbc-underline; 
+  }
+}
+.bbc-table {
+  &:before {
+    content: $bbc-table; 
+  }
+}
+.bbc-magic {
+  &:before {
+    content: $bbc-magic; 
+  }
+}
+.bbc-truck {
+  &:before {
+    content: $bbc-truck; 
+  }
+}
+.bbc-pinterest {
+  &:before {
+    content: $bbc-pinterest; 
+  }
+}
+.bbc-pinterest-square {
+  &:before {
+    content: $bbc-pinterest-square; 
+  }
+}
+.bbc-google-plus-square {
+  &:before {
+    content: $bbc-google-plus-square; 
+  }
+}
+.bbc-google-plus {
+  &:before {
+    content: $bbc-google-plus; 
+  }
+}
+.bbc-money {
+  &:before {
+    content: $bbc-money; 
+  }
+}
+.bbc-caret-down {
+  &:before {
+    content: $bbc-caret-down; 
+  }
+}
+.bbc-caret-up {
+  &:before {
+    content: $bbc-caret-up; 
+  }
+}
+.bbc-caret-left {
+  &:before {
+    content: $bbc-caret-left; 
+  }
+}
+.bbc-caret-right {
+  &:before {
+    content: $bbc-caret-right; 
+  }
+}
+.bbc-columns {
+  &:before {
+    content: $bbc-columns; 
+  }
+}
+.bbc-sort {
+  &:before {
+    content: $bbc-sort; 
+  }
+}
+.bbc-unsorted {
+  &:before {
+    content: $bbc-unsorted; 
+  }
+}
+.bbc-sort-desc {
+  &:before {
+    content: $bbc-sort-desc; 
+  }
+}
+.bbc-sort-down {
+  &:before {
+    content: $bbc-sort-down; 
+  }
+}
+.bbc-sort-asc {
+  &:before {
+    content: $bbc-sort-asc; 
+  }
+}
+.bbc-sort-up {
+  &:before {
+    content: $bbc-sort-up; 
+  }
+}
+.bbc-envelope {
+  &:before {
+    content: $bbc-envelope; 
+  }
+}
+.bbc-linkedin {
+  &:before {
+    content: $bbc-linkedin; 
+  }
+}
+.bbc-rotate-left {
+  &:before {
+    content: $bbc-rotate-left; 
+  }
+}
+.bbc-undo {
+  &:before {
+    content: $bbc-undo; 
+  }
+}
+.bbc-gavel {
+  &:before {
+    content: $bbc-gavel; 
+  }
+}
+.bbc-legal {
+  &:before {
+    content: $bbc-legal; 
+  }
+}
+.bbc-dashboard {
+  &:before {
+    content: $bbc-dashboard; 
+  }
+}
+.bbc-tachometer {
+  &:before {
+    content: $bbc-tachometer; 
+  }
+}
+.bbc-comment-o {
+  &:before {
+    content: $bbc-comment-o; 
+  }
+}
+.bbc-comments-o {
+  &:before {
+    content: $bbc-comments-o; 
+  }
+}
+.bbc-bolt {
+  &:before {
+    content: $bbc-bolt; 
+  }
+}
+.bbc-flash {
+  &:before {
+    content: $bbc-flash; 
+  }
+}
+.bbc-sitemap {
+  &:before {
+    content: $bbc-sitemap; 
+  }
+}
+.bbc-umbrella {
+  &:before {
+    content: $bbc-umbrella; 
+  }
+}
+.bbc-clipboard {
+  &:before {
+    content: $bbc-clipboard; 
+  }
+}
+.bbc-paste {
+  &:before {
+    content: $bbc-paste; 
+  }
+}
+.bbc-lightbulb-o {
+  &:before {
+    content: $bbc-lightbulb-o; 
+  }
+}
+.bbc-exchange {
+  &:before {
+    content: $bbc-exchange; 
+  }
+}
+.bbc-cloud-download {
+  &:before {
+    content: $bbc-cloud-download; 
+  }
+}
+.bbc-cloud-upload {
+  &:before {
+    content: $bbc-cloud-upload; 
+  }
+}
+.bbc-user-md {
+  &:before {
+    content: $bbc-user-md; 
+  }
+}
+.bbc-stethoscope {
+  &:before {
+    content: $bbc-stethoscope; 
+  }
+}
+.bbc-suitcase {
+  &:before {
+    content: $bbc-suitcase; 
+  }
+}
+.bbc-bell {
+  &:before {
+    content: $bbc-bell; 
+  }
+}
+.bbc-coffee {
+  &:before {
+    content: $bbc-coffee; 
+  }
+}
+.bbc-cutlery {
+  &:before {
+    content: $bbc-cutlery; 
+  }
+}
+.bbc-file-text-o {
+  &:before {
+    content: $bbc-file-text-o; 
+  }
+}
+.bbc-building-o {
+  &:before {
+    content: $bbc-building-o; 
+  }
+}
+.bbc-hospital-o {
+  &:before {
+    content: $bbc-hospital-o; 
+  }
+}
+.bbc-ambulance {
+  &:before {
+    content: $bbc-ambulance; 
+  }
+}
+.bbc-medkit {
+  &:before {
+    content: $bbc-medkit; 
+  }
+}
+.bbc-fighter-jet {
+  &:before {
+    content: $bbc-fighter-jet; 
+  }
+}
+.bbc-beer {
+  &:before {
+    content: $bbc-beer; 
+  }
+}
+.bbc-h-square {
+  &:before {
+    content: $bbc-h-square; 
+  }
+}
+.bbc-plus-square {
+  &:before {
+    content: $bbc-plus-square; 
+  }
+}
+.bbc-angle-double-left {
+  &:before {
+    content: $bbc-angle-double-left; 
+  }
+}
+.bbc-angle-double-right {
+  &:before {
+    content: $bbc-angle-double-right; 
+  }
+}
+.bbc-angle-double-up {
+  &:before {
+    content: $bbc-angle-double-up; 
+  }
+}
+.bbc-angle-double-down {
+  &:before {
+    content: $bbc-angle-double-down; 
+  }
+}
+.bbc-angle-left {
+  &:before {
+    content: $bbc-angle-left; 
+  }
+}
+.bbc-angle-right {
+  &:before {
+    content: $bbc-angle-right; 
+  }
+}
+.bbc-angle-up {
+  &:before {
+    content: $bbc-angle-up; 
+  }
+}
+.bbc-angle-down {
+  &:before {
+    content: $bbc-angle-down; 
+  }
+}
+.bbc-desktop {
+  &:before {
+    content: $bbc-desktop; 
+  }
+}
+.bbc-laptop {
+  &:before {
+    content: $bbc-laptop; 
+  }
+}
+.bbc-tablet {
+  &:before {
+    content: $bbc-tablet; 
+  }
+}
+.bbc-mobile {
+  &:before {
+    content: $bbc-mobile; 
+  }
+}
+.bbc-mobile-phone {
+  &:before {
+    content: $bbc-mobile-phone; 
+  }
+}
+.bbc-circle-o {
+  &:before {
+    content: $bbc-circle-o; 
+  }
+}
+.bbc-quote-left {
+  &:before {
+    content: $bbc-quote-left; 
+  }
+}
+.bbc-quote-right {
+  &:before {
+    content: $bbc-quote-right; 
+  }
+}
+.bbc-spinner {
+  &:before {
+    content: $bbc-spinner; 
+  }
+}
+.bbc-circle {
+  &:before {
+    content: $bbc-circle; 
+  }
+}
+.bbc-mail-reply {
+  &:before {
+    content: $bbc-mail-reply; 
+  }
+}
+.bbc-reply {
+  &:before {
+    content: $bbc-reply; 
+  }
+}
+.bbc-github-alt {
+  &:before {
+    content: $bbc-github-alt; 
+  }
+}
+.bbc-folder-o {
+  &:before {
+    content: $bbc-folder-o; 
+  }
+}
+.bbc-folder-open-o {
+  &:before {
+    content: $bbc-folder-open-o; 
+  }
+}
+.bbc-smile-o {
+  &:before {
+    content: $bbc-smile-o; 
+  }
+}
+.bbc-frown-o {
+  &:before {
+    content: $bbc-frown-o; 
+  }
+}
+.bbc-meh-o {
+  &:before {
+    content: $bbc-meh-o; 
+  }
+}
+.bbc-gamepad {
+  &:before {
+    content: $bbc-gamepad; 
+  }
+}
+.bbc-keyboard-o {
+  &:before {
+    content: $bbc-keyboard-o; 
+  }
+}
+.bbc-flag-o {
+  &:before {
+    content: $bbc-flag-o; 
+  }
+}
+.bbc-flag-checkered {
+  &:before {
+    content: $bbc-flag-checkered; 
+  }
+}
+.bbc-terminal {
+  &:before {
+    content: $bbc-terminal; 
+  }
+}
+.bbc-code {
+  &:before {
+    content: $bbc-code; 
+  }
+}
+.bbc-mail-reply-all {
+  &:before {
+    content: $bbc-mail-reply-all; 
+  }
+}
+.bbc-reply-all {
+  &:before {
+    content: $bbc-reply-all; 
+  }
+}
+.bbc-star-half-empty {
+  &:before {
+    content: $bbc-star-half-empty; 
+  }
+}
+.bbc-star-half-full {
+  &:before {
+    content: $bbc-star-half-full; 
+  }
+}
+.bbc-star-half-o {
+  &:before {
+    content: $bbc-star-half-o; 
+  }
+}
+.bbc-location-arrow {
+  &:before {
+    content: $bbc-location-arrow; 
+  }
+}
+.bbc-crop {
+  &:before {
+    content: $bbc-crop; 
+  }
+}
+.bbc-code-fork {
+  &:before {
+    content: $bbc-code-fork; 
+  }
+}
+.bbc-chain-broken {
+  &:before {
+    content: $bbc-chain-broken; 
+  }
+}
+.bbc-unlink {
+  &:before {
+    content: $bbc-unlink; 
+  }
+}
+.bbc-info {
+  &:before {
+    content: $bbc-info; 
+  }
+}
+.bbc-exclamation {
+  &:before {
+    content: $bbc-exclamation; 
+  }
+}
+.bbc-superscript {
+  &:before {
+    content: $bbc-superscript; 
+  }
+}
+.bbc-subscript {
+  &:before {
+    content: $bbc-subscript; 
+  }
+}
+.bbc-eraser {
+  &:before {
+    content: $bbc-eraser; 
+  }
+}
+.bbc-puzzle-piece {
+  &:before {
+    content: $bbc-puzzle-piece; 
+  }
+}
+.bbc-microphone {
+  &:before {
+    content: $bbc-microphone; 
+  }
+}
+.bbc-microphone-slash {
+  &:before {
+    content: $bbc-microphone-slash; 
+  }
+}
+.bbc-shield {
+  &:before {
+    content: $bbc-shield; 
+  }
+}
+.bbc-calendar-o {
+  &:before {
+    content: $bbc-calendar-o; 
+  }
+}
+.bbc-fire-extinguisher {
+  &:before {
+    content: $bbc-fire-extinguisher; 
+  }
+}
+.bbc-rocket {
+  &:before {
+    content: $bbc-rocket; 
+  }
+}
+.bbc-maxcdn {
+  &:before {
+    content: $bbc-maxcdn; 
+  }
+}
+.bbc-chevron-circle-left {
+  &:before {
+    content: $bbc-chevron-circle-left; 
+  }
+}
+.bbc-chevron-circle-right {
+  &:before {
+    content: $bbc-chevron-circle-right; 
+  }
+}
+.bbc-chevron-circle-up {
+  &:before {
+    content: $bbc-chevron-circle-up; 
+  }
+}
+.bbc-chevron-circle-down {
+  &:before {
+    content: $bbc-chevron-circle-down; 
+  }
+}
+.bbc-html5 {
+  &:before {
+    content: $bbc-html5; 
+  }
+}
+.bbc-css3 {
+  &:before {
+    content: $bbc-css3; 
+  }
+}
+.bbc-anchor {
+  &:before {
+    content: $bbc-anchor; 
+  }
+}
+.bbc-unlock-alt {
+  &:before {
+    content: $bbc-unlock-alt; 
+  }
+}
+.bbc-bullseye {
+  &:before {
+    content: $bbc-bullseye; 
+  }
+}
+.bbc-ellipsis-h {
+  &:before {
+    content: $bbc-ellipsis-h; 
+  }
+}
+.bbc-ellipsis-v {
+  &:before {
+    content: $bbc-ellipsis-v; 
+  }
+}
+.bbc-rss-square {
+  &:before {
+    content: $bbc-rss-square; 
+  }
+}
+.bbc-play-circle {
+  &:before {
+    content: $bbc-play-circle; 
+  }
+}
+.bbc-ticket {
+  &:before {
+    content: $bbc-ticket; 
+  }
+}
+.bbc-minus-square {
+  &:before {
+    content: $bbc-minus-square; 
+  }
+}
+.bbc-minus-square-o {
+  &:before {
+    content: $bbc-minus-square-o; 
+  }
+}
+.bbc-level-up {
+  &:before {
+    content: $bbc-level-up; 
+  }
+}
+.bbc-level-down {
+  &:before {
+    content: $bbc-level-down; 
+  }
+}
+.bbc-check-square {
+  &:before {
+    content: $bbc-check-square; 
+  }
+}
+.bbc-pencil-square {
+  &:before {
+    content: $bbc-pencil-square; 
+  }
+}
+.bbc-external-link-square {
+  &:before {
+    content: $bbc-external-link-square; 
+  }
+}
+.bbc-share-square {
+  &:before {
+    content: $bbc-share-square; 
+  }
+}
+.bbc-compass {
+  &:before {
+    content: $bbc-compass; 
+  }
+}
+.bbc-caret-square-o-down {
+  &:before {
+    content: $bbc-caret-square-o-down; 
+  }
+}
+.bbc-toggle-down {
+  &:before {
+    content: $bbc-toggle-down; 
+  }
+}
+.bbc-caret-square-o-up {
+  &:before {
+    content: $bbc-caret-square-o-up; 
+  }
+}
+.bbc-toggle-up {
+  &:before {
+    content: $bbc-toggle-up; 
+  }
+}
+.bbc-caret-square-o-right {
+  &:before {
+    content: $bbc-caret-square-o-right; 
+  }
+}
+.bbc-toggle-right {
+  &:before {
+    content: $bbc-toggle-right; 
+  }
+}
+.bbc-eur {
+  &:before {
+    content: $bbc-eur; 
+  }
+}
+.bbc-euro {
+  &:before {
+    content: $bbc-euro; 
+  }
+}
+.bbc-gbp {
+  &:before {
+    content: $bbc-gbp; 
+  }
+}
+.bbc-dollar {
+  &:before {
+    content: $bbc-dollar; 
+  }
+}
+.bbc-usd {
+  &:before {
+    content: $bbc-usd; 
+  }
+}
+.bbc-inr {
+  &:before {
+    content: $bbc-inr; 
+  }
+}
+.bbc-rupee {
+  &:before {
+    content: $bbc-rupee; 
+  }
+}
+.bbc-cny {
+  &:before {
+    content: $bbc-cny; 
+  }
+}
+.bbc-jpy {
+  &:before {
+    content: $bbc-jpy; 
+  }
+}
+.bbc-rmb {
+  &:before {
+    content: $bbc-rmb; 
+  }
+}
+.bbc-yen {
+  &:before {
+    content: $bbc-yen; 
+  }
+}
+.bbc-rouble {
+  &:before {
+    content: $bbc-rouble; 
+  }
+}
+.bbc-rub {
+  &:before {
+    content: $bbc-rub; 
+  }
+}
+.bbc-ruble {
+  &:before {
+    content: $bbc-ruble; 
+  }
+}
+.bbc-krw {
+  &:before {
+    content: $bbc-krw; 
+  }
+}
+.bbc-won {
+  &:before {
+    content: $bbc-won; 
+  }
+}
+.bbc-bitcoin {
+  &:before {
+    content: $bbc-bitcoin; 
+  }
+}
+.bbc-btc {
+  &:before {
+    content: $bbc-btc; 
+  }
+}
+.bbc-file {
+  &:before {
+    content: $bbc-file; 
+  }
+}
+.bbc-file-text {
+  &:before {
+    content: $bbc-file-text; 
+  }
+}
+.bbc-sort-alpha-asc {
+  &:before {
+    content: $bbc-sort-alpha-asc; 
+  }
+}
+.bbc-sort-alpha-desc {
+  &:before {
+    content: $bbc-sort-alpha-desc; 
+  }
+}
+.bbc-sort-amount-asc {
+  &:before {
+    content: $bbc-sort-amount-asc; 
+  }
+}
+.bbc-sort-amount-desc {
+  &:before {
+    content: $bbc-sort-amount-desc; 
+  }
+}
+.bbc-sort-numeric-asc {
+  &:before {
+    content: $bbc-sort-numeric-asc; 
+  }
+}
+.bbc-sort-numeric-desc {
+  &:before {
+    content: $bbc-sort-numeric-desc; 
+  }
+}
+.bbc-thumbs-up {
+  &:before {
+    content: $bbc-thumbs-up; 
+  }
+}
+.bbc-thumbs-down {
+  &:before {
+    content: $bbc-thumbs-down; 
+  }
+}
+.bbc-youtube-square {
+  &:before {
+    content: $bbc-youtube-square; 
+  }
+}
+.bbc-youtube {
+  &:before {
+    content: $bbc-youtube; 
+  }
+}
+.bbc-xing {
+  &:before {
+    content: $bbc-xing; 
+  }
+}
+.bbc-xing-square {
+  &:before {
+    content: $bbc-xing-square; 
+  }
+}
+.bbc-youtube-play {
+  &:before {
+    content: $bbc-youtube-play; 
+  }
+}
+.bbc-dropbox {
+  &:before {
+    content: $bbc-dropbox; 
+  }
+}
+.bbc-stack-overflow {
+  &:before {
+    content: $bbc-stack-overflow; 
+  }
+}
+.bbc-instagram {
+  &:before {
+    content: $bbc-instagram; 
+  }
+}
+.bbc-flickr {
+  &:before {
+    content: $bbc-flickr; 
+  }
+}
+.bbc-adn {
+  &:before {
+    content: $bbc-adn; 
+  }
+}
+.bbc-bitbucket {
+  &:before {
+    content: $bbc-bitbucket; 
+  }
+}
+.bbc-bitbucket-square {
+  &:before {
+    content: $bbc-bitbucket-square; 
+  }
+}
+.bbc-tumblr {
+  &:before {
+    content: $bbc-tumblr; 
+  }
+}
+.bbc-tumblr-square {
+  &:before {
+    content: $bbc-tumblr-square; 
+  }
+}
+.bbc-long-arrow-down {
+  &:before {
+    content: $bbc-long-arrow-down; 
+  }
+}
+.bbc-long-arrow-up {
+  &:before {
+    content: $bbc-long-arrow-up; 
+  }
+}
+.bbc-long-arrow-left {
+  &:before {
+    content: $bbc-long-arrow-left; 
+  }
+}
+.bbc-long-arrow-right {
+  &:before {
+    content: $bbc-long-arrow-right; 
+  }
+}
+.bbc-apple {
+  &:before {
+    content: $bbc-apple; 
+  }
+}
+.bbc-windows {
+  &:before {
+    content: $bbc-windows; 
+  }
+}
+.bbc-android {
+  &:before {
+    content: $bbc-android; 
+  }
+}
+.bbc-linux {
+  &:before {
+    content: $bbc-linux; 
+  }
+}
+.bbc-dribbble {
+  &:before {
+    content: $bbc-dribbble; 
+  }
+}
+.bbc-skype {
+  &:before {
+    content: $bbc-skype; 
+  }
+}
+.bbc-foursquare {
+  &:before {
+    content: $bbc-foursquare; 
+  }
+}
+.bbc-trello {
+  &:before {
+    content: $bbc-trello; 
+  }
+}
+.bbc-female {
+  &:before {
+    content: $bbc-female; 
+  }
+}
+.bbc-male {
+  &:before {
+    content: $bbc-male; 
+  }
+}
+.bbc-gittip {
+  &:before {
+    content: $bbc-gittip; 
+  }
+}
+.bbc-gratipay {
+  &:before {
+    content: $bbc-gratipay; 
+  }
+}
+.bbc-sun-o {
+  &:before {
+    content: $bbc-sun-o; 
+  }
+}
+.bbc-moon-o {
+  &:before {
+    content: $bbc-moon-o; 
+  }
+}
+.bbc-archive {
+  &:before {
+    content: $bbc-archive; 
+  }
+}
+.bbc-bug {
+  &:before {
+    content: $bbc-bug; 
+  }
+}
+.bbc-vk {
+  &:before {
+    content: $bbc-vk; 
+  }
+}
+.bbc-weibo {
+  &:before {
+    content: $bbc-weibo; 
+  }
+}
+.bbc-renren {
+  &:before {
+    content: $bbc-renren; 
+  }
+}
+.bbc-pagelines {
+  &:before {
+    content: $bbc-pagelines; 
+  }
+}
+.bbc-stack-exchange {
+  &:before {
+    content: $bbc-stack-exchange; 
+  }
+}
+.bbc-arrow-circle-o-right {
+  &:before {
+    content: $bbc-arrow-circle-o-right; 
+  }
+}
+.bbc-arrow-circle-o-left {
+  &:before {
+    content: $bbc-arrow-circle-o-left; 
+  }
+}
+.bbc-caret-square-o-left {
+  &:before {
+    content: $bbc-caret-square-o-left; 
+  }
+}
+.bbc-toggle-left {
+  &:before {
+    content: $bbc-toggle-left; 
+  }
+}
+.bbc-dot-circle-o {
+  &:before {
+    content: $bbc-dot-circle-o; 
+  }
+}
+.bbc-wheelchair {
+  &:before {
+    content: $bbc-wheelchair; 
+  }
+}
+.bbc-vimeo-square {
+  &:before {
+    content: $bbc-vimeo-square; 
+  }
+}
+.bbc-try {
+  &:before {
+    content: $bbc-try; 
+  }
+}
+.bbc-turkish-lira {
+  &:before {
+    content: $bbc-turkish-lira; 
+  }
+}
+.bbc-plus-square-o {
+  &:before {
+    content: $bbc-plus-square-o; 
+  }
+}
+.bbc-space-shuttle {
+  &:before {
+    content: $bbc-space-shuttle; 
+  }
+}
+.bbc-slack {
+  &:before {
+    content: $bbc-slack; 
+  }
+}
+.bbc-envelope-square {
+  &:before {
+    content: $bbc-envelope-square; 
+  }
+}
+.bbc-wordpress {
+  &:before {
+    content: $bbc-wordpress; 
+  }
+}
+.bbc-openid {
+  &:before {
+    content: $bbc-openid; 
+  }
+}
+.bbc-bank {
+  &:before {
+    content: $bbc-bank; 
+  }
+}
+.bbc-institution {
+  &:before {
+    content: $bbc-institution; 
+  }
+}
+.bbc-university {
+  &:before {
+    content: $bbc-university; 
+  }
+}
+.bbc-graduation-cap {
+  &:before {
+    content: $bbc-graduation-cap; 
+  }
+}
+.bbc-mortar-board {
+  &:before {
+    content: $bbc-mortar-board; 
+  }
+}
+.bbc-yahoo {
+  &:before {
+    content: $bbc-yahoo; 
+  }
+}
+.bbc-google {
+  &:before {
+    content: $bbc-google; 
+  }
+}
+.bbc-reddit {
+  &:before {
+    content: $bbc-reddit; 
+  }
+}
+.bbc-reddit-square {
+  &:before {
+    content: $bbc-reddit-square; 
+  }
+}
+.bbc-stumbleupon-circle {
+  &:before {
+    content: $bbc-stumbleupon-circle; 
+  }
+}
+.bbc-stumbleupon {
+  &:before {
+    content: $bbc-stumbleupon; 
+  }
+}
+.bbc-delicious {
+  &:before {
+    content: $bbc-delicious; 
+  }
+}
+.bbc-digg {
+  &:before {
+    content: $bbc-digg; 
+  }
+}
+.bbc-pied-piper-pp {
+  &:before {
+    content: $bbc-pied-piper-pp; 
+  }
+}
+.bbc-pied-piper-alt {
+  &:before {
+    content: $bbc-pied-piper-alt; 
+  }
+}
+.bbc-drupal {
+  &:before {
+    content: $bbc-drupal; 
+  }
+}
+.bbc-joomla {
+  &:before {
+    content: $bbc-joomla; 
+  }
+}
+.bbc-language {
+  &:before {
+    content: $bbc-language; 
+  }
+}
+.bbc-fax {
+  &:before {
+    content: $bbc-fax; 
+  }
+}
+.bbc-building {
+  &:before {
+    content: $bbc-building; 
+  }
+}
+.bbc-child {
+  &:before {
+    content: $bbc-child; 
+  }
+}
+.bbc-paw {
+  &:before {
+    content: $bbc-paw; 
+  }
+}
+.bbc-spoon {
+  &:before {
+    content: $bbc-spoon; 
+  }
+}
+.bbc-cube {
+  &:before {
+    content: $bbc-cube; 
+  }
+}
+.bbc-cubes {
+  &:before {
+    content: $bbc-cubes; 
+  }
+}
+.bbc-behance {
+  &:before {
+    content: $bbc-behance; 
+  }
+}
+.bbc-behance-square {
+  &:before {
+    content: $bbc-behance-square; 
+  }
+}
+.bbc-steam {
+  &:before {
+    content: $bbc-steam; 
+  }
+}
+.bbc-steam-square {
+  &:before {
+    content: $bbc-steam-square; 
+  }
+}
+.bbc-recycle {
+  &:before {
+    content: $bbc-recycle; 
+  }
+}
+.bbc-automobile {
+  &:before {
+    content: $bbc-automobile; 
+  }
+}
+.bbc-car {
+  &:before {
+    content: $bbc-car; 
+  }
+}
+.bbc-cab {
+  &:before {
+    content: $bbc-cab; 
+  }
+}
+.bbc-taxi {
+  &:before {
+    content: $bbc-taxi; 
+  }
+}
+.bbc-tree {
+  &:before {
+    content: $bbc-tree; 
+  }
+}
+.bbc-spotify {
+  &:before {
+    content: $bbc-spotify; 
+  }
+}
+.bbc-deviantart {
+  &:before {
+    content: $bbc-deviantart; 
+  }
+}
+.bbc-soundcloud {
+  &:before {
+    content: $bbc-soundcloud; 
+  }
+}
+.bbc-database {
+  &:before {
+    content: $bbc-database; 
+  }
+}
+.bbc-file-pdf-o {
+  &:before {
+    content: $bbc-file-pdf-o; 
+  }
+}
+.bbc-file-word-o {
+  &:before {
+    content: $bbc-file-word-o; 
+  }
+}
+.bbc-file-excel-o {
+  &:before {
+    content: $bbc-file-excel-o; 
+  }
+}
+.bbc-file-powerpoint-o {
+  &:before {
+    content: $bbc-file-powerpoint-o; 
+  }
+}
+.bbc-file-image-o {
+  &:before {
+    content: $bbc-file-image-o; 
+  }
+}
+.bbc-file-photo-o {
+  &:before {
+    content: $bbc-file-photo-o; 
+  }
+}
+.bbc-file-picture-o {
+  &:before {
+    content: $bbc-file-picture-o; 
+  }
+}
+.bbc-file-archive-o {
+  &:before {
+    content: $bbc-file-archive-o; 
+  }
+}
+.bbc-file-zip-o {
+  &:before {
+    content: $bbc-file-zip-o; 
+  }
+}
+.bbc-file-audio-o {
+  &:before {
+    content: $bbc-file-audio-o; 
+  }
+}
+.bbc-file-sound-o {
+  &:before {
+    content: $bbc-file-sound-o; 
+  }
+}
+.bbc-file-movie-o {
+  &:before {
+    content: $bbc-file-movie-o; 
+  }
+}
+.bbc-file-video-o {
+  &:before {
+    content: $bbc-file-video-o; 
+  }
+}
+.bbc-file-code-o {
+  &:before {
+    content: $bbc-file-code-o; 
+  }
+}
+.bbc-vine {
+  &:before {
+    content: $bbc-vine; 
+  }
+}
+.bbc-codepen {
+  &:before {
+    content: $bbc-codepen; 
+  }
+}
+.bbc-jsfiddle {
+  &:before {
+    content: $bbc-jsfiddle; 
+  }
+}
+.bbc-life-bouy {
+  &:before {
+    content: $bbc-life-bouy; 
+  }
+}
+.bbc-life-buoy {
+  &:before {
+    content: $bbc-life-buoy; 
+  }
+}
+.bbc-life-ring {
+  &:before {
+    content: $bbc-life-ring; 
+  }
+}
+.bbc-life-saver {
+  &:before {
+    content: $bbc-life-saver; 
+  }
+}
+.bbc-support {
+  &:before {
+    content: $bbc-support; 
+  }
+}
+.bbc-circle-o-notch {
+  &:before {
+    content: $bbc-circle-o-notch; 
+  }
+}
+.bbc-ra {
+  &:before {
+    content: $bbc-ra; 
+  }
+}
+.bbc-rebel {
+  &:before {
+    content: $bbc-rebel; 
+  }
+}
+.bbc-resistance {
+  &:before {
+    content: $bbc-resistance; 
+  }
+}
+.bbc-empire {
+  &:before {
+    content: $bbc-empire; 
+  }
+}
+.bbc-ge {
+  &:before {
+    content: $bbc-ge; 
+  }
+}
+.bbc-git-square {
+  &:before {
+    content: $bbc-git-square; 
+  }
+}
+.bbc-git {
+  &:before {
+    content: $bbc-git; 
+  }
+}
+.bbc-hacker-news {
+  &:before {
+    content: $bbc-hacker-news; 
+  }
+}
+.bbc-y-combinator-square {
+  &:before {
+    content: $bbc-y-combinator-square; 
+  }
+}
+.bbc-yc-square {
+  &:before {
+    content: $bbc-yc-square; 
+  }
+}
+.bbc-tencent-weibo {
+  &:before {
+    content: $bbc-tencent-weibo; 
+  }
+}
+.bbc-qq {
+  &:before {
+    content: $bbc-qq; 
+  }
+}
+.bbc-wechat {
+  &:before {
+    content: $bbc-wechat; 
+  }
+}
+.bbc-weixin {
+  &:before {
+    content: $bbc-weixin; 
+  }
+}
+.bbc-paper-plane {
+  &:before {
+    content: $bbc-paper-plane; 
+  }
+}
+.bbc-send {
+  &:before {
+    content: $bbc-send; 
+  }
+}
+.bbc-paper-plane-o {
+  &:before {
+    content: $bbc-paper-plane-o; 
+  }
+}
+.bbc-send-o {
+  &:before {
+    content: $bbc-send-o; 
+  }
+}
+.bbc-history {
+  &:before {
+    content: $bbc-history; 
+  }
+}
+.bbc-circle-thin {
+  &:before {
+    content: $bbc-circle-thin; 
+  }
+}
+.bbc-header {
+  &:before {
+    content: $bbc-header; 
+  }
+}
+.bbc-paragraph {
+  &:before {
+    content: $bbc-paragraph; 
+  }
+}
+.bbc-sliders {
+  &:before {
+    content: $bbc-sliders; 
+  }
+}
+.bbc-share-alt {
+  &:before {
+    content: $bbc-share-alt; 
+  }
+}
+.bbc-share-alt-square {
+  &:before {
+    content: $bbc-share-alt-square; 
+  }
+}
+.bbc-bomb {
+  &:before {
+    content: $bbc-bomb; 
+  }
+}
+.bbc-futbol-o {
+  &:before {
+    content: $bbc-futbol-o; 
+  }
+}
+.bbc-soccer-ball-o {
+  &:before {
+    content: $bbc-soccer-ball-o; 
+  }
+}
+.bbc-tty {
+  &:before {
+    content: $bbc-tty; 
+  }
+}
+.bbc-binoculars {
+  &:before {
+    content: $bbc-binoculars; 
+  }
+}
+.bbc-plug {
+  &:before {
+    content: $bbc-plug; 
+  }
+}
+.bbc-slideshare {
+  &:before {
+    content: $bbc-slideshare; 
+  }
+}
+.bbc-twitch {
+  &:before {
+    content: $bbc-twitch; 
+  }
+}
+.bbc-yelp {
+  &:before {
+    content: $bbc-yelp; 
+  }
+}
+.bbc-newspaper-o {
+  &:before {
+    content: $bbc-newspaper-o; 
+  }
+}
+.bbc-wifi {
+  &:before {
+    content: $bbc-wifi; 
+  }
+}
+.bbc-calculator {
+  &:before {
+    content: $bbc-calculator; 
+  }
+}
+.bbc-paypal {
+  &:before {
+    content: $bbc-paypal; 
+  }
+}
+.bbc-google-wallet {
+  &:before {
+    content: $bbc-google-wallet; 
+  }
+}
+.bbc-cc-visa {
+  &:before {
+    content: $bbc-cc-visa; 
+  }
+}
+.bbc-cc-mastercard {
+  &:before {
+    content: $bbc-cc-mastercard; 
+  }
+}
+.bbc-cc-discover {
+  &:before {
+    content: $bbc-cc-discover; 
+  }
+}
+.bbc-cc-amex {
+  &:before {
+    content: $bbc-cc-amex; 
+  }
+}
+.bbc-cc-paypal {
+  &:before {
+    content: $bbc-cc-paypal; 
+  }
+}
+.bbc-cc-stripe {
+  &:before {
+    content: $bbc-cc-stripe; 
+  }
+}
+.bbc-bell-slash {
+  &:before {
+    content: $bbc-bell-slash; 
+  }
+}
+.bbc-bell-slash-o {
+  &:before {
+    content: $bbc-bell-slash-o; 
+  }
+}
+.bbc-trash {
+  &:before {
+    content: $bbc-trash; 
+  }
+}
+.bbc-copyright {
+  &:before {
+    content: $bbc-copyright; 
+  }
+}
+.bbc-at {
+  &:before {
+    content: $bbc-at; 
+  }
+}
+.bbc-eyedropper {
+  &:before {
+    content: $bbc-eyedropper; 
+  }
+}
+.bbc-paint-brush {
+  &:before {
+    content: $bbc-paint-brush; 
+  }
+}
+.bbc-birthday-cake {
+  &:before {
+    content: $bbc-birthday-cake; 
+  }
+}
+.bbc-area-chart {
+  &:before {
+    content: $bbc-area-chart; 
+  }
+}
+.bbc-pie-chart {
+  &:before {
+    content: $bbc-pie-chart; 
+  }
+}
+.bbc-line-chart {
+  &:before {
+    content: $bbc-line-chart; 
+  }
+}
+.bbc-lastfm {
+  &:before {
+    content: $bbc-lastfm; 
+  }
+}
+.bbc-lastfm-square {
+  &:before {
+    content: $bbc-lastfm-square; 
+  }
+}
+.bbc-toggle-off {
+  &:before {
+    content: $bbc-toggle-off; 
+  }
+}
+.bbc-toggle-on {
+  &:before {
+    content: $bbc-toggle-on; 
+  }
+}
+.bbc-bicycle {
+  &:before {
+    content: $bbc-bicycle; 
+  }
+}
+.bbc-bus {
+  &:before {
+    content: $bbc-bus; 
+  }
+}
+.bbc-ioxhost {
+  &:before {
+    content: $bbc-ioxhost; 
+  }
+}
+.bbc-angellist {
+  &:before {
+    content: $bbc-angellist; 
+  }
+}
+.bbc-cc {
+  &:before {
+    content: $bbc-cc; 
+  }
+}
+.bbc-ils {
+  &:before {
+    content: $bbc-ils; 
+  }
+}
+.bbc-shekel {
+  &:before {
+    content: $bbc-shekel; 
+  }
+}
+.bbc-sheqel {
+  &:before {
+    content: $bbc-sheqel; 
+  }
+}
+.bbc-meanpath {
+  &:before {
+    content: $bbc-meanpath; 
+  }
+}
+.bbc-buysellads {
+  &:before {
+    content: $bbc-buysellads; 
+  }
+}
+.bbc-connectdevelop {
+  &:before {
+    content: $bbc-connectdevelop; 
+  }
+}
+.bbc-dashcube {
+  &:before {
+    content: $bbc-dashcube; 
+  }
+}
+.bbc-forumbee {
+  &:before {
+    content: $bbc-forumbee; 
+  }
+}
+.bbc-leanpub {
+  &:before {
+    content: $bbc-leanpub; 
+  }
+}
+.bbc-sellsy {
+  &:before {
+    content: $bbc-sellsy; 
+  }
+}
+.bbc-shirtsinbulk {
+  &:before {
+    content: $bbc-shirtsinbulk; 
+  }
+}
+.bbc-simplybuilt {
+  &:before {
+    content: $bbc-simplybuilt; 
+  }
+}
+.bbc-skyatlas {
+  &:before {
+    content: $bbc-skyatlas; 
+  }
+}
+.bbc-cart-plus {
+  &:before {
+    content: $bbc-cart-plus; 
+  }
+}
+.bbc-cart-arrow-down {
+  &:before {
+    content: $bbc-cart-arrow-down; 
+  }
+}
+.bbc-diamond {
+  &:before {
+    content: $bbc-diamond; 
+  }
+}
+.bbc-ship {
+  &:before {
+    content: $bbc-ship; 
+  }
+}
+.bbc-user-secret {
+  &:before {
+    content: $bbc-user-secret; 
+  }
+}
+.bbc-motorcycle {
+  &:before {
+    content: $bbc-motorcycle; 
+  }
+}
+.bbc-street-view {
+  &:before {
+    content: $bbc-street-view; 
+  }
+}
+.bbc-heartbeat {
+  &:before {
+    content: $bbc-heartbeat; 
+  }
+}
+.bbc-venus {
+  &:before {
+    content: $bbc-venus; 
+  }
+}
+.bbc-mars {
+  &:before {
+    content: $bbc-mars; 
+  }
+}
+.bbc-mercury {
+  &:before {
+    content: $bbc-mercury; 
+  }
+}
+.bbc-intersex {
+  &:before {
+    content: $bbc-intersex; 
+  }
+}
+.bbc-transgender {
+  &:before {
+    content: $bbc-transgender; 
+  }
+}
+.bbc-transgender-alt {
+  &:before {
+    content: $bbc-transgender-alt; 
+  }
+}
+.bbc-venus-double {
+  &:before {
+    content: $bbc-venus-double; 
+  }
+}
+.bbc-mars-double {
+  &:before {
+    content: $bbc-mars-double; 
+  }
+}
+.bbc-venus-mars {
+  &:before {
+    content: $bbc-venus-mars; 
+  }
+}
+.bbc-mars-stroke {
+  &:before {
+    content: $bbc-mars-stroke; 
+  }
+}
+.bbc-mars-stroke-v {
+  &:before {
+    content: $bbc-mars-stroke-v; 
+  }
+}
+.bbc-mars-stroke-h {
+  &:before {
+    content: $bbc-mars-stroke-h; 
+  }
+}
+.bbc-neuter {
+  &:before {
+    content: $bbc-neuter; 
+  }
+}
+.bbc-genderless {
+  &:before {
+    content: $bbc-genderless; 
+  }
+}
+.bbc-facebook-official {
+  &:before {
+    content: $bbc-facebook-official; 
+  }
+}
+.bbc-pinterest-p {
+  &:before {
+    content: $bbc-pinterest-p; 
+  }
+}
+.bbc-whatsapp {
+  &:before {
+    content: $bbc-whatsapp; 
+  }
+}
+.bbc-server {
+  &:before {
+    content: $bbc-server; 
+  }
+}
+.bbc-user-plus {
+  &:before {
+    content: $bbc-user-plus; 
+  }
+}
+.bbc-user-times {
+  &:before {
+    content: $bbc-user-times; 
+  }
+}
+.bbc-bed {
+  &:before {
+    content: $bbc-bed; 
+  }
+}
+.bbc-hotel {
+  &:before {
+    content: $bbc-hotel; 
+  }
+}
+.bbc-viacoin {
+  &:before {
+    content: $bbc-viacoin; 
+  }
+}
+.bbc-train {
+  &:before {
+    content: $bbc-train; 
+  }
+}
+.bbc-subway {
+  &:before {
+    content: $bbc-subway; 
+  }
+}
+.bbc-medium {
+  &:before {
+    content: $bbc-medium; 
+  }
+}
+.bbc-y-combinator {
+  &:before {
+    content: $bbc-y-combinator; 
+  }
+}
+.bbc-yc {
+  &:before {
+    content: $bbc-yc; 
+  }
+}
+.bbc-optin-monster {
+  &:before {
+    content: $bbc-optin-monster; 
+  }
+}
+.bbc-opencart {
+  &:before {
+    content: $bbc-opencart; 
+  }
+}
+.bbc-expeditedssl {
+  &:before {
+    content: $bbc-expeditedssl; 
+  }
+}
+.bbc-battery {
+  &:before {
+    content: $bbc-battery; 
+  }
+}
+.bbc-battery-4 {
+  &:before {
+    content: $bbc-battery-4; 
+  }
+}
+.bbc-battery-full {
+  &:before {
+    content: $bbc-battery-full; 
+  }
+}
+.bbc-battery-3 {
+  &:before {
+    content: $bbc-battery-3; 
+  }
+}
+.bbc-battery-three-quarters {
+  &:before {
+    content: $bbc-battery-three-quarters; 
+  }
+}
+.bbc-battery-2 {
+  &:before {
+    content: $bbc-battery-2; 
+  }
+}
+.bbc-battery-half {
+  &:before {
+    content: $bbc-battery-half; 
+  }
+}
+.bbc-battery-1 {
+  &:before {
+    content: $bbc-battery-1; 
+  }
+}
+.bbc-battery-quarter {
+  &:before {
+    content: $bbc-battery-quarter; 
+  }
+}
+.bbc-battery-0 {
+  &:before {
+    content: $bbc-battery-0; 
+  }
+}
+.bbc-battery-empty {
+  &:before {
+    content: $bbc-battery-empty; 
+  }
+}
+.bbc-mouse-pointer {
+  &:before {
+    content: $bbc-mouse-pointer; 
+  }
+}
+.bbc-i-cursor {
+  &:before {
+    content: $bbc-i-cursor; 
+  }
+}
+.bbc-object-group {
+  &:before {
+    content: $bbc-object-group; 
+  }
+}
+.bbc-object-ungroup {
+  &:before {
+    content: $bbc-object-ungroup; 
+  }
+}
+.bbc-sticky-note {
+  &:before {
+    content: $bbc-sticky-note; 
+  }
+}
+.bbc-sticky-note-o {
+  &:before {
+    content: $bbc-sticky-note-o; 
+  }
+}
+.bbc-cc-jcb {
+  &:before {
+    content: $bbc-cc-jcb; 
+  }
+}
+.bbc-cc-diners-club {
+  &:before {
+    content: $bbc-cc-diners-club; 
+  }
+}
+.bbc-clone {
+  &:before {
+    content: $bbc-clone; 
+  }
+}
+.bbc-balance-scale {
+  &:before {
+    content: $bbc-balance-scale; 
+  }
+}
+.bbc-hourglass-o {
+  &:before {
+    content: $bbc-hourglass-o; 
+  }
+}
+.bbc-hourglass-1 {
+  &:before {
+    content: $bbc-hourglass-1; 
+  }
+}
+.bbc-hourglass-start {
+  &:before {
+    content: $bbc-hourglass-start; 
+  }
+}
+.bbc-hourglass-2 {
+  &:before {
+    content: $bbc-hourglass-2; 
+  }
+}
+.bbc-hourglass-half {
+  &:before {
+    content: $bbc-hourglass-half; 
+  }
+}
+.bbc-hourglass-3 {
+  &:before {
+    content: $bbc-hourglass-3; 
+  }
+}
+.bbc-hourglass-end {
+  &:before {
+    content: $bbc-hourglass-end; 
+  }
+}
+.bbc-hourglass {
+  &:before {
+    content: $bbc-hourglass; 
+  }
+}
+.bbc-hand-grab-o {
+  &:before {
+    content: $bbc-hand-grab-o; 
+  }
+}
+.bbc-hand-rock-o {
+  &:before {
+    content: $bbc-hand-rock-o; 
+  }
+}
+.bbc-hand-paper-o {
+  &:before {
+    content: $bbc-hand-paper-o; 
+  }
+}
+.bbc-hand-stop-o {
+  &:before {
+    content: $bbc-hand-stop-o; 
+  }
+}
+.bbc-hand-scissors-o {
+  &:before {
+    content: $bbc-hand-scissors-o; 
+  }
+}
+.bbc-hand-lizard-o {
+  &:before {
+    content: $bbc-hand-lizard-o; 
+  }
+}
+.bbc-hand-spock-o {
+  &:before {
+    content: $bbc-hand-spock-o; 
+  }
+}
+.bbc-hand-pointer-o {
+  &:before {
+    content: $bbc-hand-pointer-o; 
+  }
+}
+.bbc-hand-peace-o {
+  &:before {
+    content: $bbc-hand-peace-o; 
+  }
+}
+.bbc-trademark {
+  &:before {
+    content: $bbc-trademark; 
+  }
+}
+.bbc-registered {
+  &:before {
+    content: $bbc-registered; 
+  }
+}
+.bbc-creative-commons {
+  &:before {
+    content: $bbc-creative-commons; 
+  }
+}
+.bbc-gg {
+  &:before {
+    content: $bbc-gg; 
+  }
+}
+.bbc-gg-circle {
+  &:before {
+    content: $bbc-gg-circle; 
+  }
+}
+.bbc-tripadvisor {
+  &:before {
+    content: $bbc-tripadvisor; 
+  }
+}
+.bbc-odnoklassniki {
+  &:before {
+    content: $bbc-odnoklassniki; 
+  }
+}
+.bbc-odnoklassniki-square {
+  &:before {
+    content: $bbc-odnoklassniki-square; 
+  }
+}
+.bbc-get-pocket {
+  &:before {
+    content: $bbc-get-pocket; 
+  }
+}
+.bbc-wikipedia-w {
+  &:before {
+    content: $bbc-wikipedia-w; 
+  }
+}
+.bbc-safari {
+  &:before {
+    content: $bbc-safari; 
+  }
+}
+.bbc-chrome {
+  &:before {
+    content: $bbc-chrome; 
+  }
+}
+.bbc-firefox {
+  &:before {
+    content: $bbc-firefox; 
+  }
+}
+.bbc-opera {
+  &:before {
+    content: $bbc-opera; 
+  }
+}
+.bbc-internet-explorer {
+  &:before {
+    content: $bbc-internet-explorer; 
+  }
+}
+.bbc-television {
+  &:before {
+    content: $bbc-television; 
+  }
+}
+.bbc-tv {
+  &:before {
+    content: $bbc-tv; 
+  }
+}
+.bbc-contao {
+  &:before {
+    content: $bbc-contao; 
+  }
+}
+.bbc-500px {
+  &:before {
+    content: $bbc-500px; 
+  }
+}
+.bbc-amazon {
+  &:before {
+    content: $bbc-amazon; 
+  }
+}
+.bbc-calendar-plus-o {
+  &:before {
+    content: $bbc-calendar-plus-o; 
+  }
+}
+.bbc-calendar-minus-o {
+  &:before {
+    content: $bbc-calendar-minus-o; 
+  }
+}
+.bbc-calendar-times-o {
+  &:before {
+    content: $bbc-calendar-times-o; 
+  }
+}
+.bbc-calendar-check-o {
+  &:before {
+    content: $bbc-calendar-check-o; 
+  }
+}
+.bbc-industry {
+  &:before {
+    content: $bbc-industry; 
+  }
+}
+.bbc-map-pin {
+  &:before {
+    content: $bbc-map-pin; 
+  }
+}
+.bbc-map-signs {
+  &:before {
+    content: $bbc-map-signs; 
+  }
+}
+.bbc-map-o {
+  &:before {
+    content: $bbc-map-o; 
+  }
+}
+.bbc-map {
+  &:before {
+    content: $bbc-map; 
+  }
+}
+.bbc-commenting {
+  &:before {
+    content: $bbc-commenting; 
+  }
+}
+.bbc-commenting-o {
+  &:before {
+    content: $bbc-commenting-o; 
+  }
+}
+.bbc-houzz {
+  &:before {
+    content: $bbc-houzz; 
+  }
+}
+.bbc-vimeo {
+  &:before {
+    content: $bbc-vimeo; 
+  }
+}
+.bbc-black-tie {
+  &:before {
+    content: $bbc-black-tie; 
+  }
+}
+.bbc-fonticons {
+  &:before {
+    content: $bbc-fonticons; 
+  }
+}
+.bbc-reddit-alien {
+  &:before {
+    content: $bbc-reddit-alien; 
+  }
+}
+.bbc-edge {
+  &:before {
+    content: $bbc-edge; 
+  }
+}
+.bbc-credit-card-alt {
+  &:before {
+    content: $bbc-credit-card-alt; 
+  }
+}
+.bbc-codiepie {
+  &:before {
+    content: $bbc-codiepie; 
+  }
+}
+.bbc-modx {
+  &:before {
+    content: $bbc-modx; 
+  }
+}
+.bbc-fort-awesome {
+  &:before {
+    content: $bbc-fort-awesome; 
+  }
+}
+.bbc-usb {
+  &:before {
+    content: $bbc-usb; 
+  }
+}
+.bbc-product-hunt {
+  &:before {
+    content: $bbc-product-hunt; 
+  }
+}
+.bbc-mixcloud {
+  &:before {
+    content: $bbc-mixcloud; 
+  }
+}
+.bbc-scribd {
+  &:before {
+    content: $bbc-scribd; 
+  }
+}
+.bbc-pause-circle {
+  &:before {
+    content: $bbc-pause-circle; 
+  }
+}
+.bbc-pause-circle-o {
+  &:before {
+    content: $bbc-pause-circle-o; 
+  }
+}
+.bbc-stop-circle {
+  &:before {
+    content: $bbc-stop-circle; 
+  }
+}
+.bbc-stop-circle-o {
+  &:before {
+    content: $bbc-stop-circle-o; 
+  }
+}
+.bbc-shopping-bag {
+  &:before {
+    content: $bbc-shopping-bag; 
+  }
+}
+.bbc-shopping-basket {
+  &:before {
+    content: $bbc-shopping-basket; 
+  }
+}
+.bbc-hashtag {
+  &:before {
+    content: $bbc-hashtag; 
+  }
+}
+.bbc-bluetooth {
+  &:before {
+    content: $bbc-bluetooth; 
+  }
+}
+.bbc-bluetooth-b {
+  &:before {
+    content: $bbc-bluetooth-b; 
+  }
+}
+.bbc-percent {
+  &:before {
+    content: $bbc-percent; 
+  }
+}
+.bbc-gitlab {
+  &:before {
+    content: $bbc-gitlab; 
+  }
+}
+.bbc-wpbeginner {
+  &:before {
+    content: $bbc-wpbeginner; 
+  }
+}
+.bbc-wpforms {
+  &:before {
+    content: $bbc-wpforms; 
+  }
+}
+.bbc-envira {
+  &:before {
+    content: $bbc-envira; 
+  }
+}
+.bbc-universal-access {
+  &:before {
+    content: $bbc-universal-access; 
+  }
+}
+.bbc-wheelchair-alt {
+  &:before {
+    content: $bbc-wheelchair-alt; 
+  }
+}
+.bbc-question-circle-o {
+  &:before {
+    content: $bbc-question-circle-o; 
+  }
+}
+.bbc-blind {
+  &:before {
+    content: $bbc-blind; 
+  }
+}
+.bbc-audio-description {
+  &:before {
+    content: $bbc-audio-description; 
+  }
+}
+.bbc-volume-control-phone {
+  &:before {
+    content: $bbc-volume-control-phone; 
+  }
+}
+.bbc-braille {
+  &:before {
+    content: $bbc-braille; 
+  }
+}
+.bbc-assistive-listening-systems {
+  &:before {
+    content: $bbc-assistive-listening-systems; 
+  }
+}
+.bbc-american-sign-language-interpreting {
+  &:before {
+    content: $bbc-american-sign-language-interpreting; 
+  }
+}
+.bbc-asl-interpreting {
+  &:before {
+    content: $bbc-asl-interpreting; 
+  }
+}
+.bbc-deaf {
+  &:before {
+    content: $bbc-deaf; 
+  }
+}
+.bbc-deafness {
+  &:before {
+    content: $bbc-deafness; 
+  }
+}
+.bbc-hard-of-hearing {
+  &:before {
+    content: $bbc-hard-of-hearing; 
+  }
+}
+.bbc-glide {
+  &:before {
+    content: $bbc-glide; 
+  }
+}
+.bbc-glide-g {
+  &:before {
+    content: $bbc-glide-g; 
+  }
+}
+.bbc-sign-language {
+  &:before {
+    content: $bbc-sign-language; 
+  }
+}
+.bbc-signing {
+  &:before {
+    content: $bbc-signing; 
+  }
+}
+.bbc-low-vision {
+  &:before {
+    content: $bbc-low-vision; 
+  }
+}
+.bbc-viadeo {
+  &:before {
+    content: $bbc-viadeo; 
+  }
+}
+.bbc-viadeo-square {
+  &:before {
+    content: $bbc-viadeo-square; 
+  }
+}
+.bbc-snapchat {
+  &:before {
+    content: $bbc-snapchat; 
+  }
+}
+.bbc-snapchat-ghost {
+  &:before {
+    content: $bbc-snapchat-ghost; 
+  }
+}
+.bbc-snapchat-square {
+  &:before {
+    content: $bbc-snapchat-square; 
+  }
+}
+.bbc-pied-piper {
+  &:before {
+    content: $bbc-pied-piper; 
+  }
+}
+.bbc-first-order {
+  &:before {
+    content: $bbc-first-order; 
+  }
+}
+.bbc-yoast {
+  &:before {
+    content: $bbc-yoast; 
+  }
+}
+.bbc-themeisle {
+  &:before {
+    content: $bbc-themeisle; 
+  }
+}
+.bbc-google-plus-circle {
+  &:before {
+    content: $bbc-google-plus-circle; 
+  }
+}
+.bbc-google-plus-official {
+  &:before {
+    content: $bbc-google-plus-official; 
+  }
+}
+.bbc-fa {
+  &:before {
+    content: $bbc-fa; 
+  }
+}
+.bbc-font-awesome {
+  &:before {
+    content: $bbc-font-awesome; 
+  }
+}
+.bbc-handshake-o {
+  &:before {
+    content: $bbc-handshake-o; 
+  }
+}
+.bbc-envelope-open {
+  &:before {
+    content: $bbc-envelope-open; 
+  }
+}
+.bbc-envelope-open-o {
+  &:before {
+    content: $bbc-envelope-open-o; 
+  }
+}
+.bbc-linode {
+  &:before {
+    content: $bbc-linode; 
+  }
+}
+.bbc-address-book {
+  &:before {
+    content: $bbc-address-book; 
+  }
+}
+.bbc-address-book-o {
+  &:before {
+    content: $bbc-address-book-o; 
+  }
+}
+.bbc-address-card {
+  &:before {
+    content: $bbc-address-card; 
+  }
+}
+.bbc-vcard {
+  &:before {
+    content: $bbc-vcard; 
+  }
+}
+.bbc-address-card-o {
+  &:before {
+    content: $bbc-address-card-o; 
+  }
+}
+.bbc-vcard-o {
+  &:before {
+    content: $bbc-vcard-o; 
+  }
+}
+.bbc-user-circle {
+  &:before {
+    content: $bbc-user-circle; 
+  }
+}
+.bbc-user-circle-o {
+  &:before {
+    content: $bbc-user-circle-o; 
+  }
+}
+.bbc-user-o {
+  &:before {
+    content: $bbc-user-o; 
+  }
+}
+.bbc-id-badge {
+  &:before {
+    content: $bbc-id-badge; 
+  }
+}
+.bbc-drivers-license {
+  &:before {
+    content: $bbc-drivers-license; 
+  }
+}
+.bbc-id-card {
+  &:before {
+    content: $bbc-id-card; 
+  }
+}
+.bbc-drivers-license-o {
+  &:before {
+    content: $bbc-drivers-license-o; 
+  }
+}
+.bbc-id-card-o {
+  &:before {
+    content: $bbc-id-card-o; 
+  }
+}
+.bbc-quora {
+  &:before {
+    content: $bbc-quora; 
+  }
+}
+.bbc-free-code-camp {
+  &:before {
+    content: $bbc-free-code-camp; 
+  }
+}
+.bbc-telegram {
+  &:before {
+    content: $bbc-telegram; 
+  }
+}
+.bbc-thermometer {
+  &:before {
+    content: $bbc-thermometer; 
+  }
+}
+.bbc-thermometer-4 {
+  &:before {
+    content: $bbc-thermometer-4; 
+  }
+}
+.bbc-thermometer-full {
+  &:before {
+    content: $bbc-thermometer-full; 
+  }
+}
+.bbc-thermometer-3 {
+  &:before {
+    content: $bbc-thermometer-3; 
+  }
+}
+.bbc-thermometer-three-quarters {
+  &:before {
+    content: $bbc-thermometer-three-quarters; 
+  }
+}
+.bbc-thermometer-2 {
+  &:before {
+    content: $bbc-thermometer-2; 
+  }
+}
+.bbc-thermometer-half {
+  &:before {
+    content: $bbc-thermometer-half; 
+  }
+}
+.bbc-thermometer-1 {
+  &:before {
+    content: $bbc-thermometer-1; 
+  }
+}
+.bbc-thermometer-quarter {
+  &:before {
+    content: $bbc-thermometer-quarter; 
+  }
+}
+.bbc-thermometer-0 {
+  &:before {
+    content: $bbc-thermometer-0; 
+  }
+}
+.bbc-thermometer-empty {
+  &:before {
+    content: $bbc-thermometer-empty; 
+  }
+}
+.bbc-shower {
+  &:before {
+    content: $bbc-shower; 
+  }
+}
+.bbc-bath {
+  &:before {
+    content: $bbc-bath; 
+  }
+}
+.bbc-bathtub {
+  &:before {
+    content: $bbc-bathtub; 
+  }
+}
+.bbc-s15 {
+  &:before {
+    content: $bbc-s15; 
+  }
+}
+.bbc-podcast {
+  &:before {
+    content: $bbc-podcast; 
+  }
+}
+.bbc-window-maximize {
+  &:before {
+    content: $bbc-window-maximize; 
+  }
+}
+.bbc-window-minimize {
+  &:before {
+    content: $bbc-window-minimize; 
+  }
+}
+.bbc-window-restore {
+  &:before {
+    content: $bbc-window-restore; 
+  }
+}
+.bbc-times-rectangle {
+  &:before {
+    content: $bbc-times-rectangle; 
+  }
+}
+.bbc-window-close {
+  &:before {
+    content: $bbc-window-close; 
+  }
+}
+.bbc-times-rectangle-o {
+  &:before {
+    content: $bbc-times-rectangle-o; 
+  }
+}
+.bbc-window-close-o {
+  &:before {
+    content: $bbc-window-close-o; 
+  }
+}
+.bbc-bandcamp {
+  &:before {
+    content: $bbc-bandcamp; 
+  }
+}
+.bbc-grav {
+  &:before {
+    content: $bbc-grav; 
+  }
+}
+.bbc-etsy {
+  &:before {
+    content: $bbc-etsy; 
+  }
+}
+.bbc-imdb {
+  &:before {
+    content: $bbc-imdb; 
+  }
+}
+.bbc-ravelry {
+  &:before {
+    content: $bbc-ravelry; 
+  }
+}
+.bbc-eercast {
+  &:before {
+    content: $bbc-eercast; 
+  }
+}
+.bbc-microchip {
+  &:before {
+    content: $bbc-microchip; 
+  }
+}
+.bbc-snowflake-o {
+  &:before {
+    content: $bbc-snowflake-o; 
+  }
+}
+.bbc-superpowers {
+  &:before {
+    content: $bbc-superpowers; 
+  }
+}
+.bbc-wpexplorer {
+  &:before {
+    content: $bbc-wpexplorer; 
+  }
+}
+.bbc-meetup {
+  &:before {
+    content: $bbc-meetup; 
+  }
+}
+.bbc-activity {
+  &:before {
+    content: $bbc-activity; 
+  }
+}
+.bbc-airplay {
+  &:before {
+    content: $bbc-airplay; 
+  }
+}
+.bbc-alert-circle {
+  &:before {
+    content: $bbc-alert-circle; 
+  }
+}
+.bbc-alert-octagon {
+  &:before {
+    content: $bbc-alert-octagon; 
+  }
+}
+.bbc-alert-triangle {
+  &:before {
+    content: $bbc-alert-triangle; 
+  }
+}
+.bbc-align-center1 {
+  &:before {
+    content: $bbc-align-center1; 
+  }
+}
+.bbc-align-justify1 {
+  &:before {
+    content: $bbc-align-justify1; 
+  }
+}
+.bbc-align-left1 {
+  &:before {
+    content: $bbc-align-left1; 
+  }
+}
+.bbc-align-right1 {
+  &:before {
+    content: $bbc-align-right1; 
+  }
+}
+.bbc-anchor1 {
+  &:before {
+    content: $bbc-anchor1; 
+  }
+}
+.bbc-aperture {
+  &:before {
+    content: $bbc-aperture; 
+  }
+}
+.bbc-archive1 {
+  &:before {
+    content: $bbc-archive1; 
+  }
+}
+.bbc-arrow-down3 {
+  &:before {
+    content: $bbc-arrow-down3; 
+  }
+}
+.bbc-arrow-down-circle {
+  &:before {
+    content: $bbc-arrow-down-circle; 
+  }
+}
+.bbc-arrow-down-left1 {
+  &:before {
+    content: $bbc-arrow-down-left1; 
+  }
+}
+.bbc-arrow-down-right1 {
+  &:before {
+    content: $bbc-arrow-down-right1; 
+  }
+}
+.bbc-arrow-left3 {
+  &:before {
+    content: $bbc-arrow-left3; 
+  }
+}
+.bbc-arrow-left-circle {
+  &:before {
+    content: $bbc-arrow-left-circle; 
+  }
+}
+.bbc-arrow-right3 {
+  &:before {
+    content: $bbc-arrow-right3; 
+  }
+}
+.bbc-arrow-right-circle {
+  &:before {
+    content: $bbc-arrow-right-circle; 
+  }
+}
+.bbc-arrow-up3 {
+  &:before {
+    content: $bbc-arrow-up3; 
+  }
+}
+.bbc-arrow-up-circle {
+  &:before {
+    content: $bbc-arrow-up-circle; 
+  }
+}
+.bbc-arrow-up-left1 {
+  &:before {
+    content: $bbc-arrow-up-left1; 
+  }
+}
+.bbc-arrow-up-right1 {
+  &:before {
+    content: $bbc-arrow-up-right1; 
+  }
+}
+.bbc-at-sign {
+  &:before {
+    content: $bbc-at-sign; 
+  }
+}
+.bbc-award {
+  &:before {
+    content: $bbc-award; 
+  }
+}
+.bbc-bar-chart1 {
+  &:before {
+    content: $bbc-bar-chart1; 
+  }
+}
+.bbc-bar-chart-2 {
+  &:before {
+    content: $bbc-bar-chart-2; 
+  }
+}
+.bbc-battery1 {
+  &:before {
+    content: $bbc-battery1; 
+  }
+}
+.bbc-battery-charging {
+  &:before {
+    content: $bbc-battery-charging; 
+  }
+}
+.bbc-bell2 {
+  &:before {
+    content: $bbc-bell2; 
+  }
+}
+.bbc-bell-off {
+  &:before {
+    content: $bbc-bell-off; 
+  }
+}
+.bbc-bluetooth1 {
+  &:before {
+    content: $bbc-bluetooth1; 
+  }
+}
+.bbc-bold2 {
+  &:before {
+    content: $bbc-bold2; 
+  }
+}
+.bbc-book2 {
+  &:before {
+    content: $bbc-book2; 
+  }
+}
+.bbc-book-open {
+  &:before {
+    content: $bbc-book-open; 
+  }
+}
+.bbc-bookmark2 {
+  &:before {
+    content: $bbc-bookmark2; 
+  }
+}
+.bbc-box {
+  &:before {
+    content: $bbc-box; 
+  }
+}
+.bbc-briefcase2 {
+  &:before {
+    content: $bbc-briefcase2; 
+  }
+}
+.bbc-calendar2 {
+  &:before {
+    content: $bbc-calendar2; 
+  }
+}
+.bbc-camera2 {
+  &:before {
+    content: $bbc-camera2; 
+  }
+}
+.bbc-camera-off {
+  &:before {
+    content: $bbc-camera-off; 
+  }
+}
+.bbc-cast {
+  &:before {
+    content: $bbc-cast; 
+  }
+}
+.bbc-check1 {
+  &:before {
+    content: $bbc-check1; 
+  }
+}
+.bbc-check-circle1 {
+  &:before {
+    content: $bbc-check-circle1; 
+  }
+}
+.bbc-check-square1 {
+  &:before {
+    content: $bbc-check-square1; 
+  }
+}
+.bbc-chevron-down1 {
+  &:before {
+    content: $bbc-chevron-down1; 
+  }
+}
+.bbc-chevron-left1 {
+  &:before {
+    content: $bbc-chevron-left1; 
+  }
+}
+.bbc-chevron-right1 {
+  &:before {
+    content: $bbc-chevron-right1; 
+  }
+}
+.bbc-chevron-up1 {
+  &:before {
+    content: $bbc-chevron-up1; 
+  }
+}
+.bbc-chevrons-down {
+  &:before {
+    content: $bbc-chevrons-down; 
+  }
+}
+.bbc-chevrons-left {
+  &:before {
+    content: $bbc-chevrons-left; 
+  }
+}
+.bbc-chevrons-right {
+  &:before {
+    content: $bbc-chevrons-right; 
+  }
+}
+.bbc-chevrons-up {
+  &:before {
+    content: $bbc-chevrons-up; 
+  }
+}
+.bbc-chrome2 {
+  &:before {
+    content: $bbc-chrome2; 
+  }
+}
+.bbc-circle1 {
+  &:before {
+    content: $bbc-circle1; 
+  }
+}
+.bbc-clipboard2 {
+  &:before {
+    content: $bbc-clipboard2; 
+  }
+}
+.bbc-clock1 {
+  &:before {
+    content: $bbc-clock1; 
+  }
+}
+.bbc-cloud2 {
+  &:before {
+    content: $bbc-cloud2; 
+  }
+}
+.bbc-cloud-drizzle {
+  &:before {
+    content: $bbc-cloud-drizzle; 
+  }
+}
+.bbc-cloud-lightning {
+  &:before {
+    content: $bbc-cloud-lightning; 
+  }
+}
+.bbc-cloud-off {
+  &:before {
+    content: $bbc-cloud-off; 
+  }
+}
+.bbc-cloud-rain {
+  &:before {
+    content: $bbc-cloud-rain; 
+  }
+}
+.bbc-cloud-snow {
+  &:before {
+    content: $bbc-cloud-snow; 
+  }
+}
+.bbc-code1 {
+  &:before {
+    content: $bbc-code1; 
+  }
+}
+.bbc-codepen2 {
+  &:before {
+    content: $bbc-codepen2; 
+  }
+}
+.bbc-codesandbox {
+  &:before {
+    content: $bbc-codesandbox; 
+  }
+}
+.bbc-coffee1 {
+  &:before {
+    content: $bbc-coffee1; 
+  }
+}
+.bbc-columns1 {
+  &:before {
+    content: $bbc-columns1; 
+  }
+}
+.bbc-command1 {
+  &:before {
+    content: $bbc-command1; 
+  }
+}
+.bbc-compass3 {
+  &:before {
+    content: $bbc-compass3; 
+  }
+}
+.bbc-copy2 {
+  &:before {
+    content: $bbc-copy2; 
+  }
+}
+.bbc-corner-down-left {
+  &:before {
+    content: $bbc-corner-down-left; 
+  }
+}
+.bbc-corner-down-right {
+  &:before {
+    content: $bbc-corner-down-right; 
+  }
+}
+.bbc-corner-left-down {
+  &:before {
+    content: $bbc-corner-left-down; 
+  }
+}
+.bbc-corner-left-up {
+  &:before {
+    content: $bbc-corner-left-up; 
+  }
+}
+.bbc-corner-right-down {
+  &:before {
+    content: $bbc-corner-right-down; 
+  }
+}
+.bbc-corner-right-up {
+  &:before {
+    content: $bbc-corner-right-up; 
+  }
+}
+.bbc-corner-up-left {
+  &:before {
+    content: $bbc-corner-up-left; 
+  }
+}
+.bbc-corner-up-right {
+  &:before {
+    content: $bbc-corner-up-right; 
+  }
+}
+.bbc-cpu {
+  &:before {
+    content: $bbc-cpu; 
+  }
+}
+.bbc-credit-card2 {
+  &:before {
+    content: $bbc-credit-card2; 
+  }
+}
+.bbc-crop2 {
+  &:before {
+    content: $bbc-crop2; 
+  }
+}
+.bbc-crosshair {
+  &:before {
+    content: $bbc-crosshair; 
+  }
+}
+.bbc-database2 {
+  &:before {
+    content: $bbc-database2; 
+  }
+}
+.bbc-delete {
+  &:before {
+    content: $bbc-delete; 
+  }
+}
+.bbc-disc {
+  &:before {
+    content: $bbc-disc; 
+  }
+}
+.bbc-dollar-sign {
+  &:before {
+    content: $bbc-dollar-sign; 
+  }
+}
+.bbc-download4 {
+  &:before {
+    content: $bbc-download4; 
+  }
+}
+.bbc-download-cloud {
+  &:before {
+    content: $bbc-download-cloud; 
+  }
+}
+.bbc-droplet1 {
+  &:before {
+    content: $bbc-droplet1; 
+  }
+}
+.bbc-edit1 {
+  &:before {
+    content: $bbc-edit1; 
+  }
+}
+.bbc-edit-2 {
+  &:before {
+    content: $bbc-edit-2; 
+  }
+}
+.bbc-edit-3 {
+  &:before {
+    content: $bbc-edit-3; 
+  }
+}
+.bbc-external-link1 {
+  &:before {
+    content: $bbc-external-link1; 
+  }
+}
+.bbc-eye2 {
+  &:before {
+    content: $bbc-eye2; 
+  }
+}
+.bbc-eye-off {
+  &:before {
+    content: $bbc-eye-off; 
+  }
+}
+.bbc-facebook3 {
+  &:before {
+    content: $bbc-facebook3; 
+  }
+}
+.bbc-fast-forward1 {
+  &:before {
+    content: $bbc-fast-forward1; 
+  }
+}
+.bbc-feather {
+  &:before {
+    content: $bbc-feather; 
+  }
+}
+.bbc-figma {
+  &:before {
+    content: $bbc-figma; 
+  }
+}
+.bbc-file1 {
+  &:before {
+    content: $bbc-file1; 
+  }
+}
+.bbc-file-minus {
+  &:before {
+    content: $bbc-file-minus; 
+  }
+}
+.bbc-file-plus {
+  &:before {
+    content: $bbc-file-plus; 
+  }
+}
+.bbc-file-text3 {
+  &:before {
+    content: $bbc-file-text3; 
+  }
+}
+.bbc-film2 {
+  &:before {
+    content: $bbc-film2; 
+  }
+}
+.bbc-filter2 {
+  &:before {
+    content: $bbc-filter2; 
+  }
+}
+.bbc-flag2 {
+  &:before {
+    content: $bbc-flag2; 
+  }
+}
+.bbc-folder2 {
+  &:before {
+    content: $bbc-folder2; 
+  }
+}
+.bbc-folder-minus1 {
+  &:before {
+    content: $bbc-folder-minus1; 
+  }
+}
+.bbc-folder-plus1 {
+  &:before {
+    content: $bbc-folder-plus1; 
+  }
+}
+.bbc-framer {
+  &:before {
+    content: $bbc-framer; 
+  }
+}
+.bbc-frown {
+  &:before {
+    content: $bbc-frown; 
+  }
+}
+.bbc-gift2 {
+  &:before {
+    content: $bbc-gift2; 
+  }
+}
+.bbc-git-branch {
+  &:before {
+    content: $bbc-git-branch; 
+  }
+}
+.bbc-git-commit {
+  &:before {
+    content: $bbc-git-commit; 
+  }
+}
+.bbc-git-merge {
+  &:before {
+    content: $bbc-git-merge; 
+  }
+}
+.bbc-git-pull-request {
+  &:before {
+    content: $bbc-git-pull-request; 
+  }
+}
+.bbc-github2 {
+  &:before {
+    content: $bbc-github2; 
+  }
+}
+.bbc-gitlab1 {
+  &:before {
+    content: $bbc-gitlab1; 
+  }
+}
+.bbc-globe1 {
+  &:before {
+    content: $bbc-globe1; 
+  }
+}
+.bbc-grid {
+  &:before {
+    content: $bbc-grid; 
+  }
+}
+.bbc-hard-drive {
+  &:before {
+    content: $bbc-hard-drive; 
+  }
+}
+.bbc-hash {
+  &:before {
+    content: $bbc-hash; 
+  }
+}
+.bbc-headphones2 {
+  &:before {
+    content: $bbc-headphones2; 
+  }
+}
+.bbc-heart2 {
+  &:before {
+    content: $bbc-heart2; 
+  }
+}
+.bbc-help-circle {
+  &:before {
+    content: $bbc-help-circle; 
+  }
+}
+.bbc-hexagon {
+  &:before {
+    content: $bbc-hexagon; 
+  }
+}
+.bbc-home4 {
+  &:before {
+    content: $bbc-home4; 
+  }
+}
+.bbc-image2 {
+  &:before {
+    content: $bbc-image2; 
+  }
+}
+.bbc-inbox1 {
+  &:before {
+    content: $bbc-inbox1; 
+  }
+}
+.bbc-info2 {
+  &:before {
+    content: $bbc-info2; 
+  }
+}
+.bbc-instagram2 {
+  &:before {
+    content: $bbc-instagram2; 
+  }
+}
+.bbc-italic2 {
+  &:before {
+    content: $bbc-italic2; 
+  }
+}
+.bbc-key3 {
+  &:before {
+    content: $bbc-key3; 
+  }
+}
+.bbc-layers {
+  &:before {
+    content: $bbc-layers; 
+  }
+}
+.bbc-layout {
+  &:before {
+    content: $bbc-layout; 
+  }
+}
+.bbc-life-buoy1 {
+  &:before {
+    content: $bbc-life-buoy1; 
+  }
+}
+.bbc-link2 {
+  &:before {
+    content: $bbc-link2; 
+  }
+}
+.bbc-link-2 {
+  &:before {
+    content: $bbc-link-2; 
+  }
+}
+.bbc-linkedin3 {
+  &:before {
+    content: $bbc-linkedin3; 
+  }
+}
+.bbc-list3 {
+  &:before {
+    content: $bbc-list3; 
+  }
+}
+.bbc-loader {
+  &:before {
+    content: $bbc-loader; 
+  }
+}
+.bbc-lock2 {
+  &:before {
+    content: $bbc-lock2; 
+  }
+}
+.bbc-log-in {
+  &:before {
+    content: $bbc-log-in; 
+  }
+}
+.bbc-log-out {
+  &:before {
+    content: $bbc-log-out; 
+  }
+}
+.bbc-mail1 {
+  &:before {
+    content: $bbc-mail1; 
+  }
+}
+.bbc-map3 {
+  &:before {
+    content: $bbc-map3; 
+  }
+}
+.bbc-map-pin1 {
+  &:before {
+    content: $bbc-map-pin1; 
+  }
+}
+.bbc-maximize {
+  &:before {
+    content: $bbc-maximize; 
+  }
+}
+.bbc-maximize-2 {
+  &:before {
+    content: $bbc-maximize-2; 
+  }
+}
+.bbc-meh {
+  &:before {
+    content: $bbc-meh; 
+  }
+}
+.bbc-menu1 {
+  &:before {
+    content: $bbc-menu1; 
+  }
+}
+.bbc-message-circle {
+  &:before {
+    content: $bbc-message-circle; 
+  }
+}
+.bbc-message-square {
+  &:before {
+    content: $bbc-message-square; 
+  }
+}
+.bbc-mic1 {
+  &:before {
+    content: $bbc-mic1; 
+  }
+}
+.bbc-mic-off {
+  &:before {
+    content: $bbc-mic-off; 
+  }
+}
+.bbc-minimize {
+  &:before {
+    content: $bbc-minimize; 
+  }
+}
+.bbc-minimize-2 {
+  &:before {
+    content: $bbc-minimize-2; 
+  }
+}
+.bbc-minus2 {
+  &:before {
+    content: $bbc-minus2; 
+  }
+}
+.bbc-minus-circle1 {
+  &:before {
+    content: $bbc-minus-circle1; 
+  }
+}
+.bbc-minus-square1 {
+  &:before {
+    content: $bbc-minus-square1; 
+  }
+}
+.bbc-monitor {
+  &:before {
+    content: $bbc-monitor; 
+  }
+}
+.bbc-moon {
+  &:before {
+    content: $bbc-moon; 
+  }
+}
+.bbc-more-horizontal {
+  &:before {
+    content: $bbc-more-horizontal; 
+  }
+}
+.bbc-more-vertical {
+  &:before {
+    content: $bbc-more-vertical; 
+  }
+}
+.bbc-mouse-pointer1 {
+  &:before {
+    content: $bbc-mouse-pointer1; 
+  }
+}
+.bbc-move {
+  &:before {
+    content: $bbc-move; 
+  }
+}
+.bbc-music2 {
+  &:before {
+    content: $bbc-music2; 
+  }
+}
+.bbc-navigation {
+  &:before {
+    content: $bbc-navigation; 
+  }
+}
+.bbc-navigation-2 {
+  &:before {
+    content: $bbc-navigation-2; 
+  }
+}
+.bbc-octagon {
+  &:before {
+    content: $bbc-octagon; 
+  }
+}
+.bbc-package {
+  &:before {
+    content: $bbc-package; 
+  }
+}
+.bbc-paperclip1 {
+  &:before {
+    content: $bbc-paperclip1; 
+  }
+}
+.bbc-pause3 {
+  &:before {
+    content: $bbc-pause3; 
+  }
+}
+.bbc-pause-circle1 {
+  &:before {
+    content: $bbc-pause-circle1; 
+  }
+}
+.bbc-pen-tool {
+  &:before {
+    content: $bbc-pen-tool; 
+  }
+}
+.bbc-percent1 {
+  &:before {
+    content: $bbc-percent1; 
+  }
+}
+.bbc-phone2 {
+  &:before {
+    content: $bbc-phone2; 
+  }
+}
+.bbc-phone-call {
+  &:before {
+    content: $bbc-phone-call; 
+  }
+}
+.bbc-phone-forwarded {
+  &:before {
+    content: $bbc-phone-forwarded; 
+  }
+}
+.bbc-phone-incoming {
+  &:before {
+    content: $bbc-phone-incoming; 
+  }
+}
+.bbc-phone-missed {
+  &:before {
+    content: $bbc-phone-missed; 
+  }
+}
+.bbc-phone-off {
+  &:before {
+    content: $bbc-phone-off; 
+  }
+}
+.bbc-phone-outgoing {
+  &:before {
+    content: $bbc-phone-outgoing; 
+  }
+}
+.bbc-pie-chart2 {
+  &:before {
+    content: $bbc-pie-chart2; 
+  }
+}
+.bbc-play4 {
+  &:before {
+    content: $bbc-play4; 
+  }
+}
+.bbc-play-circle1 {
+  &:before {
+    content: $bbc-play-circle1; 
+  }
+}
+.bbc-plus2 {
+  &:before {
+    content: $bbc-plus2; 
+  }
+}
+.bbc-plus-circle1 {
+  &:before {
+    content: $bbc-plus-circle1; 
+  }
+}
+.bbc-plus-square1 {
+  &:before {
+    content: $bbc-plus-square1; 
+  }
+}
+.bbc-pocket {
+  &:before {
+    content: $bbc-pocket; 
+  }
+}
+.bbc-power1 {
+  &:before {
+    content: $bbc-power1; 
+  }
+}
+.bbc-printer1 {
+  &:before {
+    content: $bbc-printer1; 
+  }
+}
+.bbc-radio {
+  &:before {
+    content: $bbc-radio; 
+  }
+}
+.bbc-refresh-ccw {
+  &:before {
+    content: $bbc-refresh-ccw; 
+  }
+}
+.bbc-refresh-cw {
+  &:before {
+    content: $bbc-refresh-cw; 
+  }
+}
+.bbc-repeat1 {
+  &:before {
+    content: $bbc-repeat1; 
+  }
+}
+.bbc-rewind {
+  &:before {
+    content: $bbc-rewind; 
+  }
+}
+.bbc-rotate-ccw {
+  &:before {
+    content: $bbc-rotate-ccw; 
+  }
+}
+.bbc-rotate-cw {
+  &:before {
+    content: $bbc-rotate-cw; 
+  }
+}
+.bbc-rss3 {
+  &:before {
+    content: $bbc-rss3; 
+  }
+}
+.bbc-save1 {
+  &:before {
+    content: $bbc-save1; 
+  }
+}
+.bbc-scissors2 {
+  &:before {
+    content: $bbc-scissors2; 
+  }
+}
+.bbc-search2 {
+  &:before {
+    content: $bbc-search2; 
+  }
+}
+.bbc-send1 {
+  &:before {
+    content: $bbc-send1; 
+  }
+}
+.bbc-server1 {
+  &:before {
+    content: $bbc-server1; 
+  }
+}
+.bbc-settings {
+  &:before {
+    content: $bbc-settings; 
+  }
+}
+.bbc-share3 {
+  &:before {
+    content: $bbc-share3; 
+  }
+}
+.bbc-share-2 {
+  &:before {
+    content: $bbc-share-2; 
+  }
+}
+.bbc-shield2 {
+  &:before {
+    content: $bbc-shield2; 
+  }
+}
+.bbc-shield-off {
+  &:before {
+    content: $bbc-shield-off; 
+  }
+}
+.bbc-shopping-bag1 {
+  &:before {
+    content: $bbc-shopping-bag1; 
+  }
+}
+.bbc-shopping-cart1 {
+  &:before {
+    content: $bbc-shopping-cart1; 
+  }
+}
+.bbc-shuffle1 {
+  &:before {
+    content: $bbc-shuffle1; 
+  }
+}
+.bbc-sidebar {
+  &:before {
+    content: $bbc-sidebar; 
+  }
+}
+.bbc-skip-back {
+  &:before {
+    content: $bbc-skip-back; 
+  }
+}
+.bbc-skip-forward {
+  &:before {
+    content: $bbc-skip-forward; 
+  }
+}
+.bbc-slack1 {
+  &:before {
+    content: $bbc-slack1; 
+  }
+}
+.bbc-slash {
+  &:before {
+    content: $bbc-slash; 
+  }
+}
+.bbc-sliders1 {
+  &:before {
+    content: $bbc-sliders1; 
+  }
+}
+.bbc-smartphone {
+  &:before {
+    content: $bbc-smartphone; 
+  }
+}
+.bbc-smile1 {
+  &:before {
+    content: $bbc-smile1; 
+  }
+}
+.bbc-speaker {
+  &:before {
+    content: $bbc-speaker; 
+  }
+}
+.bbc-square1 {
+  &:before {
+    content: $bbc-square1; 
+  }
+}
+.bbc-star1 {
+  &:before {
+    content: $bbc-star1; 
+  }
+}
+.bbc-stop-circle1 {
+  &:before {
+    content: $bbc-stop-circle1; 
+  }
+}
+.bbc-sun1 {
+  &:before {
+    content: $bbc-sun1; 
+  }
+}
+.bbc-sunrise {
+  &:before {
+    content: $bbc-sunrise; 
+  }
+}
+.bbc-sunset {
+  &:before {
+    content: $bbc-sunset; 
+  }
+}
+.bbc-tablet2 {
+  &:before {
+    content: $bbc-tablet2; 
+  }
+}
+.bbc-tag1 {
+  &:before {
+    content: $bbc-tag1; 
+  }
+}
+.bbc-target1 {
+  &:before {
+    content: $bbc-target1; 
+  }
+}
+.bbc-terminal2 {
+  &:before {
+    content: $bbc-terminal2; 
+  }
+}
+.bbc-thermometer1 {
+  &:before {
+    content: $bbc-thermometer1; 
+  }
+}
+.bbc-thumbs-down1 {
+  &:before {
+    content: $bbc-thumbs-down1; 
+  }
+}
+.bbc-thumbs-up1 {
+  &:before {
+    content: $bbc-thumbs-up1; 
+  }
+}
+.bbc-toggle-left1 {
+  &:before {
+    content: $bbc-toggle-left1; 
+  }
+}
+.bbc-toggle-right1 {
+  &:before {
+    content: $bbc-toggle-right1; 
+  }
+}
+.bbc-tool {
+  &:before {
+    content: $bbc-tool; 
+  }
+}
+.bbc-trash1 {
+  &:before {
+    content: $bbc-trash1; 
+  }
+}
+.bbc-trash-2 {
+  &:before {
+    content: $bbc-trash-2; 
+  }
+}
+.bbc-trello2 {
+  &:before {
+    content: $bbc-trello2; 
+  }
+}
+.bbc-trending-down {
+  &:before {
+    content: $bbc-trending-down; 
+  }
+}
+.bbc-trending-up {
+  &:before {
+    content: $bbc-trending-up; 
+  }
+}
+.bbc-triangle {
+  &:before {
+    content: $bbc-triangle; 
+  }
+}
+.bbc-truck2 {
+  &:before {
+    content: $bbc-truck2; 
+  }
+}
+.bbc-tv2 {
+  &:before {
+    content: $bbc-tv2; 
+  }
+}
+.bbc-twitch2 {
+  &:before {
+    content: $bbc-twitch2; 
+  }
+}
+.bbc-twitter2 {
+  &:before {
+    content: $bbc-twitter2; 
+  }
+}
+.bbc-type {
+  &:before {
+    content: $bbc-type; 
+  }
+}
+.bbc-umbrella1 {
+  &:before {
+    content: $bbc-umbrella1; 
+  }
+}
+.bbc-underline2 {
+  &:before {
+    content: $bbc-underline2; 
+  }
+}
+.bbc-unlock1 {
+  &:before {
+    content: $bbc-unlock1; 
+  }
+}
+.bbc-upload4 {
+  &:before {
+    content: $bbc-upload4; 
+  }
+}
+.bbc-upload-cloud {
+  &:before {
+    content: $bbc-upload-cloud; 
+  }
+}
+.bbc-user2 {
+  &:before {
+    content: $bbc-user2; 
+  }
+}
+.bbc-user-check1 {
+  &:before {
+    content: $bbc-user-check1; 
+  }
+}
+.bbc-user-minus1 {
+  &:before {
+    content: $bbc-user-minus1; 
+  }
+}
+.bbc-user-plus2 {
+  &:before {
+    content: $bbc-user-plus2; 
+  }
+}
+.bbc-user-x {
+  &:before {
+    content: $bbc-user-x; 
+  }
+}
+.bbc-users2 {
+  &:before {
+    content: $bbc-users2; 
+  }
+}
+.bbc-video {
+  &:before {
+    content: $bbc-video; 
+  }
+}
+.bbc-video-off {
+  &:before {
+    content: $bbc-video-off; 
+  }
+}
+.bbc-voicemail {
+  &:before {
+    content: $bbc-voicemail; 
+  }
+}
+.bbc-volume {
+  &:before {
+    content: $bbc-volume; 
+  }
+}
+.bbc-volume-1 {
+  &:before {
+    content: $bbc-volume-1; 
+  }
+}
+.bbc-volume-2 {
+  &:before {
+    content: $bbc-volume-2; 
+  }
+}
+.bbc-volume-x {
+  &:before {
+    content: $bbc-volume-x; 
+  }
+}
+.bbc-watch {
+  &:before {
+    content: $bbc-watch; 
+  }
+}
+.bbc-wifi1 {
+  &:before {
+    content: $bbc-wifi1; 
+  }
+}
+.bbc-wifi-off {
+  &:before {
+    content: $bbc-wifi-off; 
+  }
+}
+.bbc-wind {
+  &:before {
+    content: $bbc-wind; 
+  }
+}
+.bbc-x {
+  &:before {
+    content: $bbc-x; 
+  }
+}
+.bbc-x-circle {
+  &:before {
+    content: $bbc-x-circle; 
+  }
+}
+.bbc-x-octagon {
+  &:before {
+    content: $bbc-x-octagon; 
+  }
+}
+.bbc-x-square {
+  &:before {
+    content: $bbc-x-square; 
+  }
+}
+.bbc-youtube3 {
+  &:before {
+    content: $bbc-youtube3; 
+  }
+}
+.bbc-zap {
+  &:before {
+    content: $bbc-zap; 
+  }
+}
+.bbc-zap-off {
+  &:before {
+    content: $bbc-zap-off; 
+  }
+}
+.bbc-zoom-in1 {
+  &:before {
+    content: $bbc-zoom-in1; 
+  }
+}
+.bbc-zoom-out1 {
+  &:before {
+    content: $bbc-zoom-out1; 
+  }
+}
+.bbc-home1 {
+  &:before {
+    content: $bbc-home1; 
+  }
+}
+.bbc-home2 {
+  &:before {
+    content: $bbc-home2; 
+  }
+}
+.bbc-home3 {
+  &:before {
+    content: $bbc-home3; 
+  }
+}
+.bbc-office {
+  &:before {
+    content: $bbc-office; 
+  }
+}
+.bbc-newspaper {
+  &:before {
+    content: $bbc-newspaper; 
+  }
+}
+.bbc-pencil1 {
+  &:before {
+    content: $bbc-pencil1; 
+  }
+}
+.bbc-pencil2 {
+  &:before {
+    content: $bbc-pencil2; 
+  }
+}
+.bbc-quill {
+  &:before {
+    content: $bbc-quill; 
+  }
+}
+.bbc-pen {
+  &:before {
+    content: $bbc-pen; 
+  }
+}
+.bbc-blog {
+  &:before {
+    content: $bbc-blog; 
+  }
+}
+.bbc-eyedropper1 {
+  &:before {
+    content: $bbc-eyedropper1; 
+  }
+}
+.bbc-droplet {
+  &:before {
+    content: $bbc-droplet; 
+  }
+}
+.bbc-paint-format {
+  &:before {
+    content: $bbc-paint-format; 
+  }
+}
+.bbc-image1 {
+  &:before {
+    content: $bbc-image1; 
+  }
+}
+.bbc-images {
+  &:before {
+    content: $bbc-images; 
+  }
+}
+.bbc-camera1 {
+  &:before {
+    content: $bbc-camera1; 
+  }
+}
+.bbc-headphones1 {
+  &:before {
+    content: $bbc-headphones1; 
+  }
+}
+.bbc-music1 {
+  &:before {
+    content: $bbc-music1; 
+  }
+}
+.bbc-play1 {
+  &:before {
+    content: $bbc-play1; 
+  }
+}
+.bbc-film1 {
+  &:before {
+    content: $bbc-film1; 
+  }
+}
+.bbc-video-camera1 {
+  &:before {
+    content: $bbc-video-camera1; 
+  }
+}
+.bbc-dice {
+  &:before {
+    content: $bbc-dice; 
+  }
+}
+.bbc-pacman {
+  &:before {
+    content: $bbc-pacman; 
+  }
+}
+.bbc-spades {
+  &:before {
+    content: $bbc-spades; 
+  }
+}
+.bbc-clubs {
+  &:before {
+    content: $bbc-clubs; 
+  }
+}
+.bbc-diamonds {
+  &:before {
+    content: $bbc-diamonds; 
+  }
+}
+.bbc-bullhorn1 {
+  &:before {
+    content: $bbc-bullhorn1; 
+  }
+}
+.bbc-connection {
+  &:before {
+    content: $bbc-connection; 
+  }
+}
+.bbc-podcast1 {
+  &:before {
+    content: $bbc-podcast1; 
+  }
+}
+.bbc-feed1 {
+  &:before {
+    content: $bbc-feed1; 
+  }
+}
+.bbc-mic {
+  &:before {
+    content: $bbc-mic; 
+  }
+}
+.bbc-book1 {
+  &:before {
+    content: $bbc-book1; 
+  }
+}
+.bbc-books {
+  &:before {
+    content: $bbc-books; 
+  }
+}
+.bbc-library {
+  &:before {
+    content: $bbc-library; 
+  }
+}
+.bbc-file-text1 {
+  &:before {
+    content: $bbc-file-text1; 
+  }
+}
+.bbc-profile {
+  &:before {
+    content: $bbc-profile; 
+  }
+}
+.bbc-file-empty {
+  &:before {
+    content: $bbc-file-empty; 
+  }
+}
+.bbc-files-empty {
+  &:before {
+    content: $bbc-files-empty; 
+  }
+}
+.bbc-file-text2 {
+  &:before {
+    content: $bbc-file-text2; 
+  }
+}
+.bbc-file-picture {
+  &:before {
+    content: $bbc-file-picture; 
+  }
+}
+.bbc-file-music {
+  &:before {
+    content: $bbc-file-music; 
+  }
+}
+.bbc-file-play {
+  &:before {
+    content: $bbc-file-play; 
+  }
+}
+.bbc-file-video {
+  &:before {
+    content: $bbc-file-video; 
+  }
+}
+.bbc-file-zip {
+  &:before {
+    content: $bbc-file-zip; 
+  }
+}
+.bbc-copy1 {
+  &:before {
+    content: $bbc-copy1; 
+  }
+}
+.bbc-paste1 {
+  &:before {
+    content: $bbc-paste1; 
+  }
+}
+.bbc-stack {
+  &:before {
+    content: $bbc-stack; 
+  }
+}
+.bbc-folder1 {
+  &:before {
+    content: $bbc-folder1; 
+  }
+}
+.bbc-folder-open1 {
+  &:before {
+    content: $bbc-folder-open1; 
+  }
+}
+.bbc-folder-plus {
+  &:before {
+    content: $bbc-folder-plus; 
+  }
+}
+.bbc-folder-minus {
+  &:before {
+    content: $bbc-folder-minus; 
+  }
+}
+.bbc-folder-download {
+  &:before {
+    content: $bbc-folder-download; 
+  }
+}
+.bbc-folder-upload {
+  &:before {
+    content: $bbc-folder-upload; 
+  }
+}
+.bbc-price-tag {
+  &:before {
+    content: $bbc-price-tag; 
+  }
+}
+.bbc-price-tags {
+  &:before {
+    content: $bbc-price-tags; 
+  }
+}
+.bbc-barcode1 {
+  &:before {
+    content: $bbc-barcode1; 
+  }
+}
+.bbc-qrcode1 {
+  &:before {
+    content: $bbc-qrcode1; 
+  }
+}
+.bbc-ticket1 {
+  &:before {
+    content: $bbc-ticket1; 
+  }
+}
+.bbc-cart {
+  &:before {
+    content: $bbc-cart; 
+  }
+}
+.bbc-coin-dollar {
+  &:before {
+    content: $bbc-coin-dollar; 
+  }
+}
+.bbc-coin-euro {
+  &:before {
+    content: $bbc-coin-euro; 
+  }
+}
+.bbc-coin-pound {
+  &:before {
+    content: $bbc-coin-pound; 
+  }
+}
+.bbc-coin-yen {
+  &:before {
+    content: $bbc-coin-yen; 
+  }
+}
+.bbc-credit-card1 {
+  &:before {
+    content: $bbc-credit-card1; 
+  }
+}
+.bbc-calculator1 {
+  &:before {
+    content: $bbc-calculator1; 
+  }
+}
+.bbc-lifebuoy {
+  &:before {
+    content: $bbc-lifebuoy; 
+  }
+}
+.bbc-phone1 {
+  &:before {
+    content: $bbc-phone1; 
+  }
+}
+.bbc-phone-hang-up {
+  &:before {
+    content: $bbc-phone-hang-up; 
+  }
+}
+.bbc-address-book1 {
+  &:before {
+    content: $bbc-address-book1; 
+  }
+}
+.bbc-envelop {
+  &:before {
+    content: $bbc-envelop; 
+  }
+}
+.bbc-pushpin {
+  &:before {
+    content: $bbc-pushpin; 
+  }
+}
+.bbc-location {
+  &:before {
+    content: $bbc-location; 
+  }
+}
+.bbc-location2 {
+  &:before {
+    content: $bbc-location2; 
+  }
+}
+.bbc-compass1 {
+  &:before {
+    content: $bbc-compass1; 
+  }
+}
+.bbc-compass2 {
+  &:before {
+    content: $bbc-compass2; 
+  }
+}
+.bbc-map1 {
+  &:before {
+    content: $bbc-map1; 
+  }
+}
+.bbc-map2 {
+  &:before {
+    content: $bbc-map2; 
+  }
+}
+.bbc-history1 {
+  &:before {
+    content: $bbc-history1; 
+  }
+}
+.bbc-clock {
+  &:before {
+    content: $bbc-clock; 
+  }
+}
+.bbc-clock2 {
+  &:before {
+    content: $bbc-clock2; 
+  }
+}
+.bbc-alarm {
+  &:before {
+    content: $bbc-alarm; 
+  }
+}
+.bbc-bell1 {
+  &:before {
+    content: $bbc-bell1; 
+  }
+}
+.bbc-stopwatch {
+  &:before {
+    content: $bbc-stopwatch; 
+  }
+}
+.bbc-calendar1 {
+  &:before {
+    content: $bbc-calendar1; 
+  }
+}
+.bbc-printer {
+  &:before {
+    content: $bbc-printer; 
+  }
+}
+.bbc-keyboard {
+  &:before {
+    content: $bbc-keyboard; 
+  }
+}
+.bbc-display {
+  &:before {
+    content: $bbc-display; 
+  }
+}
+.bbc-laptop1 {
+  &:before {
+    content: $bbc-laptop1; 
+  }
+}
+.bbc-mobile1 {
+  &:before {
+    content: $bbc-mobile1; 
+  }
+}
+.bbc-mobile2 {
+  &:before {
+    content: $bbc-mobile2; 
+  }
+}
+.bbc-tablet1 {
+  &:before {
+    content: $bbc-tablet1; 
+  }
+}
+.bbc-tv1 {
+  &:before {
+    content: $bbc-tv1; 
+  }
+}
+.bbc-drawer {
+  &:before {
+    content: $bbc-drawer; 
+  }
+}
+.bbc-drawer2 {
+  &:before {
+    content: $bbc-drawer2; 
+  }
+}
+.bbc-box-add {
+  &:before {
+    content: $bbc-box-add; 
+  }
+}
+.bbc-box-remove {
+  &:before {
+    content: $bbc-box-remove; 
+  }
+}
+.bbc-download1 {
+  &:before {
+    content: $bbc-download1; 
+  }
+}
+.bbc-upload1 {
+  &:before {
+    content: $bbc-upload1; 
+  }
+}
+.bbc-floppy-disk {
+  &:before {
+    content: $bbc-floppy-disk; 
+  }
+}
+.bbc-drive {
+  &:before {
+    content: $bbc-drive; 
+  }
+}
+.bbc-database1 {
+  &:before {
+    content: $bbc-database1; 
+  }
+}
+.bbc-undo1 {
+  &:before {
+    content: $bbc-undo1; 
+  }
+}
+.bbc-redo {
+  &:before {
+    content: $bbc-redo; 
+  }
+}
+.bbc-undo2 {
+  &:before {
+    content: $bbc-undo2; 
+  }
+}
+.bbc-redo2 {
+  &:before {
+    content: $bbc-redo2; 
+  }
+}
+.bbc-forward1 {
+  &:before {
+    content: $bbc-forward1; 
+  }
+}
+.bbc-reply1 {
+  &:before {
+    content: $bbc-reply1; 
+  }
+}
+.bbc-bubble {
+  &:before {
+    content: $bbc-bubble; 
+  }
+}
+.bbc-bubbles {
+  &:before {
+    content: $bbc-bubbles; 
+  }
+}
+.bbc-bubbles2 {
+  &:before {
+    content: $bbc-bubbles2; 
+  }
+}
+.bbc-bubble2 {
+  &:before {
+    content: $bbc-bubble2; 
+  }
+}
+.bbc-bubbles3 {
+  &:before {
+    content: $bbc-bubbles3; 
+  }
+}
+.bbc-bubbles4 {
+  &:before {
+    content: $bbc-bubbles4; 
+  }
+}
+.bbc-user1 {
+  &:before {
+    content: $bbc-user1; 
+  }
+}
+.bbc-users1 {
+  &:before {
+    content: $bbc-users1; 
+  }
+}
+.bbc-user-plus1 {
+  &:before {
+    content: $bbc-user-plus1; 
+  }
+}
+.bbc-user-minus {
+  &:before {
+    content: $bbc-user-minus; 
+  }
+}
+.bbc-user-check {
+  &:before {
+    content: $bbc-user-check; 
+  }
+}
+.bbc-user-tie {
+  &:before {
+    content: $bbc-user-tie; 
+  }
+}
+.bbc-quotes-left {
+  &:before {
+    content: $bbc-quotes-left; 
+  }
+}
+.bbc-quotes-right {
+  &:before {
+    content: $bbc-quotes-right; 
+  }
+}
+.bbc-hour-glass {
+  &:before {
+    content: $bbc-hour-glass; 
+  }
+}
+.bbc-spinner1 {
+  &:before {
+    content: $bbc-spinner1; 
+  }
+}
+.bbc-spinner2 {
+  &:before {
+    content: $bbc-spinner2; 
+  }
+}
+.bbc-spinner3 {
+  &:before {
+    content: $bbc-spinner3; 
+  }
+}
+.bbc-spinner4 {
+  &:before {
+    content: $bbc-spinner4; 
+  }
+}
+.bbc-spinner5 {
+  &:before {
+    content: $bbc-spinner5; 
+  }
+}
+.bbc-spinner6 {
+  &:before {
+    content: $bbc-spinner6; 
+  }
+}
+.bbc-spinner7 {
+  &:before {
+    content: $bbc-spinner7; 
+  }
+}
+.bbc-spinner8 {
+  &:before {
+    content: $bbc-spinner8; 
+  }
+}
+.bbc-spinner9 {
+  &:before {
+    content: $bbc-spinner9; 
+  }
+}
+.bbc-spinner10 {
+  &:before {
+    content: $bbc-spinner10; 
+  }
+}
+.bbc-spinner11 {
+  &:before {
+    content: $bbc-spinner11; 
+  }
+}
+.bbc-binoculars1 {
+  &:before {
+    content: $bbc-binoculars1; 
+  }
+}
+.bbc-search1 {
+  &:before {
+    content: $bbc-search1; 
+  }
+}
+.bbc-zoom-in {
+  &:before {
+    content: $bbc-zoom-in; 
+  }
+}
+.bbc-zoom-out {
+  &:before {
+    content: $bbc-zoom-out; 
+  }
+}
+.bbc-enlarge {
+  &:before {
+    content: $bbc-enlarge; 
+  }
+}
+.bbc-shrink {
+  &:before {
+    content: $bbc-shrink; 
+  }
+}
+.bbc-enlarge2 {
+  &:before {
+    content: $bbc-enlarge2; 
+  }
+}
+.bbc-shrink2 {
+  &:before {
+    content: $bbc-shrink2; 
+  }
+}
+.bbc-key1 {
+  &:before {
+    content: $bbc-key1; 
+  }
+}
+.bbc-key2 {
+  &:before {
+    content: $bbc-key2; 
+  }
+}
+.bbc-lock1 {
+  &:before {
+    content: $bbc-lock1; 
+  }
+}
+.bbc-unlocked {
+  &:before {
+    content: $bbc-unlocked; 
+  }
+}
+.bbc-wrench1 {
+  &:before {
+    content: $bbc-wrench1; 
+  }
+}
+.bbc-equalizer {
+  &:before {
+    content: $bbc-equalizer; 
+  }
+}
+.bbc-equalizer2 {
+  &:before {
+    content: $bbc-equalizer2; 
+  }
+}
+.bbc-cog1 {
+  &:before {
+    content: $bbc-cog1; 
+  }
+}
+.bbc-cogs1 {
+  &:before {
+    content: $bbc-cogs1; 
+  }
+}
+.bbc-hammer {
+  &:before {
+    content: $bbc-hammer; 
+  }
+}
+.bbc-magic-wand {
+  &:before {
+    content: $bbc-magic-wand; 
+  }
+}
+.bbc-aid-kit {
+  &:before {
+    content: $bbc-aid-kit; 
+  }
+}
+.bbc-bug1 {
+  &:before {
+    content: $bbc-bug1; 
+  }
+}
+.bbc-pie-chart1 {
+  &:before {
+    content: $bbc-pie-chart1; 
+  }
+}
+.bbc-stats-dots {
+  &:before {
+    content: $bbc-stats-dots; 
+  }
+}
+.bbc-stats-bars {
+  &:before {
+    content: $bbc-stats-bars; 
+  }
+}
+.bbc-stats-bars2 {
+  &:before {
+    content: $bbc-stats-bars2; 
+  }
+}
+.bbc-trophy1 {
+  &:before {
+    content: $bbc-trophy1; 
+  }
+}
+.bbc-gift1 {
+  &:before {
+    content: $bbc-gift1; 
+  }
+}
+.bbc-glass1 {
+  &:before {
+    content: $bbc-glass1; 
+  }
+}
+.bbc-glass2 {
+  &:before {
+    content: $bbc-glass2; 
+  }
+}
+.bbc-mug {
+  &:before {
+    content: $bbc-mug; 
+  }
+}
+.bbc-spoon-knife {
+  &:before {
+    content: $bbc-spoon-knife; 
+  }
+}
+.bbc-leaf1 {
+  &:before {
+    content: $bbc-leaf1; 
+  }
+}
+.bbc-rocket1 {
+  &:before {
+    content: $bbc-rocket1; 
+  }
+}
+.bbc-meter {
+  &:before {
+    content: $bbc-meter; 
+  }
+}
+.bbc-meter2 {
+  &:before {
+    content: $bbc-meter2; 
+  }
+}
+.bbc-hammer2 {
+  &:before {
+    content: $bbc-hammer2; 
+  }
+}
+.bbc-fire1 {
+  &:before {
+    content: $bbc-fire1; 
+  }
+}
+.bbc-lab {
+  &:before {
+    content: $bbc-lab; 
+  }
+}
+.bbc-magnet1 {
+  &:before {
+    content: $bbc-magnet1; 
+  }
+}
+.bbc-bin {
+  &:before {
+    content: $bbc-bin; 
+  }
+}
+.bbc-bin2 {
+  &:before {
+    content: $bbc-bin2; 
+  }
+}
+.bbc-briefcase1 {
+  &:before {
+    content: $bbc-briefcase1; 
+  }
+}
+.bbc-airplane {
+  &:before {
+    content: $bbc-airplane; 
+  }
+}
+.bbc-truck1 {
+  &:before {
+    content: $bbc-truck1; 
+  }
+}
+.bbc-road1 {
+  &:before {
+    content: $bbc-road1; 
+  }
+}
+.bbc-accessibility {
+  &:before {
+    content: $bbc-accessibility; 
+  }
+}
+.bbc-target {
+  &:before {
+    content: $bbc-target; 
+  }
+}
+.bbc-shield1 {
+  &:before {
+    content: $bbc-shield1; 
+  }
+}
+.bbc-power {
+  &:before {
+    content: $bbc-power; 
+  }
+}
+.bbc-switch {
+  &:before {
+    content: $bbc-switch; 
+  }
+}
+.bbc-power-cord {
+  &:before {
+    content: $bbc-power-cord; 
+  }
+}
+.bbc-clipboard1 {
+  &:before {
+    content: $bbc-clipboard1; 
+  }
+}
+.bbc-list-numbered {
+  &:before {
+    content: $bbc-list-numbered; 
+  }
+}
+.bbc-list1 {
+  &:before {
+    content: $bbc-list1; 
+  }
+}
+.bbc-list2 {
+  &:before {
+    content: $bbc-list2; 
+  }
+}
+.bbc-tree1 {
+  &:before {
+    content: $bbc-tree1; 
+  }
+}
+.bbc-menu {
+  &:before {
+    content: $bbc-menu; 
+  }
+}
+.bbc-menu2 {
+  &:before {
+    content: $bbc-menu2; 
+  }
+}
+.bbc-menu3 {
+  &:before {
+    content: $bbc-menu3; 
+  }
+}
+.bbc-menu4 {
+  &:before {
+    content: $bbc-menu4; 
+  }
+}
+.bbc-cloud1 {
+  &:before {
+    content: $bbc-cloud1; 
+  }
+}
+.bbc-cloud-download1 {
+  &:before {
+    content: $bbc-cloud-download1; 
+  }
+}
+.bbc-cloud-upload1 {
+  &:before {
+    content: $bbc-cloud-upload1; 
+  }
+}
+.bbc-cloud-check {
+  &:before {
+    content: $bbc-cloud-check; 
+  }
+}
+.bbc-download2 {
+  &:before {
+    content: $bbc-download2; 
+  }
+}
+.bbc-upload2 {
+  &:before {
+    content: $bbc-upload2; 
+  }
+}
+.bbc-download3 {
+  &:before {
+    content: $bbc-download3; 
+  }
+}
+.bbc-upload3 {
+  &:before {
+    content: $bbc-upload3; 
+  }
+}
+.bbc-sphere {
+  &:before {
+    content: $bbc-sphere; 
+  }
+}
+.bbc-earth {
+  &:before {
+    content: $bbc-earth; 
+  }
+}
+.bbc-link1 {
+  &:before {
+    content: $bbc-link1; 
+  }
+}
+.bbc-flag1 {
+  &:before {
+    content: $bbc-flag1; 
+  }
+}
+.bbc-attachment {
+  &:before {
+    content: $bbc-attachment; 
+  }
+}
+.bbc-eye1 {
+  &:before {
+    content: $bbc-eye1; 
+  }
+}
+.bbc-eye-plus {
+  &:before {
+    content: $bbc-eye-plus; 
+  }
+}
+.bbc-eye-minus {
+  &:before {
+    content: $bbc-eye-minus; 
+  }
+}
+.bbc-eye-blocked {
+  &:before {
+    content: $bbc-eye-blocked; 
+  }
+}
+.bbc-bookmark1 {
+  &:before {
+    content: $bbc-bookmark1; 
+  }
+}
+.bbc-bookmarks {
+  &:before {
+    content: $bbc-bookmarks; 
+  }
+}
+.bbc-sun {
+  &:before {
+    content: $bbc-sun; 
+  }
+}
+.bbc-contrast {
+  &:before {
+    content: $bbc-contrast; 
+  }
+}
+.bbc-brightness-contrast {
+  &:before {
+    content: $bbc-brightness-contrast; 
+  }
+}
+.bbc-star-empty {
+  &:before {
+    content: $bbc-star-empty; 
+  }
+}
+.bbc-star-half1 {
+  &:before {
+    content: $bbc-star-half1; 
+  }
+}
+.bbc-star-full {
+  &:before {
+    content: $bbc-star-full; 
+  }
+}
+.bbc-heart1 {
+  &:before {
+    content: $bbc-heart1; 
+  }
+}
+.bbc-heart-broken {
+  &:before {
+    content: $bbc-heart-broken; 
+  }
+}
+.bbc-man {
+  &:before {
+    content: $bbc-man; 
+  }
+}
+.bbc-woman {
+  &:before {
+    content: $bbc-woman; 
+  }
+}
+.bbc-man-woman {
+  &:before {
+    content: $bbc-man-woman; 
+  }
+}
+.bbc-happy {
+  &:before {
+    content: $bbc-happy; 
+  }
+}
+.bbc-happy2 {
+  &:before {
+    content: $bbc-happy2; 
+  }
+}
+.bbc-smile {
+  &:before {
+    content: $bbc-smile; 
+  }
+}
+.bbc-smile2 {
+  &:before {
+    content: $bbc-smile2; 
+  }
+}
+.bbc-tongue {
+  &:before {
+    content: $bbc-tongue; 
+  }
+}
+.bbc-tongue2 {
+  &:before {
+    content: $bbc-tongue2; 
+  }
+}
+.bbc-sad {
+  &:before {
+    content: $bbc-sad; 
+  }
+}
+.bbc-sad2 {
+  &:before {
+    content: $bbc-sad2; 
+  }
+}
+.bbc-wink {
+  &:before {
+    content: $bbc-wink; 
+  }
+}
+.bbc-wink2 {
+  &:before {
+    content: $bbc-wink2; 
+  }
+}
+.bbc-grin {
+  &:before {
+    content: $bbc-grin; 
+  }
+}
+.bbc-grin2 {
+  &:before {
+    content: $bbc-grin2; 
+  }
+}
+.bbc-cool {
+  &:before {
+    content: $bbc-cool; 
+  }
+}
+.bbc-cool2 {
+  &:before {
+    content: $bbc-cool2; 
+  }
+}
+.bbc-angry {
+  &:before {
+    content: $bbc-angry; 
+  }
+}
+.bbc-angry2 {
+  &:before {
+    content: $bbc-angry2; 
+  }
+}
+.bbc-evil {
+  &:before {
+    content: $bbc-evil; 
+  }
+}
+.bbc-evil2 {
+  &:before {
+    content: $bbc-evil2; 
+  }
+}
+.bbc-shocked {
+  &:before {
+    content: $bbc-shocked; 
+  }
+}
+.bbc-shocked2 {
+  &:before {
+    content: $bbc-shocked2; 
+  }
+}
+.bbc-baffled {
+  &:before {
+    content: $bbc-baffled; 
+  }
+}
+.bbc-baffled2 {
+  &:before {
+    content: $bbc-baffled2; 
+  }
+}
+.bbc-confused {
+  &:before {
+    content: $bbc-confused; 
+  }
+}
+.bbc-confused2 {
+  &:before {
+    content: $bbc-confused2; 
+  }
+}
+.bbc-neutral {
+  &:before {
+    content: $bbc-neutral; 
+  }
+}
+.bbc-neutral2 {
+  &:before {
+    content: $bbc-neutral2; 
+  }
+}
+.bbc-hipster {
+  &:before {
+    content: $bbc-hipster; 
+  }
+}
+.bbc-hipster2 {
+  &:before {
+    content: $bbc-hipster2; 
+  }
+}
+.bbc-wondering {
+  &:before {
+    content: $bbc-wondering; 
+  }
+}
+.bbc-wondering2 {
+  &:before {
+    content: $bbc-wondering2; 
+  }
+}
+.bbc-sleepy {
+  &:before {
+    content: $bbc-sleepy; 
+  }
+}
+.bbc-sleepy2 {
+  &:before {
+    content: $bbc-sleepy2; 
+  }
+}
+.bbc-frustrated {
+  &:before {
+    content: $bbc-frustrated; 
+  }
+}
+.bbc-frustrated2 {
+  &:before {
+    content: $bbc-frustrated2; 
+  }
+}
+.bbc-crying {
+  &:before {
+    content: $bbc-crying; 
+  }
+}
+.bbc-crying2 {
+  &:before {
+    content: $bbc-crying2; 
+  }
+}
+.bbc-point-up {
+  &:before {
+    content: $bbc-point-up; 
+  }
+}
+.bbc-point-right {
+  &:before {
+    content: $bbc-point-right; 
+  }
+}
+.bbc-point-down {
+  &:before {
+    content: $bbc-point-down; 
+  }
+}
+.bbc-point-left {
+  &:before {
+    content: $bbc-point-left; 
+  }
+}
+.bbc-warning1 {
+  &:before {
+    content: $bbc-warning1; 
+  }
+}
+.bbc-notification {
+  &:before {
+    content: $bbc-notification; 
+  }
+}
+.bbc-question1 {
+  &:before {
+    content: $bbc-question1; 
+  }
+}
+.bbc-plus1 {
+  &:before {
+    content: $bbc-plus1; 
+  }
+}
+.bbc-minus1 {
+  &:before {
+    content: $bbc-minus1; 
+  }
+}
+.bbc-info1 {
+  &:before {
+    content: $bbc-info1; 
+  }
+}
+.bbc-cancel-circle {
+  &:before {
+    content: $bbc-cancel-circle; 
+  }
+}
+.bbc-blocked {
+  &:before {
+    content: $bbc-blocked; 
+  }
+}
+.bbc-cross {
+  &:before {
+    content: $bbc-cross; 
+  }
+}
+.bbc-checkmark {
+  &:before {
+    content: $bbc-checkmark; 
+  }
+}
+.bbc-checkmark2 {
+  &:before {
+    content: $bbc-checkmark2; 
+  }
+}
+.bbc-spell-check {
+  &:before {
+    content: $bbc-spell-check; 
+  }
+}
+.bbc-enter {
+  &:before {
+    content: $bbc-enter; 
+  }
+}
+.bbc-exit {
+  &:before {
+    content: $bbc-exit; 
+  }
+}
+.bbc-play2 {
+  &:before {
+    content: $bbc-play2; 
+  }
+}
+.bbc-pause1 {
+  &:before {
+    content: $bbc-pause1; 
+  }
+}
+.bbc-stop1 {
+  &:before {
+    content: $bbc-stop1; 
+  }
+}
+.bbc-previous {
+  &:before {
+    content: $bbc-previous; 
+  }
+}
+.bbc-next {
+  &:before {
+    content: $bbc-next; 
+  }
+}
+.bbc-backward1 {
+  &:before {
+    content: $bbc-backward1; 
+  }
+}
+.bbc-forward2 {
+  &:before {
+    content: $bbc-forward2; 
+  }
+}
+.bbc-play3 {
+  &:before {
+    content: $bbc-play3; 
+  }
+}
+.bbc-pause2 {
+  &:before {
+    content: $bbc-pause2; 
+  }
+}
+.bbc-stop2 {
+  &:before {
+    content: $bbc-stop2; 
+  }
+}
+.bbc-backward2 {
+  &:before {
+    content: $bbc-backward2; 
+  }
+}
+.bbc-forward3 {
+  &:before {
+    content: $bbc-forward3; 
+  }
+}
+.bbc-first {
+  &:before {
+    content: $bbc-first; 
+  }
+}
+.bbc-last {
+  &:before {
+    content: $bbc-last; 
+  }
+}
+.bbc-previous2 {
+  &:before {
+    content: $bbc-previous2; 
+  }
+}
+.bbc-next2 {
+  &:before {
+    content: $bbc-next2; 
+  }
+}
+.bbc-eject1 {
+  &:before {
+    content: $bbc-eject1; 
+  }
+}
+.bbc-volume-high {
+  &:before {
+    content: $bbc-volume-high; 
+  }
+}
+.bbc-volume-medium {
+  &:before {
+    content: $bbc-volume-medium; 
+  }
+}
+.bbc-volume-low {
+  &:before {
+    content: $bbc-volume-low; 
+  }
+}
+.bbc-volume-mute {
+  &:before {
+    content: $bbc-volume-mute; 
+  }
+}
+.bbc-volume-mute2 {
+  &:before {
+    content: $bbc-volume-mute2; 
+  }
+}
+.bbc-volume-increase {
+  &:before {
+    content: $bbc-volume-increase; 
+  }
+}
+.bbc-volume-decrease {
+  &:before {
+    content: $bbc-volume-decrease; 
+  }
+}
+.bbc-loop {
+  &:before {
+    content: $bbc-loop; 
+  }
+}
+.bbc-loop2 {
+  &:before {
+    content: $bbc-loop2; 
+  }
+}
+.bbc-infinite {
+  &:before {
+    content: $bbc-infinite; 
+  }
+}
+.bbc-shuffle {
+  &:before {
+    content: $bbc-shuffle; 
+  }
+}
+.bbc-arrow-up-left {
+  &:before {
+    content: $bbc-arrow-up-left; 
+  }
+}
+.bbc-arrow-up1 {
+  &:before {
+    content: $bbc-arrow-up1; 
+  }
+}
+.bbc-arrow-up-right {
+  &:before {
+    content: $bbc-arrow-up-right; 
+  }
+}
+.bbc-arrow-right1 {
+  &:before {
+    content: $bbc-arrow-right1; 
+  }
+}
+.bbc-arrow-down-right {
+  &:before {
+    content: $bbc-arrow-down-right; 
+  }
+}
+.bbc-arrow-down1 {
+  &:before {
+    content: $bbc-arrow-down1; 
+  }
+}
+.bbc-arrow-down-left {
+  &:before {
+    content: $bbc-arrow-down-left; 
+  }
+}
+.bbc-arrow-left1 {
+  &:before {
+    content: $bbc-arrow-left1; 
+  }
+}
+.bbc-arrow-up-left2 {
+  &:before {
+    content: $bbc-arrow-up-left2; 
+  }
+}
+.bbc-arrow-up2 {
+  &:before {
+    content: $bbc-arrow-up2; 
+  }
+}
+.bbc-arrow-up-right2 {
+  &:before {
+    content: $bbc-arrow-up-right2; 
+  }
+}
+.bbc-arrow-right2 {
+  &:before {
+    content: $bbc-arrow-right2; 
+  }
+}
+.bbc-arrow-down-right2 {
+  &:before {
+    content: $bbc-arrow-down-right2; 
+  }
+}
+.bbc-arrow-down2 {
+  &:before {
+    content: $bbc-arrow-down2; 
+  }
+}
+.bbc-arrow-down-left2 {
+  &:before {
+    content: $bbc-arrow-down-left2; 
+  }
+}
+.bbc-arrow-left2 {
+  &:before {
+    content: $bbc-arrow-left2; 
+  }
+}
+.bbc-circle-up {
+  &:before {
+    content: $bbc-circle-up; 
+  }
+}
+.bbc-circle-right {
+  &:before {
+    content: $bbc-circle-right; 
+  }
+}
+.bbc-circle-down {
+  &:before {
+    content: $bbc-circle-down; 
+  }
+}
+.bbc-circle-left {
+  &:before {
+    content: $bbc-circle-left; 
+  }
+}
+.bbc-tab {
+  &:before {
+    content: $bbc-tab; 
+  }
+}
+.bbc-move-up {
+  &:before {
+    content: $bbc-move-up; 
+  }
+}
+.bbc-move-down {
+  &:before {
+    content: $bbc-move-down; 
+  }
+}
+.bbc-sort-alpha-asc1 {
+  &:before {
+    content: $bbc-sort-alpha-asc1; 
+  }
+}
+.bbc-sort-alpha-desc1 {
+  &:before {
+    content: $bbc-sort-alpha-desc1; 
+  }
+}
+.bbc-sort-numeric-asc1 {
+  &:before {
+    content: $bbc-sort-numeric-asc1; 
+  }
+}
+.bbc-sort-numberic-desc {
+  &:before {
+    content: $bbc-sort-numberic-desc; 
+  }
+}
+.bbc-sort-amount-asc1 {
+  &:before {
+    content: $bbc-sort-amount-asc1; 
+  }
+}
+.bbc-sort-amount-desc1 {
+  &:before {
+    content: $bbc-sort-amount-desc1; 
+  }
+}
+.bbc-command {
+  &:before {
+    content: $bbc-command; 
+  }
+}
+.bbc-shift {
+  &:before {
+    content: $bbc-shift; 
+  }
+}
+.bbc-ctrl {
+  &:before {
+    content: $bbc-ctrl; 
+  }
+}
+.bbc-opt {
+  &:before {
+    content: $bbc-opt; 
+  }
+}
+.bbc-checkbox-checked {
+  &:before {
+    content: $bbc-checkbox-checked; 
+  }
+}
+.bbc-checkbox-unchecked {
+  &:before {
+    content: $bbc-checkbox-unchecked; 
+  }
+}
+.bbc-radio-checked {
+  &:before {
+    content: $bbc-radio-checked; 
+  }
+}
+.bbc-radio-checked2 {
+  &:before {
+    content: $bbc-radio-checked2; 
+  }
+}
+.bbc-radio-unchecked {
+  &:before {
+    content: $bbc-radio-unchecked; 
+  }
+}
+.bbc-crop1 {
+  &:before {
+    content: $bbc-crop1; 
+  }
+}
+.bbc-make-group {
+  &:before {
+    content: $bbc-make-group; 
+  }
+}
+.bbc-ungroup {
+  &:before {
+    content: $bbc-ungroup; 
+  }
+}
+.bbc-scissors1 {
+  &:before {
+    content: $bbc-scissors1; 
+  }
+}
+.bbc-filter1 {
+  &:before {
+    content: $bbc-filter1; 
+  }
+}
+.bbc-font1 {
+  &:before {
+    content: $bbc-font1; 
+  }
+}
+.bbc-ligature {
+  &:before {
+    content: $bbc-ligature; 
+  }
+}
+.bbc-ligature2 {
+  &:before {
+    content: $bbc-ligature2; 
+  }
+}
+.bbc-text-height1 {
+  &:before {
+    content: $bbc-text-height1; 
+  }
+}
+.bbc-text-width1 {
+  &:before {
+    content: $bbc-text-width1; 
+  }
+}
+.bbc-font-size {
+  &:before {
+    content: $bbc-font-size; 
+  }
+}
+.bbc-bold1 {
+  &:before {
+    content: $bbc-bold1; 
+  }
+}
+.bbc-underline1 {
+  &:before {
+    content: $bbc-underline1; 
+  }
+}
+.bbc-italic1 {
+  &:before {
+    content: $bbc-italic1; 
+  }
+}
+.bbc-strikethrough1 {
+  &:before {
+    content: $bbc-strikethrough1; 
+  }
+}
+.bbc-omega {
+  &:before {
+    content: $bbc-omega; 
+  }
+}
+.bbc-sigma {
+  &:before {
+    content: $bbc-sigma; 
+  }
+}
+.bbc-page-break {
+  &:before {
+    content: $bbc-page-break; 
+  }
+}
+.bbc-superscript1 {
+  &:before {
+    content: $bbc-superscript1; 
+  }
+}
+.bbc-subscript1 {
+  &:before {
+    content: $bbc-subscript1; 
+  }
+}
+.bbc-superscript2 {
+  &:before {
+    content: $bbc-superscript2; 
+  }
+}
+.bbc-subscript2 {
+  &:before {
+    content: $bbc-subscript2; 
+  }
+}
+.bbc-text-color {
+  &:before {
+    content: $bbc-text-color; 
+  }
+}
+.bbc-pagebreak {
+  &:before {
+    content: $bbc-pagebreak; 
+  }
+}
+.bbc-clear-formatting {
+  &:before {
+    content: $bbc-clear-formatting; 
+  }
+}
+.bbc-table1 {
+  &:before {
+    content: $bbc-table1; 
+  }
+}
+.bbc-table2 {
+  &:before {
+    content: $bbc-table2; 
+  }
+}
+.bbc-insert-template {
+  &:before {
+    content: $bbc-insert-template; 
+  }
+}
+.bbc-pilcrow {
+  &:before {
+    content: $bbc-pilcrow; 
+  }
+}
+.bbc-ltr {
+  &:before {
+    content: $bbc-ltr; 
+  }
+}
+.bbc-rtl {
+  &:before {
+    content: $bbc-rtl; 
+  }
+}
+.bbc-section {
+  &:before {
+    content: $bbc-section; 
+  }
+}
+.bbc-paragraph-left {
+  &:before {
+    content: $bbc-paragraph-left; 
+  }
+}
+.bbc-paragraph-center {
+  &:before {
+    content: $bbc-paragraph-center; 
+  }
+}
+.bbc-paragraph-right {
+  &:before {
+    content: $bbc-paragraph-right; 
+  }
+}
+.bbc-paragraph-justify {
+  &:before {
+    content: $bbc-paragraph-justify; 
+  }
+}
+.bbc-indent-increase {
+  &:before {
+    content: $bbc-indent-increase; 
+  }
+}
+.bbc-indent-decrease {
+  &:before {
+    content: $bbc-indent-decrease; 
+  }
+}
+.bbc-share1 {
+  &:before {
+    content: $bbc-share1; 
+  }
+}
+.bbc-new-tab {
+  &:before {
+    content: $bbc-new-tab; 
+  }
+}
+.bbc-embed {
+  &:before {
+    content: $bbc-embed; 
+  }
+}
+.bbc-embed2 {
+  &:before {
+    content: $bbc-embed2; 
+  }
+}
+.bbc-terminal1 {
+  &:before {
+    content: $bbc-terminal1; 
+  }
+}
+.bbc-share2 {
+  &:before {
+    content: $bbc-share2; 
+  }
+}
+.bbc-mail {
+  &:before {
+    content: $bbc-mail; 
+  }
+}
+.bbc-mail2 {
+  &:before {
+    content: $bbc-mail2; 
+  }
+}
+.bbc-mail3 {
+  &:before {
+    content: $bbc-mail3; 
+  }
+}
+.bbc-mail4 {
+  &:before {
+    content: $bbc-mail4; 
+  }
+}
+.bbc-amazon1 {
+  &:before {
+    content: $bbc-amazon1; 
+  }
+}
+.bbc-google1 {
+  &:before {
+    content: $bbc-google1; 
+  }
+}
+.bbc-google2 {
+  &:before {
+    content: $bbc-google2; 
+  }
+}
+.bbc-google3 {
+  &:before {
+    content: $bbc-google3; 
+  }
+}
+.bbc-google-plus1 {
+  &:before {
+    content: $bbc-google-plus1; 
+  }
+}
+.bbc-google-plus2 {
+  &:before {
+    content: $bbc-google-plus2; 
+  }
+}
+.bbc-google-plus3 {
+  &:before {
+    content: $bbc-google-plus3; 
+  }
+}
+.bbc-hangouts {
+  &:before {
+    content: $bbc-hangouts; 
+  }
+}
+.bbc-google-drive {
+  &:before {
+    content: $bbc-google-drive; 
+  }
+}
+.bbc-facebook1 {
+  &:before {
+    content: $bbc-facebook1; 
+  }
+}
+.bbc-facebook2 {
+  &:before {
+    content: $bbc-facebook2; 
+  }
+}
+.bbc-instagram1 {
+  &:before {
+    content: $bbc-instagram1; 
+  }
+}
+.bbc-whatsapp1 {
+  &:before {
+    content: $bbc-whatsapp1; 
+  }
+}
+.bbc-spotify1 {
+  &:before {
+    content: $bbc-spotify1; 
+  }
+}
+.bbc-telegram1 {
+  &:before {
+    content: $bbc-telegram1; 
+  }
+}
+.bbc-twitter1 {
+  &:before {
+    content: $bbc-twitter1; 
+  }
+}
+.bbc-vine1 {
+  &:before {
+    content: $bbc-vine1; 
+  }
+}
+.bbc-vk1 {
+  &:before {
+    content: $bbc-vk1; 
+  }
+}
+.bbc-renren1 {
+  &:before {
+    content: $bbc-renren1; 
+  }
+}
+.bbc-sina-weibo {
+  &:before {
+    content: $bbc-sina-weibo; 
+  }
+}
+.bbc-rss1 {
+  &:before {
+    content: $bbc-rss1; 
+  }
+}
+.bbc-rss2 {
+  &:before {
+    content: $bbc-rss2; 
+  }
+}
+.bbc-youtube1 {
+  &:before {
+    content: $bbc-youtube1; 
+  }
+}
+.bbc-youtube2 {
+  &:before {
+    content: $bbc-youtube2; 
+  }
+}
+.bbc-twitch1 {
+  &:before {
+    content: $bbc-twitch1; 
+  }
+}
+.bbc-vimeo1 {
+  &:before {
+    content: $bbc-vimeo1; 
+  }
+}
+.bbc-vimeo2 {
+  &:before {
+    content: $bbc-vimeo2; 
+  }
+}
+.bbc-lanyrd {
+  &:before {
+    content: $bbc-lanyrd; 
+  }
+}
+.bbc-flickr1 {
+  &:before {
+    content: $bbc-flickr1; 
+  }
+}
+.bbc-flickr2 {
+  &:before {
+    content: $bbc-flickr2; 
+  }
+}
+.bbc-flickr3 {
+  &:before {
+    content: $bbc-flickr3; 
+  }
+}
+.bbc-flickr4 {
+  &:before {
+    content: $bbc-flickr4; 
+  }
+}
+.bbc-dribbble1 {
+  &:before {
+    content: $bbc-dribbble1; 
+  }
+}
+.bbc-behance1 {
+  &:before {
+    content: $bbc-behance1; 
+  }
+}
+.bbc-behance2 {
+  &:before {
+    content: $bbc-behance2; 
+  }
+}
+.bbc-deviantart1 {
+  &:before {
+    content: $bbc-deviantart1; 
+  }
+}
+.bbc-500px1 {
+  &:before {
+    content: $bbc-500px1; 
+  }
+}
+.bbc-steam1 {
+  &:before {
+    content: $bbc-steam1; 
+  }
+}
+.bbc-steam2 {
+  &:before {
+    content: $bbc-steam2; 
+  }
+}
+.bbc-dropbox1 {
+  &:before {
+    content: $bbc-dropbox1; 
+  }
+}
+.bbc-onedrive {
+  &:before {
+    content: $bbc-onedrive; 
+  }
+}
+.bbc-github1 {
+  &:before {
+    content: $bbc-github1; 
+  }
+}
+.bbc-npm {
+  &:before {
+    content: $bbc-npm; 
+  }
+}
+.bbc-basecamp {
+  &:before {
+    content: $bbc-basecamp; 
+  }
+}
+.bbc-trello1 {
+  &:before {
+    content: $bbc-trello1; 
+  }
+}
+.bbc-wordpress1 {
+  &:before {
+    content: $bbc-wordpress1; 
+  }
+}
+.bbc-joomla1 {
+  &:before {
+    content: $bbc-joomla1; 
+  }
+}
+.bbc-ello {
+  &:before {
+    content: $bbc-ello; 
+  }
+}
+.bbc-blogger {
+  &:before {
+    content: $bbc-blogger; 
+  }
+}
+.bbc-blogger2 {
+  &:before {
+    content: $bbc-blogger2; 
+  }
+}
+.bbc-tumblr1 {
+  &:before {
+    content: $bbc-tumblr1; 
+  }
+}
+.bbc-tumblr2 {
+  &:before {
+    content: $bbc-tumblr2; 
+  }
+}
+.bbc-yahoo1 {
+  &:before {
+    content: $bbc-yahoo1; 
+  }
+}
+.bbc-yahoo2 {
+  &:before {
+    content: $bbc-yahoo2; 
+  }
+}
+.bbc-tux {
+  &:before {
+    content: $bbc-tux; 
+  }
+}
+.bbc-appleinc {
+  &:before {
+    content: $bbc-appleinc; 
+  }
+}
+.bbc-finder {
+  &:before {
+    content: $bbc-finder; 
+  }
+}
+.bbc-android1 {
+  &:before {
+    content: $bbc-android1; 
+  }
+}
+.bbc-windows1 {
+  &:before {
+    content: $bbc-windows1; 
+  }
+}
+.bbc-windows8 {
+  &:before {
+    content: $bbc-windows8; 
+  }
+}
+.bbc-soundcloud1 {
+  &:before {
+    content: $bbc-soundcloud1; 
+  }
+}
+.bbc-soundcloud2 {
+  &:before {
+    content: $bbc-soundcloud2; 
+  }
+}
+.bbc-skype1 {
+  &:before {
+    content: $bbc-skype1; 
+  }
+}
+.bbc-reddit1 {
+  &:before {
+    content: $bbc-reddit1; 
+  }
+}
+.bbc-hackernews {
+  &:before {
+    content: $bbc-hackernews; 
+  }
+}
+.bbc-wikipedia {
+  &:before {
+    content: $bbc-wikipedia; 
+  }
+}
+.bbc-linkedin1 {
+  &:before {
+    content: $bbc-linkedin1; 
+  }
+}
+.bbc-linkedin2 {
+  &:before {
+    content: $bbc-linkedin2; 
+  }
+}
+.bbc-lastfm1 {
+  &:before {
+    content: $bbc-lastfm1; 
+  }
+}
+.bbc-lastfm2 {
+  &:before {
+    content: $bbc-lastfm2; 
+  }
+}
+.bbc-delicious1 {
+  &:before {
+    content: $bbc-delicious1; 
+  }
+}
+.bbc-stumbleupon1 {
+  &:before {
+    content: $bbc-stumbleupon1; 
+  }
+}
+.bbc-stumbleupon2 {
+  &:before {
+    content: $bbc-stumbleupon2; 
+  }
+}
+.bbc-stackoverflow {
+  &:before {
+    content: $bbc-stackoverflow; 
+  }
+}
+.bbc-pinterest1 {
+  &:before {
+    content: $bbc-pinterest1; 
+  }
+}
+.bbc-pinterest2 {
+  &:before {
+    content: $bbc-pinterest2; 
+  }
+}
+.bbc-xing1 {
+  &:before {
+    content: $bbc-xing1; 
+  }
+}
+.bbc-xing2 {
+  &:before {
+    content: $bbc-xing2; 
+  }
+}
+.bbc-flattr {
+  &:before {
+    content: $bbc-flattr; 
+  }
+}
+.bbc-foursquare1 {
+  &:before {
+    content: $bbc-foursquare1; 
+  }
+}
+.bbc-yelp1 {
+  &:before {
+    content: $bbc-yelp1; 
+  }
+}
+.bbc-paypal1 {
+  &:before {
+    content: $bbc-paypal1; 
+  }
+}
+.bbc-chrome1 {
+  &:before {
+    content: $bbc-chrome1; 
+  }
+}
+.bbc-firefox1 {
+  &:before {
+    content: $bbc-firefox1; 
+  }
+}
+.bbc-IE {
+  &:before {
+    content: $bbc-IE; 
+  }
+}
+.bbc-edge1 {
+  &:before {
+    content: $bbc-edge1; 
+  }
+}
+.bbc-safari1 {
+  &:before {
+    content: $bbc-safari1; 
+  }
+}
+.bbc-opera1 {
+  &:before {
+    content: $bbc-opera1; 
+  }
+}
+.bbc-file-pdf {
+  &:before {
+    content: $bbc-file-pdf; 
+  }
+}
+.bbc-file-openoffice {
+  &:before {
+    content: $bbc-file-openoffice; 
+  }
+}
+.bbc-file-word {
+  &:before {
+    content: $bbc-file-word; 
+  }
+}
+.bbc-file-excel {
+  &:before {
+    content: $bbc-file-excel; 
+  }
+}
+.bbc-libreoffice {
+  &:before {
+    content: $bbc-libreoffice; 
+  }
+}
+.bbc-html-five {
+  &:before {
+    content: $bbc-html-five; 
+  }
+}
+.bbc-html-five2 {
+  &:before {
+    content: $bbc-html-five2; 
+  }
+}
+.bbc-css31 {
+  &:before {
+    content: $bbc-css31; 
+  }
+}
+.bbc-git1 {
+  &:before {
+    content: $bbc-git1; 
+  }
+}
+.bbc-codepen1 {
+  &:before {
+    content: $bbc-codepen1; 
+  }
+}
+.bbc-svg {
+  &:before {
+    content: $bbc-svg; 
+  }
+}
+.bbc-IcoMoon {
+  &:before {
+    content: $bbc-IcoMoon; 
+  }
+}
+
