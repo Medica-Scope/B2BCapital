@@ -1,0 +1,30 @@
+/* Imports */
+// Buttons
+@import './base/buttons';
+// Colors
+@import './base/variables';
+// Spacing
+@import './base/spacing';
+// Fonts
+@import './base/typography';
+// Mixins
+@import './base/mixins';
+// Forms
+@import './base/forms';
+// Animations
+@import './base/animations';
+
+body {
+	color: $primary-dark;
+	background-color: $layout;
+	font-family: $bbc-primary-en-font-regular;
+	.otgs-development-site-front-end {
+		display: none !important;
+	}
+}
+
+.container-xxl {
+	@include xLarge-screen {
+		max-width: 1600px;
+	}
+}

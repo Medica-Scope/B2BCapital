@@ -1,0 +1,62 @@
+@import '../../base/variables';
+
+.site-header {
+	nav {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+		background-color: $layout-light;
+		border-radius: 4px;
+		padding: 1.5rem;
+		margin-block: 1rem;
+		.site-branding {
+			a {
+				display: flex;
+				width: 90px;
+				img {
+					width: 100%;
+					object-fit: contain;
+					-o-object-fit: contain;
+				}
+			}
+		}
+		.bbc-default-menu-container {
+			.navbar-nav {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 2rem;
+			}
+		}
+		.bbc-logged-in-actions {
+			.navbar-nav {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 2rem;
+				i[class^='bbc-'],
+				i[class*=' bbc-']{
+					font-size: 20px;
+					font-weight: bold;
+				}
+				i[class^='bbc-'],
+				i[class*=' bbc-'],
+				span {
+					color: $primary-dark;
+				}
+				.nav-item {
+					.nav-link {
+						span {
+							display: block;
+						}
+					}
+					.btn-profile-desc {
+						font-size: 12px;
+					}
+				}
+			}
+		}
+	}
+}
