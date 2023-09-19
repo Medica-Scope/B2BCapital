@@ -23,6 +23,22 @@
     class Nh_Init
     {
         /**
+         * @var string
+         */
+        public static string $_NH_lANG;
+        /**
+         * @var string
+         */
+        public static string $_THEME_PATH;
+        /**
+         * @var string
+         */
+        public static string $_THEME_URI;
+        /**
+         * @var array|false|mixed
+         */
+        public static array  $_NH_CONFIGURATION;
+        /**
          * @var array
          */
         public static array $obj = [];
@@ -37,54 +53,60 @@
 
         public function __construct()
         {
+
+            self::$_NH_lANG          = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : 'en';
+            self::$_THEME_PATH       = get_template_directory();
+            self::$_THEME_URI        = get_stylesheet_directory_uri();
+            self::$_NH_CONFIGURATION = get_option('nh_configurations') ?: [];
+
             $this->class_name = [
                 'core'   => [
-                    'Hooks'         => [
+                    'Hooks'               => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_hooks.php'
                     ],
-                    'Forms'         => [
+                    'Forms'               => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_forms.php'
                     ],
-                    'Ajax_Response' => [
+                    'Ajax_Response'       => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_ajax_response.php'
                     ],
-                    'Mail'          => [
+                    'Mail'                => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_mail.php'
                     ],
-                    'Cryptor'          => [
+                    'Cryptor'             => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_cryptor.php'
                     ],
-                    'Bootstrap_Navwalker'          => [
+                    'Bootstrap_Navwalker' => [
                         'type'      => 'helper',
                         'namespace' => 'NH\APP\HELPERS',
                         'path'      => THEME_PATH . '/app/helpers/class-nh_bootstrap_navwalker.php'
                     ],
-                    'Cron'        => [
+                    'Cron'                => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-nh_cron.php'
                     ],
-                    'Post'          => [
+                    'Post'                => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-nh_post.php'
                     ],
-                    'Module'        => [
+                    'Module'              => [
                         'type'      => 'abstract',
                         'namespace' => 'NH\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-nh_module.php'
                     ],
-                    'User'          => [
+                    'User'                => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\CLASSES',
                         'path'      => THEME_PATH . '/app/Classes/class-nh_user.php'
@@ -93,17 +115,17 @@
                 ],
                 'admin'  => [],
                 'public' => [
-                    'Auth'    => [
+                    'Auth'         => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_auth.php'
                     ],
-                    'Blog'    => [
+                    'Blog'         => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_blog.php'
                     ],
-                    'Faq' => [
+                    'Faq'          => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_faq.php'
@@ -113,26 +135,16 @@
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_notification.php'
                     ],
-                    'Opportunity' => [
+                    'Opportunity'  => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity.php'
                     ],
-                    'Partner' => [
-                        'type'      => 'class',
-                        'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
-                        'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_partner.php'
-                    ],
-                    'Profile' => [
+                    'Profile'      => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_profile.php'
-                    ],
-                    'Testimonial' => [
-                        'type'      => 'class',
-                        'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
-                        'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_testimonial.php'
-                    ],
+                    ]
                 ],
             ];
         }

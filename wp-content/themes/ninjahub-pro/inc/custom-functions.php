@@ -32,9 +32,13 @@
                 'name' => 'advanced-access-manager',
                 'slug' => 'advanced-access-manager'
             ],
+//            [
+//                'name' => 'advanced-custom-fields',
+//                'slug' => 'advanced-custom-fields'
+//            ],
             [
-                'name' => 'advanced-custom-fields',
-                'slug' => 'advanced-custom-fields'
+                'name' => 'advanced-custom-fields-pro',
+                'slug' => 'advanced-custom-fields-pro'
             ],
             [
                 'name' => 'google-captcha',

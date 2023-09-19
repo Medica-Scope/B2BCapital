@@ -17,6 +17,8 @@
     use NH\APP\HELPERS\Nh_Forms;
     use NH\Nh;
 
+    $user_type = isset($_GET['type']) ? sanitize_text_field($_GET['type']) : '';
+
     get_header();
 ?>
 
@@ -97,7 +99,7 @@
                                       'investor' => __('I am Investor', 'ninja'),
                                   ],
                                   'default_option' => '',
-                                  'select_option'  => '',
+                                  'select_option'  => [$user_type],
                                   'class'          => 'col-6',
                                   'order'          => 35,
                               ],
