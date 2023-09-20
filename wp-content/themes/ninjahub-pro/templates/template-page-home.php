@@ -51,7 +51,7 @@
 				?>
 				<a href="./choose-type_en.html" class="skip-intro">Skip<i class="bbc-arrow-right2"></i></a>
 			</div>
-			<!-- test -->
+
 			<div class="carousel-inner">
 				<?php
 				foreach ( $sliders_group as $key => $slide ) {
