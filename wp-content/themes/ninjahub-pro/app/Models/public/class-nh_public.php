@@ -113,6 +113,7 @@
             ]);
 
             if (is_page([
+                'my-account',
                 'dashboard',
                 'create-opportunity'
             ])) {
