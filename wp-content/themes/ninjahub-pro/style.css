@@ -21,3 +21,85 @@ Underscores is distributed under the terms of the GNU GPL v2 or later.
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
+
+/******************** Montserrat Fonts ********************/
+/* Montserrat Extra Light Font */
+@font-face {
+  font-family: 'MontserratExtraLight';
+  src: url('./app/Models/public/assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/ExtraLight/Montserrat-ExtraLight.woff2') format('woff2');
+}
+/* Montserrat Light Font */
+@font-face {
+  font-family: 'MontserratLight';
+  src: url('./app/Models/public/assets/fonts/Montserrat/Light/Montserrat-Light.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/Light/Montserrat-Light.woff2') format('woff2');
+}
+/* Montserrat Regular Font */
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('./app/Models/public/assets/fonts/Montserrat/Regular/Montserrat-Regular.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/Regular/Montserrat-Regular.woff2') format('woff2');
+}
+/* Montserrat Medium Font */
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('./app/Models/public/assets/fonts/Montserrat/Medium/Montserrat-Medium.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/Medium/Montserrat-Medium.woff2') format('woff2');
+}
+/* Montserrat Semi Bold Font */
+@font-face {
+  font-family: 'MontserratSemiBold';
+  src: url('./app/Models/public/assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/SemiBold/Montserrat-SemiBold.woff2') format('woff2');
+}
+/* Montserrat Bold Font */
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('./app/Models/public/assets/fonts/Montserrat/Bold/Montserrat-Bold.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Montserrat/Bold/Montserrat-Bold.woff2') format('woff2');
+}
+/******************** Space Grotesk Fonts ********************/
+/* Space Grotesk Light Font */
+@font-face {
+  font-family: 'SpaceGroteskLight';
+  src: url('./app/Models/public/assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/SpaceGrotesk/Light/SpaceGrotesk-Light.woff2') format('woff2');
+}
+/* Space Grotesk Regular Font */
+@font-face {
+  font-family: 'SpaceGroteskRegular';
+  src: url('./app/Models/public/assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/SpaceGrotesk/Regular/SpaceGrotesk-Regular.woff2') format('woff2');
+}
+/* Space Grotesk Medium Font */
+@font-face {
+  font-family: 'SpaceGroteskMedium';
+  src: url('./app/Models/public/assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/SpaceGrotesk/Medium/SpaceGrotesk-Medium.woff2') format('woff2');
+}
+/* Space Grotesk Bold Font */
+@font-face {
+  font-family: 'SpaceGroteskBold';
+  src: url('./app/Models/public/assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/SpaceGrotesk/Bold/SpaceGrotesk-Bold.woff2') format('woff2');
+}
+/******************** Tajawal Font ********************/
+/* Tajawal Regular Font */
+@font-face {
+  font-family: 'TajawalRegular';
+  src: url('./app/Models/public/assets/fonts/Tajawal/Regular/Tajawal-Regular.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Tajawal/Regular/Tajawal-Regular.woff2') format('woff2');
+}
+/* Tajawal Medium Font */
+@font-face {
+  font-family: 'TajawalMedium';
+  src: url('./app/Models/public/assets/fonts/Tajawal/Medium/Tajawal-Medium.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Tajawal/Medium/Tajawal-Medium.woff2') format('woff2');
+}
+/* Tajawal Bold Font */
+@font-face {
+  font-family: 'TajawalBold';
+  src: url('./app/Models/public/assets/fonts/Tajawal/Bold/Tajawal-Bold.woff') format('woff'),
+  url('./app/Models/public/assets/fonts/Tajawal/Bold/Tajawal-Bold.woff2') format('woff2');
+}
