@@ -3,8 +3,10 @@
 main {
 	height: 100%;
 	.login-section {
-		overflow-y: scroll;
+		height: 100vh;
 		max-width: 920px;
+		overflow-y: scroll;
+		background-color: $layout-light;
 		.app-brand {
 			display: block;
 		}
