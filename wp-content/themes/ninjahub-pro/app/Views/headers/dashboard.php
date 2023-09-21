@@ -14,7 +14,7 @@
 	/**
 	 * Include Header Style File.
 	 */
-	Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/components/header/header-dashboard');
+	Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashbaord', Nh_Hooks::PATHS['public']['css'] . '/components/header/header-dashboard' );
 ?>
 
 <header id="masthead" class="site-header container-fluid container-xxl">
@@ -25,11 +25,12 @@
 		</div>
 
 		<?php
-			if (Nh_User::get_user_role() == Nh_User::OWNER) {
-				/**
-				 * Include owner type menu
-				 */
-				wp_nav_menu([
+		if ( Nh_User::get_user_role() == Nh_User::OWNER ) {
+			/**
+			 * Include owner type menu
+			 */
+			wp_nav_menu(
+				[
 					'theme_location'  => 'dashboard-owner-menu',
 					'container_class' => 'bbc-logged-in-menu-container',
 					'container_id'    => 'bbc-logged-in-menu-container',
@@ -38,12 +39,14 @@
 					'fallback_cb'     => '',
 					'depth'           => 2,
 					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]);
-			} elseif (Nh_User::get_user_role() == Nh_User::INVESTOR) {
-				/**
-				 * Include investor type menu
-				 */
-				wp_nav_menu([
+				]
+			);
+		} elseif ( Nh_User::get_user_role() == Nh_User::INVESTOR ) {
+			/**
+			 * Include investor type menu
+			 */
+			wp_nav_menu(
+				[
 					'theme_location'  => 'dashboard-investor-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -52,10 +55,11 @@
 					'menu_id'         => 'bbc-default-navbar-nav',
 					'depth'           => 2,
 					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]);
-			} else {
-				//TODO:: Admin Menu
-			}
+				]
+			);
+		} else {
+			// TODO:: Admin Menu
+		}
 		?>
 
 		<div class="bbc-logged-in-actions">
@@ -63,30 +67,33 @@
 				<li class="nav-item">
 					<?php
 						echo Nh_Forms::get_instance()
-									 ->create_form([
-										 'search' => [
-											 'class'       => 'ninja-s',
-											 'type'        => 'text',
-											 'name'        => 's',
-											 'placeholder' => __('Search', 'ninja'),
-											 'before'      => '',
-											 'after'       => '<i class="bbc-search2 ninja-header-search-icon"></i>',
-											 'order'       => 0,
-										 ],
-									 ], [
-										 'action' => apply_filters('nhml_permalink', home_url()),
-										 'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
-										 'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
-									 ]);
-					?>
+									->create_form(
+										[
+											'search' => [
+												'class'  => 'ninja-s',
+												'type'   => 'text',
+												'name'   => 's',
+												'placeholder' => __( 'Search', 'ninja' ),
+												'before' => '',
+												'after'  => '<i class="bbc-search2 ninja-header-search-icon"></i>',
+												'order'  => 0,
+											],
+										],
+										[
+											'action' => apply_filters( 'nhml_permalink', home_url() ),
+											'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
+											'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
+										]
+									);
+						?>
 				</li>
 				<li class="nav-item">
-					<?php get_template_part('app/Views/template-parts/notifications/notification'); ?>
+					<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
 				</li>
 				<li class="nav-item bbc-user-profile-btn">
 					<a class="nav-link" href="#">
-						<span class="btn-profile-title"><?= sprintf(__('Welcome, <b>%s</b>!', 'ninja'), Nh_User::get_current_user()->display_name) ?></span>
-						<span class="btn-profile-desc"><?= __('Standard dummy text ever since the 1500s.', 'ninja'); ?></span>
+						<span class="btn-profile-title"><?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?></span>
+						<span class="btn-profile-desc"><?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?></span>
 					</a>
 				</li>
 			</ul>

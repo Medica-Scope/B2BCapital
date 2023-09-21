@@ -15,6 +15,7 @@
 
     use NH\APP\CLASSES\Nh_Post;
     use NH\APP\HELPERS\Nh_Hooks;
+    use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
 
     global $post;
@@ -23,11 +24,11 @@
 
     Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
 
+
     $sliders_group = get_field('sliders_group', $post->ID);
     $partners      = get_field('partners', $post->ID);
+
 ?>
-
-
     <!-- Page Content -->
     <section class="page-content">
         <!-- Landing Page Content -->
@@ -39,13 +40,13 @@
                         if (!empty($sliders_group)) {
                             foreach ($sliders_group as $key => $value) {
                                 ?>
-                                <button type="button" data-bs-target="#landingPageCarousel" data-bs-slide-to="<?= $key ?>"
-                                        class="slide-indicator <?= $key === 0 ? 'active' : '' ?>"></button>
+                                <button type="button" data-bs-target="#landingPageCarousel" data-bs-slide-to="<?php echo $key; ?>"
+                                        class="slide-indicator <?php echo $key === 0 ? 'active' : ''; ?>"></button>
                                 <?php
                             }
                         }
                     ?>
-                    <a href="./choose-type_en.html" class="skip-intro">Skip<i class="icon bbc-next"></i></a>
+                    <a href="./choose-type_en.html" class="skip-intro">Skip<i class="bbc-arrow-right2"></i></a>
                 </div>
 
                 <div class="carousel-inner">
@@ -53,29 +54,29 @@
                         if (!empty($sliders_group)) {
                             foreach ($sliders_group as $key => $slide) {
                                 ?>
-                                <div class="carousel-item <?= $key === 0 ? 'active' : '' ?>">
+                                <div class="carousel-item <?php echo $key === 0 ? 'active' : ''; ?>">
                                     <div class="slide">
                                         <div class="slide-content">
-                                            <h1 class="b2b-title"><?= $slide['slider_titles']['tag_line'] ?></h1>
+                                            <h1 class="b2b-title"><?php echo $slide['slider_titles']['tag_line']; ?></h1>
                                             <h2 class="slide-title">
-                                                <?= $slide['slider_titles']['main_title'] ?> <span
-                                                        class="highlighted"><?= $slide['slider_titles']['main_title_highlighted_'] ?></span>
+                                                <?php echo $slide['slider_titles']['main_title']; ?> <span
+                                                        class="highlighted"><?php echo $slide['slider_titles']['main_title_highlighted_']; ?></span>
                                             </h2>
-                                            <h3 class="slide-subtitle"><?= $slide['slider_titles']['second_title'] ?></h3>
-                                            <p class="description"><?= $slide['slider_titles']['content'] ?></p>
+                                            <h3 class="slide-subtitle"><?php echo $slide['slider_titles']['second_title']; ?></h3>
+                                            <p class="description"><?php echo $slide['slider_titles']['content']; ?></p>
 
                                             <div class="statistics">
                                                 <?php
                                                     /**
                                                      * Make sure it's array and contains data before looping.
                                                      */
-                                                    if (is_array($slide['slider_statistics'])) {
+                                                    if (is_array($slide['slider_statistics']) && !empty($slide['slider_statistics'])) {
                                                         foreach ($slide['slider_statistics'] as $statistic) {
                                                             ?>
                                                             <div class="statistic">
-                                                                <h4 class="statistic-count"><?= $statistic['statistic_number'] ?><span
-                                                                            class="icon"><?= $statistic['statistic_operator'] ?></span></h4>
-                                                                <p class="statistic-name"><?= $statistic['statistic_title'] ?></p>
+                                                                <h4 class="statistic-count"><?php echo $statistic['statistic_number']; ?><span
+                                                                            class="icon"><?php echo $statistic['statistic_operator']; ?></span></h4>
+                                                                <p class="statistic-name"><?php echo $statistic['statistic_title']; ?></p>
                                                             </div>
                                                             <?php
                                                         }
@@ -86,7 +87,7 @@
                                         </div>
                                         <div class="slide-banner">
                                             <div class="banner-wrapper large">
-                                                <img src="<?= $slide['slider_image']['url'] ?>" alt="Slide 1" class="img-fluid">
+                                                <img src="<?php echo $slide['slider_image']['url']; ?>" alt="Slide 1" class="img-fluid">
                                             </div>
                                         </div>
                                     </div>
@@ -104,11 +105,17 @@
                                  alt="B2B Capital Abstract Logo" class="img-fluid">
                         </div>
                         <span class="carousel-control next" data-bs-target="#landingPageCarousel" data-bs-slide="next">
-						<span class="action-title"><?= __('Scroll', 'ninja') ?></span>
-						<span class="icon-wrapper"><i class="icon bbc-next"></i></span>
+						<span class="action-title"><?php echo __('Scroll', 'ninja'); ?></span>
+						<span class="icon-wrapper">
+							<dotlottie-player
+                                    src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/arrow-right-white.lottie/animations/12345.json"
+                                    background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
+                                    autoplay>
+							</dotlottie-player>
+						</span>
 					</span>
                         <span class="carousel-control prev d-none" data-bs-target="#landingPageCarousel" data-bs-slide="prev">
-						<i class="icon bbc-previous"></i><?= __('Back', 'ninja') ?>
+						<i class="bbc-arrow-left2"></i><?php echo __('Back', 'ninja'); ?>
 					</span>
                     </div>
                 </div>
@@ -116,15 +123,16 @@
 
             <!-- Landing Page Footer -->
             <div class="landing-page-footer">
-                <p class="footer-title"><?= __("Our Partners Include The World's", 'ninja') ?></p>
+                <p class="footer-title"><?php echo __("Our Partners Include The World's", 'ninja'); ?></p>
                 <div class="partners-logos">
                     <?php
                         if (!empty($partners)) {
                             foreach ($partners as $partner) {
                                 ?>
                                 <span class="partner-logo">
-							<img src="<?= $partner['partner_logo']['sizes']['thumbnail'] ?>" alt="<?= $partner['partner_name'] ?>" class="img-fluid">
-						</span>
+					<img src="<?php echo $partner['partner_logo']['sizes']['thumbnail']; ?>"
+                         alt="<?php echo $partner['partner_name']; ?>" class="img-fluid">
+				</span>
                                 <?php
                             }
                         }

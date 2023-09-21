@@ -5,6 +5,8 @@
      * @package NinjaHub
      */
 
+    use NH\Nh;
+
     add_action('tgmpa_register', 'ninja_register_required_plugins');
 
     /**
@@ -158,3 +160,16 @@
 //        echo 'Error:' . curl_error($ch);
 //    }
 //    curl_close($ch);
+
+
+//    add_filter('script_loader_tag', __NAMESPACE__ . '\\add_type_attribute' , 10, 3);
+
+//    function add_type_attribute($tag, $handle, $src) {
+//        // if not your script, do nothing and return original $tag
+//        if ( Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' !== $handle ) {
+//            return $tag;
+//        }
+//        // change the script tag by adding type="module" and return it.
+//        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+//        return $tag;
+//    }
