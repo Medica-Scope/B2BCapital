@@ -108,7 +108,7 @@
 						<span class="action-title"><?php echo __('Scroll', 'ninja'); ?></span>
 						<span class="icon-wrapper">
 							<dotlottie-player
-                                    src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/arrow-right-white.lottie/animations/12345.json"
+                                    src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/arrow-right-white.lottie/animations/12345.json"
                                     background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
                                     autoplay>
 							</dotlottie-player>
