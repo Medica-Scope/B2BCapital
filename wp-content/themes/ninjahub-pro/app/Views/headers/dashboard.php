@@ -126,6 +126,20 @@
 						<span class="btn-profile-title"><?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?></span>
 						<span class="btn-profile-desc"><?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?></span>
 					</a>
+                    <?php
+                        wp_nav_menu(
+                            [
+                                'theme_location'  => 'profile-menu-login',
+                                'container_class' => 'bbc-default-menu-container',
+                                'container_id'    => 'bbc-default-menu-container',
+                                'menu_class'      => 'navbar-nav',
+                                'fallback_cb'     => '',
+                                'menu_id'         => 'bbc-default-navbar-nav',
+                                'depth'           => 2,
+                                'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
+                            ]
+                        );
+                    ?>
 				</li>
 			</ul>
 		</div>

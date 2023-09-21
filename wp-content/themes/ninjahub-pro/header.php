@@ -36,6 +36,11 @@
 
                 $dashboard = [
                     'my-account',
+                    'change-password',
+                    'my-opportunities',
+                    'my-widgets',
+                    'my-notifications',
+                    'my-favorite-opportunities',
                     'dashboard',
                     'create-opportunity'
                 ];

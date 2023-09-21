@@ -89,28 +89,6 @@
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ]);
             }
 
-            if (is_page([
-                'my-account',
-                'dashboard',
-                'create-opportunity'
-            ])) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
-            }
-
-            if (is_page([
-                'my-account',
-                'login',
-                'industry',
-                'reset-password',
-                'forgot-password',
-                'registration',
-                'verification',
-                'authentication',
-            ])) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
-            }
 
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
                 'jquery',
@@ -140,6 +118,41 @@
                     'noChoicesText'  => __("'No choices to choose from'", "nh"),
                 ]
             ]);
+
+            if (is_page([
+                'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
+                'dashboard',
+                'create-opportunity'
+            ])) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+            }
+
+            if (is_page([
+                'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
+                'login',
+                'industry',
+                'reset-password',
+                'forgot-password',
+                'registration',
+                'verification',
+                'authentication',
+            ])) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
+            }
+
+
 
             $this->hooks->run();
         }
