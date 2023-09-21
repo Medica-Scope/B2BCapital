@@ -796,7 +796,7 @@
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-10 ">' : '' ?>
-                <select class="form-control <?= Nh::_DOMAIN_NAME ?>-input" id="<?= $input_data['id'] ?>"
+                <select class="form-control form-select <?= Nh::_DOMAIN_NAME ?>-input" id="<?= $input_data['id'] ?>"
                         name="<?= $input_data['name'] ?>" <?= $this->create_attr($input_data) ?> <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $input_data['multiple'] ?>>
                     <?php
                         if (empty($input_data['default_option']) && empty($input_data['select_option'])) {
