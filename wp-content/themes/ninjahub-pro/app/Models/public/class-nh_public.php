@@ -99,7 +99,7 @@
                 'domain_key'  => Nh::_DOMAIN_NAME,
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => Nh::_ENVIRONMENT,
-                'publicKey'   => $gglcptch_options['public_key'],
+                'publicKey'   => isset($gglcptch_options) ? $gglcptch_options['public_key'] : '',
                 'phrases'     => [
                     'default'        => __("This field is required.", "nh"),
                     'email'          => __("Please enter a valid email address.", "nh"),
