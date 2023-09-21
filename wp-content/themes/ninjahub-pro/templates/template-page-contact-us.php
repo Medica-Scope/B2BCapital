@@ -14,12 +14,19 @@
      */
 
 
+    use NH\APP\HELPERS\Nh_Hooks;
+    use NH\Nh;
+
     get_header();
+
+    Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home' );
+
 ?>
 
-    <main id="" class="site-home">
 
-    </main><!-- #main -->
+        </div> <!-- </layout> -->
+    </main>
+    </div> <!-- </landing-page> -->
 
 <?php get_footer();
 

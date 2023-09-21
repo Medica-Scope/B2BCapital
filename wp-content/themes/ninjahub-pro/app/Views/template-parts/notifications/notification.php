@@ -22,7 +22,7 @@
     <div class="bell">
         <button class="btn ninja-notification-bell" data-count="<?= $count ?>">
             <span class="ninja-notification-count"><?= $count ?></span>
-            <i class="fa-regular fa-bell"></i>
+            <i class="bbc-bell2"></i>
         </button>
     </div>
     <div class="ninja-notification-list container" data-page="2" data-last="<?= $found_posts > 10 ? 0 : 1 ?>">
