@@ -20,7 +20,7 @@ $single = $blog_obj->convert($post);
 ?>
 <div class="single-blog">
     <div class="cover-image">
-        <img src="<?= $single->thumbnail ?>" alt="B2B" />
+        <img src="<?= wp_get_attachment_url($single->meta_data['cover']); ?>" alt="B2B" />
     </div>
     <div class="date">
         <p><?= date('F d, Y', strtotime($single->created_date)); ?></p>

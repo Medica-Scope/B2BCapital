@@ -6,19 +6,24 @@
  * @User: Ahmed Gamal
  * @Date: 9/21/2023
  */
-global $wp_query;
+
+use NH\APP\CLASSES\Nh_Post;
+
+global $wp_query,$post;
 $queried_post_type = $wp_query->query;
+$post_obj = new Nh_Post();
+$single_post = $post_obj->convert($post);
 ?>
-<a class="blog-item" href="<?= the_permalink() ?>">
+<a class="blog-item" href="<?= $single_post->link ?>">
     <div class="img">
-        <img src="<?= the_post_thumbnail_url() ?>" alt="B2B" />
+        <img src="<?= $single_post->thumbnail ?>" alt="B2B" />
         <span class="dots"></span>
     </div>
     <div class="date">
-        <img src="<?= get_avatar_url(the_author_meta('id')) ?>"/>
-        <p><?= _e('on', 'ninja') ?> <?= get_the_date('F d, Y') ?></p>
+        <img src="<?= get_avatar_url($single_post->author) ?>" alt="B2B"/>
+        <p><?= _e('on', 'ninja') ?> <?= date('F d, Y', strtotime($single_post->created_date)) ?></p>
     </div>
-    <div class="content">
-        <?= the_excerpt() ?>
+    <div class="short-description">
+        <?= $single_post->excerpt ?>
     </div>
 </a>
