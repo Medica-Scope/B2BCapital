@@ -62,7 +62,7 @@
     "adminScripts": "gulp adminScripts",
     "adminImages": "gulp adminImages",
     "translate": "gulp translate",
-    "all": "gulp publicStyles publicStylesRtl publicScripts publicImages adminStyles adminStylesRtl adminScripts adminImages translate",
+    "all": "gulp publicStyles publicScripts publicImages adminStyles adminStylesRtl adminScripts adminImages translate",
     "bundle": "dir-archiver --src . --dest ../nh.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map yarn.lock"
   },
   "dependencies": {

@@ -9,10 +9,8 @@
 
     get_header();
 
-    global $wp_query;
-
+    global $wp_query; 
     $queried_post_type = $wp_query->query;
-
 ?>
 
     <main id="" class="">

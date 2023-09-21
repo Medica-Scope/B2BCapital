@@ -2,9 +2,12 @@
     /**
      * @Filename: blogs.php
      * @Description:
-     * @User: NINJA MASTER - Mustafa Shaaban
-     * @Date: 4/26/2023
+     * @User: Ahmed Gamal
+     * @Date: 9/21/2023
      */
+    global $wp_query; 
+    $queried_post_type = $wp_query->query;
+    echo 'henaaaaaaaa '.$wp_query->query_vars['post_type'];
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <header class="entry-header">
