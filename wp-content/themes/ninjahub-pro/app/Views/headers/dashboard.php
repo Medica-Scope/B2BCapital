@@ -57,9 +57,40 @@
 					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
 				]
 			);
-		} else {
-			// TODO:: Admin Menu
-		}
+        } elseif ( Nh_User::get_user_role() == Nh_User::ADMIN ) {
+            /**
+             * Include Admin type menu
+             */
+            wp_nav_menu(
+                [
+                    'theme_location'  => 'dashboard-admin-menu',
+                    'container_class' => 'bbc-default-menu-container',
+                    'container_id'    => 'bbc-default-menu-container',
+                    'menu_class'      => 'navbar-nav',
+                    'fallback_cb'     => '',
+                    'menu_id'         => 'bbc-default-navbar-nav',
+                    'depth'           => 2,
+                    'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
+                ]
+            );
+        } else {
+            /**
+             * Include guest menu
+             */
+            wp_nav_menu(
+                [
+                    'theme_location'  => 'dashboard-guest-menu',
+                    'container_class' => 'bbc-default-menu-container',
+                    'container_id'    => 'bbc-default-menu-container',
+                    'menu_class'      => 'navbar-nav',
+                    'fallback_cb'     => '',
+                    'menu_id'         => 'bbc-default-navbar-nav',
+                    'depth'           => 2,
+                    'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
+                ]
+            );
+        }
+
 		?>
 
 		<div class="bbc-logged-in-actions">

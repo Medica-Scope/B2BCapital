@@ -150,6 +150,8 @@
             // This theme uses wp_nav_menu() in one location.
             register_nav_menus([
                 'default-menu'            => esc_html__('Default', 'ninja'),
+                'dashboard-guest-menu'    => esc_html__('Dashboard Guest', 'ninja'),
+                'dashboard-admin-menu'    => esc_html__('Dashboard Admin', 'ninja'),
                 'dashboard-owner-menu'    => esc_html__('Dashboard Owner', 'ninja'),
                 'dashboard-investor-menu' => esc_html__('Dashboard Investor', 'ninja'),
                 'footer-menu'             => esc_html__('Footer', 'ninja'),
