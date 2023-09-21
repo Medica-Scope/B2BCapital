@@ -1,23 +1,21 @@
 <?php
-    /**
-     * @Filename: archive-faq.php
-     * @Description:
-     * @User: Ahmed Gamal
-     * @Date: 9/21/2023
-     */
 
-    use NH\APP\HELPERS\Nh_Hooks;
-    use NH\Nh;
-
-    get_header();
-
-    Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home' );
+/**
+ * @Filename: archive-faq.php
+ * @Description:
+ * @User: Ahmed Gamal
+ * @Date: 9/21/2023
+ */
 ?>
-<div class="faq-item">
-        <?= get_the_title(); ?>
-</div>
-    </div> <!-- </layout> -->
-    </main>
-    </div> <!-- </landing-page> -->
-
-<?php get_footer();
+<a class="faq-item" href="<?= the_permalink() ?>">
+    <div class="img">
+        <img src="<?= the_post_thumbnail_url() ?>" alt="B2B" />
+        <span class="title"><?= the_title() ?></span>
+    </div>
+    <div class="date">
+        <p><?= get_the_date('F d, Y') ?></p>
+    </div>
+    <div class="content">
+        <?= the_excerpt() ?>
+    </div>
+</a>
