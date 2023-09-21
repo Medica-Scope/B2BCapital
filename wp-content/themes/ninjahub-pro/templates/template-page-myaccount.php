@@ -27,6 +27,13 @@
 
     <main id="" class="">
         <h1>MY ACCOUNT</h1>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))) ?>"><?= __('My Account', 'ninja') ?></a>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= __('My Opportunities', 'ninja') ?></a>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-favorite-opportunities'))) ?>"><?= __('My Favorite Opportunities', 'ninja')
+            ?></a>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('My Widgets', 'ninja') ?></a>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __('My Notifications', 'ninja') ?></a>
+
         <?php
             $form_fields = [
                 'custom-html-1'      => [
