@@ -1,879 +1,881 @@
 @import './landing-theme';
 /* Landing Page Styles Start Here */
 .landing-page {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: $primary-dark;
-  .ellipse-gradient {
-    width: 23rem;
-    height: 37rem;
-    opacity: 0.6;
-    position: absolute;
-    top: 20%;
-    right: 7%;
-    background: radial-gradient(ellipse farthest-side at 50% 50%, $primary-medium 0%, $primary-dark 100%);
-  }
-  /* Sidebar Styles Start Here */
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 7rem;
-    min-width: 7rem;
-    padding: 3rem 1.5rem;
-    border-right: 1px solid rgba($layout-medium, 0.25);
-    @include large-screen {
-      width: 9.1875rem;
-      min-width: 9.1875rem;
-      padding: 3rem 1rem;
-    }
-    .app-brand {
-      display: inline-block;
-      width: 4rem;
-      margin-bottom: 1.5rem;
-      @include large-screen {
-        width: 4.6875rem;
-      }
-      @include xLarge-screen {
-        width: 7.875rem;
-      }
-    }
-    /* Language Link Styles Start Here */
-    .language-link {
-      display: inline-block;
-      color: $layout-medium;
-      text-align: center;
-      font-size: 0.9rem;
-      font-family: $bbc-ar-font-regular;
-      transition: all 0.3s ease-in-out;
-      position: relative;
-      z-index: 1;
-      &:hover {
-        color: $layout-light;
-      }
-      @include large-screen {
-        font-size: 1rem;
-      }
-      @include xLarge-screen {
-        font-size: 1.2rem;
-      }
-    }
-    /* App Navigation Styles Start Here */
-    .app-navigation {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      @include xLarge-screen {
-        margin-top: -7rem;
-      }
-      .nav-item {
-        min-width: fit-content;
-        transform: rotate(-90deg);
-        + .nav-item {
-          margin-top: 3.5rem;
-        }
-        .nav-link {
-          color: $layout-medium;
-          white-space: nowrap;
-          text-align: center;
-          font-size: 0.9rem;
-          font-family: $bbc-primary-en-font-extra-light;
-          transition: all 0.3s ease-in-out;
-          &:hover {
-            color: $layout;
-          }
-          @include large-screen {
-            font-size: 1rem;
-          }
-          @include xLarge-screen {
-            font-size: 1.2rem;
-          }
-        }
-        &.active {
-          .nav-link {
-            color: $highlight;
-            font-size: 1.15rem;
-            font-family: $bbc-primary-en-font-bold;
-            position: relative;
-            &::after {
-              content: '';
-              width: 4px;
-              height: 4px;
-              border-radius: 50%;
-              background-color: $highlight;
-              position: absolute;
-              top: 75%;
-              left: 50%;
-              transform: translateX(-50%);
-            }
-          }
-        }
-      }
-    }
-  }
-  /* Main Section Styles Start Here */
-  main {
-    direction: rtl;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: relative;
-    z-index: 1;
-    /* Page Layout Styles Start Here */
-    .layout {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      direction: ltr;
-      /* App Header Styles Start Here */
-      .app-header {
-        padding: 1.35rem 2.285rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        @include large-screen {
-          padding: 1.625rem 2.75rem;
-        }
-        @include xLarge-screen {
-          padding: 4rem 2.5rem;
-        }
-        /* Social Links Styles Start Here */
-        .social-links {
-          display: flex;
-          align-items: center;
-          .social-item {
-            line-height: 1;
-            + .social-item {
-              margin-left: 1.5rem;
-            }
-            .social-link {
-              display: inline-block;
-              line-height: 1;
-              .social-icon {
-                color: $layout-medium;
-                font-size: 1.25rem;
-                transition: all 0.3s ease-in-out;
-                &:hover {
-                  color: $layout;
-                }
-              }
-            }
-          }
-        }
-        /* User Area Styles Start Here */
-        .user-area {
-          display: flex;
-          align-items: center;
-          .user-action {
-            padding: 0.5rem 1rem;
-            margin-right: 1rem;
-            font-size: 0.7rem;
-            font-family: $bbc-primary-en-font-medium;
-            @include large-screen {
-              padding: 0.55rem 1.2rem;
-              font-size: 0.8rem;
-            }
-            @include xLarge-screen {
-              padding: 0.9rem 1.7rem;
-              margin-right: 1.28rem;
-              font-size: 1.12rem;
-            }
-            &.success {
-              box-shadow: 0 2px 25px 2px rgba($success, 0.15);
-            }
-            &.action {
-              box-shadow: 0 2px 25px 2px rgba($primary, 0.15);
-            }
-            &.user-menu {
-              padding: 0 0 0 1rem;
-              margin-right: 0;
-              position: relative;
-              @include xLarge-screen {
-                padding: 0 0 0 1.28rem;
-              }
-              &::before {
-                content: '';
-                opacity: 0.2;
-                width: 1px;
-                height: 1rem;
-                background-color: $layout-light;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-                @include xLarge-screen {
-                  height: 1.625rem;
-                }
-              }
-              .icon {
-                color: $layout;
-                font-size: 1.75rem;
-                transition: all 0.3s ease-in-out;
-                @include large-screen {
-                  font-size: 1.9rem;
-                }
-                @include xLarge-screen {
-                  font-size: 2.5rem;
-                }
-                &:hover {
-                  cursor: pointer;
-                  color: $layout-light;
-                }
-              }
-            }
-          }
-        }
-      }
-      /* Page Content Styles Start Here */
-      .page-content {
-        flex-grow: 1;
-        padding: 0 2.285rem 1.35rem;
-        @include large-screen {
-          padding: 0 2.75rem 1.625rem;
-        }
-        @include xLarge-screen {
-          padding: 0 2.5rem 1rem;
-        }
-        /* B2B Title Styles */
-        .b2b-title {
-          width: fit-content;
-          padding: 0.1rem 0.1rem 0.1rem 0.4rem;
-          color: $highlight;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-size: 0.5rem;
-          font-family: $bbc-primary-en-font-light;
-          border-left: 1px solid $highlight;
-          @include large-screen {
-            padding: 0.15rem 0.15rem 0.15rem 0.4rem;
-            font-size: 0.6rem;
-          }
-          @include xLarge-screen {
-            padding: 0.25rem 0.25rem 0.25rem 0.5rem;
-            letter-spacing: 2px;
-            font-size: 0.75rem;
-          }
-        }
-      }
-      /* Service Page Custom Styles Start Here */
-      &.service {
-        .app-header {
-          .social-links {
-            visibility: hidden;
-          }
-        }
-        .page-content {
-          padding: 0 2rem 2rem;
-          @include large-screen {
-            padding: 0 3rem 3rem;
-          }
-        }
-      }
-    }
-  }
-  /* Landing Page Main Section Styles Start Here */
-  &.main {
-    background: linear-gradient(130deg, $primary-dark 40%, $primary 100%);
-    .back-texture {
-      width: 75rem;
-      height: 75rem;
-      opacity: 0.025;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translateX(35%);
-      &.choose-type {
-        transform: translateX(30%);
-      }
-      @include large-screen {
-        width: 85rem;
-        height: 85rem;
-      }
-      @include xLarge-screen {
-        width: 107.5rem;
-        height: 107.5rem;
-      }
-    }
-    main {
-      overflow-y: hidden;
-      .layout {
-        .page-content {
-          max-height: calc(100vh - 4.605rem);
-          position: relative;
-          padding: 1.5rem 0 0;
-          @include large-screen {
-            max-height: calc(100vh - 5.324375rem);
-            padding: 2.5rem 0 0;
-          }
-          @include xLarge-screen {
-            max-height: calc(100vh - 11.04375rem);
-            padding: 2.5rem 0 0;
-          }
-          /* Main Landing Page Content Styles Start Here */
-          .landing-page-content {
-            height: 100%;
-            .carousel {
-              height: 100%;
-              .carousel-indicators {
-                margin: 0;
-                align-items: center;
-                bottom: 24.5vh;
-                right: auto;
-                left: 2rem;
-                @include large-screen {
-                  left: 3rem;
-                }
-                .slide-indicator {
-                  width: 0.6rem;
-                  height: 0.6rem;
-                  margin: 0;
-                  opacity: 1;
-                  border-radius: 3px;
-                  border: 2px solid $layout-medium;
-                  background-color: transparent;
-                  transition: all 1s ease-in-out;
-                  &.active {
-                    width: 1.1rem;
-                    height: 1.1rem;
-                    border: none;
-                    background-color: $highlight;
-                  }
-                  + .slide-indicator {
-                    margin-left: 0.85rem;
-                  }
-                }
-                .skip-intro {
-                  margin-left: 1rem;
-                  color: $primary;
-                  font-size: 1rem;
-                  font-family: $bbc-primary-en-font-medium;
-                  .icon {
-                    margin-left: 0.5rem;
-                    font-size: 0.75rem;
-                  }
-                }
-              }
-              .carousel-inner {
-                height: 100%;
-                padding-left: 2rem;
-                overflow: hidden;
-                @include large-screen {
-                  padding-left: 3rem;
-                }
-                .carousel-item {
-                  width: fit-content;
-                  height: 100%;
-                  &.carousel-item-start {
-                    transition: transform 1.5s cubic-bezier(0.9,0.03,0.69,0.22);
-                  }
-                  &.carousel-item-next {
-                    transition: transform 1s ease-in;
-                    transition-delay: 0.6s;
-                  }
-                  &.carousel-item-end {
-                    &:not(.carousel-item-prev) {
-                      transition: transform 1.5s cubic-bezier(.65,.25,.91,.55);
-                    }
-                  }
-                  &.carousel-item-prev {
-                    transition: transform 1.5s ease-in;
-                    transition-delay: 0.6s;
-                  }
-                  .slide {
-                    width: fit-content;
-                    height: 100%;
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: space-between;
-                    .slide-content {
-                      width: calc(48vw - 4rem);
-                      height: 100%;
-                      position: relative;
-                      @include large-screen {
-                        width: calc(48vw - 9rem);
-                      }
-                      @include xLarge-screen {
-                        margin-right: 4rem;
-                      }
-                      .slide-title {
-                        margin: 1rem 0 3rem;
-                        color: $layout-light;
-                        font-size: 2.2rem;
-                        font-family: $bbc-primary-en-font-light;
-                        .highlighted {
-                          color: $primary;
-                          font-family: $bbc-primary-en-font-bold;
-                        }
-                        @include xLarge-screen {
-                          margin: 1.5rem 0 5rem;
-                          font-size: 3.5rem;
-                        }
-                      }
-                      .slide-subtitle {
-                        margin-bottom: 1rem;
-                        color: $layout-light;
-                        font-size: 1.05rem;
-                        font-family: $bbc-primary-en-font-semi-bold;
-                        .highlighted {
-                          color: $primary;
-                          font-family: $bbc-primary-en-font-bold;
-                        }
-                        @include xLarge-screen {
-                          font-size: 1.5rem;
-                        }
-                      }
-                      .description {
-                        width: 75%;
-                        color: $layout-light;
-                        font-size: 0.8rem;
-                        font-family: $bbc-primary-en-font-light;
-                        @include xLarge-screen {
-                          width: 57%;
-                          font-size: 0.875rem;
-                        }
-                      }
-                      .statistics {
-                        width: 90%;
-                        margin-top: 1.5rem;
-                        display: flex;
-                        align-items: center;
-                        //justify-content: space-between;
-                        @include xLarge-screen {
-                          width: 95%;
-                        }
-                        .statistic {
-                          display: flex;
-                          flex-direction: column;
-                          .statistic-count {
-                            font-size: 1rem;
-                            font-family: $bbc-primary-en-font-bold;
-                            @include large-screen {
-                              font-size: 1.5rem;
-                            }
-                            @include xLarge-screen {
-                              font-size: 2.875rem;
-                            }
-                            .icon {
-                              color: $highlight;
-                              font-size: 0.75rem;
-                              font-family: $bbc-secondary-en-font-medium;
-                              @include large-screen {
-                                font-size: 0.85rem;
-                              }
-                              @include xLarge-screen {
-                                margin-left: -2px;
-                                font-size: 2.065rem;
-                              }
-                            }
-                          }
-                          .statistic-name {
-                            color: $layout-medium;
-                            font-size: 0.65rem;
-                            font-family: $bbc-primary-en-font-light;
-                            @include large-screen {
-                              font-size: 0.8rem;
-                            }
-                            @include xLarge-screen {
-                              font-size: 0.875rem;
-                            }
-                          }
-                          + .statistic {
-                            margin-left: 1rem;
-                            @include xLarge-screen {
-                              margin-left: 4.25rem;
-                            }
-                          }
-                        }
-                      }
-                    }
-                    .slide-banner {
-                      width: fit-content;
-                      height: 100%;
-                      .banner-wrapper {
-                        width: 45vw;
-                        &.large {
-                          width: 65vw;
-                        }
-                        &.medium {
-                          width: 50vw;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              .carousel-control-area {
-                z-index: 10;
-                width: 25rem;
-                height: 25rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                position: fixed;
-                bottom: -10rem;
-                right: -11rem;
-                border: 1px dashed $primary-dark;
-                .carousel-control-wrapper {
-                  width: 24.5rem;
-                  height: 24.5rem;
-                  position: relative;
-                  border-radius: 50%;
-                  background: $primary-dark;
-                  .texture {
-                    width: 20rem;
-                    position: absolute;
-                    top: -3rem;
-                    right: 1rem;
-                  }
-                  .carousel-control {
-                    position: absolute;
-                    font-size: 0.85rem;
-                    font-family: $bbc-primary-en-font-light;
-                    .icon {
-                      font-size: 0.75rem;
-                    }
-                    &:hover {
-                      cursor: pointer;
-                    }
-                    &.next {
-                      top: 5rem;
-                      right: 13rem;
-                      .action-title {
-                        font-size: 0.85rem;
-                        z-index: 1;
-                        position: absolute;
-                        top: 4rem;
-                        right: 1rem;
-                      }
-                      .icon-wrapper {
-                        display: flex;
-                        align-items: center;
-                        width: 5rem;
-                        height: 5rem;
-                        border-radius: 50%;
-                        background-color: $highlight;
-                        position: absolute;
-                        top: 0;
-                        right: 2rem;
-                        .icon {
-                          display: inline-block;
-                          font-size: 2rem;
-                          margin-left: 0.25rem;
-                          animation: arrowEnglishMove 2s ease-in-out infinite;
-                        }
-                      }
-                    }
-                    &.prev {
-                      bottom: 11.5rem;
-                      left: 2.5rem;
-                      .icon {
-                        margin-right: 0.25rem;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            /* Landing Page Footer Styles Start Here */
-            .landing-page-footer {
-              position: absolute;
-              bottom: 1.75rem;
-              left: 2rem;
-              @include large-screen {
-                left: 3rem;
-              }
-              .footer-title {
-                color: $layout-medium;
-                text-transform: uppercase;
-                font-size: 0.625rem;
-                font-family: $bbc-primary-en-font-light;
-              }
-              .partners-logos {
-                width: 50%;
-                display: flex;
-                align-items: center;
-                .partner-logo {
-                  width: 6rem;
-                  opacity: 0.6;
-                  + .partner-logo {
-                    margin-left: 0.5rem;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	display: flex;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: $primary-dark;
+	.ellipse-gradient {
+		width: 23rem;
+		height: 37rem;
+		opacity: 0.6;
+		position: absolute;
+		top: 20%;
+		right: 7%;
+		background: radial-gradient(
+			ellipse farthest-side at 50% 50%,
+			$primary-medium 0%,
+			$primary-dark 100%
+		);
+	}
+	/* Sidebar Styles Start Here */
+	.sidebar {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 7rem;
+		min-width: 7rem;
+		padding: 3rem 1.5rem;
+		border-right: 1px solid rgba($layout-medium, 0.25);
+		@include large-screen {
+			width: 9.1875rem;
+			min-width: 9.1875rem;
+			padding: 3rem 1rem;
+		}
+		.app-brand {
+			display: inline-block;
+			width: 4rem;
+			margin-bottom: 1.5rem;
+			@include large-screen {
+				width: 4.6875rem;
+			}
+			@include xLarge-screen {
+				width: 7.875rem;
+			}
+		}
+		/* Language Link Styles Start Here */
+		.language-link {
+			display: inline-block;
+			color: $layout-medium;
+			text-align: center;
+			font-size: 0.9rem;
+			font-family: $bbc-ar-font-regular;
+			transition: all 0.3s ease-in-out;
+			position: relative;
+			z-index: 1;
+			&:hover {
+				color: $layout-light;
+			}
+			@include large-screen {
+				font-size: 1rem;
+			}
+			@include xLarge-screen {
+				font-size: 1.2rem;
+			}
+		}
+		/* App Navigation Styles Start Here */
+		.app-navigation {
+			flex-grow: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			@include xLarge-screen {
+				margin-top: -7rem;
+			}
+			.nav-item {
+				min-width: fit-content;
+				transform: rotate(-90deg);
+				+ .nav-item {
+					margin-top: 3.5rem;
+				}
+				.nav-link {
+					color: $layout-medium;
+					white-space: nowrap;
+					text-align: center;
+					font-size: 0.9rem;
+					font-family: $bbc-primary-en-font-extra-light;
+					transition: all 0.3s ease-in-out;
+					&:hover {
+						color: $layout;
+					}
+					@include large-screen {
+						font-size: 1rem;
+					}
+					@include xLarge-screen {
+						font-size: 1.2rem;
+					}
+				}
+				&.active {
+					.nav-link {
+						color: $highlight;
+						font-size: 1.15rem;
+						font-family: $bbc-primary-en-font-bold;
+						position: relative;
+						&::after {
+							content: '';
+							width: 4px;
+							height: 4px;
+							border-radius: 50%;
+							background-color: $highlight;
+							position: absolute;
+							top: 75%;
+							left: 50%;
+							transform: translateX(-50%);
+						}
+					}
+				}
+			}
+		}
+	}
+	/* Main Section Styles Start Here */
+	main {
+		direction: rtl;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		overflow-x: hidden;
+		position: relative;
+		z-index: 1;
+		/* Page Layout Styles Start Here */
+		.layout {
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			direction: ltr;
+			/* App Header Styles Start Here */
+			.app-header {
+				padding: 1.35rem 2.285rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				@include large-screen {
+					padding: 1.625rem 2.75rem;
+				}
+				@include xLarge-screen {
+					padding: 4rem 2.5rem;
+				}
+				/* Social Links Styles Start Here */
+				.social-links {
+					display: flex;
+					align-items: center;
+					.social-item {
+						line-height: 1;
+						+ .social-item {
+							margin-left: 1.5rem;
+						}
+						.social-link {
+							display: inline-block;
+							line-height: 1;
+							.social-icon {
+								color: $layout-medium;
+								font-size: 1.25rem;
+								transition: all 0.3s ease-in-out;
+								&:hover {
+									color: $layout;
+								}
+							}
+						}
+					}
+				}
+				/* User Area Styles Start Here */
+				.user-area {
+					display: flex;
+					align-items: center;
+					.user-action {
+						padding: 0.5rem 1rem;
+						margin-right: 1rem;
+						font-size: 0.7rem;
+						font-family: $bbc-primary-en-font-medium;
+						@include large-screen {
+							padding: 0.55rem 1.2rem;
+							font-size: 0.8rem;
+						}
+						@include xLarge-screen {
+							padding: 0.9rem 1.7rem;
+							margin-right: 1.28rem;
+							font-size: 1.12rem;
+						}
+						&.success {
+							box-shadow: 0 2px 25px 2px rgba($success, 0.15);
+						}
+						&.action {
+							box-shadow: 0 2px 25px 2px rgba($primary, 0.15);
+						}
+						&.user-menu {
+							padding: 0 0 0 1rem;
+							margin-right: 0;
+							position: relative;
+							@include xLarge-screen {
+								padding: 0 0 0 1.28rem;
+							}
+							&::before {
+								content: '';
+								opacity: 0.2;
+								width: 1px;
+								height: 1rem;
+								background-color: $layout-light;
+								position: absolute;
+								top: 50%;
+								left: 0;
+								transform: translateY(-50%);
+								@include xLarge-screen {
+									height: 1.625rem;
+								}
+							}
+							.icon {
+								color: $layout;
+								font-size: 1.75rem;
+								transition: all 0.3s ease-in-out;
+								@include large-screen {
+									font-size: 1.9rem;
+								}
+								@include xLarge-screen {
+									font-size: 2.5rem;
+								}
+								&:hover {
+									cursor: pointer;
+									color: $layout-light;
+								}
+							}
+						}
+					}
+				}
+			}
+			/* Page Content Styles Start Here */
+			.page-content {
+				flex-grow: 1;
+				padding: 0 2.285rem 1.35rem;
+				@include large-screen {
+					padding: 0 2.75rem 1.625rem;
+				}
+				@include xLarge-screen {
+					padding: 0 2.5rem 1rem;
+				}
+				/* B2B Title Styles */
+				.b2b-title {
+					width: fit-content;
+					padding: 0.1rem 0.1rem 0.1rem 0.4rem;
+					color: $highlight;
+					text-transform: uppercase;
+					letter-spacing: 1px;
+					font-size: 0.5rem;
+					font-family: $bbc-primary-en-font-light;
+					border-left: 1px solid $highlight;
+					@include large-screen {
+						padding: 0.15rem 0.15rem 0.15rem 0.4rem;
+						font-size: 0.6rem;
+					}
+					@include xLarge-screen {
+						padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+						letter-spacing: 2px;
+						font-size: 0.75rem;
+					}
+				}
+			}
+			/* Service Page Custom Styles Start Here */
+			&.service {
+				.app-header {
+					.social-links {
+						visibility: hidden;
+					}
+				}
+				.page-content {
+					padding: 0 2rem 2rem;
+					@include large-screen {
+						padding: 0 3rem 3rem;
+					}
+				}
+			}
+		}
+	}
+	/* Landing Page Main Section Styles Start Here */
+	&.main {
+		background: linear-gradient(130deg, $primary-dark 40%, $primary 100%);
+		.back-texture {
+			width: 75rem;
+			height: 75rem;
+			opacity: 0.025;
+			position: absolute;
+			top: 0;
+			right: 0;
+			transform: translateX(35%);
+			&.choose-type {
+				transform: translateX(30%);
+			}
+			@include large-screen {
+				width: 85rem;
+				height: 85rem;
+			}
+			@include xLarge-screen {
+				width: 107.5rem;
+				height: 107.5rem;
+			}
+		}
+		main {
+			overflow-y: hidden;
+			.layout {
+				.page-content {
+					max-height: calc(100vh - 4.605rem);
+					position: relative;
+					padding: 1.5rem 0 0;
+					@include large-screen {
+						max-height: calc(100vh - 5.324375rem);
+						padding: 2.5rem 0 0;
+					}
+					@include xLarge-screen {
+						max-height: calc(100vh - 11.04375rem);
+						padding: 2.5rem 0 0;
+					}
+					/* Main Landing Page Content Styles Start Here */
+					.landing-page-content {
+						height: 100%;
+						.carousel {
+							height: 100%;
+							.carousel-indicators {
+								margin: 0;
+								align-items: center;
+								bottom: 24.5vh;
+								right: auto;
+								left: 2rem;
+								@include large-screen {
+									left: 3rem;
+								}
+								.slide-indicator {
+									width: 0.6rem;
+									height: 0.6rem;
+									margin: 0;
+									opacity: 1;
+									border-radius: 3px;
+									border: 2px solid $layout-medium;
+									background-color: transparent;
+									transition: all 1s ease-in-out;
+									&.active {
+										width: 1.1rem;
+										height: 1.1rem;
+										border: none;
+										background-color: $highlight;
+									}
+									+ .slide-indicator {
+										margin-left: 0.85rem;
+									}
+								}
+								.skip-intro {
+									display: flex;
+									align-items: center;
+									margin-left: 1rem;
+									color: $primary;
+									font-size: 1rem;
+									font-family: $bbc-primary-en-font-medium;
+									i {
+										margin-left: 0.5rem;
+									}
+								}
+							}
+							.carousel-inner {
+								height: 100%;
+								padding-left: 2rem;
+								overflow: hidden;
+								@include large-screen {
+									padding-left: 3rem;
+								}
+								.carousel-item {
+									width: fit-content;
+									height: 100%;
+									&.carousel-item-start {
+										transition: transform 1.5s
+											cubic-bezier(0.9, 0.03, 0.69, 0.22);
+									}
+									&.carousel-item-next {
+										transition: transform 1s ease-in;
+										transition-delay: 0.6s;
+									}
+									&.carousel-item-end {
+										&:not(.carousel-item-prev) {
+											transition: transform 1.5s
+												cubic-bezier(0.65, 0.25, 0.91, 0.55);
+										}
+									}
+									&.carousel-item-prev {
+										transition: transform 1.5s ease-in;
+										transition-delay: 0.6s;
+									}
+									.slide {
+										width: fit-content;
+										height: 100%;
+										display: flex;
+										align-items: flex-start;
+										justify-content: space-between;
+										.slide-content {
+											width: calc(48vw - 4rem);
+											height: 100%;
+											position: relative;
+											@include large-screen {
+												width: calc(48vw - 9rem);
+											}
+											@include xLarge-screen {
+												margin-right: 4rem;
+											}
+											.slide-title {
+												margin: 1rem 0 3rem;
+												color: $layout-light;
+												font-size: 2.2rem;
+												font-family: $bbc-primary-en-font-light;
+												.highlighted {
+													color: $primary;
+													font-family: $bbc-primary-en-font-bold;
+												}
+												@include xLarge-screen {
+													margin: 1.5rem 0 5rem;
+													font-size: 3.5rem;
+												}
+											}
+											.slide-subtitle {
+												margin-bottom: 1rem;
+												color: $layout-light;
+												font-size: 1.05rem;
+												font-family: $bbc-primary-en-font-semi-bold;
+												.highlighted {
+													color: $primary;
+													font-family: $bbc-primary-en-font-bold;
+												}
+												@include xLarge-screen {
+													font-size: 1.5rem;
+												}
+											}
+											.description {
+												width: 75%;
+												color: $layout-light;
+												font-size: 0.8rem;
+												font-family: $bbc-primary-en-font-light;
+												@include xLarge-screen {
+													width: 57%;
+													font-size: 0.875rem;
+												}
+											}
+											.statistics {
+												width: 90%;
+												margin-top: 1.5rem;
+												display: flex;
+												align-items: center;
+												//justify-content: space-between;
+												@include xLarge-screen {
+													width: 95%;
+												}
+												.statistic {
+													display: flex;
+													flex-direction: column;
+													.statistic-count {
+														font-size: 1rem;
+														font-family: $bbc-primary-en-font-bold;
+														@include large-screen {
+															font-size: 1.5rem;
+														}
+														@include xLarge-screen {
+															font-size: 2.875rem;
+														}
+														.icon {
+															color: $highlight;
+															font-size: 0.75rem;
+															font-family: $bbc-secondary-en-font-medium;
+															@include large-screen {
+																font-size: 0.85rem;
+															}
+															@include xLarge-screen {
+																margin-left: -2px;
+																font-size: 2.065rem;
+															}
+														}
+													}
+													.statistic-name {
+														color: $layout-medium;
+														font-size: 0.65rem;
+														font-family: $bbc-primary-en-font-light;
+														@include large-screen {
+															font-size: 0.8rem;
+														}
+														@include xLarge-screen {
+															font-size: 0.875rem;
+														}
+													}
+													+ .statistic {
+														margin-left: 1rem;
+														@include xLarge-screen {
+															margin-left: 4.25rem;
+														}
+													}
+												}
+											}
+										}
+										.slide-banner {
+											width: fit-content;
+											height: 100%;
+											.banner-wrapper {
+												width: 45vw;
+												&.large {
+													width: 65vw;
+												}
+												&.medium {
+													width: 50vw;
+												}
+											}
+										}
+									}
+								}
+							}
+							.carousel-control-area {
+								z-index: 10;
+								width: 25rem;
+								height: 25rem;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								border-radius: 50%;
+								position: fixed;
+								bottom: -10rem;
+								right: -11rem;
+								border: 1px dashed $primary-dark;
+								.carousel-control-wrapper {
+									width: 24.5rem;
+									height: 24.5rem;
+									position: relative;
+									border-radius: 50%;
+									background: $primary-dark;
+									.texture {
+										width: 20rem;
+										position: absolute;
+										top: -3rem;
+										right: 1rem;
+									}
+									.carousel-control {
+										position: absolute;
+										font-size: 0.85rem;
+										font-family: $bbc-primary-en-font-light;
+										.icon {
+											font-size: 0.75rem;
+										}
+										&:hover {
+											cursor: pointer;
+										}
+										&.next {
+											top: 5rem;
+											right: 13rem;
+											.action-title {
+												font-size: 0.85rem;
+												z-index: 1;
+												position: absolute;
+												top: 4rem;
+												right: 1rem;
+											}
+											.icon-wrapper {
+												display: flex;
+												align-items: center;
+												width: 5rem;
+												height: 5rem;
+												border-radius: 50%;
+												background-color: $highlight;
+												position: absolute;
+												top: 0;
+												right: 2rem;
+											}
+										}
+										&.prev {
+											bottom: 11.5rem;
+											left: 2.5rem;
+											i {
+												margin-right: 0.25rem;
+											}
+										}
+									}
+								}
+							}
+						}
+						/* Landing Page Footer Styles Start Here */
+						.landing-page-footer {
+							position: absolute;
+							bottom: 1.75rem;
+							left: 2rem;
+							@include large-screen {
+								left: 3rem;
+							}
+							.footer-title {
+								color: $layout-medium;
+								text-transform: uppercase;
+								font-size: 0.625rem;
+								font-family: $bbc-primary-en-font-light;
+							}
+							.partners-logos {
+								width: 50%;
+								display: flex;
+								align-items: center;
+								.partner-logo {
+									width: 6rem;
+									opacity: 0.6;
+									+ .partner-logo {
+										margin-left: 0.5rem;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 /* Landing Page Arabic Styles Start Here */
 .rtl {
-  .landing-page {
-    .ellipse-gradient {
-      right: auto;
-      left: 7%;
-      background: radial-gradient(ellipse farthest-side at 50% 50%, $primary-medium 0%, $primary-dark 100%);
-    }
-    /* Sidebar Arabic Styles Start Here */
-    .sidebar {
-      border-right: none;
-      border-left: 1px solid rgba($layout-medium, 0.25);
-      /* Language Link Arabic Styles Start Here */
-      .language-link {
-        direction: ltr;
-        font-size: 0.9rem;
-        font-family: $bbc-primary-en-font-regular;
-      }
-      /* App Navigation Arabic Styles Start Here */
-      .app-navigation {
-        .nav-item {
-          transform: rotate(90deg);
-          .nav-link {
-            font-family: $bbc-ar-font-medium;
-          }
-        }
-      }
-    }
-    /* Main Section Arabic Styles Start Here */
-    main {
-      direction: ltr;
-      /* Page Layout Arabic Styles Start Here */
-      .layout {
-        direction: rtl;
-        /* App Header Arabic Styles Start Here */
-        .app-header {
-          /* Social Links Arabic Styles Start Here */
-          .social-links {
-            .social-item {
-              + .social-item {
-                margin-left: 0;
-                margin-right: 1.5rem;
-              }
-            }
-          }
-          /* User Area Arabic Styles Start Here */
-          .user-area {
-            .user-action {
-              margin-right: 0;
-              margin-left: 1rem;
-              font-family: $bbc-ar-font-medium;
-              @include xLarge-screen {
-                margin-right: 0;
-                margin-left: 1.28rem;
-              }
-              &.user-menu {
-                padding: 0 1rem 0 0;
-                margin-left: 0;
-                @include xLarge-screen {
-                  padding: 0 1.28rem 0 0;
-                }
-                &::before {
-                  left: auto;
-                  right: 0;
-                }
-              }
-            }
-          }
-        }
-        /* Page Content Arabic Styles Start Here */
-        .page-content {
-          /* B2B Title Arabic Styles Start Here */
-          .b2b-title {
-            padding: 0.1rem 0.4rem 0.1rem 0.1rem;
-            letter-spacing: 0;
-            font-family: $bbc-ar-font-regular;
-            border-left: none;
-            border-right: 1px solid $highlight;
-            @include large-screen {
-              padding: 0.15rem 0.4rem 0.15rem 0.15rem;
-              letter-spacing: 0;
-            }
-            @include xLarge-screen {
-              padding: 0.25rem 0.5rem 0.25rem 0.25rem;
-              letter-spacing: 0;
-            }
-          }
-        }
-      }
-    }
-    /* Landing Page Main Section Arabic Styles Start Here */
-    &.main {
-      background: linear-gradient(230deg, $primary-dark 40%, $primary 100%);
-      .back-texture {
-        right: auto;
-        left: 0;
-        transform: translateX(-35%);
-        &.choose-type {
-          transform: translateX(-30%);
-        }
-      }
-      main {
-        .layout {
-          .page-content {
-            /* Main Landing Page Content Styles Start Here */
-            .landing-page-content {
-              .carousel {
-                .carousel-indicators {
-                  right: 2rem;
-                  left: auto;
-                  @include large-screen {
-                    left: auto;
-                    right: 3rem;
-                  }
-                  .slide-indicator {
-                    + .slide-indicator {
-                      margin-left: 0;
-                      margin-right: 0.85rem;
-                    }
-                  }
-                  .skip-intro {
-                    margin-left: 0;
-                    margin-right: 1rem;
-                    font-family: $bbc-ar-font-medium;
-                    .icon {
-                      margin-left: 0;
-                      margin-right: 0.5rem;
-                    }
-                  }
-                }
-                .carousel-inner {
-                  padding-left: 0;
-                  padding-right: 2rem;
-                  @include large-screen {
-                    padding-left: 0;
-                    padding-right: 3rem;
-                  }
-                  .carousel-item {
-                    float: right;
-                    margin-right: 0;
-                    margin-left: -100%;
-                    &.carousel-item-next:not(.carousel-item-start), &.active.carousel-item-end {
-                      transform: translateX(-100%);
-                    }
-                    &.carousel-item-prev:not(.carousel-item-end), &.active.carousel-item-start {
-                      transform: translateX(100%);
-                    }
-                    .slide {
-                      .slide-content {
-                        @include xLarge-screen {
-                          margin-right: 0;
-                          margin-left: 4rem;
-                        }
-                        .slide-title {
-                          font-family: $bbc-ar-font-regular;
-                          .highlighted {
-                            font-family: $bbc-ar-font-bold;
-                          }
-                        }
-                        .slide-subtitle {
-                          font-family: $bbc-ar-font-bold;
-                          .highlighted {
-                            font-family: $bbc-ar-font-bold;
-                          }
-                        }
-                        .description {
-                          font-family: $bbc-ar-font-regular;
-                        }
-                        .statistics {
-                          .statistic {
-                            .statistic-count {
-                              font-family: $bbc-ar-font-bold;
-                              .icon {
-                                @include xLarge-screen {
-                                  margin-left: 0;
-                                  margin-right: -2px;
-                                }
-                              }
-                            }
-                            .statistic-name {
-                              font-family: $bbc-ar-font-regular;
-                            }
-                            + .statistic {
-                              margin-left: 0;
-                              margin-right: 1rem;
-                              @include xLarge-screen {
-                                margin-left: 0;
-                                margin-right: 4.25rem;
-                              }
-                            }
-                          }
-                        }
-                      }
-                      .slide-banner {
-                        .banner-wrapper {
-                          transform: scaleX(-1);
-                        }
-                      }
-                    }
-                  }
-                }
-                .carousel-control-area {
-                  right: auto;
-                  left: -11rem;
-                  .carousel-control-wrapper {
-                    .texture {
-                      right: auto;
-                      left: 1rem;
-                    }
-                    .carousel-control {
-                      direction: ltr;
-                      font-family: $bbc-ar-font-regular;
-                      &.next {
-                        right: auto;
-                        left: 13rem;
-                        .action-title {
-                          right: auto;
-                          left: 1rem;
-                        }
-                        .icon-wrapper {
-                          right: auto;
-                          left: 2rem;
-                          .icon {
-                            margin-left: 0;
-                            margin-right: 0.25rem;
-                            animation: arrowArabicMove 2s ease-in-out infinite;
-                          }
-                        }
-                      }
-                      &.prev {
-                        left: auto;
-                        right: 2.5rem;
-                      }
-                    }
-                  }
-                }
-              }
-              /* Landing Page Footer Styles Start Here */
-              .landing-page-footer {
-                left: auto;
-                right: 2rem;
-                @include large-screen {
-                  left: auto;
-                  right: 3rem;
-                }
-                .footer-title {
-                  font-family: $bbc-ar-font-regular;
-                }
-                .partners-logos {
-                  .partner-logo {
-                    + .partner-logo {
-                      margin-left: 0;
-                      margin-right: 0.5rem;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	.landing-page {
+		.ellipse-gradient {
+			right: auto;
+			left: 7%;
+			background: radial-gradient(
+				ellipse farthest-side at 50% 50%,
+				$primary-medium 0%,
+				$primary-dark 100%
+			);
+		}
+		/* Sidebar Arabic Styles Start Here */
+		.sidebar {
+			border-right: none;
+			border-left: 1px solid rgba($layout-medium, 0.25);
+			/* Language Link Arabic Styles Start Here */
+			.language-link {
+				direction: ltr;
+				font-size: 0.9rem;
+				font-family: $bbc-primary-en-font-regular;
+			}
+			/* App Navigation Arabic Styles Start Here */
+			.app-navigation {
+				.nav-item {
+					transform: rotate(90deg);
+					.nav-link {
+						font-family: $bbc-ar-font-medium;
+					}
+				}
+			}
+		}
+		/* Main Section Arabic Styles Start Here */
+		main {
+			direction: ltr;
+			/* Page Layout Arabic Styles Start Here */
+			.layout {
+				direction: rtl;
+				/* App Header Arabic Styles Start Here */
+				.app-header {
+					/* Social Links Arabic Styles Start Here */
+					.social-links {
+						.social-item {
+							+ .social-item {
+								margin-left: 0;
+								margin-right: 1.5rem;
+							}
+						}
+					}
+					/* User Area Arabic Styles Start Here */
+					.user-area {
+						.user-action {
+							margin-right: 0;
+							margin-left: 1rem;
+							font-family: $bbc-ar-font-medium;
+							@include xLarge-screen {
+								margin-right: 0;
+								margin-left: 1.28rem;
+							}
+							&.user-menu {
+								padding: 0 1rem 0 0;
+								margin-left: 0;
+								@include xLarge-screen {
+									padding: 0 1.28rem 0 0;
+								}
+								&::before {
+									left: auto;
+									right: 0;
+								}
+							}
+						}
+					}
+				}
+				/* Page Content Arabic Styles Start Here */
+				.page-content {
+					/* B2B Title Arabic Styles Start Here */
+					.b2b-title {
+						padding: 0.1rem 0.4rem 0.1rem 0.1rem;
+						letter-spacing: 0;
+						font-family: $bbc-ar-font-regular;
+						border-left: none;
+						border-right: 1px solid $highlight;
+						@include large-screen {
+							padding: 0.15rem 0.4rem 0.15rem 0.15rem;
+							letter-spacing: 0;
+						}
+						@include xLarge-screen {
+							padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+							letter-spacing: 0;
+						}
+					}
+				}
+			}
+		}
+		/* Landing Page Main Section Arabic Styles Start Here */
+		&.main {
+			background: linear-gradient(230deg, $primary-dark 40%, $primary 100%);
+			.back-texture {
+				right: auto;
+				left: 0;
+				transform: translateX(-35%);
+				&.choose-type {
+					transform: translateX(-30%);
+				}
+			}
+			main {
+				.layout {
+					.page-content {
+						/* Main Landing Page Content Styles Start Here */
+						.landing-page-content {
+							.carousel {
+								.carousel-indicators {
+									right: 2rem;
+									left: auto;
+									@include large-screen {
+										left: auto;
+										right: 3rem;
+									}
+									.slide-indicator {
+										+ .slide-indicator {
+											margin-left: 0;
+											margin-right: 0.85rem;
+										}
+									}
+									.skip-intro {
+										margin-left: 0;
+										margin-right: 1rem;
+										font-family: $bbc-ar-font-medium;
+										i {
+											margin-left: 0;
+											margin-right: 0.5rem;
+										}
+									}
+								}
+								.carousel-inner {
+									padding-left: 0;
+									padding-right: 2rem;
+									@include large-screen {
+										padding-left: 0;
+										padding-right: 3rem;
+									}
+									.carousel-item {
+										float: right;
+										margin-right: 0;
+										margin-left: -100%;
+										&.carousel-item-next:not(.carousel-item-start),
+										&.active.carousel-item-end {
+											transform: translateX(-100%);
+										}
+										&.carousel-item-prev:not(.carousel-item-end),
+										&.active.carousel-item-start {
+											transform: translateX(100%);
+										}
+										.slide {
+											.slide-content {
+												@include xLarge-screen {
+													margin-right: 0;
+													margin-left: 4rem;
+												}
+												.slide-title {
+													font-family: $bbc-ar-font-regular;
+													.highlighted {
+														font-family: $bbc-ar-font-bold;
+													}
+												}
+												.slide-subtitle {
+													font-family: $bbc-ar-font-bold;
+													.highlighted {
+														font-family: $bbc-ar-font-bold;
+													}
+												}
+												.description {
+													font-family: $bbc-ar-font-regular;
+												}
+												.statistics {
+													.statistic {
+														.statistic-count {
+															font-family: $bbc-ar-font-bold;
+															.icon {
+																@include xLarge-screen {
+																	margin-left: 0;
+																	margin-right: -2px;
+																}
+															}
+														}
+														.statistic-name {
+															font-family: $bbc-ar-font-regular;
+														}
+														+ .statistic {
+															margin-left: 0;
+															margin-right: 1rem;
+															@include xLarge-screen {
+																margin-left: 0;
+																margin-right: 4.25rem;
+															}
+														}
+													}
+												}
+											}
+											.slide-banner {
+												.banner-wrapper {
+													transform: scaleX(-1);
+												}
+											}
+										}
+									}
+								}
+								.carousel-control-area {
+									right: auto;
+									left: -11rem;
+									.carousel-control-wrapper {
+										.texture {
+											right: auto;
+											left: 1rem;
+										}
+										.carousel-control {
+											direction: ltr;
+											font-family: $bbc-ar-font-regular;
+											&.next {
+												right: auto;
+												left: 13rem;
+												.action-title {
+													right: auto;
+													left: 1rem;
+												}
+												.icon-wrapper {
+													right: auto;
+													left: 2rem;
+												}
+											}
+											&.prev {
+												left: auto;
+												right: 2.5rem;
+											}
+										}
+									}
+								}
+							}
+							/* Landing Page Footer Styles Start Here */
+							.landing-page-footer {
+								left: auto;
+								right: 2rem;
+								@include large-screen {
+									left: auto;
+									right: 3rem;
+								}
+								.footer-title {
+									font-family: $bbc-ar-font-regular;
+								}
+								.partners-logos {
+									.partner-logo {
+										+ .partner-logo {
+											margin-left: 0;
+											margin-right: 0.5rem;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

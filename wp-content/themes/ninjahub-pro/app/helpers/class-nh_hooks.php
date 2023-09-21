@@ -94,6 +94,7 @@
         public function __construct()
         {
             $this->prefix = "production" === Nh::_ENVIRONMENT ? ".min" : "";
+            add_filter('script_loader_tag', [$this, 'add_type_attribute'] , 10, 3);
         }
 
         public static function get_instance()
@@ -228,10 +229,12 @@
          * @param null   $version
          * @param null   $position
          * @param bool   $is_vendor
+         * @param array  $extra_attr
          */
-        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE): void
+        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE, array $extra_attr =
+        []): void
         {
-            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor);
+            $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor, $extra_attr);
         }
 
         /**
@@ -245,10 +248,12 @@
          * @param null   $version
          * @param null   $position_media
          * @param bool   $is_vendor
+         * @param array  $extra_attr
          *
          * @return array
          */
-        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, bool $is_vendor = FALSE): array
+        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, bool $is_vendor = FALSE, array
+        $extra_attr = []): array
         {
 
             $hooks[] = [
@@ -258,7 +263,8 @@
                 'media'        => !empty($position_media) ? $position_media : FALSE,
                 'position'     => !empty($position_media) ? $position_media : 'all',
                 'version'      => !empty($version) ? $version : Nh::_VERSION,
-                'is_vendor'    => $is_vendor
+                'is_vendor'    => $is_vendor,
+                'extra_attr'   => $extra_attr
             ];
 
             return $hooks;
@@ -336,14 +342,14 @@
 
             if (!empty($this->styles)) {
                 foreach ($this->styles as $hook) {
-                    $path = $hook['is_vendor'] ? $hook['path'] . '.css' : $hook['path'] . $this->prefix . '.css';
+                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.css';
                     wp_enqueue_style($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['media']);
                 }
             }
 
             if (!empty($this->scripts)) {
                 foreach ($this->scripts as $hook) {
-                    $path = $hook['is_vendor'] ? $hook['path'] . '.js' : $hook['path'] . $this->prefix . '.js';
+                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.js';
                     wp_enqueue_script($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['position']);
                 }
             }
@@ -359,5 +365,20 @@
         public static function enqueue_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
         {
             self::get_instance()->add_style($script_name, $path, $is_vendor,$dependencies, $version, $media)->run();
+        }
+
+        public function add_type_attribute($tag, $handle, $src) {
+            foreach ($this->scripts as $script) {
+                if (!empty($script['extra_attr'])) {
+                    $extra_attr = '';
+                    foreach ($script['extra_attr'] as $attr_name => $attr_value) {
+                        $extra_attr .= $attr_name . '="' .$attr_value .'"';
+                    }
+                    $tag = '<script '.$extra_attr.' src="' . esc_url( $src ) . '"></script>';
+                }
+            }
+
+            // if not your script, do nothing and return original $tag
+            return $tag;
         }
     }

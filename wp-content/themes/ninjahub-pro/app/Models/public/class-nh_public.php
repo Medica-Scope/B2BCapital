@@ -37,7 +37,7 @@
             $this->actions();
             $this->filters();
             Nh_Init::get_instance()
-                    ->run('public');
+                   ->run('public');
 
         }
 
@@ -58,18 +58,18 @@
         public function enqueue_styles(): void
         {
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bbcicons', Nh_Hooks::PATHS['public']['vendors'] . '/css/bbc-icons/style', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bbcicons', Nh_Hooks::PATHS['public']['vendors'] . '/css/bbc-icons/style.css', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min.css', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min.css', TRUE);
 
             if (NH_lANG === 'ar') {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
+                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min.css', TRUE);
             } else {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', TRUE);
+                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min.css', TRUE);
             }
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
             $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style');
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
 
 
             $this->hooks->run();
@@ -79,20 +79,27 @@
         {
             global $gglcptch_options;
 
-            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
+            // Vendors
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
                 'jquery'
             ], Nh::_VERSION, NULL, TRUE);
 
+            if (is_front_page()) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', 'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs', [], Nh::_VERSION, NULL, TRUE, [ 'type' => 'module' ]);
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ]);
+            }
+
+
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
                 'jquery',
-                Nh::_DOMAIN_NAME. '-public-script-bs5'
+                Nh::_DOMAIN_NAME . '-public-script-bs5'
             ]);
 
             $this->hooks->add_localization(Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [
                 'domain_key'  => Nh::_DOMAIN_NAME,
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => Nh::_ENVIRONMENT,
-                'publicKey'   => $gglcptch_options['public_key'],
+                'publicKey'   => isset($gglcptch_options) ? $gglcptch_options['public_key'] : '',
                 'phrases'     => [
                     'default'        => __("This field is required.", "nh"),
                     'email'          => __("Please enter a valid email address.", "nh"),
@@ -114,6 +121,11 @@
 
             if (is_page([
                 'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
                 'dashboard',
                 'create-opportunity'
             ])) {
@@ -124,6 +136,11 @@
 
             if (is_page([
                 'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
                 'login',
                 'industry',
                 'reset-password',
@@ -134,6 +151,8 @@
             ])) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
             }
+
+
 
             $this->hooks->run();
         }

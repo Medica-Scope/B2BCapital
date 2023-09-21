@@ -931,6 +931,11 @@
             // prevent accessing the sensitive pages
             if (is_page([
                     'my-account',
+                    'change-password',
+                    'my-opportunities',
+                    'my-widgets',
+                    'my-notifications',
+                    'my-favorite-opportunities',
                     'verification',
                     'authentication',
                     'industry',

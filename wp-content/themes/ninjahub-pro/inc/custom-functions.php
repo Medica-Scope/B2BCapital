@@ -5,6 +5,8 @@
      * @package NinjaHub
      */
 
+    use NH\Nh;
+
     add_action('tgmpa_register', 'ninja_register_required_plugins');
 
     /**

@@ -55,7 +55,7 @@
         public function __construct()
         {
             Nh_Init::get_instance()
-                    ->run('core');
+                   ->run('core');
             $hooks = new Nh_Hooks();
             $this->init_models($hooks);
             $this->actions($hooks);
@@ -98,13 +98,15 @@
             $hooks->add_action('after_setup_theme', $this, 'nh_setup');
             $hooks->add_action('widgets_init', $this, 'nh_widgets_init');
             $hooks->add_action('customize_register', $this, 'theme_customizer');
+            $hooks->add_action('init', $this, 'nh_logout_rewrite_rule');
         }
 
 
         private function filters($hooks): void
         {
             $hooks->add_filter('body_class', $this, 'body_classes', 10, 2);
-
+            $hooks->add_filter('query_vars', $this, 'nh_logout_query_vars');
+            $hooks->add_filter('template_include', $this, 'nh_logout_template');
         }
 
         /**
@@ -150,6 +152,8 @@
             // This theme uses wp_nav_menu() in one location.
             register_nav_menus([
                 'default-menu'            => esc_html__('Default', 'ninja'),
+                'dashboard-guest-menu'    => esc_html__('Dashboard Guest', 'ninja'),
+                'dashboard-admin-menu'    => esc_html__('Dashboard Admin', 'ninja'),
                 'dashboard-owner-menu'    => esc_html__('Dashboard Owner', 'ninja'),
                 'dashboard-investor-menu' => esc_html__('Dashboard Investor', 'ninja'),
                 'footer-menu'             => esc_html__('Footer', 'ninja'),
@@ -284,6 +288,36 @@
                 $logo_url = $logo_id;
             }
             return $logo_url;
+        }
+
+        public function nh_logout_rewrite_rule(): void
+        {
+            add_rewrite_rule('^nh_account/nh_logout/?', 'index.php?pagename=nh_logout', 'top');
+        }
+
+        public function nh_logout_query_vars($vars)
+        {
+            $vars[] = 'nh_logout';
+            return $vars;
+        }
+
+        public function nh_logout_template($template): string
+        {
+            $pagename = get_query_var('pagename');
+
+            switch ($pagename) {
+                    case "nh_logout":
+                        if (is_user_logged_in()) {
+                            wp_logout();
+                            wp_safe_redirect(home_url());
+                        } else {
+                            wp_safe_redirect(apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))));
+                        }
+                        exit();
+                default;
+            }
+
+            return $template;
         }
 
     }
