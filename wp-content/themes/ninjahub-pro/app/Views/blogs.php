@@ -15,7 +15,8 @@ $queried_post_type = $wp_query->query;
         <span class="dots"></span>
     </div>
     <div class="date">
-        <p><?= get_the_date('F d, Y') ?></p>
+        <img src="<?= get_avatar_url(the_author_meta('id')) ?>"/>
+        <p><?= _e('on', 'ninja') ?> <?= get_the_date('F d, Y') ?></p>
     </div>
     <div class="content">
         <?= the_excerpt() ?>
