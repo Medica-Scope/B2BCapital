@@ -37,7 +37,7 @@
 				align-items: center;
 				gap: 2rem;
 				i[class^='bbc-'],
-				i[class*=' bbc-']{
+				i[class*=' bbc-'] {
 					font-size: 20px;
 					font-weight: bold;
 				}
@@ -58,5 +58,10 @@
 				}
 			}
 		}
+	}
+}
+.page-template-template-page-registration {
+	.site-header {
+		display: none !important;
 	}
 }

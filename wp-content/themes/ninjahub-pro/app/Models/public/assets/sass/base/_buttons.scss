@@ -18,6 +18,7 @@
 	cursor: pointer;
   &:hover {
     text-decoration: none;
+		color: $layout-light;
   }
   &:focus {
     outline: none;

@@ -40,16 +40,16 @@
 			left: initial;
 			right: 0.8rem;
 			background-color: transparent;
-			.icon-container{
+			.icon-container {
 				position: relative;
 			}
 			i[class^='bbc-'],
 			i[class*=' bbc-'] {
 				position: absolute;
-				    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
 				z-index: 11;
 				transform: initial;
 				visibility: hidden;
@@ -57,7 +57,7 @@
 				background-color: transparent;
 			}
 			i[class^='bbc-'].active,
-			i[class*=' bbc-'].active{
+			i[class*=' bbc-'].active {
 				z-index: 12;
 				visibility: visible;
 				backface-visibility: visible;
@@ -80,7 +80,6 @@
 		padding: 1rem 2rem;
 		color: $layout-dark;
 		font-size: 0.8rem;
-		font-family: $bbc-secondary-en-font-light;
 		border-radius: 3px;
 		border: none;
 		background-color: $gray-light;
@@ -91,6 +90,14 @@
 		&:focus {
 			box-shadow: none;
 		}
+		&.ninja-error-input{
+			border-color: $error;
+			border-bottom: 1px solid $error;
+		}
+	}
+	.ninja-error{
+		color: $error;
+		font-size: 0.8rem;
 	}
 	.error-message {
 		display: none;
@@ -169,56 +176,47 @@
 	color: $layout-medium;
 }
 
-
-
-
-
-
-
-
-
-
 .nh_form {
-  .form-control:focus {
-    outline: none;
-    box-shadow: 0 1px 7px 1px rgba(0, 123, 255, .25);
-  }
+	.form-control:focus {
+		outline: none;
+		box-shadow: 0 1px 7px 1px rgba(0, 123, 255, 0.25);
+	}
 
-  .ninja-input-wrapper {
-    margin-bottom: 5px;
+	.ninja-input-wrapper {
+		margin-bottom: 5px;
 
-    label {
-      font-size: 18px;
-      margin-bottom: 0;
-    }
+		label {
+			font-size: 18px;
+			margin-bottom: 0;
+		}
 
-    .ninja-input {
-      height: 36px;
-      font-size: 16px;
-    }
+		.ninja-input {
+			height: 36px;
+			font-size: 16px;
+		}
 
-    .text-muted {
-      font-size: 12px;
-    }
-  }
+		.text-muted {
+			font-size: 12px;
+		}
+	}
 
-  .form-check {
-    padding-left: 0;
-    padding-right: 0;
+	.form-check {
+		padding-left: 0;
+		padding-right: 0;
 
-    .ninja-checkbox {
-      height: auto;
-      display: inline-block;
-      width: auto;
-    }
-  }
+		.ninja-checkbox {
+			height: auto;
+			display: inline-block;
+			width: auto;
+		}
+	}
 
-  .ninja-btn {
-    border-radius: 0;
-    font-size: 16px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-  }
+	.ninja-btn {
+		border-radius: 0;
+		font-size: 16px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
 }
 
 // @import "buttons";
