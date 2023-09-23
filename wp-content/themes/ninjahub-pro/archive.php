@@ -9,6 +9,8 @@
  */
 
 use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Faq;
+use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\Nh;
 
 get_header();
@@ -16,10 +18,27 @@ Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hook
 
 global $wp_query;
 $queried_post_type = $wp_query->query;
+$nh_faq = new Nh_Faq();
 ?>
 
 <main id="" class="">
+<?php global $post; ?>
+    <ul class="breadcrumbs">
+        <li><a href="<?= home_url() ?>"><?= _e("Home", "ninja") ?></a></li>
+        <?php
+        $post_type = get_post_type();
 
+        if (is_archive() && $post_type == 'faq') {
+        ?>
+            <li>&raquo;</li>
+            <li><span class="page-title"><?= _e("FAQs", "ninja") ?></span></li>
+        <?php } elseif (is_archive() && $post_type == 'post') {
+        ?>
+            <li>&raquo;</li>
+            <li><span class="page-title"><?= _e("Blogs", "ninja") ?></span></li>
+        <?php } ?>
+    </ul>
+    <h1 class="page-title"><?= _e("FAQs", "ninja") ?></h1>
     <?php if (have_posts()) : ?>
 
         <?php
