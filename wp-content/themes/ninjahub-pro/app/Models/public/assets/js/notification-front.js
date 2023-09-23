@@ -32,6 +32,7 @@ class NhNotificationFront extends NhNotification
                 clearBtn: $(`.${KEY}-notification-clear`),
                 item: $(`.${KEY}-notification-item`),
                 newItem: $(`.${KEY}-new-notification`),
+                clickToShow: $(`.${KEY}-click-show`),
             },
         };
 

@@ -24,7 +24,7 @@ $notifications_obj = new Nh_Notification();
 
 $notifications = $notifications_obj->get_notifications();
 $count         = $notifications['new_count'];
-$found_posts   = $notifications['found_posts'];
+$found_posts   = $notifications['found_posts']; 
 ?>
 
 <main id="" class="">
@@ -40,7 +40,7 @@ $found_posts   = $notifications['found_posts'];
         </nav>
 
         <div class="notifications-con">
-            <div class="ninja-notification-list container" data-page="2" data-last="<?= $found_posts > 10 ? 0 : 1 ?>">
+            <div class="ninja-notification-my-account-list container" data-page="2" data-last="<?= $found_posts > 10 ? 0 : 1 ?>">
                 <div class="ninja-notification-group-container">
                     <?php
                     if (!empty($notifications['notifications'])) {
@@ -51,26 +51,24 @@ $found_posts   = $notifications['found_posts'];
                                 <?= __('clear all') ?>
                             </button>
                         </div>
-                        <div class="ninja-notifications-group">
+                        <div class="ninja-notifications-group accordion accordion-flush" id="accordionFlush">
                             <?php
                             foreach ($notifications['notifications'] as $notification) {
                             ?>
-                                <div class="ninja-notification-item <?= $notification->new ? 'ninjanew-notification' : '' ?>" data-id="<?= $notification->ID ?>">
-                                    <a href="<?= $notification->url ?>">
-                                        <div class="row">
-                                            <div class="col-sm-2">
+                                <div class="ninja-notification-item <?= $notification->new ? 'ninjanew-notification' : '' ?> accordion-item" data-id="<?= $notification->ID ?>">
+                                                
+                                        <div class="accordion-header" id="flush-heading<?= $notification->ID ?>">
                                                 <div class="ninja-notification-image">
                                                     <img src="<?= $notification->thumbnail ?>" alt="<?= __('Notification Thumbnail', 'ninja') ?>" />
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <div class="ninja-notification-content">
-                                                    <h6><?= $notification->title ?></h6>
-                                                    <span><?= $notification->date ?></span>
-                                                </div>
-                                            </div>
+                                            <h3 class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush<?= $notification->ID ?>" aria-expanded="false" aria-controls="flush<?= $notification->ID ?>">
+                                            <?= $notification->title ?>
+                                            </h3>
+                                            <span><?= $notification->date ?></span>
                                         </div>
-                                    </a>
+                                        <div id="flush<?= $notification->ID ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $notification->ID ?>" data-bs-parent="#accordionFlush">
+                                        <div class="accordion-body"><?= $notification->content ?></div>
+                                        </div>
                                 </div>
                             <?php
                             }
