@@ -160,3 +160,28 @@
 //        echo 'Error:' . curl_error($ch);
 //    }
 //    curl_close($ch);
+
+
+
+/**
+ * Description...
+ * @version 1.0
+ * @since 1.0.0
+ * @package NinjaHub
+ * @author Ahmed Gamal
+ * @return string
+ */
+add_action( 'pre_get_posts', 'change_archive_posts_per_page' );
+function change_archive_posts_per_page( $query ) {
+
+    if ( !$query->is_main_query() ){
+        return;
+    }
+
+    $posts_per_page = get_option( 'posts_per_page' );
+    if ( is_front_page() ) {
+        $query->set( 'posts_per_page', 12 );
+        return;
+    }
+    
+}
