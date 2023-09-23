@@ -66,7 +66,6 @@ $found_posts   = $notifications['found_posts'];
                                             <div class="col-sm-10">
                                                 <div class="ninja-notification-content">
                                                     <h6><?= $notification->title ?></h6>
-                                                    <p><?= $notification->content ?></p>
                                                     <span><?= $notification->date ?></span>
                                                 </div>
                                             </div>
