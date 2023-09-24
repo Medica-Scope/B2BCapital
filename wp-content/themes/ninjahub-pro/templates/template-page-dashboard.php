@@ -34,6 +34,14 @@
         <h3>Latest Opportunities</h3>
         <?php
 
+            acf_form(array(
+//                        'post_id' => 1454, // Use the post ID where ACF fields are saved
+                        'field_groups' => array(1430), // Replace with your ACF Field Group ID
+                        'form' => true, // Set to false so ACF doesn't output a <form> tag, as this will be nested in your custom form
+                ));
+
+
+
             $opportunities_obj = new Nh_Opportunity();
             $opportunities = $opportunities_obj->get_all();
 

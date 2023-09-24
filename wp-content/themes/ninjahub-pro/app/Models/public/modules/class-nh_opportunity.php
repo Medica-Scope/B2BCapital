@@ -39,7 +39,7 @@
         ];
         public array $taxonomy  = [
             'opportunity-category',
-            'template-category',
+            'opportunity-type',
             'industry'
         ];
 
