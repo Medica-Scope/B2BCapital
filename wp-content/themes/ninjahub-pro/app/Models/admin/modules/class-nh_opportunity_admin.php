@@ -77,7 +77,7 @@
                 if (!empty($form_template)) {
 
                     // Your specific field group ID
-                    $target_field_group_id = $this->get_field_groups_by_post_id($form_template[0]); // Replace with your field group ID
+                    $target_field_group_id = Nh_Opportunity::get_field_groups_by_post_id($form_template[0]); // Replace with your field group ID
 
                     // Array of post IDs where you want to assign the field group
                     $target_post_ids = [ $post_id ]; // Replace with your array of post IDs
@@ -92,36 +92,5 @@
                 }
             }
             return $match;
-        }
-
-        public function get_field_groups_by_post_id($post_id): array
-        {
-            $matched_groups = [];
-
-            // Get all the field groups
-            $field_groups = acf_get_field_groups();
-
-            foreach ($field_groups as $field_group) {
-
-                if (isset($field_group['location']) && is_array($field_group['location'])) {
-
-                    foreach ($field_group['location'] as $group_locations) {
-                        foreach ($group_locations as $rule) {
-
-                            if (// Check if field group is assigned to the specific post ID
-                            ($rule['param'] === 'post' && $rule['operator'] === '==' && intval($rule['value']) === (int)$post_id)) {
-                                $matched_groups[] = [
-                                    'ID'  => $field_group['ID'],
-                                    'key' => $field_group['key']
-                                ]; // Store the field group key
-                                break 2; // exit both foreach loops if match found
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            return $matched_groups;
         }
     }

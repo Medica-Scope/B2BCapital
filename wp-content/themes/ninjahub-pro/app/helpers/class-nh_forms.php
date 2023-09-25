@@ -230,7 +230,7 @@
                 'after_wrapper'  => '',
                 'autocomplete'   => 'on',
                 'hint'           => '',
-                'abbr'           => __("This field is required", "nh"),
+                'abbr'           => __("This field is required", "ninja"),
                 'order'          => 0,
                 'inline'         => FALSE,
                 'extra_attr'     => [
@@ -389,10 +389,10 @@
                 'before_wrapper' => '',
                 'after_wrapper'  => '',
                 'inline'         => FALSE,
-                'abbr'           => __("This field is required", "nh"),
+                'abbr'           => __("This field is required", "ninja"),
                 'order'          => 0,
                 'thumbnail'      => '',
-                'thumbnail_name' => __("No file selected", "nh"),
+                'thumbnail_name' => __("No file selected", "ninja"),
                 'extra_attr'     => []
             ];
 
@@ -475,7 +475,7 @@
                         'before'     => '',
                         'after'      => '',
                         'checked'    => '',
-                        'abbr'       => __("This field is required", "nh"),
+                        'abbr'       => __("This field is required", "ninja"),
                         'order'      => 0,
                         'extra_attr' => []
                     ]
@@ -557,7 +557,7 @@
                 'before'   => '',
                 'after'    => '',
                 'required' => TRUE,
-                'abbr'     => __("This field is required", "nh"),
+                'abbr'     => __("This field is required", "ninja"),
                 'choices'  => [
                     [
                         'label'      => '',
@@ -644,7 +644,7 @@
                 'before'     => '',
                 'after'      => '',
                 'checked'    => '',
-                'abbr'       => __("This field is required", "nh"),
+                'abbr'       => __("This field is required", "ninja"),
                 'order'      => 0,
                 'extra_attr' => []
             ];
@@ -707,7 +707,7 @@
                 'autocomplete' => 'on',
                 'rows'         => '3',
                 'hint'         => '',
-                'abbr'         => __("This field is required", "nh"),
+                'abbr'         => __("This field is required", "ninja"),
                 'order'        => 0,
                 'extra_attr'   => []
             ];
@@ -781,7 +781,7 @@
                 'after'          => '',
                 'multiple'       => '',
                 'inline'         => FALSE,
-                'abbr'           => __("This field is required", "nh"),
+                'abbr'           => __("This field is required", "ninja"),
                 'order'          => 0,
                 'extra_attr'     => []
             ];
