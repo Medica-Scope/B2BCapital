@@ -31,6 +31,8 @@
             'preferred_opportunities_cat_list',
             'preferred_articles_cat_list',
             'favorite_opportunities',
+            'favorite_articles',
+            'ignored_articles'
         ];
         public array $taxonomy = [
             'industry'

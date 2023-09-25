@@ -118,7 +118,9 @@
                     'noChoicesText'  => __("'No choices to choose from'", "nh"),
                 ]
             ]);
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front');
 
+            
             if (is_page([
                 'my-account',
                 'change-password',
@@ -127,7 +129,8 @@
                 'my-notifications',
                 'my-favorite-opportunities',
                 'dashboard',
-                'create-opportunity'
+                'create-opportunity',
+                'blogs'
             ])) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
