@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 3.5rem;
+	padding-left: 1.5rem;
   @include large-screen {
     margin-top: 5.5rem;
   }
@@ -59,6 +60,7 @@
     padding: 1.75rem 2.35rem;
     margin-right: 10.5vw;
     background-color: #1d2f40;
+		border-radius: 5px;
     @include large-screen {
       width: 42.15%;
       padding: 2.1rem 2.9rem;
