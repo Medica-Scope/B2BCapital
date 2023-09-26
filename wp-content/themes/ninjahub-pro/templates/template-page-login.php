@@ -53,13 +53,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 			</div>
 			<?php
 			echo Nh_Forms::get_instance()
-				->create_form( [
-					'custom-html-1' => [
+				->create_form( [ 
+					'custom-html-1' => [ 
 						'type'    => 'html',
 						'content' => '<div class="d-flex flex-row flex-wrap col-12">',
 						'order'   => 0,
 					],
-					'user_login'    => [
+					'user_login'    => [ 
 						'class'       => 'form-field form-field-has-icon col-6 pr-3',
 						'type'        => 'text',
 						'label'       => __( 'Email or phone number', 'ninja' ),
@@ -69,7 +69,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'before'      => '<i class="bbc-mail1"></i>',
 						'order'       => 5,
 					],
-					'user_password' => [
+					'user_password' => [ 
 						'class'       => 'form-field form-field-has-icon col-6 pl-3',
 						'type'        => 'password',
 						'label'       => __( 'Password', 'ninja' ),
@@ -80,11 +80,11 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'after'       => '<i class="bbc-eye1 showPassIcon" data-target ="#' . Nh::_DOMAIN_NAME . '_user_password"></i>',
 						'order'       => 10,
 					],
-					'rememberme'    => [
+					'rememberme'    => [ 
 						'class'   => 'form-field col-6 align-items-start pr-3 m-0',
 						'type'    => 'checkbox',
-						'choices' => [
-							[
+						'choices' => [ 
+							[ 
 								'class' => '',
 								'label' => 'Remember me',
 								'name'  => 'rememberme',
@@ -94,19 +94,19 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						],
 						'order'   => 15,
 					],
-					'custom-html-3' => [
+					'custom-html-3' => [ 
 						'type'    => 'html',
 						'content' => '<div class="form-field col-6 align-items-end pl-3 m-0" ><a href="' . get_permalink( get_page_by_path( 'my-account' ) ) . 'forgot-password" class="btn-link text-accent"> ' . __( 'Forgot your Password?', 'ninja' ) . ' </a></div></div>',
 						'order'   => 20,
 					],
-					'login_nonce'   => [
+					'login_nonce'   => [ 
 						'class' => '',
 						'type'  => 'nonce',
 						'name'  => 'login_nonce',
 						'value' => Nh::_DOMAIN_NAME . "_login_form",
 						'order' => 25,
 					],
-					'submit'        => [
+					'submit'        => [ 
 						'class'               => 'form-action bbc-btn btn-primary large apply',
 						'type'                => 'submit',
 						'value'               => __( 'Login', 'ninja' ),
@@ -116,7 +116,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'order'               => 25,
 					],
 				],
-					[
+					[ 
 						'class' => Nh::_DOMAIN_NAME . '-login-form',
 						'id'    => Nh::_DOMAIN_NAME . '_login_form',
 					]
@@ -131,64 +131,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 				<p>Copyright © 2023 B2B All rights reserved.</p>
 			</div>
 		</section>
-		<section class="login-animation col-12 col-md-6">
-			<div id="loginCarousel" class="carousel slide w-100 h-100">
-				<div class="carousel-navigation">
-					<button class="carousel-control-prev" type="button" data-bs-target="#loginCarousel" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
 
-					<div class="carousel-indicators">
-						<button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="0" class="active"
-							aria-current="true" aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-					</div>
-
-					<button class="carousel-control-next" type="button" data-bs-target="#loginCarousel" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
-
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<dotlottie-player
-							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
-							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
-							autoplay>
-						</dotlottie-player>
-						<div class="carousel-caption d-none d-md-block">
-							<h5>First slide label</h5>
-							<p>Some representative placeholder content for the first slide.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<dotlottie-player
-							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
-							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
-							autoplay>
-						</dotlottie-player>
-						<div class="carousel-caption d-none d-md-block">
-							<h5>Second slide label</h5>
-							<p>Some representative placeholder content for the second slide.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<dotlottie-player
-							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
-							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
-							autoplay>
-						</dotlottie-player>
-						<div class="carousel-caption d-none d-md-block">
-							<h5>Third slide label</h5>
-							<p>Some representative placeholder content for the third slide.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		<?php get_template_part( 'template-parts/login-slider-part' ); ?>
 	</div>
 </main><!-- #main -->
 

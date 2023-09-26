@@ -72,7 +72,7 @@ class Nh_Public {
 
 	public function enqueue_scripts(): void {
 		global $gglcptch_options;
-		$allowed_pages_dotlottie_script = [ 'home', 'login', 'registration', 'reset-password', 'verification' ];
+		$allowed_pages_dotlottie_script = [ 'home', 'login', 'registration', 'reset-password', 'verification', 'forgot-password' ];
 
 		// Vendors
 		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [ 
