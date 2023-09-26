@@ -3,7 +3,7 @@
 /* Login Page Styles Start Here */
 body {
 	color: $primary-dark;
-	footer{
+	footer {
 		display: none !important;
 	}
 }
@@ -17,8 +17,12 @@ main {
 		.form-check {
 			padding: 0;
 		}
+		.section-footer {
+			margin-top: 3rem;
+			border-top: 1px solid $layout;
+		}
 	}
-	.login-animation{
+	.login-animation {
 		height: 100vh;
 	}
 }

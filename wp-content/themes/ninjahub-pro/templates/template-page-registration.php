@@ -204,21 +204,33 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="../../assets/gifs/money-investment.gif" class="d-block" alt="Money Investment GIF">
+						<dotlottie-player
+							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
+							autoplay>
+						</dotlottie-player>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>First slide label</h5>
 							<p>Some representative placeholder content for the first slide.</p>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="../../assets/gifs/money-investment.gif" class="d-block" alt="Money Investment GIF">
+						<dotlottie-player
+							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
+							autoplay>
+						</dotlottie-player>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Second slide label</h5>
 							<p>Some representative placeholder content for the second slide.</p>
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="../../assets/gifs/money-investment.gif" class="d-block" alt="Money Investment GIF">
+						<dotlottie-player
+							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+							background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
+							autoplay>
+						</dotlottie-player>
 						<div class="carousel-caption d-none d-md-block">
 							<h5>Third slide label</h5>
 							<p>Some representative placeholder content for the third slide.</p>
