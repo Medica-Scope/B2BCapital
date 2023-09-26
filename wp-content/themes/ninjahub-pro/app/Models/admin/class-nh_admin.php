@@ -41,7 +41,7 @@
             $this->actions();
             $this->filters();
             Nh_Init::get_instance()
-                    ->run('admin');
+                   ->run('admin');
         }
 
         public function actions(): void
@@ -103,15 +103,16 @@
          */
         public function add_custom_recaptcha_forms($forms)
         {
-            $forms['frontend_login']           = [ "form_name" => "Front End Login" ];
-            $forms['frontend_registration']    = [ "form_name" => "Front End Register" ];
-            $forms['frontend_verification']    = [ "form_name" => "Front End Verification" ];
-            $forms['frontend_authentication']  = [ "form_name" => "Front End Authentication" ];
-            $forms['frontend_industries']      = [ "form_name" => "Front End Industries" ];
-            $forms['frontend_reset_password']  = [ "form_name" => "Front End Reset Password" ];
-            $forms['frontend_forgot_password'] = [ "form_name" => "Front End Forgot Password" ];
-            $forms['frontend_edit_profile']    = [ "form_name" => "Front End Edit Profile" ];
-            $forms['frontend_edit_password']   = [ "form_name" => "Front End Edit Password" ];
+            $forms['frontend_login']              = [ "form_name" => "Front End Login" ];
+            $forms['frontend_registration']       = [ "form_name" => "Front End Register" ];
+            $forms['frontend_verification']       = [ "form_name" => "Front End Verification" ];
+            $forms['frontend_authentication']     = [ "form_name" => "Front End Authentication" ];
+            $forms['frontend_industries']         = [ "form_name" => "Front End Industries" ];
+            $forms['frontend_reset_password']     = [ "form_name" => "Front End Reset Password" ];
+            $forms['frontend_forgot_password']    = [ "form_name" => "Front End Forgot Password" ];
+            $forms['frontend_edit_profile']       = [ "form_name" => "Front End Edit Profile" ];
+            $forms['frontend_edit_password']      = [ "form_name" => "Front End Edit Password" ];
+            $forms['frontend_create_opportunity'] = [ "form_name" => "Front End Create Opportunity" ];
             return $forms;
         }
 

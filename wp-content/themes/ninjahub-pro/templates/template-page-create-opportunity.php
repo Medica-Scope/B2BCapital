@@ -43,16 +43,17 @@
                         'order'       => 5,
                     ],
                     'category'          => [
-                        'class'          => 'col-6',
-                        'type'           => 'select',
-                        'label'          => __('Category', 'ninja'),
-                        'name'           => 'category',
-                        'placeholder'    => __('Enter your category', 'ninja'),
-                        'options'        => [],
-                        'default_option' => '',
-                        'select_option'  => [],
-                        'before'         => '',
-                        'order'          => 10,
+                        'class'             => 'col-6',
+                        'type'              => 'select',
+                        'label'             => __('Category', 'ninja'),
+                        'name'              => 'category',
+                        'placeholder'       => __('Enter your category', 'ninja'),
+                        'options'           => [],
+                        'default_option'    => '',
+                        'select_option'     => [],
+                        'extra_option_attr' => [],
+                        'before'            => '',
+                        'order'             => 10,
                     ],
                     'description'       => [
                         'class'       => 'col-6',
@@ -77,26 +78,27 @@
                         'order'       => 20,
                     ],
                     'opportunity_type'  => [
-                        'class'          => 'col-12',
-                        'type'           => 'select',
-                        'label'          => __('Opportunity Type', 'ninja'),
-                        'name'           => 'opportunity_type',
-                        'placeholder'    => __('Enter your opportunity type', 'ninja'),
-                        'options'        => [],
-                        'default_option' => '',
-                        'select_option'  => [],
-                        'before'         => '',
-                        'order'          => 25,
+                        'class'             => 'col-12',
+                        'type'              => 'select',
+                        'label'             => __('Opportunity Type', 'ninja'),
+                        'name'              => 'opportunity_type',
+                        'placeholder'       => __('Enter your opportunity type', 'ninja'),
+                        'options'           => [],
+                        'default_option'    => '',
+                        'select_option'     => [],
+                        'extra_option_attr' => [],
+                        'before'            => '',
+                        'order'             => 25,
                     ],
 
                     'custom-html-bidding-fields-1'     => [
                         'type'    => 'html',
-                        'content' => '<div class="nh-bidding-fields row col-12 nh-hidden">',
+                        'content' => '<div id="bidding_target"  class="nh-opportunities-fields col-12 nh-hidden"><div class="row">',
                         'order'   => 26,
                     ],
                     'start_bidding_amount'             => [
                         'class'       => 'col-6',
-                        'type'        => 'text',
+                        'type'        => 'number',
                         'label'       => __('Start Bidding Amount', 'ninja'),
                         'name'        => 'start_bidding_amount',
                         'value'       => '',
@@ -106,7 +108,7 @@
                     ],
                     'target_amount'                    => [
                         'class'       => 'col-6',
-                        'type'        => 'text',
+                        'type'        => 'number',
                         'label'       => __('Target Amount', 'ninja'),
                         'name'        => 'target_amount',
                         'value'       => '',
@@ -116,12 +118,12 @@
                     ],
                     'custom-html-bidding-fields-2'     => [
                         'type'    => 'html',
-                        'content' => '</div>',
+                        'content' => '</div></div>',
                         'order'   => 36,
                     ],
                     'custom-html-acquisition-fields-1' => [
                         'type'    => 'html',
-                        'content' => '<div class="nh-acquisition-fields row col-12 nh-hidden">',
+                        'content' => '<div id="acquisition_target" class="nh-opportunities-fields col-12 nh-hidden"><div class="row">',
                         'order'   => 37,
                     ],
                     'project_phase'                    => [
@@ -154,7 +156,7 @@
                     ],
                     'project_assets_amount'            => [
                         'class'       => 'col-6',
-                        'type'        => 'text',
+                        'type'        => 'number',
                         'label'       => __('Project Assets Amount', 'ninja'),
                         'name'        => 'project_assets_amount',
                         'value'       => '',
@@ -164,7 +166,7 @@
                     ],
                     'project_yearly_cashflow_amount'   => [
                         'class'       => 'col-6',
-                        'type'        => 'text',
+                        'type'        => 'number',
                         'label'       => __('Project Yearly Cashflow Amount', 'ninja'),
                         'name'        => 'project_yearly_cashflow_amount',
                         'value'       => '',
@@ -172,11 +174,11 @@
                         'placeholder' => __('Enter your project yearly cashflow amount', 'ninja'),
                         'order'       => 55,
                     ],
-                    'project_yearly_new_profit_amount' => [
+                    'project_yearly_net_profit_amount' => [
                         'class'       => 'col-6',
-                        'type'        => 'text',
+                        'type'        => 'number',
                         'label'       => __('Project Yearly Net Profit Amount', 'ninja'),
-                        'name'        => 'project_yearly_new_profit_amount',
+                        'name'        => 'project_yearly_net_profit_amount',
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your project yearly cashflow amount', 'ninja'),
@@ -184,7 +186,7 @@
                     ],
                     'custom-html-acquisition-fields-2' => [
                         'type'    => 'html',
-                        'content' => '</div>',
+                        'content' => '</div></div>',
                         'order'   => 61,
                     ],
                     'custom-html-3'                    => [
@@ -201,12 +203,7 @@
                     ],
                     'custom-form-html'                 => [
                         'type'    => 'html',
-                        'content' => '
-<div class="nh-custom-form">
-    <header>
-    <h4>' . __("Extra Information", "ninja") . '</h4>
-</header>
-</div>',
+                        'content' => ' <div class="nh-custom-form nh-hidden"> <header> <h4>' . __("Extra Information", "ninja") . '</h4> </header> <div class="nh-acf-form"></div> </div>',
                         'order'   => 75,
                     ],
                     'submit'                           => [
@@ -231,10 +228,25 @@
                 $opportunities_type_terms     = $opportunities_obj->get_taxonomy_terms('opportunity-type');
 
                 foreach ($opportunities_category_terms as $key => $term) {
+                    $status = get_term_meta($term->term_id, 'status', TRUE);
+                    if (intval($status) !== 1) {
+                        continue;
+                    }
                     $form_fields['category']['options'][$term->term_id] = $term->name;
                 }
                 foreach ($opportunities_type_terms as $key => $term) {
-                    $form_fields['opportunity_type']['options'][$term->term_id] = $term->name;
+                    $status = get_term_meta($term->term_id, 'status', TRUE);
+                    if (intval($status) !== 1) {
+                        continue;
+                    }
+                    $form_fields['opportunity_type']['options'][$term->term_id]           = $term->name;
+                    $form_fields['opportunity_type']['extra_option_attr'][$term->term_id] = [
+                        'data-target' => get_term_meta($term->term_id, 'unique_type_name', TRUE),
+                    ];
+
+                    if ($key == 0) {
+                        $form_fields['opportunity_type']['default_option'] = $term->term_id;
+                    }
                 }
 
                 echo Nh_Forms::get_instance()

@@ -19,6 +19,83 @@ class NhOpportunity extends Nh
         super();
         this.ajaxRequests = {};
     }
+
+    // getNhACFCusomForm(formData, $el) {
+    //     let that = this;
+    //     // Creating an AJAX request for login
+    //     this.ajaxRequests.getForm = $.ajax({
+    //         url: nhGlobals.ajaxUrl,
+    //         type: 'POST',
+    //         data: {
+    //             action: `${KEY}_acf_custom_form_ajax`,
+    //             data: formData,
+    //         },
+    //         beforeSend: function() {
+    //             $el.find('input, button').prop('disabled', true);
+    //             UiCtrl.beforeSendPrepare($el);
+    //         },
+    //         success: function(res) {
+    //             $('input').prop('disabled', false);
+    //
+    //             if (res.success) {
+    //                 UiCtrl.notices($el, res.msg, 'success');
+    //             } else {
+    //                 UiCtrl.notices($el, res.msg);
+    //             }
+    //
+    //             $('.nh-custom-form').show();
+    //             $('.nh-acf-form').html(res.data.html);
+    //
+    //             // $el.find('input, button').prop('disabled', false);
+    //
+    //             UiCtrl.blockUI($el, false);
+    //         },
+    //         error: function(xhr) {
+    //             let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+    //             if (xhr.statusText !== 'abort') {
+    //                 console.error(errorMessage);
+    //             }
+    //         },
+    //     });
+    // }
+
+    createOpportunity(formData, $el) {
+        let that = this;
+        // Creating an AJAX request for login
+        this.ajaxRequests.getForm = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_create_opportunity_ajax`,
+                data: formData,
+            },
+            beforeSend: function() {
+                $el.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function(res) {
+                $('input').prop('disabled', false);
+
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+
+                $el.find('input, button').prop('disabled', false);
+                that.createNewToken();
+                UiCtrl.blockUI($el, false);
+            },
+            error: function(xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+                that.createNewToken();
+            },
+        });
+    }
+
 }
 
 export default NhOpportunity;
