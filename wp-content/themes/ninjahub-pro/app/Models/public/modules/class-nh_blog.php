@@ -204,4 +204,53 @@ use WP_Post;
             $ignored_articles = array_combine($ignored_articles, $ignored_articles);
             return isset($ignored_articles[$post_id]);
         }
+
+         /**
+         * Description... overriding get_all in nh_post class
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return bool
+         */
+        public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1): array
+        {   
+            $args = [
+                "post_type"      => $this->module,
+                "post_status"    => $status,
+                "posts_per_page" => $limit,
+                'paged'          => $page,
+                "orderby"        => $orderby,
+                "not__in"        => $not_in,
+                "order"          => $order,
+            ];
+            $posts     = new \WP_Query($args);
+            $Nh_Posts = [];
+
+            foreach ($posts->get_posts() as $post) {
+                $Nh_Posts['posts'][] = $this->convert($post, $this->meta_data);
+            }
+
+            $Nh_Posts['pagination'] = $this->get_pagination($args);
+            return $Nh_Posts;
+        }
+
+        public function get_pagination(array $args){
+            $all_posts = $args;
+            $all_posts['posts_per_page'] = -1;
+            $all_posts['fields'] = 'ids';
+            $all_posts     = new \WP_Query($all_posts);
+            $count = $all_posts->found_posts;
+            $big = 999999999;
+            $pagination = paginate_links(array(
+                'base'    => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format'  => '?paged=%#%',
+                'current' => max(1, get_query_var('paged')),
+                'total'   => ceil($count/$args['posts_per_page']),
+                'prev_text' => __('« Previous'),
+                'next_text' => __('Next »'),
+            ));
+
+            return $pagination;
+        }
     }
