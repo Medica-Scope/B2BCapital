@@ -39,7 +39,7 @@
         ];
         public array $taxonomy  = [
             'opportunity-category',
-            'template-category',
+            'opportunity-type',
             'industry'
         ];
 
@@ -79,5 +79,36 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+        }
+
+        public static function get_field_groups_by_post_id($post_id): array
+        {
+            $matched_groups = [];
+
+            // Get all the field groups
+            $field_groups = acf_get_field_groups();
+
+            foreach ($field_groups as $field_group) {
+
+                if (isset($field_group['location']) && is_array($field_group['location'])) {
+
+                    foreach ($field_group['location'] as $group_locations) {
+                        foreach ($group_locations as $rule) {
+
+                            if (// Check if field group is assigned to the specific post ID
+                            ($rule['param'] === 'post' && $rule['operator'] === '==' && intval($rule['value']) === (int)$post_id)) {
+                                $matched_groups[] = [
+                                    'ID'  => $field_group['ID'],
+                                    'key' => $field_group['key']
+                                ]; // Store the field group key
+                                break 2; // exit both foreach loops if match found
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            return $matched_groups;
         }
     }

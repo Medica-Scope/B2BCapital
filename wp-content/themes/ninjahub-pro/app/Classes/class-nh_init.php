@@ -113,7 +113,13 @@
                     ],
 
                 ],
-                'admin'  => [],
+                'admin'  => [
+                    'Opportunity'         => [
+                        'type'      => 'class',
+                        'namespace' => 'NH\APP\MODELS\ADMIN\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/admin/modules/class-nh_opportunity_admin.php'
+                    ],
+                ],
                 'public' => [
                     'Auth'         => [
                         'type'      => 'class',
