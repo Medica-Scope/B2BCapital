@@ -66,8 +66,10 @@
          * @since 1.0.0
          * @version 1.0
          * @package NinjaHub
+         *
          * @param array $form_fields An array of form fields and their properties.
          * @param array $form_tag An array of attributes for the form tag.
+         *
          * @return string The generated HTML form.
          *
          * @author Mustafa Shaaban
@@ -156,7 +158,7 @@
         public function form_start(array $args = []): string
         {
             $defaults = [
-                'action'       => '',
+                'action'     => '',
                 'attr'       => '',
                 'class'      => '',
                 'form_class' => '',
@@ -320,6 +322,24 @@
                 }
             }
 
+            return $attrs;
+        }
+
+        /**
+         * This function responsible for create extra html attributes.
+         *
+         * @param array $args
+         *
+         * @return string
+         */
+        public function create_standard_attr(array $args = []): string
+        {
+            $attrs = '';
+            foreach ($args as $name => $value) {
+                if ($value) {
+                    $attrs .= " $name='$value' ";
+                }
+            }
             return $attrs;
         }
 
@@ -768,22 +788,23 @@
         {
             ob_start();
             $defaults   = [
-                'label'          => '',
-                'name'           => '',
-                'required'       => '',
-                'placeholder'    => '',
-                'options'        => [],
-                'default_option' => '',
-                'select_option'  => [],
-                'class'          => '',
-                'id'             => (empty($args['name'])) ? "" : Nh::_DOMAIN_NAME . '_' . $args['name'],
-                'before'         => '',
-                'after'          => '',
-                'multiple'       => '',
-                'inline'         => FALSE,
-                'abbr'           => __("This field is required", "ninja"),
-                'order'          => 0,
-                'extra_attr'     => []
+                'label'             => '',
+                'name'              => '',
+                'required'          => '',
+                'placeholder'       => '',
+                'options'           => [],
+                'default_option'    => '',
+                'select_option'     => [],
+                'extra_option_attr' => [],
+                'class'             => '',
+                'id'                => (empty($args['name'])) ? "" : Nh::_DOMAIN_NAME . '_' . $args['name'],
+                'before'            => '',
+                'after'             => '',
+                'multiple'          => '',
+                'inline'            => FALSE,
+                'abbr'              => __("This field is required", "ninja"),
+                'order'             => 0,
+                'extra_attr'        => []
             ];
             $input_data = array_merge($defaults, $args);
 
@@ -808,15 +829,15 @@
                             if (empty($input_data['default_option']) && !empty($input_data['select_option'])) {
                                 ?>
                                 <option
-                                value="<?= $value ?>" <?= (in_array($value, $input_data['select_option'])) ? 'selected' : '' ?>><?= $title ?></option><?php
+                                value="<?= $value ?>" <?= (in_array($value, $input_data['select_option'])) ? 'selected' : '' ?> <?= array_key_exists($value, $input_data['extra_option_attr']) ? $this->create_standard_attr($input_data['extra_option_attr'][$value]) : '' ?>><?= $title ?></option><?php
                             } elseif (!empty($input_data['default_option']) && empty($input_data['select_option'])) {
                                 ?>
                                 <option
-                                value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?>><?= $title ?></option><?php
+                                value="<?= $value ?>" <?= (!empty($input_data['default_option']) && $input_data['default_option'] === $value) ? 'selected' : '' ?> <?= array_key_exists($value, $input_data['extra_option_attr']) ? $this->create_standard_attr($input_data['extra_option_attr'][$value]) : '' ?>><?= $title ?></option><?php
                             } else {
                                 ?>
                                 <option
-                                value="<?= $value ?>"><?= $title ?></option><?php
+                                value="<?= $value ?>" <?= array_key_exists($value, $input_data['extra_option_attr']) ? $this->create_standard_attr($input_data['extra_option_attr'][$value]) : '' ?>><?= $title ?></option><?php
                             }
                         }
                     ?>

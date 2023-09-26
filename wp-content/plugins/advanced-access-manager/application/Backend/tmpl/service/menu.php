@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <p class="aam-info">
-                        <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('Manage access to the backend menu and submenu items. With the premium %sComplete Package%s, you can also enable the "restricted mode" to only whitelist allowed menu items. To learn more, refer to our official documentation page %shere%s.'), '<a href="https://aamportal.com/premium?ref=plugin" target="_blank">', '</a>', '<a href="https://aamportal.com/plugin/advanced-access-manager/service/backend-menu?ref=plugin" target="_blank">', '</a>'); ?>
+                        <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('Manage access to the backend menu and submenu items. With the premium %sComplete Package%s, you can also enable the "restricted mode" to only whitelist allowed menu items. To learn more, refer to our official documentation page %shere%s.'), '<a href="https://aamportal.com/premium?ref=plugin" target="_blank">', '</a>', '<a href="https://aamportal.com/article/streamlining-wordpress-backend-menu-access?ref=plugin" target="_blank">', '</a>'); ?>
                     </p>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                     <div class="modal-body">
                         <p class="text-center alert alert-warning text-larger">
                             <strong><?php echo __('You cannot restrict access to the Dashboard Home page.', AAM_KEY); ?></strong><br />
-                            <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('The [Dashboard Home] is the default page every user redirects to after login. To restrict access to the entire backend, check the %sHow to lock down WordPress backend%s Q&A.', 'b'), '<a href="https://aamportal.com/question/backend-access/lockdown-backend-area?ref=plugin" target="_blank">', '</a>'); ?>
+                            <?php echo sprintf(AAM_Backend_View_Helper::preparePhrase('The [Dashboard Home] is the default page every user redirects to after login. To restrict access to the entire backend, check the %sHow to lock down WordPress backend%s Q&A.', 'b'), '<a href="https://aamportal.com/question/how-to-lockdown-the-entire-wordpress-backend-area?ref=plugin" target="_blank">', '</a>'); ?>
                         </p>
                     </div>
                     <div class="modal-footer">
