@@ -1,14 +1,9 @@
 @import '../../base/variables';
+
+/* Login Page Styles Start Here */
 body {
 	color: $primary-dark;
-	.iti--allow-dropdown {
-		width: 100%;
-	}
-	.iti__selected-flag {
-		max-height: 52.19px;
-	}
 }
-/* Login Page Styles Start Here */
 main {
 	height: 100%;
 	.login-section {
@@ -16,135 +11,5 @@ main {
 		max-width: 920px;
 		overflow-y: scroll;
 		background-color: $layout-light;
-		.gglcptch {
-			margin-bottom: 1rem;
-		}
-		.social-login {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			align-items: center;
-			gap: 1rem;
-			margin-block: 2rem;
-			i[class^='bbc-'],
-			i[class*=' bbc-'] {
-				font-size: 20px;
-				margin-right: 0.4rem;
-			}
-			.bbc-btn {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				width: fit-content;
-				flex: 1;
-				min-width: 170px;
-				&.google {
-					background-color: #ea4235;
-					&:hover {
-						background-color: darken(#ea4235, 10%);
-					}
-				}
-				&.linkedin {
-					background-color: #0072b1;
-					&:hover {
-						background-color: darken(#0072b1, 10%);
-					}
-				}
-				&.facebook {
-					background-color: #0062a5;
-					&:hover {
-						background-color: darken(#0062a5, 10%);
-					}
-				}
-			}
-		}
-		.or-separator {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			justify-content: center;
-			align-items: center;
-			width: 100%;
-			.separator-line {
-				width: 100%;
-				height: 1px;
-				background-color: $layout;
-			}
-			.separator-text {
-				margin-inline: 1rem;
-				color: $layout-medium;
-			}
-		}
-		.section-footer {
-			text-align: center;
-			padding-top: 2rem;
-			p {
-				color: $layout-medium;
-			}
-		}
-	}
-	.login-animation {
-		background-color: #ced4d9;
-		padding-block: 3rem;
-		.carousel {
-			.carousel-inner {
-				height: 100%;
-			}
-			.carousel-item {
-				height: 100%;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				&.active {
-					display: flex;
-				}
-			}
-			.carousel-caption {
-				padding-bottom: 3rem;
-				h5 {
-					color: $primary-dark;
-					font-size: 30px;
-					margin-bottom: 1rem;
-				}
-				p {
-					color: $primary-dark;
-				}
-			}
-			.carousel-navigation {
-				position: absolute;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				z-index: 2;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				margin-right: 15%;
-				margin-bottom: 1rem;
-				margin-left: 15%;
-				.carousel-control-prev,
-				.carousel-control-next {
-					position: initial;
-					.carousel-control-prev-icon,
-					.carousel-control-next-icon {
-						filter: brightness(0);
-						width: 1.2rem;
-						height: 1.2rem;
-					}
-				}
-				.carousel-indicators {
-					position: relative;
-					margin: 0;
-					[data-bs-target] {
-						width: 10px;
-						height: 10px;
-						border: none !important;
-						border-radius: 50%;
-						background-color: $primary;
-					}
-				}
-			}
-		}
 	}
 }
