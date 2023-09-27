@@ -14,14 +14,14 @@
 	/**
 	 * Include Header Style File.
 	 */
-	Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashbaord', Nh_Hooks::PATHS['public']['css'] . '/components/header/header-dashboard' );
+	Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh_Hooks::PATHS['public']['css'] . '/components/header/header-dashboard' );
 ?>
 
 <header id="masthead" class="site-header container-fluid container-xxl">
 	<nav id="site-navigation" class="main-navigation">
 
 		<div class="site-branding">
-			<a href="<?php echo home_url(); ?>"><img src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo"/></a>
+			<a href="<?php echo home_url(); ?>"><img src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo" /></a>
 		</div>
 
 		<?php
@@ -123,10 +123,12 @@
 				</li>
 				<li class="nav-item bbc-user-profile-btn">
 					<a class="nav-link" href="#">
-						<span class="btn-profile-title"><?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?></span>
-						<span class="btn-profile-desc"><?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?></span>
+						<span
+							class="btn-profile-title"><?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?></span>
+						<span
+							class="btn-profile-desc"><?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?></span>
 					</a>
-                    <?php
+					<?php
                         wp_nav_menu(
                             [
                                 'theme_location'  => 'profile-menu-login',
