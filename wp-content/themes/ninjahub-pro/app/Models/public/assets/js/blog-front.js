@@ -23,8 +23,8 @@ class NhBlogFront extends NhBlog
         this.UiCtrl = new NhUiCtrl();
         this.$el    = this.UiCtrl.selectors = {
             controlls: {
-                favBtn: $(`.${KEY}-add-to-fav`),
-                ignoreBtn: $(`.${KEY}-add-to-ignore`),
+                favBtn: `.${KEY}-add-to-fav`,
+                ignoreBtn: `.${KEY}-add-to-ignore`,
             },
         };
 
@@ -44,7 +44,7 @@ class NhBlogFront extends NhBlog
             ajaxRequests   = this.ajaxRequests;
 
 
-        $controlls.favBtn.on('click', $controlls.favBtn.parent(), function (e) {
+            $(document).on('click', $controlls.favBtn, function (e) {
             e.preventDefault();
             let $this = $(e.currentTarget);
             let user_id = $this.attr('data-uID');
@@ -64,7 +64,7 @@ class NhBlogFront extends NhBlog
             ajaxRequests   = this.ajaxRequests;
 
 
-        $controlls.ignoreBtn.on('click', $controlls.ignoreBtn.parent(), function (e) {
+        $(document).on('click', $controlls.ignoreBtn, function (e) {
             e.preventDefault();
             let $this = $(e.currentTarget);
             let user_id = $this.attr('data-uID');

@@ -56,7 +56,6 @@ class NhBlog extends Nh
 
     ignoreArticle($el,user_id,post_id)
     {
-        console.log("heree");
         let that                      = this;
         this.ajaxRequests.toggleFav = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -77,6 +76,9 @@ class NhBlog extends Nh
                     }else{
                         $el.removeClass('btn-outline-dark');
                         $el.addClass('btn-outline-light');
+                    }
+                    if(res.data.updated){
+                        $('.blogs-list').html(res.data.updated);
                     }
                     UiCtrl.blockUI($el, false);
 

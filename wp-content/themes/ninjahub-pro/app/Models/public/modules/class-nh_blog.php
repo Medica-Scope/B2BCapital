@@ -167,16 +167,22 @@ use WP_Post;
                 $ignored_articles = array_values($ignored_articles);
                 $profile->set_meta_data('ignored_articles',$ignored_articles);
                 $profile->update();
+                ob_start();
+                get_template_part('app/Views/blogs-list');
+                $html = ob_get_clean();
                 new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                ['status' => true, 'msg' => 'post ignored', 'ignore_active' => 1]
+                ['status' => true, 'msg' => 'post ignored', 'ignore_active' => 1, 'updated' => $html]
                 );
             }
             else {
                 $ignored_articles[] = $post_id;
                 $profile->set_meta_data('ignored_articles',$ignored_articles);
                 $profile->update();
+                ob_start();
+                get_template_part('app/Views/blogs-list');
+                $html = ob_get_clean();
                 new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                ['status' => true, 'msg' => 'post not found!', 'ignore_active' => 0]
+                ['status' => true, 'msg' => 'post not found!', 'ignore_active' => 0, 'updated' => $html]
                 );
             }
         }
@@ -221,7 +227,7 @@ use WP_Post;
                 "posts_per_page" => $limit,
                 'paged'          => $page,
                 "orderby"        => $orderby,
-                "not__in"        => $not_in,
+                "post__not_in"        => $not_in,
                 "order"          => $order,
             ];
             $posts     = new \WP_Query($args);
@@ -230,7 +236,7 @@ use WP_Post;
             foreach ($posts->get_posts() as $post) {
                 $Nh_Posts['posts'][] = $this->convert($post, $this->meta_data);
             }
-
+            $Nh_Posts['Args'] = $args;
             $Nh_Posts['pagination'] = $this->get_pagination($args);
             return $Nh_Posts;
         }
