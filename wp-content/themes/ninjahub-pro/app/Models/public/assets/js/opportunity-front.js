@@ -42,18 +42,31 @@ class NhOpportunityFront extends NhOpportunity
 
     CreateOpportunityFormFieldsFront() {
         let that          = this,
-            $opportunity = this.$el.opportunity;
+            $opportunity = this.$el.opportunity,
+            ajaxRequests  = this.ajaxRequests;
 
-        $opportunity.category.on('change', $opportunity.parent, function (e) {
-            let $this = $(e.currentTarget);
+        // $opportunity.category.on('change', $opportunity.parent, function (e) {
+        //     e.preventDefault();
+        //     let $this             = $(e.currentTarget),
+        //         catID          = $this.find(":selected").val();
+        //
+        //     // Abort any ongoing registration requests
+        //     if (typeof ajaxRequests.getForm !== 'undefined') {
+        //         ajaxRequests.getForm.abort();
+        //     }
+        //
+        //     // that.getNhACFCusomForm(catID, $this);
+        // });
 
-            console.log($this.find(":selected").val());
-        });
 
         $opportunity.opportunity_type.on('change', $opportunity.parent, function (e) {
-            let $this = $(e.currentTarget);
+            let $this = $(e.currentTarget),
+                $target = $this.find(":selected").attr('data-target');
 
-            console.log($this.find(":selected").val());
+            $('.nh-opportunities-fields').hide();
+            $('#' + $target + '_target').show();
+
+            console.log('#' + $target + '_target');
         });
     }
 
@@ -63,7 +76,7 @@ class NhOpportunityFront extends NhOpportunity
             ajaxRequests  = this.ajaxRequests;
 
         // Initialize form validation
-        NhValidator.initAuthValidation($opportunity, 'createOpportunity');
+        NhValidator.initOpportunityValidation($opportunity, 'createOpportunity');
 
         // Handle form submission
         $opportunity.form.on('submit', $opportunity.parent, function (e) {
@@ -78,7 +91,7 @@ class NhOpportunityFront extends NhOpportunity
 
             // Validate the form and perform registration if valid
             if ($this.valid()) {
-                // that.createOpportunity(formData, $this);
+                that.createOpportunity(formData, $this);
             }
         });
     }

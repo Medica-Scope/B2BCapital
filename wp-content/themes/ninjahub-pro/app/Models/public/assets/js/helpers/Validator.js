@@ -303,7 +303,6 @@ class NhValidator
             _.invoke(forms, type);
         }
     }
-
     static initCompetitionValidation($el, type)
     {
 
@@ -378,6 +377,72 @@ class NhValidator
                     });
                 }
             },
+        };
+
+        if (_.has(forms, type)) {
+            _.invoke(forms, type);
+        }
+    }
+
+    static initOpportunityValidation($el, type)
+    {
+
+        let that = this;
+
+        const forms = {
+            createOpportunity: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            project_name: {
+                                required: true,
+                                maxlength: 150,
+                                minlength: 10
+                            },
+                            category: {
+                                required: true,
+                            },
+                            description: {
+                                required: true,
+                                maxlength: 1500,
+                                minlength: 50
+                            },
+                            short_description: {
+                                required: true,
+                                maxlength: 100,
+                                minlength: 30
+                            },
+                            opportunity_type: {
+                                required: true
+                            },
+                            start_bidding_amount: {
+                                required: true
+                            },
+                            target_amount: {
+                                required: true
+                            },
+                            project_phase: {
+                                required: true
+                            },
+                            project_start_date: {
+                                required: true
+                            },
+                            project_assets_amount: {
+                                required: true
+                            },
+                            project_yearly_cashflow_amount: {
+                                required: true
+                            },
+                            project_yearly_net_profit_amount: {
+                                required: true
+                            },
+                        },
+                    });
+                }
+            }
         };
 
         if (_.has(forms, type)) {

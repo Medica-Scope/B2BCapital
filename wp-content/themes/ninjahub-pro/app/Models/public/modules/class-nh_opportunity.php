@@ -11,6 +11,9 @@
 
     use NH\APP\CLASSES\Nh_Module;
     use NH\APP\CLASSES\Nh_Post;
+    use NH\APP\CLASSES\Nh_User;
+    use NH\APP\HELPERS\Nh_Ajax_Response;
+    use NH\Nh;
     use WP_Post;
 
 
@@ -26,7 +29,6 @@
     class Nh_Opportunity extends Nh_Module
     {
         public array $meta_data = [
-            'cover',
             'short_description',
             'opportunity_type',
             'start_bidding_amount',
@@ -70,7 +72,8 @@
          */
         protected function actions($module_name): void
         {
-            // TODO: Implement actions() method.
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_acf_custom_form_ajax', $this, 'acf_custom_form');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_opportunity_ajax', $this, 'create_opportunity');
         }
 
         /**
@@ -79,6 +82,129 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+        }
+
+        public function acf_custom_form(): void
+        {
+            $cat_ID        = (int)sanitize_text_field($_POST['data']);
+            $form_template = get_term_meta($cat_ID, 'form_template', TRUE);
+            $form          = self::get_field_groups_by_post_id($form_template);
+            ob_start();
+            acf_form([
+                //                        'post_id' => 1454, // Use the post ID where ACF fields are saved
+                'field_groups' => [ $form[0]['ID'] ],
+                // Replace with your ACF Field Group ID
+                'form'         => TRUE,
+                // Set to false so ACF doesn't output a <form> tag, as this will be nested in your custom form
+            ]);
+
+            new Nh_Ajax_Response(TRUE, '', [
+                'html' => ob_get_clean()
+            ]);
+        }
+
+        public function create_opportunity(): void
+        {
+            global $user_ID;
+
+            $form_data                        = $_POST['data'];
+            $project_name                     = sanitize_text_field($form_data['project_name']);
+            $category                         = sanitize_text_field($form_data['category']);
+            $description                      = sanitize_text_field($form_data['description']);
+            $short_description                = sanitize_text_field($form_data['short_description']);
+            $opportunity_type                 = sanitize_text_field($form_data['opportunity_type']);
+            $start_bidding_amount             = sanitize_text_field($form_data['start_bidding_amount']);
+            $target_amount                    = sanitize_text_field($form_data['target_amount']);
+            $project_phase                    = sanitize_text_field($form_data['project_phase']);
+            $project_start_date               = sanitize_text_field($form_data['project_start_date']);
+            $project_assets_amount            = sanitize_text_field($form_data['project_assets_amount']);
+            $project_yearly_cashflow_amount   = sanitize_text_field($form_data['project_yearly_cashflow_amount']);
+            $project_yearly_net_profit_amount = sanitize_text_field($form_data['project_yearly_net_profit_amount']);
+            $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"]    = $recaptcha_response;
+
+
+            if (empty($form_data)) {
+                new Nh_Ajax_Response(FALSE, __("Can't register with empty credentials.", 'ninja'));
+            }
+
+            if (!wp_verify_nonce($form_data['create_opportunity_nonce'], Nh::_DOMAIN_NAME . "_create_opportunity_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+
+            if (empty($project_name)) {
+                new Nh_Ajax_Response(FALSE, __("The project name field shouldn't be empty!.", 'ninja'));
+            }
+            if (empty($category)) {
+                new Nh_Ajax_Response(FALSE, __("The category field shouldn't be empty!.", 'ninja'));
+            }
+            if (empty($description)) {
+                new Nh_Ajax_Response(FALSE, __("The description field shouldn't be empty!.", 'ninja'));
+            }
+            if (empty($short_description)) {
+                new Nh_Ajax_Response(FALSE, __("The short description field shouldn't be empty!.", 'ninja'));
+            }
+            if (empty($opportunity_type)) {
+                new Nh_Ajax_Response(FALSE, __("The opportunity type field shouldn't be empty!.", 'ninja'));
+            }
+
+            $unique_type_name = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
+
+            if ($unique_type_name === 'bidding') {
+                if (empty($start_bidding_amount)) {
+                    new Nh_Ajax_Response(FALSE, __("The start bidding amount field shouldn't be empty!.", 'ninja'));
+                }
+                if (empty($target_amount)) {
+                    new Nh_Ajax_Response(FALSE, __("The target amount field shouldn't be empty!.", 'ninja'));
+                }
+            } elseif ($unique_type_name === 'acquisition') {
+                if (empty($project_phase)) {
+                    new Nh_Ajax_Response(FALSE, __("The project phase field shouldn't be empty!.", 'ninja'));
+                }
+                if (empty($project_start_date)) {
+                    new Nh_Ajax_Response(FALSE, __("The project start date field shouldn't be empty!.", 'ninja'));
+                }
+                if (empty($project_assets_amount)) {
+                    new Nh_Ajax_Response(FALSE, __("The project assets amount field shouldn't be empty!.", 'ninja'));
+                }
+                if (empty($project_yearly_cashflow_amount)) {
+                    new Nh_Ajax_Response(FALSE, __("The project yearly cash flow amount field shouldn't be empty!.", 'ninja'));
+                }
+                if (empty($project_yearly_net_profit_amount)) {
+                    new Nh_Ajax_Response(FALSE, __("The project yearly new profit amount field shouldn't be empty!.", 'ninja'));
+                }
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_opportunity');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            $this->title                            = $project_name;
+            $this->content                          = $description;
+            $this->author                           = $user_ID;
+            $this->taxonomy['opportunity-category'] = [ $category ];
+            $this->taxonomy['opportunity-type']     = [ $opportunity_type ];
+
+            $this->set_meta_data('short_description', $short_description);
+            $this->set_meta_data('opportunity_type', $opportunity_type);
+            $this->set_meta_data('start_bidding_amount', $start_bidding_amount);
+            $this->set_meta_data('target_amount', $target_amount);
+            $this->set_meta_data('project_phase', $project_phase);
+            $this->set_meta_data('project_start_date', $project_start_date);
+            $this->set_meta_data('project_assets_amount', $project_assets_amount);
+            $this->set_meta_data('project_yearly_cashflow_amount', $project_yearly_cashflow_amount);
+            $this->set_meta_data('project_yearly_net_profit_amount', $project_yearly_net_profit_amount);
+
+            $opportunity = $this->insert();
+
+            if (is_wp_error($opportunity)) {
+                new Nh_Ajax_Response(FALSE, $opportunity->get_error_message());
+            }
+
+            new Nh_Ajax_Response(TRUE, sprintf(__('Your account has been created successfully, Please check your %s to activate your account', 'ninja'), 'sdsdsd'), [//                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/verification')))
+            ]);
         }
 
         public static function get_field_groups_by_post_id($post_id): array
