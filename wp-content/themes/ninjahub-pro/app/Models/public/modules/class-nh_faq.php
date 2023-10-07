@@ -76,9 +76,12 @@ class Nh_Faq extends Nh_Module
      * @package NinjaHub
      * @author Ahmed Gamal
      * @return string
+     *
+     * @deprecated
      */
     public function breadcrumb(): string
     {
+        trigger_error('The method "breadcrumb" is deprecated and will be removed in future versions. Use "Nh_Public::breadcrumb" instead.', E_USER_DEPRECATED);
         global $post;
         $html = '<ul class="breadcrumbs">';
 
