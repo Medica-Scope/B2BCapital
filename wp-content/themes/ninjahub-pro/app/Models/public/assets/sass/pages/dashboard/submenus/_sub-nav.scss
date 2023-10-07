@@ -1,0 +1,12 @@
+.dashboard-subnav {
+
+	li:not(:last-of-type){
+		margin-right: 1.5rem;
+	}
+	.btn-link{
+		color: $primary;
+		&.active{
+			border-bottom: 1px solid $primary;
+		}
+	}
+}
