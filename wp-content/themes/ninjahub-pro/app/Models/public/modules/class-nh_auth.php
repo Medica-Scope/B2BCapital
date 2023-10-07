@@ -712,7 +712,7 @@
             $site_language                    = sanitize_text_field($form_data['site_language']);
             $widget_list                      = !is_array($form_data['widget_list']) ? [] : $form_data['widget_list'];
             $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
-            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
+            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_articles_cat_list'];
             $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"]    = $recaptcha_response;
 
