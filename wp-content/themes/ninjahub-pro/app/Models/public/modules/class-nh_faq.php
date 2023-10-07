@@ -77,7 +77,7 @@ class Nh_Faq extends Nh_Module
      * @author Ahmed Gamal
      * @return string
      */
-    public function breadcrumb()
+    public function breadcrumb(): string
     {
         global $post;
         $html = '<ul class="breadcrumbs">';

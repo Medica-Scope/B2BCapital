@@ -120,7 +120,7 @@
             ]);
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front');
 
-            
+
             if (is_page([
                 'my-account',
                 'change-password',
@@ -154,7 +154,6 @@
             ])) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
             }
-
 
 
             $this->hooks->run();
@@ -210,7 +209,39 @@
             }
             return $languages_codes;
         }
+
+        public static function breadcrumbs(): void
+        {
+            global $post;
+
+            $separator = Nh_Init::$_NH_lANG === 'ar' ? ' <i class="fa fa-arrow-left"></i> ' : ' <i class="fa fa-arrow-right"></i> ';
+
+            echo '<div class="breadcrumbs">';
+            echo '<a href="' . home_url() . '">' . __('Home', 'ninja') . '</a>';
+            echo $separator;
+
+            if (is_category() || is_single()) {
+                if (is_single()) {
+                    the_category($separator);
+                    echo $separator;
+                    the_title();
+                } else {
+                    single_cat_title();
+                }
+            } elseif (is_page()) {
+                if ($post->post_parent) {
+                    $anc    = get_post_ancestors($post->ID);
+                    $output = '';
+                    foreach ($anc as $ancestor) {
+                        $output = '<a href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> ' . $separator;
+                    }
+                    echo $output;
+                }
+                the_title();
+            } elseif (is_archive()) {
+                echo post_type_archive_title();
+            }
+
+            echo '</div>'; // End breadcrumbs
+        }
     }
-
-
-// TODO: PULL

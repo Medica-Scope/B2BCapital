@@ -41,8 +41,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 			</div>
 			<?php
 			echo Nh_Forms::get_instance()
-				->create_form( [ 
-					'user_email_phone' => [ 
+				->create_form( [
+					'user_email_phone' => [
 						'class'       => 'has-header form-field',
 						'type'        => 'text',
 						'label'       => __( 'Phone Number or Email', 'ninja' ),
@@ -51,14 +51,14 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 						'placeholder' => __( 'Ex. email@gmail.com', 'ninja' ),
 						'order'       => 0,
 					],
-					'forgot_nonce'     => [ 
+					'forgot_nonce'     => [
 						'class' => '',
 						'type'  => 'nonce',
 						'name'  => 'forgot_nonce',
 						'value' => Nh::_DOMAIN_NAME . "_forgot_form",
 						'order' => 15,
 					],
-					'submit'           => [ 
+					'submit'           => [
 						'class'               => 'button_state form-action bbc-btn btn-primary large apply',
 						'type'                => 'submit',
 						'value'               => __( 'Send', 'ninja' ),
@@ -67,7 +67,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 						'recaptcha_form_name' => 'frontend_forgot_password',
 						'order'               => 20,
 					]
-				], [ 
+				], [
 					'class' => Nh::_DOMAIN_NAME . '-forgot-form',
 					'id'    => Nh::_DOMAIN_NAME . '_forgot_form',
 				] );
@@ -75,7 +75,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 			?>
 
 			<div class="section-footer">
-				<p>Copyright © 2023 B2B All rights reserved.</p>
+				<p><?= __('Copyright © 2023 B2B All rights reserved.', 'ninja'); ?></p>
 			</div>
 		</section>
 

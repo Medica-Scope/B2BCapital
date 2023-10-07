@@ -1,4 +1,5 @@
-<?php
+<?php global $post;
+
     /**
      * The header for our theme
      *
@@ -10,6 +11,8 @@
      */
 
     use NH\Nh;
+
+    global $post;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -28,12 +31,14 @@
         <div id="page" class="site">
 
             <?php
+
                 $landing = [
                     'contact-us',
                     'about'
                 ];
 
                 $dashboard = [
+                    'blogs',
                     'my-account',
                     'change-password',
                     'my-opportunities',
@@ -45,7 +50,6 @@
                 ];
 
                 $my_account = [
-
                     'login',
                     'industry',
                     'reset-password',
@@ -57,7 +61,7 @@
 
                 if (is_front_page() || is_page($landing) || is_post_type_archive('service') || is_singular('service')) {
                     get_template_part('app/Views/headers/landing');
-                } elseif (is_page($dashboard)) {
+                } elseif (is_page($dashboard) || (isset($post) && $post->post_type === 'post') || is_post_type_archive('faq') || is_search()) {
                     get_template_part('app/Views/headers/dashboard');
                 } elseif (is_page($my_account)) {
                     get_template_part('app/Views/headers/my-account');
