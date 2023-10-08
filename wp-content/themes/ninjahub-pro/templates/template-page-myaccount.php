@@ -16,8 +16,8 @@
 use NH\APP\CLASSES\Nh_User;
 use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\HELPERS\Nh_Hooks;
-	use NH\APP\MODELS\FRONT\MODULES\Nh_Profile_Widget;
-	use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Profile_Widget;
+use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\Nh;
@@ -40,19 +40,14 @@ $user     = $user_obj::get_current_user();
 		</nav>
 
 		<?php
-		$form_fields = [
-			'custom-html-1'                    => [
+		$form_fields = [ 
+			'custom-html-1'                    => [ 
 				'type'    => 'html',
 				'content' => '<div class="row">',
 				'order'   => 0,
 			],
-<<<<<<< HEAD
 			'first_name'                       => [ 
 				'class'       => 'col-6 pr-3',
-=======
-			'first_name'                       => [
-				'class'       => 'form-field form-field-has-icon col-6 pr-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'        => 'text',
 				'label'       => __( 'First name', 'ninja' ),
 				'name'        => 'first_name',
@@ -61,13 +56,8 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your first name', 'ninja' ),
 				'order'       => 5,
 			],
-<<<<<<< HEAD
 			'last_name'                        => [ 
 				'class'       => 'col-6 pl-3',
-=======
-			'last_name'                        => [
-				'class'       => 'form-field form-field-has-icon col-6 pl-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'        => 'text',
 				'label'       => __( 'Last name', 'ninja' ),
 				'name'        => 'last_name',
@@ -76,13 +66,8 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your last name', 'ninja' ),
 				'order'       => 10,
 			],
-<<<<<<< HEAD
 			'phone_number'                     => [ 
 				'class'       => 'col-6 pr-3',
-=======
-			'phone_number'                     => [
-				'class'       => 'form-field form-field-has-icon col-6 pr-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'        => 'text',
 				'label'       => __( 'Phone number', 'ninja' ),
 				'name'        => 'phone_number',
@@ -92,13 +77,8 @@ $user     = $user_obj::get_current_user();
 				'extra_attr'  => [ 'disabled' => 'disable' ],
 				'order'       => 15,
 			],
-<<<<<<< HEAD
 			'user_email'                       => [ 
 				'class'       => 'col-6 pl-3',
-=======
-			'user_email'                       => [
-				'class'       => 'form-field form-field-has-icon col-6 pl-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'        => 'email',
 				'label'       => __( 'Email', 'ninja' ),
 				'name'        => 'user_email',
@@ -107,13 +87,8 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your email', 'ninja' ),
 				'order'       => 20,
 			],
-<<<<<<< HEAD
 			'site_language'                    => [ 
 				'class'          => 'col-6 pr-3',
-=======
-			'site_language'                    => [
-				'class'          => 'form-field form-field-has-icon col-6 pr-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'           => 'select',
 				'label'          => __( 'Profile language', 'ninja' ),
 				'name'           => 'site_language',
@@ -124,13 +99,8 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 25,
 			],
-<<<<<<< HEAD
 			'widget_list'                      => [ 
 				'class'          => 'col-6 pl-3',
-=======
-			'widget_list'                      => [
-				'class'          => 'form-field form-field-has-icon col-6 pl-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'           => 'select',
 				'label'          => __( 'Widget list categories', 'ninja' ),
 				'name'           => 'widget_list',
@@ -142,13 +112,8 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 30,
 			],
-<<<<<<< HEAD
 			'preferred_opportunities_cat_list' => [ 
 				'class'          => 'col-6 pr-3',
-=======
-			'preferred_opportunities_cat_list' => [
-				'class'          => 'form-field form-field-has-icon col-6 pr-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'           => 'select',
 				'label'          => __( 'Preferred categories list for opportunities', 'ninja' ),
 				'name'           => 'preferred_opportunities_cat_list',
@@ -160,13 +125,8 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 35,
 			],
-<<<<<<< HEAD
 			'preferred_articles_cat_list'      => [ 
 				'class'          => 'col-6 pl-3',
-=======
-			'preferred_articles_cat_list'      => [
-				'class'          => 'form-field form-field-has-icon col-6 pl-3',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'           => 'select',
 				'label'          => __( 'preferred categories list for articles', 'ninja' ),
 				'name'           => 'preferred_articles_cat_list',
@@ -178,26 +138,21 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 40,
 			],
-			'custom-html-3'                    => [
+			'custom-html-3'                    => [ 
 				'type'    => 'html',
 				'content' => '</div>',
 				'order'   => 45,
 			],
-			'edit_profile_nonce'               => [
+			'edit_profile_nonce'               => [ 
 				'class' => '',
 				'type'  => 'nonce',
 				'name'  => 'edit_profile_nonce',
 				'value' => Nh::_DOMAIN_NAME . "_edit_profile_form",
 				'order' => 50
 			],
-<<<<<<< HEAD
 			'submit'                           => [ 
 				'parent_class'        => '',
 				'class'               => 'btn-lg text-uppercase',
-=======
-			'submit'                           => [
-				'class'               => 'form-action bbc-btn btn-primary large apply',
->>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 				'type'                => 'submit',
 				'id'                  => Nh::_DOMAIN_NAME . '_edit_profile_submit',
 				'value'               => '<i class="bbc-save pe-1"></i> ' . __( 'Save', 'ninja' ),
@@ -207,7 +162,7 @@ $user     = $user_obj::get_current_user();
 				'order'               => 55
 			],
 		];
-		$form_tags   = [
+		$form_tags   = [ 
 			'class' => Nh::_DOMAIN_NAME . '-edit-profile-form',
 			'id'    => Nh::_DOMAIN_NAME . '_edit_profile_form'
 		];
@@ -219,8 +174,8 @@ $user     = $user_obj::get_current_user();
 		}
 
 
-		$widgets_obj       = new Nh_Profile_Widget();
-		$widgets = $widgets_obj->get_all(['publish'], -1, 'ID','ASC');
+		$widgets_obj = new Nh_Profile_Widget();
+		$widgets     = $widgets_obj->get_all( [ 'publish' ], -1, 'ID', 'ASC' );
 
 		foreach ( $widgets as $key => $value ) {
 			$form_fields['widget_list']['options'][ $value->ID ] = $value->title;
