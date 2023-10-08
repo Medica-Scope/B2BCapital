@@ -66,7 +66,7 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
-            $this->hooks->add_action('init', $this, 'profile_init', PHP_INT_MAX);
+            $this->hooks->add_action('init', $this, 'profile_init');
         }
 
         /**
@@ -75,7 +75,6 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
-//            $this->hooks->add_filter('show_admin_bar', $this, 'hide_admin_bar');
         }
 
         /**
