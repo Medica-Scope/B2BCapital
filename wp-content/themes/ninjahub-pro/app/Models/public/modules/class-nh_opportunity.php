@@ -218,7 +218,9 @@
 
         public function acf_form_head(): void
         {
-            acf_form_head();
+            if (is_page('create-opportunity-step-2')) {
+                acf_form_head();
+            }
         }
 
         public function after_acf_form_submission($post_id): void
