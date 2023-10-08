@@ -74,8 +74,9 @@
          */
         protected function actions($module_name): void
         {
-            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_acf_custom_form_ajax', $this, 'acf_custom_form');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_opportunity_ajax', $this, 'create_opportunity');
+            $this->hooks->add_action('get_header', $this, 'acf_form_head');
+            $this->hooks->add_action('acf/save_post', $this, 'after_acf_form_submission', 20);
         }
 
         /**
@@ -84,25 +85,6 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
-        }
-
-        public function acf_custom_form(): void
-        {
-            $cat_ID        = (int)sanitize_text_field($_POST['data']);
-            $form_template = get_term_meta($cat_ID, 'form_template', TRUE);
-            $form          = self::get_field_groups_by_post_id($form_template);
-            ob_start();
-            acf_form([
-                //                        'post_id' => 1454, // Use the post ID where ACF fields are saved
-                'field_groups' => [ $form[0]['ID'] ],
-                // Replace with your ACF Field Group ID
-                'form'         => TRUE,
-                // Set to false so ACF doesn't output a <form> tag, as this will be nested in your custom form
-            ]);
-
-            new Nh_Ajax_Response(TRUE, '', [
-                'html' => ob_get_clean()
-            ]);
         }
 
         public function create_opportunity(): void
@@ -219,7 +201,10 @@
                     if (!session_id()) {
                         session_start();
                     }
-                    $_SESSION['step_two'] = ['status' => true, 'ID' => $opportunity->ID];
+                    $_SESSION['step_two'] = [
+                        'status' => TRUE,
+                        'ID'     => $opportunity->ID
+                    ];
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
                     ]);
@@ -229,6 +214,27 @@
             new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                 'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities')))
             ]);
+        }
+
+        public function acf_form_head(): void
+        {
+            acf_form_head();
+        }
+
+        public function after_acf_form_submission($post_id): void
+        {
+
+            if (is_page('create-opportunity-step-2') && isset($_GET['q']) && !empty(unserialize(Nh_Cryptor::Decrypt($_GET['q'])))) {
+                $data = unserialize(Nh_Cryptor::Decrypt($_GET['q']));
+                if ($post_id === $data['opp_id']) {
+                    if (!session_id()) {
+                        session_start();
+                    }
+                    $_SESSION['step_two'] = [];
+                    wp_safe_redirect(apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))));
+                    exit();
+                }
+            }
         }
 
         public static function get_field_groups_by_post_id($post_id): array
