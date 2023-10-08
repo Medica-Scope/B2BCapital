@@ -1101,6 +1101,7 @@
 
                 $profile_id = get_user_meta($login->ID, 'profile_id', TRUE);
                 if (!$profile_id) {
+                    wp_logout();
                     // The account is disabled or blocked
                     $error->add('invalid_profile', __("This account is temporarily disabled or blocked. Please contact us.", 'ninja'), [
                         'status' => FALSE

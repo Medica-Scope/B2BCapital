@@ -143,6 +143,7 @@ class Nh {
 		 */
 		add_theme_support( 'post-thumbnails' );
 
+<<<<<<< HEAD
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( [ 
 			'default-menu'            => esc_html__( 'Default', 'ninja' ),
@@ -155,6 +156,20 @@ class Nh {
 			'profile-menu-login'      => esc_html__( 'Account Login', 'ninja' ),
 			'profile-menu-logout'     => esc_html__( 'Account Logout', 'ninja' ),
 		] );
+=======
+            // This theme uses wp_nav_menu() in one location.
+            register_nav_menus([
+                'default-menu'            => esc_html__('Default', 'ninja'),
+                'dashboard-guest-menu'    => esc_html__('Dashboard Guest', 'ninja'),
+                'dashboard-admin-menu'    => esc_html__('Dashboard Admin', 'ninja'),
+                'dashboard-owner-menu'    => esc_html__('Dashboard Owner', 'ninja'),
+                'dashboard-investor-menu' => esc_html__('Dashboard Investor', 'ninja'),
+                'footer-menu'             => esc_html__('Footer', 'ninja'),
+                'bottom-footer-menu'      => esc_html__('Bottom Footer', 'ninja'),
+                'profile-menu-login'      => esc_html__('Profile Login', 'ninja'),
+                'profile-menu-logout'     => esc_html__('Profile Logout', 'ninja'),
+            ]);
+>>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -192,6 +207,7 @@ class Nh {
 		] );
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Register widget area.
 	 *
@@ -208,6 +224,33 @@ class Nh {
 			'after_title'   => '</h2>',
 		] );
 	}
+=======
+        /**
+         * Register widget area.
+         */
+        public function nh_widgets_init(): void
+        {
+            register_sidebar([
+                'name'          => esc_html__('Sidebar', 'ninja'),
+                'id'            => 'sidebar-1',
+                'description'   => esc_html__('Add widgets here.', 'ninja'),
+                'before_widget' => '<section id="%1$s" class="widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h2 class="widget-title">',
+                'after_title'   => '</h2>',
+            ]);
+
+            register_sidebar([
+                'name'          => esc_html__('Footer', 'ninja'),
+                'id'            => 'nh-footer',
+                'description'   => esc_html__('Add widgets here.', 'ninja'),
+                'before_widget' => '<section id="%1$s" class="widget %2$s">',
+                'after_widget'  => '</section>',
+                'before_title'  => '<h2 class="widget-title">',
+                'after_title'   => '</h2>',
+            ]);
+        }
+>>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 
 
 	/**

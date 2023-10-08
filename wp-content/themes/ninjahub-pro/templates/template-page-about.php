@@ -37,7 +37,7 @@
             <!-- What We Do Section -->
             <div class="what-we-do">
                 <div class="section-texture">
-                    <img src="<?= $about->thumbnail; ?>" alt="B2B Capital Abstract Logo" class="img-fluid">
+                    <img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp" alt="B2B Capital Abstract Logo" class="img-fluid">
                 </div>
                 <div class="description">
                     <h1 class="b2b-title"><?= $about_tag_line_title ?></h1>

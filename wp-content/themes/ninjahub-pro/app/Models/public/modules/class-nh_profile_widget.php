@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Filename: class-nh_profile.php
+     * @Filename: class-nh_profile_widget.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 5/10/2023
@@ -11,36 +11,26 @@
 
     use NH\APP\CLASSES\Nh_Module;
     use NH\APP\CLASSES\Nh_Post;
-    use NH\APP\CLASSES\Nh_User;
     use WP_Post;
 
 
     /**
      * Description...
      *
-     * @class Nh_Profile
+     * @class nh_Profile_Widget
      * @version 1.0
      * @since 1.0.0
      * @package NinjaHub
      * @author Mustafa Shaaban
      */
-    class Nh_Profile extends Nh_Module
+    class Nh_Profile_Widget extends Nh_Module
     {
-        public array $meta_data = [
-            'widget_list',
-            'preferred_opportunities_cat_list',
-            'preferred_articles_cat_list',
-            'favorite_opportunities',
-            'favorite_articles',
-            'ignored_articles'
-        ];
-        public array $taxonomy = [
-            'industry'
-        ];
+        public array $meta_data = [];
+        public array $taxonomy = [];
 
         public function __construct()
         {
-            parent::__construct('profile');
+            parent::__construct('profile-widget');
         }
 
         /**
@@ -66,7 +56,6 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
-            $this->hooks->add_action('init', $this, 'profile_init');
         }
 
         /**
@@ -75,20 +64,5 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
-        }
-
-        /**
-         * Description...
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        public function profile_init(): void
-        {
-            global $user_ID;
-            if (is_user_logged_in() && (Nh_User::get_user_role($user_ID) === Nh_User::INVESTOR || Nh_User::get_user_role($user_ID) === Nh_User::OWNER)) {
-                add_filter('show_admin_bar', '__return_false', PHP_INT_MAX);
-            }
         }
     }

@@ -1,73 +1,39 @@
 <?php
 
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package NinjaHub
- */
+    /**
+     * @Filename: index.php
+     * @Description: Blog Page
+     * @User: Ahmed Gamal
+     * @Date: 26/9/2023
+     *
+     * @package NinjaHub
+     * @since 1.0
+     *
+     */
+use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Faq;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
+use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
 get_header();
-global $wp_query;
-
+global $wp_query, $post, $user_ID;
 ?>
 
 <main id="" class="">
+<?php global $post; ?>
+    <?php Nh_Public::breadcrumbs(); ?>
 
-    <?php
-    if (have_posts()) : ?>
-        <ul class="breadcrumbs">
-            <li><a href="<?= home_url() ?>"><?= _e("Home", "ninja") ?></a></li>
-                <li>&raquo;</li>
-                <li><span class="page-title"><?= _e("Blogs", "ninja") ?></span></li>
-        </ul>
+    <h1 class="page-title"><?= __("Blogs", "ninja") ?></h1>
 
-        <h1 class="page-title"><?= _e("Blogs", "ninja") ?></h1>
-        <?php
-
-        /* Start the Loop */
-        while (have_posts()) :
-            the_post();
-
-            /*
-                     * Include the Post-Type-specific template for the content.
-                     * If you want to override this in a child theme, then include a file
-                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-                     */
-            get_template_part('app/Views/blogs');
-
-        endwhile;
-        ?>
-        <div class="pagination-con">
-            <?php
-            $big = 999999999;
-            echo paginate_links(array(
-                'base'    => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                'format'  => '?paged=%#%',
-                'current' => max(1, get_query_var('paged')),
-                'total'   => $wp_query->max_num_pages,
-                'prev_text' => __('« Previous'),
-                'next_text' => __('Next »'),
-            ));
-            // the_posts_navigation();
-            ?>
-        </div>
-    <?php
-    else :
-
-        get_template_part('app/Views/none');
-
-    endif;
-    ?>
+    <div class="blogs-list">
+        <?= get_template_part('app/Views/blogs-list') ?>
+    </div>
 
 </main><!-- #main -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

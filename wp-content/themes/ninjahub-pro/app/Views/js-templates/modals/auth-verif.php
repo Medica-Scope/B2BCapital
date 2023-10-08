@@ -7,7 +7,7 @@
      */
 ?>
 
-<script type="text/template" id="nh_modal_auth_verif">
+<script type="text/template" id="ninja_modal_auth_verif">
     <div class="ninja-modal modal modal-dialog-centered">
         <div class="modal-dialog">
             <div class="modal-content">

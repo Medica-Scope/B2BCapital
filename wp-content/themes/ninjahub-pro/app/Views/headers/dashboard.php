@@ -21,7 +21,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 	<nav id="site-navigation" class="main-navigation">
 
 		<div class="site-branding">
-			<a href="<?php echo home_url(); ?>"><img src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo" /></a>
+			<a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"><img src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo" /></a>
 		</div>
 
 		<?php
@@ -30,7 +30,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include owner type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-owner-menu',
 					'container_class' => 'bbc-logged-in-menu-container',
 					'container_id'    => 'bbc-logged-in-menu-container',
@@ -46,7 +46,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include investor type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-investor-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -62,7 +62,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include Admin type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-admin-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -78,7 +78,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include guest menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-guest-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -90,8 +90,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 				]
 			);
 		}
-		?>
 
+<<<<<<< HEAD
 		<div class="bbc-logged-in-actions">
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -122,16 +122,53 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 				</li>
 				<li class="nav-item bbc-user-profile-btn">
 					<a class="nav-link" href="#">
+=======
+		if (is_user_logged_in()) {
+			?>
+			<div class="bbc-logged-in-actions">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<?php
+							echo Nh_Forms::get_instance()
+										 ->create_form(
+											 [
+												 'search' => [
+													 'class'       => 'ninja-s',
+													 'type'        => 'text',
+													 'name'        => 's',
+													 'placeholder' => __( 'Search', 'ninja' ),
+													 'before'      => '',
+													 'after'       => '<i class="bbc-search2 ninja-header-search-icon"></i>',
+													 'order'       => 0,
+												 ],
+											 ],
+											 [
+												 'action' => apply_filters( 'nhml_permalink', home_url() ),
+												 'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
+												 'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
+											 ]
+										 );
+						?>
+					</li>
+					<li class="nav-item">
+						<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
+					</li>
+					<li class="nav-item bbc-user-profile-btn">
+						<a class="nav-link" href="#">
+>>>>>>> d4a42cdf0c2ed6ec7cfdf8564be7a66024e5c594
 						<span class="btn-profile-title">
 							<?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 						</span>
-						<span class="btn-profile-desc">
+							<span class="btn-profile-desc">
 							<?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
 						</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<?php
+		}
+		?>
 
 	</nav><!-- #site-navigation -->
 </header><!-- #masthead -->

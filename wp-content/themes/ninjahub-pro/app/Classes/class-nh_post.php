@@ -236,13 +236,14 @@
             }
 
             if ($insert) {
+                $this->ID = $insert;
                 foreach ($this->meta_data as $key => $meta) {
                     add_post_meta($insert, $key, $meta);
                 }
                 foreach ($this->taxonomy as $tax_name => $taxonomies) {
                     wp_set_post_terms($this->ID, $taxonomies, $tax_name, FALSE);
                 }
-                $this->ID = $insert;
+//                $this->ID = $insert;
 
                 do_action(Nh::_DOMAIN_NAME . "_after_insert_" . $this->type, $this);
             }
