@@ -1,10 +1,4 @@
-/**
- * @Filename: _notifications.scss
- * @Description:
- * @User: NINJA MASTER - Mustafa Shaaban
- * @Date: 7/6/2023
- */
-
+@import '../../base/variables';
 .ninja-notifications {
   position: relative;
 
@@ -17,8 +11,9 @@
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 100;
-    background-color: #FFF;
-    border: 1px solid #CCC;
+    background-color: $layout-light;
+    border: 1px solid $gray-medium;
+		border-radius: 3px;
     padding: 15px 0;
 
     .ninja-notification-group-container {
@@ -26,7 +21,7 @@
 
       .ninja-notification-clear-parent {
         text-align: right;
-        border-bottom: .2px solid #ccc;
+        border-bottom: .2px solid $gray-light;
         padding-bottom: 15px;
       }
 
@@ -47,17 +42,17 @@
 
         a {
           text-decoration: none;
-          color: #000;
+          color: $black;
 
         }
 
         &:hover {
-          background-color: #CCC;
+          background-color: $gray-light;
         }
       }
 
       .ninja-notification-item-load {
-        background-color: #fff;
+        background-color: $layout-light;
         width: 100%;
       }
 
@@ -91,12 +86,12 @@
       }
 
       .ninja-notification-item:not(:last-child) {
-        border-bottom: .2px solid #CCC;
+        border-bottom: .2px solid $gray-light;
 
       }
 
       .ninja-new-notification {
-        background-color: #EFEFEF;
+        background-color: $gray-medium;
       }
 
       .ninja-notification-group-empty {
