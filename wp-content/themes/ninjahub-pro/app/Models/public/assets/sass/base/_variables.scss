@@ -1,4 +1,4 @@
-@import "colors";
+@import 'colors';
 /* B2B Capital Colors Names */
 $primary: $blue-light;
 $primary-medium: $blue-medium;
@@ -13,3 +13,8 @@ $layout-light: $white;
 $layout: $off-white;
 $layout-medium: $gray-medium;
 $layout-dark: $primary-dark;
+
+$btn-color: $layout-light;
+$btn-border-radius: 3px;
+$btn-border-radius-sm: 3px;
+$btn-border-radius-lg: 3px;

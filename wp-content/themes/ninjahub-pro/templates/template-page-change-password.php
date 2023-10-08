@@ -29,7 +29,7 @@ $user_obj = new Nh_User();
 $user     = $user_obj::get_current_user();
 ?>
 
-<main class="change-password">
+<main class="my-account change-password">
 	<div class="container">
 
 		<!-- TODO: breadcrumb -->
@@ -41,8 +41,13 @@ $user     = $user_obj::get_current_user();
 		<?php
 		echo Nh_Forms::get_instance()
 			->create_form( [ 
+				'custom-html-1'        => [ 
+					'type'    => 'html',
+					'content' => '<div class="row">',
+					'order'   => 0,
+				],
 				'current_password'     => [ 
-					'class'       => 'col-6',
+					'class'       => 'col-12',
 					'type'        => 'password',
 					'label'       => __( 'Current password', 'ninja' ),
 					'name'        => 'current_password',
@@ -52,7 +57,7 @@ $user     = $user_obj::get_current_user();
 					'order'       => 5,
 				],
 				'new_password'         => [ 
-					'class'       => 'col-6',
+					'class'       => 'col-12',
 					'type'        => 'password',
 					'label'       => __( 'New password', 'ninja' ),
 					'name'        => 'new_password',
@@ -62,7 +67,7 @@ $user     = $user_obj::get_current_user();
 					'order'       => 10,
 				],
 				'confirm_new_password' => [ 
-					'class'       => 'col-6',
+					'class'       => 'col-12',
 					'type'        => 'password',
 					'label'       => __( 'Confirm new password', 'ninja' ),
 					'name'        => 'confirm_new_password',
@@ -79,10 +84,10 @@ $user     = $user_obj::get_current_user();
 					'order' => 20
 				],
 				'submit'               => [ 
-					'class'               => '',
+					'class'               => 'btn-lg text-uppercase',
 					'type'                => 'submit',
 					'id'                  => Nh::_DOMAIN_NAME . '_edit_password_submit',
-					'value'               => __( 'Save', 'ninja' ),
+					'value'               => '<i class="bbc-save pe-1"></i> ' . __( 'Save', 'ninja' ),
 					'before'              => '',
 					'after'               => '',
 					'recaptcha_form_name' => 'frontend_edit_profile',

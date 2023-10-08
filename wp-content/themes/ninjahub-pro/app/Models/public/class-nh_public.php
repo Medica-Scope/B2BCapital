@@ -57,11 +57,11 @@ class Nh_Public {
 		$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min.css', TRUE );
 		$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min.css', TRUE );
 
-		if ( NH_lANG === 'ar' ) {
-			$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min.css', TRUE );
-		} else {
-			$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min.css', TRUE );
-		}
+		// if ( NH_lANG === 'ar' ) {
+		// 	$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min.css', TRUE );
+		// } else {
+		// 	$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min.css', TRUE );
+		// }
 
 		$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style' );
 		$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme' );
@@ -75,7 +75,7 @@ class Nh_Public {
 		$allowed_pages_dotlottie_script = [ 'home', 'login', 'registration', 'reset-password', 'verification', 'forgot-password' ];
 
 		// Vendors
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
 			'jquery'
 		], Nh::_VERSION, NULL, TRUE );
 
@@ -85,17 +85,17 @@ class Nh_Public {
 		}
 
 
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
 			'jquery',
 			Nh::_DOMAIN_NAME . '-public-script-bs5'
 		] );
 
-		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [ 
+		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [
 			'domain_key'  => Nh::_DOMAIN_NAME,
 			'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
 			'environment' => Nh::_ENVIRONMENT,
 			'publicKey'   => isset( $gglcptch_options ) ? $gglcptch_options['public_key'] : '',
-			'phrases'     => [ 
+			'phrases'     => [
 				'default'        => __( "This field is required.", "ninja" ),
 				'email'          => __( "Please enter a valid email address.", "ninja" ),
 				'number'         => __( "Please enter a valid number.", "ninja" ),
@@ -114,7 +114,7 @@ class Nh_Public {
 			]
 		] );
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
@@ -129,7 +129,7 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front' );
 		}
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
@@ -191,7 +191,7 @@ class Nh_Public {
 
 		if ( ! empty( $languages ) ) {
 			foreach ( $languages as $l ) {
-				$languages_codes[] = [ 
+				$languages_codes[] = [
 					'code' => $l['language_code'],
 					'name' => $l['translated_name']
 				];

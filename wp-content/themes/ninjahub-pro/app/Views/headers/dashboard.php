@@ -100,7 +100,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						->create_form(
 							[ 
 								'search' => [ 
-									'class'       => 'ninja-s',
+									'class'       => 'p-0 m-0 ninja-s',
 									'type'        => 'text',
 									'name'        => 's',
 									'placeholder' => __( 'Search', 'ninja' ),

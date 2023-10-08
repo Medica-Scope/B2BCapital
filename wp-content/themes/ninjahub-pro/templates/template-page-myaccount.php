@@ -36,15 +36,16 @@ $user     = $user_obj::get_current_user();
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', null, [ 'active_link' => 'my_account' ] ); ?>
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/sub-nav', null, [ 'active_link' => 'profile_data' ] ); ?>
 		</nav>
+
 		<?php
 		$form_fields = [ 
 			'custom-html-1'                    => [ 
 				'type'    => 'html',
-				'content' => '<div class="d-flex flex-row flex-wrap col-12">',
+				'content' => '<div class="row">',
 				'order'   => 0,
 			],
 			'first_name'                       => [ 
-				'class'       => 'form-field form-field-has-icon col-6 pr-3',
+				'class'       => 'col-6 pr-3',
 				'type'        => 'text',
 				'label'       => __( 'First name', 'ninja' ),
 				'name'        => 'first_name',
@@ -54,7 +55,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 5,
 			],
 			'last_name'                        => [ 
-				'class'       => 'form-field form-field-has-icon col-6 pl-3',
+				'class'       => 'col-6 pl-3',
 				'type'        => 'text',
 				'label'       => __( 'Last name', 'ninja' ),
 				'name'        => 'last_name',
@@ -64,7 +65,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 10,
 			],
 			'phone_number'                     => [ 
-				'class'       => 'form-field form-field-has-icon col-6 pr-3',
+				'class'       => 'col-6 pr-3',
 				'type'        => 'text',
 				'label'       => __( 'Phone number', 'ninja' ),
 				'name'        => 'phone_number',
@@ -75,7 +76,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 15,
 			],
 			'user_email'                       => [ 
-				'class'       => 'form-field form-field-has-icon col-6 pl-3',
+				'class'       => 'col-6 pl-3',
 				'type'        => 'email',
 				'label'       => __( 'Email', 'ninja' ),
 				'name'        => 'user_email',
@@ -85,7 +86,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 20,
 			],
 			'site_language'                    => [ 
-				'class'          => 'form-field form-field-has-icon col-6 pr-3',
+				'class'          => 'col-6 pr-3',
 				'type'           => 'select',
 				'label'          => __( 'Profile language', 'ninja' ),
 				'name'           => 'site_language',
@@ -97,7 +98,7 @@ $user     = $user_obj::get_current_user();
 				'order'          => 25,
 			],
 			'widget_list'                      => [ 
-				'class'          => 'form-field form-field-has-icon col-6 pl-3',
+				'class'          => 'col-6 pl-3',
 				'type'           => 'select',
 				'label'          => __( 'Widget list categories', 'ninja' ),
 				'name'           => 'widget_list',
@@ -110,7 +111,7 @@ $user     = $user_obj::get_current_user();
 				'order'          => 30,
 			],
 			'preferred_opportunities_cat_list' => [ 
-				'class'          => 'form-field form-field-has-icon col-6 pr-3',
+				'class'          => 'col-6 pr-3',
 				'type'           => 'select',
 				'label'          => __( 'Preferred categories list for opportunities', 'ninja' ),
 				'name'           => 'preferred_opportunities_cat_list',
@@ -123,7 +124,7 @@ $user     = $user_obj::get_current_user();
 				'order'          => 35,
 			],
 			'preferred_articles_cat_list'      => [ 
-				'class'          => 'form-field form-field-has-icon col-6 pl-3',
+				'class'          => 'col-6 pl-3',
 				'type'           => 'select',
 				'label'          => __( 'preferred categories list for articles', 'ninja' ),
 				'name'           => 'preferred_articles_cat_list',
@@ -148,10 +149,11 @@ $user     = $user_obj::get_current_user();
 				'order' => 50
 			],
 			'submit'                           => [ 
-				'class'               => 'form-action bbc-btn btn-primary large apply',
+				'parent_class'        => '',
+				'class'               => 'btn-lg text-uppercase',
 				'type'                => 'submit',
 				'id'                  => Nh::_DOMAIN_NAME . '_edit_profile_submit',
-				'value'               => __( 'Save', 'ninja' ),
+				'value'               => '<i class="bbc-save pe-1"></i> ' . __( 'Save', 'ninja' ),
 				'before'              => '',
 				'after'               => '',
 				'recaptcha_form_name' => 'frontend_edit_profile',
