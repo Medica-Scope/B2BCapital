@@ -1,278 +1,285 @@
-@import "landing-theme";
+@import 'landing-theme';
 /* Services Page Styles Start Here */
-.services-content {
-  display: flex;
-  position: relative;
-  @include xLarge-screen {
-    margin-top: -2rem;
-  }
-  /* Services Categories Styles Start Here */
-  .services-categories {
-    width: 25%;
-    min-width: 25%;
-    padding: 1.5rem 1rem 0 2rem;
-    margin: 0 3rem 0 -3rem;
-    background-color: $primary-semi-dark;
-    @include large-screen {
-      padding: 1.5rem 1rem 1.5rem 3rem;
-    }
-    @include xLarge-screen {
-      margin: 0 5rem 0 -3rem;
-    }
-    .services-title {
-      margin: 1rem 0 1.5rem;
-      color: $layout-light;
-      font-size: 1.5rem;
-      font-family: $bbc-primary-en-font-bold;
-      @include large-screen {
-        font-size: 2rem;
-      }
-      @include xLarge-screen {
-        font-size: 2.5rem;
-      }
-    }
-    .services-description {
-      color: $layout;
-      font-size: 0.75rem;
-      font-family: $bbc-primary-en-font-extra-light;
-      @include large-screen {
-        font-size: 0.95rem;
-      }
-      @include xLarge-screen {
-        font-size: 1rem;
-      }
-    }
-    .services-categories-navigation {
-      margin: 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      border-bottom: none;
-      .service-category-link {
-        .nav-link {
-          display: flex;
-          align-items: baseline;
-          padding: 0;
-          font-size: 0.7rem;
-          border: none;
-          background-color: transparent;
-          @include large-screen {
-            font-size: 0.8rem;
-          }
-          @include xLarge-screen {
-            font-size: 1.1rem;
-          }
-          .category-number {
-            color: $highlight-dark;
-            margin-right: 0.25rem;
-            font-family: $bbc-primary-en-font-light;
-          }
-          .category-name {
-            padding: 0.5rem 0.6rem 0.35rem;
-            color: $layout-medium;
-            text-align: initial;
-            font-family: $bbc-primary-en-font-bold;
-            @include large-screen {
-              padding: 0.6rem 0.75rem;
-            }
-            @include xLarge-screen {
-              padding: 0.75rem 1rem;
-            }
-          }
-          &.active {
-            margin-bottom: 0.5rem;
-            @include large-screen {
-              margin-bottom: 0.75rem;
-            }
-            .category-number {
-              color: $layout;
-            }
-            .category-name {
-              color: $layout-light;
-              border-radius: 0.25rem;
-              background-color: $primary;
-              @include large-screen {
-                border-radius: 0.30rem;
-              }
-            }
-          }
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        + .service-category-link {
-          margin-top: 0.25rem;
-          @include large-screen {
-            margin-top: 0;
-          }
-        }
-      }
-      @include xLarge-screen {
-        margin: 1.5rem 0 0;
-      }
-    }
-  }
-  /* Services Categories Content Styles Start Here */
-  .services-categories-content {
-    width: 75%;
-    overflow-x: auto;
-    .services-category-content {
-      width: fit-content;
-      height: 100%;
-      .services-group-wrapper {
-        display: flex;
-        transform: translateY(20%);
-        .services-group {
-          width: 25vw;
-          + .services-group {
-            margin-left: 2rem;
-          }
-          @include xLarge-screen {
-            width: 20vw;
-            + .services-group {
-              margin-left: 5rem;
-            }
-          }
-          .service {
-            .service-number {
-              color: $success;
-              font-size: 0.7rem;
-              font-family: $bbc-primary-en-font-light;
-              @include xLarge-screen {
-                font-size: 1.1rem;
-              }
-            }
-            .service-title {
-              margin: 0.75rem 0 1rem;
-              font-size: 1.75rem;
-              font-family: $bbc-primary-en-font-bold;
-              @include xLarge-screen {
-                font-size: 1.875rem;
-              }
-            }
-            .service-description {
-              font-size: 0.8rem;
-              font-family: $bbc-primary-en-font-light;
-              .highlighted {
-                font-family: $bbc-primary-en-font-semi-bold;
-              }
-              @include xLarge-screen {
-                font-size: 1.2rem;
-              }
-            }
-            .service-link {
-              display: inline-block;
-              margin-top: 1rem;
-              color: $primary;
-              font-size: 0.7rem;
-              font-family: $bbc-primary-en-font-medium;
-              .service-link-icons {
-                .icon {
-                  font-size: 0.4rem;
-                  animation: arrowEnglishSliding 2s infinite;
-                  &:first-child {
-                    margin-left: 0.15rem;
-                    animation-delay: -0.2s;
-                  }
-                  &:last-child {
-                    animation-delay: -0.4s;
-                  }
-                }
-              }
-              @include xLarge-screen {
-                margin-top: 1.5rem;
-                font-size: 0.875rem;
-                .service-link-icons {
-                  .icon {
-                    font-size: 0.5rem;
-                  }
-                }
-              }
-            }
-            + .service {
-              margin-top: 2rem;
-            }
-          }
-        }
-      }
-    }
-  }
+
+.page-content {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	.services-content {
+		display: flex;
+		position: relative;
+		direction: ltr;
+		@include xLarge-screen {
+			margin-top: -2rem;
+		}
+		/* Services Categories Styles Start Here */
+		.services-categories {
+			width: 25%;
+			min-width: 25%;
+			padding: 1.5rem 1rem 0 2rem;
+			margin: 0 3rem 0 0;
+			background-color: $primary-semi-dark;
+			@include large-screen {
+				padding: 1.5rem 1rem 1.5rem 3rem;
+			}
+			@include xLarge-screen {
+				margin: 0 5rem 0 0rem;
+			}
+			.services-title {
+				margin: 1rem 0 1.5rem;
+				color: $layout-light;
+				font-size: 1.5rem;
+				font-family: $bbc-primary-en-font-bold;
+				@include large-screen {
+					font-size: 2rem;
+				}
+				@include xLarge-screen {
+					font-size: 2.5rem;
+				}
+			}
+			.services-description {
+				color: $layout;
+				font-size: 0.75rem;
+				font-family: $bbc-primary-en-font-extra-light;
+				@include large-screen {
+					font-size: 0.95rem;
+				}
+				@include xLarge-screen {
+					font-size: 1rem;
+				}
+			}
+			.services-categories-navigation {
+				margin: 1.5rem 0;
+				display: flex;
+				flex-direction: column;
+				border-bottom: none;
+				.service-category-link {
+					.nav-link {
+						display: flex;
+						align-items: baseline;
+						padding: 0;
+						font-size: 0.7rem;
+						border: none;
+						background-color: transparent;
+						@include large-screen {
+							font-size: 0.8rem;
+						}
+						@include xLarge-screen {
+							font-size: 1.1rem;
+						}
+						.category-number {
+							color: $highlight-dark;
+							margin-right: 0.25rem;
+							font-family: $bbc-primary-en-font-light;
+						}
+						.category-name {
+							padding: 0.5rem 0.6rem 0.35rem;
+							color: $layout-medium;
+							text-align: initial;
+							font-family: $bbc-primary-en-font-bold;
+							@include large-screen {
+								padding: 0.6rem 0.75rem;
+							}
+							@include xLarge-screen {
+								padding: 0.75rem 1rem;
+							}
+						}
+						&.active {
+							margin-bottom: 0.5rem;
+							@include large-screen {
+								margin-bottom: 0.75rem;
+							}
+							.category-number {
+								color: $layout;
+							}
+							.category-name {
+								color: $layout-light;
+								border-radius: 0.25rem;
+								background-color: $primary;
+								@include large-screen {
+									border-radius: 0.3rem;
+								}
+							}
+						}
+						&:hover {
+							cursor: pointer;
+						}
+					}
+					+ .service-category-link {
+						margin-top: 0.25rem;
+						@include large-screen {
+							margin-top: 0;
+						}
+					}
+				}
+				@include xLarge-screen {
+					margin: 1.5rem 0 0;
+				}
+			}
+		}
+		/* Services Categories Content Styles Start Here */
+		.services-categories-content {
+			width: 75%;
+			overflow-x: auto;
+			margin-bottom: 2rem;
+			.services-category-content {
+				width: fit-content;
+				height: 100%;
+				.services-group-wrapper {
+					display: flex;
+					transform: translateY(20%);
+					.services-group {
+						width: 25vw;
+						+ .services-group {
+							margin-left: 2rem;
+						}
+						@include xLarge-screen {
+							width: 20vw;
+							+ .services-group {
+								margin-left: 5rem;
+							}
+						}
+						.service {
+							.service-number {
+								color: $success;
+								font-size: 0.7rem;
+								font-family: $bbc-primary-en-font-light;
+								@include xLarge-screen {
+									font-size: 1.1rem;
+								}
+							}
+							.service-title {
+								margin: 0.75rem 0 1rem;
+								font-size: 1.75rem;
+								font-family: $bbc-primary-en-font-bold;
+								@include xLarge-screen {
+									font-size: 1.875rem;
+								}
+							}
+							.service-description {
+								font-size: 0.8rem;
+								font-family: $bbc-primary-en-font-light;
+								.highlighted {
+									font-family: $bbc-primary-en-font-semi-bold;
+								}
+								@include xLarge-screen {
+									font-size: 1.2rem;
+								}
+							}
+							.service-link {
+								display: inline-block;
+								margin-top: 1rem;
+								color: $primary;
+								font-size: 0.7rem;
+								font-family: $bbc-primary-en-font-medium;
+								.service-link-icons {
+									.icon {
+										font-size: 0.4rem;
+										animation: arrowEnglishSliding 2s infinite;
+										&:first-child {
+											margin-left: 0.15rem;
+											animation-delay: -0.2s;
+										}
+										&:last-child {
+											animation-delay: -0.4s;
+										}
+									}
+								}
+								@include xLarge-screen {
+									margin-top: 1.5rem;
+									font-size: 0.875rem;
+									.service-link-icons {
+										.icon {
+											font-size: 0.5rem;
+										}
+									}
+								}
+							}
+							+ .service {
+								margin-top: 2rem;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 /* Services Page Arabic Styles Start Here */
 .rtl {
-  .services-content {
-    /* Services Categories Arabic Styles Start Here */
-    .services-categories {
-      padding: 1.5rem 2rem 0 1rem;
-      margin: 0 -3rem 0 3rem;
-      @include large-screen {
-        padding: 1.5rem 3rem 1.5rem 1rem;
-      }
-      @include xLarge-screen {
-        margin: 0 -3rem 0 5rem;
-      }
-      .services-title {
-        font-family: $bbc-ar-font-bold;
-      }
-      .services-description {
-        font-family: $bbc-ar-font-regular;
-      }
-      .services-categories-navigation {
-        .service-category-link {
-          .nav-link {
-            .category-number {
-              margin-right: 0;
-              margin-left: 0.25rem;
-              font-family: $bbc-ar-font-regular;
-            }
-            .category-name {
-              font-family: $bbc-ar-font-bold;
-            }
-          }
-        }
-      }
-    }
-    /* Services Categories Content Arabic Styles Start Here */
-    .services-categories-content {
-      .services-category-content {
-        .services-group-wrapper {
-          .services-group {
-            + .services-group {
-              margin-left: 0;
-              margin-right: 2rem;
-            }
-            .service {
-              .service-number {
-                font-family: $bbc-ar-font-regular;
-              }
-              .service-title {
-                font-family: $bbc-ar-font-bold;
-              }
-              .service-description {
-                font-family: $bbc-ar-font-regular;
-                .highlighted {
-                  font-family: $bbc-ar-font-medium;
-                }
-              }
-              .service-link {
-                font-family: $bbc-ar-font-medium;
-                .service-link-icons {
-                  .icon {
-                    animation: arrowArabicSliding 2s infinite;
-                    &:first-child {
-                      margin-left: 0;
-                      margin-right: 0.15rem;
-                    }
-                    &:last-child {
-                      margin-left: 0;
-                      margin-right: 0.15rem;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	.services-content {
+		/* Services Categories Arabic Styles Start Here */
+		.services-categories {
+			padding: 1.5rem 2rem 0 1rem;
+			margin: 0 -3rem 0 3rem;
+			@include large-screen {
+				padding: 1.5rem 3rem 1.5rem 1rem;
+			}
+			@include xLarge-screen {
+				margin: 0 -3rem 0 5rem;
+			}
+			.services-title {
+				font-family: $bbc-ar-font-bold;
+			}
+			.services-description {
+				font-family: $bbc-ar-font-regular;
+			}
+			.services-categories-navigation {
+				.service-category-link {
+					.nav-link {
+						.category-number {
+							margin-right: 0;
+							margin-left: 0.25rem;
+							font-family: $bbc-ar-font-regular;
+						}
+						.category-name {
+							font-family: $bbc-ar-font-bold;
+						}
+					}
+				}
+			}
+		}
+		/* Services Categories Content Arabic Styles Start Here */
+		.services-categories-content {
+			.services-category-content {
+				.services-group-wrapper {
+					.services-group {
+						+ .services-group {
+							margin-left: 0;
+							margin-right: 2rem;
+						}
+						.service {
+							.service-number {
+								font-family: $bbc-ar-font-regular;
+							}
+							.service-title {
+								font-family: $bbc-ar-font-bold;
+							}
+							.service-description {
+								font-family: $bbc-ar-font-regular;
+								.highlighted {
+									font-family: $bbc-ar-font-medium;
+								}
+							}
+							.service-link {
+								font-family: $bbc-ar-font-medium;
+								.service-link-icons {
+									.icon {
+										animation: arrowArabicSliding 2s infinite;
+										&:first-child {
+											margin-left: 0;
+											margin-right: 0.15rem;
+										}
+										&:last-child {
+											margin-left: 0;
+											margin-right: 0.15rem;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

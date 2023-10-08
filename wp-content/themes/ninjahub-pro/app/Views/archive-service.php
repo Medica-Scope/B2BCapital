@@ -12,9 +12,10 @@ use NH\Nh;
 get_header();
 
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home' );
-Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-service-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/service' );
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-services-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/services' );
 
 ?>
+
 
 <section class="page-content">
 	<!-- Services Content -->
@@ -1101,4 +1102,15 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-service-landing', Nh_
 </main>
 </div> <!-- </landing-page> -->
 
+
+<script>
+// Script reference:
+// https://alvarotrigo.com/blog/scroll-horizontally-with-mouse-wheel-vanilla-java/
+const scrollContainer = document.querySelector(".services-categories-content");
+
+scrollContainer.addEventListener("wheel", (evt) => {
+	evt.preventDefault();
+	scrollContainer.scrollLeft += evt.deltaY;
+});
+</script>
 <?php get_footer();
