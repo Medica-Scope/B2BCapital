@@ -13,6 +13,7 @@
     use NH\APP\CLASSES\Nh_Post;
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Ajax_Response;
+    use NH\APP\HELPERS\Nh_Cryptor;
     use NH\Nh;
     use WP_Post;
 
@@ -37,7 +38,8 @@
             'project_start_date',
             'project_assets_amount',
             'project_yearly_cashflow_amount',
-            'project_yearly_net_profit_amount'
+            'project_yearly_net_profit_amount',
+            'step_two'
         ];
         public array $taxonomy  = [
             'opportunity-category',
@@ -109,10 +111,10 @@
 
             $form_data                        = $_POST['data'];
             $project_name                     = sanitize_text_field($form_data['project_name']);
-            $category                         = sanitize_text_field($form_data['category']);
+            $category                         = (int)sanitize_text_field($form_data['category']);
             $description                      = sanitize_text_field($form_data['description']);
             $short_description                = sanitize_text_field($form_data['short_description']);
-            $opportunity_type                 = sanitize_text_field($form_data['opportunity_type']);
+            $opportunity_type                 = (int)sanitize_text_field($form_data['opportunity_type']);
             $start_bidding_amount             = sanitize_text_field($form_data['start_bidding_amount']);
             $target_amount                    = sanitize_text_field($form_data['target_amount']);
             $project_phase                    = sanitize_text_field($form_data['project_phase']);
@@ -181,14 +183,18 @@
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
             }
 
-            $this->title                            = $project_name;
-            $this->content                          = $description;
-            $this->author                           = $user_ID;
-            $this->taxonomy['opportunity-category'] = [ $category ];
-            $this->taxonomy['opportunity-type']     = [ $opportunity_type ];
+            $this->title           = $project_name;
+            $this->content         = $description;
+            $this->author          = $user_ID;
+            $this->taxonomy        = [
+                'opportunity-category' => [ $category ],
+                'opportunity-type'     => [ $opportunity_type ]
+            ];
+            $opportunity_type_slug = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
+
 
             $this->set_meta_data('short_description', $short_description);
-            $this->set_meta_data('opportunity_type', $opportunity_type);
+            $this->set_meta_data('opportunity_type', $opportunity_type_slug);
             $this->set_meta_data('start_bidding_amount', $start_bidding_amount);
             $this->set_meta_data('target_amount', $target_amount);
             $this->set_meta_data('project_phase', $project_phase);
@@ -203,7 +209,25 @@
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message());
             }
 
-            new Nh_Ajax_Response(TRUE, sprintf(__('Your account has been created successfully, Please check your %s to activate your account', 'ninja'), 'sdsdsd'), [//                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/verification')))
+            $form_template = get_term_meta($category, 'form_template', TRUE);
+
+            if (!empty($form_template)) {
+                $field_group = self::get_field_groups_by_post_id($form_template);
+                if (!empty($field_group)) {
+                    $field_group[0]['opp_id'] = $opportunity->ID;
+
+                    if (!session_id()) {
+                        session_start();
+                    }
+                    $_SESSION['step_two'] = ['status' => true, 'ID' => $opportunity->ID];
+                    new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
+                        'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
+                    ]);
+                }
+            }
+
+            new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
+                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities')))
             ]);
         }
 

@@ -46,7 +46,8 @@
                     'my-notifications',
                     'my-favorite-opportunities',
                     'dashboard',
-                    'create-opportunity'
+                    'create-opportunity',
+                    'create-opportunity-step-2',
                 ];
 
                 $my_account = [
@@ -61,7 +62,7 @@
 
                 if (is_front_page() || is_page($landing) || is_post_type_archive('service') || is_singular('service')) {
                     get_template_part('app/Views/headers/landing');
-                } elseif (is_page($dashboard) || (isset($post) && $post->post_type === 'post') || is_post_type_archive('faq') || is_search()) {
+                } elseif (is_page($dashboard) || (isset($post) && $post->post_type === 'post') || is_post_type_archive('faq') || is_search() || is_singular(['opportunity'])) {
                     get_template_part('app/Views/headers/dashboard');
                 } elseif (is_page($my_account)) {
                     get_template_part('app/Views/headers/my-account');

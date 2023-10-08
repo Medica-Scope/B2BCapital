@@ -364,6 +364,44 @@ class NhAuth extends Nh {
         });
     }
 
+    editProfile(formData, $el)
+    {
+        let that                      = this;
+        this.ajaxRequests.editProfile = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_edit_profile_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+                $el.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                $('input').prop('disabled', false);
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                    if (res.data.redirect) {
+                        window.location.href = res.data.redirect_url;
+                    }
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+                that.createNewToken();
+                $el.find('input, button').prop('disabled', false);
+                UiCtrl.blockUI($el, false);
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+                that.createNewToken();
+            },
+        });
+    }
+
     editPassword(formData, $el)
     {
         let that                       = this;
@@ -399,7 +437,7 @@ class NhAuth extends Nh {
             },
         });
     }
-    
+
     // Method for creating a new token
     createNewToken() {
         grecaptcha.ready(function() {

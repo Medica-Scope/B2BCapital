@@ -5,6 +5,7 @@
      * @package NinjaHub
      */
 
+    use NH\APP\HELPERS\Nh_Cryptor;
     use NH\Nh;
 
     add_action('tgmpa_register', 'ninja_register_required_plugins');
@@ -192,3 +193,22 @@
     }
 
     add_action('get_header', 'my_acf_form_head');
+
+
+    function my_after_acf_form_submission($post_id)
+    {
+
+        if (is_page('create-opportunity-step-2') && isset($_GET['q']) && !empty(unserialize(Nh_Cryptor::Decrypt($_GET['q'])))) {
+            $data = unserialize(Nh_Cryptor::Decrypt($_GET['q']));
+            if ($post_id === $data['opp_id']) {
+                if (!session_id()) {
+                    session_start();
+                }
+                $_SESSION['step_two'] = [];
+                wp_safe_redirect(apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))));
+                exit();
+            }
+        }
+    }
+
+    add_action('acf/save_post', 'my_after_acf_form_submission', 20);

@@ -710,7 +710,7 @@
 //            $phone_number                     = sanitize_text_field($form_data['phone_number']);
             $user_email                       = sanitize_text_field($form_data['user_email']);
             $site_language                    = sanitize_text_field($form_data['site_language']);
-            $widget_list                      = !is_array($form_data['widget_list']) ? [] : $form_data['widget_list'];
+            $widget_list                      = !is_array($form_data['widget_list']) ? [$form_data['widget_list']] : $form_data['widget_list'];
             $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
             $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_articles_cat_list'];
             $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
@@ -780,7 +780,20 @@
             }
 
             // TODO:: Widget Lists
+            $relative_widget_list = $widget_list;
+            foreach ($relative_widget_list as $widget) {
+                foreach (Nh_Public::get_available_languages() as $lang) {
+                    if ($lang['code'] !== NH_lANG) {
+                        // Get the term's ID in the French language
+                        $translated_term_id = wpml_object_id_filter($widget, 'post', FALSE, $lang['code']);
+                        if ($translated_term_id) {
+                            $relative_widget_list[] = $translated_term_id;
+                        }
+                    }
 
+                }
+
+            }
 
             $current_user_obj               = Nh_User::get_current_user();
 //            $current_user_obj->username     = $phone_number;
@@ -794,7 +807,7 @@
             $current_user_obj->set_user_meta('nickname', ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)));
 //            $current_user_obj->set_user_meta('phone_number', $phone_number);
             $current_user_obj->set_user_meta('site_language', $site_language);
-            $current_user_obj->profile->set_meta_data('widget_list', $widget_list);
+            $current_user_obj->profile->set_meta_data('widget_list', $relative_widget_list);
             $current_user_obj->profile->set_meta_data('preferred_opportunities_cat_list', $relative_preferred_opportunities_cat_list);
             $current_user_obj->profile->set_meta_data('preferred_articles_cat_list', $relative_preferred_articles_cat_list);
 
@@ -939,7 +952,9 @@
                     'verification',
                     'authentication',
                     'industry',
-                    'dashboard'
+                    'dashboard',
+                    'create-opportunity',
+                    'create-opportunity-step-2'
                 ]) && !is_user_logged_in()) {
                 $url = apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/login')));
                 wp_safe_redirect($url);
@@ -1022,21 +1037,23 @@
 
             /**
              * Temp if there is an error wit redirections
-             */ //            if (is_user_logged_in()) {
-            //                $site_language = get_user_meta($user_ID, 'site_language', TRUE);
-            //                $current_url = home_url(add_query_arg([], $wp->request)); // Get the current URL
-            //
-            //                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
-            //                if (!str_contains($current_url, "/$site_language/") && !str_contains($current_url, "?lang=$site_language")) {
-            //                    $current_protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-            //                    $full_url  = $current_protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            //                    $redirect_url = apply_filters('wpml_permalink', $full_url, $site_language); // Get the Arabic version of the current page or post URL.
-            //                    if ($redirect_url) {
-            //                        wp_redirect($redirect_url);
-            //                        exit;
-            //                    }
-            //                }
-            //            }
+             */
+            if (is_user_logged_in()) {
+                $site_language = get_user_meta($user_ID, 'site_language', TRUE);
+                $default_site_lang = apply_filters('wpml_default_language', NULL );
+                $current_url = home_url(add_query_arg([], $wp->request)); // Get the current URL
+
+                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
+                if (!str_contains($current_url, "/$site_language/") && !str_contains($current_url, "?lang=$site_language") && $site_language !== $default_site_lang) {
+                    $current_protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+                    $full_url  = $current_protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                    $redirect_url = apply_filters('wpml_permalink', $full_url, $site_language); // Get the Arabic version of the current page or post URL.
+                    if ($redirect_url) {
+                        wp_safe_redirect($redirect_url);
+                        exit;
+                    }
+                }
+            }
 
         }
     }
