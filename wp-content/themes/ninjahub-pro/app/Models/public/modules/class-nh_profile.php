@@ -88,7 +88,7 @@
         public function hide_admin_bar()
         {
             global $user_ID;
-            if (is_user_logged_in() || (Nh_User::get_user_role($user_ID) === Nh_User::INVESTOR || Nh_User::get_user_role($user_ID) === Nh_User::OWNER)) {
+            if (is_user_logged_in() && (Nh_User::get_user_role($user_ID) === Nh_User::INVESTOR || Nh_User::get_user_role($user_ID) === Nh_User::OWNER)) {
                 return FALSE;
             }
         }
