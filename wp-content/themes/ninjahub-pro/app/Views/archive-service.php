@@ -11,6 +11,7 @@ use NH\Nh;
 
 get_header();
 
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home' );
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-service-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/service' );
 
 ?>

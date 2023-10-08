@@ -13,6 +13,10 @@ use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
 use NH\Nh;
 
+$active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
+/**
+ * TODO: $args not working
+ */
 ?>
 <div class="landing-page main">
 	<div class="back-texture">
@@ -29,7 +33,7 @@ use NH\Nh;
 		<!-- App Language Switcher -->
 		<div class="language-link">
 			<?php
-			do_action( 'wpml_language_switcher', [ 
+			do_action( 'wpml_language_switcher', [
 				'display_names_in_native_lang'   => 0,
 				'display_names_in_current_lang ' => 1,
 				'display_link_for_current_lang'  => 0,
@@ -39,16 +43,22 @@ use NH\Nh;
 		<!-- App Navigation -->
 		<ul class="navbar-nav app-navigation">
 			<li class="nav-item">
-				<a class="nav-link"
-					href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'contact-us' ) ) ); ?>"><?php echo __( 'Contact Us', 'ninja' ); ?></a>
+				<a class="nav-link <?php echo $active_link === 'contact_us' ? 'active' : ''; ?>"
+					href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'contact-us' ) ) ); ?>">
+					<?php echo __( 'Contact Us', 'ninja' ); ?>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link"
-					href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'about' ) ) ); ?>"><?php echo __( 'About', 'ninja' ); ?></a>
+				<a class="nav-link <?php echo $active_link === 'about_us' ? 'active' : ''; ?>"
+					href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'about' ) ) ); ?>">
+					<?php echo __( 'About', 'ninja' ); ?>
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link"
-					href="<?php echo get_post_type_archive_link( 'service' ); ?>"><?php echo __( 'Services', 'ninja' ); ?></a>
+				<a class="nav-link <?php echo $active_link === 'services' ? 'active' : ''; ?>"
+					href="<?php echo get_post_type_archive_link( 'service' ); ?>">
+					<?php echo __( 'Services', 'ninja' ); ?>
+				</a>
 			</li>
 		</ul>
 	</aside>
@@ -80,33 +90,37 @@ use NH\Nh;
 					<?php
 					if ( ! is_user_logged_in() ) {
 						?>
-						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
-							class="user-action bbc-btn outline success"><?php echo __( 'Join as Investor', 'ninja' ); ?></a>
-						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
-							class="user-action bbc-btn outline action"><?php echo __( 'Join as Owner', 'ninja' ); ?></a>
-						<?php
+					<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
+						class="user-action bbc-btn outline success">
+						<?php echo __( 'Join as Investor', 'ninja' ); ?>
+					</a>
+					<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
+						class="user-action bbc-btn outline action">
+						<?php echo __( 'Join as Owner', 'ninja' ); ?>
+					</a>
+					<?php
 					}
 					?>
 
 					<?php
 					if ( is_user_logged_in() ) {
 						?>
-						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
-							<span class="user-action user-menu">
-								<span class="icon bbc-menu">
-									<span class="path1"></span>
-									<span class="path2"></span>
-									<span class="path3"></span>
-									<span class="path4"></span>
-									<span class="path5"></span>
-									<span class="path6"></span>
-									<span class="path7"></span>
-									<span class="path8"></span>
-									<span class="path9"></span>
-								</span>
+					<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
+						<span class="user-action user-menu">
+							<span class="icon bbc-menu">
+								<span class="path1"></span>
+								<span class="path2"></span>
+								<span class="path3"></span>
+								<span class="path4"></span>
+								<span class="path5"></span>
+								<span class="path6"></span>
+								<span class="path7"></span>
+								<span class="path8"></span>
+								<span class="path9"></span>
 							</span>
-						</a>
-						<?php
+						</span>
+					</a>
+					<?php
 					}
 					?>
 
