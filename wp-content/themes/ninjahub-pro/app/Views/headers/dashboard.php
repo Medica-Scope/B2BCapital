@@ -123,7 +123,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 					<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
 				</li>
 				<li class="nav-item bbc-user-profile-btn">
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
 						<span class="btn-profile-title">
 							<?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 						</span>

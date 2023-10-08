@@ -17,6 +17,7 @@
     use NH\APP\HELPERS\Nh_Cryptor;
     use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+    use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
 
 
@@ -35,6 +36,7 @@
 
     <main id="" class="site-home">
         <div class="container">
+            <?php Nh_Public::breadcrumbs(); ?>
             <?php
                 if (isset($_GET['q']) && !empty(unserialize(Nh_Cryptor::Decrypt($_GET['q']))) && isset($_SESSION['step_two']) && is_array($_SESSION['step_two']) && isset
                     ($_SESSION['step_two']['status']) && $_SESSION['step_two']['status'] === TRUE) {
