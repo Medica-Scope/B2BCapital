@@ -19,6 +19,7 @@
 
 ?>
     <main class="container-fluid ">
+        <h1><?= __('General Information', 'ninja') ?></h1>
        <h1><?= $post->post_title ?></h1>
        <p><?= $post->post_content ?></p>
     </main><!-- #main -->
