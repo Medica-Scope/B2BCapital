@@ -1,492 +1,499 @@
-@import "./landing-theme";
+@import './landing-theme';
 /* About Page Styles Start Here */
-.about-content {
-  /* What We Do Section Styles Start Here */
-  .what-we-do {
-    display: flex;
-    justify-content: flex-start;
-    position: relative;
-    margin-top: 3.785rem;
-    @include large-screen {
-      margin-top: 4.375rem;
-    }
-    @include xLarge-screen {
-      margin-top: 2.8125rem;
-    }
-    .section-texture {
-      width: 25rem;
-      position: absolute;
-      bottom: 11rem;
-      right: -12rem;
-      @include large-screen {
-        width: 30rem;
-        bottom: 4.5rem;
-        right: -14rem;
-      }
-      @include xLarge-screen {
-        width: 35rem;
-        bottom: -4.5rem;
-        right: -15rem;
-      }
-    }
-    .description {
-      position: relative;
-      z-index: 1;
-      width: 50%;
-      color: $layout-light;
-      .page-section-title {
-        margin: 1.140rem 0 2rem;
-        font-size: 2.1rem;
-        font-family: $bbc-primary-en-font-bold;
-        @include large-screen {
-          margin: 1.375rem 0 2.45rem;
-          font-size: 2.45rem;
-        }
-        @include xLarge-screen {
-          margin: 1.75rem 0 2.5rem;
-          font-size: 3.25rem;
-        }
-      }
-      .section-content {
-        font-size: 0.61rem;
-        font-family: $bbc-primary-en-font-light;
-        + .section-content {
-          margin-top: 1rem;
-        }
-        @include large-screen {
-          font-size: 0.7rem;
-          + .section-content {
-            margin-top: 1.125rem;
-          }
-        }
-        @include xLarge-screen {
-          font-size: 1rem;
-          + .section-content {
-            margin-top: 1.5rem;
-          }
-        }
-      }
-      .page-section-subtitle {
-        width: fit-content;
-        margin: 1.70rem 0 1rem;
-        color: $primary;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        font-family: $bbc-secondary-en-font-regular;
-        @include large-screen {
-          margin: 2rem 0 1rem;
-          font-size: 0.9rem;
-        }
-        @include xLarge-screen {
-          margin: 2.25rem 0 1.15rem;
-          font-size: 1.05rem;
-        }
-      }
-    }
-    .banner {
-      width: 35%;
-      margin-left: 5%;
-      @include xLarge-screen {
-        width: 40%;
-      }
-      .banner-wrapper {
-        position: relative;
-        .statistics {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          transform: translateX(50%) translateY(-50%);
-          @include xLarge-screen {
-            transform: translateX(5%) translateY(-50%);
-          }
-          .statistic {
-            padding: 0.75rem 0.5rem;
-            border-radius: 0.5rem;
-            background-color: $primary-semi-dark;
-            @include large-screen {
-              padding: 0.75rem 0.75rem;
-            }
-            @include xLarge-screen {
-              padding: 1.25rem 0.75rem;
-            }
-            .statistic-count {
-              width: fit-content;
-              font-size: 1.5rem;
-              font-family: $bbc-primary-en-font-bold;
-              @include large-screen {
-                font-size: 1.75rem;
-              }
-              @include xLarge-screen {
-                font-size: 2.6rem;
-              }
-              .icon {
-                width: fit-content;
-                position: relative;
-                top: -0.25rem;
-                left: -0.3rem;
-                color: $highlight;
-                font-size: 0.65rem;
-                @include large-screen {
-                  font-size: 0.7rem;
-                }
-                @include xLarge-screen {
-                  font-size: 1rem;
-                }
-              }
-            }
-            .statistic-name {
-              width: fit-content;
-              color: $layout-medium;
-              font-size: 0.55rem;
-              font-family: $bbc-primary-en-font-light;
-              @include large-screen {
-                font-size: 0.65rem;
-              }
-              @include xLarge-screen {
-                font-size: 0.9rem;
-              }
-            }
-            + .statistic {
-              margin-top: 0.5rem;
-              @include large-screen {
-                margin-top: 0.8rem;
-              }
-              @include xLarge-screen {
-                margin-top: 1rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  /* About Section Styles Start Here */
-  .about-section {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    height: calc(100vh - 5rem);
-    margin-top: 5rem;
-    @include large-screen {
-      height: calc(100vh - 5rem);
-      margin-top: 5.375rem;
-    }
-    @include xLarge-screen {
-      height: calc(100vh - 9rem);
-      margin-top: 7rem;
-    }
-    .banner-wrapper {
-      width: 11rem;
-      margin-right: 2.65rem;
-      .banner {
-        width: 11rem;
-        height: 28.35rem;
-      }
-      @include large-screen {
-        width: 13.1875rem;
-        margin-right: 3.125rem;
-        .banner {
-          width: 13.1875rem;
-          height: 33.125rem;
-        }
-      }
-      @include xLarge-screen {
-        width: 18.375rem;
-        margin-right: 4.375rem;
-        .banner {
-          width: 18.375rem;
-          height: 46.5rem;
-        }
-      }
-    }
-    .section-description {
-      position: relative;
-      z-index: 1;
-      width: 40%;
-      color: $layout-light;
-      .page-section-title {
-        margin: 1rem 0 1.5rem;
-        font-size: 2.5rem;
-        font-family: $bbc-primary-en-font-bold;
-        @include xLarge-screen {
-          font-size: 3.5rem;
-        }
-      }
-      .section-content {
-        font-size: 0.75rem;
-        font-family: $bbc-primary-en-font-light;
-        @include xLarge-screen {
-          font-size: 1rem;
-        }
-        + .section-content {
-          margin-top: 1rem;
-        }
-      }
-    }
-    .award {
-      position: relative;
-      margin: 4rem 0 0 4rem;
-      @include large-screen {
-        margin: 10rem 0 0 5rem;
-      }
-      @include xLarge-screen {
-        margin: 12rem 0 0 10rem;
-      }
-    }
-    /* Awards Section Styles Start Here */
-    &.awards {
-      .section-texture {
-        width: 25rem;
-        position: absolute;
-        bottom: 0;
-        right: 6rem;
-        @include large-screen {
-          width: 30rem;
-          right: 8rem;
-        }
-        @include xLarge-screen {
-          width: 35rem;
-          right: 12rem;
-        }
-      }
-    }
-    /* Partners Section Styles Start Here */
-    &.partners {
-      .section-description {
-        width: 65%;
-        transform: translateY(-75%);
-        @include large-screen {
-          transform: translateY(-85%);
-        }
-        @include xLarge-screen {
-          transform: translateY(-100%);
-        }
-        .section-content {
-          max-width: 35%;
-          @include large-screen {
-            max-width: 30%;
-          }
-          @include xLarge-screen {
-            max-width: 28%;
-          }
-        }
-        .partners-logos {
-          margin-top: 2rem;
-          position: relative;
-          .logos-row {
-            display: block;
-            padding: 10.140rem 0 0 0;
-            position: absolute;
-            top: 7.14rem;
-            left: 0;
-            width: 8.140rem;
-            max-height: 47.5rem;
-            margin: 0;
-            overflow-x: hidden;
-            overflow-y: auto;
-            transform: rotate(-90deg) translateY(-8.140rem) scaleX(-1);
-            transform-origin: right top;
-            @include large-screen {
-              width: 9rem;
-              max-height: 55.5rem;
-              padding: 12rem 0 0 0;
-              top: 8rem;
-              transform: rotate(-90deg) translateY(-9rem) scaleX(-1);
-            }
-            @include xLarge-screen {
-              width: 11.95rem;
-              max-height: 78.125rem;
-              padding: 16.75rem 0 0 0;
-              top: 12rem;
-              transform: rotate(-90deg) translateY(-11.95rem) scaleX(-1);
-            }
-            &.second {
-              top: 14.5rem;
-              @include large-screen {
-                top: 16.5rem;
-              }
-              @include xLarge-screen {
-                top: 23.5rem;
-              }
-            }
-            .logo-wrapper {
-              width: 10.140rem;
-              height: 6rem;
-              margin: 0 1rem 1rem 1rem;
-              transform: rotate(90deg) scaleY(-1) translateY(-10.140rem);
-              transform-origin: right top;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border-radius: 0.5rem;
-              background-color: $layout-light;
-              + .logo-wrapper {
-                margin: 5.1875rem 1rem 1rem 1rem;
-                @include large-screen {
-                  margin: 6.1875rem 1rem 1rem 1rem;
-                }
-                @include xLarge-screen {
-                  margin: 8.25rem 1rem 1rem 1rem;
-                }
-              }
-              @include large-screen {
-                width: 12rem;
-                height: 7rem;
-                transform: rotate(90deg) scaleY(-1) translateY(-12rem);
-              }
-              @include xLarge-screen {
-                width: 16.75rem;
-                height: 9.875rem;
-                transform: rotate(90deg) scaleY(-1) translateY(-16.75rem);
-              }
-              .logo {
-                max-width: 7.5rem;
-                height: auto;
-                @include large-screen {
-                  max-width: 8.5625rem;
-                }
-                @include xLarge-screen {
-                  max-width: 12rem;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+.page-content {
+	overflow-y: scroll;
+    overflow-x: hidden;
+    margin-inline-start: 2rem;
+	.about-content {
+		/* What We Do Section Styles Start Here */
+		.what-we-do {
+			display: flex;
+			justify-content: flex-start;
+			position: relative;
+			margin-top: 3.785rem;
+			@include large-screen {
+				margin-top: 4.375rem;
+			}
+			@include xLarge-screen {
+				margin-top: 2.8125rem;
+			}
+			.section-texture {
+				width: 25rem;
+				position: absolute;
+				bottom: 11rem;
+				right: -12rem;
+				@include large-screen {
+					width: 30rem;
+					bottom: 4.5rem;
+					right: -14rem;
+				}
+				@include xLarge-screen {
+					width: 35rem;
+					bottom: -4.5rem;
+					right: -15rem;
+				}
+			}
+			.description {
+				position: relative;
+				z-index: 1;
+				width: 50%;
+				max-height: 500px;
+				overflow-y: scroll;
+				color: $layout-light;
+				.page-section-title {
+					margin: 1.14rem 0 2rem;
+					font-size: 2.1rem;
+					font-family: $bbc-primary-en-font-bold;
+					@include large-screen {
+						margin: 1.375rem 0 2.45rem;
+						font-size: 2.45rem;
+					}
+					@include xLarge-screen {
+						margin: 1.75rem 0 2.5rem;
+						font-size: 3.25rem;
+					}
+				}
+				.section-content {
+					font-size: 0.61rem;
+					font-family: $bbc-primary-en-font-light;
+					+ .section-content {
+						margin-top: 1rem;
+					}
+					@include large-screen {
+						font-size: 0.7rem;
+						+ .section-content {
+							margin-top: 1.125rem;
+						}
+					}
+					@include xLarge-screen {
+						font-size: 1rem;
+						+ .section-content {
+							margin-top: 1.5rem;
+						}
+					}
+				}
+				.page-section-subtitle {
+					width: fit-content;
+					margin: 1.7rem 0 1rem;
+					color: $primary;
+					text-transform: uppercase;
+					font-size: 0.8rem;
+					font-family: $bbc-secondary-en-font-regular;
+					@include large-screen {
+						margin: 2rem 0 1rem;
+						font-size: 0.9rem;
+					}
+					@include xLarge-screen {
+						margin: 2.25rem 0 1.15rem;
+						font-size: 1.05rem;
+					}
+				}
+			}
+			.banner {
+				width: 35%;
+				margin-left: 5%;
+				@include xLarge-screen {
+					width: 40%;
+				}
+				.banner-wrapper {
+					position: relative;
+					img{
+border-radius: 3px;
+					}
+					.statistics {
+						position: absolute;
+						top: 50%;
+						right: 0;
+						transform: translateX(50%) translateY(-50%);
+						@include xLarge-screen {
+							transform: translateX(5%) translateY(-50%);
+						}
+						.statistic {
+							padding: 0.75rem 0.5rem;
+							border-radius: 0.5rem;
+							background-color: $primary-semi-dark;
+							@include large-screen {
+								padding: 0.75rem 0.75rem;
+							}
+							@include xLarge-screen {
+								padding: 1.25rem 0.75rem;
+							}
+							.statistic-count {
+								width: fit-content;
+								font-size: 1.5rem;
+								font-family: $bbc-primary-en-font-bold;
+								@include large-screen {
+									font-size: 1.75rem;
+								}
+								@include xLarge-screen {
+									font-size: 2.6rem;
+								}
+								.icon {
+									width: fit-content;
+									position: relative;
+									top: -0.25rem;
+									left: -0.3rem;
+									color: $highlight;
+									font-size: 0.65rem;
+									@include large-screen {
+										font-size: 0.7rem;
+									}
+									@include xLarge-screen {
+										font-size: 1rem;
+									}
+								}
+							}
+							.statistic-name {
+								width: fit-content;
+								color: $layout-medium;
+								font-size: 0.55rem;
+								font-family: $bbc-primary-en-font-light;
+								@include large-screen {
+									font-size: 0.65rem;
+								}
+								@include xLarge-screen {
+									font-size: 0.9rem;
+								}
+							}
+							+ .statistic {
+								margin-top: 0.5rem;
+								@include large-screen {
+									margin-top: 0.8rem;
+								}
+								@include xLarge-screen {
+									margin-top: 1rem;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		/* About Section Styles Start Here */
+		.about-section {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			position: relative;
+			height: calc(100vh - 5rem);
+			margin-top: 5rem;
+			@include large-screen {
+				height: calc(100vh - 5rem);
+				margin-top: 5.375rem;
+			}
+			@include xLarge-screen {
+				height: calc(100vh - 9rem);
+				margin-top: 7rem;
+			}
+			.banner-wrapper {
+				width: 11rem;
+				margin-right: 2.65rem;
+				.banner {
+					width: 11rem;
+					height: 28.35rem;
+				}
+				@include large-screen {
+					width: 13.1875rem;
+					margin-right: 3.125rem;
+					.banner {
+						width: 13.1875rem;
+						height: 33.125rem;
+					}
+				}
+				@include xLarge-screen {
+					width: 18.375rem;
+					margin-right: 4.375rem;
+					.banner {
+						width: 18.375rem;
+						height: 46.5rem;
+					}
+				}
+			}
+			.section-description {
+				position: relative;
+				z-index: 1;
+				width: 50%;
+				max-height: 500px;
+				overflow-y: scroll;
+				color: $layout-light;
+				.page-section-title {
+					margin: 1rem 0 1.5rem;
+					font-size: 2.5rem;
+					font-family: $bbc-primary-en-font-bold;
+					@include xLarge-screen {
+						font-size: 3.5rem;
+					}
+				}
+				.section-content {
+					font-size: 0.75rem;
+					font-family: $bbc-primary-en-font-light;
+					@include xLarge-screen {
+						font-size: 1rem;
+					}
+					+ .section-content {
+						margin-top: 1rem;
+					}
+				}
+			}
+			.award {
+				position: relative;
+				margin-left: auto;
+				margin-right: 5rem;
+			}
+			/* Awards Section Styles Start Here */
+			&.awards {
+				.section-texture {
+					width: 25rem;
+					position: absolute;
+					bottom: 0;
+					right: 6rem;
+					@include large-screen {
+						width: 30rem;
+						right: 8rem;
+					}
+					@include xLarge-screen {
+						width: 35rem;
+						right: 12rem;
+					}
+				}
+			}
+			/* Partners Section Styles Start Here */
+			&.partners {
+				.section-description {
+					width: 65%;
+					transform: translateY(-75%);
+					@include large-screen {
+						transform: translateY(-85%);
+					}
+					@include xLarge-screen {
+						transform: translateY(-100%);
+					}
+					.section-content {
+						max-width: 35%;
+						@include large-screen {
+							max-width: 30%;
+						}
+						@include xLarge-screen {
+							max-width: 28%;
+						}
+					}
+					.partners-logos {
+						margin-top: 2rem;
+						position: relative;
+						.logos-row {
+							display: block;
+							padding: 10.14rem 0 0 0;
+							position: absolute;
+							top: 7.14rem;
+							left: 0;
+							width: 8.14rem;
+							max-height: 47.5rem;
+							margin: 0;
+							overflow-x: hidden;
+							overflow-y: auto;
+							transform: rotate(-90deg) translateY(-8.14rem) scaleX(-1);
+							transform-origin: right top;
+							@include large-screen {
+								width: 9rem;
+								max-height: 55.5rem;
+								padding: 12rem 0 0 0;
+								top: 8rem;
+								transform: rotate(-90deg) translateY(-9rem) scaleX(-1);
+							}
+							@include xLarge-screen {
+								width: 11.95rem;
+								max-height: 78.125rem;
+								padding: 16.75rem 0 0 0;
+								top: 12rem;
+								transform: rotate(-90deg) translateY(-11.95rem) scaleX(-1);
+							}
+							&.second {
+								top: 14.5rem;
+								@include large-screen {
+									top: 16.5rem;
+								}
+								@include xLarge-screen {
+									top: 23.5rem;
+								}
+							}
+							.logo-wrapper {
+								width: 10.14rem;
+								height: 6rem;
+								margin: 0 1rem 1rem 1rem;
+								transform: rotate(90deg) scaleY(-1) translateY(-10.14rem);
+								transform-origin: right top;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								border-radius: 0.5rem;
+								background-color: $layout-light;
+								+ .logo-wrapper {
+									margin: 5.1875rem 1rem 1rem 1rem;
+									@include large-screen {
+										margin: 6.1875rem 1rem 1rem 1rem;
+									}
+									@include xLarge-screen {
+										margin: 8.25rem 1rem 1rem 1rem;
+									}
+								}
+								@include large-screen {
+									width: 12rem;
+									height: 7rem;
+									transform: rotate(90deg) scaleY(-1) translateY(-12rem);
+								}
+								@include xLarge-screen {
+									width: 16.75rem;
+									height: 9.875rem;
+									transform: rotate(90deg) scaleY(-1) translateY(-16.75rem);
+								}
+								.logo {
+									max-width: 7.5rem;
+									height: auto;
+									@include large-screen {
+										max-width: 8.5625rem;
+									}
+									@include xLarge-screen {
+										max-width: 12rem;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 /* About Page Arabic Styles Start Here */
 .rtl {
-  .about-content {
-    /* What We Do Section Arabic Styles Start Here */
-    .what-we-do {
-      .section-texture {
-        right: auto;
-        left: -12rem;
-        @include large-screen {
-          right: auto;
-          left: -14rem;
-        }
-        @include xLarge-screen {
-          right: auto;
-          left: -15rem;
-        }
-      }
-      .description {
-        .page-section-title {
-          font-family: $bbc-ar-font-bold;
-        }
-        .section-content {
-          font-family: $bbc-ar-font-regular;
-        }
-        .page-section-subtitle {
-          font-family: $bbc-ar-font-regular;
-        }
-      }
-      .banner {
-        margin-left: 0;
-        margin-right: 5%;
-        .banner-wrapper {
-          .statistics {
-            right: auto;
-            left: 0;
-            transform: translateX(-50%) translateY(-50%);
-            @include xLarge-screen {
-              transform: translateX(-5%) translateY(-50%);
-            }
-            .statistic {
-              .statistic-count {
-                font-family: $bbc-ar-font-bold;
-                .icon {
-                  left: auto;
-                  right: -0.3rem;
-                }
-              }
-              .statistic-name {
-                font-family: $bbc-ar-font-regular;
-              }
-            }
-          }
-        }
-      }
-    }
-    /* About Section Arabic Styles Start Here */
-    .about-section {
-      .banner-wrapper {
-        margin-right: 0;
-        margin-left: 2.65rem;
-        @include large-screen {
-          margin-right: 0;
-          margin-left: 3.125rem;
-        }
-        @include xLarge-screen {
-          margin-right: 0;
-          margin-left: 4.375rem;
-        }
-      }
-      .section-description {
-        .page-section-title {
-          font-family: $bbc-ar-font-bold;
-        }
-        .section-content {
-          font-family: $bbc-ar-font-regular;
-        }
-      }
-      .award {
-        margin: 4rem 4rem 0 0;
-        @include large-screen {
-          margin: 10rem 5rem 0 0;
-        }
-        @include xLarge-screen {
-          margin: 12rem 10rem 0 0;
-        }
-      }
-      /* Awards Section Arabic Styles Start Here */
-      &.awards {
-        .section-texture {
-          right: auto;
-          left: 6rem;
-          @include large-screen {
-            right: auto;
-            left: 8rem;
-          }
-          @include xLarge-screen {
-            right: auto;
-            left: 12rem;
-          }
-        }
-      }
-      /* Partners Section Styles Start Here */
-      &.partners {
-        .section-description {
-          .partners-logos {
-            .logos-row {
-              left: auto;
-              right: 0;
-              transform: rotate(90deg) translateY(-8.140rem) scaleX(-1);
-              transform-origin: left top;
-              @include large-screen {
-                transform: rotate(90deg) translateY(-9rem) scaleX(-1);
-              }
-              @include xLarge-screen {
-                transform: rotate(90deg) translateY(-11.95rem) scaleX(-1);
-              }
-              .logo-wrapper {
-                transform: rotate(-90deg) scaleY(-1) translateY(-10.140rem);
-                transform-origin: left top;
-                @include large-screen {
-                  transform: rotate(-90deg) scaleY(-1) translateY(-12rem);
-                }
-                @include xLarge-screen {
-                  transform: rotate(-90deg) scaleY(-1) translateY(-16.75rem);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	.about-content {
+		/* What We Do Section Arabic Styles Start Here */
+		.what-we-do {
+			.section-texture {
+				right: auto;
+				left: -12rem;
+				@include large-screen {
+					right: auto;
+					left: -14rem;
+				}
+				@include xLarge-screen {
+					right: auto;
+					left: -15rem;
+				}
+			}
+			.description {
+				.page-section-title {
+					font-family: $bbc-ar-font-bold;
+				}
+				.section-content {
+					font-family: $bbc-ar-font-regular;
+				}
+				.page-section-subtitle {
+					font-family: $bbc-ar-font-regular;
+				}
+			}
+			.banner {
+				margin-left: 0;
+				margin-right: 5%;
+				.banner-wrapper {
+					.statistics {
+						right: auto;
+						left: 0;
+						transform: translateX(-50%) translateY(-50%);
+						@include xLarge-screen {
+							transform: translateX(-5%) translateY(-50%);
+						}
+						.statistic {
+							.statistic-count {
+								font-family: $bbc-ar-font-bold;
+								.icon {
+									left: auto;
+									right: -0.3rem;
+								}
+							}
+							.statistic-name {
+								font-family: $bbc-ar-font-regular;
+							}
+						}
+					}
+				}
+			}
+		}
+		/* About Section Arabic Styles Start Here */
+		.about-section {
+			.banner-wrapper {
+				margin-right: 0;
+				margin-left: 2.65rem;
+				@include large-screen {
+					margin-right: 0;
+					margin-left: 3.125rem;
+				}
+				@include xLarge-screen {
+					margin-right: 0;
+					margin-left: 4.375rem;
+				}
+			}
+			.section-description {
+				.page-section-title {
+					font-family: $bbc-ar-font-bold;
+				}
+				.section-content {
+					font-family: $bbc-ar-font-regular;
+				}
+			}
+			.award {
+				margin: 4rem 4rem 0 0;
+				@include large-screen {
+					margin: 10rem 5rem 0 0;
+				}
+				@include xLarge-screen {
+					margin: 12rem 10rem 0 0;
+				}
+			}
+			/* Awards Section Arabic Styles Start Here */
+			&.awards {
+				.section-texture {
+					right: auto;
+					left: 6rem;
+					@include large-screen {
+						right: auto;
+						left: 8rem;
+					}
+					@include xLarge-screen {
+						right: auto;
+						left: 12rem;
+					}
+				}
+			}
+			/* Partners Section Styles Start Here */
+			&.partners {
+				.section-description {
+					.partners-logos {
+						.logos-row {
+							left: auto;
+							right: 0;
+							transform: rotate(90deg) translateY(-8.14rem) scaleX(-1);
+							transform-origin: left top;
+							@include large-screen {
+								transform: rotate(90deg) translateY(-9rem) scaleX(-1);
+							}
+							@include xLarge-screen {
+								transform: rotate(90deg) translateY(-11.95rem) scaleX(-1);
+							}
+							.logo-wrapper {
+								transform: rotate(-90deg) scaleY(-1) translateY(-10.14rem);
+								transform-origin: left top;
+								@include large-screen {
+									transform: rotate(-90deg) scaleY(-1) translateY(-12rem);
+								}
+								@include xLarge-screen {
+									transform: rotate(-90deg) scaleY(-1) translateY(-16.75rem);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
