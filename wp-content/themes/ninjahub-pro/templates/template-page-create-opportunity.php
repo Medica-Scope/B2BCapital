@@ -16,6 +16,7 @@
 
     use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+    use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
 
     get_header();
@@ -23,6 +24,7 @@
 
     <main id="" class="site-home">
         <div class="container">
+            <?php Nh_Public::breadcrumbs(); ?>
             <h1>Create a New Opportunity</h1>
 
             <?php
