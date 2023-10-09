@@ -272,6 +272,11 @@
                     new Nh_Ajax_Response(TRUE, __('You have been logged in successfully.', 'ninja'), [
                         'redirect_url' => apply_filters('nhml_permalink', $redirect_url)
                     ]);
+                } elseif ($user->get_error_code() === 'empty_industry') {
+                    $redirect_url = get_permalink(get_page_by_path('my-account/industry'));
+                    new Nh_Ajax_Response(TRUE, __('You have been logged in successfully.', 'ninja'), [
+                        'redirect_url' => apply_filters('nhml_permalink', $redirect_url)
+                    ]);
                 } else {
                     new Nh_Ajax_Response(FALSE, $user->get_error_message(), $user->get_error_data());
                 }
