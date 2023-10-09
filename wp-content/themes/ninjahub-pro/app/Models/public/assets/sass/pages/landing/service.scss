@@ -2,14 +2,15 @@
 /* Service Page Styles Start Here */
 .service-content-wrapper {
   display: flex;
+	direction: ltr;
   /* Service Banner Styles Start Here */
   .service-banner-wrapper {
     min-width: 15vw;
     height: 100vh;
-    margin: -9.625rem 0 0 -2rem;
-    @include large-screen {
-      margin: -9.625rem 0 0 -3rem;
-    }
+    // margin: -9.625rem 0 0 -2rem;
+    // @include large-screen {
+    //   margin: -9.625rem 0 0 -3rem;
+    // }
     .service-banner {
       position: fixed;
       top: 0;
@@ -303,10 +304,10 @@
   .service-content-wrapper {
     /* Service Banner Arabic Styles Start Here */
     .service-banner-wrapper {
-      margin: -9.625rem -2rem 0 0;
-      @include large-screen {
-        margin: -9.625rem -3rem 0 0;
-      }
+      // margin: -9.625rem -2rem 0 0;
+      // @include large-screen {
+      //   margin: -9.625rem -3rem 0 0;
+      // }
       .service-banner {
         left: auto;
         right: calc(7rem + 2px);
