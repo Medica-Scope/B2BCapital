@@ -185,6 +185,21 @@
         }
 
     }
+    function add_new_columns($columns) {
+        $columns['fav_count'] = 'Favorite count';
+        $columns['ignore_count'] = 'Ignore count';
+        return $columns;
+    }
+    add_filter('manage_post_posts_columns', 'add_new_columns');
+    
+    function populate_columns($column, $post_id) {
+        if ($column == 'fav_count') {
+            echo get_post_meta($post_id, 'fav_count', true);
+        } elseif ($column == 'ignore_count') {
+            echo get_post_meta($post_id, 'ignore_count', true);
+        }
+    }
+    add_action('manage_post_posts_custom_column', 'populate_columns', 10, 2);
 
     function my_acf_form_head()
     {

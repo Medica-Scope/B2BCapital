@@ -9,7 +9,15 @@
      * @package NinjaHub
      */
 
-    use NH\Nh;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
+use NH\Nh;
+
+/// to be reviewed with mostafa
+if(is_singular('post')){
+    $post_obj = new Nh_Blog();
+    $post_obj->increment_read_count(get_the_ID());
+}
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

@@ -7,19 +7,14 @@
  * @Date: 9/21/2023
  */
 
-use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
-use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
-use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
-
 global $wp_query, $post, $user_ID;
 
-// href="<?= $single_post->link
 $single_post = $args['post'];
 $fav_chk = (isset($args['fav_chk'])) ? $args['fav_chk'] : '';
 $ignore_chk = (isset($args['ignore_chk'])) ? $args['ignore_chk'] : '';
 $opportunity = (isset($args['opportunity'])) ? $args['opportunity'] : '';
 ?>
-<div class="blog-item" >
+<div class="blog-item">
 
     <a href="<?=$single_post->link?>" class="img">
             <img src="<?=$single_post->thumbnail?>" alt="B2B" />

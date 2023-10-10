@@ -79,7 +79,7 @@ use WP_Post;
         }
 
         /**
-         * Description...
+         * Description...toggle fav article and save it to user's favorite list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
@@ -90,8 +90,9 @@ use WP_Post;
 
             $post_id =intval($_POST['post_id']);
             $user_id = intval($_POST['user_id']);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
-            $profile = $profile_obj->get_by_id($user_id);            
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
             // $favorites = $this->get_user_favorites($user_id);
             $favorites = !empty($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
             
@@ -102,6 +103,8 @@ use WP_Post;
                 }
                 $profile->set_meta_data('favorite_articles',$favorites);
                 $profile->update();
+                $fav_count = get_post_meta($post_id, 'fav_count', true);
+                update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
                 new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
                 ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
                 );
@@ -109,13 +112,15 @@ use WP_Post;
                 $favorites[] = $post_id;
                 $profile->set_meta_data('favorite_articles',$favorites);
                 $profile->update();
+                $fav_count = get_post_meta($post_id, 'fav_count', true);
+                update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
                 new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
                 ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
                 );
             }
         }
         /**
-         * Description...
+         * Description...get user's favorite list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
@@ -124,15 +129,16 @@ use WP_Post;
          */
         public function get_user_favorites($user_id): array
         {
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
-            $profile = $profile_obj->get_by_id($user_id);
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
             $favorites = ($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
 
             return $favorites;
         }
 
         /**
-         * Description...
+         * Description...Check if post exists in user's favorite list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
@@ -147,7 +153,7 @@ use WP_Post;
         }
 
         /**
-         * Description...
+         * Description...ignore article and save it to user's ignored list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
@@ -158,8 +164,9 @@ use WP_Post;
         {
             $post_id = intval($_POST['post_id']);
             $user_id = intval($_POST['user_id']);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
-            $profile = $profile_obj->get_by_id($user_id);               
+            $profile     = $profile_obj->get_by_id((int)$profile_id);              
             $ignored_articles = $this->get_user_ignored_articles($user_id);
             $ignored_articles = array_combine($ignored_articles, $ignored_articles);
             if(isset($ignored_articles[$post_id])){
@@ -167,6 +174,8 @@ use WP_Post;
                 $ignored_articles = array_values($ignored_articles);
                 $profile->set_meta_data('ignored_articles',$ignored_articles);
                 $profile->update();
+                $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                 ob_start();
                 get_template_part('app/Views/blogs-list');
                 $html = ob_get_clean();
@@ -178,6 +187,8 @@ use WP_Post;
                 $ignored_articles[] = $post_id;
                 $profile->set_meta_data('ignored_articles',$ignored_articles);
                 $profile->update();
+                $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
                 ob_start();
                 get_template_part('app/Views/blogs-list');
                 $html = ob_get_clean();
@@ -189,15 +200,16 @@ use WP_Post;
 
         public function get_user_ignored_articles($user_id): array
         {
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
-            $profile = $profile_obj->get_by_id($user_id);
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
             $ignored_articles = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : array();
 
             return $ignored_articles;
         }
 
         /**
-         * Description...
+         * Description...Check if post exists in user's ignored list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
@@ -211,6 +223,27 @@ use WP_Post;
             return isset($ignored_articles[$post_id]);
         }
 
+        /**
+         * Description...increase read count for single viewed post, also set cookie (expires in 30 days) for the viewed posts 
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return bool
+         */
+        public function increment_read_count($post_id) {
+
+            if (isset($_COOKIE['viewed_posts']) && in_array($post_id, json_decode(stripslashes($_COOKIE['viewed_posts'])), true)) {
+                return;
+            }
+            $current_count = get_post_meta($post_id, 'read_count', true);
+            $new_count = empty($current_count) ? 1 : $current_count + 1;
+            update_post_meta($post_id, 'read_count', $new_count);
+
+            $viewed_posts = isset($_COOKIE['viewed_posts']) ? json_decode(stripslashes($_COOKIE['viewed_posts']), true) : array();
+            $viewed_posts[] = $post_id;
+            setcookie('viewed_posts', json_encode($viewed_posts), time() + (30 * DAY_IN_SECONDS), '/');
+        }
          /**
          * Description... overriding get_all in nh_post class
          * @version 1.0
@@ -236,7 +269,6 @@ use WP_Post;
             foreach ($posts->get_posts() as $post) {
                 $Nh_Posts['posts'][] = $this->convert($post, $this->meta_data);
             }
-            $Nh_Posts['Args'] = $args;
             $Nh_Posts['pagination'] = $this->get_pagination($args);
             return $Nh_Posts;
         }

@@ -1,0 +1,89 @@
+/**
+ * Filename: Search.js
+ * Description:
+ * User: Ahmed Gamal
+ * Date: 7/9/2022
+ */
+
+/* globals nhGlobals, KEY */
+// import theme 3d party modules
+import $ from 'jquery';
+import UiCtrl from '../inc/UiCtrl';
+import Nh from './Nh';
+
+class NhSearch extends Nh {
+    constructor() {
+        super();
+        this.ajaxRequests = {};
+    }
+
+    search(formData, type, $el) {
+        let that = this;
+
+        this.ajaxRequests.search = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_search_ajax`,
+                s: formData,
+                type: type
+            },
+            beforeSend: function () {
+                $el.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                $('input').prop('disabled', false);
+                $el.find('input, button').prop('disabled', false);
+                UiCtrl.blockUI($el, false);
+                $('.search-con').find('.search-body').html(res.data.html);
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            }
+        });
+    }
+
+    loadmore(formData, $el) {
+        let that = this,
+            loopParent = $(`.search-success`);
+
+        this.ajaxRequests.searchLoadmore = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_search_loadmore_ajax`,
+                data: formData
+            },
+            beforeSend: function () {
+                $el.parent.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($(`.search-success`));
+            },
+            success: function (res) {
+
+                $('input').prop('disabled', false);
+                $el.parent.find('input, button').prop('disabled', false);
+
+                UiCtrl.blockUI(loopParent, false);
+                if (res.data.last) {
+                    loopParent.attr('data-last', 'true')
+                }
+                loopParent.append(res.data.html);
+                loopParent.attr('data-page', Number(loopParent.attr('data-page')) + 1)
+
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            }
+        });
+    }
+
+}
+
+export default NhSearch;

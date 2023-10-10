@@ -13,20 +13,23 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
 use NH\Nh;
 
-get_header();
-
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
 global $post;
 $post_obj = new Nh_Blog();
 $opportunity_obj = new Nh_Opportunity();
 $single_post = $post_obj->convert($post);
 $opportunity = "";
+
+get_header();
+
+Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
+
 if (($single_post->meta_data['opportunity'])) {
     $opportunity = $opportunity_obj->get_by_id($single_post->meta_data['opportunity']);
 }
 if ($user_ID) {
+    $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
     $profile_obj = new Nh_Profile();
-    $profile = $profile_obj->get_by_id($user_ID);
+    $profile     = $profile_obj->get_by_id((int)$profile_id);
     $fav_chk = $post_obj->is_post_in_user_favorites($single_post->ID, $user_ID);
     $ignore_chk = $post_obj->is_post_in_user_ignored_articles($single_post->ID, $user_ID);
 
@@ -69,7 +72,7 @@ if ($user_ID) {
 
     <?php if (!empty($opportunity)): ?>
     <div class="opportunity">
-        <a href="<?=$opportunity->link?>"><?=$opportunity->name;?></a>
+        <a href="<?=$opportunity->link?>"><?=$opportunity->title;?></a>
     </div>
     <div class="opportunity-short-description">
         <p><?=$opportunity->meta_data['short_description'];?></p>
@@ -91,8 +94,8 @@ if ($user_ID) {
         <h3><?= _e("Other blogs", "ninja") ?></h3>
         <?php
         $related = $post_obj->get_all(['publish'], 10, 'rand', 'ASC', [$single_post->ID]);
-        if (!empty($related)) {
-            foreach ($related as $single_related) {
+        if (!empty($related['posts'])) {
+            foreach ($related['posts'] as $single_related) {
         ?>
                 <div class="related-card">
                     <a class="blog-item" href="<?= $single_related->link ?>">

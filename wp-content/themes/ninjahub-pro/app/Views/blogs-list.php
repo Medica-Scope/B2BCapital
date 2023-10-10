@@ -25,17 +25,16 @@ if (get_query_var('paged')) {
     $paged = get_query_var('paged');
 }
 if ($user_ID) {
+    $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
     $profile_obj = new Nh_Profile();
-    $profile = $profile_obj->get_by_id($user_ID);
+    $profile     = $profile_obj->get_by_id((int)$profile_id);
     // $fav_articles = $profile->meta_data['favorite_articles'];
-    $ignored_articles = $profile->meta_data['ignored_articles'];
+    $ignored_articles = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
 }
-var_dump($ignored_articles);
 $query = $blog_obj->get_all(['publish'], 12, 'date', 'DESC', $ignored_articles, $user_ID, $paged);
 if ($query['posts']): ?>
 
 <?php
-var_dump($query['Args']);
 /* Start the Loop */
 foreach ($query['posts'] as $single_post):
     $post_obj = new Nh_Blog();
@@ -66,9 +65,8 @@ endforeach;
 ?>
 <div class="pagination-con">
     <?php
-echo $query['pagination'];
-// the_posts_navigation();
-?>
+        echo $query['pagination'];
+    ?>
 </div>
 <?php
 

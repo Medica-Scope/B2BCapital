@@ -100,4 +100,41 @@ class Nh_Faq extends Nh_Module
         $html .= '</ul>';
         echo $html;
     }
+
+     /**
+         * Retrieves all posts of the module.
+         *
+         * @param array  $status The post statuses to retrieve.
+         * @param int    $limit The maximum number of posts to retrieve.
+         * @param string $orderby The field to order the posts by.
+         * @param string $order The order of the posts (ASC or DESC).
+         * @param array  $not_in The post IDs to exclude from the results.
+         * Override function get_all() Nh_Post
+         * @return array An array of Nh_Post objects representing the retrieved posts.
+         * @since 1.0.0
+         * @package NinjaHub
+         * @version 1.0
+         */
+        public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = ['']): array
+        {
+            $posts     = new \WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => $status,
+                "posts_per_page" => $limit,
+                "orderby"        => $orderby,
+                "not__in"        => $not_in,
+                "order"          => $order,
+                "tax_query"      => [
+                    'relation',
+                    $tax_query
+                ]
+            ]);
+            $Nh_Posts = [];
+
+            foreach ($posts->get_posts() as $post) {
+                $Nh_Posts[] = $this->convert($post, $this->meta_data);
+            }
+
+            return $Nh_Posts;
+        }
 }
