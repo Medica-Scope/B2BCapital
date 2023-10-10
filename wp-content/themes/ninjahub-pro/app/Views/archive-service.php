@@ -33,74 +33,14 @@
                         foreach ($category as $key => $term) {
                             ?>
                             <li class="nav-item service-category-link">
-                                <button type="button" class="nav-link active" data-bs-toggle="tab" data-bs-target="#category-<?= $key ?>">
-                                    <span class="category-number"><?= $key ?>.</span>
+                                <button type="button" class="nav-link <?= $key === 0 ? 'active' : '' ?>" data-bs-toggle="tab" data-bs-target="#category-<?= $key ?>">
+                                    <span class="category-number"><?= $key+1 ?>.</span>
                                     <span class="category-name"><?= $term->name ?></span>
                                 </button>
                             </li>
                             <?php
                         }
                     ?>
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link active" data-bs-toggle="tab" data-bs-target="#category-1">
-                            <span class="category-number">01.</span>
-                            <span class="category-name">Financial services</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-2">
-                            <span class="category-number">02.</span>
-                            <span class="category-name">Merge opportunities</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-3">
-                            <span class="category-number">03.</span>
-                            <span class="category-name">Seize opportunities</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-4">
-                            <span class="category-number">04.</span>
-                            <span class="category-name">Investment services</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-5">
-                            <span class="category-number">05.</span>
-                            <span class="category-name">Establishing companies</span>
-                        </button>
-                    </li>
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-6">
-                            <span class="category-number">06.</span>
-                            <span class="category-name">Feasibility studies</span>
-                        </button>
-                    </li>
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-7">
-                            <span class="category-number">07.</span>
-                            <span class="category-name">Performance appraisal studies</span>
-                        </button>
-                    </li>
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-8">
-                            <span class="category-number">08.</span>
-                            <span class="category-name">Financial due diligence</span>
-                        </button>
-                    </li>
-                    <li class="nav-item service-category-link">
-                        <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-9">
-                            <span class="category-number">09.</span>
-                            <span class="category-name">Choosing the most appropriate investment mechanism and strategy for
-							investors
-							and opportunity provider</span>
-                        </button>
-                    </li>
                 </ul>
             </div>
 
