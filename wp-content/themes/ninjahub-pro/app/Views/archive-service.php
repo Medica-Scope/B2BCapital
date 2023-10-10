@@ -22,36 +22,40 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-services-landing', Nh
 	<div class="services-content">
 		<!-- Services Categories -->
 		<div class="services-categories">
-			<h1 class="b2b-title">B2B Services</h1>
-			<h2 class="services-title">Services</h2>
-			<p class="services-description">Services of the specialized administrative and technical consulting sector
-			</p>
+			<h1 class="b2b-title"><?= __('B2B Services', 'ninja') ?></h1>
+			<h2 class="services-title"><?= __('Services', 'ninja') ?></h2>
+			<p class="services-description"><?= __('Services of the specialized administrative and technical consulting sector', 'ninja') ?></p>
 			<ul class="nav nav-tabs services-categories-navigation">
+
 				<li class="nav-item service-category-link">
 					<button type="button" class="nav-link active" data-bs-toggle="tab" data-bs-target="#category-1">
 						<span class="category-number">01.</span>
 						<span class="category-name">Financial services</span>
 					</button>
 				</li>
+
 				<li class="nav-item service-category-link">
 					<button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-2">
 						<span class="category-number">02.</span>
 						<span class="category-name">Merge opportunities</span>
 					</button>
 				</li>
-				<li class="nav-item service-category-link">
+
+                <li class="nav-item service-category-link">
 					<button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-3">
 						<span class="category-number">03.</span>
 						<span class="category-name">Seize opportunities</span>
 					</button>
 				</li>
-				<li class="nav-item service-category-link">
+
+                <li class="nav-item service-category-link">
 					<button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-4">
 						<span class="category-number">04.</span>
 						<span class="category-name">Investment services</span>
 					</button>
 				</li>
-				<li class="nav-item service-category-link">
+
+                <li class="nav-item service-category-link">
 					<button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#category-5">
 						<span class="category-number">05.</span>
 						<span class="category-name">Establishing companies</span>
@@ -85,6 +89,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-services-landing', Nh
 				</li>
 			</ul>
 		</div>
+
 		<!-- Services Categories Content -->
 		<div class="tab-content services-categories-content">
 			<div id="category-1" class="services-category-content tab-pane fade show active">
