@@ -89,12 +89,26 @@
 		font-family: $bbc-ar-font-regular !important;
 	}
 }
-.btn-lg{
+.btn-lg {
 	border-radius: 3px;
 }
-.btn-success, .btn-primary, .btn-danger, .btn-secondary {
+.btn-success,
+.btn-primary,
+.btn-danger,
+.btn-secondary {
 	color: $layout-light;
-	&:hover, &:focus, &:focus-visible, &:active{
+	&:hover,
+	&:focus,
+	&:focus-visible,
+	&:active {
 		color: $layout-light;
 	}
+}
+.btn-outline-light {
+	--bs-btn-color: var(--bs-black);
+	--bs-btn-bg: var(--bs-white);
+	--bs-btn-hover-color: var(--bs-success);
+	--bs-btn-border-color: var(--bs-gray-300);
+	--bs-btn-active-color: var(--bs-white);
+	--bs-btn-active-bg: var(--bs-btn-hover-color);
 }
