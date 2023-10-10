@@ -1,18 +1,14 @@
 <?php global $post;
 
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package NinjaHub
- */
-
+use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\Nh;
 
-global $post;
+/// to be reviewed with mostafa
+if(is_singular('post')){
+    $post_obj = new Nh_Blog();
+    $post_obj->increment_read_count(get_the_ID());
+}
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>

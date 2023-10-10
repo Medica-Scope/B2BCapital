@@ -151,6 +151,11 @@
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_profile.php'
                     ],
+                    'Search'      => [
+                        'type'      => 'class',
+                        'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_search.php'
+                    ],
                     'Profile_Widget'      => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',

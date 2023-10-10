@@ -130,7 +130,12 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front' );
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front' );
 		}
+        $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front');
 
+
+        if(is_post_type_archive('faq')){
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search-ajax', Nh_Hooks::PATHS['public']['js'] . '/search-ajax');
+        }
 		if ( is_page( [
 			'my-account',
 			'change-password',
