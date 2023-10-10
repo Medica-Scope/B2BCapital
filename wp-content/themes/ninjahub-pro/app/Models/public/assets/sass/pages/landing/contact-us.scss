@@ -1,284 +1,304 @@
-@import "landing-theme";
+@import 'landing-theme';
 /* Contact Us Page Styles Start Here */
-.contact-us-content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3.5rem;
-  @include large-screen {
-    margin-top: 5.5rem;
-  }
-  @include xLarge-screen {
-    margin-top: 6.15rem;
-  }
-  .contact-us-intro {
-    width: 38.5%;
-    @include large-screen {
-      width: 32.5%;
-    }
-    @include xLarge-screen {
-      width: 32.3%;
-    }
-    /* Contact Us Intro Title Styles Start Here */
-    .contact-us-title {
-      color: $layout-light;
-      font-size: 4rem;
-      font-family: $bbc-primary-en-font-bold;
-      @include large-screen {
-        font-size: 3.75rem;
-      }
-      @include xLarge-screen {
-        font-size: 7rem;
-      }
-    }
-    .intro-description {
-      max-width: 23vw;
-      margin-top: 2.215rem;
-      color: $layout;
-      font-size: 0.68rem;
-      font-family: $bbc-primary-en-font-light;
-      @include large-screen {
-        margin-top: 2.625rem;
-        font-size: 0.8rem;
-      }
-      @include xLarge-screen {
-        margin-top: 3.75rem;
-        font-size: 1.12rem;
-      }
-      .email-us {
-        color: $highlight;
-        font-family: $bbc-primary-en-font-semi-bold;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-          color: $highlight-dark;
-        }
-      }
-    }
-  }
-  .contact-us-form {
-    width: 41%;
-    padding: 1.75rem 2.35rem;
-    margin-right: 10.5vw;
-    background-color: #1d2f40;
-    @include large-screen {
-      width: 42.15%;
-      padding: 2.1rem 2.9rem;
-    }
-    @include xLarge-screen {
-      width: 39.5%;
-      padding: 3.125rem 4.25rem;
-    }
-    .form-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .form-title {
-        color: $layout-light;
-        font-size: 1.25rem;
-        font-family: $bbc-primary-en-font-medium;
-        @include large-screen {
-          font-size: 1.68rem;
-        }
-        @include xLarge-screen {
-          font-size: 2.04rem;
-        }
-      }
-      .form-help {
-        color: $primary;
-        font-size: 0.75rem;
-        font-family: $bbc-secondary-en-font-light;
-        .icon {
-          margin-right: 0.15rem;
-          color: $primary;
-          font-size: 0.70rem;
-        }
-        &:hover {
-          cursor: pointer;
-        }
-        @include large-screen {
-          font-size: 0.85rem;
-          .icon {
-            margin-right: 0.25rem;
-            font-size: 0.8rem;
-          }
-        }
-        @include xLarge-screen {
-          font-size: 1.15rem;
-          .icon {
-            font-size: 1rem;
-          }
-        }
-      }
-    }
-    .form-action {
-      margin-top: 2rem;
-      text-transform: uppercase;
-      font-family: $bbc-secondary-en-font-medium;
-    }
-  }
+.page-content {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	.contact-us-content {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 3.5rem;
+		padding-left: 1.5rem;
+		@include large-screen {
+			margin-top: 4rem;
+		}
+		@include xLarge-screen {
+			margin-top: 6rem;
+		}
+		.contact-us-intro {
+			width: 38.5%;
+			@include large-screen {
+				width: 32.5%;
+			}
+			@include xLarge-screen {
+				width: 32.3%;
+			}
+			/* Contact Us Intro Title Styles Start Here */
+			.contact-us-title {
+				color: $layout-light;
+				font-size: 4rem;
+				font-family: $bbc-primary-en-font-bold;
+				@include large-screen {
+					font-size: 3.75rem;
+				}
+				@include xLarge-screen {
+					font-size: 7rem;
+				}
+			}
+			.intro-description {
+				max-width: 23vw;
+				margin-top: 2.215rem;
+				color: $layout;
+				font-size: 0.68rem;
+				font-family: $bbc-primary-en-font-light;
+				@include large-screen {
+					margin-top: 2.625rem;
+					font-size: 0.8rem;
+				}
+				@include xLarge-screen {
+					margin-top: 3.75rem;
+					font-size: 1.12rem;
+				}
+				.email-us {
+					color: $highlight;
+					font-family: $bbc-primary-en-font-semi-bold;
+					transition: all 0.3s ease-in-out;
+					&:hover {
+						color: $highlight-dark;
+					}
+				}
+			}
+		}
+		.contact-us-form,
+		.wpcf7 {
+			width: 41%;
+			padding: 1.75rem 2.35rem;
+			margin-right: 10.5vw;
+			margin-bottom: 3rem;
+			background-color: #1d2f40;
+			border-radius: 5px;
+			@include large-screen {
+				width: 42.15%;
+				padding: 2.1rem 2.9rem;
+			}
+			@include xLarge-screen {
+				width: 39.5%;
+				padding: 3.125rem 4.25rem;
+			}
+			form {
+				.wpcf7-response-output {
+					display: none !important;
+				}
+			}
+			.form-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.form-title {
+					color: $layout-light;
+					font-size: 1.25rem;
+					font-family: $bbc-primary-en-font-medium;
+					@include large-screen {
+						font-size: 1.68rem;
+					}
+					@include xLarge-screen {
+						font-size: 2.04rem;
+					}
+				}
+				.form-help {
+					color: $primary;
+					font-size: 0.75rem;
+					font-family: $bbc-secondary-en-font-light;
+					.icon {
+						margin-right: 0.15rem;
+						color: $primary;
+						font-size: 0.7rem;
+					}
+					&:hover {
+						cursor: pointer;
+					}
+					@include large-screen {
+						font-size: 0.85rem;
+						.icon {
+							margin-right: 0.25rem;
+							font-size: 0.8rem;
+						}
+					}
+					@include xLarge-screen {
+						font-size: 1.15rem;
+						.icon {
+							font-size: 1rem;
+						}
+					}
+				}
+			}
+			.form-action {
+				margin-top: 2rem;
+				text-transform: uppercase;
+				font-family: $bbc-secondary-en-font-medium;
+			}
+		}
+	}
 }
 /* Contact Us Page Arabic Styles Start Here */
 .rtl {
-  .contact-us-content {
-    .contact-us-intro {
-      /* Contact Us Intro Title Styles Start Here */
-      .contact-us-title {
-        font-family: $bbc-ar-font-bold;
-      }
-      .intro-description {
-        font-family: $bbc-ar-font-regular;
-        .email-us {
-          font-family: $bbc-ar-font-bold;
-        }
-      }
-    }
-    .contact-us-form {
-      margin-right: 0;
-      margin-left: 10.5vw;
-      .form-header {
-        .form-title {
-          font-family: $bbc-ar-font-medium;
-        }
-        .form-help {
-          font-family: $bbc-ar-font-regular;
-          .icon {
-            margin-right: 0;
-            margin-left: 0.15rem;
-          }
-          @include large-screen {
-            .icon {
-              margin-right: 0;
-              margin-left: 0.25rem;
-            }
-          }
-        }
-      }
-      .form-action {
-        font-family: $bbc-ar-font-medium;
-      }
-    }
-  }
+	.contact-us-content {
+		.contact-us-intro {
+			/* Contact Us Intro Title Styles Start Here */
+			.contact-us-title {
+				font-family: $bbc-ar-font-bold;
+			}
+			.intro-description {
+				font-family: $bbc-ar-font-regular;
+				.email-us {
+					font-family: $bbc-ar-font-bold;
+				}
+			}
+		}
+		.contact-us-form,
+		.wpcf7 {
+			margin-right: 0;
+			margin-left: 10.5vw;
+			.form-header {
+				.form-title {
+					font-family: $bbc-ar-font-medium;
+				}
+				.form-help {
+					font-family: $bbc-ar-font-regular;
+					.icon {
+						margin-right: 0;
+						margin-left: 0.15rem;
+					}
+					@include large-screen {
+						.icon {
+							margin-right: 0;
+							margin-left: 0.25rem;
+						}
+					}
+				}
+			}
+			.form-action {
+				font-family: $bbc-ar-font-medium;
+			}
+		}
+	}
 }
 
 /* Forms Styles Start Here */
 .form-field {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 1rem;
-  margin: 0.9rem 0 0;
-  position: relative;
-  @include large-screen {
-    margin: 0.95rem 0 0;
-  }
-  @include xLarge-screen {
-    margin: 1.5rem 0 0;
-  }
-  .form-control-label {
-    position: absolute;
-    top: 0.65rem;
-    left: 0;
-    z-index: 1;
-    color: $layout-light;
-    line-height: 0.9rem;
-    font-size: 0.8rem;
-    font-family: $bbc-secondary-en-font-light;
-    transition: transform 150ms ease-out, font-size 150ms ease-out;
-    @include large-screen {
-      top: 0.75rem;
-    }
-    @include xLarge-screen {
-      top: 1.25rem;
-      font-size: 1.1rem;
-    }
-  }
-  .form-control {
-    margin: 0;
-    height: auto;
-    padding: 0.55rem 0;
-    color: $layout;
-    font-size: 0.8rem;
-    font-family: $bbc-primary-en-font-regular;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid $layout-medium;
-    background-color: transparent;
-    @include xLarge-screen {
-      padding: 0.75rem 0;
-      font-size: 1.1rem;
-    }
-    &:focus {
-      box-shadow: none;
-      border-bottom: 1px solid $primary;
-      + .form-control-label {
-        color: $layout;
-        font-size: 0.75em;
-        transform: translateY(-150%);
-      }
-    }
-  }
-  .error-message {
-    display: none;
-    width: 100%;
-    position: absolute;
-    bottom: -0.25rem;
-    color: $error;
-    font-size: 0.75rem;
-    font-family: $bbc-primary-en-font-regular;
-    .message {
-      width: 100%;
-      display: block;
-      + .message {
-        position: absolute;
-      }
-    }
-  }
-  &.filled {
-    .form-control-label {
-      display: none;
-    }
-  }
-  &.has-error {
-    animation: bounce 0.5s;
-    animation-delay: 0.25s;
-    .form-control-label {
-      display: inline-block;
-      color: $error;
-    }
-    .form-control {
-      outline: 0;
-      border-color: red;
-      border-bottom: 1px solid $error;
-    }
-    .error-message {
-      display: inline-block;
-    }
-  }
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 1rem;
+	margin: 0.9rem 0 0;
+	position: relative;
+	@include large-screen {
+		margin: 0.95rem 0 0;
+	}
+	@include xLarge-screen {
+		margin: 1.5rem 0 0;
+	}
+	.wpcf7-submit {
+		width: 100%;
+		margin: 0;
+	}
+	.form-control-label {
+		position: absolute;
+		top: -0.8rem;
+		left: 0;
+		z-index: 1;
+		color: $layout-light;
+		line-height: 0.9rem;
+		font-size: 0.8rem;
+		font-family: $bbc-secondary-en-font-light;
+		transition: transform 150ms ease-out, font-size 150ms ease-out;
+		@include large-screen {
+			top: -0.75rem;
+		}
+		@include xLarge-screen {
+			top: -1.25rem;
+			font-size: 1.1rem;
+		}
+	}
+	.form-control {
+		margin: 0;
+		height: auto;
+		padding: 0.55rem 0;
+		color: $layout;
+		font-size: 0.8rem;
+		font-family: $bbc-primary-en-font-regular;
+		border-radius: 0;
+		border: none;
+		border-bottom: 1px solid $layout-medium;
+		background-color: transparent;
+		@include xLarge-screen {
+			padding: 0.75rem 0;
+			font-size: 1.1rem;
+		}
+		&:focus {
+			box-shadow: none;
+			border-bottom: 1px solid $primary;
+			+ .form-control-label {
+				color: $layout;
+				font-size: 0.75em;
+				transform: translateY(-150%);
+			}
+		}
+	}
+	.error-message {
+		display: none;
+		width: 100%;
+		position: absolute;
+		bottom: -0.25rem;
+		color: $error;
+		font-size: 0.75rem;
+		font-family: $bbc-primary-en-font-regular;
+		.message {
+			width: 100%;
+			display: block;
+			+ .message {
+				position: absolute;
+			}
+		}
+	}
+	&.filled {
+		.form-control-label {
+			display: none;
+		}
+	}
+	&.has-error {
+		animation: bounce 0.5s;
+		animation-delay: 0.25s;
+		.form-control-label {
+			display: inline-block;
+			color: $error;
+		}
+		.form-control {
+			outline: 0;
+			border-color: red;
+			border-bottom: 1px solid $error;
+		}
+		.error-message {
+			display: inline-block;
+		}
+	}
 }
 /* Forms Arabic Styles Start Here */
 .rtl {
-  .form-field {
-    .form-control-label {
-      left: auto;
-      right: 0;
-      font-family: $bbc-ar-font-regular;
-    }
-    .form-control {
-      font-family: $bbc-ar-font-regular;
-    }
-    &.has-error {
-      .error-message {
-        font-family: $bbc-ar-font-regular;
-      }
-    }
-  }
+	.form-field {
+		.form-control-label {
+			left: auto;
+			right: 0;
+			font-family: $bbc-ar-font-regular;
+		}
+		.form-control {
+			font-family: $bbc-ar-font-regular;
+		}
+		&.has-error {
+			.error-message {
+				font-family: $bbc-ar-font-regular;
+			}
+		}
+	}
 }
 /* Placeholder Styles Start Here */
 ::placeholder {
-  color: $layout-medium;
-  opacity: 1; /* Firefox */
+	color: $layout-medium;
+	opacity: 1; /* Firefox */
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: $layout-medium;
+:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: $layout-medium;
 }
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: $layout-medium;
+::-ms-input-placeholder {
+	/* Microsoft Edge */
+	color: $layout-medium;
 }

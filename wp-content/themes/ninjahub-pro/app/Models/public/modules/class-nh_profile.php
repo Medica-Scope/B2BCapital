@@ -66,6 +66,7 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
+            $this->hooks->add_action('init', $this, 'profile_init');
         }
 
         /**
@@ -74,7 +75,6 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
-            $this->hooks->add_filter('show_admin_bar', $this, 'hide_admin_bar');
         }
 
         /**
@@ -83,14 +83,12 @@
          * @since 1.0.0
          * @package NinjaHub
          * @author Mustafa Shaaban
-         * @return bool
          */
-        public function hide_admin_bar(): bool
+        public function profile_init(): void
         {
             global $user_ID;
-            if (!is_user_logged_in() || (Nh_User::get_user_role($user_ID) === Nh_User::INVESTOR || Nh_User::get_user_role($user_ID) === Nh_User::OWNER)) {
-                return FALSE;
+            if (is_user_logged_in() && (Nh_User::get_user_role($user_ID) === Nh_User::INVESTOR || Nh_User::get_user_role($user_ID) === Nh_User::OWNER)) {
+                add_filter('show_admin_bar', '__return_false', PHP_INT_MAX);
             }
-            return TRUE;
         }
     }

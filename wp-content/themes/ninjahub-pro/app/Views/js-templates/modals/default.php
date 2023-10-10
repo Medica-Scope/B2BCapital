@@ -7,6 +7,6 @@
      */
 ?>
 
-<script type="text/template" id="nh_modal_default">
+<script type="text/template" id="ninja_modal_default">
     <%= msg %>
 </script>

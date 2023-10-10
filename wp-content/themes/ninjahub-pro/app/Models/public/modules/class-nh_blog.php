@@ -11,7 +11,8 @@
 
     use NH\APP\CLASSES\Nh_Module;
     use NH\APP\CLASSES\Nh_Post;
-use NH\APP\HELPERS\Nh_Ajax_Response;
+    use NH\APP\CLASSES\Nh_User;
+    use NH\APP\HELPERS\Nh_Ajax_Response;
 use NH\Nh;
 use WP_Post;
 
@@ -95,7 +96,7 @@ use WP_Post;
             $profile     = $profile_obj->get_by_id((int)$profile_id);
             // $favorites = $this->get_user_favorites($user_id);
             $favorites = !empty($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
-            
+
             if (in_array($post_id, $favorites)) {
                 $key = array_search($post_id, $favorites);
                 if ($key !== false) {
@@ -145,7 +146,7 @@ use WP_Post;
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_post_in_user_favorites($post_id, $user_id): bool 
+        public function is_post_in_user_favorites($post_id, $user_id): bool
         {
             $favorites = $this->get_user_favorites($user_id);
             $favorites = array_combine($favorites, $favorites);
@@ -160,7 +161,7 @@ use WP_Post;
          * @author Ahmed Gamal
          * @return void
          */
-        public function ignore_article(): void 
+        public function ignore_article(): void
         {
             $post_id = intval($_POST['post_id']);
             $user_id = intval($_POST['user_id']);
@@ -179,7 +180,7 @@ use WP_Post;
                 ob_start();
                 get_template_part('app/Views/blogs-list');
                 $html = ob_get_clean();
-                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
+                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
                 ['status' => true, 'msg' => 'post ignored', 'ignore_active' => 1, 'updated' => $html]
                 );
             }
@@ -216,7 +217,7 @@ use WP_Post;
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_post_in_user_ignored_articles($post_id, $user_id): bool 
+        public function is_post_in_user_ignored_articles($post_id, $user_id): bool
         {
             $ignored_articles = $this->get_user_ignored_articles($user_id);
             $ignored_articles = array_combine($ignored_articles, $ignored_articles);
@@ -253,7 +254,7 @@ use WP_Post;
          * @return bool
          */
         public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1): array
-        {   
+        {
             $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,

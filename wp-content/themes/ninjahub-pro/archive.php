@@ -1,12 +1,12 @@
 <?php
 
-/**
- * The template for displaying archive pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package NinjaHub
- */
+    /**
+     * The template for displaying archive pages
+     *
+     * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+     *
+     * @package NinjaHub
+     */
 
 use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\HELPERS\Nh_Hooks;
@@ -14,29 +14,42 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Faq;
 use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\Nh;
 
-get_header();
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
+    get_header();
+    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
 
-global $wp_query, $post;
-$queried_post_type = $wp_query->query;
-$nh_faq = new Nh_Faq();
+    global $wp_query, $post;
+    $queried_post_type = $wp_query->query;
 ?>
 
-<main id="" class="">
-    <ul class="breadcrumbs">
-        <li><a href="<?= home_url() ?>"><?= _e("Home", "ninja") ?></a></li>
+    <main id="" class="">
         <?php
-        $post_type = get_post_type();
-
-        if (is_archive() && $post_type == 'faq') {
+            if ($queried_post_type['post_type'] !== 'service') {
+                Nh_Public::breadcrumbs();
+            }
         ?>
-            <li>&raquo;</li>
-            <li><span class="page-title"><?= _e("FAQs", "ninja") ?></span></li>
-        <?php } ?>
-    </ul>
+        <?php if (have_posts() && $queried_post_type['post_type'] !== 'faq') : ?>
 
-    <a href="<?= home_url() ?>" class="back-btn"><?= _e("Back", "ninja") ?></a>
+            <?php
+            /* Start the Loop */
+            while (have_posts()) :
+                the_post();
 
+                /*
+                     * Include the Post-Type-specific template for the content.
+                     * If you want to override this in a child theme, then include a file
+                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+                     */
+                if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
+                    get_template_part('app/Views/archive');
+                } else {
+                    get_template_part('app/Views/archive', get_post_type());
+                }
+
+            endwhile;
+        endif;
+        
+    if ($queried_post_type['post_type'] == 'faq') {
+    ?>
     <h1 class="page-title"><?= _e("Frequently asked questions", "ninja") ?></h1>
 
     <?php if (have_posts()) : ?>
@@ -133,17 +146,18 @@ $nh_faq = new Nh_Faq();
     <?php
     else :
 
-        if (empty(locate_template('app/Views/none-' . $queried_post_type['post_type'] . '.php'))) {
-            get_template_part('app/Views/none');
-        } else {
-            get_template_part('app/Views/none', $queried_post_type['post_type']);
-        }
+            if (empty(locate_template('app/Views/none-' . $queried_post_type['post_type'] . '.php'))) {
+                get_template_part('app/Views/none');
+            } else {
+                get_template_part('app/Views/none', $queried_post_type['post_type']);
+            }
 
-    endif;
-    ?>
+        endif;
+    }
+        ?>
 
-</main><!-- #main -->
+    </main><!-- #main -->
 
 <?php
-// get_sidebar();
-get_footer();
+    // get_sidebar();
+    get_footer();

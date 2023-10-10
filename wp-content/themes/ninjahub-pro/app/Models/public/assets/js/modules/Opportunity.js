@@ -78,6 +78,7 @@ class NhOpportunity extends Nh
 
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
+                    window.location.href = res.data.redirect_url;
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
@@ -96,6 +97,14 @@ class NhOpportunity extends Nh
         });
     }
 
+    // Method for creating a new token
+    createNewToken() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute(nhGlobals.publicKey).then(function(token) {
+                $('#g-recaptcha-response').val(token);
+            });
+        });
+    }
 }
 
 export default NhOpportunity;

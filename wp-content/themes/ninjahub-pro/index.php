@@ -19,18 +19,15 @@ use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\Nh;
 
 get_header();
-// Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
 global $wp_query, $post, $user_ID;
 ?>
 
 <main id="" class="">
 <?php global $post; ?>
-    <ul class="breadcrumbs">
-        <li><a href="<?= home_url() ?>"><?= _e("Home", "ninja") ?></a></li>
-            <li>&raquo;</li>
-            <li><span class="page-title"><?= _e("Blogs", "ninja") ?></span></li>
-    </ul>
-    <h1 class="page-title"><?= _e("Blogs", "ninja") ?></h1>
+    <?php Nh_Public::breadcrumbs(); ?>
+
+    <h1 class="page-title"><?= __("Blogs", "ninja") ?></h1>
+
     <div class="blogs-list">
         <?= get_template_part('app/Views/blogs-list') ?>
     </div>

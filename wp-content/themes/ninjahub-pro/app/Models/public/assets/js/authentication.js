@@ -497,16 +497,16 @@ class NhAuthentication extends NhAuth {
         $('.showPassIcon').on('click', function (e) {
             let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');
-            $this.removeClass('fa-solid fa-eye');
-            $this.addClass('fa-sharp fa-solid fa-eye-slash');
+            $this.removeClass('bbc-eye1');
+            $this.addClass('bbc-eye-off');
             if ($($target_element).attr('type') === 'password') {
                 $($target_element).attr('type', 'text');
-                $this.removeClass('fa-sharp fa-solid fa-eye-slash');
-                $this.addClass('fa-solid fa-eye');
+                $this.removeClass('bbc-eye-off');
+                $this.addClass('bbc-eye1');
             } else {
                 $($target_element).attr('type', 'password');
-                $this.removeClass('fa-solid fa-eye');
-                $this.addClass('fa-sharp fa-solid fa-eye-slash');
+                $this.removeClass('bbc-eye1');
+                $this.addClass('bbc-eye-off');
             }
         });
     }

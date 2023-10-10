@@ -20,8 +20,8 @@
     get_header();
 ?>
 
-    <main id="" class="">
-        <?php
+<main id="" class="">
+	<?php
             if (isset($_GET['key'])) {
                 $key = sanitize_text_field($_GET['key']);
 
@@ -84,14 +84,14 @@
 
                 } else {
                     ?>
-                    <p>
-                        <?= $validate->get_error_message() ?>,
-                                                             please follow the link <a href="<?= get_permalink(get_page_by_path('my-account/forgot-password')) ?>">Reset
-                                                                                                                                                                   Password</a>
-                                                             to get the new code
-                    </p>
+	<p>
+		<?= $validate->get_error_message() ?>,
+		please follow the link <a href="<?= get_permalink(get_page_by_path('my-account/forgot-password')) ?>">Reset
+			Password</a>
+		to get the new code
+	</p>
 
-                    <?php
+	<?php
                 }
 
             } else {
@@ -102,7 +102,6 @@
                 get_template_part('404');
             }
         ?>
-    </main><!-- #main -->
+</main><!-- #main -->
 
 <?php get_footer();
-

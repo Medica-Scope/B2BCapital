@@ -1,8 +1,14 @@
 /* Imports */
-// Buttons
-@import './base/buttons';
+
+/* Imports to customize bootstrap START */
 // Colors
 @import './base/variables';
+// Bootstrap
+@import '../../../../../node_modules//bootstrap/scss/bootstrap.scss';
+/* Imports to customize bootstrap END */
+
+// Buttons
+@import './base/buttons';
 // Spacing
 @import './base/spacing';
 // Fonts
@@ -111,7 +117,7 @@ body {
 		max-width: 1600px;
 	}
 }
-.rc-anchor{
+.rc-anchor {
 	display: none !important;
 }
 .nh-hidden {

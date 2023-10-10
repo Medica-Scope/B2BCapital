@@ -22,6 +22,6 @@
 
 <footer>
 	<div class="section-footer">
-		<p>Copyright © 2023 B2B All rights reserved.</p>
+		<p><?= __('Copyright © 2023 B2B All rights reserved.', 'ninja'); ?></p>
 	</div>
 </footer>

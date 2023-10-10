@@ -9,5 +9,5 @@
 ?>
 
 <footer>
-	Dashboard Footer
+	<?php dynamic_sidebar('footer');  ?>
 </footer>

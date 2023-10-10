@@ -77,7 +77,7 @@
                 if (!empty($form_template)) {
 
                     // Your specific field group ID
-                    $target_field_group_id = $this->get_field_groups_by_post_id($form_template[0]); // Replace with your field group ID
+                    $target_field_group_id = $this->get_field_groups_by_post_id($form_template); // Replace with your field group ID
 
                     // Array of post IDs where you want to assign the field group
                     $target_post_ids = [ $post_id ]; // Replace with your array of post IDs

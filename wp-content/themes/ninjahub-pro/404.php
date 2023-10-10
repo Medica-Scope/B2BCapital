@@ -8,15 +8,13 @@
  */
 
 
-	use NH\APP\CLASSES\Nh_Post;
-	use NH\APP\HELPERS\Nh_Hooks;
-	use NH\APP\MODELS\FRONT\Nh_Public;
-	use NH\Nh;
+use NH\APP\CLASSES\Nh_Post;
+use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
 get_header();
 ?>
-
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
 <main id="" class="">
 	<section class="error-404 not-found d-flex flex-column justify-content-center align-items-center">

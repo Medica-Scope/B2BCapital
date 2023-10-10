@@ -28,6 +28,28 @@
 				flex-direction: row;
 				align-items: center;
 				gap: 2rem;
+				.nav-item {
+					&.active {
+						position: relative;
+						.nav-link {
+							font-weight: bold;
+						}
+						&::after {
+							content: '';
+							position: absolute;
+							height: 3px;
+							width: 24px;
+							background-color: $primary;
+						}
+					}
+					.nav-link {
+						transition: all 0.3s ease-in-out;
+						color: #000;
+						&:hover {
+							font-weight: bold;
+						}
+					}
+				}
 			}
 		}
 		.bbc-logged-in-actions {
@@ -35,7 +57,7 @@
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				gap: 2rem;
+				gap: 1.5rem;
 				i[class^='bbc-'],
 				i[class*=' bbc-'] {
 					font-size: 20px;
@@ -55,12 +77,31 @@
 					.btn-profile-desc {
 						font-size: 12px;
 					}
+					&.bbc-user-profile-btn {
+						border-left: 1px solid $layout;
+						padding-left: 1.5rem;
+					}
+				}
+				.ninja-notification-bell {
+					.ninja-notification-count {
+						position: absolute;
+						right: 1px;
+						top: 4px;
+						font-size: 0;
+						line-height: 0;
+						background-color: #0e9cfb;
+						border-radius: 50%;
+						width: 7px;
+						height: 7px;
+					}
 				}
 			}
 		}
 	}
 }
-.page-template-template-page-registration {
+.page-template-template-page-registration,
+.page-template-template-page-login,
+.page-template-template-page-forgot-password {
 	.site-header {
 		display: none !important;
 	}

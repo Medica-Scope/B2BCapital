@@ -68,10 +68,12 @@
 
 
             foreach ($terms as $key => $term) {
+                $icon_id = get_term_meta($term->term_id, 'icon', TRUE);
+                $icon_link = (int )$icon_id > 0 ? wp_get_attachment_image_url($icon_id) : '';
                 $hidden_class = $key > 4 ? 'hidden-tag' : '';
                 $form_fields['industries']['choices'][] = [
                     'class' => 'industries-tags ' . $hidden_class,
-                    'label' => $term->name,
+                    'label' => !empty($icon_link) ? '<img src="'.$icon_link.'" alt="Industry Icon"/> ' . $term->name : $term->name,
                     'name'  => 'industries',
                     'value' => $term->term_id,
                     'order' => $key
