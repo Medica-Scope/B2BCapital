@@ -133,9 +133,11 @@
 .ninja-checkbox {
 	cursor: pointer;
 }
+
 .gglcptch {
 	margin-bottom: 1rem;
 }
+
 .social-login {
 	display: flex;
 	flex-direction: row;
@@ -176,6 +178,7 @@
 		}
 	}
 }
+
 .login-animation {
 	background-color: #ced4d9;
 	padding-block: 3rem;
@@ -239,6 +242,7 @@
 		}
 	}
 }
+
 .or-separator {
 	display: flex;
 	flex-direction: row;
@@ -256,6 +260,7 @@
 		color: $layout-medium;
 	}
 }
+
 .section-footer {
 	text-align: center;
 	padding-top: 2rem;
@@ -263,9 +268,11 @@
 		color: $layout-medium;
 	}
 }
+
 .iti--allow-dropdown {
 	width: 100%;
 }
+
 .iti__selected-flag {
 	max-height: 52.19px;
 }
@@ -345,10 +352,3 @@
 		padding-bottom: 7px;
 	}
 }
-
-// @import "buttons";
-// @import "fields";
-// @import "login";
-// @import "forgot_password";
-// @import "registration";
-// @import "verify_email";

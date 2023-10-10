@@ -1,0 +1,35 @@
+@import './login.scss';
+.site {
+	.site-header {
+		display: none !important;
+	}
+	.ninja-verification-form {
+		.gglcptch {
+			position: absolute;
+			bottom: -1rem;
+		}
+
+		.error{
+			color: $red;
+			p{
+				color: $red;
+			}
+		}
+	}
+	.form-field.otp-digit {
+		width: 90px;
+		max-width: 90px;
+		.form-control {
+			font-size: 1.5rem;
+			font-weight: bold;
+			color: $highlight;
+			text-align: center;
+			&::placeholder {
+				border-bottom: 1px solid $gray-medium;
+				+ div {
+					border-bottom: 1px solid $gray-medium;
+				}
+			}
+		}
+	}
+}
