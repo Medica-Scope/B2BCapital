@@ -133,9 +133,10 @@ use WP_Post;
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = ($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
-
-            return $favorites;
+            if (is_wp_error($profile)) {
+                return [];
+            }
+            return ($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
         }
 
         /**
@@ -204,9 +205,10 @@ use WP_Post;
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $ignored_articles = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : array();
-
-            return $ignored_articles;
+            if (is_wp_error($profile)) {
+                return [];
+            }
+            return ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : array();
         }
 
         /**
