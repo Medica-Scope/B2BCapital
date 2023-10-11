@@ -174,6 +174,7 @@
     function add_new_columns($columns) {
         $columns['fav_count'] = 'Favorite count';
         $columns['ignore_count'] = 'Ignore count';
+        $columns['read_count'] = 'Read count';
         return $columns;
     }
     add_filter('manage_post_posts_columns', 'add_new_columns');
@@ -183,6 +184,8 @@
             echo get_post_meta($post_id, 'fav_count', true);
         } elseif ($column == 'ignore_count') {
             echo get_post_meta($post_id, 'ignore_count', true);
+        } elseif ($column == 'read_count') {
+            echo get_post_meta($post_id, 'read_count', true);
         }
     }
     add_action('manage_post_posts_custom_column', 'populate_columns', 10, 2);
