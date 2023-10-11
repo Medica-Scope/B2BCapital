@@ -120,11 +120,11 @@
          * @author Mustafa Shaaban
          * @throws \Exception
          */
-        public function get_notifications(): array
+        public function get_notifications(int $limit = 10): array
         {
             global $wpdb, $user_ID;
 
-            $all      = $this->get_all_custom([ 'publish' ]);
+            $all      = $this->get_all_custom([ 'publish' ], $limit);
             $html_obj = [
                 'notifications' => []
             ];

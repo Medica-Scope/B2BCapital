@@ -23,9 +23,11 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
 global $user_ID;
 $notifications_obj = new Nh_Notification();
 
-$notifications = $notifications_obj->get_notifications();
+$notifications = $notifications_obj->get_notifications(-1);
 $count         = $notifications['new_count'];
 $found_posts   = $notifications['found_posts'];
+echo 'jims'.$count;
+
 ?>
 
 <main id="" class="">
@@ -42,7 +44,7 @@ $found_posts   = $notifications['found_posts'];
         </nav>
 
         <div class="notifications-con">
-            <div class="ninja-notification-my-account-list container" data-page="2" data-last="<?= $found_posts > 10 ? 0 : 1 ?>">
+            <div class="ninja-notification-my-account-list container">
                 <div class="ninja-notification-group-container">
                     <?php
                     if (!empty($notifications['notifications'])) {

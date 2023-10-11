@@ -69,41 +69,6 @@ class Nh_Faq extends Nh_Module
         // TODO: Implement filters() method.
     }
 
-    /**
-     * Description...
-     * @version 1.0
-     * @since 1.0.0
-     * @package NinjaHub
-     * @author Ahmed Gamal
-     * @return string
-     *
-     * @deprecated
-     */
-    public function breadcrumb(): string
-    {
-        trigger_error('The method "breadcrumb" is deprecated and will be removed in future versions. Use "Nh_Public::breadcrumb" instead.', E_USER_DEPRECATED);
-        global $post;
-        $html = '<ul class="breadcrumbs">';
-
-        $html .= '<li><a href="' . home_url() . '">'.get_the_title(get_option('page_on_front')).'</a></li>';
-        if (is_archive()) {
-            $post_type = get_post_type();
-            $post_type_obj = get_post_type_object($post_type);
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li>' .  the_archive_title('<span class="page-title">', '</span>') . '</li>';
-        } elseif (is_single()) {
-            $post_type = get_post_type($post);
-            $html .= '<li><a href="' . get_post_type_archive_link($post_type) . '"></a></li>';
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li><span class="page-title">' . get_the_title() . '</span></li>';
-        } elseif (is_page() && !is_front_page()) {
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li><span class="page-title">' . get_the_title() . '</span></li>';
-        }
-        $html .= '</ul>';
-        echo $html;
-    }
-
      /**
          * Retrieves all posts of the module.
          *
