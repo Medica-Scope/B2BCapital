@@ -24,12 +24,13 @@ global $wp_query, $post, $user_ID;
 
 <main id="" class="">
 <?php global $post; ?>
+
     <?php Nh_Public::breadcrumbs(); ?>
 
     <h1 class="page-title"><?= __("Blogs", "ninja") ?></h1>
 
     <div class="blogs-list">
-        <?= get_template_part('app/Views/blogs-list') ?>
+        <?php get_template_part('app/Views/blogs-list') ?>
     </div>
 
 </main><!-- #main -->
