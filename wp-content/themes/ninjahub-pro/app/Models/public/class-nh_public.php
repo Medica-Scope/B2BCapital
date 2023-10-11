@@ -136,6 +136,7 @@ class Nh_Public {
         if(is_post_type_archive('faq')){
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search-ajax', Nh_Hooks::PATHS['public']['js'] . '/search-ajax');
         }
+
 		if ( is_page( [
 			'my-account',
 			'change-password',
@@ -154,6 +155,10 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication' );
 		}
 
+        if(is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' )) {
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-service', Nh_Hooks::PATHS['public']['js'] . '/service-front' );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front' );
+        }
 
 		$this->hooks->run();
 	}
