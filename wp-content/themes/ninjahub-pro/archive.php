@@ -8,7 +8,9 @@
      * @package NinjaHub
      */
 
+    use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\HELPERS\Nh_Hooks;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Faq;
     use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
 
@@ -21,57 +23,47 @@
 
     <main id="" class="">
         <?php
-            if ($queried_post_type['post_type'] !== 'service') {
-                Nh_Public::breadcrumbs();
-            }
-        ?>
-        <?php if (have_posts()) : ?>
+            if (is_tax()) {
+                $term_object = $wp_query->get_queried_object();
+                if (empty(locate_template('app/Views/single-taxonomy-' . $term_object->taxonomy . '.php'))) {
+                    get_template_part('app/Views/single-taxonomy');
+                } else {
+                    get_template_part('app/Views/single-taxonomy', $term_object->taxonomy);
+                }
+            } else {
 
-            <?php
-            /* Start the Loop */
-            while (have_posts()) :
-                the_post();
+                if ($queried_post_type['post_type'] !== 'service') {
+                    Nh_Public::breadcrumbs();
+                }
 
-                /*
-                     * Include the Post-Type-specific template for the content.
-                     * If you want to override this in a child theme, then include a file
-                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-                     */
                 if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
                     get_template_part('app/Views/archive');
                 } else {
                     get_template_part('app/Views/archive', get_post_type());
                 }
-
-            endwhile;
-
-
-            ?>
-            <div class="pagination-con">
-                <?php
-                    $big = 999999999;
-                    echo paginate_links([
-                        'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                        'format'    => '?paged=%#%',
-                        'current'   => max(1, get_query_var('paged')),
-                        'total'     => $wp_query->max_num_pages,
-                        'prev_text' => __('« Previous'),
-                        'next_text' => __('Next »'),
-                    ]);
-                    // the_posts_navigation();
-                ?>
-            </div>
-        <?php
-
-        else :
-
-            if (empty(locate_template('app/Views/none-' . $queried_post_type['post_type'] . '.php'))) {
-                get_template_part('app/Views/none');
-            } else {
-                get_template_part('app/Views/none', $queried_post_type['post_type']);
             }
 
-        endif;
+        ?>
+        <?php
+            //         if (have_posts() && $queried_post_type['post_type'] !== 'faq') :
+
+            /* Start the Loop */
+            //            while (have_posts()) :
+            //                the_post();
+            //
+            //                /*
+            //                     * Include the Post-Type-specific template for the content.
+            //                     * If you want to override this in a child theme, then include a file
+            //                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+            //                     */
+//                            if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
+//                                get_template_part('app/Views/archive');
+//                            } else {
+//                                get_template_part('app/Views/archive', get_post_type());
+//                            }
+            //
+            //            endwhile;
+            //        endif;
         ?>
 
     </main><!-- #main -->

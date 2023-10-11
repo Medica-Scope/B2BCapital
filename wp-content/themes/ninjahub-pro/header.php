@@ -1,18 +1,14 @@
 <?php global $post;
 
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package NinjaHub
- */
-
+use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\Nh;
 
-global $post;
+/// to be reviewed with mostafa
+if(is_singular('post')){
+    $post_obj = new Nh_Blog();
+    $post_obj->increment_read_count(get_the_ID());
+}
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -64,7 +60,7 @@ global $post;
 				'authentication',
 			];
 
-			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) ) {
+			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' ) ) {
 				get_template_part( 'app/Views/headers/landing' );
 			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) ) {
 				get_template_part( 'app/Views/headers/dashboard' );

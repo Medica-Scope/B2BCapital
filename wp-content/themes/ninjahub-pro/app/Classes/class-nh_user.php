@@ -753,7 +753,7 @@
         /**
          * Check the reset code validity
          *
-         * @param $key The reset code
+         * @param string $key The reset code
          *
          * @version 1.0
          * @since 1.0.0
@@ -761,7 +761,7 @@
          * @author Mustafa Shaaban
          * @return bool|\WP_Error Returns true if the reset code is valid, otherwise returns a WP_Error object
          */
-        public static function check_reset_code($key): bool|WP_Error
+        public static function check_reset_code(string $key): bool|WP_Error
         {
             $error        = new WP_Error(); // Create a new WP_Error object
             $decrypt_data = Nh_Cryptor::Decrypt($key); // Decrypt the reset code

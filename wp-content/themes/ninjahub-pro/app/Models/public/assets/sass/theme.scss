@@ -117,9 +117,6 @@ body {
 		max-width: 1600px;
 	}
 }
-.rc-anchor {
+.rc-anchor, .nh-hidden, .hidden-tag {
 	display: none !important;
-}
-.nh-hidden {
-	display: none;
 }
