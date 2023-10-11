@@ -30,6 +30,7 @@
             'features',
             'service_icon',
             'working_days',
+            'short_description',
         ];
         public array $taxonomy = [
             'service-category'
@@ -71,5 +72,39 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+        }
+
+        /**
+         * Description...
+         *
+         * @param \WP_Term $term
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public function get_category_services(\WP_Term $term): array
+        {
+            $services     = new \WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => 'publish',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => $term->taxonomy,
+                        'field' => 'id',
+                        'terms' => $term->term_id
+                    )
+                )
+            ]);
+
+            $Nh_services = [];
+
+            foreach ($services->get_posts() as $service) {
+                $Nh_services[] = $this->convert($service, $this->meta_data);
+            }
+
+            return $Nh_services;
         }
     }

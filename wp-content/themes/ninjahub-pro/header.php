@@ -60,7 +60,7 @@ if(is_singular('post')){
 				'authentication',
 			];
 
-			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) ) {
+			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' ) ) {
 				get_template_part( 'app/Views/headers/landing' );
 			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) ) {
 				get_template_part( 'app/Views/headers/dashboard' );

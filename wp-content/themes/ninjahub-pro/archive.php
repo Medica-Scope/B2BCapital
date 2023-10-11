@@ -23,14 +23,24 @@
 
     <main id="" class="">
         <?php
-            if ($queried_post_type['post_type'] !== 'service') {
-                Nh_Public::breadcrumbs();
-            }
-
-            if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
-                get_template_part('app/Views/archive');
+            if (is_tax()) {
+                $term_object = $wp_query->get_queried_object();
+                if (empty(locate_template('app/Views/single-taxonomy-' . $term_object->taxonomy . '.php'))) {
+                    get_template_part('app/Views/single-taxonomy');
+                } else {
+                    get_template_part('app/Views/single-taxonomy', $term_object->taxonomy);
+                }
             } else {
-                get_template_part('app/Views/archive', get_post_type());
+
+                if ($queried_post_type['post_type'] !== 'service') {
+                    Nh_Public::breadcrumbs();
+                }
+
+                if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
+                    get_template_part('app/Views/archive');
+                } else {
+                    get_template_part('app/Views/archive', get_post_type());
+                }
             }
 
         ?>
