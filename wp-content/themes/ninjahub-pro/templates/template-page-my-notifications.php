@@ -26,7 +26,6 @@ $notifications_obj = new Nh_Notification();
 $notifications = $notifications_obj->get_notifications(-1);
 $count         = $notifications['new_count'];
 $found_posts   = $notifications['found_posts'];
-echo 'jims'.$count;
 
 ?>
 
@@ -49,7 +48,7 @@ echo 'jims'.$count;
                     <?php
                     if (!empty($notifications['notifications'])) {
                     ?>
-                        <h2><?= _e("Notification list", "ninja") ?></h2>
+                        <h2><?= __("Notification list", "ninja") ?></h2>
                         <div class="ninja-notification-clear-parent">
                             <button class="btn ninja-notification-clear">
                                 <?= __('clear all') ?>

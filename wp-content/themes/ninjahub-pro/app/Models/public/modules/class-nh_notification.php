@@ -363,9 +363,9 @@
 
             $last = FALSE;
 
-            if ($page * 10 >= $notifications['count']) {
+            // if ($page * 10 >= $notifications['count']) {
                 $last = TRUE;
-            }
+            // }
 
             ob_start();
             foreach ($notifications as $key => $notification) {

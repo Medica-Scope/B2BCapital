@@ -28,7 +28,7 @@ class NhNotificationFront extends NhNotification
                 bell_counter: $(`.${KEY}-notification-count`),
                 notification_group_container: $(`.${KEY}-notification-group-container`),
                 notification_list: $(`.${KEY}-notification-list`),
-                notification_group: $(`.${KEY}-notifications-group`),
+                notification_group: $(`.${KEY}-notification-list .${KEY}-notifications-group`),
                 clearBtn: $(`.${KEY}-notification-clear`),
                 item: $(`.${KEY}-notification-item`),
                 newItem: $(`.${KEY}-new-notification`),

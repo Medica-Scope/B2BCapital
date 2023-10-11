@@ -69,11 +69,13 @@ $found_posts   = $notifications['found_posts'];
 						</div>
 						<?php
 					}
-					if($found_posts>10){
 					?>
-					<div class="show-more"><a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= _e("Show more", "ninja") ?></a></div>
-					<?php } ?>
 				</div>
+				<?php
+				if($found_posts>20){
+					?>
+					<div class="ninja-show-more d-none"><a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __("Show more", "ninja") ?></a></div>
+				<?php } ?>
 				<?php
 			} else {
 				get_template_part( 'app/Views/template-parts/notifications/notification', 'empty' );
