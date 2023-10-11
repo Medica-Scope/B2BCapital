@@ -46,11 +46,11 @@
             //                     * If you want to override this in a child theme, then include a file
             //                     * called content-___.php (where ___ is the Post Type name) and that will be used instead.
             //                     */
-            //                if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
-            //                    get_template_part('app/Views/archive');
-            //                } else {
-            //                    get_template_part('app/Views/archive', get_post_type());
-            //                }
+//                            if (empty(locate_template('app/Views/archive-' . get_post_type() . '.php'))) {
+//                                get_template_part('app/Views/archive');
+//                            } else {
+//                                get_template_part('app/Views/archive', get_post_type());
+//                            }
             //
             //            endwhile;
             //        endif;
