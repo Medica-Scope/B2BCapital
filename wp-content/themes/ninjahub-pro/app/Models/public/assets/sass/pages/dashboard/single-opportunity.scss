@@ -1,0 +1,11 @@
+@import '../../base/variables';
+@import '../../components/cards/card';
+
+.related-opportunities{
+	margin-top: 4rem;
+	padding-top: 4rem;
+	border-bottom: 1px dashed rgba($gray-medium, 0.75);
+	h3{
+		margin-bottom: 2rem;
+	}
+}

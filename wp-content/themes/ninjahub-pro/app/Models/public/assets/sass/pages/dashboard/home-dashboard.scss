@@ -1,5 +1,5 @@
 @import '../../base/variables';
-@import '../../components/card';
+@import '../../components/cards/card';
 
 .dashboard-overview {
 	border-bottom: 1px dashed rgba($gray-medium, 0.75);
@@ -21,7 +21,7 @@
 			display: flex;
 			flex-direction: row;
 			flex-wrap: nowrap;
-			border: 1px solid rgba($gray-medium, 0.75);
+			border: 1px solid rgba($gray-medium, 0.30);
 			border-radius: 3px;
 		}
 	}
@@ -42,8 +42,7 @@
 		}
 		.sidebar-create-opportunity,
 		.sidebar-my-opportunities,
-		.sidebar-latest-acquisitions,
-		.sidebar-faq {
+		.sidebar-latest-acquisitions {
 			padding: 2rem;
 			margin-bottom: 2rem;
 			border-radius: 3px;
@@ -59,42 +58,6 @@
 				margin-top: 2rem;
 				padding-top: 1rem;
 				padding-inline-end: 0.5rem;
-			}
-		}
-		.sidebar-faq {
-			display: flex;
-			flex-direction: row;
-			align-items: flex-end;
-			background-color: $primary-medium;
-			a {
-				border-radius: 50%;
-				background-color: $layout;
-				width: 50px;
-				height: 50px;
-				color: $black;
-				text-align: center;
-				font-size: 1rem;
-				font-weight: bold;
-				line-height: 2.2;
-				&:hover{
-					background-color: $layout-medium;
-				}
-			}
-			h3 {
-				font-size: 1.3rem;
-				font-weight: bold;
-				margin-bottom: 0.6rem;
-			}
-			p {
-				font-size: 0.8rem;
-				margin-bottom: 1rem;
-			}
-			img {
-				margin-inline-start: 1rem;
-				width: 100px;
-			}
-			* {
-				color: $layout;
 			}
 		}
 	}
