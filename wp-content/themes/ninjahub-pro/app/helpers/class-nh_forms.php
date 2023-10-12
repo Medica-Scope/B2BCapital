@@ -439,7 +439,7 @@
                     <?= $this->create_attr($input_data) ?> <?= $input_data['multiple'] ?>
                     <?= $input_data['required'] ? 'required="required"' : '' ?>>
                 <label class="input-group-text buttonLow buttonLow-id" for="<?= $input_data['id'] ?>">
-                    <?= __('Upload your University ID', 'ninja') ?>
+                    <?= __('Upload Image', 'ninja') ?>
                 </label>
                 <?php
                     if (!empty($input_data['hint'])) {

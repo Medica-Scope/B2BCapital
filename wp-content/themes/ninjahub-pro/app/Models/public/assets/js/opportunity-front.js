@@ -30,7 +30,11 @@ class NhOpportunityFront extends NhOpportunity
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
         };
-
+        this.attachment = {
+            currentSize: 0,
+            totalSize: 26214400,
+        };
+        this.max_file_size = 5242880;
         this.initialization();
     }
 
@@ -38,6 +42,8 @@ class NhOpportunityFront extends NhOpportunity
     {
         this.CreateOpportunityFront();
         this.CreateOpportunityFormFieldsFront();
+        this.upload();
+        this.remove();
     }
 
     CreateOpportunityFormFieldsFront() {
@@ -95,6 +101,109 @@ class NhOpportunityFront extends NhOpportunity
             }
         });
     }
+
+    upload() {
+        let that = this,
+        $opportunity = this.$el.opportunity,
+            ajaxRequests = this.ajaxRequests;
+
+        $('.ninja-attachment-uploader').on('change', $opportunity, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget),
+                form_data = new FormData(),
+                files = $this[0].files,
+                target = $(this).attr('data-target'),
+                $recaptcha = $this.closest('form').find('#g-recaptcha-response').val();
+
+            form_data.append('action', `${KEY}_upload_attachment`);
+            form_data.append('g-recaptcha-response', $recaptcha);
+
+            if (typeof ajaxRequests.ninjaAttacmentUpload !== 'undefined') {
+                ajaxRequests.ninjaAttacmentUpload.abort();
+            }
+
+            if (files.length > 0) {
+                if (!that.checkExt(files[0].name)) {
+                    NhUiCtrl.notices($this.closest('form'), 'extension error');
+                    $('html, body').animate({
+                        scrollTop: $('.ninja-form-notice.result').offset().top - 200,
+                    }, 500);
+                    NhUiCtrl.blockUI($opportunity.form, false);
+                    return;
+                }
+
+                if (files[0].size > that.max_file_size) {
+                    NhUiCtrl.notices($this.closest('form'), 'The file size can\'t be more than ' + (that.max_file_size / 1024 / 1024) + 'MB.');
+                    $('html, body').animate({
+                        scrollTop: $('.ninja-form-notice.result').offset().top - 200,
+                    }, 500);
+                    NhUiCtrl.blockUI($opportunity.form, false);
+                    return;
+                }
+
+                if (files[0].size <= that.max_file_size) {
+                    form_data.append('file', files[0]);
+                    that.ajax_upload($this.parent(), form_data, target, $this, $opportunity);
+                } else {
+                    NhUiCtrl.notices($this.closest('form'), 'invalid file size');
+                    $('html, body').animate({
+                        scrollTop: $('.ninja-form-notice.result').offset().top - 200,
+                    }, 500);
+                    NhUiCtrl.blockUI($opportunity.form, false);
+                }
+
+            }
+
+        });
+    }
+
+    remove() {
+        let that = this,
+            $opportunity = this.$el.opportunity,
+            ajaxRequests = this.ajaxRequests;
+
+        $(document).on('click', '.ninja-remove-attachment', function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget),
+                form_data = new FormData(),
+                $recaptcha = $this.closest('form').find('#g-recaptcha-response').val(),
+                target = $this.parent().parent().parent().find('input[type="file"]').attr('data-target');
+            form_data.append('action', `${KEY}_remove_attachment`);
+            form_data.append('g-recaptcha-response', $recaptcha);
+
+            form_data.append('attachment_id', $(`input[name="${target}"]`).val());
+
+            if (typeof ajaxRequests.ninjaAttacmentRemove !== 'undefined') {
+                ajaxRequests.ninjaAttacmentRemove.abort();
+            }
+
+            that.ajax_remove($this.parent(), form_data, $this, $opportunity);
+        });
+    }
+
+    createAttachment(filename) {
+        return '<div class="col-sm-2 ninja-single-attachment-wrapper"><div class="ninja-single-attachment"><i class="fa fa-file"></i><p class="ninja-attachment-name">' + filename + '</p><div class="ninja-attachment-progress"><span class="ninja-progress"></span></div><a href="javascript:;" class="ninja-remove-attachment"><i class="fa fa-times-circle"></i></a></div></div>';
+    };
+
+    renameFile(filename) {
+        let splice = filename.split('.'),
+            ext = splice[splice.length - 1],
+            name = splice[0],
+            subStringingFileName = name.substring(0, 5) + '...';
+        return subStringingFileName + ext;
+    };
+
+    checkExt(filename) {
+        let splice = filename.split('.'),
+            availableExt = [
+                'jpg',
+                'jpeg',
+                'png',
+            ],
+            ext = splice[splice.length - 1];
+
+        return $.inArray(ext.toLowerCase(), availableExt) >= 0;
+    };
 }
 
 new NhOpportunityFront();

@@ -148,16 +148,19 @@
                 }
             }
 
+
             foreach ($slots as $key_slot => $slot) {
                 foreach ($working_days as $key => $day) {
+                    $currentDate = new \DateTime();
+                    $today = $currentDate->format('d-m-Y');
                     if ($day['day_name'] === $slot['day_name']) {
-                        if ($key_slot === 0) {
+                        if ($today === $slot['data']['date']) {
                             $full_data_format = __('Today', 'ninja');
                         } else {
                             $full_data_format = $slot['day_name_short'] . ' ' . $slot['date'];
                         }
                         $available_slots[] = [
-                            'day_name'         => $key_slot === 0 ? __('Today', 'ninja') : $slot['day_name'],
+                            'day_name'         => $today === $slot['data']['date'] ? __('Today', 'ninja') : $slot['day_name'],
                             'day_name_short'   => $slot['day_name_short'],
                             'date'             => $slot['date'],
                             'full_data_format' => $full_data_format,
