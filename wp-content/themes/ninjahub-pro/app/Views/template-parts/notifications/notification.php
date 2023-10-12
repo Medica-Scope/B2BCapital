@@ -11,7 +11,7 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
 global $user_ID;
 $notifications_obj = new Nh_Notification();
 
-$notifications = $notifications_obj->get_notifications();
+$notifications = $notifications_obj->get_notifications(10);
 $count         = $notifications['new_count'];
 $found_posts   = $notifications['found_posts'];
 
@@ -71,6 +71,11 @@ $found_posts   = $notifications['found_posts'];
 					}
 					?>
 				</div>
+				<?php
+				if($found_posts>20){
+					?>
+					<div class="ninja-show-more d-none"><a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __("Show more", "ninja") ?></a></div>
+				<?php } ?>
 				<?php
 			} else {
 				get_template_part( 'app/Views/template-parts/notifications/notification', 'empty' );

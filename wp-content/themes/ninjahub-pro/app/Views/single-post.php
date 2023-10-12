@@ -10,7 +10,6 @@
     use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
-    use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
     use NH\Nh;
 
     get_header();
@@ -20,19 +19,18 @@
     $opportunity_obj = new Nh_Opportunity();
     $single_post     = $post_obj->convert($post);
     $opportunity     = "";
+    
     if (($single_post->meta_data['opportunity'])) {
         $opportunity = $opportunity_obj->get_by_id($single_post->meta_data['opportunity']);
     }
     if ($user_ID) {
-        $profile_obj = new Nh_Profile();
-        $profile     = $profile_obj->get_by_id($user_ID);
         $fav_chk     = $post_obj->is_post_in_user_favorites($single_post->ID, $user_ID);
         $ignore_chk  = $post_obj->is_post_in_user_ignored_articles($single_post->ID, $user_ID);
 
     }
 ?>
     <div class="single-blog">
-        <a href="<?= home_url() ?>"><?= _e("Back to home", "ninja") ?></a>
+        <a href="<?= home_url() ?>"><?= __("Back to home", "ninja") ?></a>
         <div class="cover-image">
             <img src="<?= wp_get_attachment_url($single_post->meta_data['cover']); ?>" alt="B2B"/>
         </div>
@@ -82,7 +80,7 @@
 
         <div class="date">
             <img src="<?= get_avatar_url($single_post->author) ?>" alt="B2B"/>
-            <p><?= _e('on', 'ninja') ?> <?= date('F d, Y', strtotime($single_post->created_date)) ?></p>
+            <p><?= __('on', 'ninja') ?> <?= date('F d, Y', strtotime($single_post->created_date)) ?></p>
         </div>
         <div class="short-description">
             <?= $single_post->excerpt ?>
@@ -91,7 +89,7 @@
             <?= $single_post->content ?>
         </div>
         <div class="related slick-slider">
-            <h3><?= _e("Other blogs", "ninja") ?></h3>
+            <h3><?= __("Other blogs", "ninja") ?></h3>
             <?php
                 $related = $post_obj->get_all([ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ]);
                 if (!empty($related)) {
