@@ -105,6 +105,170 @@ class NhOpportunity extends Nh
             });
         });
     }
+
+    ajax_upload($wrapper, data, target, $input, $el) {
+        let that = this,
+            ajaxRequests = this.ajaxRequests;
+        let file = data.get('file');
+        let file_name = that.renameFile(file.name);
+        let $file = $(that.createAttachment(file_name));
+
+        ajaxRequests.ninjaAttacmentUpload = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            beforeSend: function () {
+
+                $el.form.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el.form);
+            },
+            xhr: function () {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function (evt) {
+                    if (evt.lengthComputable) {
+                        let percentComplete = evt.loaded / evt.total,
+                            progress = $file.find('.ninja-progress');
+                        percentComplete = parseInt(percentComplete * 100);
+                        progress.width(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function (res) {
+                if (res.success) {
+                    // BLOCK UI
+                    $el.form.find('input, button').prop('disabled', false);
+                    UiCtrl.beforeSendPrepare($el.form);
+
+                    // Remove attachment wrapper if exists
+                    let label_id = $(`input[data-target="${target}"]`).attr('id');
+                    $(`label[for="${label_id}"]`).hide();
+                    if ($wrapper.find('.ninja-single-attachment-wrapper').length) {
+                        $wrapper.find('.ninja-single-attachment-wrapper').remove();
+                    }
+                    $wrapper.append($file);
+
+
+                    // Show the new attachment then add it to the form
+                    let input_file = $('<input type="hidden" name="files[]" />');
+                    $file.find('.ninja-attachment-progress').remove();
+                    $file.find('.ninja-single-attachment').append(input_file);
+                    input_file.attr('data-imgID', res.data.attachment_ID);
+                    $(`input[name="${target}"]`).val(res.data.attachment_ID);
+                    that.createNewToken();
+                    UiCtrl.blockUI($el.form, false);
+
+                } else {
+                    // Reset Input
+                    $input.val('');
+                    $(`input[name="${target}"]`).val(""); // input that should hold the attachment ID
+                    $(`input[data-target="${target}"]`).val(""); // file input type
+                    $el.form.find('input, button').prop('disabled', false);
+                    UiCtrl.notices($wrapper.closest('form'), res.msg);
+                    UiCtrl.blockUI($el.form, false);
+
+                    // Scroll the page to the target element
+                    $('html, body').animate({
+                        scrollTop: $('.ninja-form-notice.result').offset().top - 200,
+                    }, 500); // Adjust the duration as needed
+
+                }
+            },
+            complete: function () {
+                $wrapper.find('input').prop('disabled', false);
+            },
+            error: function (xhr, status, error) {
+                let errorMessage = xhr.status + ': ' + xhr.statusText;
+                if (xhr.statusText !== 'abort') {
+                    $file.remove();
+                    $el.form.find('input, button').prop('disabled', false);
+                    $(`input[name="${target}"]`).val(""); // input that should hold the attachment ID
+                    $(`input[data-target="${target}"]`).val(""); // file input type
+                    // UiCtrl.notices($wrapper.closest('form'), res.msg);
+                    UiCtrl.blockUI($el.form, false);
+                    console.error(errorMessage);
+                }
+            },
+        });
+    }
+
+    
+    ajax_remove($wrapper, data, $btn, $el) {
+        let that = this,
+            ajaxRequests = this.ajaxRequests;
+
+        ajaxRequests.ninjaAttacmentRemove = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            beforeSend: function () {
+                $el.form.find('input, button').prop('disabled', true);
+                UiCtrl.beforeSendPrepare($el.form);
+            },
+            xhr: function () {
+                let xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener('progress', function (evt) {
+                    if (evt.lengthComputable) {
+                        let percentComplete = evt.loaded / evt.total;
+                    }
+                }, false);
+                return xhr;
+            },
+            success: function (res) {
+                if (res.success) {
+                    // Remove attachment icon with it's parent
+                    $btn.closest('.ninja-single-attachment-wrapper').fadeOut(200, function () {
+                        $btn.closest('.ninja-single-attachment-wrapper').remove();
+                    });
+
+
+                    // TODO:: SHOULD BE ENHANCED
+                    // ========================= //
+                    let target = $btn.parent().parent().parent().find('input[type="file"]').attr('data-target');
+                    $(`input[name="${target}"]`).val('');
+                    $(`input[data-target="${target}"]`).val('');
+                    let label_id = $(`input[data-target="${target}"]`).attr('id');
+                    $(`label[for="${label_id}"]`).show();
+                    // ========================= //
+
+
+                    $wrapper.find('.ninja-attachment-uploader').val('');
+                    $el.form.find('input, button').prop('disabled', false);
+                    that.createNewToken();
+                    UiCtrl.blockUI($el.form, false);
+
+                } else {
+                    $el.form.find('input, button').prop('disabled', false);
+                    UiCtrl.notices($wrapper.closest('form'), res.msg);
+                    UiCtrl.blockUI($el.form, false);
+
+                    // Scroll the page to the target element
+                    $('html, body').animate({
+                        scrollTop: $('.ninja-form-notice.result').offset().top - 200,
+                    }, 500); // Adjust the duration as needed
+                }
+            },
+            complete: function () {
+                $wrapper.find('input').prop('disabled', false);
+                $wrapper.find('input').val('');
+            },
+            error: function (xhr, status, error) {
+                let errorMessage = xhr.status + ': ' + xhr.statusText;
+                if (xhr.statusText !== 'abort') {
+                    $el.form.find('input, button').prop('disabled', false);
+                    // UiCtrl.notices($wrapper.closest('form'), res.msg);
+                    UiCtrl.blockUI($el.form, false);
+                    console.error(errorMessage);
+                }
+            },
+        });
+    }
 }
 
 export default NhOpportunity;
