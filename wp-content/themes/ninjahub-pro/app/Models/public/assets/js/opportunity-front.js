@@ -29,6 +29,10 @@ class NhOpportunityFront extends NhOpportunity
                 category: $(`#${KEY}_category`).parent(),
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
+            controlls: {
+                favBtn: `.${KEY}-add-to-fav`,
+                ignoreBtn: `.${KEY}-add-to-ignore`,
+            },
         };
         this.attachment = {
             currentSize: 0,
@@ -44,6 +48,8 @@ class NhOpportunityFront extends NhOpportunity
         this.CreateOpportunityFormFieldsFront();
         this.upload();
         this.remove();
+        this.toggle_fav_opportunity();
+        this.ignore_opportunity();
     }
 
     CreateOpportunityFormFieldsFront() {
@@ -121,7 +127,6 @@ class NhOpportunityFront extends NhOpportunity
             if (typeof ajaxRequests.ninjaAttacmentUpload !== 'undefined') {
                 ajaxRequests.ninjaAttacmentUpload.abort();
             }
-
             if (files.length > 0) {
                 if (!that.checkExt(files[0].name)) {
                     NhUiCtrl.notices($this.closest('form'), 'extension error');
@@ -131,7 +136,6 @@ class NhOpportunityFront extends NhOpportunity
                     NhUiCtrl.blockUI($opportunity.form, false);
                     return;
                 }
-
                 if (files[0].size > that.max_file_size) {
                     NhUiCtrl.notices($this.closest('form'), 'The file size can\'t be more than ' + (that.max_file_size / 1024 / 1024) + 'MB.');
                     $('html, body').animate({
@@ -204,6 +208,47 @@ class NhOpportunityFront extends NhOpportunity
 
         return $.inArray(ext.toLowerCase(), availableExt) >= 0;
     };
+
+    toggle_fav_opportunity()
+    {
+        let that           = this,
+            $controlls = this.$el.controlls,
+            ajaxRequests   = this.ajaxRequests;
+
+
+            $(document).on('click', $controlls.favBtn, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+            let user_id = $this.attr('data-uID');
+            let post_id = $this.attr('data-id');
+
+            if (typeof ajaxRequests.toggleFav !== 'undefined') {
+                ajaxRequests.toggleFav.abort();
+            }
+
+            that.toggleFavoriteOpportunity($this,user_id,post_id);
+        });
+    }
+
+    ignore_opportunity(){
+        let that           = this,
+            $controlls = this.$el.controlls,
+            ajaxRequests   = this.ajaxRequests;
+
+
+        $(document).on('click', $controlls.ignoreBtn, function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget);
+            let user_id = $this.attr('data-uID');
+            let post_id = $this.attr('data-id');
+
+            if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
+                ajaxRequests.ignoreArticle.abort();
+            }
+            console.log('clicked');
+            that.ignoreOpportunity($this,user_id,post_id);
+        });
+    }
 }
 
 new NhOpportunityFront();
