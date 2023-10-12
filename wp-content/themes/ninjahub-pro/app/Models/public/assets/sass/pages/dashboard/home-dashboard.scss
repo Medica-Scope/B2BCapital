@@ -76,6 +76,9 @@
 				font-size: 1rem;
 				font-weight: bold;
 				line-height: 2.2;
+				&:hover{
+					background-color: $layout-medium;
+				}
 			}
 			h3 {
 				font-size: 1.3rem;
