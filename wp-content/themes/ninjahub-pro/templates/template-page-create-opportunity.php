@@ -191,11 +191,34 @@
                         'content' => '</div></div>',
                         'order'   => 61,
                     ],
+                    'media_file' => [
+                        'class'         => 'form-group col-md-6',
+                        'type'          => 'file',
+                        'name'          => 'media_file',
+                        'required'      => FALSE,
+                        'accept'        => 'image/*',
+                        'before'        => '',
+                        'after'         => '',
+                        'order'         => 62,
+                        'extra_attr'    => [
+                            'data-target' => "media_file_id"
+                        ]
+                    ],
+                    'media_file_id'      => [
+                        'class'    => '',
+                        'type'     => 'hidden',
+                        'name'     => 'media_file_id',
+                        'required' => FALSE,
+                        'before'   => '',
+                        'after'    => '',
+                        'order'    => 63,
+                    ],
                     'custom-html-3'                    => [
                         'type'    => 'html',
                         'content' => '</div>',
                         'order'   => 65,
                     ],
+
                     'create_opportunity_nonce'         => [
                         'class' => '',
                         'type'  => 'nonce',

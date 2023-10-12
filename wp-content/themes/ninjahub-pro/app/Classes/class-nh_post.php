@@ -228,7 +228,8 @@
                 'post_parent'  => $this->parent,
                 'post_author'  => $this->author,
                 'post_name'    => $this->name,
-                'post_type'    => $this->type
+                'post_type'    => $this->type,
+
             ]);
 
             if (is_wp_error($insert)) {
@@ -237,6 +238,9 @@
 
             if ($insert) {
                 $this->ID = $insert;
+                if(!empty($this->thumbnail)){
+                    set_post_thumbnail( $this->ID, $this->thumbnail);
+                }
                 foreach ($this->meta_data as $key => $meta) {
                     add_post_meta($insert, $key, $meta);
                 }
