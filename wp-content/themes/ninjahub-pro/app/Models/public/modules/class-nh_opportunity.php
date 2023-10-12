@@ -269,4 +269,40 @@
 
             return $matched_groups;
         }
+
+        /**
+         * Description...
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return array
+         */
+        public function get_all_custom(array $status = ['any'], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = ['0'], array $tax_query = [''], int $user_id = 0): array
+        {
+            $args = [
+                "post_type"      => $this->module,
+                "post_status"    => $status,
+                "posts_per_page" => $limit,
+                "author__in"         => ($user_id)?[$user_id]:[],
+                "orderby"        => $orderby,
+                "not__in"        => $not_in,
+                "order"          => $order,
+                "tax_query"      => [
+                    'relation' => 'AND',
+                ]
+            ];
+            if(!empty($tax_query)){
+                $args['tax_query'][] = $tax_query;
+            }
+            $posts     = new \WP_Query($args);
+            $Nh_Posts = [];
+        
+            foreach ($posts->get_posts() as $post) {
+                $Nh_Posts[] = $this->convert($post, $this->meta_data);
+            }
+
+            return $Nh_Posts;
+        }
     }
