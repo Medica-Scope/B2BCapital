@@ -304,7 +304,6 @@
                     'relation' => 'AND',
                 ]
             ];
-            var_dump($args);
             if(!empty($tax_query)){
                 $args['tax_query'][] = $tax_query;
             }

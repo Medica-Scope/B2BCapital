@@ -54,8 +54,7 @@ $opportunities = [];
                 $favorite_opportunities = [];
                 $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $not_in = array_merge($favorite_opportunities, $ignored_opportunities);
-                var_dump($not_in);
-                $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $ignored_opportunities, [], $user_ID);
+                $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $not_in, [], $user_ID);
                 if (!empty($opportunities)) {
             ?>
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
