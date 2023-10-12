@@ -52,18 +52,17 @@ $opportunities = [];
                 $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $favorite_opportunities, [], $user_ID);
                 if (!empty($opportunities)) {
             ?>
-                    <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-my-opportunity-tab" data-toggle="tab" href="#nav-my-opportunity" role="tab" aria-controls="nav-my-opportunity" aria-selected="true"><?= __("My Opportunities", "ninja"); ?></a>
-                            <?php //if(!empty($favorite_opportunities)){ 
-                            ?>
-                            <a class="nav-item nav-link" id="nav-fav-opportunity-tab" data-toggle="tab" href="#nav-fav-opportunity" role="tab" aria-controls="nav-fav-opportunity" aria-selected="false"><?= __("My Favorite Opportunities", "ninja"); ?></a>
-                            <?php //} 
-                            ?>
-                        </div>
-                    </nav>
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-my-opportunity" role="tabpanel" aria-labelledby="nav-my-opportunity-tab">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="my-opportunity-tab" data-bs-toggle="pill" data-bs-target="#my-opportunity" type="button" role="tab" aria-controls="my-opportunity" aria-selected="true"><?= __("My Opportunities", "ninja") ?></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="fav-opportunity-tab" data-bs-toggle="pill" data-bs-target="#fav-opportunity" type="button" role="tab" aria-controls="fav-opportunity" aria-selected="false"><?= __("My Favorite Opportunities", "ninja") ?></button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="my-opportunity" role="tabpanel" aria-labelledby="my-opportunity-tab" tabindex="0">
                             <?php
                             foreach ($opportunities as $opportunity) {
                                 $opportunity_date = get_the_date('Y-m-d', $opportunity->ID);
@@ -85,14 +84,36 @@ $opportunities = [];
                             }
                             ?>
                         </div>
-                        <?php //if(!empty($favorite_opportunities)){ 
-                        ?>
-                        <div class="tab-pane fade" id="nav-fav-opportunity" role="tabpanel" aria-labelledby="nav-fav-opportunity-tab">
-                            <p>No Favorites</p>
+                        <div class="tab-pane fade" id="fav-opportunity" role="tabpanel" aria-labelledby="fav-opportunity-tab" tabindex="0">
+                            <?php
+                            if (!empty($favorite_opportunities)) {
+                                foreach ($favorite_opportunities as $fav_opportunity_id) {
+                                    $obj = new Nh_Opportunity();
+                                    $favorite_opportunity = $obj->get_by_id((int) $fav_opportunity_id);
+                                    if ($favorite_opportunity) {
+                                        $favorite_opportunity_date = get_the_date('Y-m-d', $favorite_opportunity->ID);
+                            ?>
+                                        <div class="opportunity-card">
+                                            <?php
+                                            if ($favorite_opportunity_date >= date('Y-m-d', strtotime('-20 days'))) {
+                                            ?>
+                                                <span class="new"><?= __("New", "ninja") ?></span>
+                                            <?php } ?>
+                                            <h3><?= $favorite_opportunity->name ?></h3>
+                                            <span class="date"><?php echo get_the_date('F jS, Y', $favorite_opportunity->ID) ?></span>
+                                            <p class="short-description"><?= $favorite_opportunity->meta_data['short_description'] ?></p>
+                                            <span class="status" style="display: none;"><?php print_r($favorite_opportunity); ?></span>
+                                        </div>
+                                <?php
+                                    }
+                                }
+                            } else { ?>
+                                <p><?= __("No Favorites", "ninja") ?></p>
+                            <?php } ?>
                         </div>
-                    <?php } ?>
                     </div>
-                <?php }  ?>
+                <?php } ?>
+            <?php }  ?>
         </section>
     </div>
 </main><!-- #main -->
