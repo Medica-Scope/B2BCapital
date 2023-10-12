@@ -6,7 +6,9 @@
      * @Date: 4/26/2023
      */
 
+    use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\HELPERS\Nh_Hooks;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Appointment;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Service;
     use NH\Nh;
 
@@ -18,6 +20,7 @@
     global $post;
 
     $services_obj    = new Nh_Service();
+    $appointments    = new Nh_Appointment();
     $service         = $services_obj->convert($post);
     $available_slots = array_chunk($service->available_slots, 4);
 ?>
@@ -66,60 +69,81 @@
                                         <?php
                                     }
                                 ?>
-
                             </ul>
                             <?php
                         }
                     ?>
                 </div>
 
-                <form class="service-subscription-form">
-                    <h3 class="form-title"><?= __('Subscribe Now!', 'ninja') ?></h3>
-                    <div class="form-field">
-                        <input type="text" id="name" name="name" class="form-control">
-                        <label for="name" class="form-control-label"><?= __('Name', 'ninja') ?></label>
-                    </div>
-                    <div class="form-field">
-                        <input type="email" id="email" name="email" class="form-control">
-                        <label for="email" class="form-control-label"><?= __('Email', 'ninja') ?></label>
-                    </div>
-                    <div class="form-field">
-                        <input type="text" id="mobile" name="mobile" class="form-control">
-                        <label for="mobile" class="form-control-label"><?= __('Mobile', 'ninja') ?></label>
-                    </div>
-                    <div class="time-slots">
-                        <h4 class="time-slots-title"><?= __('Select Your Slot', 'ninja') ?></h4>
-                        <?php
-                            foreach ($available_slots as $slot) {
-                                ?>
-                                <div class="time-slots-group">
-                                    <?php
-                                        foreach ($slot as $key => $single_slot) {
-                                            ?>
-                                            <div class="time-slot">
-                                                <input type="radio" name="timeslot" value="slot<?= $key ?>" id="slot<?= $key ?>" class="form-check-input">
-                                                <label class="time-slot-details" for="slot<?= $key ?>">
-                                                    <span class="date"><?= $single_slot['day_name'] ?></span>
-                                                    <div>
+                <div class="ninja_form_container service-subscription-form ninja-appointment-form-container">
+                    <form class="ninja_form ninja-appointment-form" id="ninja_appointment_form">
+                        <h3 class="form-title"><?= __('Subscribe Now!', 'ninja') ?></h3>
+                        <div class="form-field">
+                            <input type="text" id="name" name="name" class="form-control" required>
+                            <label for="name" class="form-control-label"><?= __('Name', 'ninja') ?></label>
+                        </div>
+                        <div class="form-field">
+                            <input type="email" id="email" name="email" class="form-control" required>
+                            <label for="email" class="form-control-label"><?= __('Email', 'ninja') ?></label>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" id="mobile" name="mobile" class="form-control" required>
+                            <label for="mobile" class="form-control-label"><?= __('Mobile', 'ninja') ?></label>
+                        </div>
+                        <div class="time-slots">
+                            <h4 class="time-slots-title"><?= __('Select Your Slot', 'ninja') ?></h4>
+                            <?php
+                                foreach ($available_slots as $slot) {
+                                    ?>
+                                    <div class="time-slots-group">
+                                        <?php
+                                            foreach ($slot as $key => $single_slot) {
+                                                ?>
+                                                <div class="time-slot">
+                                                    <input type="radio" name="timeslot" value="slot<?= $key ?>" class="form-check-input" required>
+                                                    <div class="time-slot-details">
+                                                        <span class="date"><?= $single_slot['full_data_format'] ?></span>
                                                         <?php
                                                             foreach ($single_slot['slots'] as $time_slot) {
-                                                                ?><span class="time from d-block"><?= $time_slot ?></span><?php
+
+                                                                if ($appointments->check_appointment_slot([
+                                                                    'day'  => $single_slot['data']['day'],
+                                                                    'date' => $single_slot['data']['date'],
+                                                                    'time' => $time_slot
+                                                                ])) {
+                                                                    continue;
+                                                                }
+
+                                                                ?><span class="time ninja-single-time d-block" data-day="<?= $single_slot['data']['day'] ?>"
+                                                                        data-date="<?= $single_slot['data']['date'] ?>" data-time="<?= $time_slot ?>" >
+                                                                <?= $time_slot ?>
+                                                                </span><?php
                                                             }
                                                         ?>
                                                     </div>
-                                                </label>
-                                            </div>
-                                            <?php
-                                        }
-                                    ?>
-                                </div>
-                                <?php
-                            }
-                        ?>
-                    </div>
-                    <button type="submit" class="form-action bbc-btn large apply"><?= __('Checkout Now', 'ninja') ?></button>
-                </form>
+                                                </div>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
 
+                        <?php
+                            if ( is_plugin_active( 'google-captcha/google-captcha.php' ) && function_exists( 'gglcptch_display_custom' ) ) {
+                                echo apply_filters( 'gglcptch_display_recaptcha', '', 'frontend_create_appointment' );
+                            }
+                            echo wp_nonce_field( Nh::_DOMAIN_NAME . "_create_appointment_form", "create_appointment_form", TRUE, FALSE );
+                        ?>
+
+                        <input type="hidden" name="service_id" value="<?= $post->ID ?>">
+                        <input type="hidden" name="service_title" value="<?= $post->post_title ?>">
+
+                        <button type="submit" class="form-action bbc-btn large apply"><?= __('Checkout Now', 'ninja') ?></button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

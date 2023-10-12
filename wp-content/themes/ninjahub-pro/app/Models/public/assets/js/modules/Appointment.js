@@ -7,26 +7,28 @@
 
 /* globals nhGlobals, KEY */
 // import theme 3d party modules
-import $ from 'jquery';
+import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
-import Nh from './Nh';
+import Nh     from './Nh';
 
-class NhAppointment extends Nh {
-    constructor() {
+class NhAppointment extends Nh
+{
+    constructor()
+    {
         super();
         this.ajaxRequests = {};
     }
 
-    appointment(formData, type, $el) {
+    createAppointment(formData, $el)
+    {
         let that = this;
 
-        this.ajaxRequests.search = $.ajax({
+        this.ajaxRequests.createAppointment = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
             data: {
-                action: `${KEY}_search_ajax`,
-                s: formData,
-                type: type
+                action: `${KEY}_create_appointment_ajax`,
+                data: formData,
             },
             beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
@@ -34,16 +36,32 @@ class NhAppointment extends Nh {
             },
             success: function (res) {
                 $('input').prop('disabled', false);
+                if (res.success) {
+                    UiCtrl.notices($el, res.msg, 'success');
+                } else {
+                    UiCtrl.notices($el, res.msg);
+                }
+                that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
-                $('.search-con').find('.search-body').html(res.data.html);
             },
             error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+                that.createNewToken();
+            },
+        });
+    }
+
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('#g-recaptcha-response').val(token);
+            });
         });
     }
 

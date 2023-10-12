@@ -113,6 +113,7 @@
             $forms['frontend_edit_profile']       = [ "form_name" => "Front End Edit Profile" ];
             $forms['frontend_edit_password']      = [ "form_name" => "Front End Edit Password" ];
             $forms['frontend_create_opportunity'] = [ "form_name" => "Front End Create Opportunity" ];
+            $forms['frontend_create_appointment'] = [ "form_name" => "Front End Create Appointment" ];
             return $forms;
         }
 
