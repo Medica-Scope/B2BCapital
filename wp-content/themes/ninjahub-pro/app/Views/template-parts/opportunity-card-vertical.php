@@ -8,7 +8,7 @@ $is_card_horizontal       = ! empty( $args['is_card_horizontal'] ) ? $args['is_c
 ?>
 <div class="opportunity-item card shadow border-0">
 	<div class="row g-0">
-		<div class="card-img-top <?php echo $is_card_horizontal ? 'col-md-4' : ''; ?>">
+		<div class="card-image <?php echo $is_card_horizontal ? 'col-md-4' : ''; ?>">
 			<a href="<?= esc_url( $opportunity_link ); ?>"><img src="<?= esc_url( $opportunity_thumbnail ); ?>"
 					alt="<?= esc_attr( $opportunity_title ); ?>"></a>
 			<?php

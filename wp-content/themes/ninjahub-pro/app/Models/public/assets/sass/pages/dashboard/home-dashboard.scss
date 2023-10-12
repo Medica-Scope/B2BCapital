@@ -53,8 +53,12 @@
 		}
 		.sidebar-latest-acquisitions {
 			.acquisitions-list{
-				max-height: 400px;
-				overflow-y: scroll;
+				max-height: 380px;
+				overflow-y: auto;
+				overflow-x: hidden;
+				margin-top: 2rem;
+				padding-top: 1rem;
+				padding-inline-end: 0.5rem;
 			}
 		}
 		.sidebar-faq {

@@ -147,25 +147,26 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_H
 									?>
 								</div>
 							</div>
-							<div class="sidebar-faq shadow">
-								<div>
-									<h3>
-										<?= __( 'Help and Modules', 'ninja' ) ?>
-									</h3>
-									<p>
-										<?= __( 'Our help and module screens are here to make your life easier', 'ninja' ) ?>
-									</p>
-									<a href="<?= apply_filters( 'nhml_permalink', get_post_type_archive_link( 'faq' ) ) ?>"
-										class="btn square">
-										<?= __( 'Go', 'ninja' ) ?>
-									</a>
-								</div>
-
-								<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/help.webp" alt="help icon" />
+						</div>
+						<div class="sidebar-faq shadow">
+							<div>
+								<h3>
+									<?= __( 'Help and Modules', 'ninja' ) ?>
+								</h3>
+								<p>
+									<?= __( 'Our help and module screens are here to make your life easier', 'ninja' ) ?>
+								</p>
+								<a href="<?= apply_filters( 'nhml_permalink', get_post_type_archive_link( 'faq' ) ) ?>"
+									class="btn square">
+									<?= __( 'Go', 'ninja' ) ?>
+								</a>
 							</div>
+
+							<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/help.webp" alt="help icon" />
 						</div>
 					</div>
 				</div>
+			</div>
 		</section>
 	</div>
 

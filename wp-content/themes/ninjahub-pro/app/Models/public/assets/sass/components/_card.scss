@@ -2,14 +2,21 @@
 	.card {
 		padding: 1rem;
 		&.card-horizontal{
-			a{
-				height: auto;
+			.card-image{
+				width: auto;
+				a{
+					width:80px;
+					height: auto;
+				}
 			}
 			.card-footer{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
 				background-color: transparent;
 			}
 		}
-		.card-img-top {
+		.card-image {
 			position: relative;
 			display: flex;
 			justify-content: center;
