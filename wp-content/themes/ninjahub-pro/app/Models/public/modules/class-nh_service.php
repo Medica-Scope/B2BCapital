@@ -31,6 +31,7 @@
             'service_icon',
             'working_days',
             'short_description',
+            'appointments',
         ];
         public array $taxonomy  = [
             'service-category'
@@ -142,7 +143,7 @@
                 while ($max > $current) {
                     $current = $current + (60 * $time_increases_by);
                     if ($current > $min) {
-                        $working_days[$key]['time_slots'][] = date('g:i a', $current);;
+                        $working_days[$key]['time_slots'][] = date('g:i a', $current);
                     }
                 }
             }
@@ -150,8 +151,7 @@
             foreach ($slots as $key_slot => $slot) {
                 foreach ($working_days as $key => $day) {
                     if ($day['day_name'] === $slot['day_name']) {
-
-                        if ($key_slot === 0 ? __('Today', 'ninja') : $slot['day_name']) {
+                        if ($key_slot === 0) {
                             $full_data_format = __('Today', 'ninja');
                         } else {
                             $full_data_format = $slot['day_name_short'] . ' ' . $slot['date'];
@@ -161,6 +161,7 @@
                             'day_name_short'   => $slot['day_name_short'],
                             'date'             => $slot['date'],
                             'full_data_format' => $full_data_format,
+                            'data'             => $slot['data'],
                             'slots'            => $day['time_slots']
                         ];
                         break;
@@ -171,7 +172,7 @@
             return $available_slots;
         }
 
-        public function getNextDaysExcluding($excludeDays = [], $included_days = [])
+        public function getNextDaysExcluding($excludeDays = [], $included_days = []): array
         {
             $days        = [];
             $currentDate = new \DateTime();
@@ -179,9 +180,15 @@
             while (count($days) < 30) {
                 // Check if the current day is not in the excluded days array
                 if (!in_array($currentDate->format('l'), $excludeDays) && in_array($currentDate->format('l'), $included_days)) {
-                    $days[] = [ 'date'           => $currentDate->format('d/m'),
-                                'day_name'       => $currentDate->format('l'),
-                                'day_name_short' => $currentDate->format('D')
+                    $days[] = [
+                        'date'           => $currentDate->format('d-m'),
+                        'day_name'       => $currentDate->format('l'),
+                        'day_name_short' => $currentDate->format('D'),
+                        'data'           => [
+                            'day'  => $currentDate->format('l'),
+                            'date' => $currentDate->format('d-m-Y'),
+                            'time' => $currentDate->format('g:i a')
+                        ],
                     ];
                 }
 

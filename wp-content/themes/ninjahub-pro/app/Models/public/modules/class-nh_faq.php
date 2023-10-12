@@ -71,73 +71,36 @@ class Nh_Faq extends Nh_Module
 
     /**
      * Description...
+     *
      * @version 1.0
      * @since 1.0.0
      * @package NinjaHub
      * @author Ahmed Gamal
-     * @return string
-     *
-     * @deprecated
+     * @return array
      */
-    public function breadcrumb(): string
+    public function get_all_custom(array $status = ['any'], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = ['0'], array $tax_query = ['']): array
     {
-        trigger_error('The method "breadcrumb" is deprecated and will be removed in future versions. Use "Nh_Public::breadcrumb" instead.', E_USER_DEPRECATED);
-        global $post;
-        $html = '<ul class="breadcrumbs">';
-
-        $html .= '<li><a href="' . home_url() . '">'.get_the_title(get_option('page_on_front')).'</a></li>';
-        if (is_archive()) {
-            $post_type = get_post_type();
-            $post_type_obj = get_post_type_object($post_type);
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li>' .  the_archive_title('<span class="page-title">', '</span>') . '</li>';
-        } elseif (is_single()) {
-            $post_type = get_post_type($post);
-            $html .= '<li><a href="' . get_post_type_archive_link($post_type) . '"></a></li>';
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li><span class="page-title">' . get_the_title() . '</span></li>';
-        } elseif (is_page() && !is_front_page()) {
-            $html .= '<li>&raquo;</li>';
-            $html .= '<li><span class="page-title">' . get_the_title() . '</span></li>';
+        $args = [
+            "post_type"      => $this->module,
+            "post_status"    => $status,
+            "posts_per_page" => $limit,
+            "orderby"        => $orderby,
+            "not__in"        => $not_in,
+            "order"          => $order,
+            "tax_query"      => [
+                'relation' => 'AND',
+            ]
+        ];
+        if(!empty($tax_query)){
+            $args['tax_query'][] = $tax_query;
         }
-        $html .= '</ul>';
-        echo $html;
+        $posts     = new \WP_Query($args);
+        $Nh_Posts = [];
+
+        foreach ($posts->get_posts() as $post) {
+            $Nh_Posts[] = $this->convert($post, $this->meta_data);
+        }
+
+        return $Nh_Posts;
     }
-
-     /**
-         * Retrieves all posts of the module.
-         *
-         * @param array  $status The post statuses to retrieve.
-         * @param int    $limit The maximum number of posts to retrieve.
-         * @param string $orderby The field to order the posts by.
-         * @param string $order The order of the posts (ASC or DESC).
-         * @param array  $not_in The post IDs to exclude from the results.
-         * Override function get_all() Nh_Post
-         * @return array An array of Nh_Post objects representing the retrieved posts.
-         * @since 1.0.0
-         * @package NinjaHub
-         * @version 1.0
-         */
-        public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = ['']): array
-        {
-            $posts     = new \WP_Query([
-                "post_type"      => $this->module,
-                "post_status"    => $status,
-                "posts_per_page" => $limit,
-                "orderby"        => $orderby,
-                "not__in"        => $not_in,
-                "order"          => $order,
-                "tax_query"      => [
-                    'relation',
-                    $tax_query
-                ]
-            ]);
-            $Nh_Posts = [];
-
-            foreach ($posts->get_posts() as $post) {
-                $Nh_Posts[] = $this->convert($post, $this->meta_data);
-            }
-
-            return $Nh_Posts;
-        }
 }

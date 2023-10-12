@@ -94,30 +94,35 @@ use WP_Post;
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            // $favorites = $this->get_user_favorites($user_id);
-            $favorites = !empty($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
-
-            if (in_array($post_id, $favorites)) {
-                $key = array_search($post_id, $favorites);
-                if ($key !== false) {
-                    unset($favorites[$key]);
+            $favorites = [];
+            if(!is_wp_error($profile)){
+                $favorites = ($profile->meta_data['favorite_articles'])? $profile->meta_data['favorite_articles'] : [];
+                if (in_array($post_id, $favorites)) {
+                    $key = array_search($post_id, $favorites);
+                    if ($key !== false) {
+                        unset($favorites[$key]);
+                    }
+                    $profile->set_meta_data('favorite_articles',$favorites);
+                    $profile->update();
+                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
+                    ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
+                    );
+                } else {
+                    $favorites[] = $post_id;
+                    $profile->set_meta_data('favorite_articles',$favorites);
+                    $profile->update();
+                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
+                    ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
+                    );
                 }
-                $profile->set_meta_data('favorite_articles',$favorites);
-                $profile->update();
-                $fav_count = get_post_meta($post_id, 'fav_count', true);
-                update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
-                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
-                );
-            } else {
-                $favorites[] = $post_id;
-                $profile->set_meta_data('favorite_articles',$favorites);
-                $profile->update();
-                $fav_count = get_post_meta($post_id, 'fav_count', true);
-                update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
-                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
-                );
+            }else{
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
+                    ['status' => false, 'msg' => 'You must have profile', 'fav_active' => 1]
+                    );
             }
         }
         /**
@@ -128,14 +133,8 @@ use WP_Post;
          * @author Ahmed Gamal
          * @return array
          */
-        public function get_user_favorites($user_id): array
+        public function get_user_favorites($profile): array
         {
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
-            if (is_wp_error($profile)) {
-                return [];
-            }
             return ($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : array();
         }
 
@@ -149,8 +148,14 @@ use WP_Post;
          */
         public function is_post_in_user_favorites($post_id, $user_id): bool
         {
-            $favorites = $this->get_user_favorites($user_id);
-            $favorites = array_combine($favorites, $favorites);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $favorites = array();
+            if(!is_wp_error($profile)){
+                $favorites = $this->get_user_favorites($profile);
+                $favorites = array_combine($favorites, $favorites);
+            }   
             return isset($favorites[$post_id]);
         }
 
@@ -168,46 +173,47 @@ use WP_Post;
             $user_id = intval($_POST['user_id']);
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);              
-            $ignored_articles = $this->get_user_ignored_articles($user_id);
-            $ignored_articles = array_combine($ignored_articles, $ignored_articles);
-            if(isset($ignored_articles[$post_id])){
-                unset($ignored_articles[$post_id]);
-                $ignored_articles = array_values($ignored_articles);
-                $profile->set_meta_data('ignored_articles',$ignored_articles);
-                $profile->update();
-                $ignore_count = get_post_meta($post_id, 'ignore_count', true);
-                update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
-                ob_start();
-                get_template_part('app/Views/blogs-list');
-                $html = ob_get_clean();
-                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                ['status' => true, 'msg' => 'post ignored', 'ignore_active' => 1, 'updated' => $html]
-                );
-            }
-            else {
-                $ignored_articles[] = $post_id;
-                $profile->set_meta_data('ignored_articles',$ignored_articles);
-                $profile->update();
-                $ignore_count = get_post_meta($post_id, 'ignore_count', true);
-                update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
-                ob_start();
-                get_template_part('app/Views/blogs-list');
-                $html = ob_get_clean();
-                new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                ['status' => true, 'msg' => 'post not found!', 'ignore_active' => 0, 'updated' => $html]
-                );
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_articles = [];
+            if(!is_wp_error($profile)){
+                $ignored_articles = ($profile->meta_data['ignored_articles'])? $profile->meta_data['ignored_articles'] : [];
+                $ignored_articles = array_combine($ignored_articles, $ignored_articles);
+                if(isset($ignored_articles[$post_id])){
+                    unset($ignored_articles[$post_id]);
+                    $ignored_articles = array_values($ignored_articles);
+                    $profile->set_meta_data('ignored_articles',$ignored_articles);
+                    $profile->update();
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
+                    ob_start();
+                    get_template_part('app/Views/blogs-list');
+                    $html = ob_get_clean();
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
+                    ['status' => true, 'msg' => 'post un-ignored', 'ignore_active' => 1, 'updated' => $html]
+                    );
+                }
+                else {
+                    $ignored_articles[] = $post_id;
+                    $profile->set_meta_data('ignored_articles',$ignored_articles);
+                    $profile->update();
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
+                    ob_start();
+                    get_template_part('app/Views/blogs-list');
+                    $html = ob_get_clean();
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
+                    ['status' => true, 'msg' => 'post ignored!', 'ignore_active' => 0, 'updated' => $html]
+                    );
+                }             
+            }else{
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
+                    ['status' => false, 'msg' => 'You must have profile', 'ignore_active' => 1]
+                    );
             }
         }
 
-        public function get_user_ignored_articles($user_id): array
+        public function get_user_ignored_articles($profile): array
         {
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
-            if (is_wp_error($profile)) {
-                return [];
-            }
             return ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : array();
         }
 
@@ -221,8 +227,14 @@ use WP_Post;
          */
         public function is_post_in_user_ignored_articles($post_id, $user_id): bool
         {
-            $ignored_articles = $this->get_user_ignored_articles($user_id);
-            $ignored_articles = array_combine($ignored_articles, $ignored_articles);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_articles = array();
+            if(!is_wp_error($profile)){
+                $ignored_articles = $this->get_user_ignored_articles($profile);
+                $ignored_articles = array_combine($ignored_articles, $ignored_articles);
+            }   
             return isset($ignored_articles[$post_id]);
         }
 
@@ -255,8 +267,17 @@ use WP_Post;
          * @author Ahmed Gamal
          * @return bool
          */
-        public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1): array
         {
+            if ($user_id) {
+                $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                // $fav_articles = $profile->meta_data['favorite_articles'];
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];  // for ignored articles
+                }
+            }
             $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,

@@ -77,6 +77,10 @@
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_opportunity_ajax', $this, 'create_opportunity');
             $this->hooks->add_action('get_header', $this, 'acf_form_head');
             $this->hooks->add_action('acf/save_post', $this, 'after_acf_form_submission', 20);
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_upload_attachment', $this, 'upload_attachment');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_upload_attachment', $this, 'upload_attachment');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_remove_attachment', $this, 'remove_attachment');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_remove_attachment', $this, 'remove_attachment');
         }
 
         /**
@@ -97,6 +101,7 @@
             $description                      = sanitize_text_field($form_data['description']);
             $short_description                = sanitize_text_field($form_data['short_description']);
             $opportunity_type                 = (int)sanitize_text_field($form_data['opportunity_type']);
+            $attachment_id                = (int)sanitize_text_field(Nh_Cryptor::Decrypt($form_data['media_file_id']));
             $start_bidding_amount             = sanitize_text_field($form_data['start_bidding_amount']);
             $target_amount                    = sanitize_text_field($form_data['target_amount']);
             $project_phase                    = sanitize_text_field($form_data['project_phase']);
@@ -168,6 +173,7 @@
             $this->title           = $project_name;
             $this->content         = $description;
             $this->author          = $user_ID;
+            $this->thumbnail       = $attachment_id;
             $this->taxonomy        = [
                 'opportunity-category' => [ $category ],
                 'opportunity-type'     => [ $opportunity_type ]
@@ -269,4 +275,146 @@
 
             return $matched_groups;
         }
+
+        /**
+         * Description...
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return array
+         */
+        public function get_all_custom(array $status = ['any'], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = ['0'], array $tax_query = [''], int $user_id = 0): array
+        {
+            $args = [
+                "post_type"      => $this->module,
+                "post_status"    => $status,
+                "posts_per_page" => $limit,
+                "author__in"         => ($user_id)?[$user_id]:[],
+                "orderby"        => $orderby,
+                "not__in"        => $not_in,
+                "order"          => $order,
+                "tax_query"      => [
+                    'relation' => 'AND',
+                ]
+            ];
+            if(!empty($tax_query)){
+                $args['tax_query'][] = $tax_query;
+            }
+            $posts     = new \WP_Query($args);
+            $Nh_Posts = [];
+        
+            foreach ($posts->get_posts() as $post) {
+                $Nh_Posts[] = $this->convert($post, $this->meta_data);
+            }
+
+            return $Nh_Posts;
+        }
+
+               /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return void
+         */
+        public function upload_attachment(): void
+        {
+            $file         = $_FILES;
+
+            if(!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+                new Nh_Ajax_Response(FALSE, __('The reCaptcha verification failed. Please try again.', 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'submit_application');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            if (!empty($file)) {
+
+                $upload     = wp_upload_bits($file['file']['name'], NULL, file_get_contents($file['file']['tmp_name']));
+                $maxsize    = 5242880;
+                $acceptable = [
+                    'image/jpeg',
+                    'image/jpg',
+                    'image/png'
+                ];
+
+                if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
+                    new Nh_Ajax_Response(FALSE, __("File too large. File must be less than 2 megabytes.", 'ninja'));
+                }
+
+                if ((!in_array($_FILES['file']['type'], $acceptable)) && (!empty($_FILES["file"]["type"]))) {
+                    new Nh_Ajax_Response(FALSE, __("Invalid file type. Only JPG, JPEG and PNG types are accepted.", 'ninja'));
+                }
+
+                if (!empty($upload['error'])) {
+                    new Nh_Ajax_Response(FALSE, __($upload['error'], 'ninja'));
+                }
+
+                $wp_filetype = wp_check_filetype(basename($upload['file']), NULL);
+
+                $wp_upload_dir = wp_upload_dir();
+
+                $attachment = [
+                    'guid'           => $wp_upload_dir['baseurl'] . _wp_relative_upload_path($upload['file']),
+                    'post_mime_type' => $wp_filetype['type'],
+                    'post_title'     => preg_replace('/\.[^.]+$/', '', basename($upload['file'])),
+                    'post_content'   => '',
+                    'post_status'    => 'inherit'
+                ];
+
+                $attach_id = wp_insert_attachment($attachment, $upload['file']);
+
+                $attach_data = wp_generate_attachment_metadata($attach_id, $upload['file']);
+
+                wp_update_attachment_metadata($attach_id, $attach_data);
+
+                wp_upload_bits($file['file']["name"], NULL, file_get_contents($file['file']["tmp_name"]));
+
+                new Nh_Ajax_Response(TRUE, __('Attachment has been uploaded successfully.', 'ninja'), [
+                    'attachment_ID' => Nh_Cryptor::Encrypt($attach_id)
+                ]);
+            } else {
+                new Nh_Ajax_Response(FALSE, __("Can't upload empty file", 'ninja'));
+            }
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return void
+         */
+        public function remove_attachment(): void
+        {
+            $attachment_id = Nh_Cryptor::Decrypt(sanitize_text_field($_POST['attachment_id']));
+            
+            if(!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+                new Nh_Ajax_Response(FALSE, __('The reCaptcha verification failed. Please try again.', 'ninja'));/* the reCAPTCHA answer  */
+            }
+            
+            $check_result  = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'submit_application');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            $deleted = wp_delete_attachment($attachment_id);
+
+            if (!$deleted) {
+                new Nh_Ajax_Response(FALSE, __("Can't remove attachment", 'ninja'));
+            } else {
+                new Nh_Ajax_Response(TRUE, __("Attachment has been removed successfully", 'ninja'));
+            }
+        }
+
+
+        
     }
