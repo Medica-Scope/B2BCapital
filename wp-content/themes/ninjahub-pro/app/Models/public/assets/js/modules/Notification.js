@@ -102,7 +102,11 @@ class NhNotification extends Nh
                     $(`.${KEY}-notification-item-load`).remove();
                     $(`.${KEY}-notification-bell`).attr('data-count', res.data.count);
                     $(`.${KEY}-notification-count`).html(res.data.count);
-                    $(`.${KEY}-notifications-group`).append(res.data.html);
+                    $(`.${KEY}-notification-list .${KEY}-notifications-group`).append(res.data.html);
+                    if($(`.${KEY}-show-more.d-none`).length){
+                        $(`.${KEY}-show-more.d-none`).removeClass('d-none');
+                    }
+
                 }
             },
             error: function (xhr) {
