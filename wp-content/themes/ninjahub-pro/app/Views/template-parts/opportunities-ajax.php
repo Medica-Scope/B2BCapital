@@ -1,13 +1,10 @@
 <?php
 
 /**
- * @Filename: template-my-opportunities.php
+ * @Filename: opportunities-ajax.php
  * @Description:
- * @User: NINJA MASTER - Mustafa Shaaban
+ * @User: Ahmed Gamal
  * @Date: 21/2/2023
- *
- * Template Name: My Opportunities Page
- * Template Post Type: page
  *
  * @package NinjaHub
  * @since 1.0
@@ -15,12 +12,9 @@
  */
 
 
-use NH\APP\CLASSES\Nh_User;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
-use NH\APP\MODELS\FRONT\Nh_Public;
 
-get_header();
 
 global $user_ID;
 $opportunity_obj = new Nh_Opportunity();
@@ -31,30 +25,12 @@ $favorites = [];
 $opportunities = [];
 
 
-?>
 
-<main id="" class="">
-    <div class="container">
-        <?php Nh_Public::breadcrumbs(); ?>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))) ?>"><?= __('My Account', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja'); ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('Widgets', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __('Notifications', 'ninja') ?></a>
-        </nav>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= sprintf(__('My %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')); ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-favorite-opportunities'))) ?>"><?= sprintf(__('My Favorite %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')) ?></a>
-        </nav>
-
-        <section class="page-content opportunity-content">
-            <?php
             if (!is_wp_error($profile)) {
-                $not_in = [];
                 $favorite_opportunities = [];
                 $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $not_in = array_merge($favorite_opportunities, $ignored_opportunities);
-                $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $not_in, [], $user_ID);
+                $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $favorite_opportunities, [], $user_ID);
                 if (!empty($opportunities)) {
             ?>
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -143,8 +119,3 @@ $opportunities = [];
                     </div>
                 <?php } ?>
             <?php }  ?>
-        </section>
-    </div>
-</main><!-- #main -->
-
-<?php get_footer();

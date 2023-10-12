@@ -81,6 +81,10 @@
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_upload_attachment', $this, 'upload_attachment');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_remove_attachment', $this, 'remove_attachment');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_remove_attachment', $this, 'remove_attachment');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_toggle_favorite_opportunity_ajax', $this, 'toggle_opportunity_favorite');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_toggle_favorite_opportunity_ajax', $this, 'toggle_opportunity_favorite');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_ignore_opportunity_ajax', $this, 'ignore_opportunity');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_ignore_opportunity_ajax', $this, 'ignore_opportunity');
         }
 
         /**
@@ -290,6 +294,7 @@
             $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
+                'relation' => 'AND',
                 "posts_per_page" => $limit,
                 "author__in"         => ($user_id)?[$user_id]:[],
                 "orderby"        => $orderby,
@@ -415,6 +420,164 @@
             }
         }
 
+                /**
+         * Description...toggle fav opportunity and save it to user's favorite list
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         */
+        public function toggle_opportunity_favorite(): void
+        {
+
+            $post_id =intval($_POST['post_id']);
+            $user_id = intval($_POST['user_id']);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $favorites = [];
+            if(!is_wp_error($profile)){
+                $favorites = ($profile->meta_data['favorite_opportunities'])? $profile->meta_data['favorite_opportunities'] : [];
+                if (in_array($post_id, $favorites)) {
+                    $key = array_search($post_id, $favorites);
+                    if ($key !== false) {
+                        unset($favorites[$key]);
+                    }
+                    $profile->set_meta_data('favorite_opportunities',$favorites);
+                    $profile->update();
+                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
+                    ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
+                    );
+                } else {
+                    $favorites[] = $post_id;
+                    $profile->set_meta_data('favorite_opportunities',$favorites);
+                    $profile->update();
+                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
+                    ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
+                    );
+                }
+            }else{
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
+                    ['status' => false, 'msg' => 'You must have profile', 'fav_active' => 1]
+                    );
+            }
+        }
+        /**
+         * Description...get user's favorite list
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return array
+         */
+        public function get_user_favorites($profile): array
+        {
+            return ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : array();
+        }
+
+        /**
+         * Description...Check if post exists in user's favorite list
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return bool
+         */
+        public function is_post_in_user_favorites($post_id, $user_id): bool
+        {
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $favorites = array();
+            if(!is_wp_error($profile)){
+                $favorites = $this->get_user_favorites($profile);
+                $favorites = array_combine($favorites, $favorites);
+            }   
+            return isset($favorites[$post_id]);
+        }
+
+        /**
+         * Description...ignore oppertunitie and save it to user's ignored list
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return void
+         */
+        public function ignore_opportunity(): void
+        {
+            $post_id = intval($_POST['post_id']);
+            $user_id = intval($_POST['user_id']);
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_opportunities = [];
+            if(!is_wp_error($profile)){
+                $ignored_opportunities = ($profile->meta_data['ignored_opportunities'])? $profile->meta_data['ignored_opportunities'] : [];
+                $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
+                if(isset($ignored_opportunities[$post_id])){
+                    unset($ignored_opportunities[$post_id]);
+                    $ignored_opportunities = array_values($ignored_opportunities);
+                    $profile->set_meta_data('ignored_opportunities',$ignored_opportunities);
+                    $profile->update();
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
+                    ob_start();
+                    get_template_part('app/Views/template-parts/opportunities-ajax');
+                    $html = ob_get_clean();
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
+                    ['status' => true, 'msg' => 'post un-ignored', 'ignore_active' => 1, 'updated' => $html]
+                    );
+                }
+                else {
+                    $ignored_opportunities[] = $post_id;
+                    $profile->set_meta_data('ignored_opportunities',$ignored_opportunities);
+                    $profile->update();
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
+                    ob_start();
+                    get_template_part('app/Views/template-parts/opportunities-ajax');
+                    $html = ob_get_clean();
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
+                    ['status' => true, 'msg' => 'post ignored!', 'ignore_active' => 0, 'updated' => $html]
+                    );
+                }             
+            }else{
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
+                    ['status' => false, 'msg' => 'You must have profile', 'ignore_active' => 1]
+                    );
+            }
+        }
+
+        public function get_user_ignored_opportunities($profile): array
+        {
+            return ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : array();
+        }
+
+        /**
+         * Description...Check if post exists in user's ignored list
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return bool
+         */
+        public function is_post_in_user_ignored_opportunities($post_id, $user_id): bool
+        {
+            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_opportunities = array();
+            if(!is_wp_error($profile)){
+                $ignored_opportunities = $this->get_user_ignored_opportunities($profile);
+                $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
+            }   
+            return isset($ignored_opportunities[$post_id]);
+        }
 
         
     }

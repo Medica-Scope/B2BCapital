@@ -13,8 +13,6 @@
     <main id="" class="">
 
         <?php
-
-            echo get_post_type();
             while (have_posts()) :
                 the_post();
 

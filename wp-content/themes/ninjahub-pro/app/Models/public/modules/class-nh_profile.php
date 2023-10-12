@@ -31,6 +31,7 @@
             'preferred_opportunities_cat_list',
             'preferred_articles_cat_list',
             'favorite_opportunities',
+            'ignored_opportunities',
             'favorite_articles',
             'ignored_articles'
         ];
