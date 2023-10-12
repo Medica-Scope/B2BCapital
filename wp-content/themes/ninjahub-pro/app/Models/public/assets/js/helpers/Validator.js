@@ -303,6 +303,7 @@ class NhValidator
             _.invoke(forms, type);
         }
     }
+
     static initCompetitionValidation($el, type)
     {
 
@@ -439,6 +440,49 @@ class NhValidator
                             project_yearly_net_profit_amount: {
                                 required: true
                             },
+                        },
+                    });
+                }
+            }
+        };
+
+        if (_.has(forms, type)) {
+            _.invoke(forms, type);
+        }
+    }
+
+    static initAppointmentsValidation($el, type)
+    {
+
+        let that = this;
+
+        const forms = {
+            createAppointment: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            name: {
+                                required: true,
+                                maxlength: 150,
+                                minlength: 2
+                            },
+                            email: {
+                                required: true,
+                                email_regex: true,
+                                minlength: 10,
+                                maxlength: 125
+                            },
+                            mobile: {
+                                required: true,
+                                maxlength: 16,
+                                minlength: 11
+                            },
+                            timeslot: {
+                                required: true
+                            }
                         },
                     });
                 }
