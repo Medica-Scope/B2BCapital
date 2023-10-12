@@ -59,3 +59,12 @@
 		}
 	}
 }
+
+.btn-outline-light {
+	--bs-btn-color: var(--bs-black);
+	--bs-btn-bg: var(--bs-white);
+	--bs-btn-hover-color: var(--bs-success);
+	--bs-btn-border-color: var(--bs-gray-300);
+	--bs-btn-active-color: var(--bs-white);
+	--bs-btn-active-bg: var(--bs-btn-hover-color);
+}
