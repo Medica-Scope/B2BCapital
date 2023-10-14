@@ -1,7 +1,7 @@
 @import './submenus/submenus.scss';
 @import '../../base/variables';
 
-.ninja_form_container, .acf-form {
+.ninja_form_container:not(.ninja-header-search-form-container), .acf-form {
 	background-color: $layout-light;
 	max-width: 920px;
 	border-radius: 5px;
@@ -9,5 +9,15 @@
 	margin: 2rem auto;
 }
 .ninja-attachment-uploader{
-	width: 100%;
+	width: 100% !important;
+}
+.breadcrumbs{
+	color: $gray-medium;
+	a{
+		color: $gray-medium;
+	}
+	.bbc-chevron-right, .bbc-chevron-left{
+		font-size: 0.8rem;
+		color: rgba($gray-medium, 0.50);
+	}
 }
