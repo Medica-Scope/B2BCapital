@@ -1,1 +1,13 @@
 @import './submenus/submenus.scss';
+@import '../../base/variables';
+
+.ninja_form_container, .acf-form {
+	background-color: $layout-light;
+	max-width: 920px;
+	border-radius: 5px;
+	padding: 2rem;
+	margin: 2rem auto;
+}
+.ninja-attachment-uploader{
+	width: 100%;
+}

@@ -1,39 +1,35 @@
 <?php
-    /**
-     * @Filename: template-my-widgets.php
-     * @Description:
-     * @User: NINJA MASTER - Mustafa Shaaban
-     * @Date: 21/2/2023
-     *
-     * Template Name: My Widgets Page
-     * Template Post Type: page
-     *
-     * @package NinjaHub
-     * @since 1.0
-     *
-     */
+/**
+ * @Filename: template-my-widgets.php
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 21/2/2023
+ *
+ * Template Name: My Widgets Page
+ * Template Post Type: page
+ *
+ * @package NinjaHub
+ * @since 1.0
+ *
+ */
 
 
-    use NH\APP\CLASSES\Nh_User;
-    use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\APP\CLASSES\Nh_User;
+use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
-    get_header();
+get_header();
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
 ?>
+<main class="my-widgets">
+	<div class="container container-xxl">
+		<?php Nh_Public::breadcrumbs(); ?>
 
-    <main id="" class="">
-        <div class="container">
-            <?php Nh_Public::breadcrumbs(); ?>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))) ?>"><?= __('My Account', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja'); ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('Widgets', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __('Notifications', 'ninja') ?></a>
-        </nav>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('My Widgets', 'ninja') ?></a>
-        </nav>
-        </div>
-    </main><!-- #main -->
+		<nav class="dashboard-submenus mt-3 mb-5">
+			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', null, [ 'active_link' => 'my_widgets' ] ); ?>
+		</nav>
+	</div>
+</main><!-- #main -->
 
 <?php get_footer();
-

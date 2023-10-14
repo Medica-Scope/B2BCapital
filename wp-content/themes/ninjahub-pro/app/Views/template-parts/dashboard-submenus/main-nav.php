@@ -8,7 +8,7 @@ use NH\APP\CLASSES\Nh_User;
 
 $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 
-$acquisition_or_opportunities = $active_link === 'acquisition' || $active_link === 'acquisition' ? true : false;
+$acquisition_or_opportunities = $active_link === 'acquisition' || $active_link === 'opportunities' ? true : false;
 ?>
 
 <ul class="dashboard-main-nav d-flex flex-row align-items-baseline">

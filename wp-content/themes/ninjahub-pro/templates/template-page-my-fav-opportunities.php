@@ -15,26 +15,24 @@
 
 
     use NH\APP\CLASSES\Nh_User;
+use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
     get_header();
+
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
 ?>
 
-    <main id="" class="">
-        <div class="container">
-            <?php Nh_Public::breadcrumbs(); ?>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))) ?>"><?= __('My Account', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja'); ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('Widgets', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __('Notifications', 'ninja') ?></a>
-        </nav>
-            <nav>
-                <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= sprintf(__('My %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')); ?></a>
-                <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-favorite-opportunities'))) ?>"><?= sprintf(__('My Favorite %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')) ?></a>
-            </nav>
-        </div>
-    </main><!-- #main -->
+<main class="my-fav-opportunities">
+	<div class="container container-xxl">
+		<?php Nh_Public::breadcrumbs(); ?>
+
+		<nav class="dashboard-submenus mt-3 mb-5">
+			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', null, [ 'active_link' => 'opportunities' ] ); ?>
+			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', null, [ 'active_link' => 'my_favorite' ] ); ?>
+		</nav>
+	</div>
+</main><!-- #main -->
 
 <?php get_footer();
-

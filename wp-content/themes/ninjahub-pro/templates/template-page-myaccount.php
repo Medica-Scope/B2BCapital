@@ -31,12 +31,12 @@ $user     = $user_obj::get_current_user();
 ?>
 
 <main class="my-account">
-	<div class="container">
+	<div class="container container-xxl">
 		<!-- TODO: breadcrumb -->
 		<?php Nh_Public::breadcrumbs(); ?>
 		<nav class="dashboard-submenus mt-3 mb-5">
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', null, [ 'active_link' => 'my_account' ] ); ?>
-			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/sub-nav', null, [ 'active_link' => 'profile_data' ] ); ?>
+			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/myaccount-sub-nav', null, [ 'active_link' => 'profile_data' ] ); ?>
 		</nav>
 
 		<?php
