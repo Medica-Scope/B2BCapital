@@ -65,11 +65,13 @@
 
         public function enqueue_scripts(): void
         {
-            $this->hooks->add_script('admin-script-main', Nh_Hooks::PATHS['admin']['js'] . '/main', [ 'jquery' ]);
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-admin-script-main', Nh_Hooks::PATHS['admin']['js'] . '/main', [ 'jquery' ]);
             $this->hooks->add_localization(Nh::_DOMAIN_NAME . '-admin-script-main', 'nhGlobals', [
                 'domain_key' => Nh::_DOMAIN_NAME,
                 'ajaxUrl'    => admin_url('admin-ajax.php'),
             ]);
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-opportunity-script-main', Nh_Hooks::PATHS['admin']['js'] . '/opportunity-front', [ 'jquery' ]);
+
             $this->hooks->run();
 
         }

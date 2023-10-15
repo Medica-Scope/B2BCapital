@@ -44,19 +44,11 @@ $is_item_controllers      = ! empty( $args['is_item_controllers'] ) ? $args['is_
 	</div>
 	<div class="card-footer card-extra-info">
 		<div class="card-info-item">
-			<small class="text-body-secondary">Location</small>
+			<small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
 			<p class="card-text fw-bold">Egypt</p>
 		</div>
 		<div class="card-info-item">
-			<small class="text-body-secondary">Valuation</small>
-			<p class="card-text fw-bold">95460$</p>
-		</div>
-		<div class="card-info-item">
-			<small class="text-body-secondary">Location</small>
-			<p class="card-text fw-bold">Egypt</p>
-		</div>
-		<div class="card-info-item">
-			<small class="text-body-secondary">Valuation</small>
+			<small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
 			<p class="card-text fw-bold">95460$</p>
 		</div>
 	</div>

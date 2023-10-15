@@ -15,26 +15,76 @@
 
 
     use NH\APP\CLASSES\Nh_User;
+    use NH\APP\HELPERS\Nh_Hooks;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
     use NH\APP\MODELS\FRONT\Nh_Public;
+    use NH\Nh;
 
     get_header();
+
+    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account');
+
+    global $user_ID;
+    $opportunity_obj  = new Nh_Opportunity();
+    $opportunities    = $opportunity_obj->get_profile_fav_opportunities();
+    $user_obj         = Nh_User::get_current_user();
 ?>
 
-    <main id="" class="">
-        <div class="container">
+    <main class="my-fav-opportunities">
+        <div class="container container-xxl">
             <?php Nh_Public::breadcrumbs(); ?>
-        <nav>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))) ?>"><?= __('My Account', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja'); ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"><?= __('Widgets', 'ninja') ?></a>
-            <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __('Notifications', 'ninja') ?></a>
-        </nav>
-            <nav>
-                <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"><?= sprintf(__('My %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')); ?></a>
-                <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-favorite-opportunities'))) ?>"><?= sprintf(__('My Favorite %s', 'ninja'), Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja')) ?></a>
+
+            <nav class="dashboard-submenus mt-3 mb-5">
+                <?php get_template_part('app/Views/template-parts/dashboard-submenus/main-nav', NULL, [ 'active_link' => 'opportunities' ]); ?>
+                <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'my_favorite' ]); ?>
             </nav>
         </div>
+
+        <section class="page-content opportunity-content">
+            <?php
+
+                foreach ($opportunities as $opportunity) {
+                    $ignore_chk = in_array($opportunity->ID, empty($user_obj->profile->meta_data['ignored_opportunities']) ? [] : $user_obj->profile->meta_data['ignored_opportunities']);
+                    ?>
+                    <div class="opportunity-card">
+
+                        <h3>
+                            <?= $opportunity->title ?>
+                        </h3>
+
+                        <span class="date">
+                            <?= date('F jS, Y', strtotime($opportunity->created_date)) ?>
+                        </span>
+
+                        <p class="short-description">
+                            <?= $opportunity->meta_data['short_description'] ?>
+                        </p>
+
+                        <span class="status">
+                            <?= $opportunity->meta_data['opportunity_stage'] ?>
+                        </span>
+
+                        <div class="ninja-fav-con">
+                            <button class="ninja-add-to-fav btn btn-dark" id="addToFav"
+                                    data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
+                                    data-type="<?= $opportunity->type ?>" type="button">FAV
+                            </button>
+                        </div>
+
+                        <div class="ninja-ignore-con">
+                            <button class="ninja-add-to-ignore btn <?= ($ignore_chk) ? 'btn-outline-dark' : '' ?>"
+                                    id="addToIgnore" data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
+                                    data-type="<?= $opportunity->type ?>" type="button">X
+                            </button>
+                        </div>
+
+                    </div>
+                    <?php
+                }
+
+            ?>
+        </section>
     </main><!-- #main -->
 
 <?php get_footer();
-

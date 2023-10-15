@@ -54,6 +54,7 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
+            $this->hooks->add_action('init', $this, 'register_opportunity_statuses');
         }
 
         /**
@@ -63,6 +64,8 @@
         {
             // TODO: Implement filters() method.
             $this->hooks->add_filter('acf/location/rule_match/post', $this, 'acf_location_rules', 10, 4);
+//            $this->hooks->add_filter('quick_edit_dropdown_pages_args', $this,'opportunity_quick_edit_dropdown', 10, 2);
+//            $this->hooks->add_filter('quick_edit_dropdown_posts_args', $this, 'opportunity_quick_edit_dropdown', 10, 2);
         }
 
         public function acf_location_rules($match, $rule, $options, $field_group)
@@ -92,6 +95,103 @@
                 }
             }
             return $match;
+        }
+
+        public function register_opportunity_statuses(): void
+        {
+            register_post_status('new', array(
+                'label'                     => _x('New', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('New (%s)', 'New (%s)', 'ninja'),
+            ));
+
+            register_post_status('approved', array(
+                'label'                     => _x('Approved', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Approved (%s)', 'Approved (%s)', 'ninja'),
+            ));
+
+            register_post_status('held', array(
+                'label'                     => _x('Held', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Held (%s)', 'Held (%s)', 'ninja'),
+            ));
+
+            register_post_status('review', array(
+                'label'                     => _x('Review', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Review (%s)', 'Review (%s)', 'ninja'),
+            ));
+
+            register_post_status('verified', array(
+                'label'                     => _x('Verified', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Verified (%s)', 'Verified (%s)', 'ninja'),
+            ));
+
+            register_post_status('seo_verified', array(
+                'label'                     => _x('SEO Verified', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('SEO Verified (%s)', 'SEO Verified (%s)', 'ninja'),
+            ));
+
+            register_post_status('translated', array(
+                'label'                     => _x('Translated', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Translated (%s)', 'Translated (%s)', 'ninja'),
+            ));
+
+            register_post_status('success', array(
+                'label'                     => _x('Success', 'Opportunity status', 'ninja'),
+                'public'                    => true,
+                'exclude_from_search'       => false,
+                'show_in_admin_all_list'    => true,
+                'show_in_admin_status_list' => true,
+                'label_count'               => _n_noop('Success (%s)', 'Success (%s)', 'ninja'),
+            ));
+        }
+
+        // Add custom statuses to quick edit options
+        public function opportunity_quick_edit_dropdown($statuses, $post) {
+            if ($post->post_type === 'opportunity') {
+                $custom_statuses = array(
+                    'new'         => 'New',
+                    'approved'    => 'Approved',
+                    'held'        => 'Held',
+                    'review'      => 'Review',
+                    'verified'    => 'Verified',
+                    'seo_verified' => 'SEO Verified',
+                    'translated'  => 'Translated',
+                    'success'     => 'Success',
+                );
+
+                foreach ($custom_statuses as $key => $value) {
+                    $statuses[$key] = $value;
+                }
+            }
+
+            return $statuses;
         }
 
         private function get_field_groups_by_post_id($post_id): array

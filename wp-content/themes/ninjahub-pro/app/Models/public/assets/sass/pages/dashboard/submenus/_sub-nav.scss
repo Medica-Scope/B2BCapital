@@ -4,8 +4,9 @@
 		margin-right: 1.5rem;
 	}
 	.btn-link{
-		color: $primary;
+		color: $primary-medium;
 		&.active{
+			color: $primary;
 			border-bottom: 1px solid $primary;
 		}
 	}

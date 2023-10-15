@@ -3,7 +3,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 use NH\Nh;
 
 ?>
-<div class="faq-help-card shadow">
+<div class="faq-help-card card shadow">
 	<div>
 		<h3>
 			<?= __( 'Help and Modules', 'ninja' ) ?>

@@ -30,13 +30,11 @@ $user     = $user_obj::get_current_user();
 ?>
 
 <main class="my-account change-password">
-	<div class="container">
-
-		<!-- TODO: breadcrumb -->
+	<div class="container container-xxl">
 		<?php Nh_Public::breadcrumbs(); ?>
 		<nav class="dashboard-submenus mt-3 mb-5">
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', null, [ 'active_link' => 'my_account' ] ); ?>
-			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/sub-nav', null, [ 'active_link' => 'change_password' ] ); ?>
+			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/myaccount-sub-nav', null, [ 'active_link' => 'change_password' ] ); ?>
 		</nav>
 
 		<?php

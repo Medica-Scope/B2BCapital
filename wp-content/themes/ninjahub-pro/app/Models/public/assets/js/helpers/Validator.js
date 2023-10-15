@@ -8,8 +8,8 @@
 /* global nhGlobals, KEY */
 
 // import theme 3d party modules
-import $ from 'jquery';
-import _ from 'lodash';
+import $            from 'jquery';
+import _            from 'lodash';
 import 'jquery-validation';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/js/utils.js';
@@ -68,7 +68,7 @@ class NhValidator
             // let re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         }, this.phrases.phone_regex);
-        $.validator.addMethod("intlTelNumber", function(value, element, param) {
+        $.validator.addMethod('intlTelNumber', function (value, element, param) {
             let iti = window.ITIOBJ[param.itiObj];
             return this.optional(element) || iti.isValidNumber();
         }, this.phrases.intlTelNumber);
@@ -103,7 +103,7 @@ class NhValidator
                             user_login: 'required',
                             user_password: {
                                 required: true,
-                                maxlength: 26
+                                maxlength: 26,
                             },
                         },
                     });
@@ -118,9 +118,9 @@ class NhValidator
                         rules: {
                             'industries': {
                                 required: true,
-                                minlength: 1
+                                minlength: 1,
                             },
-                        }
+                        },
                     });
                 }
             },
@@ -134,38 +134,38 @@ class NhValidator
                             first_name: {
                                 required: true,
                                 minlength: 2,
-                                maxlength: 150
+                                maxlength: 150,
                             },
                             last_name: {
                                 required: true,
                                 minlength: 2,
-                                maxlength: 150
+                                maxlength: 150,
                             },
                             phone_number: {
                                 required: true,
-                                intlTelNumber: {itiObj: 'registration'},
-                                maxlength: 50
+                                intlTelNumber: { itiObj: 'registration' },
+                                maxlength: 50,
                             },
                             user_email: {
                                 required: true,
                                 email_regex: true,
                                 minlength: 10,
-                                maxlength: 125
+                                maxlength: 125,
                             },
                             user_password: {
                                 required: true,
-                                password_regex: true
+                                password_regex: true,
                             },
                             confirm_password: {
                                 required: true,
                                 equalTo: $el.user_password,
                             },
                             user_type: {
-                                required: true
+                                required: true,
                             },
                             verification_type: {
-                                required: true
-                            }
+                                required: true,
+                            },
                         },
                     });
                 }
@@ -179,19 +179,19 @@ class NhValidator
                         rules: {
                             code1: {
                                 required: true,
-                                maxlength: 1
+                                maxlength: 1,
                             },
                             code2: {
                                 required: true,
-                                maxlength: 1
+                                maxlength: 1,
                             },
                             code3: {
                                 required: true,
-                                maxlength: 1
+                                maxlength: 1,
                             },
                             code4: {
                                 required: true,
-                                maxlength: 1
+                                maxlength: 1,
                             },
                         },
                     });
@@ -205,7 +205,7 @@ class NhValidator
                         },
                         rules: {
                             user_email_phone: {
-                                required: true
+                                required: true,
                             },
                         },
                     });
@@ -236,28 +236,28 @@ class NhValidator
                         normalizer: function (value) {
                             return $.trim(value);
                         },
-                        ignore: ":hidden:not(select)",
+                        ignore: ':hidden:not(select)',
                         rules: {
                             first_name: {
                                 required: true,
                                 minlength: 2,
-                                maxlength: 150
+                                maxlength: 150,
                             },
                             last_name: {
                                 required: true,
                                 minlength: 2,
-                                maxlength: 150
+                                maxlength: 150,
                             },
                             phone_number: {
                                 required: true,
-                                intlTelNumber: {itiObj: 'editProfile'},
-                                maxlength: 50
+                                intlTelNumber: { itiObj: 'editProfile' },
+                                maxlength: 50,
                             },
                             user_email: {
                                 required: true,
                                 email_regex: true,
                                 minlength: 10,
-                                maxlength: 125
+                                maxlength: 125,
                             },
                             site_language: {
                                 required: true,
@@ -270,7 +270,7 @@ class NhValidator
                             },
                             preferred_articles_cat_list: {
                                 required: true,
-                            }
+                            },
                         },
                     });
                 }
@@ -401,7 +401,7 @@ class NhValidator
                             project_name: {
                                 required: true,
                                 maxlength: 150,
-                                minlength: 10
+                                minlength: 10,
                             },
                             category: {
                                 required: true,
@@ -409,41 +409,121 @@ class NhValidator
                             description: {
                                 required: true,
                                 maxlength: 1500,
-                                minlength: 50
+                                minlength: 50,
                             },
                             short_description: {
                                 required: true,
                                 maxlength: 100,
-                                minlength: 30
+                                minlength: 30,
                             },
                             opportunity_type: {
-                                required: true
+                                required: true,
                             },
                             start_bidding_amount: {
-                                required: true
+                                required: true,
                             },
                             target_amount: {
-                                required: true
+                                required: true,
                             },
                             project_phase: {
-                                required: true
+                                required: true,
                             },
                             project_start_date: {
-                                required: true
+                                required: true,
                             },
                             project_assets_amount: {
-                                required: true
+                                required: true,
                             },
                             project_yearly_cashflow_amount: {
-                                required: true
+                                required: true,
                             },
                             project_yearly_net_profit_amount: {
-                                required: true
+                                required: true,
+                            },
+                            media_file: {
+                                required: true,
+                            },
+                            date_founded: {
+                                required: true,
+                            },
+                            asking_price_in_usd: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            number_of_customers: {
+                                required: true,
+                                number: true,
+                                step: 1,
+                                min: 0,
+                            },
+                            business_team_size: {
+                                required: true,
+                                number: true,
+                                step: 1,
+                                min: 0,
+                            },
+                            location: {
+                                required: true,
+                            },
+                            net_profit: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            valuation_in_usd: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            stake_to_be_sold_percentage: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                                max: 100,
+                            },
+                            usd_exchange_rate_used_in_conversion: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            annual_accounting_revenue: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            annual_growth_rate_percentage: {
+                                required: true,
+                                max: 100,
+                            },
+                            annual_growth_rate: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            tech_stack_this_product_is_built_on: {
+                                required: true,
+                            },
+                            product_competitors: {
+                                required: true,
+                            },
+                            business_type: {
+                                required: true,
+                            },
+                            business_model: {
+                                required: true,
                             },
                         },
                     });
                 }
-            }
+            },
         };
 
         if (_.has(forms, type)) {
@@ -467,26 +547,26 @@ class NhValidator
                             name: {
                                 required: true,
                                 maxlength: 150,
-                                minlength: 2
+                                minlength: 2,
                             },
                             email: {
                                 required: true,
                                 email_regex: true,
                                 minlength: 10,
-                                maxlength: 125
+                                maxlength: 125,
                             },
                             mobile: {
                                 required: true,
                                 maxlength: 16,
-                                minlength: 11
+                                minlength: 11,
                             },
                             timeslot: {
-                                required: true
-                            }
+                                required: true,
+                            },
                         },
                     });
                 }
-            }
+            },
         };
 
         if (_.has(forms, type)) {

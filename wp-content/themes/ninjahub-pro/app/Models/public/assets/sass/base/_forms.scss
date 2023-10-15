@@ -9,7 +9,10 @@
 @import '../components/loader/loader';
 
 /* Forms Styles Start Here */
-.form-field {
+.form-field,
+.form-group,
+.input-group,
+.acf-field {
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 1rem;
@@ -38,7 +41,7 @@
 			border-radius: 2px;
 			color: $primary;
 		}
-		.bbc-lock2{
+		.bbc-lock2 {
 			left: 1.7rem !important;
 		}
 		.showPassIcon {
@@ -50,7 +53,8 @@
 			background-color: transparent !important;
 			cursor: pointer;
 		}
-		.form-control {
+		.form-control,
+		.form-select {
 			padding: 1rem 2rem 1rem 3rem;
 		}
 	}
@@ -61,12 +65,15 @@
 		font-family: $bbc-secondary-en-font-medium;
 		margin-bottom: 0.5rem;
 	}
-	.form-control {
-		margin: 0;
+	.form-control,
+	.form-select,
+	input,
+	textarea {
+		margin: 0 !important;
 		height: auto;
-		padding: 1rem;
+		padding: 1rem !important;
 		color: $layout-dark;
-		font-size: 0.8rem;
+		font-size: 0.8rem !important;
 		border-radius: 3px;
 		border: none;
 		background-color: $gray-light;
@@ -76,6 +83,10 @@
 		}
 		&:focus {
 			box-shadow: none;
+		}
+		&:focus-visible {
+			border: none !important;
+			outline: none !important;
 		}
 		&.ninja-error-input {
 			border-color: $error;
@@ -114,7 +125,8 @@
 			display: inline-block;
 			color: $error;
 		}
-		.form-control {
+		.form-control,
+		.form-select {
 			outline: 0;
 			border-color: red;
 			border-bottom: 1px solid $error;
@@ -286,7 +298,8 @@
 			right: 0;
 			font-family: $bbc-ar-font-regular;
 		}
-		.form-control {
+		.form-control,
+		.form-select {
 			font-family: $bbc-ar-font-regular;
 		}
 		&.has-error {
@@ -352,3 +365,10 @@
 		padding-bottom: 7px;
 	}
 }
+
+/* ACF Forms Styles START*/
+.acf-field {
+	input {
+	}
+}
+/* ACF Forms Styles END*/
