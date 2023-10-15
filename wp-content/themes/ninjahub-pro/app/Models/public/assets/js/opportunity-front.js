@@ -11,18 +11,22 @@
 import $ from 'jquery';
 
 // import theme modules
-import NhValidator    from './helpers/Validator';
-import NhUiCtrl        from './inc/UiCtrl';
+import NhValidator   from './helpers/Validator';
+import NhUiCtrl      from './inc/UiCtrl';
 import NhOpportunity from './modules/Opportunity';
-import intlTelInput from 'intl-tel-input';
+import tinymce       from 'tinymce/tinymce';
+import 'tinymce/themes/silver';  // Import the theme
+import 'tinymce/plugins/link';   // Import a plugin
+import 'tinymce/icons/default';  // Import the icons
+import 'tinymce/models/dom';  // Import the dom
 
 class NhOpportunityFront extends NhOpportunity
 {
     constructor()
     {
         super();
-        this.UiCtrl = new NhUiCtrl();
-        this.$el    = this.UiCtrl.selectors = {
+        this.UiCtrl        = new NhUiCtrl();
+        this.$el           = this.UiCtrl.selectors = {
             opportunity: {
                 form: $(`#${KEY}_create_opportunity_form`),
                 parent: $(`#${KEY}_create_opportunity_form`).parent(),
@@ -34,7 +38,7 @@ class NhOpportunityFront extends NhOpportunity
                 ignoreBtn: `.${KEY}-add-to-ignore`,
             },
         };
-        this.attachment = {
+        this.attachment    = {
             currentSize: 0,
             totalSize: 26214400,
         };
@@ -52,28 +56,23 @@ class NhOpportunityFront extends NhOpportunity
         this.ignore_opportunity();
     }
 
-    CreateOpportunityFormFieldsFront() {
-        let that          = this,
+    CreateOpportunityFormFieldsFront()
+    {
+        let that         = this,
             $opportunity = this.$el.opportunity,
-            ajaxRequests  = this.ajaxRequests;
+            ajaxRequests = this.ajaxRequests;
 
-        // $opportunity.category.on('change', $opportunity.parent, function (e) {
-        //     e.preventDefault();
-        //     let $this             = $(e.currentTarget),
-        //         catID          = $this.find(":selected").val();
-        //
-        //     // Abort any ongoing registration requests
-        //     if (typeof ajaxRequests.getForm !== 'undefined') {
-        //         ajaxRequests.getForm.abort();
-        //     }
-        //
-        //     // that.getNhACFCusomForm(catID, $this);
-        // });
-
+        tinymce.init({
+            selector: `#${KEY}_extra_details`,
+            base_url: '/wp-content/themes/ninjahub-pro/node_modules/tinymce',
+            suffix: '.min',
+            menubar: false,
+            height: 250
+        }).then();
 
         $opportunity.opportunity_type.on('change', $opportunity.parent, function (e) {
-            let $this = $(e.currentTarget),
-                $target = $this.find(":selected").attr('data-target');
+            let $this   = $(e.currentTarget),
+                $target = $this.find(':selected').attr('data-target');
 
             $('.nh-opportunities-fields').hide();
             $('#' + $target + '_target').show();
@@ -82,10 +81,11 @@ class NhOpportunityFront extends NhOpportunity
         });
     }
 
-    CreateOpportunityFront() {
-        let that          = this,
+    CreateOpportunityFront()
+    {
+        let that         = this,
             $opportunity = this.$el.opportunity,
-            ajaxRequests  = this.ajaxRequests;
+            ajaxRequests = this.ajaxRequests;
 
         // Initialize form validation
         NhValidator.initOpportunityValidation($opportunity, 'createOpportunity');
@@ -93,8 +93,10 @@ class NhOpportunityFront extends NhOpportunity
         // Handle form submission
         $opportunity.form.on('submit', $opportunity.parent, function (e) {
             e.preventDefault();
-            let $this             = $(e.currentTarget),
-                formData          = $this.serializeObject();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            formData.extra_details = tinymce.get(`${KEY}_extra_details`).getContent();
 
             // Abort any ongoing registration requests
             if (typeof ajaxRequests.createOpportunity !== 'undefined') {
@@ -108,17 +110,18 @@ class NhOpportunityFront extends NhOpportunity
         });
     }
 
-    upload() {
-        let that = this,
-        $opportunity = this.$el.opportunity,
+    upload()
+    {
+        let that         = this,
+            $opportunity = this.$el.opportunity,
             ajaxRequests = this.ajaxRequests;
 
         $('.ninja-attachment-uploader').on('change', $opportunity, function (e) {
             e.preventDefault();
-            let $this = $(e.currentTarget),
-                form_data = new FormData(),
-                files = $this[0].files,
-                target = $(this).attr('data-target'),
+            let $this      = $(e.currentTarget),
+                form_data  = new FormData(),
+                files      = $this[0].files,
+                target     = $(this).attr('data-target'),
                 $recaptcha = $this.closest('form').find('#g-recaptcha-response').val();
 
             form_data.append('action', `${KEY}_upload_attachment`);
@@ -161,17 +164,18 @@ class NhOpportunityFront extends NhOpportunity
         });
     }
 
-    remove() {
-        let that = this,
+    remove()
+    {
+        let that         = this,
             $opportunity = this.$el.opportunity,
             ajaxRequests = this.ajaxRequests;
 
         $(document).on('click', '.ninja-remove-attachment', function (e) {
             e.preventDefault();
-            let $this = $(e.currentTarget),
-                form_data = new FormData(),
+            let $this      = $(e.currentTarget),
+                form_data  = new FormData(),
                 $recaptcha = $this.closest('form').find('#g-recaptcha-response').val(),
-                target = $this.parent().parent().parent().find('input[type="file"]').attr('data-target');
+                target     = $this.parent().parent().parent().find('input[type="file"]').attr('data-target');
             form_data.append('action', `${KEY}_remove_attachment`);
             form_data.append('g-recaptcha-response', $recaptcha);
 
@@ -185,40 +189,43 @@ class NhOpportunityFront extends NhOpportunity
         });
     }
 
-    createAttachment(filename) {
+    createAttachment(filename)
+    {
         return '<div class="col-sm-2 ninja-single-attachment-wrapper"><div class="ninja-single-attachment"><i class="fa fa-file"></i><p class="ninja-attachment-name">' + filename + '</p><div class="ninja-attachment-progress"><span class="ninja-progress"></span></div><a href="javascript:;" class="ninja-remove-attachment"><i class="fa fa-times-circle"></i></a></div></div>';
     };
 
-    renameFile(filename) {
-        let splice = filename.split('.'),
-            ext = splice[splice.length - 1],
-            name = splice[0],
+    renameFile(filename)
+    {
+        let splice               = filename.split('.'),
+            ext                  = splice[splice.length - 1],
+            name                 = splice[0],
             subStringingFileName = name.substring(0, 5) + '...';
         return subStringingFileName + ext;
     };
 
-    checkExt(filename) {
-        let splice = filename.split('.'),
+    checkExt(filename)
+    {
+        let splice       = filename.split('.'),
             availableExt = [
                 'jpg',
                 'jpeg',
                 'png',
             ],
-            ext = splice[splice.length - 1];
+            ext          = splice[splice.length - 1];
 
         return $.inArray(ext.toLowerCase(), availableExt) >= 0;
     };
 
     toggle_fav_opportunity()
     {
-        let that           = this,
-            $controlls = this.$el.controlls,
-            ajaxRequests   = this.ajaxRequests;
+        let that         = this,
+            $controlls   = this.$el.controlls,
+            ajaxRequests = this.ajaxRequests;
 
 
-            $(document).on('click', $controlls.favBtn, function (e) {
+        $(document).on('click', $controlls.favBtn, function (e) {
             e.preventDefault();
-            let $this = $(e.currentTarget);
+            let $this   = $(e.currentTarget);
             let user_id = $this.attr('data-uID');
             let post_id = $this.attr('data-id');
 
@@ -226,19 +233,20 @@ class NhOpportunityFront extends NhOpportunity
                 ajaxRequests.toggleFav.abort();
             }
 
-            that.toggleFavoriteOpportunity($this,user_id,post_id);
+            that.toggleFavoriteOpportunity($this, user_id, post_id);
         });
     }
 
-    ignore_opportunity(){
-        let that           = this,
-            $controlls = this.$el.controlls,
-            ajaxRequests   = this.ajaxRequests;
+    ignore_opportunity()
+    {
+        let that         = this,
+            $controlls   = this.$el.controlls,
+            ajaxRequests = this.ajaxRequests;
 
 
         $(document).on('click', $controlls.ignoreBtn, function (e) {
             e.preventDefault();
-            let $this = $(e.currentTarget);
+            let $this   = $(e.currentTarget);
             let user_id = $this.attr('data-uID');
             let post_id = $this.attr('data-id');
 
@@ -246,7 +254,7 @@ class NhOpportunityFront extends NhOpportunity
                 ajaxRequests.ignoreArticle.abort();
             }
             console.log('clicked');
-            that.ignoreOpportunity($this,user_id,post_id);
+            that.ignoreOpportunity($this, user_id, post_id);
         });
     }
 }

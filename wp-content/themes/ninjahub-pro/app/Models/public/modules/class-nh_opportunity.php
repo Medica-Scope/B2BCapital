@@ -30,7 +30,7 @@
     class Nh_Opportunity extends Nh_Module
     {
         public array $meta_data = [
-            'short_description',
+            // Opportunity Data
             'opportunity_type',
             'start_bidding_amount',
             'target_amount',
@@ -39,12 +39,42 @@
             'project_assets_amount',
             'project_yearly_cashflow_amount',
             'project_yearly_net_profit_amount',
-            'step_two'
+
+            //Basic Info
+            'short_description',
+            'date_founded',
+            'asking_price_in_usd',
+            'number_of_customers',
+            'business_team_size',
+            'location',
+
+            // Financial Info
+            'net_profit',
+            'valuation_in_usd',
+            'stake_to_be_sold_percentage',
+            'usd_exchange_rate_used_in_conversion',
+            'annual_accounting_revenue',
+            'annual_growth_rate_percentage',
+            'annual_growth_rate',
+
+            // Business Information
+            'tech_stack_this_product_is_built_on',
+            'product_competitors',
+            'extra_details',
+
+            // Status
+            'opportunity_stage',
+
+            'step_two',
+            'opportunity_bids',
+            'opportunity_acquisitions',
         ];
         public array $taxonomy  = [
             'opportunity-category',
             'opportunity-type',
-            'industry'
+            'industry',
+            'business-type',
+            'business-model'
         ];
 
         public function __construct()
@@ -95,6 +125,9 @@
             // TODO: Implement filters() method.
         }
 
+        /**
+         * @throws \Exception
+         */
         public function create_opportunity(): void
         {
             global $user_ID;
@@ -105,16 +138,36 @@
             $description                      = sanitize_text_field($form_data['description']);
             $short_description                = sanitize_text_field($form_data['short_description']);
             $opportunity_type                 = (int)sanitize_text_field($form_data['opportunity_type']);
-            $attachment_id                = (int)sanitize_text_field(Nh_Cryptor::Decrypt($form_data['media_file_id']));
+            $attachment_id                    = (int)sanitize_text_field(Nh_Cryptor::Decrypt($form_data['media_file_id']));
             $start_bidding_amount             = sanitize_text_field($form_data['start_bidding_amount']);
             $target_amount                    = sanitize_text_field($form_data['target_amount']);
-            $project_phase                    = sanitize_text_field($form_data['project_phase']);
+            $project_phase                    = isset($form_data['project_phase']) ? sanitize_text_field($form_data['project_phase']) : '';
             $project_start_date               = sanitize_text_field($form_data['project_start_date']);
             $project_assets_amount            = sanitize_text_field($form_data['project_assets_amount']);
             $project_yearly_cashflow_amount   = sanitize_text_field($form_data['project_yearly_cashflow_amount']);
             $project_yearly_net_profit_amount = sanitize_text_field($form_data['project_yearly_net_profit_amount']);
-            $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
-            $_POST["g-recaptcha-response"]    = $recaptcha_response;
+
+            $date_founded                         = sanitize_text_field($form_data['date_founded']);
+            $asking_price_in_usd                  = sanitize_text_field($form_data['asking_price_in_usd']);
+            $number_of_customers                  = sanitize_text_field($form_data['number_of_customers']);
+            $business_team_size                   = sanitize_text_field($form_data['business_team_size']);
+            $location                             = sanitize_text_field($form_data['location']);
+            $net_profit                           = sanitize_text_field($form_data['net_profit']);
+            $valuation_in_usd                     = sanitize_text_field($form_data['valuation_in_usd']);
+            $stake_to_be_sold_percentage          = sanitize_text_field($form_data['stake_to_be_sold_percentage']);
+            $usd_exchange_rate_used_in_conversion = sanitize_text_field($form_data['usd_exchange_rate_used_in_conversion']);
+            $annual_accounting_revenue            = sanitize_text_field($form_data['annual_accounting_revenue']);
+            $annual_growth_rate_percentage        = sanitize_text_field($form_data['annual_growth_rate_percentage']);
+            $annual_growth_rate                   = sanitize_text_field($form_data['annual_growth_rate']);
+            $tech_stack_this_product_is_built_on  = sanitize_text_field($form_data['tech_stack_this_product_is_built_on']);
+            $product_competitors                  = sanitize_text_field($form_data['product_competitors']);
+            $allowed_tags                         = '<p><h1><h2><h3><h4><h5><h6><a><abbr><b><bdi><br><code><em><i><mark><q><s><samp><small><span><strong><sub><sup><u><var><wbr>';
+            $extra_details                        = strip_tags($form_data['extra_details'], $allowed_tags);
+            $business_type                        = (int)sanitize_text_field($form_data['business_type']);
+            $business_model                       = !is_array($form_data['business_model']) ? [ $form_data['business_model'] ] : $form_data['business_model'];
+
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
 
 
             if (empty($form_data)) {
@@ -174,13 +227,21 @@
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
             }
 
+            if (!$this->can_create_opportunity()) {
+                new Nh_Ajax_Response(FALSE, __("You have exceeded your creation limit for this month.", 'ninja'));
+            }
+
             $this->title           = $project_name;
             $this->content         = $description;
             $this->author          = $user_ID;
             $this->thumbnail       = $attachment_id;
             $this->taxonomy        = [
                 'opportunity-category' => [ $category ],
-                'opportunity-type'     => [ $opportunity_type ]
+                'opportunity-type'     => [ $opportunity_type ],
+                'business-type'        => [ $business_type ],
+                'business-model'       => array_map(function($ID) {
+                    return (int)$ID;
+                }, $business_model)
             ];
             $opportunity_type_slug = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
 
@@ -194,6 +255,22 @@
             $this->set_meta_data('project_assets_amount', $project_assets_amount);
             $this->set_meta_data('project_yearly_cashflow_amount', $project_yearly_cashflow_amount);
             $this->set_meta_data('project_yearly_net_profit_amount', $project_yearly_net_profit_amount);
+            $this->set_meta_data('date_founded', $date_founded);
+            $this->set_meta_data('asking_price_in_usd', $asking_price_in_usd);
+            $this->set_meta_data('number_of_customers', $number_of_customers);
+            $this->set_meta_data('business_team_size', $business_team_size);
+            $this->set_meta_data('location', $location);
+            $this->set_meta_data('net_profit', $net_profit);
+            $this->set_meta_data('valuation_in_usd', $valuation_in_usd);
+            $this->set_meta_data('stake_to_be_sold_percentage', $stake_to_be_sold_percentage);
+            $this->set_meta_data('usd_exchange_rate_used_in_conversion', $usd_exchange_rate_used_in_conversion);
+            $this->set_meta_data('annual_accounting_revenue', $annual_accounting_revenue);
+            $this->set_meta_data('annual_growth_rate_percentage', $annual_growth_rate_percentage);
+            $this->set_meta_data('annual_growth_rate', $annual_growth_rate);
+            $this->set_meta_data('tech_stack_this_product_is_built_on', $tech_stack_this_product_is_built_on);
+            $this->set_meta_data('product_competitors', $product_competitors);
+            $this->set_meta_data('extra_details', $extra_details);
+            $this->set_meta_data('opportunity_stage', 'new');
 
             $opportunity = $this->insert();
 
@@ -289,14 +366,14 @@
          * @author Ahmed Gamal
          * @return array
          */
-        public function get_all_custom(array $status = ['any'], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = ['0'], array $tax_query = [''], int $user_id = 0): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [ '' ], int $user_id = 0): array
         {
             $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
-                'relation' => 'AND',
+                'relation'       => 'AND',
                 "posts_per_page" => $limit,
-                "author__in"         => ($user_id)?[$user_id]:[],
+                "author__in"     => ($user_id) ? [ $user_id ] : [],
                 "orderby"        => $orderby,
                 "not__in"        => $not_in,
                 "order"          => $order,
@@ -304,12 +381,12 @@
                     'relation' => 'AND',
                 ]
             ];
-            if(!empty($tax_query)){
+            if (!empty($tax_query)) {
                 $args['tax_query'][] = $tax_query;
             }
-            $posts     = new \WP_Query($args);
+            $posts    = new \WP_Query($args);
             $Nh_Posts = [];
-        
+
             foreach ($posts->get_posts() as $post) {
                 $Nh_Posts[] = $this->convert($post, $this->meta_data);
             }
@@ -317,7 +394,7 @@
             return $Nh_Posts;
         }
 
-               /**
+        /**
          * Description...
          * @version 1.0
          * @since 1.0.0
@@ -327,9 +404,9 @@
          */
         public function upload_attachment(): void
         {
-            $file         = $_FILES;
+            $file = $_FILES;
 
-            if(!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+            if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
                 new Nh_Ajax_Response(FALSE, __('The reCaptcha verification failed. Please try again.', 'ninja'));/* the reCAPTCHA answer  */
             }
 
@@ -400,12 +477,12 @@
         public function remove_attachment(): void
         {
             $attachment_id = Nh_Cryptor::Decrypt(sanitize_text_field($_POST['attachment_id']));
-            
-            if(!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+
+            if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
                 new Nh_Ajax_Response(FALSE, __('The reCaptcha verification failed. Please try again.', 'ninja'));/* the reCAPTCHA answer  */
             }
-            
-            $check_result  = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'submit_application');
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'submit_application');
 
             if ($check_result !== TRUE) {
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
@@ -420,7 +497,7 @@
             }
         }
 
-                /**
+        /**
          * Description...toggle fav opportunity and save it to user's favorite list
          * @version 1.0
          * @since 1.0.0
@@ -430,53 +507,63 @@
         public function toggle_opportunity_favorite(): void
         {
 
-            $post_id =intval($_POST['post_id']);
-            $user_id = intval($_POST['user_id']);
+            $post_id     = intval($_POST['post_id']);
+            $user_id     = intval($_POST['user_id']);
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = [];
-            if(!is_wp_error($profile)){
-                $favorites = ($profile->meta_data['favorite_opportunities'])? $profile->meta_data['favorite_opportunities'] : [];
+            $favorites   = [];
+            if (!is_wp_error($profile)) {
+                $favorites = ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 if (in_array($post_id, $favorites)) {
                     $key = array_search($post_id, $favorites);
-                    if ($key !== false) {
+                    if ($key !== FALSE) {
                         unset($favorites[$key]);
                     }
-                    $profile->set_meta_data('favorite_opportunities',$favorites);
+                    $profile->set_meta_data('favorite_opportunities', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                    ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
-                    );
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'     => TRUE,
+                        'msg'        => 'post removed',
+                        'fav_active' => 1
+                    ]);
                 } else {
                     $favorites[] = $post_id;
-                    $profile->set_meta_data('favorite_opportunities',$favorites);
+                    $profile->set_meta_data('favorite_opportunities', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                    ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
-                    );
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'     => TRUE,
+                        'msg'        => 'post added',
+                        'fav_active' => 0
+                    ]);
                 }
-            }else{
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
-                    ['status' => false, 'msg' => 'You must have profile', 'fav_active' => 1]
-                    );
+            } else {
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                    'status'     => FALSE,
+                    'msg'        => 'You must have profile',
+                    'fav_active' => 1
+                ]);
             }
         }
+
         /**
          * Description...get user's favorite list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
          * @author Ahmed Gamal
+         *
+         * @param $profile
+         *
          * @return array
          */
         public function get_user_favorites($profile): array
         {
-            return ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : array();
+            return ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
         }
 
         /**
@@ -492,11 +579,11 @@
             $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = array();
-            if(!is_wp_error($profile)){
+            $favorites   = [];
+            if (!is_wp_error($profile)) {
                 $favorites = $this->get_user_favorites($profile);
                 $favorites = array_combine($favorites, $favorites);
-            }   
+            }
             return isset($favorites[$post_id]);
         }
 
@@ -510,52 +597,59 @@
          */
         public function ignore_opportunity(): void
         {
-            $post_id = intval($_POST['post_id']);
-            $user_id = intval($_POST['user_id']);
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $post_id               = intval($_POST['post_id']);
+            $user_id               = intval($_POST['user_id']);
+            $profile_id            = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj           = new Nh_Profile();
+            $profile               = $profile_obj->get_by_id((int)$profile_id);
             $ignored_opportunities = [];
-            if(!is_wp_error($profile)){
-                $ignored_opportunities = ($profile->meta_data['ignored_opportunities'])? $profile->meta_data['ignored_opportunities'] : [];
+            if (!is_wp_error($profile)) {
+                $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
-                if(isset($ignored_opportunities[$post_id])){
+                if (isset($ignored_opportunities[$post_id])) {
                     unset($ignored_opportunities[$post_id]);
                     $ignored_opportunities = array_values($ignored_opportunities);
-                    $profile->set_meta_data('ignored_opportunities',$ignored_opportunities);
+                    $profile->set_meta_data('ignored_opportunities', $ignored_opportunities);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                     ob_start();
                     get_template_part('app/Views/template-parts/opportunities-ajax');
                     $html = ob_get_clean();
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                    ['status' => true, 'msg' => 'post un-ignored', 'ignore_active' => 1, 'updated' => $html]
-                    );
-                }
-                else {
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'        => TRUE,
+                        'msg'           => 'post un-ignored',
+                        'ignore_active' => 1,
+                        'updated'       => $html
+                    ]);
+                } else {
                     $ignored_opportunities[] = $post_id;
-                    $profile->set_meta_data('ignored_opportunities',$ignored_opportunities);
+                    $profile->set_meta_data('ignored_opportunities', $ignored_opportunities);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
                     ob_start();
                     get_template_part('app/Views/template-parts/opportunities-ajax');
                     $html = ob_get_clean();
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                    ['status' => true, 'msg' => 'post ignored!', 'ignore_active' => 0, 'updated' => $html]
-                    );
-                }             
-            }else{
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
-                    ['status' => false, 'msg' => 'You must have profile', 'ignore_active' => 1]
-                    );
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'        => TRUE,
+                        'msg'           => 'post ignored!',
+                        'ignore_active' => 0,
+                        'updated'       => $html
+                    ]);
+                }
+            } else {
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                    'status'        => FALSE,
+                    'msg'           => 'You must have profile',
+                    'ignore_active' => 1
+                ]);
             }
         }
 
         public function get_user_ignored_opportunities($profile): array
         {
-            return ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : array();
+            return ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
         }
 
         /**
@@ -568,16 +662,144 @@
          */
         public function is_post_in_user_ignored_opportunities($post_id, $user_id): bool
         {
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $ignored_opportunities = array();
-            if(!is_wp_error($profile)){
+            $profile_id            = get_user_meta($user_id, 'profile_id', TRUE);
+            $profile_obj           = new Nh_Profile();
+            $profile               = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_opportunities = [];
+            if (!is_wp_error($profile)) {
                 $ignored_opportunities = $this->get_user_ignored_opportunities($profile);
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
-            }   
+            }
             return isset($ignored_opportunities[$post_id]);
         }
 
-        
+        /**
+         * Get dashboard opportunities to be displayed in the sidebar
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public function get_dashboard_sidebar_opportunities(): array
+        {
+            global $user_ID;
+
+            $opportunities = new \WP_Query([
+                'post_type'      => $this->module,
+                'post_status'    => 'publish',
+                'orderby'        => 'ID',
+                'order'          => 'DESC',
+                'author'         => $user_ID,
+                'posts_per_page' => 6
+            ]);
+
+            $Nh_opportunities = [];
+
+            foreach ($opportunities->get_posts() as $opportunity) {
+                $Nh_opportunities[] = $this->convert($opportunity, $this->meta_data);
+            }
+
+            return $Nh_opportunities;
+        }
+
+
+        public function get_opportunities()
+        {
+
+        }
+
+        public function get_profile_opportunities(): array
+        {
+            global $user_ID;
+
+            $opportunities = new \WP_Query([
+                'post_type'   => $this->module,
+                'post_status' => 'publish',
+                'orderby'     => 'ID',
+                'order'       => 'DESC',
+                'author'      => $user_ID
+            ]);
+
+            $Nh_opportunities = [];
+
+            foreach ($opportunities->get_posts() as $opportunity) {
+                $Nh_opportunities[] = $this->convert($opportunity, $this->meta_data);
+            }
+
+            return $Nh_opportunities;
+        }
+
+        public function get_profile_fav_opportunities(): array
+        {
+            global $user_ID;
+
+            $profile_id       = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj      = new Nh_Profile();
+            $profile          = $profile_obj->get_by_id((int)$profile_id);
+            $Nh_opportunities = [];
+
+            if (!is_wp_error($profile)) {
+                $fav_ids = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
+
+                if (!empty($fav_ids)) {
+                    $opportunities = new \WP_Query([
+                        'post_type'   => $this->module,
+                        'post_status' => 'publish',
+                        'orderby'     => 'ID',
+                        'order'       => 'DESC',
+                        "post__in"    => $profile->meta_data['favorite_opportunities'],
+                    ]);
+                    foreach ($opportunities->get_posts() as $opportunity) {
+                        $Nh_opportunities[] = $this->convert($opportunity, $this->meta_data);
+                    }
+                }
+            }
+
+            return $Nh_opportunities;
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return bool
+         * @throws \Exception
+         */
+        public function can_create_opportunity(): bool
+        {
+            global $user_ID;
+
+            $opportunities = new \WP_Query([
+                'post_type'      => $this->module,
+                'post_status'    => 'publish',
+                'orderby'        => 'ID',
+                'order'          => 'DESC',
+                'author'         => $user_ID,
+                'posts_per_page' => 1
+            ]);
+
+            if ($opportunities->have_posts()) {
+                $now  = new \DateTime();
+                $date = new \DateTime($opportunities->post->post_date);
+
+                // Add one month to the current date
+                $oneMonthLater = clone $now;
+                $oneMonthLater->add(new \DateInterval('P1M'));
+
+                // Check if the input date is more than one month from today
+                if ($date > $oneMonthLater) {
+                    return TRUE;
+                }
+
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+
+        }
+
+
     }
