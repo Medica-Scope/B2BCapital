@@ -46,9 +46,9 @@ locate_template( "inc/template-tags.php", TRUE );
  * @author Mustafa Shaaban
  */
 class Nh {
-	const _ENVIRONMENT = 'development';
+	const _ENVIRONMENT = 'production';
 	const _DOMAIN_NAME = 'ninja';
-	const _VERSION = '0.1.2';
+	const _VERSION = '0.1.3';
 
 
 	public function __construct() {
