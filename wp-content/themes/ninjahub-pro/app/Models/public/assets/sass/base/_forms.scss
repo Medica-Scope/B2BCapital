@@ -69,11 +69,11 @@
 	.form-select,
 	input,
 	textarea {
-		margin: 0 !important;
+		margin: 0;
 		height: auto;
-		padding: 1rem !important;
+		padding: 1rem;
 		color: $layout-dark;
-		font-size: 0.8rem !important;
+		font-size: 0.8rem;
 		border-radius: 3px;
 		border: none;
 		background-color: $gray-light;
@@ -368,7 +368,10 @@
 
 /* ACF Forms Styles START*/
 .acf-field {
-	input {
+	input, textarea {
+		margin: 0 !important;
+		padding: 1rem !important;
+		font-size: 0.8rem !important;
 	}
 }
 /* ACF Forms Styles END*/

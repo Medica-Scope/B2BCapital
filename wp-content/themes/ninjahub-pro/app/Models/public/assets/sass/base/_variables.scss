@@ -18,3 +18,18 @@ $btn-color: $layout-light;
 $btn-border-radius: 3px;
 $btn-border-radius-sm: 3px;
 $btn-border-radius-lg: 3px;
+
+$badge-color: $white;
+$badge-border-radius: 3px;
+$badge-padding-y: 0.5rem;
+$badge-padding-x: 0.8rem;
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+	3xl: 1602px,
+);
