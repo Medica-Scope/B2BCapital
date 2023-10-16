@@ -30,7 +30,7 @@
                             'search'    => [
                                 'class'       => 'ninja-search-input-group',
                                 'type'        => 'text',
-                                'name'        => 's',
+                                'name'        => 's_ajax',
                                 'placeholder' => __('Search', 'ninja'),
                                 'before'      => '',
                                 'after'       => '<i class="fas fa-search ninja-search-icon"></i>',
