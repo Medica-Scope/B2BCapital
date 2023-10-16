@@ -66,6 +66,7 @@
     "bundle": "dir-archiver --src . --dest ../nh.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map yarn.lock"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@wordpress/data": "^9.13.1",
     "babelify": "^10.0.0",
     "bootstrap": "^5.3.2",
