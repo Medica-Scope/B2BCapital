@@ -40,10 +40,12 @@ class NhAcquisition extends Nh
                 if (res.success) {
                     UiCtrl.notices($el.form, res.msg, 'success');
                     $el.form.remove();
-                    // $($el).append(_.template($('#ninja_modal_opp_request_success').html())({
-                    //     msg: res.msg,
-                    //     button_text: res.data.button_text,
-                    // }));
+                    $('body').append(_.template($('#ninja_modal_opp_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+                    let successModal = new bootstrap.Modal(document.getElementById('opportunitySuccess'), {});
+                    successModal.show();
                 } else {
                     UiCtrl.notices($el.form, res.msg);
                 }

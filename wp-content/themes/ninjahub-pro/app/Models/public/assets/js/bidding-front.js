@@ -8,12 +8,13 @@
 /* global nhGlobals, KEY */
 
 // import theme 3d party modules
-import $  from 'jquery';
+import $ from 'jquery';
 
 // import theme modules
 import NhValidator from './helpers/Validator';
 import NhUiCtrl    from './inc/UiCtrl';
 import NhBidding   from './modules/Bidding';
+import bootstrap   from 'bootstrap';
 
 class NhBiddingFront extends NhBidding
 {
@@ -29,6 +30,7 @@ class NhBiddingFront extends NhBidding
                 form: $(`#${KEY}_add_bid_form`),
                 parent: $(`#${KEY}_add_bid_form`).parent(),
                 start_bid: $(`#${KEY}_start_bid`),
+                addBidModalBtn: $(`#addBidModalBtn`),
                 bidding_modal: $(`.bidding-modal`),
                 bids_numbers: $(`.bids-numbers`),
             },
@@ -61,6 +63,7 @@ class NhBiddingFront extends NhBidding
         // Handle form submission
         $bidding.form.on('submit', $bidding.parent, function (e) {
             e.preventDefault();
+
             let $this    = $(e.currentTarget),
                 formData = $this.serializeObject();
 

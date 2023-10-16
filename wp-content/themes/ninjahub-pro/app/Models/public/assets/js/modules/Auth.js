@@ -117,6 +117,8 @@ class NhAuth extends Nh {
                         redirect_text: res.data.redirect_text,
                         redirect_url: res.data.redirect_url,
                     }));
+                    let successModal = new bootstrap.Modal(document.getElementById('authVerifySuccess'), {});
+                    successModal.show();
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }

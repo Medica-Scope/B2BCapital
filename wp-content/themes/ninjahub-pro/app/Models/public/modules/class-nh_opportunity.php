@@ -66,8 +66,11 @@
             'opportunity_stage',
 
             'step_two',
+            'fav_count',
+            'ignore_count',
             'opportunity_bids',
             'opportunity_acquisitions',
+            'opportunity_investments',
         ];
         public array $taxonomy  = [
             'opportunity-category',
@@ -525,8 +528,6 @@
                     $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'status'     => TRUE,
-                        'msg'        => 'post removed',
                         'fav_active' => 1
                     ]);
                 } else {
@@ -536,15 +537,13 @@
                     $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'status'     => TRUE,
-                        'msg'        => 'post added',
                         'fav_active' => 0
                     ]);
                 }
             } else {
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                new Nh_Ajax_Response(TRUE, __('Something went wrong!', 'ninja'), [
                     'status'     => FALSE,
-                    'msg'        => 'You must have profile',
+                    'msg'        => 'Invalid profile ID',
                     'fav_active' => 1
                 ]);
             }
