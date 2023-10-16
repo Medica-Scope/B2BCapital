@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Filename: class-nh_opportunity_acquisition.php
+     * @Filename: class-nh_opportunity_investments.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 5/10/2023
@@ -21,23 +21,23 @@
     /**
      * Description...
      *
-     * @class Nh_Opportunity_Acquisition
+     * @class Nh_Opportunity_Investments
      * @version 1.0
      * @since 1.0.0
      * @package NinjaHub
      * @author Mustafa Shaaban
      */
-    class Nh_Opportunity_Acquisition extends Nh_Module
+    class Nh_Opportunity_Investments extends Nh_Module
     {
         public array $meta_data = [
             'opportunity',
-            'acquisitions_stage',
+            'investments_stage',
         ];
         public array $taxonomy  = [];
 
         public function __construct()
         {
-            parent::__construct('opp-acquisition');
+            parent::__construct('opp-investments');
         }
 
         /**
@@ -62,7 +62,7 @@
          */
         protected function actions($module_name): void
         {
-            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_acquisition_ajax', $this, 'create_acquisition_ajax');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_investment_ajax', $this, 'create_investment_ajax');
         }
 
         /**
@@ -73,7 +73,7 @@
             // TODO: Implement filters() method.
         }
 
-        public function create_acquisition_ajax()
+        public function create_investment_ajax(): void
         {
             $form_data                     = $_POST['data'];
             $opp_id                        = (int)sanitize_text_field($form_data['opp_id']);
@@ -81,7 +81,7 @@
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
 
-            if (!wp_verify_nonce($form_data['create_acquisitions_nonce'], Nh::_DOMAIN_NAME . "_create_acquisitions_nonce_form")) {
+            if (!wp_verify_nonce($form_data['create_investments_nonce'], Nh::_DOMAIN_NAME . "_create_investments_nonce_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
 
@@ -93,7 +93,7 @@
                 new Nh_Ajax_Response(FALSE, __("Something went wrong.", 'ninja'));
             }
 
-            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_acquisitions');
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_investments');
 
             if ($check_result !== TRUE) {
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
@@ -113,29 +113,29 @@
             }
 
             if ($current_user->role !== Nh_User::INVESTOR) {
-                new Nh_Ajax_Response(FALSE, __("You can't send an acquisitions request.", 'ninja'));
+                new Nh_Ajax_Response(FALSE, __("You can't send an investments request.", 'ninja'));
             }
 
-            if (!$this->user_can_acquire($current_user->ID, $opp_id)) {
-                new Nh_Ajax_Response(FALSE, __("You can't send an acquisition request twice for the same opportunity.", 'ninja'));
+            if (!$this->user_can_invest($current_user->ID, $opp_id)) {
+                new Nh_Ajax_Response(FALSE, __("You can't send an investment request twice for the same opportunity.", 'ninja'));
             }
 
-            $acquisition_obj         = new Nh_Opportunity_Acquisition();
-            $acquisition_obj->title  = 'New Request From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
-            $acquisition_obj->author = $current_user->ID;
-            $acquisition_obj->set_meta_data('opportunity', $opp_id);
+            $investment_obj         = new Nh_Opportunity_Investments();
+            $investment_obj->title  = 'New Request From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
+            $investment_obj->author = $current_user->ID;
+            $investment_obj->set_meta_data('opportunity', $opp_id);
             // TODO:: RECAP
-            $acquisition_obj->set_meta_data('acquisitions_stage', 'open');
-            $insert = $acquisition_obj->insert();
+            $investment_obj->set_meta_data('investments_stage', 'open');
+            $insert = $investment_obj->insert();
 
             if (is_wp_error($insert)) {
                 new Nh_Ajax_Response(FALSE, $insert->get_error_message(), $insert->get_error_data());
             }
 
-            $opportunity_acquisitions   = empty($opportunity->meta_data['opportunity_acquisitions']) ? [] : $opportunity->meta_data['opportunity_acquisitions'];
-            $opportunity_acquisitions[] = $insert->ID;
-            $opportunity->set_meta_data('opportunity_acquisitions', $opportunity_acquisitions);
-            $opportunity->set_meta_data('opportunity_stage', 'acquisition-start');
+            $opportunity_investments   = empty($opportunity->meta_data['opportunity_investments']) ? [] : $opportunity->meta_data['opportunity_investments'];
+            $opportunity_investments[] = $insert->ID;
+            $opportunity->set_meta_data('opportunity_investments', $opportunity_investments);
+            $opportunity->set_meta_data('opportunity_stage', 'investment-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {
@@ -143,7 +143,7 @@
             }
 
             $notifications = new Nh_Notification();
-            $notifications->send($current_user->ID, $opportunity->author, 'acquisition', [ 'opportunity_id' => $opportunity->ID ]);
+            $notifications->send($current_user->ID, $opportunity->author, 'investment', [ 'opportunity_id' => $opportunity->ID ]);
 
             //TODO:: SEND EMAILS
 
@@ -152,9 +152,9 @@
                 ]);
         }
 
-        public function user_can_acquire($user_ID, $opp_ID): bool
+        public function user_can_invest($user_ID, $opp_ID): bool
         {
-            $acquisitions = new \WP_Query([
+            $investments = new \WP_Query([
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'author'      => $user_ID,
@@ -167,14 +167,14 @@
                 ],
             ]);
 
-            if (!$acquisitions->have_posts()) {
+            if (!$investments->have_posts()) {
                 return TRUE;
             }
 
             return FALSE;
         }
 
-        public function get_dashboard_sidebar_acquisitions(bool $current = FALSE): array
+        public function get_dashboard_sidebar_investments(bool $current = FALSE): array
         {
             global $user_ID;
 
@@ -185,7 +185,7 @@
                 'order'       => 'DESC',
                 'meta_query'  => [
                     [
-                        'key'     => 'acquisitions_stage',
+                        'key'     => 'investments_stage',
                         'value'   => 'closed',
                         'compare' => '=',
                     ],
@@ -197,21 +197,21 @@
                 unset($args['meta_query']);
             }
 
-            $acquisitions = new \WP_Query($args);
+            $investments = new \WP_Query($args);
 
-            $Nh_acquisitions = [];
+            $Nh_investments = [];
 
-            foreach ($acquisitions->get_posts() as $acquisition) {
-                $single_acquisition              = $this->convert($acquisition, $this->meta_data);
+            foreach ($investments->get_posts() as $investment) {
+                $single_investment              = $this->convert($investment, $this->meta_data);
                 $opportunity_obj                 = new Nh_Opportunity();
-                $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$single_acquisition->meta_data['opportunity']);
-                $Nh_acquisitions[]               = $single_acquisition;
+                $single_investment->opportunity = $opportunity_obj->get_by_id((int)$single_investment->meta_data['opportunity']);
+                $Nh_investments[]               = $single_investment;
             }
 
-            return $Nh_acquisitions;
+            return $Nh_investments;
         }
 
-        public function get_profile_acquisitions(bool $current = FALSE): array
+        public function get_profile_investments(bool $current = FALSE): array
         {
             global $user_ID;
 
@@ -222,7 +222,7 @@
                 'order'       => 'DESC',
                 'meta_query'  => [
                     [
-                        'key'     => 'acquisitions_stage',
+                        'key'     => 'investments_stage',
                         'value'   => 'closed',
                         'compare' => '=',
                     ],
@@ -234,18 +234,18 @@
                 unset($args['meta_query']);
             }
 
-            $acquisitions = new \WP_Query($args);
+            $investments = new \WP_Query($args);
 
-            $Nh_acquisitions = [];
+            $Nh_investments = [];
 
-            foreach ($acquisitions->get_posts() as $acquisition) {
-                $single_acquisition              = $this->convert($acquisition, $this->meta_data);
+            foreach ($investments->get_posts() as $investment) {
+                $single_investment              = $this->convert($investment, $this->meta_data);
                 $opportunity_obj                 = new Nh_Opportunity();
-                $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$single_acquisition->meta_data['opportunity']);
-                $Nh_acquisitions[]               = $single_acquisition;
+                $single_investment->opportunity = $opportunity_obj->get_by_id((int)$single_investment->meta_data['opportunity']);
+                $Nh_investments[]               = $single_investment;
             }
 
-            return $Nh_acquisitions;
+            return $Nh_investments;
         }
 
     }

@@ -164,6 +164,7 @@ class Nh_Public {
 		if ( is_singular( 'opportunity' ) ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front' );
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front' );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front' );
 		}
 
 		$this->hooks->run();

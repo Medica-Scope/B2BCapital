@@ -1,5 +1,5 @@
 /**
- * @Filename: acquisition-front.js
+ * @Filename: investment-front.js
  * @Description:
  * @User: NINJA MASTER - Mustafa Shaaban
  * @Date: 1/4/2023
@@ -13,9 +13,9 @@ import $ from 'jquery';
 // import theme modules
 import NhValidator   from './helpers/Validator';
 import NhUiCtrl      from './inc/UiCtrl';
-import NhAcquisition from './modules/Acquisition';
+import NhInvestment from './modules/Investment';
 
-class NhAcquisitionFront extends NhAcquisition
+class NhInvestmentFront extends NhInvestment
 {
     constructor()
     {
@@ -25,10 +25,10 @@ class NhAcquisitionFront extends NhAcquisition
         // Initialize the UiCtrl and $el properties
         this.UiCtrl = new NhUiCtrl();
         this.$el    = this.UiCtrl.selectors = {
-            acquisition: {
-                form: $(`#${KEY}_create_acquisition_form`),
-                parent: $(`#${KEY}_create_acquisition_form`).parent(),
-                acquisitions_numbers: $(`.acquisitions-numbers`),
+            investment: {
+                form: $(`#${KEY}_create_investment_form`),
+                parent: $(`#${KEY}_create_investment_form`).parent(),
+                investments_numbers: $(`.investments-numbers`),
             },
         };
 
@@ -37,34 +37,34 @@ class NhAcquisitionFront extends NhAcquisition
 
     initialization()
     {
-        this.CreateAcquisitionFront();
+        this.CreateInvestmentFront();
     }
 
-    CreateAcquisitionFront()
+    CreateInvestmentFront()
     {
         let that         = this,
-            $acquisition = this.$el.acquisition,
+            $investment = this.$el.investment,
             ajaxRequests = this.ajaxRequests;
 
 
         // Handle form submission
-        $acquisition.form.on('submit', $acquisition.parent, function (e) {
+        $investment.form.on('submit', $investment.parent, function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget),
                 formData = $this.serializeObject();
 
             // Abort any ongoing forgot password requests
-            if (typeof ajaxRequests.createAcquisition !== 'undefined') {
-                ajaxRequests.createAcquisition.abort();
+            if (typeof ajaxRequests.createInvestment !== 'undefined') {
+                ajaxRequests.createInvestment.abort();
             }
 
             // Validate the form and perform forgot password request if valid
             if ($this.valid()) {
-                that.createAcquisition(formData, $acquisition);
+                that.createInvestment(formData, $investment);
             }
         });
 
     }
 }
 
-new NhAcquisitionFront();
+new NhInvestmentFront();

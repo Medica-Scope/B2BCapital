@@ -153,6 +153,8 @@
             $notifications = new Nh_Notification();
             $notifications->send($current_user->ID, $opportunity->author, 'bidding', ['opportunity_id' => $opportunity->ID]);
 
+            //TODO:: SEND EMAILS
+
             new Nh_Ajax_Response(TRUE, sprintf(__('Your bid for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
                 'button_text' => __('Done', 'ninja')
             ]);

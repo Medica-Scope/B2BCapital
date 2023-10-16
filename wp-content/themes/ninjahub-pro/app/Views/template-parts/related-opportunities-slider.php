@@ -10,9 +10,10 @@ use NH\Nh;
 	<div class="row overflow-x-auto flex-nowrap">
 		<?php
 		$opportunities_obj = new Nh_Opportunity();
-		$opportunities     = $opportunities_obj->get_all();
+		$opportunities     = isset($args['related_opportunities']) && is_array($args['related_opportunities']) ? $args['related_opportunities'] : [];
 
-		foreach ( $opportunities as $opportunity ) {
+		foreach ( $opportunities as $opportunity_id ) {
+            $opportunity = $opportunities_obj->get_by_id($opportunity_id);
 			$args = [ 
 				'opportunity_link'         => $opportunity->link,
 				'opportunity_title'        => $opportunity->title,

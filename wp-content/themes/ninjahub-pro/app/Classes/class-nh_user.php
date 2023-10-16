@@ -208,9 +208,9 @@
 
             // Add filter to override user avatar in users table
             if (is_admin() && ('users.php' == $pagenow || 'profile.php' == $pagenow)) {
-                $hooks = new Nh_Hooks();
-                $hooks->add_filter('get_avatar_data', $this, 'override_user_table_avatar', 1, 2);
-                $hooks->run();
+//                $hooks = new Nh_Hooks();
+//                $hooks->add_filter('get_avatar_data', $this, 'override_user_table_avatar', 1, 2);
+//                $hooks->run();
             }
         }
 
@@ -641,15 +641,15 @@
                 } else {
                     // Send the forgot password email.
                     $email = Nh_Mail::init()
-                                     ->to($user->user_email)
-                                     ->subject('Forgot Password')
-                                     ->template('forgot-password/body', [
-                                         'data' => [
-                                             'user'      => $user,
-                                             'url_query' => $generate_forgot_data['reset_link']
-                                         ]
-                                     ])
-                                     ->send();
+                                    ->to($user->user_email)
+                                    ->subject('Forgot Password')
+                                    ->template('forgot-password/body', [
+                                        'data' => [
+                                            'user'      => $user,
+                                            'url_query' => $generate_forgot_data['reset_link']
+                                        ]
+                                    ])
+                                    ->send();
                 }
 
             }
@@ -1398,15 +1398,15 @@
                 $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
 
                 $email = Nh_Mail::init()
-                                 ->to($this->email)
-                                 ->subject('Welcome to Nh - Please Authenticate Your Email')
-                                 ->template('account-authentication/body', [
-                                     'data' => [
-                                         'user'   => $this,
-                                         'digits' => $randomNumber
-                                     ]
-                                 ])
-                                 ->send();
+                                ->to($this->email)
+                                ->subject('Welcome to Nh - Please Authenticate Your Email')
+                                ->template('account-authentication/body', [
+                                    'data' => [
+                                        'user'   => $this,
+                                        'digits' => $randomNumber
+                                    ]
+                                ])
+                                ->send();
             } else {
                 // If the type is verification, update the user meta data and send the verification email.
                 $this->set_user_meta('account_verification_status', 0, TRUE);
@@ -1414,15 +1414,15 @@
                 $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
 
                 $email = Nh_Mail::init()
-                                 ->to($this->email)
-                                 ->subject('Welcome to Nh - Please Verify Your Email')
-                                 ->template('account-verification/body', [
-                                     'data' => [
-                                         'user'   => $this,
-                                         'digits' => $randomNumber
-                                     ]
-                                 ])
-                                 ->send();
+                                ->to($this->email)
+                                ->subject('Welcome to Nh - Please Verify Your Email')
+                                ->template('account-verification/body', [
+                                    'data' => [
+                                        'user'   => $this,
+                                        'digits' => $randomNumber
+                                    ]
+                                ])
+                                ->send();
             }
 
             return $email; // Return the result of sending the email.

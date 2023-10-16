@@ -65,6 +65,8 @@
             // Status
             'opportunity_stage',
 
+            'related_opportunities',
+
             'step_two',
             'fav_count',
             'ignore_count',

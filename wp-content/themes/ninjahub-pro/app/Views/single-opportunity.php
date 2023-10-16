@@ -15,6 +15,7 @@
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Bid;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Investments;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
     use NH\Nh;
 
@@ -28,6 +29,7 @@
     $opportunity_obj          = new Nh_Opportunity();
     $opportunity_bids_obj     = new Nh_Opportunity_Bid();
     $opportunity_acquisition_obj     = new Nh_Opportunity_Acquisition();
+    $opportunity_investments_obj     = new Nh_Opportunity_Investments();
     $opportunity              = $opportunity_obj->get_by_id($post->ID);
     $business_model           = isset($opportunity->taxonomy['business-model']) ? implode(' + ', array_map(function($single) {
         return $single->name;
@@ -219,7 +221,7 @@
                                                  'value'  => $opportunity->ID,
                                                  'order'  => 0
                                              ],
-                                             'add_bid_nonce'               => [
+                                             'create_acquisitions_nonce'               => [
                                                  'class' => '',
                                                  'type'  => 'nonce',
                                                  'name'  => 'create_acquisitions_nonce',
@@ -230,13 +232,47 @@
                                                  'class'               => 'btn',
                                                  'id'                  => 'submit_acquisitions_request',
                                                  'type'                => 'submit',
-                                                 'value'               => __('Acquisition', 'ninja'),
+                                                 'value'               => __('Acquisitions', 'ninja'),
                                                  'recaptcha_form_name' => 'frontend_create_acquisitions',
                                                  'order'               => 15
                                              ],
                                          ], [
                                              'class' => Nh::_DOMAIN_NAME . '-create-acquisition-form',
                                              'id'    => Nh::_DOMAIN_NAME . '_create_acquisition_form'
+                                         ]);
+                        }
+                    }
+
+                    if ($unique_type_name === 'regular') {
+                        if ($opportunity_investments_obj->user_can_invest($user_ID, $opportunity->ID)) {
+                            echo Nh_Forms::get_instance()
+                                         ->create_form([
+                                             'opp_id'                      => [
+                                                 'type'   => 'hidden',
+                                                 'name'   => 'opp_id',
+                                                 'before' => '',
+                                                 'after'  => '',
+                                                 'value'  => $opportunity->ID,
+                                                 'order'  => 0
+                                             ],
+                                             'create_investments_nonce'               => [
+                                                 'class' => '',
+                                                 'type'  => 'nonce',
+                                                 'name'  => 'create_investments_nonce',
+                                                 'value' => Nh::_DOMAIN_NAME . "_create_investments_nonce_form",
+                                                 'order' => 5
+                                             ],
+                                             'submit_investments_request' => [
+                                                 'class'               => 'btn',
+                                                 'id'                  => 'submit_investments_request',
+                                                 'type'                => 'submit',
+                                                 'value'               => __('Invest Request', 'ninja'),
+                                                 'recaptcha_form_name' => 'frontend_create_investments',
+                                                 'order'               => 15
+                                             ],
+                                         ], [
+                                             'class' => Nh::_DOMAIN_NAME . '-create-investment-form',
+                                             'id'    => Nh::_DOMAIN_NAME . '_create_investment_form'
                                          ]);
                         }
                     }
@@ -382,7 +418,8 @@
             <h3>
                 <?= __('Related Opportunities', 'ninja'); ?>
             </h3>
-            <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, []); ?>
+            <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, ['related_opportunities' => $opportunity->meta_data['related_opportunities']])
+            ; ?>
         </div>
     </main><!-- #main -->
 <?php get_template_part('app/Views/js-templates/horizontal-scroll', NULL, [ 'scrollable_container' => '.related-opportunities-slider .overflow-x-auto' ]); ?>
