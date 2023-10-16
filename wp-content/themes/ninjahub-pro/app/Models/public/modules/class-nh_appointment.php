@@ -126,16 +126,16 @@
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
 
-            if (empty($service_id)) {
-                new Nh_Ajax_Response(FALSE, __("Something went wrong.", 'ninja'));
-            }
-
             if (empty($service_title)) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong.", 'ninja'));
             }
 
             if (empty($form_data)) {
                 new Nh_Ajax_Response(FALSE, __("Form data mustn't be empty!.", 'ninja'));
+            }
+
+            if (empty($service_id)) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong.", 'ninja'));
             }
 
             if (empty($name)) {

@@ -197,7 +197,7 @@
             foreach ($posts->get_posts() as $post) {
                 $class
 
-                                      = __CLASS__;
+                                     = __CLASS__;
                 $nh_module           = new $class;
                 $Nh_Posts['posts'][] = $nh_module->assign($this->convert($post, $this->meta_data));
             }
@@ -232,9 +232,33 @@
                     $notification_obj->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'ninja');
                     $notification_obj->author                         = $to;
                     $notification_obj->meta_data['notification_data'] = [
-                        'type'       => 'bidding',
-                        'from'       => $user->display_name,
-                        'project_id' => $data['project_id'],
+                        'type'           => 'bidding',
+                        'from'           => $user->display_name,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+                    break;
+                case 'acquisition':
+                    $notification_obj->title                          = __("New Acquisition Request", 'ninja');
+                    $notification_obj->content                        = __('You have a new acquisition request on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'bidding',
+                        'from'           => __('B2B', 'ninja'),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+                    break;
+                case 'investment':
+                    $notification_obj->title                          = __("New Investment Request", 'ninja');
+                    $notification_obj->content                        = __('You have a new investment request on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'bidding',
+                        'from'           => __('B2B', 'ninja'),
+                        'opportunity_id' => $data['opportunity_id'],
                     ];
                     $notification_obj->meta_data['new']               = 1;
                     $notification_obj->insert();
@@ -262,11 +286,25 @@
             $formatted = new \stdClass();
 
             switch ($type) {
+                case 'acquisition':
                 case 'bidding':
+                case 'investment':
                     $opportunity_obj = new Nh_Opportunity();
-                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['project_id'], $opportunity_obj->type, FALSE, NH_lANG);
-                    $opportunity     = $opportunity_obj->get_by_id($opportunity_id);
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
 
+                    if (!$opportunity_id) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+                    $opportunity          = $opportunity_obj->get_by_id($opportunity_id);
                     $formatted->ID        = $notification->ID;
                     $formatted->title     = __($notification->title, 'ninja');
                     $formatted->content   = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
@@ -274,6 +312,7 @@
                     $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
                     $formatted->date      = $this->time_elapsed_string($notification->created_date);
                     $formatted->new       = (int)$notification->meta_data['new'];
+
                     break;
                 default:
                     break;
@@ -364,7 +403,7 @@
             $last = FALSE;
 
             // if ($page * 10 >= $notifications['count']) {
-                $last = TRUE;
+            $last = TRUE;
             // }
 
             ob_start();

@@ -1,11 +1,11 @@
 <?php
     /**
-     * @Filename: template-my-fav-opportunities.php
+     * @Filename: template-my-ignored-opportunities.php
      * @Description:
      * @User: NINJA MASTER - Mustafa Shaaban
      * @Date: 21/2/2023
      *
-     * Template Name: My Favorite Opportunities Page
+     * Template Name: My Ignored Opportunities Page
      * Template Post Type: page
      *
      * @package NinjaHub
@@ -37,7 +37,7 @@
 
             <nav class="dashboard-submenus mt-3 mb-5">
                 <?php get_template_part('app/Views/template-parts/dashboard-submenus/main-nav', NULL, [ 'active_link' => 'opportunities' ]); ?>
-                <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'my_favorite' ]); ?>
+                <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'my_ignored' ]); ?>
             </nav>
         </div>
 

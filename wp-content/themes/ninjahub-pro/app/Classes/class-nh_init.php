@@ -161,6 +161,11 @@
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity_bid.php'
                     ],
+                    'Opportunity_Investments'  => [
+                        'type'      => 'class',
+                        'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
+                        'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity_investments.php'
+                    ],
                     'Profile'      => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',

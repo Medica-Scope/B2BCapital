@@ -1,0 +1,31 @@
+@import '../../base/variables';
+.my-opportunities-card {
+	background-color: $layout-light;
+	padding: 2rem 1rem 1.5rem 1rem;
+	border-radius: 5px;
+	min-height: 177px;
+	.badge {
+		&.text-bg-success,
+		&.text-bg-primary {
+			color: $layout-light !important;
+		}
+	}
+	.opportunities-card-header {
+		h3 {
+			color: $primary-medium;
+			font-size: 1.2rem;
+			font-weight: bold;
+			margin-bottom: 1.5rem;
+		}
+	}
+	.opportunities-card-body {
+		.date{
+			display: inline-block;
+			color: $primary-medium;
+			margin-bottom: 0.5rem;
+		}
+		.short-description {
+			font-size: 0.9rem;
+		}
+	}
+}

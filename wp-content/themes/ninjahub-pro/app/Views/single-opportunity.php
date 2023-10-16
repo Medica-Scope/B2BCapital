@@ -7,28 +7,42 @@
      * @Date: 9/21/2023
      */
 
+    use NH\APP\CLASSES\Nh_Init;
+    use NH\APP\CLASSES\Nh_User;
+    use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Bid;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Investments;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
     use NH\Nh;
 
-    global $post;
+    global $user_ID, $post;
 
     get_header();
 
+    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min');
     Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-single-opportunity', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/single-opportunity');
 
-    $opportunity_obj = new Nh_Opportunity();
-    $opportunity     = $opportunity_obj->get_by_id($post->ID);
-    $business_model  = isset($opportunity->taxonomy['business-model']) ? implode(' + ', array_map(function($single) {
+    $opportunity_obj          = new Nh_Opportunity();
+    $opportunity_bids_obj     = new Nh_Opportunity_Bid();
+    $opportunity_acquisition_obj     = new Nh_Opportunity_Acquisition();
+    $opportunity_investments_obj     = new Nh_Opportunity_Investments();
+    $opportunity              = $opportunity_obj->get_by_id($post->ID);
+    $business_model           = isset($opportunity->taxonomy['business-model']) ? implode(' + ', array_map(function($single) {
         return $single->name;
     }, $opportunity->taxonomy['business-model'])) : '';
-
+    $opportunity_type         = isset($opportunity->taxonomy['opportunity-type']) ? $opportunity->taxonomy['opportunity-type'][0]->term_id : '';
+    $unique_type_name         = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
+    $opportunity_bids         = $opportunity_obj->get_opportunity_bids($opportunity->ID, TRUE);
+    $opportunity_acquisitions = $opportunity_obj->get_opportunity_acquisitions($opportunity->ID, TRUE);
 ?>
 
     <main class="container container-xxl">
-        <a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>" class="btn btn-secondary text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+        <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>" class="btn btn-secondary text-uppercase mb-2"><i
+                class="bbc-chevron-left"></i>
             <?= __('back', 'ninja'); ?>
         </a>
         <h3 class="mb-4">
@@ -40,6 +54,256 @@
         </h3>
 
         <p><?= $opportunity->taxonomy['business-type'][0]->name ?></p>
+
+        <?php
+
+            echo Nh_Forms::get_instance()
+                         ->create_form([
+                             'opp_id'                      => [
+                                 'type'   => 'hidden',
+                                 'name'   => 'opp_id',
+                                 'before' => '',
+                                 'after'  => '',
+                                 'value'  => $opportunity->ID,
+                                 'order'  => 0
+                             ],
+                             'add_to_fav_nonce'               => [
+                                 'class' => '',
+                                 'type'  => 'nonce',
+                                 'name'  => 'add_to_fav_nonce_nonce',
+                                 'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
+                                 'order' => 5
+                             ],
+                             'submit_add_to_fav_request' => [
+                                 'class'               => 'btn',
+                                 'id'                  => 'submit_add_to_fav_request',
+                                 'type'                => 'submit',
+                                 'value'               => __('Add To Favorite', 'ninja'),
+                                 'recaptcha_form_name' => 'frontend_add_to_fav',
+                                 'order'               => 10
+                             ],
+                         ], [
+                             'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+                             'id'    => Nh::_DOMAIN_NAME . '_add_to_fav_form'
+                         ]);
+
+
+            echo Nh_Forms::get_instance()
+                         ->create_form([
+                             'opp_id'                      => [
+                                 'type'   => 'hidden',
+                                 'name'   => 'opp_id',
+                                 'before' => '',
+                                 'after'  => '',
+                                 'value'  => $opportunity->ID,
+                                 'order'  => 0
+                             ],
+                             'ignore_opp_nonce'               => [
+                                 'class' => '',
+                                 'type'  => 'nonce',
+                                 'name'  => 'ignore_opp_nonce',
+                                 'value' => Nh::_DOMAIN_NAME . "_ignore_opp_nonce_form",
+                                 'order' => 5
+                             ],
+                             'submit_ignore' => [
+                                 'class'               => 'btn',
+                                 'id'                  => 'submit_submit_ignore',
+                                 'type'                => 'submit',
+                                 'value'               => __('Ignore', 'ninja'),
+                                 'recaptcha_form_name' => 'frontend_ignore',
+                                 'order'               => 10
+                             ],
+                         ], [
+                             'class' => Nh::_DOMAIN_NAME . '-create-ignore-opp-form',
+                             'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opp_form'
+                         ]);
+
+            if ($opportunity->meta_data['opportunity_stage'] !== 'success') {
+
+                if (Nh_User::get_user_role() === Nh_User::INVESTOR) {
+                    if ($unique_type_name === 'bidding') {
+                        if ($opportunity_bids_obj->user_can_bid($user_ID, $opportunity->ID)) {
+                            ?>
+
+                            <div class="bidding-modal">
+                                <!-- Button trigger modal -->
+                                <button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBidModal">
+                                    <?= __('Add Bid', 'ninja') ?>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="addBidModal" tabindex="-1" aria-labelledby="addBidModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="addBidModalLabel"><?= __('Add Bid', 'ninja') ?></h1>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <div>
+                                                        <p><?= __('Start bidding amount', 'ninja') ?></p>
+                                                        <span>$<?= $opportunity->meta_data['start_bidding_amount'] ?></span>
+                                                    </div>
+                                                    <div>
+                                                        <p><?= __('Target amount', 'ninja') ?></p>
+                                                        <span>$<?= $opportunity->meta_data['target_amount'] ?></span>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <?= Nh_Forms::get_instance()
+                                                                ->create_form([
+                                                                    'bid_amount'    => [
+                                                                        'class'       => '',
+                                                                        'type'        => 'number',
+                                                                        'name'        => 'bid_amount',
+                                                                        'placeholder' => __('Add Bid', 'ninja'),
+                                                                        'before'      => '',
+                                                                        'order'       => 0,
+                                                                    ],
+                                                                    'opp_id'        => [
+                                                                        'type'   => 'hidden',
+                                                                        'name'   => 'opp_id',
+                                                                        'before' => '',
+                                                                        'after'  => '',
+                                                                        'value'  => $opportunity->ID,
+                                                                        'order'  => 5
+                                                                    ],
+                                                                    'start_bid'     => [
+                                                                        'type'  => 'hidden',
+                                                                        'id'    => Nh::_DOMAIN_NAME . '_start_bid',
+                                                                        'name'  => 'start_bid',
+                                                                        'value' => (int)$opportunity->meta_data['start_bidding_amount'],
+                                                                        'order' => 10
+                                                                    ],
+                                                                    'add_bid_nonce' => [
+                                                                        'class' => '',
+                                                                        'type'  => 'nonce',
+                                                                        'name'  => 'add_bid_nonce',
+                                                                        'value' => Nh::_DOMAIN_NAME . "_add_bid_nonce_form",
+                                                                        'order' => 15
+                                                                    ],
+                                                                    'submit_bid'    => [
+                                                                        'class'               => 'btn',
+                                                                        'id'                  => 'submit_bid',
+                                                                        'type'                => 'submit',
+                                                                        'value'               => __('Start Bidding', 'ninja'),
+                                                                        'recaptcha_form_name' => 'frontend_add_bid',
+                                                                        'order'               => 20
+                                                                    ],
+                                                                ], [
+                                                                    'class' => Nh::_DOMAIN_NAME . '-add-bid-form',
+                                                                    'id'    => Nh::_DOMAIN_NAME . '_add_bid_form'
+                                                                ]); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                        <span class="btn btn-blue"><?= sprintf(__('Number Of Bids %s', 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?></span>
+                        <?php
+                    }
+
+                    if ($unique_type_name === 'acquisition') {
+                        if ($opportunity_acquisition_obj->user_can_acquire($user_ID, $opportunity->ID)) {
+                            echo Nh_Forms::get_instance()
+                                         ->create_form([
+                                             'opp_id'                      => [
+                                                 'type'   => 'hidden',
+                                                 'name'   => 'opp_id',
+                                                 'before' => '',
+                                                 'after'  => '',
+                                                 'value'  => $opportunity->ID,
+                                                 'order'  => 0
+                                             ],
+                                             'create_acquisitions_nonce'               => [
+                                                 'class' => '',
+                                                 'type'  => 'nonce',
+                                                 'name'  => 'create_acquisitions_nonce',
+                                                 'value' => Nh::_DOMAIN_NAME . "_create_acquisitions_nonce_form",
+                                                 'order' => 5
+                                             ],
+                                             'submit_acquisitions_request' => [
+                                                 'class'               => 'btn',
+                                                 'id'                  => 'submit_acquisitions_request',
+                                                 'type'                => 'submit',
+                                                 'value'               => __('Acquisitions', 'ninja'),
+                                                 'recaptcha_form_name' => 'frontend_create_acquisitions',
+                                                 'order'               => 15
+                                             ],
+                                         ], [
+                                             'class' => Nh::_DOMAIN_NAME . '-create-acquisition-form',
+                                             'id'    => Nh::_DOMAIN_NAME . '_create_acquisition_form'
+                                         ]);
+                        }
+                    }
+
+                    if ($unique_type_name === 'regular') {
+                        if ($opportunity_investments_obj->user_can_invest($user_ID, $opportunity->ID)) {
+                            echo Nh_Forms::get_instance()
+                                         ->create_form([
+                                             'opp_id'                      => [
+                                                 'type'   => 'hidden',
+                                                 'name'   => 'opp_id',
+                                                 'before' => '',
+                                                 'after'  => '',
+                                                 'value'  => $opportunity->ID,
+                                                 'order'  => 0
+                                             ],
+                                             'create_investments_nonce'               => [
+                                                 'class' => '',
+                                                 'type'  => 'nonce',
+                                                 'name'  => 'create_investments_nonce',
+                                                 'value' => Nh::_DOMAIN_NAME . "_create_investments_nonce_form",
+                                                 'order' => 5
+                                             ],
+                                             'submit_investments_request' => [
+                                                 'class'               => 'btn',
+                                                 'id'                  => 'submit_investments_request',
+                                                 'type'                => 'submit',
+                                                 'value'               => __('Invest Request', 'ninja'),
+                                                 'recaptcha_form_name' => 'frontend_create_investments',
+                                                 'order'               => 15
+                                             ],
+                                         ], [
+                                             'class' => Nh::_DOMAIN_NAME . '-create-investment-form',
+                                             'id'    => Nh::_DOMAIN_NAME . '_create_investment_form'
+                                         ]);
+                        }
+                    }
+
+                }
+
+                if (Nh_User::get_user_role() === Nh_User::OWNER) {
+                    if ($unique_type_name === 'bidding') {
+                        ?>
+                        <span class="btn btn-blue"><?= sprintf(__('Number Of Bids %s', 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?></span>
+                        <?php
+                    }
+
+                    if ($unique_type_name === 'acquisition') {
+                        ?>
+                        <span
+                            class="btn btn-blue"><?= sprintf(__('Number Of Requests %s', 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?></span>
+                        <?php
+                    }
+
+                    if ($unique_type_name === 'regular') {
+                        ?>
+                        <span
+                            class="btn btn-blue"><?= sprintf(__('Number Of Requests %s', 'ninja'), "<span class='regular-numbers'>" . $opportunity_acquisitions . "</span>") ?></span>
+                        <?php
+                    }
+                }
+
+            }
+        ?>
+
         <div class="opportunity-details row row-cols-1 row-cols-md-2 g-4 mt-2">
             <div class="col details-items">
                 <div class="card shadow">
@@ -154,7 +418,8 @@
             <h3>
                 <?= __('Related Opportunities', 'ninja'); ?>
             </h3>
-            <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, []); ?>
+            <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, ['related_opportunities' => $opportunity->meta_data['related_opportunities']])
+            ; ?>
         </div>
     </main><!-- #main -->
 <?php get_template_part('app/Views/js-templates/horizontal-scroll', NULL, [ 'scrollable_container' => '.related-opportunities-slider .overflow-x-auto' ]); ?>

@@ -65,9 +65,14 @@
             // Status
             'opportunity_stage',
 
+            'related_opportunities',
+
             'step_two',
+            'fav_count',
+            'ignore_count',
             'opportunity_bids',
             'opportunity_acquisitions',
+            'opportunity_investments',
         ];
         public array $taxonomy  = [
             'opportunity-category',
@@ -525,8 +530,6 @@
                     $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'status'     => TRUE,
-                        'msg'        => 'post removed',
                         'fav_active' => 1
                     ]);
                 } else {
@@ -536,15 +539,13 @@
                     $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'status'     => TRUE,
-                        'msg'        => 'post added',
                         'fav_active' => 0
                     ]);
                 }
             } else {
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                new Nh_Ajax_Response(TRUE, __('Something went wrong!', 'ninja'), [
                     'status'     => FALSE,
-                    'msg'        => 'You must have profile',
+                    'msg'        => 'Invalid profile ID',
                     'fav_active' => 1
                 ]);
             }
@@ -801,5 +802,67 @@
 
         }
 
+        public function get_opportunity_bids(int $opp_id = 0, $count = false): int|array
+        {
+            $id = $opp_id ? $opp_id : $this->ID;
+            $nh_opportunity_bids_obj = new Nh_Opportunity_Bid();
+            $nh_opportunity_bids = [];
 
+            $bids = new \WP_Query([
+                'post_type' => $nh_opportunity_bids_obj->module,
+                'post_status' => 'publish',
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => $id,
+                        'compare' => '=',
+                    ],
+                ],
+            ]);
+
+            if ($count) {
+                return $bids->found_posts;
+            }
+
+            if ($bids->have_posts()) {
+                foreach ($bids->posts as $single) {
+                    $nh_opportunity_bids[] = $nh_opportunity_bids_obj->convert($single);
+                }
+            }
+
+            return $nh_opportunity_bids;
+
+        }
+
+        public function get_opportunity_acquisitions(int $opp_id = 0, $count = false): int|array
+        {
+            $id = $opp_id ? $opp_id : $this->ID;
+            $nh_opportunity_acquisitions_obj = new Nh_Opportunity_Acquisition();
+            $nh_opportunity_acquisitions = [];
+
+            $acquisitions = new \WP_Query([
+                'post_type' => $nh_opportunity_acquisitions_obj->module,
+                'post_status' => 'publish',
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => $id,
+                        'compare' => '=',
+                    ],
+                ],
+            ]);
+
+            if ($count) {
+                return $acquisitions->found_posts;
+            }
+
+            if ($acquisitions->have_posts()) {
+                foreach ($acquisitions->posts as $single) {
+                    $nh_opportunity_acquisitions[] = $nh_opportunity_acquisitions_obj->convert($single);
+                }
+            }
+
+            return $nh_opportunity_acquisitions;
+
+        }
     }

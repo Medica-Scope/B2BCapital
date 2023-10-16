@@ -46,6 +46,7 @@ class NhUiCtrl
     static beforeSendPrepare(el)
     {
         $(`.${KEY}-form-notice`).remove();
+        $('.gglcptch_error_text').hide();
         this.blockUI(el);
     }
 

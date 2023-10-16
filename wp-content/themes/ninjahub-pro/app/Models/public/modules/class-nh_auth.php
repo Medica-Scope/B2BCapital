@@ -85,6 +85,10 @@
             ])) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
             }
+
+            if (is_singular('opportunity')) {
+                require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/opportunity-response.php';
+            }
         }
 
         /**
@@ -801,6 +805,17 @@
             }
 
             $current_user_obj               = Nh_User::get_current_user();
+
+            if ($current_user_obj->profile->ID === 0) {
+                $profile         = new Nh_Profile(); // Create a new Nh_Profile object.
+                $profile->title  = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)); // Set the profile title.
+                $profile->author = $current_user_obj->ID; // Set the profile author.
+                $profile->insert(); // Insert the profile into the system.
+                update_user_meta($current_user_obj->ID, 'profile_id', $profile->ID);
+            }
+
+            $current_user_obj               = Nh_User::get_current_user();
+
 //            $current_user_obj->username     = $phone_number;
             $current_user_obj->email        = $user_email;
             $current_user_obj->display_name = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));

@@ -61,6 +61,7 @@
          */
         protected function actions($module_name): void
         {
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_create_bid_ajax', $this, 'create_bid_ajax');
         }
 
         /**
@@ -71,4 +72,113 @@
             // TODO: Implement filters() method.
         }
 
+        public function create_bid_ajax()
+        {
+            $form_data                     = $_POST['data'];
+            $bid_amount                    = (int)sanitize_text_field($form_data['bid_amount']);
+            $opp_id                        = (int)sanitize_text_field($form_data['opp_id']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+
+            if (!wp_verify_nonce($form_data['add_bid_nonce'], Nh::_DOMAIN_NAME . "_add_bid_nonce_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+
+            if (empty($form_data)) {
+                new Nh_Ajax_Response(FALSE, __("Form data mustn't be empty!.", 'ninja'));
+            }
+
+            if (empty($opp_id)) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong.", 'ninja'));
+            }
+
+            if (empty($bid_amount)) {
+                new Nh_Ajax_Response(FALSE, __("The Bid field is empty!.", 'ninja'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_bid');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            $opportunity_obj = new Nh_Opportunity();
+            $opportunity     = $opportunity_obj->get_by_id($opp_id);
+
+            if (is_wp_error($opportunity)) {
+                new Nh_Ajax_Response(FALSE, $opportunity->get_error_message(), $opportunity->get_error_data());
+            }
+
+            $start_bidding_amount = (int)$opportunity->meta_data['start_bidding_amount'];
+
+            if ($bid_amount < $start_bidding_amount) {
+                new Nh_Ajax_Response(FALSE, __("Invalid bid amount!.", 'ninja'));
+            }
+
+            $current_user = Nh_User::get_current_user();
+
+            if ($current_user->profile->ID === 0) {
+                new Nh_Ajax_Response(FALSE, __("Invalid Profile ID.", 'ninja'));
+            }
+
+            if ($current_user->role !== Nh_User::INVESTOR) {
+                new Nh_Ajax_Response(FALSE, __("You can't bid to this opportunity.", 'ninja'));
+            }
+
+            if (!$this->user_can_bid($current_user->ID, $opp_id)) {
+                new Nh_Ajax_Response(FALSE, __("You can't bid twice at the same opportunity.", 'ninja'));
+            }
+
+            $bidding_obj         = new Nh_Opportunity_Bid();
+            $bidding_obj->title  = 'New Bidding From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
+            $bidding_obj->author = $current_user->ID;
+            $bidding_obj->set_meta_data('opportunity', $opp_id);
+            $insert = $bidding_obj->insert();
+
+            if (is_wp_error($insert)) {
+                new Nh_Ajax_Response(FALSE, $insert->get_error_message(), $insert->get_error_data());
+            }
+
+            $opportunity_bids   = empty($opportunity->meta_data['opportunity_bids']) ? [] : $opportunity->meta_data['opportunity_bids'];
+            $opportunity_bids[] = $insert->ID;
+            $opportunity->set_meta_data('opportunity_bids', $opportunity_bids);
+            $opportunity->set_meta_data('opportunity_stage', 'bidding-start');
+            $update = $opportunity->update();
+
+            if (is_wp_error($update)) {
+                new Nh_Ajax_Response(FALSE, $update->get_error_message(), $update->get_error_data());
+            }
+
+            $notifications = new Nh_Notification();
+            $notifications->send($current_user->ID, $opportunity->author, 'bidding', ['opportunity_id' => $opportunity->ID]);
+
+            //TODO:: SEND EMAILS
+
+            new Nh_Ajax_Response(TRUE, sprintf(__('Your bid for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
+                'button_text' => __('Done', 'ninja')
+            ]);
+        }
+
+        public function user_can_bid($user_ID, $opp_ID): bool
+        {
+            $bids = new \WP_Query([
+                'post_type'   => $this->module,
+                'post_status' => 'publish',
+                'author'      => $user_ID,
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => $opp_ID,
+                        'compare' => '=',
+                    ],
+                ],
+            ]);
+
+            if (!$bids->have_posts()) {
+                return TRUE;
+            }
+
+            return FALSE;
+        }
     }

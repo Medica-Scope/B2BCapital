@@ -48,8 +48,7 @@ locate_template( "inc/template-tags.php", TRUE );
 class Nh {
 	const _ENVIRONMENT = 'production';
 	const _DOMAIN_NAME = 'ninja';
-	const _VERSION = '0.1.3';
-
+	const _VERSION     = '0.1.5';
 
 	public function __construct() {
 		Nh_Init::get_instance()
