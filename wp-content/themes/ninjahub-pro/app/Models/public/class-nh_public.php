@@ -74,7 +74,7 @@ class Nh_Public {
 		global $gglcptch_options;
 
 		// Vendors
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
 			'jquery'
 		], Nh::_VERSION, NULL, TRUE );
 
@@ -84,17 +84,17 @@ class Nh_Public {
 		}
 
 
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
 			'jquery',
 			Nh::_DOMAIN_NAME . '-public-script-bs5'
 		] );
 
-		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [ 
+		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [
 			'domain_key'  => Nh::_DOMAIN_NAME,
 			'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
 			'environment' => Nh::_ENVIRONMENT,
 			'publicKey'   => isset( $gglcptch_options ) ? $gglcptch_options['public_key'] : '',
-			'phrases'     => [ 
+			'phrases'     => [
 				'default'        => __( "This field is required.", "ninja" ),
 				'email'          => __( "Please enter a valid email address.", "ninja" ),
 				'number'         => __( "Please enter a valid number.", "ninja" ),
@@ -117,7 +117,7 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front' );
 		}
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
@@ -138,7 +138,7 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-search-ajax', Nh_Hooks::PATHS['public']['js'] . '/search-ajax' );
 		}
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
@@ -159,6 +159,11 @@ class Nh_Public {
 		if ( is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' ) ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-service', Nh_Hooks::PATHS['public']['js'] . '/service-front' );
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front' );
+		}
+
+		if ( is_singular( 'opportunity' ) ) {
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front' );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front' );
 		}
 
 		$this->hooks->run();
@@ -203,7 +208,7 @@ class Nh_Public {
 
 		if ( ! empty( $languages ) ) {
 			foreach ( $languages as $l ) {
-				$languages_codes[] = [ 
+				$languages_codes[] = [
 					'code' => $l['language_code'],
 					'name' => $l['translated_name']
 				];

@@ -285,7 +285,7 @@
                 foreach ($this->taxonomy as $tax_name => $terms) {
                     if (is_object($terms[0])) {
                         $terms = array_map(function($term) {
-                            return $term->term_id;
+                            return (int)$term->term_id;
                         }, $terms);
                     }
                     wp_set_post_terms($this->ID, $terms, $tax_name, FALSE);
