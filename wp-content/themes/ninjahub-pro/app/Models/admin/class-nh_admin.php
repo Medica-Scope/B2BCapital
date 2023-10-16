@@ -49,12 +49,14 @@
             $this->hooks->add_action('admin_enqueue_scripts', $this, 'enqueue_styles');
             $this->hooks->add_action('admin_enqueue_scripts', $this, 'enqueue_scripts');
             $this->hooks->add_action('admin_init', $this, 'restrict_admin_with_redirect');
+            $this->hooks->add_action('manage_post_posts_custom_column', $this, 'populate_columns', 10, 2);
             $this->hooks->run();
         }
 
         public function filters()
         {
             $this->hooks->add_filter('gglcptch_add_custom_form', $this, 'add_custom_recaptcha_forms', 10, 1);
+            $this->hooks->add_filter('manage_post_posts_columns', $this, 'add_new_columns');
             $this->hooks->run();
         }
 
@@ -119,6 +121,30 @@
             $forms['frontend_add_bid'] = [ "form_name" => "Front End Add Bid" ];
             $forms['frontend_create_acquisitions'] = [ "form_name" => "Front End Create Acquisitions" ];
             return $forms;
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Ahmed Gamal
+         * @return string
+         */
+        public function add_new_columns($columns) {
+            $columns['fav_count'] = 'Favorite count';
+            $columns['ignore_count'] = 'Ignore count';
+            $columns['read_count'] = 'Read count';
+            return $columns;
+        }
+        public function populate_columns($column, $post_id) {
+            if ($column == 'fav_count') {
+                echo get_post_meta($post_id, 'fav_count', true);
+            } elseif ($column == 'ignore_count') {
+                echo get_post_meta($post_id, 'ignore_count', true);
+            } elseif ($column == 'read_count') {
+                echo get_post_meta($post_id, 'read_count', true);
+            }
         }
 
     }

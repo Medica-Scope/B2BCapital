@@ -135,7 +135,7 @@ class Nh_Public {
 
 
 		if ( is_post_type_archive( 'faq' ) ) {
-			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-search-ajax', Nh_Hooks::PATHS['public']['js'] . '/search-ajax' );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front' );
 		}
 
 		if ( is_page( [

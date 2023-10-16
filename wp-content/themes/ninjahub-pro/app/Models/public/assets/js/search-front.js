@@ -13,11 +13,13 @@ import $ from 'jquery';
 // import theme modules
 import NhValidator    from './helpers/Validator';
 import NhUiCtrl       from './inc/UiCtrl';
+import NhSearch from './modules/Search';
 
-class NhSearchFront
+class NhSearchFront extends NhSearch
 {
     constructor()
     {
+        super();
         this.UiCtrl = new NhUiCtrl();
         this.$el    = this.UiCtrl.selectors = {
             search: {
@@ -25,6 +27,18 @@ class NhSearchFront
                 parent: $(`.${KEY}_header_search`).parent(),
                 icon: $(`.${KEY}-header-search-icon`),
                 input: $(`#${KEY}_s`),
+            },
+            searchAjax: {
+                form: $(`#${KEY}_search_form_ajax`),
+                parent: $(`#${KEY}_search_form_ajax`).parent(),
+                keyword_input: $(`#${KEY}_s_ajax`),
+                search_result: $('.search-result'),
+                search_empty: $('.search-empty'),
+                search_post_type: $(`input[name="search_post_type"]`),
+            },
+            loadmore: {
+                parent: $(`.search-con`),
+                loop: $(`.search-success`),
             },
         };
 
@@ -34,6 +48,8 @@ class NhSearchFront
     initialization()
     {
         this.showSearch();
+        this.searchFront();
+        this.searchLoadMoreFront();
     }
 
     showSearch()
@@ -58,6 +74,61 @@ class NhSearchFront
                 $search.input.animate({ opacity: 0, width: '0' }, 250)
             }
         })
+    }
+
+    searchFront() {
+        let that = this,
+            $search = this.$el.searchAjax,
+            ajaxRequests = this.ajaxRequests;
+        $(document).on("click",".open-search",function(e){
+            $('.search-con').toggleClass('popupMode');
+            $('.open-search').toggleClass('show')
+        });
+
+        $search.form.on('submit', function (e) {
+            e.preventDefault();
+        });
+
+        $search.keyword_input.on('keyup', function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget),
+                type = $search.search_post_type.val(),
+                formData = $this.val();
+
+            if (typeof ajaxRequests.search !== 'undefined') {
+                ajaxRequests.search.abort();
+            }
+
+            if ((e.type === 'keyup' && e.keyCode === 13 && formData.length > 0) || (e.type === 'blur' && formData.length > 0)) {
+                that.search(formData, type, $search.form);
+            }
+        });
+    }
+
+    searchLoadMoreFront() {
+        let that = this,
+            $search = this.$el.searchAjax,
+            $loadmore = this.$el.loadmore,
+            ajaxRequests = this.ajaxRequests;
+
+        $loadmore.parent.on('scroll', function (e) {
+            e.preventDefault();
+
+            let $this = $(e.currentTarget),
+                last = $(`.search-success`).attr('data-last'),
+                formData = {
+                    page: $(`.search-success`).attr('data-page'),
+                    s: $search.keyword_input.val(),
+                };
+
+            if ($this[0].scrollHeight - $this.scrollTop() <= $this.outerHeight() + 10 && last == 'false') {
+                if (typeof ajaxRequests.searchLoadmore !== 'undefined') {
+                    ajaxRequests.searchLoSadmore.abort();
+                }
+                that.loadmore(formData, $loadmore);
+            }
+
+        });
     }
 }
 

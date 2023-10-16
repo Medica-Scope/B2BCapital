@@ -8,7 +8,7 @@
 /* globals nhGlobals, KEY */
 // import theme 3d party modules
 import $ from 'jquery';
-import UiCtrl from '../inc/UiCtrl';
+import NhUiCtrl from '../inc/UiCtrl';
 import Nh from './Nh';
 
 class NhSearch extends Nh {
@@ -30,12 +30,12 @@ class NhSearch extends Nh {
             },
             beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
-                UiCtrl.beforeSendPrepare($el);
+                NhUiCtrl.beforeSendPrepare($el);
             },
             success: function (res) {
                 $('input').prop('disabled', false);
                 $el.find('input, button').prop('disabled', false);
-                UiCtrl.blockUI($el, false);
+                NhUiCtrl.blockUI($el, false);
                 $('.search-con').find('.search-body').html(res.data.html);
             },
             error: function (xhr) {
@@ -60,14 +60,14 @@ class NhSearch extends Nh {
             },
             beforeSend: function () {
                 $el.parent.find('input, button').prop('disabled', true);
-                UiCtrl.beforeSendPrepare($(`.search-success`));
+                NhUiCtrl.beforeSendPrepare($(`.search-success`));
             },
             success: function (res) {
 
                 $('input').prop('disabled', false);
                 $el.parent.find('input, button').prop('disabled', false);
 
-                UiCtrl.blockUI(loopParent, false);
+                NhUiCtrl.blockUI(loopParent, false);
                 if (res.data.last) {
                     loopParent.attr('data-last', 'true')
                 }
