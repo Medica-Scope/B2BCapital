@@ -147,7 +147,7 @@ $user = Nh_User::get_current_user();
 			</div>
 		</section>
 
-		<?php get_template_part( 'template-parts/login-slider-part' ); ?>
+		<?php get_template_part( 'app/Views/template-parts/login-slider-part' ); ?>
 	</div>
 </main><!-- #main -->
 

@@ -85,6 +85,10 @@
             ])) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
             }
+
+            if (is_singular('opportunity')) {
+                require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/opportunity-response.php';
+            }
         }
 
         /**

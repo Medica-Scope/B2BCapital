@@ -79,7 +79,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 			</div>
 		</section>
 
-		<?php get_template_part( 'template-parts/login-slider-part' ); ?>
+		<?php get_template_part( 'app/Views/template-parts/login-slider-part' ); ?>
 	</div>
 </main><!-- #main -->
 

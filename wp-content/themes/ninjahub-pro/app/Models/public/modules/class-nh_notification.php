@@ -197,7 +197,7 @@
             foreach ($posts->get_posts() as $post) {
                 $class
 
-                                      = __CLASS__;
+                                     = __CLASS__;
                 $nh_module           = new $class;
                 $Nh_Posts['posts'][] = $nh_module->assign($this->convert($post, $this->meta_data));
             }
@@ -232,9 +232,21 @@
                     $notification_obj->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'ninja');
                     $notification_obj->author                         = $to;
                     $notification_obj->meta_data['notification_data'] = [
-                        'type'       => 'bidding',
-                        'from'       => $user->display_name,
-                        'project_id' => $data['project_id'],
+                        'type'           => 'bidding',
+                        'from'           => $user->display_name,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+                    break;
+                case 'acquisition':
+                    $notification_obj->title                          = __("New Acquisition Request", 'ninja');
+                    $notification_obj->content                        = __('You have a new acquisition request on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'bidding',
+                        'from'           => __('B2B', 'ninja'),
+                        'opportunity_id' => $data['opportunity_id'],
                     ];
                     $notification_obj->meta_data['new']               = 1;
                     $notification_obj->insert();
@@ -262,9 +274,10 @@
             $formatted = new \stdClass();
 
             switch ($type) {
+                case 'acquisition':
                 case 'bidding':
                     $opportunity_obj = new Nh_Opportunity();
-                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['project_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
                     $opportunity     = $opportunity_obj->get_by_id($opportunity_id);
 
                     $formatted->ID        = $notification->ID;
@@ -364,7 +377,7 @@
             $last = FALSE;
 
             // if ($page * 10 >= $notifications['count']) {
-                $last = TRUE;
+            $last = TRUE;
             // }
 
             ob_start();

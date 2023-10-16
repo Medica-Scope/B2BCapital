@@ -574,6 +574,36 @@ class NhValidator
         }
     }
 
+    static initBiddingValidation($el, type)
+    {
+
+        let that = this;
+
+        const forms = {
+            createBid: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            bid_amount: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: parseFloat($el.start_bid.val())
+                            }
+                        },
+                    });
+                }
+            },
+        };
+
+        if (_.has(forms, type)) {
+            _.invoke(forms, type);
+        }
+    }
+
 
 }
 
