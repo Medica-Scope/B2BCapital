@@ -11,10 +11,15 @@
      *
      */
 
-    use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
+use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
     use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
     get_header();
+
+    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/home-dashboard');
+
 
     global $wp_query, $post, $user_ID;
 ?>

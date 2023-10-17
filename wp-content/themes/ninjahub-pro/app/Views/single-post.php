@@ -7,7 +7,8 @@
      * @Date: 9/21/2023
      */
 
-    use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
     use NH\Nh;
@@ -19,13 +20,14 @@
     $opportunity_obj = new Nh_Opportunity();
     $single_post     = $post_obj->convert($post);
     $opportunity     = "";
-    
+    $fav_chk = false;
+    $ignore_chk = false;
     if (($single_post->meta_data['opportunity'])) {
         $opportunity = $opportunity_obj->get_by_id($single_post->meta_data['opportunity']);
     }
     if ($user_ID) {
-        $fav_chk     = $post_obj->is_post_in_user_favorites($single_post->ID, $user_ID);
-        $ignore_chk  = $post_obj->is_post_in_user_ignored_articles($single_post->ID, $user_ID);
+        $fav_chk     = $post_obj->is_post_in_user_favorites($single_post->ID);
+        $ignore_chk  = $post_obj->is_post_in_user_ignored($single_post->ID);
 
     }
 ?>
@@ -38,13 +40,42 @@
             <p><?= date('F d, Y', strtotime($single_post->created_date)); ?></p>
         </div>
 
-        <?php if (!empty($user_ID)): ?>
-            <div class="ninja-fav-con">
-                <button class="ninja-add-to-fav btn <?= ($fav_chk) ? 'btn-dark' : '' ?>" id="addToFav" data-uID="<?= $user_ID ?>" data-id="<?= $single_post->ID ?>"
-                        data-type="<?= $single_post->type ?>" type="button">FAV
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php if (!empty($user_ID)): 
+        if($fav_chk){
+            $fav_class = 'bbc-star';
+        }
+        else{
+            $fav_class = 'bbc-star-o';
+        }
+        echo Nh_Forms::get_instance()
+        ->create_form([
+            'opp_id'                      => [
+                'type'   => 'hidden',
+                'name'   => 'post_id',
+                'before' => '',
+                'after'  => '',
+                'value'  => $single_post->ID,
+                'order'  => 0
+            ],
+            'add_to_fav_nonce'               => [
+                'class' => '',
+                'type'  => 'nonce',
+                'name'  => 'add_to_fav_nonce_nonce',
+                'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
+                'order' => 5
+            ],
+            'submit_add_to_fav_request' => [
+                'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+                'id'                  => 'submit_add_to_fav_request',
+                'type'                => 'submit',
+                'value'               => '<i class="'.$fav_class.' fav-star"></i>',
+                'recaptcha_form_name' => 'frontend_add_to_fav',
+                'order'               => 10
+            ],
+        ], [
+            'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+        ]);
+        endif; ?>
 
 
         <?php if (!empty($user_ID)): ?>
@@ -91,7 +122,7 @@
         <div class="related slick-slider">
             <h3><?= __("Other blogs", "ninja") ?></h3>
             <?php
-                $related = $post_obj->get_all([ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ]);
+                $related = $post_obj->get_all_custom([ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ]);
                 if (!empty($related)) {
                     foreach ($related['posts'] as $single_related) {
                         ?>

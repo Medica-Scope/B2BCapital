@@ -30,6 +30,7 @@
 
     $opportunities_obj = new Nh_Opportunity();
     $acquisitions_obj  = new Nh_Opportunity_Acquisition();
+
 ?>
 
     <main class="site-dashboard-home">
@@ -59,10 +60,10 @@
                                 </div>
                                 <div class="opportunity-actions col-6">
                                     <div class="opportunity-list-sort">
-                                        <button class="btn btn-light bg-transparent opportunity-list-style">
+                                        <button class="btn btn-light bg-transparent opportunity-list-style grid-switch" data-view="list-group">
                                             <i class="bbc-th-list"></i>
                                         </button>
-                                        <button class="btn btn-light bg-transparent opportunity-list-filter">
+                                        <button class="btn btn-light bg-transparent opportunity-list-filter grid-switch active" data-view="card-group">
                                             <i class="bbc-grid"></i>
                                         </button>
                                     </div>
@@ -77,12 +78,15 @@
                                         $opportunities = $opportunities_obj->get_all();
 
                                         foreach ($opportunities as $opportunity) {
+                                            $fav_check = $opportunities_obj->is_opportunity_in_user_favorites($opportunity->ID);
                                             $args = [
                                                 'opportunity_link'         => $opportunity->link,
                                                 'opportunity_title'        => $opportunity->title,
                                                 'opportunity_thumbnail'    => $opportunity->thumbnail,
                                                 'opportunity_created_date' => $opportunity->created_date,
                                                 'is_item_controllers'      => TRUE,
+                                                'opportunity_id'           => $opportunity->ID,
+                                                'is_fav'                   => $fav_check
                                             ];
                                             ?>
                                             <div class="col">
@@ -153,6 +157,7 @@
                                                         'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
                                                         'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
+                                                        'opportunity_id'           => $opportunity->ID,
                                                     ];
 
                                                     ?>
@@ -173,6 +178,7 @@
                                                         'opportunity_thumbnail'    => $opportunity->thumbnail,
                                                         'opportunity_created_date' => $opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
+                                                        'opportunity_id'           => $opportunity->ID,
                                                     ];
                                                     ?>
                                                     <div class="col">

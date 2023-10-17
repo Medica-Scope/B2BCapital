@@ -511,10 +511,24 @@
          */
         public function toggle_opportunity_favorite(): void
         {
+            global $user_ID;
 
-            $post_id     = intval($_POST['post_id']);
-            $user_id     = intval($_POST['user_id']);
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            $form_data                     = $_POST['data'];
+            $post_id                       = (int)sanitize_text_field($form_data['opp_id']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+
+            if (!wp_verify_nonce($form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+            
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_to_fav');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
             $favorites   = [];
@@ -552,39 +566,26 @@
         }
 
         /**
-         * Description...get user's favorite list
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Ahmed Gamal
-         *
-         * @param $profile
-         *
-         * @return array
-         */
-        public function get_user_favorites($profile): array
-        {
-            return ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
-        }
-
-        /**
          * Description...Check if post exists in user's favorite list
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
+         * @param post_id
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_post_in_user_favorites($post_id, $user_id): bool
+        public function is_opportunity_in_user_favorites($post_id): bool
         {
-            $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+            global $user_ID;
+
+            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites   = [];
-            if (!is_wp_error($profile)) {
-                $favorites = $this->get_user_favorites($profile);
+            $favorites = array();
+            if(!is_wp_error($profile)){
+                $favorites = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $favorites = array_combine($favorites, $favorites);
-            }
+            }   
             return isset($favorites[$post_id]);
         }
 
@@ -648,11 +649,6 @@
             }
         }
 
-        public function get_user_ignored_opportunities($profile): array
-        {
-            return ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
-        }
-
         /**
          * Description...Check if post exists in user's ignored list
          * @version 1.0
@@ -661,16 +657,18 @@
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_post_in_user_ignored_opportunities($post_id, $user_id): bool
+        public function is_opportunity_in_user_ignored($post_id, $user_id): bool
         {
-            $profile_id            = get_user_meta($user_id, 'profile_id', TRUE);
-            $profile_obj           = new Nh_Profile();
-            $profile               = $profile_obj->get_by_id((int)$profile_id);
-            $ignored_opportunities = [];
-            if (!is_wp_error($profile)) {
-                $ignored_opportunities = $this->get_user_ignored_opportunities($profile);
+            global $user_ID;
+
+            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_opportunities = array();
+            if(!is_wp_error($profile)){
+                $ignored_opportunities = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
-            }
+            }   
             return isset($ignored_opportunities[$post_id]);
         }
 
