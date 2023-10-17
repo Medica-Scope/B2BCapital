@@ -100,7 +100,7 @@ class WP_Optimize_WebP {
 	 */
 	private function is_webp_redirection_possible() {
 		$redirection_possible = WP_Optimize()->get_options()->get_option('redirection_possible');
-		if ('true' === $redirection_possible) return true;
+		if (!empty($redirection_possible)) return 'true' === $redirection_possible;
 		return $this->run_webp_serving_self_test();
 	}
 
@@ -300,15 +300,72 @@ class WP_Optimize_WebP {
 	}
 
 	/**
-	 * Resets webp serving method by setting all flags status to false
+	 * Resets webp serving method by running self test, if needed purges cache and empties `uploads/.htaccess` file
 	 */
 	public function reset_webp_serving_method() {
-		WP_Optimize()->get_page_cache()->purge();
-		WP_Optimize()->get_webp_instance()->empty_htaccess_file();
+		$this->reset_webp_options();
+		$this->run_self_test();
+		list($old_redirection_possible, $new_redirection_possible) = $this->get_old_and_new_redirection_possibility();
+		$this->maybe_purge_cache($old_redirection_possible, $new_redirection_possible);
+		$this->maybe_empty_htaccess_file($new_redirection_possible);
+	}
+	
+	/**
+	 * Resets WebP related options
+	 */
+	private function reset_webp_options() {
 		$options = WP_Optimize()->get_options();
+		$options->update_option('old_redirection_possible', $options->get_option('redirection_possible'));
 		$options->update_option('webp_conversion_test', false);
 		$options->update_option('webp_converters', false);
-		$options->update_option('redirection_possible', 'false');
+		$options->update_option('redirection_possible', false);
+	}
+	
+	/**
+	 * Running self test to find available converters and possibility of serving webp using redirection method
+	 */
+	private function run_self_test() {
+		$this->set_converter_status();
+		if ($this->get_webp_conversion_test_result()) {
+			$this->save_htaccess_rules();
+			$this->run_webp_serving_self_test();
+		}
+	}
+	
+	/**
+	 * Gets old and new redirection possibility values
+	 *
+	 * @return array
+	 */
+	private function get_old_and_new_redirection_possibility() {
+		$options = WP_Optimize()->get_options();
+		return array(
+			$options->get_option('old_redirection_possible'),
+			$options->get_option('redirection_possible'),
+		);
+	}
+	
+	/**
+	 * Cache is cleared when there is a change in the potential for serving WebP using redirection.
+	 *
+	 * @param string $old_redirection_possible
+	 * @param string $new_redirection_possible
+	 */
+	private function maybe_purge_cache($old_redirection_possible, $new_redirection_possible) {
+		if ($old_redirection_possible !== $new_redirection_possible) {
+			WP_Optimize()->get_page_cache()->purge();
+		}
+	}
+	
+	/**
+	 * Remove redirection rules from `uploads/.htaccess` file if redirection is not possible
+	 *
+	 * @param string $new_redirection_possible
+	 */
+	private function maybe_empty_htaccess_file($new_redirection_possible) {
+		if ('false' === $new_redirection_possible) {
+			$this->empty_htaccess_file();
+		}
 	}
 
 	/**

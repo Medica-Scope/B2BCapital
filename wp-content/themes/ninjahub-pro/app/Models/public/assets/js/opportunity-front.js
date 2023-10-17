@@ -33,9 +33,9 @@ class NhOpportunityFront extends NhOpportunity
                 category: $(`#${KEY}_category`).parent(),
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
-            controlls: {
-                favBtn: `.${KEY}-add-to-fav`,
-                ignoreBtn: `.${KEY}-add-to-ignore`,
+            favorite: {
+                form: $(`.${KEY}-add-to-fav-form`),
+                parent: $(`.${KEY}-add-to-fav-form`).parent(),
             },
         };
         this.attachment    = {
@@ -54,6 +54,7 @@ class NhOpportunityFront extends NhOpportunity
         this.remove();
         this.toggle_fav_opportunity();
         this.ignore_opportunity();
+        this.list_grid_switch();
     }
 
     CreateOpportunityFormFieldsFront()
@@ -219,43 +220,86 @@ class NhOpportunityFront extends NhOpportunity
     toggle_fav_opportunity()
     {
         let that         = this,
-            $controlls   = this.$el.controlls,
+            $favorite   = this.$el.favorite,
             ajaxRequests = this.ajaxRequests;
-
-
-        $(document).on('click', $controlls.favBtn, function (e) {
-            e.preventDefault();
-            let $this   = $(e.currentTarget);
-            let user_id = $this.attr('data-uID');
-            let post_id = $this.attr('data-id');
-
-            if (typeof ajaxRequests.toggleFav !== 'undefined') {
-                ajaxRequests.toggleFav.abort();
-            }
-
-            that.toggleFavoriteOpportunity($this, user_id, post_id);
-        });
+            
+            $favorite.form.on('submit', $favorite.parent, function (e) {
+                e.preventDefault();
+                let $this    = $(e.currentTarget),
+                    formData = $this.serializeObject();
+        
+                // Abort any ongoing registration requests
+                if (typeof ajaxRequests.toggleFav !== 'undefined') {
+                    ajaxRequests.toggleFav.abort();
+                }
+       
+                    that.toggleFavoriteOpportunity(formData, $this);
+            });
     }
 
     ignore_opportunity()
     {
         let that         = this,
-            $controlls   = this.$el.controlls,
+            // $controlls   = this.$el.controlls,
             ajaxRequests = this.ajaxRequests;
 
 
-        $(document).on('click', $controlls.ignoreBtn, function (e) {
-            e.preventDefault();
-            let $this   = $(e.currentTarget);
-            let user_id = $this.attr('data-uID');
-            let post_id = $this.attr('data-id');
+        // $(document).on('click', $controlls.ignoreBtn, function (e) {
+        //     e.preventDefault();
+        //     let $this   = $(e.currentTarget);
+        //     let user_id = $this.attr('data-uID');
+        //     let post_id = $this.attr('data-id');
 
-            if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
-                ajaxRequests.ignoreArticle.abort();
-            }
-            console.log('clicked');
-            that.ignoreOpportunity($this, user_id, post_id);
+        //     if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
+        //         ajaxRequests.ignoreArticle.abort();
+        //     }
+        //     console.log('clicked');
+        //     that.ignoreOpportunity($this, user_id, post_id);
+        // });
+    }
+
+    list_grid_switch(){
+        let that = this;
+
+        $(document).on("click", '.grid-switch', function(e){
+            let old_value = $('.grid-switch.active').attr('data-view');
+            $('.grid-switch.active').removeClass('active');
+            $(this).addClass('active');
+            that.setCookie('grid_view', $(this).attr('data-view'), 1);
+            $('.opportunity-list .row').removeClass(old_value);
+            $('.opportunity-list .row').addClass($(this).attr('data-view'));
         });
+    }
+    setCookie(name, value, daysToLive) {
+        // Encode value in order to escape semicolons, commas, and whitespace
+        var cookie = name + "=" + encodeURIComponent(value);
+        
+        if(typeof daysToLive === "number") {
+            /* Sets the max-age attribute so that the cookie expires
+            after the specified number of days */
+            cookie += "; max-age=" + (daysToLive*24*60*60);
+            
+            document.cookie = cookie;
+        }
+    }
+    getCookie(name) {
+        // Split cookie string and get all individual name=value pairs in an array
+        var cookieArr = document.cookie.split(";");
+        
+        // Loop through the array elements
+        for(var i = 0; i < cookieArr.length; i++) {
+            var cookiePair = cookieArr[i].split("=");
+            
+            /* Removing whitespace at the beginning of the cookie name
+            and compare it with the given string */
+            if(name == cookiePair[0].trim()) {
+                // Decode the cookie value and return
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        
+        // Return null if not found
+        return null;
     }
 }
 

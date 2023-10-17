@@ -15,7 +15,8 @@
 
 
     use NH\APP\CLASSES\Nh_User;
-    use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
     use NH\APP\MODELS\FRONT\Nh_Public;
@@ -66,10 +67,42 @@
                         </span>
 
                         <div class="ninja-fav-con">
-                            <button class="ninja-add-to-fav btn btn-dark" id="addToFav"
-                                    data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
-                                    data-type="<?= $opportunity->type ?>" type="button">FAV
-                            </button>
+                            <?php
+                            if($fav_chk){
+                                $fav_class = 'bbc-star';
+                            }
+                            else{
+                                $fav_class = 'bbc-star-o';
+                            }
+                            echo Nh_Forms::get_instance()
+                            ->create_form([
+                                'opp_id'                      => [
+                                    'type'   => 'hidden',
+                                    'name'   => 'post_id',
+                                    'before' => '',
+                                    'after'  => '',
+                                    'value'  => $single_post->ID,
+                                    'order'  => 0
+                                ],
+                                'add_to_fav_nonce'               => [
+                                    'class' => '',
+                                    'type'  => 'nonce',
+                                    'name'  => 'add_to_fav_nonce_nonce',
+                                    'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
+                                    'order' => 5
+                                ],
+                                'submit_add_to_fav_request' => [
+                                    'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+                                    'id'                  => 'submit_add_to_fav_request',
+                                    'type'                => 'submit',
+                                    'value'               => '<i class="'.$fav_class.' fav-star"></i>',
+                                    'recaptcha_form_name' => 'frontend_add_to_fav',
+                                    'order'               => 10
+                                ],
+                            ], [
+                                'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+                            ]);
+                            ?>
                         </div>
 
                         <div class="ninja-ignore-con">

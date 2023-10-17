@@ -41,13 +41,13 @@ $partners      = get_field( 'partners', $post->ID );
 					foreach ( $sliders_group as $key => $value ) {
 						?>
 						<button type="button" data-bs-target="#landingPageCarousel" data-bs-slide-to="<?php echo $key; ?>"
-							class="slide-indicator <?php echo $key === 0 ? 'active' : ''; ?>"></button>
+							class="slide-indicator <?php echo $key === 0 ? 'active' : ''; ?>" aria-label="Slider indicator"></button>
 						<?php
 					}
 				}
 				?>
 				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/choose-type' ) ) ); ?>"
-					class="skip-intro">Skip<i class="bbc-arrow-right2"></i></a>
+					class="skip-intro"><?= __('Skip', 'ninja') ?><i class="bbc-arrow-right2"></i></a>
 			</div>
 
 			<div class="carousel-inner">

@@ -934,6 +934,7 @@
                 'before'              => '',
                 'after'               => '',
                 'recaptcha_form_name' => '',
+                'extra_attr'        => [],
                 'order'               => 0
             ];
 
@@ -949,7 +950,7 @@
 		<div class="form-field <?= $input_data['parent_class'] ?>">
 			<?= $input_data['before'] ?>
 			<button class="form-action btn btn-primary <?= Nh::_DOMAIN_NAME ?>-btn <?= $input_data['class'] ?>"
-				id="<?= $input_data['id'] ?>" type="<?= $input_data['type'] ?>">
+				id="<?= $input_data['id'] ?>" type="<?= $input_data['type'] ?>" <?= $this->create_attr($input_data) ?>>
 				<?= $input_data['value'] ?>
 			</button>
 			<?= $input_data['after'] ?>

@@ -64,6 +64,9 @@ class NhAuthentication extends NhAuth {
                 selectedNumbersSpan: $(`#${KEY}_industries_form`).find(`.selected-number`),
                 showTags: $(`#${KEY}_industries_form`).find(`.show-tags`),
                 parent: $(`#${KEY}_industries_form`).parent(),
+                wizard: $(`.step-wizard`),
+                step_header_1: $(`.after-registration-step-1`),
+                step_header_2: $(`.after-registration-step-2`),
             },
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
@@ -320,6 +323,19 @@ class NhAuthentication extends NhAuth {
             $tagsInputs  = $industries.tags.find('input'),
             $showTags    = $industries.showTags,
             ajaxRequests = this.ajaxRequests;
+
+        $industries.wizard.on('click', function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget),
+                stepTarget = $this.attr('data-target');
+
+            if ($("input[name='industries']").valid()) {
+                $('.form-steps').hide();
+                $(`.${stepTarget}`).show();
+            }
+
+        })
+
 
         // Handle change event on industry tags inputs
         $tagsInputs.on('change', $industries.form, function (e) {
