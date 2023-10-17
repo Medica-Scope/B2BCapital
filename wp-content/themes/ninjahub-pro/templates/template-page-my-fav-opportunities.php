@@ -15,7 +15,8 @@
 
 
     use NH\APP\CLASSES\Nh_User;
-    use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
     use NH\APP\MODELS\FRONT\Nh_Public;
@@ -45,40 +46,19 @@
             <?php
 
                 foreach ($opportunities as $opportunity) {
-                    $ignore_chk = in_array($opportunity->ID, empty($user_obj->profile->meta_data['ignored_opportunities']) ? [] : $user_obj->profile->meta_data['ignored_opportunities']);
+                    $fav_check = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
+                    $args = [
+                        'opportunity_link'         => $opportunity->link,
+                        'opportunity_title'        => $opportunity->title,
+                        'opportunity_thumbnail'    => $opportunity->thumbnail,
+                        'opportunity_created_date' => $opportunity->created_date,
+                        'is_item_controllers'      => TRUE,
+                        'opportunity_id'           => $opportunity->ID,
+                        'is_fav'                   => $fav_check
+                    ];
                     ?>
-                    <div class="opportunity-card">
-
-                        <h3>
-                            <a href="<?= $opportunity->link ?>"></a><?= $opportunity->title ?>
-                        </h3>
-
-                        <span class="date">
-                            <?= date('F jS, Y', strtotime($opportunity->created_date)) ?>
-                        </span>
-
-                        <p class="short-description">
-                            <?= $opportunity->meta_data['short_description'] ?>
-                        </p>
-
-                        <span class="status">
-                            <?= $opportunity->meta_data['opportunity_stage'] ?>
-                        </span>
-
-                        <div class="ninja-fav-con">
-                            <button class="ninja-add-to-fav btn btn-dark" id="addToFav"
-                                    data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
-                                    data-type="<?= $opportunity->type ?>" type="button">FAV
-                            </button>
-                        </div>
-
-                        <div class="ninja-ignore-con">
-                            <button class="ninja-add-to-ignore btn <?= ($ignore_chk) ? 'btn-outline-dark' : '' ?>"
-                                    id="addToIgnore" data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
-                                    data-type="<?= $opportunity->type ?>" type="button">X
-                            </button>
-                        </div>
-
+                    <div class="col">
+                        <?php get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); ?>
                     </div>
                     <?php
                 }

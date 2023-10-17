@@ -22,9 +22,13 @@ class NhBlogFront extends NhBlog
         super();
         this.UiCtrl = new NhUiCtrl();
         this.$el    = this.UiCtrl.selectors = {
-            controlls: {
-                favBtn: `.${KEY}-add-to-fav`,
-                ignoreBtn: `.${KEY}-add-to-ignore`,
+            favorite: {
+                form: $(`.${KEY}-add-to-fav-form`),
+                parent: $(`.${KEY}-add-to-fav-form`).parent(),
+            },
+            ignore: {
+                form: $(`.${KEY}-create-ignore-article-form`),
+                parent: $(`.${KEY}-create-ignore-article-form`).parent(),
             },
         };
 
@@ -58,24 +62,45 @@ class NhBlogFront extends NhBlog
         });
     }
 
+    toggleFav()
+    {
+        let that         = this,
+            $favorite   = this.$el.favorite,
+            ajaxRequests = this.ajaxRequests;
+            
+            $favorite.form.on('submit', $favorite.parent, function (e) {
+                e.preventDefault();
+                let $this    = $(e.currentTarget),
+                    formData = $this.serializeObject();
+        
+                // Abort any ongoing registration requests
+                if (typeof ajaxRequests.toggleFav !== 'undefined') {
+                    ajaxRequests.toggleFav.abort();
+                }
+    
+                // Validate the form and perform registration if valid
+                // if ($this.valid()) {
+                    that.toggleFavorite(formData, $this);
+            });
+    }
     ignore_article(){
-        let that           = this,
-            $controlls = this.$el.controlls,
-            ajaxRequests   = this.ajaxRequests;
 
+            let that         = this,
+            $ignore   = this.$el.ignore,
+            ajaxRequests = this.ajaxRequests;
+            
+            $ignore.form.on('submit', $ignore.parent, function (e) {
+                e.preventDefault();
+                let $this    = $(e.currentTarget),
+                    formData = $this.serializeObject();
+        
+                // Abort any ongoing registration requests
+                if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
+                    ajaxRequests.ignoreArticle.abort();
+                }
 
-        $(document).on('click', $controlls.ignoreBtn, function (e) {
-            e.preventDefault();
-            let $this = $(e.currentTarget);
-            let user_id = $this.attr('data-uID');
-            let post_id = $this.attr('data-id');
-
-            if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
-                ajaxRequests.ignoreArticle.abort();
-            }
-            console.log('clicked');
-            that.ignoreArticle($this,user_id,post_id);
-        });
+                    that.ignoreArticle(formData, $this);
+            });
     }
 }
 

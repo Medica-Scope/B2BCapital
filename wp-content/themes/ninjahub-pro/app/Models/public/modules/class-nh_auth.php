@@ -557,6 +557,8 @@
 
             $form_data                     = $_POST['data'];
             $industries                    = $form_data['industries'];
+            $expected_value                    = $form_data['expected_value'];
+            $entity_legal_type                    = $form_data['entity_legal_type'];
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -577,6 +579,14 @@
                 new Nh_Ajax_Response(FALSE, __("You have to select at least one industry.", 'ninja'));
             }
 
+            if (empty($expected_value)) {
+                new Nh_Ajax_Response(FALSE, __("Expected value field can't be empty!.", 'ninja'));
+            }
+
+            if (empty($entity_legal_type)) {
+                new Nh_Ajax_Response(FALSE, __("Entity legal type can't be empty!.", 'ninja'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_industries');
 
             if ($check_result !== TRUE) {
@@ -585,6 +595,8 @@
 
             $user                                = Nh_User::get_current_user();
             $user->profile->taxonomy['industry'] = $industries;
+            $user->profile->set_meta_data('expected_value', $expected_value);
+            $user->profile->set_meta_data('entity_legal_type', $entity_legal_type);
             $user->profile->update();
 
 

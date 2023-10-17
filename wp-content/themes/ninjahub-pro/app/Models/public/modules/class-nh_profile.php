@@ -33,7 +33,9 @@
             'favorite_opportunities',
             'ignored_opportunities',
             'favorite_articles',
-            'ignored_articles'
+            'ignored_articles',
+            'expected_value',
+            'entity_legal_type',
         ];
         public array $taxonomy = [
             'industry'

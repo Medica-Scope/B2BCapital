@@ -20,7 +20,7 @@ class NhBlog extends Nh
         this.ajaxRequests = {};
     }
 
-    toggleFavorite($el,user_id,post_id)
+    toggleFavorite(formData, $el)
     {
         let that                      = this;
         this.ajaxRequests.toggleFav = $.ajax({
@@ -28,8 +28,7 @@ class NhBlog extends Nh
             type: 'POST',
             data: {
                 action: `${KEY}_toggle_favorite_ajax`,
-                user_id: user_id,
-                post_id: post_id,
+                data: formData,
             },
             beforeSend: function () {
                 UiCtrl.beforeSendPrepare($el);
@@ -37,9 +36,9 @@ class NhBlog extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.fav_active == 0){
-                        $el.addClass('btn-dark');
+                        $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
                     }else{
-                        $el.removeClass('btn-dark');
+                        $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
                     UiCtrl.blockUI($el, false);
 
@@ -54,7 +53,7 @@ class NhBlog extends Nh
         });
     }
 
-    ignoreArticle($el,user_id,post_id)
+    ignoreArticle(formData, $el)
     {
         let that                      = this;
         this.ajaxRequests.toggleFav = $.ajax({
@@ -62,8 +61,7 @@ class NhBlog extends Nh
             type: 'POST',
             data: {
                 action: `${KEY}_ignore_article_ajax`,
-                user_id: user_id,
-                post_id: post_id,
+                data: formData,
             },
             beforeSend: function () {
                 UiCtrl.beforeSendPrepare($el);

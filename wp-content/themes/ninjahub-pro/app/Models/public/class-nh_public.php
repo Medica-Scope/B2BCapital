@@ -71,7 +71,7 @@ class Nh_Public {
 	}
 
 	public function enqueue_scripts(): void {
-		global $gglcptch_options;
+		global $gglcptch_options,$wp;
 
 		// Vendors
 		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
@@ -113,7 +113,7 @@ class Nh_Public {
 			]
 		] );
 
-		if ( is_page( 'blogs' ) || is_post_type_archive( 'post' ) || is_singular( 'post' ) ) {
+		if ( preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive( 'post' ) || is_singular( 'post' ) ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front' );
 		}
 
