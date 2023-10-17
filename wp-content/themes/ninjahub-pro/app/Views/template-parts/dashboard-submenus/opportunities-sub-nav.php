@@ -25,6 +25,13 @@ $acquisition_or_opportunities = $active_link === 'acquisition' || $active_link =
 		</a>
 	</li>
 
+    <li>
+		<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-ignored-opportunities' ) ) ) ?>"
+			class="btn-link <?php echo $active_link === 'my_ignored' ? 'active' : ''; ?>">
+			<?= __( 'My Ignored Opportunities', 'ninja' ) ?>
+		</a>
+	</li>
+
 	<?php
 	if ( Nh_User::get_user_role() === Nh_User::OWNER || Nh_User::get_user_role() === Nh_User::ADMIN ) {
 		?>

@@ -7,11 +7,11 @@
 
 /* globals nhGlobals, KEY */
 // import theme 3d party modules
-import $      from 'jquery';
-import UiCtrl from '../inc/UiCtrl';
-import Nh     from './Nh';
+import $         from 'jquery';
+import UiCtrl    from '../inc/UiCtrl';
+import Nh        from './Nh';
 import bootstrap from 'bootstrap';
-import _ from 'lodash';
+import _         from 'lodash';
 
 class NhBidding extends Nh
 {
@@ -23,8 +23,7 @@ class NhBidding extends Nh
 
     createBid(formData, $el)
     {
-        let that = this,
-        addBidModal = new bootstrap.Modal(document.getElementById('addBidModal'), {});
+        let that        = this;
 
         this.ajaxRequests.createBid = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -43,17 +42,23 @@ class NhBidding extends Nh
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el.form, res.msg, 'success');
-                    window.location.reload();
-                    addBidModal.hide();
+
+                    // window.location.reload();
+                    $el.addBidModalBtn.click();
                     $el.bidding_modal.remove();
                     $el.bids_numbers.text(bidCount + 1);
-                    // $($el).append(_.template($('#ninja_modal_opp_request_success').html())({
-                    //     msg: res.msg,
-                    //     button_text: res.data.button_text,
-                    // }));
+
+                    $('body').append(_.template($('#ninja_modal_opp_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+
+                    let successModal = new bootstrap.Modal(document.getElementById('opportunitySuccess'), {});
+                    successModal.show();
                 } else {
                     UiCtrl.notices($el.form, res.msg);
                 }
+
                 $el.form.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.form, false);
                 that.createNewToken();

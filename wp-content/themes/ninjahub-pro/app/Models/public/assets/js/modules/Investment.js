@@ -12,7 +12,7 @@ import UiCtrl from '../inc/UiCtrl';
 import Nh     from './Nh';
 import _      from 'lodash';
 
-class NhAcquisition extends Nh
+class NhInvestment extends Nh
 {
     constructor()
     {
@@ -20,15 +20,15 @@ class NhAcquisition extends Nh
         this.ajaxRequests = {};
     }
 
-    createAcquisition(formData, $el)
+    createInvestment(formData, $el)
     {
         let that = this;
 
-        this.ajaxRequests.createAcquisition = $.ajax({
+        this.ajaxRequests.createInvestment = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
             data: {
-                action: `${KEY}_create_acquisition_ajax`,
+                action: `${KEY}_create_investment_ajax`,
                 data: formData,
             },
             beforeSend: function () {
@@ -75,4 +75,4 @@ class NhAcquisition extends Nh
 
 }
 
-export default NhAcquisition;
+export default NhInvestment;
