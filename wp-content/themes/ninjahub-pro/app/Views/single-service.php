@@ -77,7 +77,7 @@
 
                 <div class="ninja_form_container service-subscription-form ninja-appointment-form-container">
                     <form class="ninja_form ninja-appointment-form" id="ninja_appointment_form">
-                        <h3 class="form-title"><?= __('Subscribe Now!', 'ninja') ?></h3>
+                        <h3 class="form-title"><?= __('CHECKOUT NOW!', 'ninja') ?></h3>
                         <div class="form-field">
                             <input type="text" id="name" name="name" class="form-control" required>
                             <label for="name" class="form-control-label"><?= __('Name', 'ninja') ?></label>
@@ -129,6 +129,11 @@
                                     <?php
                                 }
                             ?>
+                        </div>
+                        <div class="checkout-price nh-hidden">
+                            <p><?= __("You've to pay.", 'ninja') ?></p>
+                            <span><?= __('Help', 'ninja') ?></span>
+                            <?= $service->price_formated_html ?>
                         </div>
 
                         <?php

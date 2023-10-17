@@ -29,6 +29,7 @@ class NhAppointmentFront extends NhAppointment
                 form: $(`#${KEY}_appointment_form`),
                 parent: $(`#${KEY}_appointment_form`).parent(),
                 slotTime: $(`.${KEY}-single-time`),
+                checkoutPrice: $(`.checkout-price`),
             },
         };
 
@@ -53,6 +54,7 @@ class NhAppointmentFront extends NhAppointment
             $('.active-slot-time').removeClass('active-slot-time');
             $this.addClass('active-slot-time');
             $this.closest('.time-slot').find('input').prop('checked', true);
+            $appointments.checkoutPrice.show();
         });
     }
 
