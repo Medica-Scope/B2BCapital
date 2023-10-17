@@ -120,6 +120,12 @@ class NhValidator
                                 required: true,
                                 minlength: 1,
                             },
+                            'expected_value': {
+                                required: true
+                            },
+                            'entity_legal_type': {
+                                required: true
+                            },
                         },
                     });
                 }
