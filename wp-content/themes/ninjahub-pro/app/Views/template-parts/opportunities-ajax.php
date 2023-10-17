@@ -48,8 +48,8 @@ $opportunities = [];
                             foreach ($opportunities as $opportunity) {
                                 $opportunity_date = get_the_date('Y-m-d', $opportunity->ID);
                                 if ($user_ID) {
-                                    $fav_chk            = $opportunity_obj->is_post_in_user_favorites($opportunity->ID, $user_ID);
-                                    $ignore_chk         = $opportunity_obj->is_post_in_user_ignored_opportunities($opportunity->ID, $user_ID);
+                                    $fav_chk            = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
+                                    $ignore_chk         = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
                                 }
                                 $fav_chk = (isset($fav_chk)) ? $fav_chk : '';
                                 $ignore_chk = (isset($ignore_chk)) ? $ignore_chk : '';

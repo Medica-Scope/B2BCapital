@@ -270,7 +270,7 @@ class NhOpportunity extends Nh
         });
     }
 
-    toggleFavoriteOpportunity($el,user_id,post_id)
+    toggleFavoriteOpportunity(formData, $el)
     {
         let that                      = this;
         this.ajaxRequests.toggleFav = $.ajax({
@@ -278,8 +278,7 @@ class NhOpportunity extends Nh
             type: 'POST',
             data: {
                 action: `${KEY}_toggle_favorite_opportunity_ajax`,
-                user_id: user_id,
-                post_id: post_id,
+                data: formData,
             },
             beforeSend: function () {
                 UiCtrl.beforeSendPrepare($el);
@@ -287,9 +286,9 @@ class NhOpportunity extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.fav_active == 0){
-                        $el.addClass('btn-dark');
+                        $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
                     }else{
-                        $el.removeClass('btn-dark');
+                        $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
                     UiCtrl.blockUI($el, false);
 
