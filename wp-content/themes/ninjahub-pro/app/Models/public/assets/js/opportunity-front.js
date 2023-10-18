@@ -192,7 +192,7 @@ class NhOpportunityFront extends NhOpportunity
 
     createAttachment(filename)
     {
-        return '<div class="col-sm-2 ninja-single-attachment-wrapper"><div class="ninja-single-attachment"><i class="fa fa-file"></i><p class="ninja-attachment-name">' + filename + '</p><div class="ninja-attachment-progress"><span class="ninja-progress"></span></div><a href="javascript:;" class="ninja-remove-attachment"><i class="fa fa-times-circle"></i></a></div></div>';
+        return '<div class="col-sm-2 ninja-single-attachment-wrapper"><div class="ninja-single-attachment"><i class="bbc-file"></i><p class="ninja-attachment-name">' + filename + '</p><div class="ninja-attachment-progress"><span class="ninja-progress"></span></div><a href="javascript:;" class="ninja-remove-attachment"><i class="bbc-x-circle"></i></a></div></div>';
     };
 
     renameFile(filename)
@@ -222,17 +222,17 @@ class NhOpportunityFront extends NhOpportunity
         let that         = this,
             $favorite   = this.$el.favorite,
             ajaxRequests = this.ajaxRequests;
-            
+
             $favorite.form.on('submit', $favorite.parent, function (e) {
                 e.preventDefault();
                 let $this    = $(e.currentTarget),
                     formData = $this.serializeObject();
-        
+
                 // Abort any ongoing registration requests
                 if (typeof ajaxRequests.toggleFav !== 'undefined') {
                     ajaxRequests.toggleFav.abort();
                 }
-       
+
                     that.toggleFavoriteOpportunity(formData, $this);
             });
     }
@@ -273,23 +273,23 @@ class NhOpportunityFront extends NhOpportunity
     setCookie(name, value, daysToLive) {
         // Encode value in order to escape semicolons, commas, and whitespace
         var cookie = name + "=" + encodeURIComponent(value);
-        
+
         if(typeof daysToLive === "number") {
             /* Sets the max-age attribute so that the cookie expires
             after the specified number of days */
             cookie += "; max-age=" + (daysToLive*24*60*60);
-            
+
             document.cookie = cookie;
         }
     }
     getCookie(name) {
         // Split cookie string and get all individual name=value pairs in an array
         var cookieArr = document.cookie.split(";");
-        
+
         // Loop through the array elements
         for(var i = 0; i < cookieArr.length; i++) {
             var cookiePair = cookieArr[i].split("=");
-            
+
             /* Removing whitespace at the beginning of the cookie name
             and compare it with the given string */
             if(name == cookiePair[0].trim()) {
@@ -297,7 +297,7 @@ class NhOpportunityFront extends NhOpportunity
                 return decodeURIComponent(cookiePair[1]);
             }
         }
-        
+
         // Return null if not found
         return null;
     }

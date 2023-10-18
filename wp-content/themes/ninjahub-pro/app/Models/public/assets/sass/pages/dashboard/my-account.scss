@@ -35,3 +35,10 @@
 .tox-tinymce{
 	border-radius: 5px !important;
 }
+.ninja-single-attachment{
+    display: flex;
+    align-items: center;
+		.ninja-attachment-name{
+			margin-inline:0.5rem;
+		}
+}
