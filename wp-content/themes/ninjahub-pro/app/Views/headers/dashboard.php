@@ -33,8 +33,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			wp_nav_menu(
 				[ 
 					'theme_location'  => 'dashboard-owner-menu',
-					'container_class' => 'bbc-logged-in-menu-container',
-					'container_id'    => 'bbc-logged-in-menu-container',
+					'container_class' => 'bbc-default-menu-container',
+					'container_id'    => 'bbc-default-menu-container',
 					'menu_class'      => 'navbar-nav',
 					'menu_id'         => 'bbc-logged-in-navbar-nav',
 					'fallback_cb'     => '',
@@ -49,7 +49,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			wp_nav_menu(
 				[ 
 					'theme_location'  => 'dashboard-investor-menu',
-					'container_class' => 'bbc-default-menu-container',
+					'container_class' => 'bbc-default-menu-container ',
 					'container_id'    => 'bbc-default-menu-container',
 					'menu_class'      => 'navbar-nav',
 					'fallback_cb'     => '',
@@ -123,7 +123,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
 					</li>
 					<li class="nav-item bbc-user-profile-btn">
-						<a class="nav-link" href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
+						<a class="nav-link"
+							href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
 							<span class="btn-profile-title">
 								<?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
