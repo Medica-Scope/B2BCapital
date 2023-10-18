@@ -31,7 +31,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include owner type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-owner-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -47,7 +47,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include investor type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-investor-menu',
 					'container_class' => 'bbc-default-menu-container ',
 					'container_id'    => 'bbc-default-menu-container',
@@ -63,7 +63,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include Admin type menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-admin-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -79,7 +79,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 			 * Include guest menu
 			 */
 			wp_nav_menu(
-				[ 
+				[
 					'theme_location'  => 'dashboard-guest-menu',
 					'container_class' => 'bbc-default-menu-container',
 					'container_id'    => 'bbc-default-menu-container',
@@ -100,8 +100,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						<?php
 						echo Nh_Forms::get_instance()
 							->create_form(
-								[ 
-									'search' => [ 
+								[
+									'search' => [
 										'class'       => 'm-0 p-0 ninja-s',
 										'type'        => 'text',
 										'name'        => 's',
@@ -111,7 +111,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 										'order'       => 0,
 									],
 								],
-								[ 
+								[
 									'action' => apply_filters( 'nhml_permalink', home_url() ),
 									'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
 									'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
@@ -141,7 +141,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+							<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
