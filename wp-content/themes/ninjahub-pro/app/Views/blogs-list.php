@@ -22,40 +22,40 @@ $paged            = 1;
 $fav_articles     = [];
 $ignored_articles = [];
 
-if (get_query_var('paged')) {
-    $paged = get_query_var('paged');
+if ( get_query_var( 'paged' ) ) {
+	$paged = get_query_var( 'paged' );
 }
 
-$results = $blog_obj->get_all_custom(['publish'], 12, 'date', 'DESC', $ignored_articles, $user_ID, $paged);
-if ($results['posts']) { ?>
+$results = $blog_obj->get_all_custom( [ 'publish' ], 12, 'date', 'DESC', $ignored_articles, $user_ID, $paged );
+if ( $results['posts'] ) { ?>
 
-    <?php
-    /* Start the Loop */
-    foreach ($results['posts'] as $single_post) {
-        $args            = [];
-        $args['post'] = $single_post;
-        /*
-        * Include the Post-Type-specific template for the content.
-        * If you want to override this in a child theme, then include a file
-        * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-        */
-        get_template_part('app/Views/blogs', NULL, $args);
-    }
+<?php
+	/* Start the Loop */
+	foreach ( $results['posts'] as $single_post ) {
+		$args         = [];
+		$args['post'] = $single_post;
+		/*
+		 * Include the Post-Type-specific template for the content.
+		 * If you want to override this in a child theme, then include a file
+		 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+		 */
+		get_template_part( 'app/Views/blogs', NULL, $args );
+	}
 
-    ?>
-    <div class="pagination-con">
-        <?php
-        echo $results['pagination'];
-        ?>
-    </div>
+	?>
+<div class="pagination-con">
+	<?php
+		echo $results['pagination'];
+		?>
+</div>
 <?php
 
 } else {
 
-    if (empty(locate_template('app/Views/none-' . $queried_post_type['post_type'] . '.php'))) {
-        get_template_part('app/Views/none');
-    } else {
-        get_template_part('app/Views/none', $queried_post_type['post_type']);
-    }
+	if ( empty( locate_template( 'app/Views/none-' . $queried_post_type['post_type'] . '.php' ) ) ) {
+		get_template_part( 'app/Views/none' );
+	} else {
+		get_template_part( 'app/Views/none', $queried_post_type['post_type'] );
+	}
 }
 ?>
