@@ -95,22 +95,22 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 						<?= __( 'Subscribe Now!', 'ninja' ) ?>
 					</h3>
 					<div class="form-field">
-						<input type="text" id="name" name="name" class="form-control" required>
 						<label for="name" class="form-control-label">
 							<?= __( 'Name', 'ninja' ) ?>
 						</label>
+						<input type="text" id="name" name="name" class="form-control" required>
 					</div>
 					<div class="form-field">
-						<input type="email" id="email" name="email" class="form-control" required>
 						<label for="email" class="form-control-label">
 							<?= __( 'Email', 'ninja' ) ?>
 						</label>
+						<input type="email" id="email" name="email" class="form-control" required>
 					</div>
 					<div class="form-field">
-						<input type="text" id="mobile" name="mobile" class="form-control" required>
 						<label for="mobile" class="form-control-label">
 							<?= __( 'Mobile', 'ninja' ) ?>
 						</label>
+						<input type="text" id="mobile" name="mobile" class="form-control" required>
 					</div>
 					<div class="time-slots">
 						<h4 class="time-slots-title">
