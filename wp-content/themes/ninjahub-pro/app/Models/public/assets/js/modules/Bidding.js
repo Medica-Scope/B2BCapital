@@ -61,14 +61,14 @@ class NhBidding extends Nh
 
                 $el.form.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.form, false);
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
             error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }

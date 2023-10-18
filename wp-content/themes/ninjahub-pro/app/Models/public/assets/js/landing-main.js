@@ -110,4 +110,4 @@ window.onSubmit = onSubmit;
 // Calling Functions
 handleCarouselAnimation();
 validateForm('contact-us-form');
-validateForm('service-subscription-form');
+// validateForm('service-subscription-form');
