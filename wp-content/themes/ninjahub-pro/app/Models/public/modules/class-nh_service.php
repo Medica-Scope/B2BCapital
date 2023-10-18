@@ -156,6 +156,7 @@
 
             foreach ($slots as $key_slot => $slot) {
                 foreach ($working_days as $key => $day) {
+                    date_default_timezone_set('Africa/Cairo');
                     $currentDate = new \DateTime();
                     $today       = $currentDate->format('d-m-Y');
                     if ($day['day_name'] === $slot['day_name']) {
@@ -189,6 +190,8 @@
 
         public function getNextDaysExcluding($excludeDays = [], $included_days = []): array
         {
+            date_default_timezone_set('Africa/Cairo');
+
             $days        = [];
             $currentDate = new \DateTime();
 
