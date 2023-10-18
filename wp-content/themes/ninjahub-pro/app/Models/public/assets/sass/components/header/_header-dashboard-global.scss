@@ -70,6 +70,9 @@
 					color: $primary-dark;
 				}
 				.nav-item {
+					.dropdown-toggle::after{
+						display: none;
+					}
 					.nav-link {
 						span {
 							display: block;
@@ -82,9 +85,6 @@
 						border-left: 1px solid $layout;
 						padding-left: 1.5rem;
 					}
-					.dropdown-toggle{&::after{
-						display: none;
-					}}
 				}
 				.ninja-notification-bell {
 					.ninja-notification-count {
