@@ -25,6 +25,7 @@
 			color: $highlight;
 			text-align: center;
 			&::placeholder {
+				color: $highlight;
 				border-bottom: 1px solid $gray-medium;
 				+ div {
 					border-bottom: 1px solid $gray-medium;
