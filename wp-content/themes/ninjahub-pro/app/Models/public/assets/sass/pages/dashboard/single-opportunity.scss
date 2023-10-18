@@ -26,3 +26,14 @@
 		cursor: -webkit-grabbing;
 	}
 }
+.actions {
+	display: flex;
+	justify-content: space-between;
+	.ninja_form_container {
+		width: 49%;
+	}
+}
+.card-body {
+	padding-top: 0;
+	padding-bottom: 0;
+}
