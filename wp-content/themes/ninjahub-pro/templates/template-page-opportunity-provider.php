@@ -70,8 +70,9 @@ get_header();
 			</div>
 			<div class="user-type-video owner">
 				<div class="video-scene">
-					<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/owner-video.webp" alt="B2B Owner"
-						class="img-fluid">
+					<video autoplay loop class="w-100">
+						<source src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/videos/owner.mp4" type="video/mp4">
+					</video>
 				</div>
 			</div>
 		</div>

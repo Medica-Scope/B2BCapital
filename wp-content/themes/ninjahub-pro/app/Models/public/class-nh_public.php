@@ -71,14 +71,20 @@ class Nh_Public {
 	}
 
 	public function enqueue_scripts(): void {
-		global $gglcptch_options,$wp;
+		global $gglcptch_options, $wp;
+		$is_single_service = is_single() && 'service' == get_post_type();
 
 		// Vendors
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-popper', Nh_Hooks::PATHS['public']['vendors'] . '/js/popper.min.js', [
+			'jquery'
+		], Nh::_VERSION, NULL, TRUE );
 		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
 			'jquery'
 		], Nh::_VERSION, NULL, TRUE );
 
-		if ( is_front_page() ) {
+		if ( is_front_page() || is_page( [
+			'login', 'registration', 'forgot-password'
+		] ) || $is_single_service || is_404() ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', 'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs', [], Nh::_VERSION, NULL, TRUE, [ 'type' => 'module' ] );
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ] );
 		}
@@ -113,7 +119,7 @@ class Nh_Public {
 			]
 		] );
 
-		if ( preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive( 'post' ) || is_singular( 'post' ) ) {
+		if ( preg_match( '#^my-account/my-ignored-articles(/.+)?$#', $wp->request ) || preg_match( '#^blogs(/.+)?$#', $wp->request ) || is_post_type_archive( 'post' ) || is_singular( 'post' ) ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front' );
 		}
 
