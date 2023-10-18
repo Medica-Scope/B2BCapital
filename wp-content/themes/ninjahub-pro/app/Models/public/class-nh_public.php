@@ -84,7 +84,7 @@ class Nh_Public {
 
 		if ( is_front_page() || is_page( [
 			'login', 'registration', 'forgot-password'
-		] ) || $is_single_service ) {
+		] ) || $is_single_service || is_404() ) {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', 'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs', [], Nh::_VERSION, NULL, TRUE, [ 'type' => 'module' ] );
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ] );
 		}
