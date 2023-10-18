@@ -122,7 +122,8 @@ $opportunity = (isset($args['opportunity'])) ? $args['opportunity'] : '';
                     ],
                 ], [
                     'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
-                ]);?>
+                ]);
+                ?>
             </div>
         </div>
     <?php endif; ?>

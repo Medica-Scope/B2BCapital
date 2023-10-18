@@ -87,6 +87,8 @@
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_item_clear_notifications_ajax', $this, 'item_clear_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_item_clear_notifications_ajax', $this, 'item_clear_notifications_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_read_new_notifications_ajax', $this, 'read_new_notifications_ajax');
@@ -400,8 +402,6 @@
 
             $notifications = $this->load_more([ 'publish' ], $page, 10, 'DESC', [ $user_ID ]);
 
-            $last = FALSE;
-
             // if ($page * 10 >= $notifications['count']) {
             $last = TRUE;
             // }
@@ -502,5 +502,50 @@
                 $string = array_slice($string, 0, 1);
 
             return $string ? implode(', ', $string) . ' ' . __('ago', 'ninja') : __('just now', 'ninja');
+        }
+
+        public function item_clear_notifications_ajax(): void
+        {
+            global $user_ID;
+            $form_data                     = $_POST['data'];
+            $post_id                       = (int)sanitize_text_field($form_data['post_id']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+            if (!wp_verify_nonce($form_data['notification_item_clear_nonce'], Nh::_DOMAIN_NAME . "_notification_item_clear_nonce_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+            
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_notification_item_clear');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            wp_delete_post($post_id, TRUE);
+            
+            $posts = new \WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => 'any',
+                "posts_per_page" => -1,
+                'author'         => $user_ID
+            ]);
+
+            ob_start();
+            if(!empty($posts->get_posts())){
+                foreach ($posts->get_posts() as $notification) {
+                    $notification = $this->convert($notification);
+                    get_template_part('app/Views/template-parts/notifications/notification', 'list-ajax', [ 'data' => $notification ]);
+
+                }
+            }else{
+                get_template_part('app/Views/template-parts/notifications/notification', 'empty');
+            }
+
+            $html = ob_get_clean();
+
+            new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                'html'  => $html,
+            ]);
         }
     }

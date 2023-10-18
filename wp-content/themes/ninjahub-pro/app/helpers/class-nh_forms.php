@@ -74,7 +74,7 @@
          *
          * @author Mustafa Shaaban
          */
-        public function create_form(array $form_fields = [], array $form_tag = []): string
+        public function create_form(array $form_fields = [], array $form_tag = [])
         {
             // Check if the form fields array is empty
             if (empty($form_fields)) {
