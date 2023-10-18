@@ -122,9 +122,9 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 					<li class="nav-item">
 						<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
 					</li>
-					<li class="nav-item bbc-user-profile-btn">
-						<a class="nav-link"
-							href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
+					<li class="nav-item bbc-user-profile-btn dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+							data-bs-toggle="dropdown" data-bs-auto-close="true">
 							<span class="btn-profile-title">
 								<?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
@@ -132,6 +132,17 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 								<?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
 							</span>
 						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item"
+									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">My
+									Profile</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Something else here</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
