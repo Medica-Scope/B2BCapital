@@ -333,6 +333,18 @@
 										@include large-screen {
 											transform: translateX(-10%);
 										}
+										video {
+											border-top-right-radius: 20px;
+											border-bottom-right-radius: 20px;
+										}
+									}
+								}
+								&.owner {
+									.video-scene {
+										video {
+											border-top-left-radius: 20px;
+											border-bottom-left-radius: 20px;
+										}
 									}
 								}
 							}
@@ -553,11 +565,19 @@
 										@include large-screen {
 											transform: translateX(10%) scaleX(-1);
 										}
+										video {
+											border-top-left-radius: 20px;
+											border-bottom-left-radius: 20px;
+										}
 									}
 								}
 								&.owner {
 									.video-scene {
 										transform: scaleX(-1);
+										video {
+											border-top-right-radius: 20px;
+											border-bottom-right-radius: 20px;
+										}
 									}
 								}
 							}
