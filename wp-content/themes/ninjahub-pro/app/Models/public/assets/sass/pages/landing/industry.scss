@@ -33,6 +33,14 @@
 		font-weight: bold;
 		letter-spacing: 0.15rem;
 	}
+	.form-step-2 {
+		.steps-circle-fill {
+			border-color: $success;
+		}
+		.form-check{
+			width: fit-content;
+		}
+	}
 	.form-field {
 		&.ninja-input-wrapper {
 			flex-direction: row;

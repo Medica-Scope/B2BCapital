@@ -87,8 +87,8 @@ body {
 /***** All Scrollbars Styles Start Here *****/
 /* Any Scrollbar Width & Height */
 ::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 4px;
+  height: 4px;
 }
 
 /* Any Scrollbar Track Color */
@@ -138,4 +138,16 @@ body {
 
 .rc-anchor, .hidden-tag {
   display: none !important;
+}
+
+.breadcrumbs {
+	color: $gray-medium;
+	a {
+		color: $gray-medium;
+	}
+	.bbc-chevron-right,
+	.bbc-chevron-left {
+		font-size: 0.8rem;
+		color: rgba($gray-medium, 0.5);
+	}
 }

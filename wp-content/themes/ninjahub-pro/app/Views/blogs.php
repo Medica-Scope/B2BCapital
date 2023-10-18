@@ -16,21 +16,22 @@ global $wp_query, $post, $user_ID;
 $post_obj        = new Nh_Blog();
 $opportunity_obj = new Nh_Opportunity();
 $opportunity     = "";
-$single_post = $args['post'];
-if (($single_post->meta_data['opportunity'])) {
-    $opportunity         = $opportunity_obj->get_by_id($single_post->meta_data['opportunity']);
-    $args['opportunity'] = $opportunity;
+$single_post     = $args['post'];
+
+if ( ( $single_post->meta_data['opportunity'] ) ) {
+	$opportunity         = $opportunity_obj->get_by_id( $single_post->meta_data['opportunity'] );
+	$args['opportunity'] = $opportunity;
 }
 
-if ($user_ID) {
-    $fav_chk            = $post_obj->is_post_in_user_favorites($single_post->ID);
-    $ignore_chk         = $post_obj->is_post_in_user_ignored($single_post->ID);
-    $args['fav_chk']    = $fav_chk;
-    $args['ignore_chk'] = $ignore_chk;
+if ( $user_ID ) {
+	$fav_chk            = $post_obj->is_post_in_user_favorites( $single_post->ID );
+	$ignore_chk         = $post_obj->is_post_in_user_ignored( $single_post->ID );
+	$args['fav_chk']    = $fav_chk;
+	$args['ignore_chk'] = $ignore_chk;
 }
-$fav_chk = (isset($args['fav_chk'])) ? $args['fav_chk'] : '';
-$ignore_chk = (isset($args['ignore_chk'])) ? $args['ignore_chk'] : '';
-$opportunity = (isset($args['opportunity'])) ? $args['opportunity'] : '';
+$fav_chk     = ( isset( $args['fav_chk'] ) ) ? $args['fav_chk'] : '';
+$ignore_chk  = ( isset( $args['ignore_chk'] ) ) ? $args['ignore_chk'] : '';
+$opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 ?>
 <div class="blog-item card">
 

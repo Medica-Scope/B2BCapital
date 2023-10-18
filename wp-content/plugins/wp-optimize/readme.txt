@@ -5,7 +5,7 @@ Tags: cache, minify, caching, image cache, performance cache, clean, spam, speed
 Requires PHP: 5.6
 Requires at least: 4.5
 Tested up to: 6.3
-Stable tag: 3.2.19
+Stable tag: 3.2.20
 License: GPLv2+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -366,6 +366,23 @@ If none of the above works, disable processing of JavaScript files in the minify
 
 
 == Changelog ==
+
+
+= 3.2.20 - 16/Oct/2023 =
+
+* FIX: WebP - Performance issue because of possible infinite loop
+* FIX: Cache purging occurred prior to the cache lifespan expiration
+* FIX: Premium - Smush - Do not consider images in trashed posts as unused
+* TWEAK - Remove extra slash from plugin asset urls and paths
+* TWEAK: Image - Add a tooltip next to the restore button on the edit media screen
+* TWEAK: Premium - Prevent PHP deprecated warning when generating variations from attributes for new WooCommerce variable products
+* TWEAK: Premium - Purge cache when the `Variation Swatches for WooCommerce` plugin settings get updated
+* TWEAK: Premium - Settings - Style improvement for the `Purge cache permissions` select2 box
+* TWEAK: Recognise LearnDash plugin tables in database optimization
+* TWEAK: Remove empty `uploads/.htaccess` file and remaining cron events
+* TWEAK: Smush - Disable server info in smush logs by default
+* TWEAK: Smush - Resolve double log entries when compressing a single image from the media library metabox
+* TWEAK: Prevent unwanted PHP notice upon update
 
 = 3.2.19 - 15/Sep/2023 =
 
@@ -1427,4 +1444,4 @@ If none of the above works, disable processing of JavaScript files in the minify
 * Fix Interface
 
 == Upgrade Notice ==
-* 3.2.19: Various fixes and tweaks - a recommended update for all
+* 3.2.20: Various fixes, and tweaks - a recommended update for all

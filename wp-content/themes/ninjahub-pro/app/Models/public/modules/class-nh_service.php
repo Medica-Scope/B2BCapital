@@ -56,8 +56,13 @@
          */
         public function convert(WP_Post $post, array $meta_data = []): Nh_Post
         {
-            $service                  = parent::convert($post, $this->meta_data);
-            $service->available_slots = $this->get_available_slots($service);
+            $service                      = parent::convert($post, $this->meta_data);
+            $service->available_slots     = $this->get_available_slots($service);
+            $price                        = number_format((float)$service->meta_data['service_price'], 2);
+            $parts                        = explode('.', $price);
+            $service->price_formated      = $price;
+            $service->price_formated_html = "<p class='service-price'><span class='price-big'>$$parts[0].</span><span class='price-small'>$parts[1]</span></p>";
+
 
             return $service;
         }
@@ -151,11 +156,19 @@
 
             foreach ($slots as $key_slot => $slot) {
                 foreach ($working_days as $key => $day) {
+                    date_default_timezone_set('Africa/Cairo');
                     $currentDate = new \DateTime();
-                    $today = $currentDate->format('d-m-Y');
+                    $today       = $currentDate->format('d-m-Y');
                     if ($day['day_name'] === $slot['day_name']) {
                         if ($today === $slot['data']['date']) {
                             $full_data_format = __('Today', 'ninja');
+                            foreach ($day['time_slots'] as $key => $single_time) {
+                                $current = new \DateTime($single_time);
+                                $today_current_time = new \DateTime($currentDate->format('g:i a'));
+                                if ($today_current_time > $current) {
+                                    unset($day['time_slots'][$key]);
+                                }
+                            }
                         } else {
                             $full_data_format = $slot['day_name_short'] . ' ' . $slot['date'];
                         }
@@ -177,6 +190,8 @@
 
         public function getNextDaysExcluding($excludeDays = [], $included_days = []): array
         {
+            date_default_timezone_set('Africa/Cairo');
+
             $days        = [];
             $currentDate = new \DateTime();
 
