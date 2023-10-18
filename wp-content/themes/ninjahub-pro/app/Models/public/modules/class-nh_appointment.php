@@ -166,6 +166,10 @@
                 new Nh_Ajax_Response(FALSE, __("The slot day is empty!.", 'ninja'));
             }
 
+            if ($this->check_appointment_slot($slot_data)) {
+                new Nh_Ajax_Response(FALSE, __("This slot is not available!.", 'ninja'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_appointment');
 
             if ($check_result !== TRUE) {
