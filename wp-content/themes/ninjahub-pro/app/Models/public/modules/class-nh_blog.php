@@ -234,10 +234,9 @@ use WP_Post;
                     $ignore_count = get_post_meta($post_id, 'ignore_count', true);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                     ob_start();
-                    // $html = ob_get_clean();
                     get_template_part('app/Views/blogs-list');
-                    $html = ob_get_contents();
-                    ob_end_clean();
+                    $html = ob_get_clean();
+                    
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
                     ['status' => true, 'msg' => 'post un-ignored', 'ignore_active' => 1, 'updated' => $html]
                     );

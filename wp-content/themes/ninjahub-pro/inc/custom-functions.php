@@ -132,10 +132,10 @@
         tgmpa($plugins, $config);
     }
 
-    //    $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
-    //    for ($i = 0; $i < 7; $i++) {
-    //        $notifications->send(13, 12, 'bidding', [ 'project_id' => '157' ]);
-    //    }
+        // $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
+        // for ($i = 0; $i < 7; $i++) {
+        //     $notifications->send(18, 1, 'bidding', [ 'opportunity_id' => '1762' ]);
+        // }
 
 
     //    $ch = curl_init();

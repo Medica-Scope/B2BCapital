@@ -27,11 +27,15 @@ class NhNotificationFront extends NhNotification
                 bellBtn: $(`.${KEY}-notification-bell`),
                 bell_counter: $(`.${KEY}-notification-count`),
                 notification_group_container: $(`.${KEY}-notification-group-container`),
+                my_notification_group_container: $(`.notifications-con .${KEY}-notifications-group`),
                 notification_list: $(`.${KEY}-notification-list`),
                 notification_group: $(`.${KEY}-notification-list .${KEY}-notifications-group`),
                 clearBtn: $(`.${KEY}-notification-clear`),
+                ItemClearBtn: $(`.${KEY}-item-notification-clear`),
                 item: $(`.${KEY}-notification-item`),
                 newItem: $(`.${KEY}-new-notification`),
+                clearForm: $(`.${KEY}-notification-item-clear-form`),
+                clearFormParent: $(`.notifications-con`),
             },
         };
 
@@ -43,6 +47,7 @@ class NhNotificationFront extends NhNotification
         this.showNotifications();
         this.clearAll();
         this.loadMore();
+        this.itemClear();
     }
 
     showNotifications()
@@ -100,6 +105,36 @@ class NhNotificationFront extends NhNotification
 
             that.clear($notifications.notification_group_container);
         });
+    }
+
+    itemClear()
+    {
+            let that         = this,
+            $notifications   = this.$el.notifications,
+            ajaxRequests = this.ajaxRequests;
+            
+            $notifications.clearForm.on('submit', $notifications.clearFormParent, function (e) {
+                e.preventDefault();
+                let $this    = $(e.currentTarget),
+                    formData = $this.serializeObject();
+        
+                // Abort any ongoing registration requests
+                if (typeof ajaxRequests.clear_notifications !== 'undefined') {
+                    ajaxRequests.clear_notifications.abort();
+                }
+                    that.item_clear(formData, $notifications.my_notification_group_container);
+            });
+
+        // $notifications.ItemClearBtn.on('click', $notifications.ItemClearBtn.parent(), function (e) {
+        //     e.preventDefault();
+        //     let $this = $(e.currentTarget);
+
+        //     if (typeof ajaxRequests.clear_notifications !== 'undefined') {
+        //         ajaxRequests.clear_notifications.abort();
+        //     }
+
+        //     that.item_clear($notifications.my_notification_group_container);
+        // });
     }
 
     loadMore()

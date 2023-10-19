@@ -77,9 +77,6 @@ class NhBlogFront extends NhBlog
                 if (typeof ajaxRequests.toggleFav !== 'undefined') {
                     ajaxRequests.toggleFav.abort();
                 }
-    
-                // Validate the form and perform registration if valid
-                // if ($this.valid()) {
                     that.toggleFavorite(formData, $this);
             });
     }
