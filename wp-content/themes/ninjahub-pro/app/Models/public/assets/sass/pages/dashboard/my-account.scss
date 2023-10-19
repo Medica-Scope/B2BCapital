@@ -1,23 +1,33 @@
 @import './submenus/submenus.scss';
 @import '../../base/variables';
 
-.ninja_form_container:not(.ninja-header-search-form-container), .acf-form {
+.ninja_form_container:not(.ninja-header-search-form-container),
+.acf-form {
 	background-color: $layout-light;
 	max-width: 920px;
 	border-radius: 5px;
 	padding: 2rem;
 	margin: 2rem auto;
 }
-.ninja-attachment-uploader{
+.ninja-attachment-uploader {
 	width: 100% !important;
 }
-.breadcrumbs{
-	color: $gray-medium;
-	a{
-		color: $gray-medium;
-	}
-	.bbc-chevron-right, .bbc-chevron-left{
-		font-size: 0.8rem;
-		color: rgba($gray-medium, 0.50);
-	}
+
+.tox .tox-statusbar,
+.tox .tox-toolbar-overlord,
+.tox:not(.tox-tinymce-inline) .tox-editor-header,
+.tox .tox-toolbar,
+.tox .tox-toolbar__overflow,
+.tox .tox-toolbar__primary {
+	background-color: $gray-light !important;
+}
+.tox-tinymce{
+	border-radius: 5px !important;
+}
+.ninja-single-attachment{
+    display: flex;
+    align-items: center;
+		.ninja-attachment-name{
+			margin-inline:0.5rem;
+		}
 }

@@ -1,22 +1,19 @@
 @import './landing-theme';
 /* About Page Styles Start Here */
 .page-content {
-	overflow-y: scroll;
-    overflow-x: hidden;
-    margin-inline-start: 2rem;
+	margin-inline-start: 2rem;
 	.about-content {
+		overflow-y: hidden;
+		overflow-x: auto;
+		height: 92%;
 		/* What We Do Section Styles Start Here */
 		.what-we-do {
 			display: flex;
-			justify-content: flex-start;
+			align-items: flex-start;
+			justify-content: space-between;
 			position: relative;
-			margin-top: 3.785rem;
-			@include large-screen {
-				margin-top: 4.375rem;
-			}
-			@include xLarge-screen {
-				margin-top: 2.8125rem;
-			}
+			width: calc(100vw - 11rem);
+			padding-inline-end: 5rem;
 			.section-texture {
 				width: 25rem;
 				position: absolute;
@@ -38,8 +35,11 @@
 				z-index: 1;
 				width: 50%;
 				max-height: 500px;
-				overflow-y: scroll;
+				overflow-y: auto;
 				color: $layout-light;
+				&::-webkit-scrollbar{
+					width: 4px;
+				}
 				.page-section-title {
 					margin: 1.14rem 0 2rem;
 					font-size: 2.1rem;
@@ -97,8 +97,8 @@
 				}
 				.banner-wrapper {
 					position: relative;
-					img{
-border-radius: 3px;
+					img {
+						border-radius: 3px;
 					}
 					.statistics {
 						position: absolute;
@@ -172,19 +172,10 @@ border-radius: 3px;
 		/* About Section Styles Start Here */
 		.about-section {
 			display: flex;
-			align-items: center;
-			justify-content: flex-start;
+			align-items: flex-start;
 			position: relative;
-			height: calc(100vh - 5rem);
-			margin-top: 5rem;
-			@include large-screen {
-				height: calc(100vh - 5rem);
-				margin-top: 5.375rem;
-			}
-			@include xLarge-screen {
-				height: calc(100vh - 9rem);
-				margin-top: 7rem;
-			}
+			width: calc(100vw - 11rem);
+			padding-inline-end: 5rem;
 			.banner-wrapper {
 				width: 11rem;
 				margin-right: 2.65rem;
@@ -214,7 +205,7 @@ border-radius: 3px;
 				z-index: 1;
 				width: 50%;
 				max-height: 500px;
-				overflow-y: scroll;
+				overflow-y: auto;
 				color: $layout-light;
 				.page-section-title {
 					margin: 1rem 0 1.5rem;
@@ -238,7 +229,6 @@ border-radius: 3px;
 			.award {
 				position: relative;
 				margin-left: auto;
-				margin-right: 5rem;
 			}
 			/* Awards Section Styles Start Here */
 			&.awards {
@@ -261,13 +251,6 @@ border-radius: 3px;
 			&.partners {
 				.section-description {
 					width: 65%;
-					transform: translateY(-75%);
-					@include large-screen {
-						transform: translateY(-85%);
-					}
-					@include xLarge-screen {
-						transform: translateY(-100%);
-					}
 					.section-content {
 						max-width: 35%;
 						@include large-screen {
@@ -281,80 +264,39 @@ border-radius: 3px;
 						margin-top: 2rem;
 						position: relative;
 						.logos-row {
-							display: block;
-							padding: 10.14rem 0 0 0;
-							position: absolute;
-							top: 7.14rem;
-							left: 0;
-							width: 8.14rem;
+							display: flex;
+							flex-direction: row;
+							flex-wrap: nowrap;
+							padding: 0.5rem 0;
+							width: 100%;
 							max-height: 47.5rem;
 							margin: 0;
-							overflow-x: hidden;
-							overflow-y: auto;
-							transform: rotate(-90deg) translateY(-8.14rem) scaleX(-1);
-							transform-origin: right top;
-							@include large-screen {
-								width: 9rem;
-								max-height: 55.5rem;
-								padding: 12rem 0 0 0;
-								top: 8rem;
-								transform: rotate(-90deg) translateY(-9rem) scaleX(-1);
-							}
-							@include xLarge-screen {
-								width: 11.95rem;
-								max-height: 78.125rem;
-								padding: 16.75rem 0 0 0;
-								top: 12rem;
-								transform: rotate(-90deg) translateY(-11.95rem) scaleX(-1);
-							}
-							&.second {
-								top: 14.5rem;
-								@include large-screen {
-									top: 16.5rem;
-								}
-								@include xLarge-screen {
-									top: 23.5rem;
-								}
-							}
+							overflow-x: auto;
+							overflow-y: hidden;
 							.logo-wrapper {
-								width: 10.14rem;
+								width: 10rem;
 								height: 6rem;
-								margin: 0 1rem 1rem 1rem;
-								transform: rotate(90deg) scaleY(-1) translateY(-10.14rem);
-								transform-origin: right top;
+								margin-inline-end: 0.5rem;
 								display: flex;
 								align-items: center;
 								justify-content: center;
-								border-radius: 0.5rem;
+								border-radius: 5px;
 								background-color: $layout-light;
-								+ .logo-wrapper {
-									margin: 5.1875rem 1rem 1rem 1rem;
-									@include large-screen {
-										margin: 6.1875rem 1rem 1rem 1rem;
-									}
-									@include xLarge-screen {
-										margin: 8.25rem 1rem 1rem 1rem;
-									}
+								&:last-of-type{
+									margin: 0;
 								}
 								@include large-screen {
 									width: 12rem;
 									height: 7rem;
-									transform: rotate(90deg) scaleY(-1) translateY(-12rem);
 								}
 								@include xLarge-screen {
-									width: 16.75rem;
-									height: 9.875rem;
-									transform: rotate(90deg) scaleY(-1) translateY(-16.75rem);
+									width: 16rem;
+									height: 9rem;
 								}
 								.logo {
-									max-width: 7.5rem;
-									height: auto;
-									@include large-screen {
-										max-width: 8.5625rem;
-									}
-									@include xLarge-screen {
-										max-width: 12rem;
-									}
+									height: 100%;
+									width: 100%;
+									object-fit: contain;
 								}
 							}
 						}
@@ -462,35 +404,6 @@ border-radius: 3px;
 					@include xLarge-screen {
 						right: auto;
 						left: 12rem;
-					}
-				}
-			}
-			/* Partners Section Styles Start Here */
-			&.partners {
-				.section-description {
-					.partners-logos {
-						.logos-row {
-							left: auto;
-							right: 0;
-							transform: rotate(90deg) translateY(-8.14rem) scaleX(-1);
-							transform-origin: left top;
-							@include large-screen {
-								transform: rotate(90deg) translateY(-9rem) scaleX(-1);
-							}
-							@include xLarge-screen {
-								transform: rotate(90deg) translateY(-11.95rem) scaleX(-1);
-							}
-							.logo-wrapper {
-								transform: rotate(-90deg) scaleY(-1) translateY(-10.14rem);
-								transform-origin: left top;
-								@include large-screen {
-									transform: rotate(-90deg) scaleY(-1) translateY(-12rem);
-								}
-								@include xLarge-screen {
-									transform: rotate(-90deg) scaleY(-1) translateY(-16.75rem);
-								}
-							}
-						}
 					}
 				}
 			}

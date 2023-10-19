@@ -43,7 +43,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -52,7 +52,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -80,7 +80,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -89,7 +89,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -122,7 +122,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -131,7 +131,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -159,7 +159,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -168,7 +168,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -199,7 +199,7 @@ class NhAuth extends Nh {
                     UiCtrl.notices($el.closest('form'), res.msg);
                 }
                 $el.hide();
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
@@ -208,7 +208,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -239,7 +239,7 @@ class NhAuth extends Nh {
                     UiCtrl.notices($el.closest('form'), res.msg);
                 }
                 $el.hide();
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
@@ -248,7 +248,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -276,7 +276,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -285,7 +285,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -314,7 +314,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -323,7 +323,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -352,7 +352,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -361,7 +361,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -390,7 +390,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -399,7 +399,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
@@ -426,7 +426,7 @@ class NhAuth extends Nh {
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -435,7 +435,7 @@ class NhAuth extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                that.createNewToken();
+                //TODO:: AFTER MEETING//that.createNewToken();
             },
         });
     }
