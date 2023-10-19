@@ -13,8 +13,8 @@
     use NH\APP\CLASSES\Nh_Post;
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Ajax_Response;
-use NH\Nh;
-use WP_Post;
+    use NH\Nh;
+    use WP_Post;
 
 
     /**
@@ -99,7 +99,7 @@ use WP_Post;
             if (!wp_verify_nonce($form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
-            
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_to_fav');
 
             if ($check_result !== TRUE) {
@@ -108,35 +108,41 @@ use WP_Post;
             $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = [];
-            if(!is_wp_error($profile)){
-                $favorites = ($profile->meta_data['favorite_articles'])? $profile->meta_data['favorite_articles'] : [];
+            $favorites   = [];
+            if (!is_wp_error($profile)) {
+                $favorites = ($profile->meta_data['favorite_articles']) ? $profile->meta_data['favorite_articles'] : [];
                 if (in_array($post_id, $favorites)) {
                     $key = array_search($post_id, $favorites);
-                    if ($key !== false) {
+                    if ($key !== FALSE) {
                         unset($favorites[$key]);
                     }
-                    $profile->set_meta_data('favorite_articles',$favorites);
+                    $profile->set_meta_data('favorite_articles', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                    ['status' => true, 'msg' => 'post removed', 'fav_active' => 1]
-                    );
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'     => TRUE,
+                        'msg'        => 'post removed',
+                        'fav_active' => 1
+                    ]);
                 } else {
                     $favorites[] = $post_id;
-                    $profile->set_meta_data('favorite_articles',$favorites);
+                    $profile->set_meta_data('favorite_articles', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', true);
+                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), 
-                    ['status' => true, 'msg' => 'post added', 'fav_active' => 0]
-                    );
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'     => TRUE,
+                        'msg'        => 'post added',
+                        'fav_active' => 0
+                    ]);
                 }
-            }else{
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
-                    ['status' => false, 'msg' => 'You must have profile', 'fav_active' => 1]
-                    );
+            } else {
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                    'status'     => FALSE,
+                    'msg'        => 'You must have profile',
+                    'fav_active' => 1
+                ]);
             }
         }
 
@@ -145,7 +151,9 @@ use WP_Post;
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
+         *
          * @param post_id
+         *
          * @author Ahmed Gamal
          * @return bool
          */
@@ -156,11 +164,11 @@ use WP_Post;
             $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = array();
-            if(!is_wp_error($profile)){
+            $favorites   = [];
+            if (!is_wp_error($profile)) {
                 $favorites = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $favorites = array_combine($favorites, $favorites);
-            }   
+            }
             return isset($favorites[$post_id]);
         }
 
@@ -168,9 +176,9 @@ use WP_Post;
         {
             global $user_ID;
 
-            $profile_id       = get_user_meta($user_ID, 'profile_id', TRUE);
-            $profile_obj      = new Nh_Profile();
-            $profile          = $profile_obj->get_by_id((int)$profile_id);
+            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
             $Nh_articles = [];
 
             if (!is_wp_error($profile)) {
@@ -212,52 +220,62 @@ use WP_Post;
             if (!wp_verify_nonce($form_data['ignore_article_nonce'], Nh::_DOMAIN_NAME . "_ignore_article_nonce_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
-            
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_to_fav');
 
             if ($check_result !== TRUE) {
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
             }
 
-            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
+            $profile_id       = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj      = new Nh_Profile();
+            $profile          = $profile_obj->get_by_id((int)$profile_id);
             $ignored_articles = [];
-            if(!is_wp_error($profile)){
-                $ignored_articles = ($profile->meta_data['ignored_articles'])? $profile->meta_data['ignored_articles'] : [];
+            if (!is_wp_error($profile)) {
+                $ignored_articles = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
                 $ignored_articles = array_combine($ignored_articles, $ignored_articles);
-                if(isset($ignored_articles[$post_id])){
+                if (isset($ignored_articles[$post_id])) {
                     unset($ignored_articles[$post_id]);
                     $ignored_articles = array_values($ignored_articles);
-                    $profile->set_meta_data('ignored_articles',$ignored_articles);
+                    $profile->set_meta_data('ignored_articles', $ignored_articles);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
+
                     ob_start();
                     get_template_part('app/Views/blogs-list');
                     $html = ob_get_clean();
-                    
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                    ['status' => true, 'msg' => 'post un-ignored', 'ignore_active' => 1, 'updated' => $html]
-                    );
-                }
-                else {
+
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'        => TRUE,
+                        'msg'           => 'post un-ignored',
+                        'ignore_active' => 1,
+                        'updated'       => $html
+                    ]);
+                } else {
                     $ignored_articles[] = $post_id;
-                    $profile->set_meta_data('ignored_articles',$ignored_articles);
+                    $profile->set_meta_data('ignored_articles', $ignored_articles);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', true);
+                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
+
                     ob_start();
                     get_template_part('app/Views/blogs-list');
                     $html = ob_get_clean();
-                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'),
-                    ['status' => true, 'msg' => 'post ignored!', 'ignore_active' => 0, 'updated' => $html]
-                    );
-                }             
-            }else{
-                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), 
-                    ['status' => false, 'msg' => 'You must have profile', 'ignore_active' => 1]
-                    );
+
+                    new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                        'status'        => TRUE,
+                        'msg'           => 'post ignored!',
+                        'ignore_active' => 0,
+                        'updated'       => $html
+                    ]);
+                }
+            } else {
+                new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
+                    'status'        => FALSE,
+                    'msg'           => 'You must have profile',
+                    'ignore_active' => 1
+                ]);
             }
         }
 
@@ -266,7 +284,9 @@ use WP_Post;
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
+         *
          * @param post_id
+         *
          * @author Ahmed Gamal
          * @return bool
          */
@@ -277,11 +297,11 @@ use WP_Post;
             $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $ignored = array();
-            if(!is_wp_error($profile)){
+            $ignored     = [];
+            if (!is_wp_error($profile)) {
                 $ignored = is_array($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
                 $ignored = array_combine($ignored, $ignored);
-            }   
+            }
             return isset($ignored[$post_id]);
         }
 
@@ -289,9 +309,9 @@ use WP_Post;
         {
             global $user_ID;
 
-            $profile_id       = get_user_meta($user_ID, 'profile_id', TRUE);
-            $profile_obj      = new Nh_Profile();
-            $profile          = $profile_obj->get_by_id((int)$profile_id);
+            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj = new Nh_Profile();
+            $profile     = $profile_obj->get_by_id((int)$profile_id);
             $Nh_articles = [];
 
             if (!is_wp_error($profile)) {
@@ -313,28 +333,31 @@ use WP_Post;
 
             return $Nh_articles;
         }
+
         /**
-         * Description...increase read count for single viewed post, also set cookie (expires in 30 days) for the viewed posts 
+         * Description...increase read count for single viewed post, also set cookie (expires in 30 days) for the viewed posts
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
          * @author Ahmed Gamal
          * @return bool
          */
-        public function increment_read_count($post_id) {
+        public function increment_read_count($post_id)
+        {
 
-            if (isset($_COOKIE['viewed_posts']) && in_array($post_id, json_decode(stripslashes($_COOKIE['viewed_posts'])), true)) {
+            if (isset($_COOKIE['viewed_posts']) && in_array($post_id, json_decode(stripslashes($_COOKIE['viewed_posts'])), TRUE)) {
                 return;
             }
-            $current_count = get_post_meta($post_id, 'read_count', true);
-            $new_count = empty($current_count) ? 1 : $current_count + 1;
+            $current_count = get_post_meta($post_id, 'read_count', TRUE);
+            $new_count     = empty($current_count) ? 1 : $current_count + 1;
             update_post_meta($post_id, 'read_count', $new_count);
 
-            $viewed_posts = isset($_COOKIE['viewed_posts']) ? json_decode(stripslashes($_COOKIE['viewed_posts']), true) : array();
+            $viewed_posts   = isset($_COOKIE['viewed_posts']) ? json_decode(stripslashes($_COOKIE['viewed_posts']), TRUE) : [];
             $viewed_posts[] = $post_id;
             setcookie('viewed_posts', json_encode($viewed_posts), time() + (30 * DAY_IN_SECONDS), '/');
         }
-         /**
+
+        /**
          * Description... overriding get_all in nh_post class
          * @version 1.0
          * @since 1.0.0
@@ -353,44 +376,45 @@ use WP_Post;
                     $not_in = ($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];  // for ignored articles
                 }
             }
-            $args = [
+            $args     = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
                 'paged'          => $page,
                 "orderby"        => $orderby,
-                "post__not_in"        => $not_in,
+                "post__not_in"   => $not_in,
                 "order"          => $order,
             ];
-            $posts     = new \WP_Query($args);
+            $posts    = new \WP_Query($args);
             $Nh_Posts = [];
-            
-            if($posts->get_posts()){
+
+            if ($posts->get_posts()) {
                 foreach ($posts->get_posts() as $post) {
                     $Nh_Posts['posts'][] = $this->convert($post, $this->meta_data);
                 }
-            }else{
+            } else {
                 $Nh_Posts['posts'] = [];
             }
             $Nh_Posts['pagination'] = $this->get_pagination($args);
             return $Nh_Posts;
         }
 
-        public function get_pagination(array $args){
-            $all_posts = $args;
+        public function get_pagination(array $args)
+        {
+            $all_posts                   = $args;
             $all_posts['posts_per_page'] = -1;
-            $all_posts['fields'] = 'ids';
-            $all_posts     = new \WP_Query($all_posts);
-            $count = $all_posts->found_posts;
-            $big = 999999999;
-            $pagination = paginate_links(array(
-                'base'    => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                'format'  => '?paged=%#%',
-                'current' => max(1, get_query_var('paged')),
-                'total'   => ceil($count/$args['posts_per_page']),
+            $all_posts['fields']         = 'ids';
+            $all_posts                   = new \WP_Query($all_posts);
+            $count                       = $all_posts->found_posts;
+            $big                         = 999999999;
+            $pagination                  = paginate_links([
+                'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format'    => '?paged=%#%',
+                'current'   => max(1, get_query_var('paged')),
+                'total'     => ceil($count / $args['posts_per_page']),
                 'prev_text' => __('« Previous'),
                 'next_text' => __('Next »'),
-            ));
+            ]);
 
             return $pagination;
         }
