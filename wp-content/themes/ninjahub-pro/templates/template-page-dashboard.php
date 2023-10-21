@@ -75,7 +75,7 @@
                             <div class="opportunity-list">
                                 <div class="row row-cols-1 row-cols-md-2 g-4 card-group">
                                     <?php
-                                        $opportunities = $opportunities_obj->get_all();
+                                        $opportunities = $opportunities_obj->get_all_custom(['publish'], 12, 'date', 'DESC', [], [], $user_ID, $paged);
 
                                         foreach ($opportunities as $opportunity) {
                                             $fav_check = $opportunities_obj->is_opportunity_in_user_favorites($opportunity->ID);

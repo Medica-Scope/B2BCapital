@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @Filename: template-my-fav-articles.php
+ * @Filename: template-my-ignored-articles.php
  * @Description:
- * @User: NINJA MASTER - Mustafa Shaaban
+ * @User: Ahmed Gamal
  * @Date: 21/2/2023
  *
  * Template Name: My Ignored Articles Page
@@ -21,6 +21,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
 use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\Nh;
 
@@ -30,7 +31,16 @@ Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks:
 
 global $user_ID;
 $Blog_obj  = new Nh_Blog();
-$blogs    = $Blog_obj->get_profile_ignored_articles();
+// $blogs    = $Blog_obj->get_profile_ignored_articles();
+$ignored_articles     = [];
+if(!empty($user_ID)){
+$profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+$profile_obj = new Nh_Profile();
+$profile     = $profile_obj->get_by_id((int)$profile_id);
+    if (!is_wp_error($profile)) {
+        $ignored_articles = is_array($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
+    }
+}
 $user_obj         = Nh_User::get_current_user();
 ?>
 
@@ -45,29 +55,39 @@ $user_obj         = Nh_User::get_current_user();
     </div>
 
     <section class="page-content opportunity-content">
-        <?php
+    <div class="container-fluid">
+        <div class="blogs-list row row-cols-1 row-cols-md-3 g-4">
+            <?php
 
-        foreach ($blogs as $single_post) {
-            $ignore_chk = $Blog_obj->is_post_in_user_ignored($single_post->ID);
-            ?>
-            <div class="blog-item card">
+            $blog_obj          = new Nh_Blog();
+            $paged             = 1;
+            $queried_post_type = $wp_query->query;
+            if(!empty($ignored_articles)){
+                if (get_query_var('paged')) {
+                    $paged = get_query_var('paged');
+                }
 
-                <a href="<?= $single_post->link ?>" class="img">
-                    <img src="<?= $single_post->thumbnail ?>" alt="B2B" />
-                    <span class="dots"></span>
-                </a>
+                $results = $blog_obj->get_all_custom(['publish'], 12, 'date', 'DESC', [], $user_ID, $paged, $ignored_articles);
 
-                    <div class="card-image">
-                        <div class="opportunity-item-controllers">
-                            <?php
-                            if ($ignore_chk) {
+                if (!empty($results) && isset($results['posts'])) {
+                    /* Start the Loop */
+                    foreach ($results['posts'] as $single_post) {
+                        $args = [];
+                        $args['fav_form'] = '';
+                        $args['ignore_form'] = '';
+                        if (!empty($user_ID)) {
+                            $fav_chk            = $blog_obj->is_post_in_user_favorites($single_post->ID);
+                            $ignore_chk         = $blog_obj->is_post_in_user_ignored($single_post->ID);
+                            $args['fav_chk']    = $fav_chk;
+                            $args['ignore_chk'] = $ignore_chk;
+                            if ($fav_chk) {
                                 $fav_class = 'bbc-star';
                             } else {
                                 $fav_class = 'bbc-star-o';
                             }
-                            echo Nh_Forms::get_instance()
+                            $args['fav_form'] = Nh_Forms::get_instance()
                                 ->create_form([
-                                    'post_id'                      => [
+                                    'post_id'                   => [
                                         'type'   => 'hidden',
                                         'name'   => 'post_id',
                                         'before' => '',
@@ -75,7 +95,7 @@ $user_obj         = Nh_User::get_current_user();
                                         'value'  => $single_post->ID,
                                         'order'  => 0
                                     ],
-                                    'add_to_fav_nonce'               => [
+                                    'add_to_fav_nonce'          => [
                                         'class' => '',
                                         'type'  => 'nonce',
                                         'name'  => 'add_to_fav_nonce_nonce',
@@ -93,22 +113,14 @@ $user_obj         = Nh_User::get_current_user();
                                 ], [
                                     'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                                 ]);
-                            ?>
-                        </div>
-                    </div>
-
-
-                    <div class="card-image">
-                        <div class="opportunity-item-controllers">
-                            <?php
                             if ($ignore_chk) {
-                                $fav_class = 'bbc-star';
+                                $ignore_class = 'bbc-star';
                             } else {
-                                $fav_class = 'bbc-star-o';
+                                $ignore_class = 'bbc-star-o';
                             }
-                            echo Nh_Forms::get_instance()
+                            $args['ignore_form'] = Nh_Forms::get_instance()
                                 ->create_form([
-                                    'post_id'                      => [
+                                    'post_id'              => [
                                         'type'   => 'hidden',
                                         'name'   => 'post_id',
                                         'before' => '',
@@ -116,59 +128,52 @@ $user_obj         = Nh_User::get_current_user();
                                         'value'  => $single_post->ID,
                                         'order'  => 0
                                     ],
-                                    'ignore_article_nonce'               => [
+                                    'ignore_article_nonce' => [
                                         'class' => '',
                                         'type'  => 'nonce',
                                         'name'  => 'ignore_article_nonce',
                                         'value' => Nh::_DOMAIN_NAME . "_ignore_article_nonce_form",
                                         'order' => 5
                                     ],
-                                    'submit_ignore' => [
+                                    'submit_ignore'        => [
                                         'class'               => 'btn',
                                         'id'                  => 'submit_submit_ignore',
                                         'type'                => 'submit',
-                                        'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
+                                        'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
                                         'recaptcha_form_name' => 'frontend_ignore',
                                         'order'               => 10
                                     ],
                                 ], [
                                     'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
-                                ]); ?>
-                        </div>
+                                ]);
+                        }
+                        $args['post'] = $single_post;
+
+                        /*
+                                    * Include the Post-Type-specific template for the content.
+                                    * If you want to override this in a child theme, then include a file
+                                    * called content-___.php (where ___ is the Post Type name) and that will be used instead.
+                                    */
+                        get_template_part('app/Views/blogs/blogs-item', NULL, $args);
+                    }
+
+                ?>
+                    <div class="pagination-con">
+                        <?php
+                        echo $results['pagination'];
+                        ?>
                     </div>
+                <?php
 
-
-                <div class="title">
-                    <a href="<?= $single_post->link ?>"><?= $single_post->title ?></a>
-                </div>
-
-
-                <?php if (!empty($single_post->taxonomy['category'])) : ?>
-                    <div class="category">
-                        <?= $single_post->taxonomy['category'][0]->name ?>
-                    </div>
-                <?php endif; ?>
-
-
-                <?php if (!empty($opportunity)) : ?>
-                    <div class="opportunity">
-                        <a href="<?= $opportunity->link ?>"><?= $opportunity->name; ?></a>
-                    </div>
-                <?php endif; ?>
-
-
-                <div class="date">
-                    <img src="<?= get_avatar_url($single_post->author) ?>" alt="B2B" />
-                    <p><?= __('on', 'ninja') ?> <?= date('F d, Y', strtotime($single_post->created_date)) ?></p>
-                </div>
-                <div class="short-description">
-                    <?= $single_post->excerpt ?>
-                </div>
-            </div>
-        <?php
-        }
-
-        ?>
+                } else {
+                    get_template_part('app/Views/none');
+                }
+            }else{
+                get_template_part('app/Views/none');
+            }
+            ?>
+        </div>
+    </div>
     </section>
 </main><!-- #main -->
 

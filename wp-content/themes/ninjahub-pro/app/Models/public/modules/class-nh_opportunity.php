@@ -371,16 +371,26 @@
          * @author Ahmed Gamal
          * @return array
          */
-        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [ '' ], int $user_id = 0): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [ '' ], int $user_id = 0, int $page = 1, array $in = []): array
         {
+            if ($user_id) {
+                $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                // $fav_articles = $profile->meta_data['favorite_articles'];
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
             $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 'relation'       => 'AND',
+                'paged'          => $page,
                 "posts_per_page" => $limit,
                 "author__in"     => ($user_id) ? [ $user_id ] : [],
                 "orderby"        => $orderby,
-                "not__in"        => $not_in,
+                "post__not_in"        => $not_in,
                 "order"          => $order,
                 "tax_query"      => [
                     'relation' => 'AND',
@@ -389,14 +399,42 @@
             if (!empty($tax_query)) {
                 $args['tax_query'][] = $tax_query;
             }
+            if(!empty($in)){
+                $args['post__in'] = $in;
+            }
             $posts    = new \WP_Query($args);
             $Nh_Posts = [];
 
-            foreach ($posts->get_posts() as $post) {
-                $Nh_Posts[] = $this->convert($post, $this->meta_data);
+            if ($posts->get_posts()) {
+                foreach ($posts->get_posts() as $post) {
+                    $Nh_Posts['posts'][] = $this->convert($post, $this->meta_data);
+                }
+            } else {
+                $Nh_Posts['posts'] = [];
             }
-
+            $Nh_Posts['pagination'] = $this->get_pagination($args);
             return $Nh_Posts;
+
+        }
+
+        public function get_pagination(array $args)
+        {
+            $all_posts                   = $args;
+            $all_posts['posts_per_page'] = -1;
+            $all_posts['fields']         = 'ids';
+            $all_posts                   = new \WP_Query($all_posts);
+            $count                       = $all_posts->found_posts;
+            $big                         = 999999999;
+            $pagination                  = paginate_links([
+                'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format'    => '?paged=%#%',
+                'current'   => max(1, get_query_var('paged')),
+                'total'     => ceil($count / $args['posts_per_page']),
+                'prev_text' => __('« Previous'),
+                'next_text' => __('Next »'),
+            ]);
+
+            return $pagination;
         }
 
         /**
@@ -657,7 +695,7 @@
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_opportunity_in_user_ignored($post_id, $user_id): bool
+        public function is_opportunity_in_user_ignored($post_id): bool
         {
             global $user_ID;
 
