@@ -637,9 +637,22 @@
          */
         public function ignore_opportunity(): void
         {
-            $post_id               = intval($_POST['post_id']);
-            $user_id               = intval($_POST['user_id']);
-            $profile_id            = get_user_meta($user_id, 'profile_id', TRUE);
+            global $user_ID,$wp;
+            $form_data                     = $_POST['data'];
+            $post_id                       = (int)sanitize_text_field($form_data['post_id']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+            if (!wp_verify_nonce($form_data['ignore_opportunity_nonce'], Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_ignore');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+            $profile_id            = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj           = new Nh_Profile();
             $profile               = $profile_obj->get_by_id((int)$profile_id);
             $ignored_opportunities = [];
@@ -654,7 +667,12 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                     ob_start();
-                    get_template_part('app/Views/template-parts/opportunities-ajax');
+                    if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
+                        get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
+                    }
+                    else{
+                        get_template_part('app/Views/opportunities/opportunities-list', null, []);
+                    }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
@@ -669,7 +687,12 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
                     ob_start();
-                    get_template_part('app/Views/template-parts/opportunities-ajax');
+                    if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
+                        get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
+                    }
+                    else{
+                        get_template_part('app/Views/opportunities/opportunities-list', null, []);
+                    }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
