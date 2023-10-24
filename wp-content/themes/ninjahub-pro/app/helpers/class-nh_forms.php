@@ -522,11 +522,12 @@ class Nh_Forms extends Nh_Hooks {
 						?>
 			<div class="form-check <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= $name['class'] ?>">
 				<?= $name['before'] ?>
-				<input type="<?= $input_data['type'] ?>" class="<?= $input_data['input_class'] . Nh::_DOMAIN_NAME ?>-checkbox"
-					id="<?= $id ?>" name="<?= $name['name'] ?>" value="<?= $name['value'] ?>"
+				<input type="<?= $input_data['type'] ?>"
+					class="<?= $input_data['input_class'] . ' ' . Nh::_DOMAIN_NAME ?>-checkbox" id="<?= $id ?>"
+					name="<?= $name['name'] ?>" value="<?= $name['value'] ?>"
 					<?= $name['required'] ? 'required="required"' : '' ?> <?= $this->create_attr( $name['extra_attr'] ) ?>
 					<?= $name['checked'] ?>>
-				<label for="<?= $id ?>" class="<?= $input_data['label_class'] . Nh::_DOMAIN_NAME ?>-label">
+				<label for="<?= $id ?>" class="<?= $input_data['label_class'] . ' ' . Nh::_DOMAIN_NAME ?>-label">
 					<?= $name['label'] ?>
 				</label>
 				<?= $name['after'] ?>
