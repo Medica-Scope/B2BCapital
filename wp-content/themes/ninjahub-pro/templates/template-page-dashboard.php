@@ -77,7 +77,7 @@
                                     <?php
                                         $opportunities = $opportunities_obj->get_all_custom(['publish'], 12, 'date', 'DESC', [], [], $user_ID, $paged);
 
-                                        foreach ($opportunities as $opportunity) {
+                                        foreach ($opportunities['posts'] as $opportunity) {
                                             $fav_check = $opportunities_obj->is_opportunity_in_user_favorites($opportunity->ID);
                                             $args = [
                                                 'opportunity_link'         => $opportunity->link,

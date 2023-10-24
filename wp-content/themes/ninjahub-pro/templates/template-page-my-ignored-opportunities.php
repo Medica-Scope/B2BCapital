@@ -1,90 +1,104 @@
 <?php
-    /**
-     * @Filename: template-my-ignored-opportunities.php
-     * @Description:
-     * @User: NINJA MASTER - Mustafa Shaaban
-     * @Date: 21/2/2023
-     *
-     * Template Name: My Ignored Opportunities Page
-     * Template Post Type: page
-     *
-     * @package NinjaHub
-     * @since 1.0
-     *
-     */
+
+/**
+ * @Filename: template-my-ignored-opportunities.php
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 21/2/2023
+ *
+ * Template Name: My Ignored Opportunities Page
+ * Template Post Type: page
+ *
+ * @package NinjaHub
+ * @since 1.0
+ *
+ */
 
 
-    use NH\APP\CLASSES\Nh_User;
-    use NH\APP\HELPERS\Nh_Hooks;
-    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
-    use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
-    use NH\APP\MODELS\FRONT\Nh_Public;
-    use NH\Nh;
+use NH\APP\CLASSES\Nh_User;
+use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity_Acquisition;
+use NH\APP\MODELS\FRONT\Nh_Public;
+use NH\Nh;
 
-    get_header();
+get_header();
 
-    Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account');
+Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account');
 
-    global $user_ID;
-    $opportunity_obj  = new Nh_Opportunity();
-    $opportunities    = $opportunity_obj->get_profile_fav_opportunities();
-    $user_obj         = Nh_User::get_current_user();
+global $user_ID;
+$opportunity_obj  = new Nh_Opportunity();
+$opportunities    = $opportunity_obj->get_profile_ignored_opportunities();
+$user_obj         = Nh_User::get_current_user();
 ?>
 
-    <main class="my-fav-opportunities">
-        <div class="container container-xxl">
-            <?php Nh_Public::breadcrumbs(); ?>
+<main class="my-fav-opportunities">
+    <div class="container container-xxl">
+        <?php Nh_Public::breadcrumbs(); ?>
 
-            <nav class="dashboard-submenus mt-3 mb-5">
-                <?php get_template_part('app/Views/template-parts/dashboard-submenus/main-nav', NULL, [ 'active_link' => 'opportunities' ]); ?>
-                <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'my_ignored' ]); ?>
-            </nav>
-        </div>
+        <nav class="dashboard-submenus mt-3 mb-5">
+            <?php get_template_part('app/Views/template-parts/dashboard-submenus/main-nav', NULL, ['active_link' => 'opportunities']); ?>
+            <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, ['active_link' => 'my_ignored']); ?>
+        </nav>
+    </div>
 
-        <section class="page-content opportunity-content">
-            <?php
+    <section class="page-content opportunity-content">
+        <div class="opportunities-list ignore-list">
+            <div class="card-group">
+                <?php
+                if (!empty($opportunities)) {
+                    foreach ($opportunities as $opportunity) {
+                        $ignored_check = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
+                        $ignore_class = '';
+                        if ($ignored_check) {
+                            $ignore_class = 'bbc-star';
+                        } else {
+                            $ignore_class = 'bbc-star-o';
+                        }
 
-                foreach ($opportunities as $opportunity) {
-                    $ignore_chk = in_array($opportunity->ID, empty($user_obj->profile->meta_data['ignored_opportunities']) ? [] : $user_obj->profile->meta_data['ignored_opportunities']);
-                    ?>
-                    <div class="opportunity-card">
-
-                        <h3>
-                            <a href="<?= $opportunity->link ?>"></a><?= $opportunity->title ?>
-                        </h3>
-
-                        <span class="date">
-                            <?= date('F jS, Y', strtotime($opportunity->created_date)) ?>
-                        </span>
-
-                        <p class="short-description">
-                            <?= $opportunity->meta_data['short_description'] ?>
-                        </p>
-
-                        <span class="status">
-                            <?= $opportunity->meta_data['opportunity_stage'] ?>
-                        </span>
-
-                        <div class="ninja-fav-con">
-                            <button class="ninja-add-to-fav btn btn-dark" id="addToFav"
-                                    data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
-                                    data-type="<?= $opportunity->type ?>" type="button">FAV
-                            </button>
+                        $args['ignore_form'] = Nh_Forms::get_instance()
+                            ->create_form([
+                                'opp_id'              => [
+                                    'type'   => 'hidden',
+                                    'name'   => 'opp_id',
+                                    'before' => '',
+                                    'after'  => '',
+                                    'value'  => $opportunity->ID,
+                                    'order'  => 0
+                                ],
+                                'ignore_opportunity_nonce' => [
+                                    'class' => '',
+                                    'type'  => 'nonce',
+                                    'name'  => 'ignore_opportunity_nonce',
+                                    'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
+                                    'order' => 5
+                                ],
+                                'submit_ignore'        => [
+                                    'class'               => 'btn',
+                                    'id'                  => 'submit_submit_ignore',
+                                    'type'                => 'submit',
+                                    'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
+                                    'recaptcha_form_name' => 'frontend_ignore',
+                                    'order'               => 10
+                                ],
+                            ], [
+                                'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
+                            ]);
+                        $args['opportunity'] = $opportunity;
+                ?>
+                        <div class="col">
+                            <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); ?>
                         </div>
-
-                        <div class="ninja-ignore-con">
-                            <button class="ninja-add-to-ignore btn <?= ($ignore_chk) ? 'btn-outline-dark' : '' ?>"
-                                    id="addToIgnore" data-uID="<?= $user_ID ?>" data-id="<?= $opportunity->ID ?>"
-                                    data-type="<?= $opportunity->type ?>" type="button">X
-                            </button>
-                        </div>
-
-                    </div>
-                    <?php
+                <?php
+                    }
+                } else {
+                    get_template_part('app/Views/opportunities/opportunities', 'empty');
                 }
-
-            ?>
-        </section>
-    </main><!-- #main -->
+                ?>
+            </div>
+        </div>
+    </section>
+</main><!-- #main -->
 
 <?php get_footer();

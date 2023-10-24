@@ -667,12 +667,12 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                     ob_start();
-                    if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
-                        get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
-                    }
-                    else{
+                    // if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
+                    //     get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
+                    // }
+                    // else{
                         get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    }
+                    // }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
@@ -687,12 +687,12 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
                     ob_start();
-                    if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
-                        get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
-                    }
-                    else{
+                    // if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
+                    //     get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
+                    // }
+                    // else{
                         get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    }
+                    // }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
@@ -819,6 +819,34 @@
             return $Nh_opportunities;
         }
 
+        public function get_profile_ignored_opportunities(): array
+        {
+            global $user_ID;
+
+            $profile_id       = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj      = new Nh_Profile();
+            $profile          = $profile_obj->get_by_id((int)$profile_id);
+            $Nh_opportunities = [];
+
+            if (!is_wp_error($profile)) {
+                $ignored_ids = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
+
+                if (!empty($ignored_ids)) {
+                    $opportunities = new \WP_Query([
+                        'post_type'   => $this->module,
+                        'post_status' => 'publish',
+                        'orderby'     => 'ID',
+                        'order'       => 'DESC',
+                        "post__in"    => $profile->meta_data['ignored_opportunities'],
+                    ]);
+                    foreach ($opportunities->get_posts() as $opportunity) {
+                        $Nh_opportunities[] = $this->convert($opportunity, $this->meta_data);
+                    }
+                }
+            }
+
+            return $Nh_opportunities;
+        }
         /**
          * Description...
          * @version 1.0

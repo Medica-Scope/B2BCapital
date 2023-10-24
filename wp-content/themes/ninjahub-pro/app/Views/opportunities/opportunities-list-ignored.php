@@ -42,46 +42,10 @@ if ($results['posts'] && !empty($ignored_opportunities)) { ?>
     /* Start the Loop */
     foreach ($results['posts'] as $opportunity) {
         $args = [];
-        $args['fav_form'] = '';
         $args['ignore_form'] = '';
         if (!empty($user_ID)) {
-            $fav_chk            = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
             $ignore_chk         = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
-            $args['fav_chk']    = $fav_chk;
             $args['ignore_chk'] = $ignore_chk;
-            if ($fav_chk) {
-                $fav_class = 'bbc-star';
-            } else {
-                $fav_class = 'bbc-star-o';
-            }
-            $args['fav_form'] = Nh_Forms::get_instance()
-                ->create_form([
-                    'opp_id'                   => [
-                        'type'   => 'hidden',
-                        'name'   => 'opp_id',
-                        'before' => '',
-                        'after'  => '',
-                        'value'  => $opportunity->ID,
-                        'order'  => 0
-                    ],
-                    'add_to_fav_nonce'          => [
-                        'class' => '',
-                        'type'  => 'nonce',
-                        'name'  => 'add_to_fav_nonce_nonce',
-                        'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
-                        'order' => 5
-                    ],
-                    'submit_add_to_fav_request' => [
-                        'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
-                        'id'                  => 'submit_add_to_fav_request',
-                        'type'                => 'submit',
-                        'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
-                        'recaptcha_form_name' => 'frontend_add_to_fav',
-                        'order'               => 10
-                    ],
-                ], [
-                    'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
-                ]);
             if ($ignore_chk) {
                 $ignore_class = 'bbc-star';
             } else {

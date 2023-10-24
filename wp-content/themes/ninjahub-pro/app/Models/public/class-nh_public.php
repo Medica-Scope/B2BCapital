@@ -225,12 +225,17 @@ class Nh_Public {
 	}
 
 	public static function breadcrumbs(): void {
-		global $post;
+		global $post,$wp;
 
 		$separator = Nh_Init::$_NH_lANG === 'ar' ? ' <i class="bbc-chevron-left"></i> ' : ' <i class="bbc-chevron-right"></i> ';
 
 		echo '<div class="breadcrumbs">';
-		echo '<a href="' . apply_filters( 'nhml_permalink', home_url() ) . '">' . __( 'Home', 'ninja' ) . '</a>';
+		if ( preg_match( '#my-account#', $wp->request ) ) {
+			$page_link = get_the_permalink(get_page_by_path('dashboard'));
+			echo '<a href="' . apply_filters( 'nhml_permalink', $page_link ) . '">' . __( 'Dashboard', 'ninja' ) . '</a>';
+		}else{
+			echo '<a href="' . apply_filters( 'nhml_permalink', home_url() ) . '">' . __( 'Home', 'ninja' ) . '</a>';
+		}
 		echo $separator;
 
 		if ( is_category() || is_single() ) {
