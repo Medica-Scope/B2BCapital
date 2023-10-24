@@ -1,7 +1,8 @@
-@import './submenus/submenus.scss';
 @import '../../base/variables';
+@import './submenus/submenus.scss';
+@import '../../components/cards/card';
 
-.ninja_form_container:not(.ninja-header-search-form-container),
+.ninja_form_container:not(.ninja-header-search-form-container, .ninja-add-to-fav-form-container),
 .acf-form {
 	background-color: $layout-light;
 	max-width: 920px;
@@ -21,13 +22,13 @@
 .tox .tox-toolbar__primary {
 	background-color: $gray-light !important;
 }
-.tox-tinymce{
+.tox-tinymce {
 	border-radius: 5px !important;
 }
-.ninja-single-attachment{
-    display: flex;
-    align-items: center;
-		.ninja-attachment-name{
-			margin-inline:0.5rem;
-		}
+.ninja-single-attachment {
+	display: flex;
+	align-items: center;
+	.ninja-attachment-name {
+		margin-inline: 0.5rem;
+	}
 }
