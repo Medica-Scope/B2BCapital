@@ -324,7 +324,7 @@ class NhOpportunity extends Nh
                         $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
                     if(res.data.updated){
-                        $('.opportunities-list .card-group').html(res.data.updated);
+                        $('.opportunity-list .card-group').html(res.data.updated);
                     }
                     UiCtrl.blockUI($el, false);
 

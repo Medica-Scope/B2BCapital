@@ -371,34 +371,32 @@
          * @author Ahmed Gamal
          * @return array
          */
-        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [ '' ], int $user_id = 0, int $page = 1, array $in = []): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [], int $user_id = 0, int $page = 1, array $in = []): array
         {
             if ($user_id) {
                 $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
                 $profile_obj = new Nh_Profile();
                 $profile     = $profile_obj->get_by_id((int)$profile_id);
-                // $fav_articles = $profile->meta_data['favorite_articles'];
+                // $fav_opportunities = $profile->meta_data['favorite_opportunities'];
                 if (!is_wp_error($profile)) {
                     $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
                 }
             }
-            $args = [
+            $args     = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
-                'relation'       => 'AND',
-                'paged'          => $page,
                 "posts_per_page" => $limit,
-                "author__in"     => ($user_id) ? [ $user_id ] : [],
+                'paged'          => $page,
                 "orderby"        => $orderby,
-                "post__not_in"        => $not_in,
+                "post__not_in"   => $not_in,
                 "order"          => $order,
                 "tax_query"      => [
                     'relation' => 'AND',
                 ]
-            ];
-            if (!empty($tax_query)) {
-                $args['tax_query'][] = $tax_query;
-            }
+            ];      
+        if (!empty($tax_query)) {
+            $args['tax_query'][] = $tax_query;
+        }
             if(!empty($in)){
                 $args['post__in'] = $in;
             }
@@ -414,7 +412,6 @@
             }
             $Nh_Posts['pagination'] = $this->get_pagination($args);
             return $Nh_Posts;
-
         }
 
         public function get_pagination(array $args)
@@ -667,12 +664,7 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
                     ob_start();
-                    // if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
-                    //     get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
-                    // }
-                    // else{
                         get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    // }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
@@ -687,12 +679,7 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
                     ob_start();
-                    // if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-opportunities')){
-                    //     get_template_part('app/Views/opportunities/opportunities-list-ignored', null, []);
-                    // }
-                    // else{
                         get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    // }
                     $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,

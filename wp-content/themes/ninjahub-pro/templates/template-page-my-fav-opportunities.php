@@ -44,7 +44,7 @@ $user_obj         = Nh_User::get_current_user();
     </div>
 
     <section class="page-content opportunity-content">
-        <div class="opportunities-list ignore-list">
+        <div class="opportunity-list ignore-list">
             <div class="card-group">
                 <?php
                 if (!empty($opportunities)) {
@@ -84,6 +84,7 @@ $user_obj         = Nh_User::get_current_user();
                             ], [
                                 'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                             ]);
+                            $args['current_page'] = 'my-favorite-opportunities';
                         $args['opportunity'] = $opportunity;
                 ?>
                         <div class="col">
