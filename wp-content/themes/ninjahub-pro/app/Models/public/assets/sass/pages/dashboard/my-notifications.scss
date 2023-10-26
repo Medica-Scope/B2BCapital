@@ -1,38 +1,6 @@
+@import '../../base/elements/_bs-accordion';
 @import '../../base/variables';
 
 .ninja-notification-group-container {
-	.accordion-header {
-		h3 {
-			color: $primary-medium;
-			font-size: 1.2rem;
-			font-weight: bold;
-		}
-		.bbc-bell-o {
-			background-color: $layout-light;
-			padding: 0.8rem;
-			// border: 1px solid rgba($gray-medium, 0.30);
-			border-radius: 3px;
-			margin-inline-end: 1rem;
-			font-size: 1.5rem;
-		}
-		small,
-		.small {
-			font-size: 0.7em;
-			margin-top: 0.5rem;
-		}
-	}
-	.accordion-item {
-		border-radius: 5px !important;
-		.accordion-button,
-		.accordion-button.collapsed {
-			border-radius: 5px !important;
-		}
-	}
-	.accordion-button:not(.collapsed) {
-		box-shadow: none;
-		background-color: transparent;
-	}
-	.accordion-body {
-		padding-inline-start: 5.5rem;
-	}
+
 }
