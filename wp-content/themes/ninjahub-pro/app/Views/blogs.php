@@ -8,6 +8,7 @@
  */
 
 use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\Nh;
@@ -34,11 +35,13 @@ $ignore_chk  = ( isset( $args['ignore_chk'] ) ) ? $args['ignore_chk'] : '';
 $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 ?>
 <div class="col">
-	<div class="blog-item card">
+	<div class="blog-item card shadow">
 		<a href="<?= $single_post->link ?>" class="card-image-top position-relative bg-primary bg-gradient">
 			<h3>
 				<?= $single_post->title; ?>
 			</h3>
+
+			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
 			<div class="opportunity-item-controllers">
 				<?php
 				// if ( ! empty( $user_ID ) ) :
