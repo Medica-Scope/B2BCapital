@@ -60,6 +60,9 @@ class Nh_Auth extends Nh_User {
 		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_edit_profile_ajax', $this, 'edit_profile_ajax' );
 		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_edit_password_ajax', $this, 'edit_password_ajax' );
 		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax' );
+
+		$this->hooks->add_action('nsl_register_new_user', $this, 'custom_function_after_nextend_register');
+
 	}
 
 	private function filters(): void {
@@ -1067,5 +1070,20 @@ class Nh_Auth extends Nh_User {
 			}
 		}
 
+	}
+
+	public function custom_function_after_nextend_register($user_id) {
+		$profile_obj = new Nh_Profile();
+		$profile_obj->author = $user_id;
+		$wp_user_obj = get_user_by('id', $user_id);
+		$profile_obj->title  = $wp_user_obj->display_name;
+		$profile_obj->insert();
+		$user = self::get_user($wp_user_obj);
+		$wp_user_obj->set_role(static::INVESTOR);
+		$user->set_user_meta( 'email_verification_status', 1, TRUE );
+		$user->set_user_meta( 'account_authentication_status', 1, TRUE );
+		$user->set_user_meta( 'account_verification_status', 1, TRUE );
+		$user->set_user_meta( 'verification_key', '', TRUE );
+		$user->set_user_meta( 'verification_expire_date', '', TRUE );
 	}
 }
