@@ -136,8 +136,8 @@ if ( $user_ID ) {
 		</h3>
 		<?php
 		/* $related = $post_obj->get_all_custom( [ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ] );
-																			if ( ! empty( $related ) ) {
-																				foreach ( $related['posts'] as $single_related ) { */
+																				if ( ! empty( $related ) ) {
+																					foreach ( $related['posts'] as $single_related ) { */
 		?>
 		<div class="related-card">
 			<a class="blog-item" href="<?php /* echo  $single_related->link */?>">
@@ -157,7 +157,7 @@ if ( $user_ID ) {
 		</div>
 		<?php
 		/*}
-																		 } */
+																			 } */
 		?>
 	</div> -->
 		</div>
