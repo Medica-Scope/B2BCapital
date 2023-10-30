@@ -90,7 +90,7 @@ $user_obj         = Nh_User::get_current_user();
                 ?>
                         <div class="col">
                             <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); // GAMAL?>
-                            <?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); //KHALED ?>
+                            <?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); // KHALED ?>
                         </div>
                 <?php
                     }
