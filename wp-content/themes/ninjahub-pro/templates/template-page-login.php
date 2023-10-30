@@ -28,7 +28,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
 			<!-- App Brand -->
 
-			<a href="<?php echo home_url(); ?>" class="app-brand mb-6"><img src="<?php echo Nh::get_site_logo(); ?>"
+			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
 					alt="Nh Site Logo" class="img-fluid" /></a>
 			<div class="section-header">
 				<div class="d-flex flex-row justify-content-between align-items-center">

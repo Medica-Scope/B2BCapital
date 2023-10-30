@@ -45,7 +45,7 @@ if ( $user_ID ) {
 			<h3>
 				<?= $single_post->title; ?>
 			</h3>
-			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
+			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
 		</div>
 		<div class="container-md content-container">
 			<div class="date">

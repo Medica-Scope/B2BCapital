@@ -18,11 +18,11 @@ get_header();
 
 <main id="" class="">
 	<section class="error-404 not-found d-flex flex-column justify-content-center align-items-center">
-		<dotlottie-player src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/animation_404.lottie"
+		<dotlottie-player src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/animation_404.lottie"
 			background="transparent" speed="1" style="width: 950px; height:500px; margin:0 auto;" direction="1" mode="normal"
 			loop autoplay>
 		</dotlottie-player>
-		<a href="<?php echo home_url(); ?>" class="btn-link text-secondary"><i class="bbc-home2"></i> Back to
+		<a href="<?= home_url(); ?>" class="btn-link text-secondary"><i class="bbc-home2"></i> Back to
 			Homepage</a>
 	</section><!-- .error-404 -->
 </main><!-- #main -->

@@ -32,11 +32,11 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 	<div class="service-content-wrapper">
 		<div class="service-banner-wrapper">
 			<div class="service-banner">
-				<a href="<?php echo get_post_type_archive_link( 'service' ); ?>" class="back-link">
+				<a href="<?= get_post_type_archive_link( 'service' ); ?>" class="back-link">
 					<i class="icon bbc-previous-circle"></i>
 					<?= __( 'Bak To Services', 'ninja' ) ?>
 				</a>
-				<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/services/service-banner.webp" alt="Service Banner"
+				<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/services/service-banner.webp" alt="Service Banner"
 					class="banner">
 			</div>
 		</div>
@@ -45,7 +45,7 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 				<h1 class="service-title">
 					<span class="title-icon">
 						<dotlottie-player
-							src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/handshake-agreement.lottie"
+							src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/handshake-agreement.lottie"
 							background="transparent" speed="1" style="width: 50px; height: 50px" direction="1" mode="normal" loop
 							autoplay>
 						</dotlottie-player>

@@ -15,7 +15,7 @@ $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : false;
 ?>
 <div class="opportunity-item card shadow border-0">
 	<div class="row g-0">
-		<div class="card-image <?php echo $is_card_horizontal ? 'col-md-4' : ''; ?>">
+		<div class="card-image <?= $is_card_horizontal ? 'col-md-4' : ''; ?>">
 			<a href="<?= esc_url($opportunity_link); ?>"><img src="<?= esc_url($opportunity_thumbnail); ?>" alt="<?= esc_attr($opportunity_title); ?>"></a>
 			<?php
 			if ($is_item_controllers) {
@@ -94,7 +94,7 @@ $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : false;
 			}
 			?>
 		</div>
-		<div class="card-body p-0 <?php echo $is_card_horizontal ? 'col-md-8' : ''; ?>">
+		<div class="card-body p-0 <?= $is_card_horizontal ? 'col-md-8' : ''; ?>">
 			<p class="card-text"><small class="text-body-secondary">
 					<?= __('Business Type', 'ninja'); ?>
 				</small></p>
