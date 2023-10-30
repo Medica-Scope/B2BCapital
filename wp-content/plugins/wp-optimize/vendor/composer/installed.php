@@ -3,7 +3,7 @@
         'name' => 'updraftplus/wp-optimize',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'cae0f0081523bc8ca34cff165e1551e381795407',
+        'reference' => 'a9f38bdb2369c5fb10e455e184a021aa7939b4c5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -214,7 +214,7 @@
         'updraftplus/wp-optimize' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cae0f0081523bc8ca34cff165e1551e381795407',
+            'reference' => 'a9f38bdb2369c5fb10e455e184a021aa7939b4c5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

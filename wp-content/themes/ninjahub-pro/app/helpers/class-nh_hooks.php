@@ -40,7 +40,7 @@
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
                 'images'  => THEME_URI . '/app/Models/public/assets/images',
-                'vid'     => THEME_URI . '/app/Models/public/vid',
+                'video'     => THEME_URI . '/app/Models/public/video',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
             ],
             'views'  => THEME_PATH . '/app/Views'

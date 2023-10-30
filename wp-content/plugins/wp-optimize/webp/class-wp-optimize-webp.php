@@ -14,12 +14,12 @@ class WP_Optimize_WebP {
 	 * Constructor
 	 */
 	private function __construct() {
+		$this->_should_use_webp = WP_Optimize()->get_options()->get_option('webp_conversion');
 		if ($this->should_run_webp_conversion_test()) {
 			$this->set_converter_status();
 		}
 
 		if ($this->get_webp_conversion_test_result()) {
-			$this->maybe_setup_htaccess_file();
 			if (!is_admin()) {
 				$this->maybe_decide_webp_serve_method();
 			}
@@ -54,16 +54,6 @@ class WP_Optimize_WebP {
 		if ($this->is_webp_conversion_successful()) {
 			WP_Optimize()->get_options()->update_option('webp_conversion_test', true);
 			WP_Optimize()->get_options()->update_option('webp_converters', $converter_status['working_converters']);
-		}
-	}
-
-	/**
-	 * May be set up `uploads/.htaccess` file
-	 */
-	private function maybe_setup_htaccess_file() {
-		$this->_should_use_webp = WP_Optimize()->get_options()->get_option('webp_conversion');
-		if ($this->_should_use_webp) {
-			$this->setup_htaccess_file();
 		}
 	}
 
@@ -157,6 +147,7 @@ class WP_Optimize_WebP {
 	 * @return void
 	 */
 	private function save_htaccess_rules() {
+		$this->setup_htaccess_file();
 		$this->add_webp_mime_type();
 		$htaccess_comment_section = 'WP-Optimize WebP Rules';
 		if ($this->_htaccess->is_commented_section_exists($htaccess_comment_section)) return;

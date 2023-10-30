@@ -4,8 +4,8 @@ Donate link: https://david.dw-perspective.org.uk/donate
 Tags: cache, minify, caching, image cache, performance cache, clean, spam, speed, database, smush, smushing
 Requires PHP: 5.6
 Requires at least: 4.5
-Tested up to: 6.3
-Stable tag: 3.2.20
+Tested up to: 6.4
+Stable tag: 3.2.21
 License: GPLv2+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -367,6 +367,8 @@ If none of the above works, disable processing of JavaScript files in the minify
 
 == Changelog ==
 
+= 3.2.21 - 18/Oct/2023 =
+* FIX: Prevent PHP fatal error when updating from older versions of WP-Optimize
 
 = 3.2.20 - 16/Oct/2023 =
 
@@ -1444,4 +1446,4 @@ If none of the above works, disable processing of JavaScript files in the minify
 * Fix Interface
 
 == Upgrade Notice ==
-* 3.2.20: Various fixes, and tweaks - a recommended update for all
+* 3.2.21: Fix a fatal error when updating from older version
