@@ -19,7 +19,7 @@
 	<nav id="site-navigation" class="main-navigation">
 
 		<div class="site-branding">
-			<a href="<?php echo home_url(); ?>"><img src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo"/></a>
+			<a href="<?= home_url(); ?>"><img src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo"/></a>
 		</div>
 
 	</nav><!-- #site-navigation -->

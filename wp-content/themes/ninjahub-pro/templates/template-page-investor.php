@@ -33,7 +33,7 @@ get_header();
 			<div class="user-type-video investor">
 				<div class="video-scene">
 					<video autoplay loop class="w-100">
-						<source src="<?php echo Nh_Hooks::PATHS['public']['video']; ?>/investor.mp4" type="video/mp4">
+						<source src="<?= Nh_Hooks::PATHS['public']['video']; ?>/investor.mp4" type="video/mp4">
 					</video>
 				</div>
 			</div>
@@ -55,14 +55,14 @@ get_header();
 					consultants who are present in it for a fair and true evaluation of the promoted investment
 					opportunities.
 				</p>
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) . '/?type=investor'; ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) . '/?type=investor'; ?>"
 					class="user-type-action bbc-btn outline success">Join as Investor</a>
 			</div>
 			<div class="other-user-type owner">
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/opportunity-provider' ) ) ); ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/opportunity-provider' ) ) ); ?>"
 					class="other-user">
 					<span class="other-type-image">
-						<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/owner-video.webp" alt="B2B Owner"
+						<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user-type/owner-video.webp" alt="B2B Owner"
 							class="img-fluid">
 					</span>
 					<span class="other-user-title">

@@ -22,7 +22,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 
 		<div class="site-branding">
 			<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>"><img
-					src="<?php echo Nh::get_site_logo(); ?>" alt="Nh Site Logo" /></a>
+					src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo" /></a>
 		</div>
 
 		<?php
@@ -126,10 +126,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
 							data-bs-toggle="dropdown" data-bs-auto-close="true">
 							<span class="btn-profile-title">
-								<?php echo sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
+								<?= sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
 							<span class="btn-profile-desc">
-								<?php echo __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
+								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
 							</span>
 						</a>
 						<ul class="dropdown-menu">

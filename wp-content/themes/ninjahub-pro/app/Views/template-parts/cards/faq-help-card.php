@@ -16,5 +16,5 @@ use NH\Nh;
 		</a>
 	</div>
 
-	<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/help.webp" alt="help icon" />
+	<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/help.webp" alt="help icon" />
 </div>

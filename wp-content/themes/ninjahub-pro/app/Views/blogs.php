@@ -41,7 +41,7 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 				<?= $single_post->title; ?>
 			</h3>
 
-			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
+			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
 			<div class="opportunity-item-controllers">
 				<?php
 				// if ( ! empty( $user_ID ) ) :

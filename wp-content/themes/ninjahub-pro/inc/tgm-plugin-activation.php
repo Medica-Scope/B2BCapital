@@ -792,7 +792,7 @@
 
                 ?>
                 <div class="tgmpa wrap">
-                    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+                    <h1><?= esc_html(get_admin_page_title()); ?></h1>
                     <?php $plugin_table->prepare_items(); ?>
 
                     <?php
@@ -803,8 +803,8 @@
                     <?php $plugin_table->views(); ?>
 
                     <form id="tgmpa-plugins" action="" method="post">
-                        <input type="hidden" name="tgmpa-page" value="<?php echo esc_attr($this->menu); ?>"/>
-                        <input type="hidden" name="plugin_status" value="<?php echo esc_attr($plugin_table->view_context); ?>"/>
+                        <input type="hidden" name="tgmpa-page" value="<?= esc_attr($this->menu); ?>"/>
+                        <input type="hidden" name="plugin_status" value="<?= esc_attr($plugin_table->view_context); ?>"/>
                         <?php $plugin_table->display(); ?>
                     </form>
                 </div>

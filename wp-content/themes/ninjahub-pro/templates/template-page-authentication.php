@@ -32,16 +32,16 @@ $user = Nh_User::get_current_user();
 		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
 			<!-- App Brand -->
 
-			<a href="<?php echo home_url(); ?>" class="app-brand mb-6"><img src="<?php echo Nh::get_site_logo(); ?>"
+			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
 					alt="Nh Site Logo" class="img-fluid" /></a>
 			<div class="section-header">
 				<div class="row justify-content-center">
-					<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user.webp" style="max-width:100px" />
+					<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user.webp" style="max-width:100px" />
 					<h1 class="section-title display-2 text-center mb-2">
-						<?php echo __( 'Authenticate your account', 'ninja' ); ?>
+						<?= __( 'Authenticate your account', 'ninja' ); ?>
 					</h1>
 					<p class="text-center">
-						<?php echo __( 'Please enter the OTP – verification Code that has been received on your phone – WhatsApp - email', 'ninja' ); ?>
+						<?= __( 'Please enter the OTP – verification Code that has been received on your phone – WhatsApp - email', 'ninja' ); ?>
 					</p>
 				</div>
 			</div>

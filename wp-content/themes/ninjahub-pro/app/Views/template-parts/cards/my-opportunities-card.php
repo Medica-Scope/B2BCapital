@@ -32,22 +32,22 @@
         ?>
 
         <h3 class="col-8">
-            <a href="<?= $opportunity_link ?>"><?php echo $opportunity_title; ?></a>
+            <a href="<?= $opportunity_link ?>"><?= $opportunity_title; ?></a>
         </h3>
         <div class="col-4 d-flex justify-content-end align-items-start">
-			<span class="status badge <?php echo $badge_status_class; ?>">
-				<?php echo $opportunity_stage; ?>
+			<span class="status badge <?= $badge_status_class; ?>">
+				<?= $opportunity_stage; ?>
 			</span>
         </div>
     </div>
 
     <div class="opportunities-card-body">
         <small class="date text-mute">
-            <?php echo date('F jS, Y', strtotime($opportunity_created_date)); ?>
+            <?= date('F jS, Y', strtotime($opportunity_created_date)); ?>
         </small>
 
         <p class="short-description">
-            <?php echo wp_html_excerpt($opportunity_short_description, 140, '...'); ?>
+            <?= wp_html_excerpt($opportunity_short_description, 140, '...'); ?>
         </p>
     </div>
 </div>
