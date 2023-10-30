@@ -33,7 +33,7 @@ get_header();
 			<div class="user-type-video investor">
 				<div class="video-scene">
 					<video autoplay loop class="w-100">
-						<source src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/videos/investor.mp4" type="video/mp4">
+						<source src="<?php echo Nh_Hooks::PATHS['public']['video']; ?>/investor.mp4" type="video/mp4">
 					</video>
 				</div>
 			</div>
