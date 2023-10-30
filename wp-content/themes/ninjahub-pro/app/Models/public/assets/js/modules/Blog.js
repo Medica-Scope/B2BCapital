@@ -35,6 +35,8 @@ class NhBlog extends Nh
             },
             success: function (res) {
                 if (res.success) {
+                    console.log('el',$el);
+                    console.log('active', res.data.fav_active);
                     if(res.data.fav_active == 0){
                         $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
                     }else{
@@ -69,11 +71,9 @@ class NhBlog extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.ignore_active == 0){
-                        $el.removeClass('btn-outline-light');
-                        $el.addClass('btn-outline-dark');
+                        $el.find('.ignore-star').toggleClass('bbc-star-o bbc-star');
                     }else{
-                        $el.removeClass('btn-outline-dark');
-                        $el.addClass('btn-outline-light');
+                        $el.find('.ignore-star').toggleClass('bbc-star bbc-star-o');
                     }
                     if(res.data.updated){
                         $('.blogs-list').html(res.data.updated);

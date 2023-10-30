@@ -447,7 +447,7 @@
                         'value'               => '<i class="bbc-save pe-1"></i> ' . __('Save', 'ninja'),
                         'before'              => '',
                         'after'               => '',
-                        'recaptcha_form_name' => 'frontend_create_opportunity',
+
                         'order'               => 190
                     ],
                 ];

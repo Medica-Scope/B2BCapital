@@ -27,7 +27,7 @@ $opportunities = [];
 
 
             if (!is_wp_error($profile)) {
-                $favorite_opportunities = [];
+                $favorite_opportunities = ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $not_in = array_merge($favorite_opportunities, $ignored_opportunities);
                 $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $favorite_opportunities, [], $user_ID);
