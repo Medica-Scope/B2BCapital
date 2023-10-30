@@ -37,14 +37,18 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 					</h1>
 				</div>
 
-				<div class="social-login">
-					<?php /** echo do_shortcode( '[nextend_social_login]' ); */?>
-					<a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a>
-					<a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
-						LinkedIn</a>
-					<a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
-						Facebook</a>
-				</div>
+                <div class="social-login">
+                        <?php  
+                        if(class_exists('NextendSocialLogin', false)){
+                            echo NextendSocialLogin::renderButtonsWithContainer();
+                        }  
+                        ?>
+                        <!-- <a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a> -->
+                        <a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
+                            LinkedIn</a>
+                        <a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
+                            Facebook</a>
+                    </div>
 
 				<div class="or-separator">
 					<span class="separator-line left-line"></span>

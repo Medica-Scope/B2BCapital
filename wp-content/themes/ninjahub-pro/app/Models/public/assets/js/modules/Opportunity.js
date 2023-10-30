@@ -303,16 +303,15 @@ class NhOpportunity extends Nh
         });
     }
 
-    ignoreOpportunity($el,user_id,post_id)
+    ignoreOpportunity(formData, $el)
     {
         let that                      = this;
-        this.ajaxRequests.toggleFav = $.ajax({
+        this.ajaxRequests.ignoreOpportunity = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
             data: {
                 action: `${KEY}_ignore_opportunity_ajax`,
-                user_id: user_id,
-                post_id: post_id,
+                data: formData,
             },
             beforeSend: function () {
                 UiCtrl.beforeSendPrepare($el);
@@ -320,14 +319,12 @@ class NhOpportunity extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.ignore_active == 0){
-                        $el.removeClass('btn-outline-light');
-                        $el.addClass('btn-outline-dark');
+                        $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
                     }else{
-                        $el.removeClass('btn-outline-dark');
-                        $el.addClass('btn-outline-light');
+                        $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
                     if(res.data.updated){
-                        $('.opportunity-content').html(res.data.updated);
+                        $('.opportunity-list .card-group').html(res.data.updated);
                     }
                     UiCtrl.blockUI($el, false);
 

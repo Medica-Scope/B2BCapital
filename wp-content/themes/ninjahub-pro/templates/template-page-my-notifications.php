@@ -16,6 +16,7 @@
 
 
 use NH\APP\CLASSES\Nh_User;
+use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
 use NH\APP\MODELS\FRONT\Nh_Public;
@@ -75,6 +76,47 @@ $found_posts   = $notifications['found_posts'];
 									<div class="accordion-header" id="flush-heading<?= $notification->ID ?>">
 										<div class="ninja-notification-image">
 											<img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
+										</div>
+										<h3 class="accordion-button collapsed" data-bs-toggle="collapse"
+											data-bs-target="#flush<?= $notification->ID ?>" aria-expanded="false"
+											aria-controls="flush<?= $notification->ID ?>">
+											<?= $notification->title ?>
+										</h3>
+										<span>
+											<?= $notification->date ?>
+										</span>
+										<div class="ninja-notification-item-clear-parent">
+											<?php
+											                echo Nh_Forms::get_instance()
+															->create_form([
+																'post_id'                      => [
+																	'type'   => 'hidden',
+																	'name'   => 'post_id',
+																	'before' => '',
+																	'after'  => '',
+																	'value'  => $notification->ID,
+																	'order'  => 0
+																],
+																'notification_item_clear_nonce'               => [
+																	'class' => '',
+																	'type'  => 'nonce',
+																	'name'  => 'notification_item_clear_nonce',
+																	'value' => Nh::_DOMAIN_NAME . "_notification_item_clear_nonce_form",
+																	'order' => 5
+																],
+																'submit_notification_item_clear_request' => [
+																	'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+																	'id'                  => 'submit_notification_item_clear_request',
+																	'type'                => 'submit',
+																	'value'               => __('Clear', 'ninja'),
+																	'recaptcha_form_name' => 'frontend_notification_item_clear',
+																	'order'               => 10
+																],
+															], [
+																'class' => Nh::_DOMAIN_NAME . '-notification-item-clear-form',
+															]);
+														
+											?>
 										</div>
 									</div>
 									<div id="flush<?= $notification->ID ?>" class="accordion-collapse collapse"
