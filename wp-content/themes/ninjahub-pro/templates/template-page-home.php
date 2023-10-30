@@ -35,7 +35,7 @@ $partners      = get_field( 'partners', $post->ID );
 	<div class="landing-page-content">
 		<!-- Landing Page Carousel -->
 		<div id="landingPageCarousel" class="carousel slide" data-bs-wrap="false">
-			<div class="carousel-indicators">
+			<div class="carousel-indicators d-none d-md-flex">
 				<?php
 				if ( ! empty( $sliders_group ) ) {
 					foreach ( $sliders_group as $key => $value ) {
@@ -47,7 +47,9 @@ $partners      = get_field( 'partners', $post->ID );
 				}
 				?>
 				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/choose-type' ) ) ); ?>"
-					class="skip-intro"><?= __('Skip', 'ninja') ?><i class="bbc-arrow-right2"></i></a>
+					class="skip-intro">
+					<?= __( 'Skip', 'ninja' ) ?><i class="bbc-arrow-right2"></i>
+				</a>
 			</div>
 
 			<div class="carousel-inner">
@@ -96,7 +98,6 @@ $partners      = get_field( 'partners', $post->ID );
 										}
 										?>
 									</div>
-
 								</div>
 								<div class="slide-banner">
 									<div class="banner-wrapper large">
@@ -124,13 +125,12 @@ $partners      = get_field( 'partners', $post->ID );
 						<span class="icon-wrapper">
 							<dotlottie-player
 								src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/arrow-right-white.lottie/animations/12345.json"
-								background="transparent" speed="1" style="width: 80px; height: 80px" direction="1"
-								mode="normal" loop autoplay>
+								background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
+								autoplay>
 							</dotlottie-player>
 						</span>
 					</span>
-					<span class="carousel-control prev d-none" data-bs-target="#landingPageCarousel"
-						data-bs-slide="prev">
+					<span class="carousel-control prev d-none" data-bs-target="#landingPageCarousel" data-bs-slide="prev">
 						<i class="bbc-arrow-left2"></i>
 						<?php echo __( 'Back', 'ninja' ); ?>
 					</span>

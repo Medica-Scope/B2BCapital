@@ -9,13 +9,13 @@
  * @package NinjaHub
  */
 
-$dashboard = [ 
+$dashboard = [
 	'my-account',
 	'dashboard',
 	'create-opportunity'
 ];
 
-$my_account = [ 
+$my_account = [
 	'login',
 	'industry',
 	'reset-password',
@@ -29,10 +29,11 @@ if ( is_page( $dashboard ) ) {
 	get_template_part( 'app/Views/footers/dashboard' );
 } elseif ( is_page( $my_account ) ) {
 	get_template_part( 'app/Views/footers/my-account' );
-} else {
-	// TODO:: Will be used for Blogs later..
-	get_template_part( 'app/Views/footers/default' );
 }
+//  else {
+// 	// TODO:: Will be used for Blogs later..
+// 	get_template_part( 'app/Views/footers/default' );
+// }
 
 
 wp_body_close();
@@ -40,7 +41,12 @@ wp_body_close();
 wp_footer();
 
 ?>
-
+<script>
+screen.addEventListener("orientationchange", () => {
+	console.log(`The orientation of the screen is: ${ screen.orientation }`);
+	screen.orientation.lock();
+});
+</script>
 </body>
 
 </html>

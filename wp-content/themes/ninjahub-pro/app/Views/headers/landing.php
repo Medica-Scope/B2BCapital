@@ -19,12 +19,12 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
  */
 ?>
 <div class="landing-page main">
-	<div class="back-texture">
+	<div class="back-texture d-none d-xl-flex">
 		<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/landing-page/texture.webp" alt="Texture"
 			class="img-fluid">
 	</div>
 	<!-- App Sidebar -->
-	<aside class="sidebar">
+	<aside class="sidebar d-none d-lg-flex">
 		<!-- App Brand -->
 		<a href="<?= home_url() ?>" class="app-brand">
 			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"

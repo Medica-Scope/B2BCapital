@@ -1,4 +1,5 @@
 @import './landing-theme';
+
 /* Landing Page Styles Start Here */
 .landing-page {
 	display: flex;
@@ -290,10 +291,10 @@
 			position: absolute;
 			top: 0;
 			right: 0;
-			transform: translateX(35%);
-			&.choose-type {
-				transform: translateX(30%);
-			}
+			// transform: translateX(35%);
+			// &.choose-type {
+			// 	transform: translateX(30%);
+			// }
 			@include large-screen {
 				width: 85rem;
 				height: 85rem;
@@ -326,10 +327,11 @@
 							.carousel-indicators {
 								margin: 0;
 								align-items: center;
-								bottom: 24.5vh;
+								bottom: 10rem;
 								right: auto;
 								left: 2rem;
 								@include large-screen {
+									bottom: 24.5vh;
 									left: 3rem;
 								}
 								.slide-indicator {
@@ -365,14 +367,20 @@
 							}
 							.carousel-inner {
 								height: 100%;
-								padding-left: 2rem;
 								overflow: hidden;
+								padding-inline: 2rem;
+								@include medium-screen {
+									padding-inline-start: 2rem;
+								}
 								@include large-screen {
-									padding-left: 3rem;
+									padding-inline-start: 3rem;
 								}
 								.carousel-item {
-									width: fit-content;
+									width: 100%;
 									height: 100%;
+									@include large-screen {
+										width: fit-content;
+									}
 									&.carousel-item-start {
 										transition: transform 1.5s
 											cubic-bezier(0.9, 0.03, 0.69, 0.22);
@@ -392,18 +400,28 @@
 										transition-delay: 0.6s;
 									}
 									.slide {
-										width: fit-content;
+										width: 100%;
 										height: 100%;
 										display: flex;
 										align-items: flex-start;
-										justify-content: space-between;
+										justify-content: center;
+										flex-direction: column;
+										@include large-screen {
+											width: fit-content;
+											flex-direction: row;
+											justify-content: space-between;
+										}
 										.slide-content {
-											width: calc(48vw - 4rem);
-											height: 100%;
+											width: 100%;
+											height: fit-content;
 											position: relative;
 											@include large-screen {
-												width: calc(48vw - 9rem);
+												width: calc(48vw - 4rem);
+												height: 100%;
 											}
+											// @include large-screen {
+											// 	width: calc(48vw - 9rem);
+											// }
 											@include xLarge-screen {
 												margin-right: 4rem;
 											}
@@ -435,21 +453,26 @@
 												}
 											}
 											.description {
-												width: 75%;
+												width: 100%;
 												color: $layout-light;
 												font-size: 0.8rem;
 												font-family: $bbc-primary-en-font-light;
+												@include large-screen {
+													width: 75%;
+												}
 												@include xLarge-screen {
 													width: 57%;
 													font-size: 0.875rem;
 												}
 											}
 											.statistics {
-												width: 90%;
+												width: 100%;
 												margin-top: 1.5rem;
 												display: flex;
 												align-items: center;
-												//justify-content: space-between;
+												@include large-screen {
+													width: 90%;
+												}
 												@include xLarge-screen {
 													width: 95%;
 												}
@@ -499,15 +522,30 @@
 											}
 										}
 										.slide-banner {
-											width: fit-content;
-											height: 100%;
+											width: 100%;
+											height: fit-content;
+											margin-top: 6rem;
+											@include large-screen {
+												width: fit-content;
+												height: 100%;
+												margin-top: 0;
+											}
 											.banner-wrapper {
-												width: 45vw;
+												width: 100%;
+												@include large-screen {
+													width: 45vw;
+												}
 												&.large {
-													width: 65vw;
+													width: 100%;
+													@include large-screen {
+														width: 65vw;
+													}
 												}
 												&.medium {
-													width: 50vw;
+													width: 100%;
+													@include large-screen {
+														width: 50vw;
+													}
 												}
 											}
 										}
@@ -614,6 +652,7 @@
 		}
 	}
 }
+
 /* Landing Page Arabic Styles Start Here */
 .rtl {
 	.landing-page {
@@ -714,10 +753,10 @@
 			.back-texture {
 				right: auto;
 				left: 0;
-				transform: translateX(-35%);
-				&.choose-type {
-					transform: translateX(-30%);
-				}
+				// transform: translateX(-35%);
+				// &.choose-type {
+				// 	transform: translateX(-30%);
+				// }
 			}
 			main {
 				.layout {
