@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Filename: template-page-dashboard.php
  * @Description:
@@ -28,7 +27,7 @@ global $user_ID;
 
 get_header();
 
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/home-dashboard');
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/home-dashboard' );
 
 $opportunities_obj = new Nh_Opportunity();
 $acquisitions_obj  = new Nh_Opportunity_Acquisition();
@@ -163,7 +162,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
                                                  */
                                 ?>
                                         <div class="col">
-                                            <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); ?>
+                                            <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); // GAMAL ?>
+                                            <?php //get_template_part( 'app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args ); //KHALED?>
                                         </div>
                                 <?php
                                     }

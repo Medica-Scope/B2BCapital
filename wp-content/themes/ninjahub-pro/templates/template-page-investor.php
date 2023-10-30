@@ -32,8 +32,9 @@ get_header();
 		<div class="active-user-type">
 			<div class="user-type-video investor">
 				<div class="video-scene">
-					<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/investor-video.webp" alt="B2B Investor"
-						class="img-fluid">
+					<video autoplay loop class="w-100">
+						<source src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/videos/investor.mp4" type="video/mp4">
+					</video>
 				</div>
 			</div>
 			<div class="active-user-type-content">

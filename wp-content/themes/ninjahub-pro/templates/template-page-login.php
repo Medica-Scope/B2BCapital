@@ -92,7 +92,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'type'    => 'checkbox',
 						'choices' => [ 
 							[ 
-								'class' => '',
+								'class' => ' ',
 								'label' => 'Remember me',
 								'name'  => 'rememberme',
 								'value' => '1',

@@ -1,0 +1,22 @@
+@import '../base/variables';
+
+footer {
+	.widget_block {
+		margin-top: 6rem;
+		.menu {
+			list-style-type: disc;
+			list-style: inside;
+			color: $layout-medium;
+			font-size: 0.9rem;
+			li{
+				margin-bottom: 0.5rem;
+			}
+			a {
+				color: $layout-medium;
+			}
+		}
+		.wp-block-heading{
+			margin-bottom: 1rem;
+		}
+	}
+}

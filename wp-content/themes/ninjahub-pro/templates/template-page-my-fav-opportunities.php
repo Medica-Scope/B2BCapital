@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Filename: template-my-fav-opportunities.php
  * @Description:
@@ -45,7 +44,7 @@ $user_obj         = Nh_User::get_current_user();
 
     <section class="page-content opportunity-content">
         <div class="opportunity-list ignore-list">
-            <div class="card-group">
+            <div class="row row-cols-1 row-cols-md-2 g-4 card-group">
                 <?php
                 if (!empty($opportunities)) {
                     foreach ($opportunities as $opportunity) {
@@ -88,7 +87,8 @@ $user_obj         = Nh_User::get_current_user();
                         $args['opportunity'] = $opportunity;
                 ?>
                         <div class="col">
-                            <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); ?>
+                            <?php get_template_part('app/Views/opportunities/opportunity-item', NULL, $args); // GAMAL?>
+                            <?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); // KHALED?>
                         </div>
                 <?php
                     }

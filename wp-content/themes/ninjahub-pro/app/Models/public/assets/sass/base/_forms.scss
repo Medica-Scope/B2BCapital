@@ -368,10 +368,17 @@
 
 /* ACF Forms Styles START*/
 .acf-field {
-	input, textarea {
+	input,
+	textarea {
 		margin: 0 !important;
 		padding: 1rem !important;
 		font-size: 0.8rem !important;
+	}
+}
+.acf-basic-uploader {
+	width: 100%;
+	input {
+		width: 100%;
 	}
 }
 /* ACF Forms Styles END*/

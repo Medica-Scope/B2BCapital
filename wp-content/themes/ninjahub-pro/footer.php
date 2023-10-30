@@ -1,43 +1,43 @@
 <?php
-    /**
-     * The template for displaying the footer
-     *
-     * Contains the closing of the #content div and all content after.
-     *
-     * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
-     *
-     * @package NinjaHub
-     */
+/**
+ * The template for displaying the footer
+ *
+ * Contains the closing of the #content div and all content after.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package NinjaHub
+ */
 
-	$dashboard = [
-		'my-account',
-		'dashboard',
-		'create-opportunity'
-	];
+$dashboard = [ 
+	'my-account',
+	'dashboard',
+	'create-opportunity'
+];
 
-	$my_account = [
-		'login',
-		'industry',
-		'reset-password',
-		'forgot-password',
-		'registration',
-		'verification',
-		'authentication',
-	];
+$my_account = [ 
+	'login',
+	'industry',
+	'reset-password',
+	'forgot-password',
+	'registration',
+	'verification',
+	'authentication',
+];
 
-	if (is_page($dashboard)) {
-		get_template_part('app/Views/footers/dashboard');
-	} elseif (is_page($my_account)) {
-		get_template_part('app/Views/footers/my-account');
-	} else {
-		// TODO:: Will be used for Blogs later..
-		get_template_part('app/Views/footers/default');
-	}
+if ( is_page( $dashboard ) ) {
+	get_template_part( 'app/Views/footers/dashboard' );
+} elseif ( is_page( $my_account ) ) {
+	get_template_part( 'app/Views/footers/my-account' );
+} else {
+	// TODO:: Will be used for Blogs later..
+	get_template_part( 'app/Views/footers/default' );
+}
 
 
-    wp_body_close();
+wp_body_close();
 
-    wp_footer();
+wp_footer();
 
 ?>
 

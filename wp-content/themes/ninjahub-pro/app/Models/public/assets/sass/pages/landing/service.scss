@@ -192,7 +192,7 @@
 						&:focus {
 							border-bottom: 1px solid $layout-medium;
 						}
-						&:autofill{
+						&:autofill {
 							background-color: transparent;
 							border-bottom: 1px solid $layout-medium;
 						}
@@ -319,6 +319,16 @@
 					margin-top: 2rem;
 					text-transform: uppercase;
 					font-family: $bbc-secondary-en-font-medium;
+				}
+				.checkout-price {
+					margin-top: 1rem;
+					.service-price {
+						color: $success;
+						font-weight: bold;
+						.price-big {
+							font-size: 2rem;
+						}
+					}
 				}
 			}
 		}
