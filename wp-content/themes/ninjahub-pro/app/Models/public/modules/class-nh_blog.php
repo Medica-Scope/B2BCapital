@@ -211,7 +211,7 @@
          */
         public function ignore_article(): void
         {
-            global $user_ID;
+            global $user_ID,$wp;
             $form_data                     = $_POST['data'];
             $post_id                       = (int)sanitize_text_field($form_data['post_id']);
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
@@ -221,7 +221,7 @@
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
 
-            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_to_fav');
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_ignore');
 
             if ($check_result !== TRUE) {
                 new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
@@ -241,9 +241,13 @@
                     $profile->update();
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
-
                     ob_start();
-                    get_template_part('app/Views/blogs-list');
+                    if(str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-articles')){
+                        get_template_part('app/Views/blogs/blogs-list-ignored', null, []);
+                    }
+                    else{
+                        get_template_part('app/Views/blogs/blogs-list', null, []);
+                    }
                     $html = ob_get_clean();
 
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
@@ -260,7 +264,7 @@
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
 
                     ob_start();
-                    get_template_part('app/Views/blogs-list');
+                    get_template_part('app/Views/blogs/blogs-list', null, []);
                     $html = ob_get_clean();
 
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
@@ -365,7 +369,7 @@
          * @author Ahmed Gamal
          * @return bool
          */
-        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], int $user_id = 0, int $page = 1, array $in = []): array
         {
             if ($user_id) {
                 $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
@@ -385,6 +389,9 @@
                 "post__not_in"   => $not_in,
                 "order"          => $order,
             ];
+            if(!empty($in)){
+                $args['post__in'] = $in;
+            }
             $posts    = new \WP_Query($args);
             $Nh_Posts = [];
 

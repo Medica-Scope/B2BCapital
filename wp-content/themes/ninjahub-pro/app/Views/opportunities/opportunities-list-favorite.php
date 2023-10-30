@@ -12,34 +12,41 @@
  */
 
 use NH\APP\HELPERS\Nh_Forms;
-use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
 use NH\Nh;
 
 global $wp_query, $post, $user_ID;
 
-$blog_obj          = new Nh_Blog();
+$opportunity_obj          = new Nh_Opportunity();
 $paged             = 1;
-$fav_articles      = [];
-$ignored_articles  = [];
+$fav_opportunities      = [];
+$ignored_opportunities  = [];
 $queried_post_type = $wp_query->query;
 
 if (get_query_var('paged')) {
     $paged = get_query_var('paged');
 }
-$results = $blog_obj->get_all_custom(['publish'], 12, 'date', 'DESC', $ignored_articles, $user_ID, $paged);
-if ($results['posts']) { ?>
+if(!empty($user_ID)){
+    $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+    $profile_obj = new Nh_Profile();
+    $profile     = $profile_obj->get_by_id((int)$profile_id);
+    if (!is_wp_error($profile)) {
+        $ignored_opportunities = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
+    }
+}
+$results = $opportunity_obj->get_all_custom(['publish'], 12, 'date', 'DESC', [], [], $user_ID, $paged, $ignored_opportunities);
+if ($results['posts'] && !empty($ignored_opportunities)) { ?>
 
     <?php
     /* Start the Loop */
-    foreach ($results['posts'] as $single_post) {
+    foreach ($results['posts'] as $opportunity) {
         $args = [];
         $args['fav_form'] = '';
         $args['ignore_form'] = '';
         if (!empty($user_ID)) {
-            $fav_chk            = $blog_obj->is_post_in_user_favorites($single_post->ID);
-            $ignore_chk         = $blog_obj->is_post_in_user_ignored($single_post->ID);
+            $fav_chk            = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
+            $ignore_chk         = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
             $args['fav_chk']    = $fav_chk;
             $args['ignore_chk'] = $ignore_chk;
             if ($fav_chk) {
@@ -49,12 +56,12 @@ if ($results['posts']) { ?>
             }
             $args['fav_form'] = Nh_Forms::get_instance()
                 ->create_form([
-                    'post_id'                   => [
+                    'opp_id'                   => [
                         'type'   => 'hidden',
-                        'name'   => 'post_id',
+                        'name'   => 'opp_id',
                         'before' => '',
                         'after'  => '',
-                        'value'  => $single_post->ID,
+                        'value'  => $opportunity->ID,
                         'order'  => 0
                     ],
                     'add_to_fav_nonce'          => [
@@ -87,7 +94,7 @@ if ($results['posts']) { ?>
                         'name'   => 'post_id',
                         'before' => '',
                         'after'  => '',
-                        'value'  => $single_post->ID,
+                        'value'  => $opportunity->ID,
                         'order'  => 0
                     ],
                     'ignore_article_nonce' => [
@@ -109,13 +116,13 @@ if ($results['posts']) { ?>
                     'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
                 ]);
         }
-        $args['post'] = $single_post;
+        $args['opportunity'] = $opportunity;
         /*
              * Include the Post-Type-specific template for the content.
              * If you want to override this in a child theme, then include a file
              * called content-___.php (where ___ is the Post Type name) and that will be used instead.
              */
-        get_template_part('app/Views/blogs/blogs-item', NULL, $args);
+        get_template_part('app/Views/opportunities/opportunities-item', NULL, $args);
     }
 
     ?>

@@ -28,8 +28,16 @@ $queried_post_type = $wp_query->query;
 if (get_query_var('paged')) {
     $paged = get_query_var('paged');
 }
-$results = $blog_obj->get_all_custom(['publish'], 12, 'date', 'DESC', $ignored_articles, $user_ID, $paged);
-if ($results['posts']) { ?>
+if(!empty($user_ID)){
+    $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+    $profile_obj = new Nh_Profile();
+    $profile     = $profile_obj->get_by_id((int)$profile_id);
+    if (!is_wp_error($profile)) {
+        $ignored_articles = is_array($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
+    }
+}
+$results = $blog_obj->get_all_custom(['publish'], 12, 'date', 'DESC', [], $user_ID, $paged, $ignored_articles);
+if ($results['posts'] && !empty($ignored_articles)) { ?>
 
     <?php
     /* Start the Loop */

@@ -37,6 +37,10 @@ class NhOpportunityFront extends NhOpportunity
                 form: $(`.${KEY}-add-to-fav-form`),
                 parent: $(`.${KEY}-add-to-fav-form`).parent(),
             },
+            ignore: {
+                form: $(`.${KEY}-create-ignore-opportunity-form`),
+                parent: $(`.${KEY}-create-ignore-opportunity-form`).parent(),
+            },
         };
         this.attachment    = {
             currentSize: 0,
@@ -240,22 +244,21 @@ class NhOpportunityFront extends NhOpportunity
     ignore_opportunity()
     {
         let that         = this,
-            // $controlls   = this.$el.controlls,
-            ajaxRequests = this.ajaxRequests;
+        $ignore   = this.$el.ignore,
+        ajaxRequests = this.ajaxRequests;
+        
+        $ignore.form.on('submit', $ignore.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+    
+            // Abort any ongoing registration requests
+            if (typeof ajaxRequests.ignoreOpportunity !== 'undefined') {
+                ajaxRequests.ignoreOpportunity.abort();
+            }
 
-
-        // $(document).on('click', $controlls.ignoreBtn, function (e) {
-        //     e.preventDefault();
-        //     let $this   = $(e.currentTarget);
-        //     let user_id = $this.attr('data-uID');
-        //     let post_id = $this.attr('data-id');
-
-        //     if (typeof ajaxRequests.ignoreArticle !== 'undefined') {
-        //         ajaxRequests.ignoreArticle.abort();
-        //     }
-        //     console.log('clicked');
-        //     that.ignoreOpportunity($this, user_id, post_id);
-        // });
+                that.ignoreOpportunity(formData, $this);
+        });
     }
 
     list_grid_switch(){
