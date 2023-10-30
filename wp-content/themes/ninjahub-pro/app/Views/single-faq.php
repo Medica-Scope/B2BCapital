@@ -8,30 +8,31 @@
  */
 
 use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\Nh_Public;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Faq;
 use NH\Nh;
 
 get_header();
 
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home');
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-single-faq', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/single-faq' );
+
+
 global $post;
 $single = new Nh_Faq();
-$single = $single->convert($post);
+$single = $single->convert( $post );
 ?>
-<div class="accordion accordion-flush" id="accordionFlush">
-    <div class="accordion-item" data-id="<?= $single->ID ?>">
+<div class="single-faq container container-xxl">
+	<?php Nh_Public::breadcrumbs(); ?>
 
-        <div class="accordion-header" id="flush-heading<?= $single->ID ?>">
-            <h3 class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush<?= $single->ID ?>" aria-expanded="false" aria-controls="flush<?= $single->ID ?>">
-                <?= $single->title ?>
-            </h3>
-        </div>
-        <div id="flush<?= $single->ID ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?= $single->ID ?>" data-bs-parent="#accordionFlush">
-            <div class="accordion-body"><?= $single->content ?></div>
-        </div>
-    </div>
+	<section class="page-content bg-white shadow">
+		<h1 class="page-title mb-4">
+			<?= $single->title ?>
+		</h1>
+		<div class="">
+			<?= $single->content ?>
+		</div>
+	</section>
 </div>
-
 </div> <!-- </layout> -->
 </main>
 </div> <!-- </landing-page> -->

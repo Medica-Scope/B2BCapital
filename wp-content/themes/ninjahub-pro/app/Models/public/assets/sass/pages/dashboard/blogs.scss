@@ -3,6 +3,7 @@
 
 .blog-item {
 	min-height: 340px;
+	border: none;
 	.card-image-top {
 		display: flex;
 		align-items: center;
@@ -13,6 +14,13 @@
 			color: $layout;
 			font-size: 1.5rem;
 			font-weight: bold;
+		}
+		img {
+			width: 250px;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			object-fit: contain;
 		}
 	}
 	.short-description {
@@ -25,23 +33,95 @@
 	.blog-content {
 		padding: 1rem;
 		margin-top: 8rem;
+		border-radius: 5px;
 		.cover-image {
-			width: 50%;
+			height: 150px;
+			max-width: 900px;
 			text-align: center;
 			margin: auto;
 			margin-top: -5rem;
-			color: white;
+			color: $layout-light;
 			padding: 3rem 1.5rem;
 			h3 {
 				color: $layout;
 				font-size: 1.5rem;
 				font-weight: bold;
+				text-align: left;
+				width: 60%;
+			}
+			img {
+				width: 250px;
+				height: 100%;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				object-fit: contain;
 			}
 		}
-		.content {
+		.content-container {
 			color: $primary-dark;
 			font-family: $bbc-primary-en-font-light;
 			font-size: 1rem;
+			max-width: 900px;
+			margin: 0 auto;
+			.tags {
+				display: flex;
+				flex-direction: row;
+				margin-top: 2rem;
+				.tags-title {
+					font-weight: bold;
+					margin-inline-start: 0.5rem;
+				}
+				.tags-items {
+					span {
+						display: inline-block;
+					}
+				}
+			}
+		}
+	}
+}
+
+.pagination-con {
+	width: 98%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba($black, 0.1);
+	padding: 1rem;
+	margin-inline: auto;
+	border-radius: 3px;
+	* {
+		color: $primary-dark;
+	}
+	.prev,
+	.next {
+		text-transform: uppercase;
+		i {
+			display: inline-block;
+			border: 1px solid $layout-medium;
+			border-radius: 50%;
+			padding: 0.5rem;
+		}
+	}
+	.prev {
+		margin-inline-end: auto !important;
+	}
+	.next {
+		margin-inline-start: auto !important;
+	}
+	.page-numbers {
+		margin: 0 0.2rem;
+		font-weight: bold;
+		&.current {
+			color: $layout-light;
+			background-color: $primary;
+			padding: 0.2rem 0.5rem;
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			line-height: 1.2;
+			text-align: center;
 		}
 	}
 }

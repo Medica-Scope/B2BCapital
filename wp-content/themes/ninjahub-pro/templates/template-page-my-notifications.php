@@ -24,6 +24,7 @@ use NH\Nh;
 get_header();
 
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-notifications', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-notifications' );
 
 global $user_ID;
 $notifications_obj = new Nh_Notification();
@@ -49,15 +50,22 @@ $found_posts   = $notifications['found_posts'];
 					<?php
 					if ( ! empty( $notifications['notifications'] ) ) {
 						?>
-						<h2>
-							<?= __( "Notification list", "ninja" ) ?>
-						</h2>
-						<div class="ninja-notification-clear-parent">
-							<button class="btn ninja-notification-clear">
-								<?= __( 'clear all' ) ?>
-							</button>
+						<div class="row justify-content-between p-0">
+							<div class="col-8">
+								<h3>
+									<?= __( "Notification list", "ninja" ) ?>
+								</h3>
+							</div>
+							<div class="col-4 d-flex justify-content-end">
+								<div class="ninja-notification-clear-parent">
+									<button class="btn btn-outline-secondary ninja-notification-clear text-uppercase">
+										<i class="bbc-trash-2"></i>
+										<?= __( 'clear all' ) ?>
+									</button>
+								</div>
+							</div>
 						</div>
-						<div class="ninja-notifications-group accordion accordion-flush" id="accordionFlush">
+						<div class="ninja-notifications-group accordion accordion-flush mt-4" id="accordionFlush">
 							<?php
 							foreach ( $notifications['notifications'] as $notification ) {
 								?>
@@ -66,21 +74,11 @@ $found_posts   = $notifications['found_posts'];
 
 									<div class="accordion-header" id="flush-heading<?= $notification->ID ?>">
 										<div class="ninja-notification-image">
-											<img src="<?= $notification->thumbnail ?>"
-												alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
+											<img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
 										</div>
-										<h3 class="accordion-button collapsed" data-bs-toggle="collapse"
-											data-bs-target="#flush<?= $notification->ID ?>" aria-expanded="false"
-											aria-controls="flush<?= $notification->ID ?>">
-											<?= $notification->title ?>
-										</h3>
-										<span>
-											<?= $notification->date ?>
-										</span>
 									</div>
 									<div id="flush<?= $notification->ID ?>" class="accordion-collapse collapse"
-										aria-labelledby="flush-heading<?= $notification->ID ?>"
-										data-bs-parent="#accordionFlush">
+										aria-labelledby="flush-heading<?= $notification->ID ?>" data-bs-parent="#accordionFlush">
 										<div class="accordion-body">
 											<?= $notification->content ?>
 										</div>

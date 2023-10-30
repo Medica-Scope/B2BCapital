@@ -45,102 +45,99 @@ if ( $user_ID ) {
 			<h3>
 				<?= $single_post->title; ?>
 			</h3>
+			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/blog-item-repeat-bg.webp');" />
 		</div>
+		<div class="container-md content-container">
+			<div class="date">
+				<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
+				<small class="text-muted">
+					<?= __( 'on', 'ninja' ) ?>
+					<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
+				</small>
 
-		<div class="date">
-			<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
-			<small class="text-muted">
-				<?= __( 'on', 'ninja' ) ?>
-				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
-			</small>
-		</div>
-
-		<?php if ( ! empty( $user_ID ) ) :
-			if ( $fav_chk ) {
-				$fav_class = 'bbc-star';
-			} else {
-				$fav_class = 'bbc-star-o';
-			}
-			echo Nh_Forms::get_instance()
-				->create_form( [ 
-					'opp_id'                    => [ 
-						'type'   => 'hidden',
-						'name'   => 'post_id',
-						'before' => '',
-						'after'  => '',
-						'value'  => $single_post->ID,
-						'order'  => 0
-					],
-					'add_to_fav_nonce'          => [ 
-						'class' => '',
-						'type'  => 'nonce',
-						'name'  => 'add_to_fav_nonce_nonce',
-						'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
-						'order' => 5
-					],
-					'submit_add_to_fav_request' => [ 
-						'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
-						'id'                  => 'submit_add_to_fav_request',
-						'type'                => 'submit',
-						'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
-						'recaptcha_form_name' => 'frontend_add_to_fav',
-						'order'               => 10
-					],
-				], [ 
-					'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
-				] );
-		endif; ?>
+				<?php if ( ! empty( $user_ID ) ) :
+					if ( $fav_chk ) {
+						$fav_class = 'bbc-star';
+					} else {
+						$fav_class = 'bbc-star-o';
+					}
+					echo Nh_Forms::get_instance()
+						->create_form( [ 
+							'opp_id'                    => [ 
+								'type'   => 'hidden',
+								'name'   => 'post_id',
+								'before' => '',
+								'after'  => '',
+								'value'  => $single_post->ID,
+								'order'  => 0
+							],
+							'add_to_fav_nonce'          => [ 
+								'class' => '',
+								'type'  => 'nonce',
+								'name'  => 'add_to_fav_nonce_nonce',
+								'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
+								'order' => 5
+							],
+							'submit_add_to_fav_request' => [ 
+								'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+								'id'                  => 'submit_add_to_fav_request',
+								'type'                => 'submit',
+								'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
+								'recaptcha_form_name' => 'frontend_add_to_fav',
+								'order'               => 10
+							],
+						], [ 
+							'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+						] );
+				endif; ?>
 
 
-		<?php if ( ! empty( $user_ID ) ) : ?>
-			<div class="ninja-ignore-con">
-				<button class="ninja-add-to-ignore btn <?= ( $ignore_chk ) ? 'btn-outline-dark' : '' ?>" id="addToIgnore"
-					data-uID="<?= $user_ID ?>" data-id="<?= $single_post->ID ?>" data-type="<?= $single_post->type ?>"
-					type="button">X
-				</button>
+				<?php if ( ! empty( $user_ID ) ) : ?>
+					<div class="ninja-ignore-con">
+						<button class="ninja-add-to-ignore btn <?= ( $ignore_chk ) ? 'btn-outline-dark' : '' ?>" id="addToIgnore"
+							data-uID="<?= $user_ID ?>" data-id="<?= $single_post->ID ?>" data-type="<?= $single_post->type ?>"
+							type="button">X
+						</button>
+					</div>
+				<?php endif; ?>
 			</div>
-		<?php endif; ?>
 
-		<?php if ( ! empty( $single_post->taxonomy['category'] ) ) : ?>
-			<div class="category">
-				<?= $single_post->taxonomy['category'][0]->name ?>
+			<?php if ( ! empty( $opportunity ) ) : ?>
+				<div class="opportunity">
+					<a href="<?= $opportunity->link ?>">
+						<?= $opportunity->name; ?>
+					</a>
+				</div>
+				<div class="opportunity-short-description">
+					<p>
+						<?= $opportunity->meta_data['short_description']; ?>
+					</p>
+				</div>
+			<?php endif; ?>
+
+			<div class="content">
+				<?= $single_post->content ?>
 			</div>
-		<?php endif; ?>
 
-
-		<?php if ( ! empty( $opportunity ) ) : ?>
-			<div class="opportunity">
-				<a href="<?= $opportunity->link ?>">
-					<?= $opportunity->name; ?>
-				</a>
-			</div>
-			<div class="opportunity-short-description">
-				<p>
-					<?= $opportunity->meta_data['short_description']; ?>
+			<div class="tags">
+				<p class="tags-title">
+					<?= __( 'Tags:', 'ninja' ) ?>
 				</p>
+				<div class="tags-items">
+					<span>buyes, </span>
+					<span>exists, </span>
+					<span>investors, </span>
+					<span>startups</span>
+				</div>
 			</div>
-		<?php endif; ?>
 
-
-		<div class="date">
-			<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
-			<p>
-				<?= __( 'on', 'ninja' ) ?>
-				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
-			</p>
-		</div>
-
-		<div class="content">
-			<?= $single_post->content ?>
-		</div>
-
-		<!-- <div class="related slick-slider">
+			<!-- <div class="related slick-slider">
 		<h3>
 		</h3>
 		<?php
 		/* $related = $post_obj->get_all_custom( [ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ] );
-									  if ( ! empty( $related ) ) {
-										  foreach ( $related['posts'] as $single_related ) { */
+																				if ( ! empty( $related ) ) {
+																					foreach ( $related['posts'] as $single_related ) { */
 		?>
 		<div class="related-card">
 			<a class="blog-item" href="<?php /* echo  $single_related->link */?>">
@@ -160,12 +157,12 @@ if ( $user_ID ) {
 		</div>
 		<?php
 		/*}
-									 } */
+																			 } */
 		?>
 	</div> -->
+		</div>
 	</div>
 </div>
-
 </div> <!-- </layout> -->
 </main>
 </div> <!-- </landing-page> -->
