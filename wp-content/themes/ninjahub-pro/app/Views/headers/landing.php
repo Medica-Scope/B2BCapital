@@ -19,16 +19,16 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
  */
 ?>
 <div class="landing-page main">
-	<div class="back-texture">
-		<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/landing-page/texture.webp" alt="Texture"
+	<div class="back-texture d-none d-xl-flex">
+		<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/landing-page/texture.webp" alt="Texture"
 			class="img-fluid">
 	</div>
 	<!-- App Sidebar -->
-	<aside class="sidebar">
+	<aside class="sidebar d-none d-lg-flex">
 		<!-- App Brand -->
 		<a href="<?= home_url() ?>" class="app-brand">
-			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
-				alt="B2B Capital Logo" class="img-fluid">
+			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp" alt="B2B Capital Logo"
+				class="img-fluid">
 		</a>
 		<!-- App Language Switcher -->
 		<div class="language-link">
@@ -90,13 +90,13 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 					<?php
 					if ( ! is_user_logged_in() ) {
 						?>
-						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
+						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
 							class="user-action bbc-btn outline success">
-							<?= __( 'Join as Investor', 'ninja' ); ?>
+							<?php echo __( 'Join as Investor', 'ninja' ); ?>
 						</a>
-						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
+						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
 							class="user-action bbc-btn outline action">
-							<?= __( 'Join as Owner', 'ninja' ); ?>
+							<?php echo __( 'Join as Owner', 'ninja' ); ?>
 						</a>
 						<?php
 					}
@@ -105,7 +105,8 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 					<?php
 					if ( is_user_logged_in() ) {
 						?>
-						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
+						<a href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+							aria-controls="staticBackdrop">
 							<span class="user-action user-menu">
 								<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
 									<g id="grid_layout_20" data-name="grid layout 20" transform="translate(-4 -4)">
@@ -131,6 +132,54 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 								</svg>
 							</span>
 						</a>
+
+						<div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop"
+							aria-labelledby="staticBackdropLabel">
+							<div class="offcanvas-header">
+								<h5 class="offcanvas-title" id="staticBackdropLabel">
+									<a href="<?= home_url() ?>" class="app-brand">
+										<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
+											alt="B2B Capital Logo" class="img-fluid">
+									</a>
+								</h5>
+								<button type="button" class="btn btn-outline-light" data-bs-dismiss="offcanvas"
+									aria-label="Close">X</button>
+							</div>
+							<div class="offcanvas-body">
+								<ul class="navbar-nav app-navigation">
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white  <?php echo $active_link === 'dashboard' ? 'active' : ''; ?>"
+											href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
+											<?php echo __( 'Dashboard', 'ninja' ); ?>
+										</a>
+									</li>
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white  <?php echo $active_link === 'contact_us' ? 'active' : ''; ?>"
+											href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'contact-us' ) ) ); ?>">
+											<?php echo __( 'Contact Us', 'ninja' ); ?>
+										</a>
+									</li>
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white  <?php echo $active_link === 'about_us' ? 'active' : ''; ?>"
+											href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'about' ) ) ); ?>">
+											<?php echo __( 'About', 'ninja' ); ?>
+										</a>
+									</li>
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white  <?php echo $active_link === 'services' ? 'active' : ''; ?>"
+											href="<?php echo get_post_type_archive_link( 'service' ); ?>">
+											<?php echo __( 'Services', 'ninja' ); ?>
+										</a>
+									</li>
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white  <?php echo $active_link === 'faq' ? 'active' : ''; ?>"
+											href="<?php echo get_post_type_archive_link( 'faq' ); ?>">
+											<?php echo __( 'FAQs', 'ninja' ); ?>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
 						<?php
 					}
 					?>

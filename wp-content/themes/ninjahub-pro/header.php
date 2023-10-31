@@ -4,9 +4,9 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\Nh;
 
 /// to be reviewed with mostafa
-if(is_singular('post')){
-    $post_obj = new Nh_Blog();
-    $post_obj->increment_read_count(get_the_ID());
+if ( is_singular( 'post' ) ) {
+	$post_obj = new Nh_Blog();
+	$post_obj->increment_read_count( get_the_ID() );
 }
 
 ?>
@@ -16,6 +16,8 @@ if(is_singular('post')){
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+
 		<link rel="profile" href="https://gmpg.org/xfn/11">
 
 		<?php wp_head(); ?>

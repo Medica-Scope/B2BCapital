@@ -1,4 +1,5 @@
 @import './landing-theme';
+
 /* Landing Page Styles Start Here */
 .landing-page {
 	display: flex;
@@ -232,6 +233,12 @@
 						}
 					}
 				}
+				.offcanvas {
+					background-color: $primary-semi-dark;
+					.offcanvas-header{
+						padding-top: 6rem;
+					}
+				}
 			}
 			/* Page Content Styles Start Here */
 			.page-content {
@@ -250,17 +257,15 @@
 					color: $highlight;
 					text-transform: uppercase;
 					letter-spacing: 1px;
-					font-size: 0.5rem;
+					font-size: 1rem;
 					font-family: $bbc-primary-en-font-light;
 					border-left: 1px solid $highlight;
 					@include large-screen {
 						padding: 0.15rem 0.15rem 0.15rem 0.4rem;
-						font-size: 0.6rem;
 					}
 					@include xLarge-screen {
 						padding: 0.25rem 0.25rem 0.25rem 0.5rem;
 						letter-spacing: 2px;
-						font-size: 0.75rem;
 					}
 				}
 			}
@@ -290,10 +295,10 @@
 			position: absolute;
 			top: 0;
 			right: 0;
-			transform: translateX(35%);
-			&.choose-type {
-				transform: translateX(30%);
-			}
+			// transform: translateX(35%);
+			// &.choose-type {
+			// 	transform: translateX(30%);
+			// }
 			@include large-screen {
 				width: 85rem;
 				height: 85rem;
@@ -326,10 +331,11 @@
 							.carousel-indicators {
 								margin: 0;
 								align-items: center;
-								bottom: 24.5vh;
+								bottom: 10rem;
 								right: auto;
 								left: 2rem;
 								@include large-screen {
+									bottom: 24.5vh;
 									left: 3rem;
 								}
 								.slide-indicator {
@@ -365,14 +371,20 @@
 							}
 							.carousel-inner {
 								height: 100%;
-								padding-left: 2rem;
 								overflow: hidden;
+								padding-inline: 2rem;
+								@include medium-screen {
+									padding-inline-start: 2rem;
+								}
 								@include large-screen {
-									padding-left: 3rem;
+									padding-inline-start: 3rem;
 								}
 								.carousel-item {
-									width: fit-content;
+									width: 100%;
 									height: 100%;
+									@include large-screen {
+										width: fit-content;
+									}
 									&.carousel-item-start {
 										transition: transform 1.5s
 											cubic-bezier(0.9, 0.03, 0.69, 0.22);
@@ -392,25 +404,35 @@
 										transition-delay: 0.6s;
 									}
 									.slide {
-										width: fit-content;
-										height: 100%;
+										width: 100%;
+										height: auto;
 										display: flex;
 										align-items: flex-start;
-										justify-content: space-between;
+										justify-content: center;
+										flex-direction: column;
+										@include large-screen {
+											width: fit-content;
+											flex-direction: row;
+											justify-content: space-between;
+										}
 										.slide-content {
-											width: calc(48vw - 4rem);
-											height: 100%;
+											width: 100%;
+											height: fit-content;
 											position: relative;
 											@include large-screen {
-												width: calc(48vw - 9rem);
+												width: calc(48vw - 4rem);
+												height: 100%;
 											}
+											// @include large-screen {
+											// 	width: calc(48vw - 9rem);
+											// }
 											@include xLarge-screen {
 												margin-right: 4rem;
 											}
 											.slide-title {
 												margin: 1rem 0 3rem;
 												color: $layout-light;
-												font-size: 2.2rem;
+												// font-size: 2.2rem;
 												font-family: $bbc-primary-en-font-light;
 												.highlighted {
 													color: $primary;
@@ -424,32 +446,36 @@
 											.slide-subtitle {
 												margin-bottom: 1rem;
 												color: $layout-light;
-												font-size: 1.05rem;
 												font-family: $bbc-primary-en-font-semi-bold;
 												.highlighted {
 													color: $primary;
 													font-family: $bbc-primary-en-font-bold;
 												}
-												@include xLarge-screen {
-													font-size: 1.5rem;
-												}
+												// @include xLarge-screen {
+												// 	font-size: 1.5rem;
+												// }
 											}
 											.description {
-												width: 75%;
+												width: 100%;
 												color: $layout-light;
-												font-size: 0.8rem;
+												font-size: 1.2rem;
 												font-family: $bbc-primary-en-font-light;
+												@include large-screen {
+													width: 75%;
+												}
 												@include xLarge-screen {
 													width: 57%;
-													font-size: 0.875rem;
+													// font-size: 0.875rem;
 												}
 											}
 											.statistics {
-												width: 90%;
+												width: 100%;
 												margin-top: 1.5rem;
 												display: flex;
 												align-items: center;
-												//justify-content: space-between;
+												@include large-screen {
+													width: 90%;
+												}
 												@include xLarge-screen {
 													width: 95%;
 												}
@@ -457,37 +483,37 @@
 													display: flex;
 													flex-direction: column;
 													.statistic-count {
-														font-size: 1rem;
+														font-size: 2.5rem;
 														font-family: $bbc-primary-en-font-bold;
-														@include large-screen {
-															font-size: 1.5rem;
-														}
+														// @include large-screen {
+														// 	font-size: 1.5rem;
+														// }
 														@include xLarge-screen {
 															font-size: 2.875rem;
 														}
 														.icon {
 															color: $highlight;
-															font-size: 0.75rem;
+															font-size: 2rem;
 															font-family: $bbc-secondary-en-font-medium;
-															@include large-screen {
-																font-size: 0.85rem;
-															}
-															@include xLarge-screen {
-																margin-left: -2px;
-																font-size: 2.065rem;
-															}
+															// @include large-screen {
+																// font-size: 0.85rem;
+															// }
+															// @include xLarge-screen {
+																// margin-left: -2px;
+																// font-size: 2.065rem;
+															// }
 														}
 													}
 													.statistic-name {
 														color: $layout-medium;
-														font-size: 0.65rem;
+														font-size: 1.2rem;
 														font-family: $bbc-primary-en-font-light;
-														@include large-screen {
-															font-size: 0.8rem;
-														}
-														@include xLarge-screen {
-															font-size: 0.875rem;
-														}
+														// @include large-screen {
+														// 	font-size: 0.8rem;
+														// }
+														// @include xLarge-screen {
+														// 	font-size: 0.875rem;
+														// }
 													}
 													+ .statistic {
 														margin-left: 1rem;
@@ -499,15 +525,30 @@
 											}
 										}
 										.slide-banner {
-											width: fit-content;
-											height: 100%;
+											width: 100%;
+											height: fit-content;
+											margin-top: 6rem;
+											@include large-screen {
+												width: fit-content;
+												height: 100%;
+												margin-top: 0;
+											}
 											.banner-wrapper {
-												width: 45vw;
+												width: 100%;
+												@include large-screen {
+													width: 45vw;
+												}
 												&.large {
-													width: 65vw;
+													width: 100%;
+													@include large-screen {
+														width: 65vw;
+													}
 												}
 												&.medium {
-													width: 50vw;
+													width: 100%;
+													@include large-screen {
+														width: 50vw;
+													}
 												}
 											}
 										}
@@ -614,6 +655,7 @@
 		}
 	}
 }
+
 /* Landing Page Arabic Styles Start Here */
 .rtl {
 	.landing-page {
@@ -694,6 +736,7 @@
 						padding: 0.1rem 0.4rem 0.1rem 0.1rem;
 						letter-spacing: 0;
 						font-family: $bbc-ar-font-regular;
+						font-size: 1rem;
 						border-left: none;
 						border-right: 1px solid $highlight;
 						@include large-screen {
@@ -714,10 +757,10 @@
 			.back-texture {
 				right: auto;
 				left: 0;
-				transform: translateX(-35%);
-				&.choose-type {
-					transform: translateX(-30%);
-				}
+				// transform: translateX(-35%);
+				// &.choose-type {
+				// 	transform: translateX(-30%);
+				// }
 			}
 			main {
 				.layout {
@@ -793,10 +836,10 @@
 														.statistic-count {
 															font-family: $bbc-ar-font-bold;
 															.icon {
-																@include xLarge-screen {
-																	margin-left: 0;
-																	margin-right: -2px;
-																}
+																// @include xLarge-screen {
+																// 	margin-left: 0;
+																// 	margin-right: -2px;
+																// }
 															}
 														}
 														.statistic-name {
