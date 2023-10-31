@@ -26,10 +26,10 @@ $opportunity_id           = $opportunity->ID;
 $current_page = (isset($args['current_page'])) ? $args['current_page'] : '';
 ?>
 <div class="opportunity-item card shadow border-0">
-    <div class="row g-0">
-        <div class="card-image">
-            <div class="opportunity-item-controllers">
-                <?php 
+	<div class="row g-0">
+		<div class="card-image">
+			<div class="opportunity-item-controllers">
+				<?php
                 if (!empty($user_ID)) :
                     echo ($current_page == 'my-ignored-opportunities') ? '' : $args['fav_form'];
                 endif;
@@ -37,41 +37,41 @@ $current_page = (isset($args['current_page'])) ? $args['current_page'] : '';
                     echo ($current_page == 'my-favorite-opportunities') ? '' : $args['ignore_form'];
                 endif;
                 ?>
-            </div>
-        </div>
-        <div class="card-body p-0">
-            <p class="card-text"><small class="text-body-secondary">
-                    <?= __('Business Type', 'ninja'); ?>
-                </small></p>
+			</div>
+		</div>
+		<div class="card-body p-0">
+			<p class="card-text"><small class="text-body-secondary">
+					<?= __('Business Type', 'ninja'); ?>
+				</small></p>
 
-            <a href="<?= $opportunity_link ?>" class="card-title btn btn-link btn-link-dark">
-                <?= $opportunity_title; ?>
-            </a>
+			<a href="<?= $opportunity_link ?>" class="card-title btn btn-link btn-link-dark">
+				<?= $opportunity_title; ?>
+			</a>
 
-            <p class="card-text"><small class="text-body-secondary">
-                    <?= $opportunity_created_date; ?>
-                </small>
-            </p>
+			<p class="card-text"><small class="text-body-secondary">
+					<?= $opportunity_created_date; ?>
+				</small>
+			</p>
 
-            <div class="card-extra-info">
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Location</small>
-                    <p class="card-text fw-bold">Egypt</p>
-                </div>
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Valuation</small>
-                    <p class="card-text fw-bold">95460$</p>
-                </div>
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Location</small>
-                    <p class="card-text fw-bold">Egypt</p>
-                </div>
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Valuation</small>
-                    <p class="card-text fw-bold">95460$</p>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="card-extra-info">
+				<div class="card-info-item">
+					<small class="text-body-secondary">Location</small>
+					<p class="card-text fw-bold">Egypt</p>
+				</div>
+				<div class="card-info-item">
+					<small class="text-body-secondary">Valuation</small>
+					<p class="card-text fw-bold">95460$</p>
+				</div>
+				<div class="card-info-item">
+					<small class="text-body-secondary">Location</small>
+					<p class="card-text fw-bold">Egypt</p>
+				</div>
+				<div class="card-info-item">
+					<small class="text-body-secondary">Valuation</small>
+					<p class="card-text fw-bold">95460$</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <?php
