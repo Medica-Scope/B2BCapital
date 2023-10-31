@@ -21,13 +21,15 @@ $opportunity_link         = $opportunity->link;
 $opportunity_title        = $opportunity->title;
 $opportunity_thumbnail    = $opportunity->thumbnail;
 $opportunity_created_date = $opportunity->created_date;
-$is_item_controllers      = TRUE;
+$is_item_controllers      = true;
 $opportunity_id           = $opportunity->ID;
 $current_page = (isset($args['current_page'])) ? $args['current_page'] : '';
 ?>
 <div class="opportunity-item card shadow border-0">
 	<div class="row g-0">
 		<div class="card-image">
+			<a href="<?= esc_url($opportunity_link); ?>"><img src="<?= esc_url($opportunity_thumbnail); ?>"
+					alt="<?= esc_attr($opportunity_title); ?>"></a>
 			<div class="opportunity-item-controllers">
 				<?php
                 if (!empty($user_ID)) :
