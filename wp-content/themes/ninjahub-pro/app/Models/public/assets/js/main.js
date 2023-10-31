@@ -11,6 +11,7 @@
 import $ from 'jquery';
 
 // import theme modules
+import '@dotlottie/player-component';
 
 class NhMain
 {
