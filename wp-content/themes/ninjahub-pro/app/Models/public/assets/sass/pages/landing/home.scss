@@ -233,6 +233,12 @@
 						}
 					}
 				}
+				.offcanvas {
+					background-color: $primary-semi-dark;
+					.offcanvas-header{
+						padding-top: 6rem;
+					}
+				}
 			}
 			/* Page Content Styles Start Here */
 			.page-content {
@@ -251,17 +257,15 @@
 					color: $highlight;
 					text-transform: uppercase;
 					letter-spacing: 1px;
-					font-size: 0.5rem;
+					font-size: 1rem;
 					font-family: $bbc-primary-en-font-light;
 					border-left: 1px solid $highlight;
 					@include large-screen {
 						padding: 0.15rem 0.15rem 0.15rem 0.4rem;
-						font-size: 0.6rem;
 					}
 					@include xLarge-screen {
 						padding: 0.25rem 0.25rem 0.25rem 0.5rem;
 						letter-spacing: 2px;
-						font-size: 0.75rem;
 					}
 				}
 			}
@@ -401,7 +405,7 @@
 									}
 									.slide {
 										width: 100%;
-										height: 100%;
+										height: auto;
 										display: flex;
 										align-items: flex-start;
 										justify-content: center;
@@ -428,7 +432,7 @@
 											.slide-title {
 												margin: 1rem 0 3rem;
 												color: $layout-light;
-												font-size: 2.2rem;
+												// font-size: 2.2rem;
 												font-family: $bbc-primary-en-font-light;
 												.highlighted {
 													color: $primary;
@@ -442,27 +446,26 @@
 											.slide-subtitle {
 												margin-bottom: 1rem;
 												color: $layout-light;
-												font-size: 1.05rem;
 												font-family: $bbc-primary-en-font-semi-bold;
 												.highlighted {
 													color: $primary;
 													font-family: $bbc-primary-en-font-bold;
 												}
-												@include xLarge-screen {
-													font-size: 1.5rem;
-												}
+												// @include xLarge-screen {
+												// 	font-size: 1.5rem;
+												// }
 											}
 											.description {
 												width: 100%;
 												color: $layout-light;
-												font-size: 0.8rem;
+												font-size: 1.2rem;
 												font-family: $bbc-primary-en-font-light;
 												@include large-screen {
 													width: 75%;
 												}
 												@include xLarge-screen {
 													width: 57%;
-													font-size: 0.875rem;
+													// font-size: 0.875rem;
 												}
 											}
 											.statistics {
@@ -480,37 +483,37 @@
 													display: flex;
 													flex-direction: column;
 													.statistic-count {
-														font-size: 1rem;
+														font-size: 2.5rem;
 														font-family: $bbc-primary-en-font-bold;
-														@include large-screen {
-															font-size: 1.5rem;
-														}
+														// @include large-screen {
+														// 	font-size: 1.5rem;
+														// }
 														@include xLarge-screen {
 															font-size: 2.875rem;
 														}
 														.icon {
 															color: $highlight;
-															font-size: 0.75rem;
+															font-size: 2rem;
 															font-family: $bbc-secondary-en-font-medium;
-															@include large-screen {
-																font-size: 0.85rem;
-															}
-															@include xLarge-screen {
-																margin-left: -2px;
-																font-size: 2.065rem;
-															}
+															// @include large-screen {
+																// font-size: 0.85rem;
+															// }
+															// @include xLarge-screen {
+																// margin-left: -2px;
+																// font-size: 2.065rem;
+															// }
 														}
 													}
 													.statistic-name {
 														color: $layout-medium;
-														font-size: 0.65rem;
+														font-size: 1.2rem;
 														font-family: $bbc-primary-en-font-light;
-														@include large-screen {
-															font-size: 0.8rem;
-														}
-														@include xLarge-screen {
-															font-size: 0.875rem;
-														}
+														// @include large-screen {
+														// 	font-size: 0.8rem;
+														// }
+														// @include xLarge-screen {
+														// 	font-size: 0.875rem;
+														// }
 													}
 													+ .statistic {
 														margin-left: 1rem;
@@ -733,6 +736,7 @@
 						padding: 0.1rem 0.4rem 0.1rem 0.1rem;
 						letter-spacing: 0;
 						font-family: $bbc-ar-font-regular;
+						font-size: 1rem;
 						border-left: none;
 						border-right: 1px solid $highlight;
 						@include large-screen {
@@ -832,10 +836,10 @@
 														.statistic-count {
 															font-family: $bbc-ar-font-bold;
 															.icon {
-																@include xLarge-screen {
-																	margin-left: 0;
-																	margin-right: -2px;
-																}
+																// @include xLarge-screen {
+																// 	margin-left: 0;
+																// 	margin-right: -2px;
+																// }
 															}
 														}
 														.statistic-name {
