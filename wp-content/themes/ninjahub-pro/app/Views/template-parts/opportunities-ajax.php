@@ -27,7 +27,7 @@ $opportunities = [];
 
 
             if (!is_wp_error($profile)) {
-                $favorite_opportunities = [];
+                $favorite_opportunities = ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $not_in = array_merge($favorite_opportunities, $ignored_opportunities);
                 $opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'DESC', $favorite_opportunities, [], $user_ID);
@@ -63,7 +63,7 @@ $opportunities = [];
                                     }
                                     ?>
                                     <h3><?= $opportunity->name ?></h3>
-                                    <span class="date"><?php echo get_the_date('F jS, Y', $opportunity->ID) ?></span>
+                                    <span class="date"><?= get_the_date('F jS, Y', $opportunity->ID) ?></span>
                                     <p class="short-description"><?= $opportunity->meta_data['short_description'] ?></p>
                                     <span class="status"><?= $opportunity->status ?></span>
                                     <?php if (!empty($user_ID)): ?>
@@ -105,7 +105,7 @@ $opportunities = [];
                                                 <span class="new"><?= __("New", "ninja") ?></span>
                                             <?php } ?>
                                             <h3><?= $favorite_opportunity->name ?></h3>
-                                            <span class="date"><?php echo get_the_date('F jS, Y', $favorite_opportunity->ID) ?></span>
+                                            <span class="date"><?= get_the_date('F jS, Y', $favorite_opportunity->ID) ?></span>
                                             <p class="short-description"><?= $favorite_opportunity->meta_data['short_description'] ?></p>
                                             <span class="status"><?= $favorite_opportunity->status ?></span>
                                         </div>

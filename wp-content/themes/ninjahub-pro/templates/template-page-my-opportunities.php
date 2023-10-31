@@ -56,20 +56,20 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions();
 
 							<h3>
 								<a href="<?= $acquisition->opportunity->link ?>">
-									<?php echo $acquisition->opportunity->title; ?>
+									<?= $acquisition->opportunity->title; ?>
 								</a>
 							</h3>
 
 							<span class="date">
-								<?php echo date( 'F jS, Y', strtotime( $acquisition->opportunity->created_date ) ); ?>
+								<?= date( 'F jS, Y', strtotime( $acquisition->opportunity->created_date ) ); ?>
 							</span>
 
 							<p class="short-description">
-								<?php echo $acquisition->opportunity->meta_data['short_description']; ?>
+								<?= $acquisition->opportunity->meta_data['short_description']; ?>
 							</p>
 
 							<span class="status">
-								<?php echo $acquisition->meta_data['acquisition_stage']; ?>
+								<?= $acquisition->meta_data['acquisition_stage']; ?>
 							</span>
 
 						</div>

@@ -37,23 +37,23 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 		<!-- What We Do Section -->
 		<div class="what-we-do col-12">
 			<div class="section-texture">
-				<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
+				<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
 					alt="B2B Capital Abstract Logo" class="img-fluid">
 			</div>
 
 			<div class="description">
 				<h1 class="b2b-title">
-					<?php echo $about_tag_line_title; ?>
+					<?= $about_tag_line_title; ?>
 				</h1>
 				<h2 class="page-section-title">
-					<?php echo $about_inner_title; ?>
+					<?= $about_inner_title; ?>
 				</h2>
-				<?php echo $about->content; ?>
+				<?= $about->content; ?>
 			</div>
 
 			<div class="banner">
 				<div class="banner-wrapper">
-					<img src="<?php echo $about->thumbnail; ?>" alt="<?php echo $about->title; ?>" class="img-fluid">
+					<img src="<?= $about->thumbnail; ?>" alt="<?= $about->title; ?>" class="img-fluid">
 					<div class="statistics">
 						<?php
 						if ( ! empty( $about_statistics ) ) {
@@ -61,10 +61,10 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 								?>
 								<div class="statistic">
 									<h4 class="statistic-count">
-										<?php echo $statistic['statistic_number']; ?> <i class="icon bbc-plus"></i>
+										<?= $statistic['statistic_number']; ?> <i class="icon bbc-plus"></i>
 									</h4>
 									<p class="statistic-name">
-										<?php echo $statistic['statistic_title']; ?>
+										<?= $statistic['statistic_title']; ?>
 									</p>
 								</div>
 								<?php
@@ -85,26 +85,26 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 		<!-- Awards Section -->
 		<div class="about-section awards col-12">
 			<div class="section-texture">
-				<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
+				<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
 					alt="B2B Capital Abstract Logo" class="img-fluid">
 			</div>
 			<div class="banner-wrapper">
-				<img src="<?php echo $awards_obj->thumbnail; ?>" alt="Awards" class="banner">
+				<img src="<?= $awards_obj->thumbnail; ?>" alt="Awards" class="banner">
 			</div>
 			<div class="section-description">
 				<h2 class="page-section-title">
-					<?php echo $awards_inner_title; ?>
+					<?= $awards_inner_title; ?>
 				</h2>
-				<?php echo $awards_obj->content; ?>
+				<?= $awards_obj->content; ?>
 			</div>
 			<div class="award">
 				<?php
 				foreach ( $awards_logos as $logo ) {
 					?>
 					<p>
-						<?php echo $logo['award_name']; ?>
+						<?= $logo['award_name']; ?>
 					</p>
-					<img src="<?php echo $logo['award_logo']['sizes']['thumbnail']; ?>" alt="Btkobra Logo"
+					<img src="<?= $logo['award_logo']['sizes']['thumbnail']; ?>" alt="Btkobra Logo"
 						class="img-fluid">
 					<?php
 				}
@@ -122,13 +122,13 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 		<!-- Partners Section -->
 		<div class="about-section partners col-12">
 			<div class="banner-wrapper">
-				<img src="<?php echo $partners_obj->thumbnail; ?>" alt="Partners" class="banner">
+				<img src="<?= $partners_obj->thumbnail; ?>" alt="Partners" class="banner">
 			</div>
 			<div class="section-description">
 				<h2 class="page-section-title">
-					<?php echo $partners_inner_title; ?>
+					<?= $partners_inner_title; ?>
 				</h2>
-				<?php echo $partners_obj->content; ?>
+				<?= $partners_obj->content; ?>
 				<!-- Partners Logos -->
 				<div class="partners-logos">
 					<?php
@@ -137,8 +137,8 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 					<div class="row row-cols-1 logos-row">
 						<?php foreach ( $chunk[0] as $logo ) { ?>
 							<span class="logo-wrapper col">
-								<img src="<?php echo $logo['partner_logo']['sizes']['thumbnail']; ?>"
-									alt="<?php echo $logo['partner_name']; ?>" class="logo">
+								<img src="<?= $logo['partner_logo']['sizes']['thumbnail']; ?>"
+									alt="<?= $logo['partner_name']; ?>" class="logo">
 							</span>
 						<?php } ?>
 					</div>
@@ -146,8 +146,8 @@ $about_statistics     = get_field( 'statistics', $about->ID );
 					<div class="row row-cols-1 logos-row second">
 						<?php foreach ( $chunk[1] as $logo ) { ?>
 							<span class="logo-wrapper col">
-								<img src="<?php echo $logo['partner_logo']['sizes']['thumbnail']; ?>"
-									alt="<?php echo $logo['partner_name']; ?>" class="logo">
+								<img src="<?= $logo['partner_logo']['sizes']['thumbnail']; ?>"
+									alt="<?= $logo['partner_name']; ?>" class="logo">
 							</span>
 						<?php } ?>
 					</div>

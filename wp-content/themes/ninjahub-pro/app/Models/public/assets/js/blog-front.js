@@ -43,27 +43,6 @@ class NhBlogFront extends NhBlog
 
     toggleFav()
     {
-        let that           = this,
-            $controlls = this.$el.controlls,
-            ajaxRequests   = this.ajaxRequests;
-
-
-            $(document).on('click', $controlls.favBtn, function (e) {
-            e.preventDefault();
-            let $this = $(e.currentTarget);
-            let user_id = $this.attr('data-uID');
-            let post_id = $this.attr('data-id');
-
-            if (typeof ajaxRequests.toggleFav !== 'undefined') {
-                ajaxRequests.toggleFav.abort();
-            }
-
-            that.toggleFavorite($this,user_id,post_id);
-        });
-    }
-
-    toggleFav()
-    {
         let that         = this,
             $favorite   = this.$el.favorite,
             ajaxRequests = this.ajaxRequests;
@@ -77,9 +56,6 @@ class NhBlogFront extends NhBlog
                 if (typeof ajaxRequests.toggleFav !== 'undefined') {
                     ajaxRequests.toggleFav.abort();
                 }
-    
-                // Validate the form and perform registration if valid
-                // if ($this.valid()) {
                     that.toggleFavorite(formData, $this);
             });
     }

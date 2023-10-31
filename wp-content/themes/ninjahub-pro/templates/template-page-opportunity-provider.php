@@ -31,10 +31,10 @@ get_header();
 		<!-- Owner Type Content -->
 		<div class="active-user-type">
 			<div class="other-user-type investor">
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/investor' ) ) ); ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/investor' ) ) ); ?>"
 					class="other-user">
 					<span class="other-type-image">
-						<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/investor-video.webp" alt="B2B Investor"
+						<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user-type/investor-video.webp" alt="B2B Investor"
 							class="img-fluid">
 					</span>
 					<span class="other-user-title">
@@ -65,13 +65,13 @@ get_header();
 					complete
 					acquisitions within my company.
 				</p>
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) . '/?type=owner'; ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) . '/?type=owner'; ?>"
 					class="user-type-action bbc-btn outline action">Join as Owner</a>
 			</div>
 			<div class="user-type-video owner">
 				<div class="video-scene">
 					<video autoplay loop class="w-100">
-						<source src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/videos/owner.mp4" type="video/mp4">
+						<source src="<?= Nh_Hooks::PATHS['public']['video']; ?>/owner.mp4" type="video/mp4">
 					</video>
 				</div>
 			</div>

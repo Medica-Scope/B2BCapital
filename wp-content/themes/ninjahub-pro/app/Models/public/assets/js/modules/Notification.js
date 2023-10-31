@@ -79,6 +79,33 @@ class NhNotification extends Nh
         });
     }
 
+    item_clear(formData, $el)
+    {
+        let that                      = this;
+        this.ajaxRequests.clear_notifications = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_item_clear_notifications_ajax`,
+                data: formData
+            },
+            beforeSend: function () {
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                if (res.success) {
+                    $el.html(res.data.html);
+                    UiCtrl.blockUI($el, false);
+                }
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            }
+        });
+    }
     loadMoreNotification(formData, $el)
     {
         let that                      = this;

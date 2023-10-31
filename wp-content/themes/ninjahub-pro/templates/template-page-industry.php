@@ -31,14 +31,14 @@ $opportunity_obj = new Nh_Opportunity();
 	<div class="row h-100">
 		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
 			<!-- App Brand -->
-			<a href="<?php echo home_url(); ?>" class="app-brand mb-6"><img src="<?php echo Nh::get_site_logo(); ?>"
+			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
 					alt="Nh Site Logo" class="img-fluid" /></a>
 			<div class="section-header">
 				<div class="form-steps form-step-1">
 
 					<div class="row justify-content-between after-registration-step-1">
 						<h1 class="section-title col-8 display-4 mb-2">
-							<?php echo __( 'Choose which industry you are interested in:', 'ninja' ); ?>
+							<?= __( 'Choose which industry you are interested in:', 'ninja' ); ?>
 						</h1>
 						<div class="steps col-2">
 							<div class="steps-circle">
@@ -52,7 +52,7 @@ $opportunity_obj = new Nh_Opportunity();
 				<div class="form-steps form-step-2 nh-hidden">
 					<div class="row justify-content-between after-registration-step-2">
 						<h1 class="section-title col-8 display-4 mb-2">
-							<?php echo __( 'For Best Results Please Answer For Questions:', 'ninja' ); ?>
+							<?= __( 'For Best Results Please Answer For Questions:', 'ninja' ); ?>
 						</h1>
 						<div class="steps col-2">
 							<div class="steps-circle">

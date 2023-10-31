@@ -29,10 +29,10 @@ get_header();
 		<h2 class="types-title">B2B Is To Regulate<br>The Relationship Between</h2>
 		<div class="user-types">
 			<div class="user-type investor">
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/investor' ) ) ); ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/investor' ) ) ); ?>"
 					class="user-type-link">
 					<div class="user-type-image">
-						<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/choose-investor.webp"
+						<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user-type/choose-investor.webp"
 							alt="Choose Investor" class="img-fluid">
 					</div>
 					<div class="user-type-title-wrapper">
@@ -48,10 +48,10 @@ get_header();
 				</a>
 			</div>
 			<div class="user-type owner">
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/opportunity-provider' ) ) ); ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/opportunity-provider' ) ) ); ?>"
 					class="user-type-link">
 					<div class="user-type-image">
-						<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/user-type/choose-owner.webp" alt="Choose Owner"
+						<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user-type/choose-owner.webp" alt="Choose Owner"
 							class="img-fluid">
 					</div>
 					<div class="user-type-title-wrapper">

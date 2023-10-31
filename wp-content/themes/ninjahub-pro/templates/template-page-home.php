@@ -115,12 +115,12 @@ $partners      = get_field( 'partners', $post->ID );
 			<div class="carousel-control-area">
 				<div class="carousel-control-wrapper">
 					<div class="texture">
-						<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
+						<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
 							alt="B2B Capital Abstract Logo" class="img-fluid">
 					</div>
 					<span class="carousel-control next" data-bs-target="#landingPageCarousel" data-bs-slide="next">
 						<span class="action-title">
-							<?php echo __( 'Scroll', 'ninja' ); ?>
+							<?= __( 'Scroll', 'ninja' ); ?>
 						</span>
 						<span class="icon-wrapper">
 							<dotlottie-player
@@ -132,7 +132,7 @@ $partners      = get_field( 'partners', $post->ID );
 					</span>
 					<span class="carousel-control prev d-none" data-bs-target="#landingPageCarousel" data-bs-slide="prev">
 						<i class="bbc-arrow-left2"></i>
-						<?php echo __( 'Back', 'ninja' ); ?>
+						<?= __( 'Back', 'ninja' ); ?>
 					</span>
 				</div>
 			</div>
@@ -141,7 +141,7 @@ $partners      = get_field( 'partners', $post->ID );
 		<!-- Landing Page Footer -->
 		<div class="landing-page-footer">
 			<p class="footer-title">
-				<?php echo __( "Our Partners Include The World's", 'ninja' ); ?>
+				<?= __( "Our Partners Include The World's", 'ninja' ); ?>
 			</p>
 			<div class="partners-logos">
 				<?php

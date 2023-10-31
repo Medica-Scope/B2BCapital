@@ -13,14 +13,14 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 
 	<li>
 		<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-favorite-articles' ) ) ) ?>"
-			class="btn-link <?php echo $active_link === 'my_favorite_article' ? 'active' : ''; ?>">
+			class="btn-link <?= $active_link === 'my_favorite_article' ? 'active' : ''; ?>">
 			<?= __( 'My Favorite Articles', 'ninja' ) ?>
 		</a>
 	</li>
 
     <li>
 		<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-ignored-articles' ) ) ) ?>"
-			class="btn-link <?php echo $active_link === 'my_ignored_article' ? 'active' : ''; ?>">
+			class="btn-link <?= $active_link === 'my_ignored_article' ? 'active' : ''; ?>">
 			<?= __( 'My Ignored Articles', 'ninja' ) ?>
 		</a>
 	</li>
