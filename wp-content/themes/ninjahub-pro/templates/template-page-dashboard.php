@@ -97,8 +97,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												$fav_class = 'controll-icon bbc-star-o';
 											}
 											$args['fav_form'] = Nh_Forms::get_instance()
-												->create_form( [
-													'opp_id'                    => [
+												->create_form( [ 
+													'opp_id'                    => [ 
 														'type'   => 'hidden',
 														'name'   => 'opp_id',
 														'before' => '',
@@ -106,14 +106,14 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'value'  => $opportunity->ID,
 														'order'  => 0
 													],
-													'add_to_fav_nonce'          => [
+													'add_to_fav_nonce'          => [ 
 														'class' => '',
 														'type'  => 'nonce',
 														'name'  => 'add_to_fav_nonce_nonce',
 														'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 														'order' => 5
 													],
-													'submit_add_to_fav_request' => [
+													'submit_add_to_fav_request' => [ 
 														'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
 														'id'                  => 'submit_add_to_fav_request',
 														'type'                => 'submit',
@@ -121,7 +121,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'recaptcha_form_name' => 'frontend_add_to_fav',
 														'order'               => 10
 													],
-												], [
+												], [ 
 													'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 												] );
 											if ( $ignore_chk ) {
@@ -130,8 +130,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
 											}
 											$args['ignore_form'] = Nh_Forms::get_instance()
-												->create_form( [
-													'opp_id'                   => [
+												->create_form( [ 
+													'opp_id'                   => [ 
 														'type'   => 'hidden',
 														'name'   => 'opp_id',
 														'before' => '',
@@ -139,14 +139,14 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'value'  => $opportunity->ID,
 														'order'  => 0
 													],
-													'ignore_opportunity_nonce' => [
+													'ignore_opportunity_nonce' => [ 
 														'class' => '',
 														'type'  => 'nonce',
 														'name'  => 'ignore_opportunity_nonce',
 														'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
 														'order' => 5
 													],
-													'submit_ignore'            => [
+													'submit_ignore'            => [ 
 														'class'               => 'btn btn-light bg-white ms-2',
 														'id'                  => 'submit_submit_ignore',
 														'type'                => 'submit',
@@ -154,7 +154,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'recaptcha_form_name' => 'frontend_ignore',
 														'order'               => 10
 													],
-												], [
+												], [ 
 													'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
 												] );
 										}
@@ -166,11 +166,11 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 										 */
 										?>
-								<div class="col">
-									<?php get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL ?>
-									<?php //get_template_part( 'app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args ); // KHALED?>
-								</div>
-								<?php
+										<div class="col">
+											<?php get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL ?>
+											<?php //get_template_part( 'app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args ); // KHALED?>
+										</div>
+										<?php
 									}
 								}
 								?>
@@ -183,49 +183,49 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 					<div class="sidebar-container mt-5 mt-md-0">
 
 						<?php if ( Nh_User::get_user_role() !== Nh_User::INVESTOR ) { ?>
-						<div class="sidebar-create-opportunity shadow">
-							<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ); ?>"
-								class="btn-create-opportunity btn btn-success btn-lg shadow text-uppercase">
-								<i class="bbc-plus-square"></i>
-								<?= __( 'Create New Opportunity', 'ninja' ) ?>
-							</a>
+							<div class="sidebar-create-opportunity shadow">
+								<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ); ?>"
+									class="btn-create-opportunity btn btn-success btn-lg shadow text-uppercase">
+									<i class="bbc-plus-square"></i>
+									<?= __( 'Create New Opportunity', 'ninja' ) ?>
+								</a>
 
-							<small class="pt-3 d-none d-md-flex"><i class="bbc-lightbulb-o"></i>
-								<?= __( 'Please Note You Can Add Only', 'ninja' ); ?> <span class="text-warning">
-									<?= __( 'One Opportunity In Month', 'ninja' ) ?>
-								</span>
-							</small>
-						</div>
+								<small class="pt-3 d-none d-md-flex"><i class="bbc-lightbulb-o"></i>
+									<?= __( 'Please Note You Can Add Only', 'ninja' ); ?> <span class="text-warning">
+										<?= __( 'One Opportunity In Month', 'ninja' ) ?>
+									</span>
+								</small>
+							</div>
 						<?php } ?>
 						<div class="sidebar-my-opportunities shadow">
 							<div>
 								<?php
 								if ( Nh_User::get_user_role() === Nh_User::INVESTOR ) {
 									?>
-								<h3 class="text-primary">
-									<?= __( 'My Acquisitions', 'ninja' ); ?>
-								</h3>
-								<small class="text-muted">
-									<?= sprintf( __( 'Latest update in %s', 'ninja' ), date_i18n( 'F j, Y', strtotime( date( 'F j, Y' ) ) ) ); ?>
-								</small>
-								<h6>
-									<?= __( 'Acquisitions', 'ninja' ) ?>
-								</h6>
+									<h3 class="text-primary">
+										<?= __( 'My Acquisitions', 'ninja' ); ?>
+									</h3>
+									<small class="text-muted">
+										<?= sprintf( __( 'Latest update in %s', 'ninja' ), date_i18n( 'F j, Y', strtotime( date( 'F j, Y' ) ) ) ); ?>
+									</small>
+									<h6>
+										<?= __( 'Acquisitions', 'ninja' ) ?>
+									</h6>
 
-								<?php
+									<?php
 
 								} else {
 									?>
-								<h3 class="text-primary">
-									<?= __( 'My Opportunities', 'ninja' ); ?>
-								</h3>
-								<small class="text-muted">
-									<?= sprintf( __( 'Latest update in %s', 'ninja' ), date_i18n( 'F j, Y', strtotime( date( 'F j, Y' ) ) ) ); ?>
-								</small>
-								<h6>
-									<?= __( 'Opportunities', 'ninja' ) ?>
-								</h6>
-								<?php
+									<h3 class="text-primary">
+										<?= __( 'My Opportunities', 'ninja' ); ?>
+									</h3>
+									<small class="text-muted">
+										<?= sprintf( __( 'Latest update in %s', 'ninja' ), date_i18n( 'F j, Y', strtotime( date( 'F j, Y' ) ) ) ); ?>
+									</small>
+									<h6>
+										<?= __( 'Opportunities', 'ninja' ) ?>
+									</h6>
+									<?php
 								}
 								?>
 							</div>
@@ -238,7 +238,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										$acquisitions = $acquisitions_obj->get_dashboard_sidebar_acquisitions( TRUE );
 
 										foreach ( $acquisitions as $acquisition ) {
-											$args = [
+											$args = [ 
 												'opportunity_link'         => $acquisition->opportunity->link,
 												'opportunity_title'        => $acquisition->opportunity->title,
 												'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
@@ -248,17 +248,17 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 											];
 
 											?>
-									<div class="col">
-										<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
-									</div>
-									<?php
+											<div class="col">
+												<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
+											</div>
+											<?php
 										}
 									} else {
 
 										$opportunities = $opportunities_obj->get_dashboard_sidebar_opportunities();
 
 										foreach ( $opportunities as $opportunity ) {
-											$args = [
+											$args = [ 
 												'opportunity_link'         => $opportunity->link,
 												'opportunity_title'        => $opportunity->title,
 												'opportunity_thumbnail'    => $opportunity->thumbnail,
@@ -267,10 +267,10 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												'opportunity_id'           => $opportunity->ID,
 											];
 											?>
-									<div class="col">
-										<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
-									</div>
-									<?php
+											<div class="col">
+												<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
+											</div>
+											<?php
 
 										}
 									}
@@ -297,7 +297,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 									$acquisitions = $acquisitions_obj->get_dashboard_sidebar_acquisitions();
 
 									foreach ( $acquisitions as $acquisition ) {
-										$args = [
+										$args = [ 
 											'opportunity_link'         => $acquisition->link,
 											'opportunity_title'        => $acquisition->title,
 											'opportunity_thumbnail'    => $acquisition->thumbnail,
@@ -305,10 +305,10 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 											'is_item_controllers'      => FALSE,
 										];
 										?>
-									<div class="col">
-										<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
-									</div>
-									<?php
+										<div class="col">
+											<?php get_template_part( 'app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args ); ?>
+										</div>
+										<?php
 									}
 									?>
 								</div>
