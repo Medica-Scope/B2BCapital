@@ -53,7 +53,7 @@ class NhBiddingFront extends NhBidding
 
         if (addBidModal !== null) {
             addBidModal.addEventListener('shown.bs.modal', function () {
-                //TODO:: AFTER MEETING//that.createNewToken();
+                that.createNewToken();
             });
         }
 
