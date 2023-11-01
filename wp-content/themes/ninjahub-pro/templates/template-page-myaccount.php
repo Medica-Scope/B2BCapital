@@ -67,7 +67,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 10,
 			],
 			'phone_number'                     => [ 
-				'class'       => 'col-6 pr-3',
+				'class'       => 'col-12 col-md-6 pe-md-3',
 				'type'        => 'text',
 				'label'       => __( 'Phone number', 'ninja' ),
 				'name'        => 'phone_number',
@@ -78,7 +78,7 @@ $user     = $user_obj::get_current_user();
 				'order'       => 15,
 			],
 			'user_email'                       => [ 
-				'class'       => 'col-6 pl-3',
+				'class'       => 'col-12 col-md-6 ps-md-3',
 				'type'        => 'email',
 				'label'       => __( 'Email', 'ninja' ),
 				'name'        => 'user_email',
