@@ -84,7 +84,7 @@ class NhOpportunity extends Nh
                 }
 
                 $el.find('input, button').prop('disabled', false);
-                //TODO:: AFTER MEETING//that.createNewToken();
+                that.createNewToken();
                 UiCtrl.blockUI($el, false);
             },
             error: function(xhr) {
@@ -92,7 +92,7 @@ class NhOpportunity extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                //TODO:: AFTER MEETING//that.createNewToken();
+                that.createNewToken();
             },
         });
     }
@@ -158,7 +158,7 @@ class NhOpportunity extends Nh
                     $file.find('.ninja-single-attachment').append(input_file);
                     input_file.attr('data-imgID', res.data.attachment_ID);
                     $(`input[name="${target}"]`).val(res.data.attachment_ID);
-                    //TODO:: AFTER MEETING//that.createNewToken();
+                    that.createNewToken();
                     UiCtrl.blockUI($el.form, false);
 
                 } else {
@@ -240,7 +240,7 @@ class NhOpportunity extends Nh
 
                     $wrapper.find('.ninja-attachment-uploader').val('');
                     $el.form.find('input, button').prop('disabled', false);
-                    //TODO:: AFTER MEETING//that.createNewToken();
+                    that.createNewToken();
                     UiCtrl.blockUI($el.form, false);
 
                 } else {

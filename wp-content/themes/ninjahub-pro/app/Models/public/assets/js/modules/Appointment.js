@@ -41,7 +41,7 @@ class NhAppointment extends Nh
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
-                //TODO:: AFTER MEETING//that.createNewToken();
+                that.createNewToken();
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
@@ -50,7 +50,7 @@ class NhAppointment extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-                //TODO:: AFTER MEETING//that.createNewToken();
+                that.createNewToken();
             },
         });
     }
