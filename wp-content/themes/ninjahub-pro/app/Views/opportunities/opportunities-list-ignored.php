@@ -46,10 +46,10 @@ if ($results['posts'] && !empty($ignored_opportunities)) { ?>
         if (!empty($user_ID)) {
             $ignore_chk         = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
             $args['ignore_chk'] = $ignore_chk;
-            if ($ignore_chk) {
-                $ignore_class = 'bbc-star';
+            if ( $ignore_chk ) {
+                $ignore_class = 'controll-icon bbc-thumbs-up text-dark';
             } else {
-                $ignore_class = 'bbc-star-o';
+                $ignore_class = 'controll-icon bbc-thumbs-down text-dark';
             }
             $args['ignore_form'] = Nh_Forms::get_instance()
                 ->create_form([

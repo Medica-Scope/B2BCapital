@@ -7,7 +7,7 @@ use NH\Nh;
 
 ?>
 
-<section class="login-animation col-12 col-md-6">
+<section class="login-animation d-none d-md-flex col-md-6">
 	<div id="loginCarousel" class="carousel slide w-100 h-100">
 		<div class="carousel-navigation">
 			<button class="carousel-control-prev" type="button" data-bs-target="#loginCarousel" data-bs-slide="prev">
@@ -30,8 +30,7 @@ use NH\Nh;
 
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<dotlottie-player
-					src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+				<dotlottie-player src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
 					background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
 					autoplay>
 				</dotlottie-player>
@@ -41,8 +40,7 @@ use NH\Nh;
 				</div>
 			</div>
 			<div class="carousel-item">
-				<dotlottie-player
-					src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+				<dotlottie-player src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
 					background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
 					autoplay>
 				</dotlottie-player>
@@ -52,8 +50,7 @@ use NH\Nh;
 				</div>
 			</div>
 			<div class="carousel-item">
-				<dotlottie-player
-					src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
+				<dotlottie-player src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/money-investment.json"
 					background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop
 					autoplay>
 				</dotlottie-player>

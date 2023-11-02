@@ -126,7 +126,7 @@
                 ]
             ]);
 
-            if (preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive('post') || is_singular('post')) {
+            if (preg_match('#^my-account/my-favorite-articles(/.+)?$#', $wp->request) || preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive('post') || is_singular('post')) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front');
             }
 
@@ -137,6 +137,7 @@
                 'my-widgets',
                 'my-notifications',
                 'my-favorite-opportunities',
+				'my-ignored-opportunities',
                 'dashboard',
                 'create-opportunity',
                 'blogs'
@@ -146,6 +147,9 @@
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
             }
 
+			if(is_singular(['opportunity'])){
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+			}
 
             if (is_post_type_archive('faq')) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');

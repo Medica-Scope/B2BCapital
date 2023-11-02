@@ -36,7 +36,7 @@ if ( $user_ID ) {
 ?>
 <div class="single-blog container container-xxl">
 	<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'blogs' ) ) ) ?>"
-		class="btn btn-secondary text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+		class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
 		<?= __( 'back', 'ninja' ); ?>
 	</a>
 
@@ -136,8 +136,8 @@ if ( $user_ID ) {
 		</h3>
 		<?php
 		/* $related = $post_obj->get_all_custom( [ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ] );
-																				if ( ! empty( $related ) ) {
-																					foreach ( $related['posts'] as $single_related ) { */
+																						if ( ! empty( $related ) ) {
+																							foreach ( $related['posts'] as $single_related ) { */
 		?>
 		<div class="related-card">
 			<a class="blog-item" href="<?php /* echo  $single_related->link */?>">
@@ -157,7 +157,7 @@ if ( $user_ID ) {
 		</div>
 		<?php
 		/*}
-																			 } */
+																					 } */
 		?>
 	</div> -->
 		</div>

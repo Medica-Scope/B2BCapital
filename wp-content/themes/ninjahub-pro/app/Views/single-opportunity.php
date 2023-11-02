@@ -37,13 +37,21 @@ $opportunity_type            = isset( $opportunity->taxonomy['opportunity-type']
 $unique_type_name            = get_term_meta( $opportunity_type, 'unique_type_name', TRUE );
 $opportunity_bids            = $opportunity_obj->get_opportunity_bids( $opportunity->ID, TRUE );
 $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $opportunity->ID, TRUE );
+$fav_class = 'bbc-star-o';
+if ( $user_ID ) {
+	$fav_chk    = $opportunity_obj->is_opportunity_in_user_favorites( $opportunity->ID );
+	if($fav_chk){
+		$fav_class = 'bbc-star';
+	}
+	$ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored( $opportunity->ID );
+}
 ?>
 
 <main class="container container-xxl">
 	<div class="row align-items-end">
 		<div class="col-8">
 			<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>"
-				class="btn btn-secondary text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+				class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
 				<?= __( 'back', 'ninja' ); ?>
 			</a>
 			<h3 class="mb-4">
@@ -54,7 +62,9 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 				<?= __( 'Business Type', 'ninja' ); ?>
 			</h3>
 
-			<p><?= $opportunity->taxonomy['business-type'][0]->name ?></p>
+			<p>
+				<?= $opportunity->taxonomy['business-type'][0]->name ?>
+			</p>
 		</div>
 		<div class="col-4 actions">
 			<?php
@@ -80,7 +90,7 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'class'               => 'btn-secondary',
 						'id'                  => 'submit_add_to_fav_request',
 						'type'                => 'submit',
-						'value'               => '<i class="bbc-bookmark"></i> ' . __( 'Add To Favorite', 'ninja' ),
+						'value'               => '<i class="'.$fav_class.' fav-star"></i> ' . __( 'Add To Favorite', 'ninja' ),
 						'recaptcha_form_name' => 'frontend_add_to_fav',
 						'order'               => 10
 					],
@@ -100,11 +110,11 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'value'  => $opportunity->ID,
 						'order'  => 0
 					],
-					'ignore_opp_nonce' => [ 
+					'ignore_opportunity_nonce' => [
 						'class' => '',
 						'type'  => 'nonce',
-						'name'  => 'ignore_opp_nonce',
-						'value' => Nh::_DOMAIN_NAME . "_ignore_opp_nonce_form",
+						'name'  => 'ignore_opportunity_nonce',
+						'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
 						'order' => 5
 					],
 					'submit_ignore'    => [ 
@@ -116,8 +126,8 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'order'               => 10
 					],
 				], [ 
-					'class' => Nh::_DOMAIN_NAME . '-create-ignore-opp-form',
-					'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opp_form'
+					'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
+					'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opportunity_form'
 				] );
 
 			if ( $opportunity->meta_data['opportunity_stage'] !== 'success' ) {
@@ -139,17 +149,27 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 									<div class="modal-dialog modal-dialog-centered">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h1 class="modal-title fs-5" id="addBidModalLabel"><?= __( 'Add Bid', 'ninja' ) ?></h1>
+												<h1 class="modal-title fs-5" id="addBidModalLabel">
+													<?= __( 'Add Bid', 'ninja' ) ?>
+												</h1>
 											</div>
 											<div class="modal-body">
 												<div>
 													<div>
-														<p><?= __( 'Start bidding amount', 'ninja' ) ?></p>
-														<span>$<?= $opportunity->meta_data['start_bidding_amount'] ?></span>
+														<p>
+															<?= __( 'Start bidding amount', 'ninja' ) ?>
+														</p>
+														<span>$
+															<?= $opportunity->meta_data['start_bidding_amount'] ?>
+														</span>
 													</div>
 													<div>
-														<p><?= __( 'Target amount', 'ninja' ) ?></p>
-														<span>$<?= $opportunity->meta_data['target_amount'] ?></span>
+														<p>
+															<?= __( 'Target amount', 'ninja' ) ?>
+														</p>
+														<span>$
+															<?= $opportunity->meta_data['target_amount'] ?>
+														</span>
 													</div>
 												</div>
 
@@ -208,8 +228,9 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						}
 
 						?>
-						<span
-							class="btn btn-blue"><?= sprintf( __( 'Number Of Bids %s', 'ninja' ), "<span class='bids-numbers'>" . $opportunity_bids . "</span>" ) ?></span>
+						<span class="btn btn-blue">
+							<?= sprintf( __( 'Number Of Bids %s', 'ninja' ), "<span class='bids-numbers'>" . $opportunity_bids . "</span>" ) ?>
+						</span>
 						<?php
 					}
 
@@ -286,22 +307,25 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 				if ( Nh_User::get_user_role() === Nh_User::OWNER ) {
 					if ( $unique_type_name === 'bidding' ) {
 						?>
-						<span
-							class="btn btn-blue"><?= sprintf( __( 'Number Of Bids %s', 'ninja' ), "<span class='bids-numbers'>" . $opportunity_bids . "</span>" ) ?></span>
+						<span class="btn btn-blue">
+							<?= sprintf( __( 'Number Of Bids %s', 'ninja' ), "<span class='bids-numbers'>" . $opportunity_bids . "</span>" ) ?>
+						</span>
 						<?php
 					}
 
 					if ( $unique_type_name === 'acquisition' ) {
 						?>
-						<span
-							class="btn btn-blue"><?= sprintf( __( 'Number Of Requests %s', 'ninja' ), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>" ) ?></span>
+						<span class="btn btn-blue">
+							<?= sprintf( __( 'Number Of Requests %s', 'ninja' ), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>" ) ?>
+						</span>
 						<?php
 					}
 
 					if ( $unique_type_name === 'regular' ) {
 						?>
-						<span
-							class="btn btn-blue"><?= sprintf( __( 'Number Of Requests %s', 'ninja' ), "<span class='regular-numbers'>" . $opportunity_acquisitions . "</span>" ) ?></span>
+						<span class="btn btn-blue">
+							<?= sprintf( __( 'Number Of Requests %s', 'ninja' ), "<span class='regular-numbers'>" . $opportunity_acquisitions . "</span>" ) ?>
+						</span>
 						<?php
 					}
 				}
@@ -320,26 +344,44 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title text-primary"><?= __( 'About', 'ninja' ) ?></h5>
+							<h5 class="card-title text-primary">
+								<?= __( 'About', 'ninja' ) ?>
+							</h5>
 							<div class="card-text">
-								<?= wp_html_excerpt( $opportunity->meta_data['short_description'], 140, '...' ); ?></div>
+								<?= wp_html_excerpt( $opportunity->meta_data['short_description'], 140, '...' ); ?>
+							</div>
 							<div class="card-extra-info">
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Date Founded', 'ninja' ) ?></small>
+									<small class="text-body-secondary">
+										<?= __( 'Date Founded', 'ninja' ) ?>
+									</small>
 									<p class="card-text fw-bold">
-										<?= date( 'F j, Y', strtotime( $opportunity->meta_data['date_founded'] ) ); ?></p>
+										<?= date( 'F j, Y', strtotime( $opportunity->meta_data['date_founded'] ) ); ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Asking price in USD', 'ninja' ) ?></small>
-									<p class="card-text fw-bold text-success">$<?= $opportunity->meta_data['asking_price_in_usd']; ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Asking price in USD', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold text-success">$
+										<?= $opportunity->meta_data['asking_price_in_usd']; ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Number of Customers', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['number_of_customers']; ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Number of Customers', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['number_of_customers']; ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Business Team size', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['business_team_size']; ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Business Team size', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['business_team_size']; ?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -352,23 +394,38 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 				<div class="row g-0">
 					<div class="col-12">
 						<div class="card-body">
-							<h5 class="card-title text-primary"><?= __( 'Financial Details', 'ninja' ) ?></h5>
+							<h5 class="card-title text-primary">
+								<?= __( 'Financial Details', 'ninja' ) ?>
+							</h5>
 							<div class="card-extra-info">
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Net Profit', 'ninja' ) ?></small>
-									<p class="card-text fw-bold text-success">$<?= $opportunity->meta_data['net_profit']; ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Net Profit', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold text-success">$
+										<?= $opportunity->meta_data['net_profit']; ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Valuation in USD', 'ninja' ) ?></small>
-									<p class="card-text fw-bold text-success">$<?= $opportunity->meta_data['valuation_in_usd'] ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Valuation in USD', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold text-success">$
+										<?= $opportunity->meta_data['valuation_in_usd'] ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Stake to be sold', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['stake_to_be_sold_percentage'] ?>%</p>
+									<small class="text-body-secondary">
+										<?= __( 'Stake to be sold', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['stake_to_be_sold_percentage'] ?>%
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small
-										class="text-body-secondary"><?= __( 'USD Exchange rate used in conversion', 'ninja' ) ?></small>
+									<small class="text-body-secondary">
+										<?= __( 'USD Exchange rate used in conversion', 'ninja' ) ?>
+									</small>
 									<p class="card-text fw-bold">
 										<?= sprintf( __( '%s EGP', 'ninja' ), $opportunity->meta_data['usd_exchange_rate_used_in_conversion'] ); ?>
 									</p>
@@ -376,17 +433,28 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 							</div>
 							<div class="card-extra-info">
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Annual Accounting Revenue', 'ninja' ) ?></small>
-									<p class="card-text fw-bold text-success">$<?= $opportunity->meta_data['annual_accounting_revenue'] ?>
+									<small class="text-body-secondary">
+										<?= __( 'Annual Accounting Revenue', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold text-success">$
+										<?= $opportunity->meta_data['annual_accounting_revenue'] ?>
 									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Annual Growth Rate', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['annual_growth_rate_percentage'] ?>%</p>
+									<small class="text-body-secondary">
+										<?= __( 'Annual Growth Rate', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['annual_growth_rate_percentage'] ?>%
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Annual Growth Rate', 'ninja' ) ?></small>
-									<p class="card-text fw-bold text-success">$<?= $opportunity->meta_data['annual_growth_rate'] ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Annual Growth Rate', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold text-success">$
+										<?= $opportunity->meta_data['annual_growth_rate'] ?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -399,19 +467,33 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 				<div class="row g-0">
 					<div class="col-12">
 						<div class="card-body">
-							<h5 class="card-title text-primary"><?= __( 'Business Overview', 'ninja' ) ?></h5>
+							<h5 class="card-title text-primary">
+								<?= __( 'Business Overview', 'ninja' ) ?>
+							</h5>
 							<div class="card-extra-info">
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Business model and pricing', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $business_model ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Business model and pricing', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $business_model ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Tech stack this product is built on', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['tech_stack_this_product_is_built_on'] ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Tech stack this product is built on', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['tech_stack_this_product_is_built_on'] ?>
+									</p>
 								</div>
 								<div class="card-info-item">
-									<small class="text-body-secondary"><?= __( 'Product competitors', 'ninja' ) ?></small>
-									<p class="card-text fw-bold"><?= $opportunity->meta_data['product_competitors'] ?></p>
+									<small class="text-body-secondary">
+										<?= __( 'Product competitors', 'ninja' ) ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $opportunity->meta_data['product_competitors'] ?>
+									</p>
 								</div>
 							</div>
 							<div class="extra-info">

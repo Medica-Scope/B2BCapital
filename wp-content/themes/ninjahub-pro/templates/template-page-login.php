@@ -25,11 +25,11 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 
 	<div class="row h-100">
 
-		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
+		<section class="login-section container-xl col-12 col-md-6 py-5 px-3 px-md-5 px-xl-6">
 			<!-- App Brand -->
 
-			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
-					alt="Nh Site Logo" class="img-fluid" /></a>
+			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo"
+					class="img-fluid" /></a>
 			<div class="section-header">
 				<div class="d-flex flex-row justify-content-between align-items-center">
 					<h1 class="section-title">
@@ -37,18 +37,18 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 					</h1>
 				</div>
 
-                <div class="social-login">
-                        <?php  
-                        if(class_exists('NextendSocialLogin', false)){
-                            echo NextendSocialLogin::renderButtonsWithContainer();
-                        }  
-                        ?>
-                        <!-- <a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a> -->
-                        <a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
-                            LinkedIn</a>
-                        <a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
-                            Facebook</a>
-                    </div>
+				<div class="social-login">
+					<?php
+					if ( class_exists( 'NextendSocialLogin', false ) ) {
+						echo NextendSocialLogin::renderButtonsWithContainer();
+					}
+					?>
+					<!-- <a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a> -->
+					<a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
+						LinkedIn</a>
+					<a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
+						Facebook</a>
+				</div>
 
 				<div class="or-separator">
 					<span class="separator-line left-line"></span>
@@ -67,7 +67,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'order'   => 0,
 					],
 					'user_login'    => [ 
-						'class'       => 'form-field form-field-has-icon col-6 pr-3',
+						'class'       => 'form-field form-field-has-icon col-12 col-md-6 pe-md-3',
 						'type'        => 'text',
 						'label'       => __( 'Email or phone number', 'ninja' ),
 						'name'        => 'user_login',
@@ -77,7 +77,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'order'       => 5,
 					],
 					'user_password' => [ 
-						'class'       => 'form-field form-field-has-icon col-6 pl-3',
+						'class'       => 'form-field form-field-has-icon col-12 col-md-6 ps-md-3',
 						'type'        => 'password',
 						'label'       => __( 'Password', 'ninja' ),
 						'name'        => 'user_password',
@@ -88,7 +88,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 						'order'       => 10,
 					],
 					'rememberme'    => [ 
-						'class'   => 'form-field col-6 align-items-start pr-3 m-0',
+						'class'   => 'form-field col-6 align-items-start ps-3 m-0',
 						'type'    => 'checkbox',
 						'choices' => [ 
 							[ 
@@ -103,7 +103,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 					],
 					'custom-html-3' => [ 
 						'type'    => 'html',
-						'content' => '<div class="form-field col-6 align-items-end pl-3 m-0" ><a href="' . apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/forgot-password' ) ) ) . '" class="btn-link text-accent"> ' . __( 'Forgot your Password?', 'ninja' ) . ' </a></div></div>',
+						'content' => '<div class="form-field col-6 align-items-end pe-3 m-0" ><a href="' . apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/forgot-password' ) ) ) . '" class="btn-link text-accent"> ' . __( 'Forgot your Password?', 'ninja' ) . ' </a></div></div>',
 						'order'   => 20,
 					],
 					'login_nonce'   => [ 

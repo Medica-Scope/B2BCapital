@@ -83,11 +83,11 @@ if ($results['posts'] && !empty($ignored_articles)) { ?>
                 ], [
                     'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                 ]);
-            if ($ignore_chk) {
-                $ignore_class = 'bbc-star';
-            } else {
-                $ignore_class = 'bbc-star-o';
-            }
+                if ( $ignore_chk ) {
+                    $ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+                } else {
+                    $ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+                }
             $args['ignore_form'] = Nh_Forms::get_instance()
                 ->create_form([
                     'post_id'              => [
