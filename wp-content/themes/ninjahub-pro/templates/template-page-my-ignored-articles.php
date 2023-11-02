@@ -27,21 +27,21 @@ use NH\Nh;
 
 get_header();
 
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account');
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
 
 global $user_ID;
-$Blog_obj  = new Nh_Blog();
+$Blog_obj = new Nh_Blog();
 // $blogs    = $Blog_obj->get_profile_ignored_articles();
-$ignored_articles     = [];
-if(!empty($user_ID)){
-$profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
-$profile_obj = new Nh_Profile();
-$profile     = $profile_obj->get_by_id((int)$profile_id);
-    if (!is_wp_error($profile)) {
-        $ignored_articles = is_array($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
-    }
+$ignored_articles = [];
+if ( ! empty( $user_ID ) ) {
+	$profile_id  = get_user_meta( $user_ID, 'profile_id', TRUE );
+	$profile_obj = new Nh_Profile();
+	$profile     = $profile_obj->get_by_id( (int) $profile_id );
+	if ( ! is_wp_error( $profile ) ) {
+		$ignored_articles = is_array( $profile->meta_data['ignored_articles'] ) ? $profile->meta_data['ignored_articles'] : [];
+	}
 }
-$user_obj         = Nh_User::get_current_user();
+$user_obj = Nh_User::get_current_user();
 ?>
 
 <main class="my-fav-opportunities">
