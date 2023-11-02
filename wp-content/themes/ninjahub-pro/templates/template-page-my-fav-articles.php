@@ -12,7 +12,6 @@
      * @since 1.0
      *
      */
-    
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Forms;
     use NH\APP\HELPERS\Nh_Hooks;

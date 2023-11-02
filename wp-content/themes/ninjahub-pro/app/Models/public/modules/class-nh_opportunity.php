@@ -382,6 +382,7 @@
                     $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
                 }
             }
+
             $args     = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
@@ -549,7 +550,7 @@
             global $user_ID;
 
             $form_data                     = $_POST['data'];
-            $post_id                       = (int)sanitize_text_field($form_data['opp_id']);
+            $opp_id                       = (int)sanitize_text_field($form_data['opp_id']);
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -568,24 +569,24 @@
             $favorites   = [];
             if (!is_wp_error($profile)) {
                 $favorites = ($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
-                if (in_array($post_id, $favorites)) {
-                    $key = array_search($post_id, $favorites);
+                if (in_array($opp_id, $favorites)) {
+                    $key = array_search($opp_id, $favorites);
                     if ($key !== FALSE) {
                         unset($favorites[$key]);
                     }
                     $profile->set_meta_data('favorite_opportunities', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
-                    update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
+                    $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
+                    update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 1,
                     ]);
                 } else {
-                    $favorites[] = $post_id;
+                    $favorites[] = $opp_id;
                     $profile->set_meta_data('favorite_opportunities', $favorites);
                     $profile->update();
-                    $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
-                    update_post_meta($post_id, 'fav_count', (int)$fav_count + 1);
+                    $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
+                    update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 0
                     ]);
@@ -608,7 +609,7 @@
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_opportunity_in_user_favorites($post_id): bool
+        public function is_opportunity_in_user_favorites($opp_id): bool
         {
             global $user_ID;
 
@@ -620,7 +621,7 @@
                 $favorites = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $favorites = array_combine($favorites, $favorites);
             }   
-            return isset($favorites[$post_id]);
+            return isset($favorites[$opp_id]);
         }
 
         /**
@@ -635,7 +636,7 @@
         {
             global $user_ID,$wp;
             $form_data                     = $_POST['data'];
-            $post_id                       = (int)sanitize_text_field($form_data['post_id']);
+            $opp_id                       = (int)sanitize_text_field($form_data['opp_id']);
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -655,36 +656,36 @@
             if (!is_wp_error($profile)) {
                 $ignored_opportunities = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
-                if (isset($ignored_opportunities[$post_id])) {
-                    unset($ignored_opportunities[$post_id]);
+                if (isset($ignored_opportunities[$opp_id])) {
+                    unset($ignored_opportunities[$opp_id]);
                     $ignored_opportunities = array_values($ignored_opportunities);
                     $profile->set_meta_data('ignored_opportunities', $ignored_opportunities);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
-                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
-                    ob_start();
-                        get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    $html = ob_get_clean();
+                    $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
+                    update_post_meta($opp_id, 'ignore_count', (int)$ignore_count + 1);
+                    // ob_start();
+                    //     get_template_part('app/Views/opportunities/opportunities-list', null, []);
+                    // $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated'       => $html
+                        'updated'       => ''
                     ]);
                 } else {
-                    $ignored_opportunities[] = $post_id;
+                    $ignored_opportunities[] = $opp_id;
                     $profile->set_meta_data('ignored_opportunities', $ignored_opportunities);
                     $profile->update();
-                    $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
-                    update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
-                    ob_start();
-                        get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    $html = ob_get_clean();
+                    $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
+                    update_post_meta($opp_id, 'ignore_count', (int)$ignore_count - 1);
+                    // ob_start();
+                    //     get_template_part('app/Views/opportunities/opportunities-list', null, []);
+                    // $html = ob_get_clean();
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated'       => $html
+                        'updated'       => '',
                     ]);
                 }
             } else {
@@ -704,7 +705,7 @@
          * @author Ahmed Gamal
          * @return bool
          */
-        public function is_opportunity_in_user_ignored($post_id): bool
+        public function is_opportunity_in_user_ignored($opp_id): bool
         {
             global $user_ID;
 
@@ -716,7 +717,7 @@
                 $ignored_opportunities = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
             }   
-            return isset($ignored_opportunities[$post_id]);
+            return isset($ignored_opportunities[$opp_id]);
         }
 
         /**

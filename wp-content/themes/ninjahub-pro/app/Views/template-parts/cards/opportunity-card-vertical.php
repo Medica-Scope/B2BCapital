@@ -77,7 +77,7 @@ $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : false;
 								'class'               => 'btn',
 								'id'                  => 'submit_submit_ignore',
 								'type'                => 'submit',
-								'value'               => '<i class="bbc-star-o fav-star"></i>',
+								'value'               => '<i class="controll-icon bbc-thumbs-up text-dark ignore-star"></i>',
 								'recaptcha_form_name' => 'frontend_ignore',
 								'order'               => 10
 							],

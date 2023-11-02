@@ -71,9 +71,9 @@ class NhBlog extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.ignore_active == 0){
-                        $el.find('.ignore-star').toggleClass('bbc-star-o bbc-star');
+                        $el.find('.ignore-star').toggleClass('bbc-thumbs-down bbc-thumbs-up');
                     }else{
-                        $el.find('.ignore-star').toggleClass('bbc-star bbc-star-o');
+                        $el.find('.ignore-star').toggleClass('bbc-thumbs-up bbc-thumbs-down');
                     }
                     if(res.data.updated){
                         $('.blogs-list').html(res.data.updated);

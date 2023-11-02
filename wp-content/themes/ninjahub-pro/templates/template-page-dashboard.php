@@ -63,25 +63,61 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 							</div>
 							<div class="opportunity-actions col-6">
 								<div class="opportunity-list-sort">
-									<button class="btn btn-light bg-transparent opportunity-list-style grid-switch"
+									<button class="btn btn-light bg-transparent opportunity-list-style grid-switch <?= (isset($_COOKIE['grid_view']) && $_COOKIE['grid_view'] == 'list-group')?'active':'' ?>"
 										data-view="list-group">
 										<i class="bbc-th-list"></i>
 									</button>
-									<button class="btn btn-light bg-transparent opportunity-list-filter grid-switch active"
+									<button class="btn btn-light bg-transparent opportunity-list-filter grid-switch <?= (isset($_COOKIE['grid_view']) && $_COOKIE['grid_view'] == 'card-group')?'active':'' ?>"
 										data-view="card-group">
 										<i class="bbc-grid"></i>
 									</button>
 								</div>
-								<button class="btn btn-outline-warning opportunity-adv-filter" data-bs-toggle="button"><i
-										class="bbc-sliders"></i> Advanced Filters
-								</button>
+								<div class="filters">
+									<button class="btn btn-outline-warning opportunity-adv-filter" data-bs-toggle="button"><i
+											class="bbc-sliders"></i> Advanced Filters
+									</button>
+									<div class="filter-con">
+										<?php
+										echo Nh_Forms::get_instance()
+										->create_form( [ 
+											'search_input'                    => [ 
+												'type'   => 'text',
+												'name'   => 's',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['s'])?$_GET['s']:'',
+												'order'  => 0
+											],
+											'filters_nonce'          => [ 
+												'class' => '',
+												'type'  => 'nonce',
+												'name'  => 'filters_nonce',
+												'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
+												'order' => 5
+											],
+											'submit_filters_request' => [ 
+												'class'               => 'btn btn-light bg-white filter-opportunities ninja-filter-opportunities',
+												'id'                  => 'submit_filters_request',
+												'type'                => 'submit',
+												'value'               => 'Save',
+												'recaptcha_form_name' => 'frontend_filters',
+												'order'               => 10
+											],
+										], [ 
+											'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+										] );
+										?>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="opportunity-list">
-							<div class="row row-cols-1 row-cols-md-2 g-4 card-group">
+							<?php
+							$opportunities = $opportunities_obj->get_all_custom( [ 'publish' ], 12, 'date', 'DESC', [], [], $user_ID, $paged );
+							if ( ! empty( $opportunities ) ) {
+							?>
+							<div class="row row-cols-1 row-cols-md-2 g-4 <?= (isset($_COOKIE['grid_view']))?$_COOKIE['grid_view']:'card-group' ?>">
 								<?php
-								$opportunities = $opportunities_obj->get_all_custom( [ 'publish' ], 12, 'date', 'DESC', [], [], $user_ID, $paged );
-								if ( ! empty( $opportunities ) ) {
 									foreach ( $opportunities['posts'] as $opportunity ) {
 										$args                = [];
 										$args['fav_form']    = '';
@@ -125,7 +161,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 												] );
 											if ( $ignore_chk ) {
-												$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+												$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
 											} else {
 												$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
 											}
@@ -150,7 +186,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'class'               => 'btn btn-light bg-white ms-2',
 														'id'                  => 'submit_submit_ignore',
 														'type'                => 'submit',
-														'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
+														'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
 														'recaptcha_form_name' => 'frontend_ignore',
 														'order'               => 10
 													],
@@ -172,9 +208,15 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										</div>
 										<?php
 									}
-								}
 								?>
 							</div>
+
+							<div class="pagination-con">
+								<?php
+								echo $opportunities['pagination'];
+								?>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>

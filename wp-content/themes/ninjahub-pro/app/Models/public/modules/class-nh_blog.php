@@ -241,19 +241,19 @@
                     $profile->update();
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count + 1);
-                    ob_start();
-                    if (str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-articles')) {
-                        get_template_part('app/Views/blogs/blogs-list-ignored', NULL, []);
-                    } else {
-                        get_template_part('app/Views/blogs/blogs-list', NULL, []);
-                    }
-                    $html = ob_get_clean();
+                    // ob_start();
+                    // if (str_contains($_SERVER['HTTP_REFERER'], 'my-account/my-ignored-articles')) {
+                    //     get_template_part('app/Views/blogs/blogs-list-ignored', NULL, []);
+                    // } else {
+                    //     get_template_part('app/Views/blogs/blogs-list', NULL, []);
+                    // }
+                    // $html = ob_get_clean();
 
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated'       => $html
+                        'updated'       => ''
                     ]);
                 } else {
                     $ignored_articles[] = $post_id;
@@ -262,15 +262,15 @@
                     $ignore_count = get_post_meta($post_id, 'ignore_count', TRUE);
                     update_post_meta($post_id, 'ignore_count', (int)$ignore_count - 1);
 
-                    ob_start();
-                    get_template_part('app/Views/blogs/blogs-list', NULL, []);
-                    $html = ob_get_clean();
+                    // ob_start();
+                    // get_template_part('app/Views/blogs/blogs-list', NULL, []);
+                    // $html = ob_get_clean();
 
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated'       => $html
+                        'updated'       => ''
                     ]);
                 }
             } else {

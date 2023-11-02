@@ -92,7 +92,7 @@ global $wp_query, $post, $user_ID;
 								'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 							] );
 						if ( $ignore_chk ) {
-							$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+							$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
 						} else {
 							$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
 						}
@@ -117,7 +117,7 @@ global $wp_query, $post, $user_ID;
 									'class'               => 'btn btn-light bg-white ms-2',
 									'id'                  => 'submit_submit_ignore',
 									'type'                => 'submit',
-									'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
+									'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
 									'recaptcha_form_name' => 'frontend_ignore',
 									'order'               => 10
 								],

@@ -50,10 +50,10 @@ $user_obj        = Nh_User::get_current_user();
 							$ignored_check = $opportunity_obj->is_opportunity_in_user_ignored( $opportunity->ID );
 							$ignore_class  = '';
 							if ( $ignored_check ) {
-								$ignore_class = 'bbc-star';
-							} else {
-								$ignore_class = 'bbc-star-o';
-							}
+                                $ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+                            } else {
+                                $ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+                            }
 
 							$args['ignore_form']  = Nh_Forms::get_instance()
 								->create_form( [ 
@@ -76,7 +76,7 @@ $user_obj        = Nh_User::get_current_user();
 										'class'               => 'btn',
 										'id'                  => 'submit_submit_ignore',
 										'type'                => 'submit',
-										'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
+										'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
 										'recaptcha_form_name' => 'frontend_ignore',
 										'order'               => 10
 									],

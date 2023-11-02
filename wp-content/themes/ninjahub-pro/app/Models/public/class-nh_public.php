@@ -137,6 +137,7 @@
                 'my-widgets',
                 'my-notifications',
                 'my-favorite-opportunities',
+				'my-ignored-opportunities',
                 'dashboard',
                 'create-opportunity',
                 'blogs'
