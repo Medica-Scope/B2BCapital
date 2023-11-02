@@ -553,7 +553,6 @@
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
-
             if (!wp_verify_nonce($form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
@@ -579,7 +578,7 @@
                     $fav_count = get_post_meta($post_id, 'fav_count', TRUE);
                     update_post_meta($post_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 1
+                        'fav_active' => 1,
                     ]);
                 } else {
                     $favorites[] = $post_id;

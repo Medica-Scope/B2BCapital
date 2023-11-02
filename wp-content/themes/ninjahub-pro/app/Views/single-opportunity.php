@@ -37,6 +37,14 @@ $opportunity_type            = isset( $opportunity->taxonomy['opportunity-type']
 $unique_type_name            = get_term_meta( $opportunity_type, 'unique_type_name', TRUE );
 $opportunity_bids            = $opportunity_obj->get_opportunity_bids( $opportunity->ID, TRUE );
 $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $opportunity->ID, TRUE );
+$fav_class = 'bbc-star-o';
+if ( $user_ID ) {
+	$fav_chk    = $opportunity_obj->is_opportunity_in_user_favorites( $opportunity->ID );
+	if($fav_chk){
+		$fav_class = 'bbc-star';
+	}
+	$ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored( $opportunity->ID );
+}
 ?>
 
 <main class="container container-xxl">
@@ -80,7 +88,7 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'class'               => 'btn-secondary',
 						'id'                  => 'submit_add_to_fav_request',
 						'type'                => 'submit',
-						'value'               => '<i class="bbc-bookmark"></i> ' . __( 'Add To Favorite', 'ninja' ),
+						'value'               => '<i class="'.$fav_class.' fav-star"></i> ' . __( 'Add To Favorite', 'ninja' ),
 						'recaptcha_form_name' => 'frontend_add_to_fav',
 						'order'               => 10
 					],
@@ -100,11 +108,11 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'value'  => $opportunity->ID,
 						'order'  => 0
 					],
-					'ignore_opp_nonce' => [ 
+					'ignore_opportunity_nonce' => [
 						'class' => '',
 						'type'  => 'nonce',
-						'name'  => 'ignore_opp_nonce',
-						'value' => Nh::_DOMAIN_NAME . "_ignore_opp_nonce_form",
+						'name'  => 'ignore_opportunity_nonce',
+						'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
 						'order' => 5
 					],
 					'submit_ignore'    => [ 
@@ -116,8 +124,8 @@ $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $
 						'order'               => 10
 					],
 				], [ 
-					'class' => Nh::_DOMAIN_NAME . '-create-ignore-opp-form',
-					'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opp_form'
+					'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
+					'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opportunity_form'
 				] );
 
 			if ( $opportunity->meta_data['opportunity_stage'] !== 'success' ) {
