@@ -371,7 +371,7 @@
          * @author Ahmed Gamal
          * @return array
          */
-        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [], int $user_id = 0, int $page = 1, array $in = []): array
+        public function get_all_custom(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [], int $user_id = 0, int $page = 1, array $in = [], array $search_fields = []): array
         {
             if ($user_id) {
                 $profile_id  = get_user_meta($user_id, 'profile_id', TRUE);
@@ -393,8 +393,31 @@
                 "order"          => $order,
                 "tax_query"      => [
                     'relation' => 'AND',
+                ],
+                "meta_query"      => [
+                    'relation' => 'AND',
                 ]
-            ];      
+            ];
+            if(!empty($search_fields)){
+                if(isset($search_fields['business_type'])){
+                    $args['tax_query'][] = [
+                        'taxonomy' => 'business-type',
+                        'terms' => (int)$search_fields['business_type'],
+                        'field' => 'term_id',
+                    ];
+                    unset($search_fields['business_type']);
+                }
+                if(isset($search_fields['search'])){
+                    $args['s'] = $search_fields['search'];
+                    unset($search_fields['search']);
+                }
+                foreach($search_fields as $key => $value){
+                    $args['meta_query'][] = [
+                        'key' => $key,
+                        'value' => $value,
+                    ];
+                }
+            }  
         if (!empty($tax_query)) {
             $args['tax_query'][] = $tax_query;
         }
@@ -663,9 +686,7 @@
                     $profile->update();
                     $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
                     update_post_meta($opp_id, 'ignore_count', (int)$ignore_count + 1);
-                    // ob_start();
-                    //     get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    // $html = ob_get_clean();
+    
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
@@ -678,9 +699,7 @@
                     $profile->update();
                     $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
                     update_post_meta($opp_id, 'ignore_count', (int)$ignore_count - 1);
-                    // ob_start();
-                    //     get_template_part('app/Views/opportunities/opportunities-list', null, []);
-                    // $html = ob_get_clean();
+                
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
