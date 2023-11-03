@@ -52,7 +52,7 @@ $highSensitivityOptions = array_filter(wfScanner::highSensitivityScanTypeOptions
 							$('.wf-option.wf-option-toggled[data-option="' + keys[i] + '"]').find('.wf-option-checkbox').toggleClass('wf-checked', selectedOptions[keys[i]]); //Currently all checkboxes
 						}
 					}
-					
+
 					$('.wf-scan-type-option').each(function(index, element) {
 						$(element).on('keydown', function(e) {
 							if (e.keyCode == 32) {
@@ -62,12 +62,12 @@ $highSensitivityOptions = array_filter(wfScanner::highSensitivityScanTypeOptions
 								$(this).trigger('click');
 							}
 						});
-						
+
 						$(element).on('click', function(e) {
 							if ($(element).hasClass('wf-scan-type-option-custom')) {
 								return;
 							}
-							
+
 							e.preventDefault();
 							e.stopPropagation();
 
@@ -86,7 +86,7 @@ $highSensitivityOptions = array_filter(wfScanner::highSensitivityScanTypeOptions
 							else {
 								WFAD.pendingChanges[optionName] = value;
 							}
-							
+
 							var selectedOptions = $(this).data('selectedOptions');
 							var keys = Object.keys(selectedOptions);
 							for (var i = 0; i < keys.length; i++) {
@@ -130,7 +130,7 @@ $highSensitivityOptions = array_filter(wfScanner::highSensitivityScanTypeOptions
 							if (isReset) {
 								return;
 							}
-							
+
 							var currentScanType = $('.wf-scan-type-option.wf-active');
 							if (!currentScanType.hasClass('wf-scan-type-option-custom')) {
 								currentScanType.removeClass('wf-active').find('.wf-option-checkbox').attr('aria-checked', 'false');
@@ -149,8 +149,8 @@ $highSensitivityOptions = array_filter(wfScanner::highSensitivityScanTypeOptions
 									if (keys[i] == $(this).data('option')) {
 										continue;
 									}
-									
-									var option = $('.wf-option.wf-option-toggled[data-option="' + keys[i] + '"]'); 
+
+									var option = $('.wf-option.wf-option-toggled[data-option="' + keys[i] + '"]');
 									option.find('.wf-option-checkbox').toggleClass('wf-checked', selectedOptions[keys[i]]).attr('aria-checked', selectedOptions[keys[i]] ? 'true' : 'false'); //Currently all checkboxes
 									var value = (selectedOptions[keys[i]] ? option.data('enabledValue') : option.data('disabledValue'));
 									var originalValue = option.data('originalValue');

@@ -9,7 +9,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
  */
 ?>
 <div class="wf-alert wf-alert-danger" id="wf-scan-failed" style="display: none;">
-	
+
 </div>
 <ul class="wf-flex-horizontal wf-flex-vertical-xs wf-flex-full-width wf-no-top wf-no-bottom">
 	<li id="wf-scan-last-status"></li>

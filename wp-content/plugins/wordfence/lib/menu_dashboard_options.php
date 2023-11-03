@@ -182,7 +182,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 														else if (wfConfig::get('premiumPaymentHold')) {
 															$title = __('Payment Method Invalid', 'wordfence');
 														}
-														
+
 														if (isset($title)) {
 															$days = floor(((int) wfConfig::get('premiumNextRenew') - time()) / 86400);
 															if ($days <= 0) {
@@ -194,7 +194,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 															else {
 																$days = sprintf(/* translators: Number of days */ __('in %d days', 'wordfence'), $days);
 															}
-															
+
 															echo wfView::create('dashboard/status-payment-expiring', array(
 																'id' => 'wf-premium-alert',
 																'title' => $title,
@@ -215,7 +215,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 															else {
 																$days = sprintf(__('in %d days', 'wordfence'), $days);
 															}
-															
+
 															echo wfView::create('dashboard/status-renewing', array(
 																'id' => 'wf-premium-alert',
 																'title' => __('Premium License Expiring', 'wordfence'),
@@ -253,23 +253,23 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 					echo wfView::create('dashboard/options-group-license', array(
 						'stateKey' => 'global-options-license',
 					))->render();
-					
+
 					echo wfView::create('dashboard/options-group-view-customization', array(
 						'stateKey' => 'global-options-view-customization',
 					))->render();
-					
+
 					echo wfView::create('dashboard/options-group-general', array(
 						'stateKey' => 'global-options-general',
 					))->render();
-					
+
 					echo wfView::create('dashboard/options-group-dashboard', array(
 						'stateKey' => 'global-options-dashboard',
 					))->render();
-					
+
 					echo wfView::create('dashboard/options-group-alert', array(
 						'stateKey' => 'global-options-alert',
 					))->render();
-					
+
 					echo wfView::create('dashboard/options-group-email-summary', array(
 						'stateKey' => 'global-options-email-summary',
 					))->render();

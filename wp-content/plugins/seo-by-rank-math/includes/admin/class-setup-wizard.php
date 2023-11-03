@@ -71,7 +71,7 @@ class Setup_Wizard {
 
 	/**
 	 * Hook suffix.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $hook_suffix = '';

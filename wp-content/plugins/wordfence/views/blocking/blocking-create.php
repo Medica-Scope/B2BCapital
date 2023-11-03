@@ -26,7 +26,7 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 								else {
 									duration = (Date.now().getTime() - duration.getTime()) / 1000;
 								}
-								
+
 								var allowCreation = duration >= 0 && !!$('#wf-block-reason').val();
 								if (active == 'ip-address') {
 									allowCreation = allowCreation && $('#wf-block-ip').val() && WFAD.isValidIP($('#wf-block-ip').val());
@@ -38,20 +38,20 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 								else if (active == 'custom-pattern') {
 									allowCreation = allowCreation && (($('#wf-block-ip-range').val() && WFAD.parseIPRange($('#wf-block-ip-range').val())) || $('#wf-block-hostname').val() || $('#wf-block-user-agent').val() || $('#wf-block-referrer').val());
 								}
-								
+
 								$('#wf-block-add-save').toggleClass('wf-disabled', !allowCreation);
 							};
-							
+
 							$(function() {
 								$('#wf-block-type a').on('click', function(e) {
-									e.preventDefault(); 
+									e.preventDefault();
 									e.stopPropagation();
-		
+
 									$('#wf-block-type > li').removeClass('wf-active');
 									$(this).closest('li').addClass('wf-active');
 
 									$('#wf-block-duration, #wf-block-reason, #wf-block-ip, #wf-block-ip-range, #wf-block-hostname, #wf-block-user-agent, #wf-block-referrer').val('');
-									
+
 									var title = $('#wf-block-parameters-title').data('newTitle');
 									var saveButton = $('#wf-block-type > li.wf-active a').data('newButton');
 									var active = $('#wf-block-type > li.wf-active a').data('value');
@@ -60,15 +60,15 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 										$('.wf-block-add-ip').show();
 									}
 									else if (active == 'country') {
-										$('.wf-block-add-ip, .wf-block-add-pattern').hide(); 
+										$('.wf-block-add-ip, .wf-block-add-pattern').hide();
 										$('.wf-block-add-country').show();
 
 										$('#wf-block-reason').val('<?php esc_attr_e('Country Blocking', 'wordfence'); ?>');
-										
+
 										if (!!$('#wf-blocks-wrapper').data('hasCountryBlock')) {
 											title = $('#wf-block-parameters-title').data('editTitle');
 											saveButton = $('#wf-block-type > li.wf-active a').data('editButton');
-											
+
 											var editValues = $('#wf-blocks-wrapper').data('hasCountryBlock');
 											$('.wf-block-edit').first().closest('tr').addClass('wf-editing');
 											$('#wf-block-reason').val(editValues.reason);
@@ -89,16 +89,16 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 
 									$('#wf-block-parameters-title').text(title);
 									$('#wf-block-add-save').html(saveButton);
-									
+
 									$('.wf-block-add-common').show();
 								});
 
 								$('#wf-block-type .wf-active a').triggerHandler('click');
-								
+
 								<?php if ($wfBlockRange): ?>
 								$('#wf-block-ip-range').val('<?php echo esc_attr($wfBlockRange); ?>');
 								<?php endif; ?>
-								
+
 								$('#wf-block-reason, #wf-block-ip, #wf-block-ip-range, #wf-block-hostname, #wf-block-user-agent, #wf-block-referrer').on('change paste keyup', function() {
 									setTimeout(function() {
 										WFAD.updateCreateBlockPattern();
@@ -202,7 +202,7 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 				<td class="wf-option-text wf-padding-add-top-small"><input id="wf-block-referrer" type="text" placeholder="<?php esc_attr_e('e.g., *badwebsite.example.com*', 'wordfence'); ?>"></td>
 			</tr>
 			<tr class="wf-block-add-ip wf-block-add-pattern" style="display: none;">
-				<th class="wf-right wf-padding-add-right wf-padding-add-top-small"><?php echo wp_kses(__('<span class="wf-hidden-xs">Block </span>Reason', 'wordfence'), array('span'=>array('class'=>array()))); ?><span class="wf-red-dark">*</span></th> 
+				<th class="wf-right wf-padding-add-right wf-padding-add-top-small"><?php echo wp_kses(__('<span class="wf-hidden-xs">Block </span>Reason', 'wordfence'), array('span'=>array('class'=>array()))); ?><span class="wf-red-dark">*</span></th>
 				<td class="wf-option-text wf-padding-add-top-small"><input id="wf-block-reason" type="text" placeholder="<?php esc_attr_e('Enter a reason', 'wordfence'); ?>" maxlength="50"></td>
 			</tr>
 		</table>
@@ -222,7 +222,7 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 								WFAD.updateCreateBlockPattern();
 							});
 						});
-						
+
 						$('#wf-block-country-countries').wfselect2({
 							tags: true,
 							tokenSeparators: [',', ' '],
@@ -265,7 +265,7 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 									}).data('wfselect2-opt', $(value));
 								list.append(li);
 							});
-							
+
 							if (selected.length > 5) {
 								if (!container.data('expanded')) {
 									list.append($('<li class="wf-tags-show-hide-more"><a href="#" role="button">and ' + (selected.length - 5) + ' more...' + '</a></li>'));
@@ -274,17 +274,17 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 									list.append($('<li class="wf-tags-show-hide-more"><a href="#" role="button">Hide' + '</a></li>'));
 								}
 							}
-							
+
 							container.html('').append(list);
-							
+
 							$('.wf-tags-show-hide-more').on('click', function(e) {
-								e.preventDefault(); 
+								e.preventDefault();
 								e.stopPropagation();
-								
+
 								var expanded = !!container.data('expanded');
 								$('.wf-tag-selected').slice(5).toggleClass('wf-hidden', expanded);
 								container.data('expanded', !expanded);
-								
+
 								$(this).find('a').text(expanded ? 'and ' + (selected.length - 5) + ' more...' : 'Hide');
 							});
 
@@ -294,11 +294,11 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 						if ($('#wf-block-country-countries').length > 0) {
 							$('#wf-block-country-countries').data('wfselect2').$container.addClass('wf-select2-placeholder-fix wf-select2-hide-tags');
 						}
-						
+
 						$('#wf-block-country-countries-popup').on('click', function(e) {
 							e.preventDefault();
 							e.stopPropagation();
-							
+
 							var content = $('#wfTmpl_countrySelector').tmpl();
 							$(content).find('#wf-country-selector-confirm').text($('#wf-block-add-save').text());
 
@@ -310,32 +310,32 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 								modal.find('li[data-country="' + currentSelection[i] + '"]').addClass('wf-active');
 							}
 							modal.data('countries', countries);
-							
+
 							$.wfDrawer({
 								width: WFAD.isSmallScreen ? '320px' : '800px',
 								content: content,
 								onComplete: function() {
 									var updateCount = function() {
 										var count = $('.wf-blocked-countries li.wf-active').length;
-										$('#wf-country-selector-count').text(count + (count == 1 ? ' Country Selected' : ' Countries Selected'));	
+										$('#wf-country-selector-count').text(count + (count == 1 ? ' Country Selected' : ' Countries Selected'));
 									};
 									updateCount();
-	
+
 									$('.wf-blocked-countries a').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										$(this).closest('li').trigger('click');
 									});
-	
+
 									$('.wf-blocked-countries li').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										var modal = $('#wf-country-selector');
 										var countries = modal.data('countries');
 										var country = $(this).data('country');
-	
+
 										$(this).toggleClass('wf-active');
 										if ($(this).hasClass('wf-active')) {
 											countries[country] = 1;
@@ -343,53 +343,53 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 										else {
 											delete countries[country];
 										}
-	
+
 										modal.data('countries', countries);
 										updateCount();
 									});
-									
+
 									$('#wf-country-selector-block-all').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										var modal = $('#wf-country-selector');
 										var countries = {};
 										modal.find('li[data-country]').addClass('wf-active').each(function() {
 											countries[$(this).data('country')] = 1;
 										});
-										
+
 										modal.data('countries', countries);
 										updateCount();
 									});
-	
+
 									$('#wf-country-selector-unblock-all').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										var modal = $('#wf-country-selector');
 										modal.data('countries', {});
 										modal.find('li[data-country]').removeClass('wf-active');
 										updateCount();
 									});
-	
+
 									$('.wf-country-selector-section-options li a').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										$(this).closest('li').trigger('click');
 									});
-									
+
 									$('.wf-country-selector-section-options li').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										var letter = $(this).find('a').data('letter');
 										var scrollTarget = $('.wf-blocked-countries[data-letter="' + letter + '"]');
 										$('.wf-country-selector-inner-wrapper').animate({
 											scrollTop: $('.wf-country-selector-inner-wrapper').scrollTop() + scrollTarget.offset().top - $('.wf-country-selector-inner-wrapper').offset().top
 										}, 500);
 									});
-									
+
 									$('#wf-country-selector-cancel').on('click', function(e) { //Commits but doesn't save
 										e.preventDefault();
 										e.stopPropagation();
@@ -400,21 +400,21 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 
 										$.wfDrawer.close()
 									});
-	
+
 									$('#wf-country-selector-confirm').on('click', function(e) { //Commits and saves
 										e.preventDefault();
 										e.stopPropagation();
-	
+
 										var modal = $('#wf-country-selector');
 										var countries = Object.keys(modal.data('countries')) || [];
 										$('#wf-block-country-countries').val(countries).trigger('change');
 										$('#wf-block-add-save').trigger('click');
-	
+
 										$.wfDrawer.close()
 									});
 							}});
 						});
-						
+
 						$('#wf-block-add-cancel').on('click', function(e) {
 							e.preventDefault();
 							e.stopPropagation();
@@ -425,7 +425,7 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 							$('.wf-block-add-common, .wf-block-add-ip, .wf-block-add-country, .wf-block-add-pattern').hide();
 							$('#wf-block-duration, #wf-block-reason, #wf-block-ip, #wf-block-ip-range, #wf-block-hostname, #wf-block-user-agent, #wf-block-referrer').val('');
 						});
-						
+
 						$('#wf-block-add-save').on('click', function(e) {
 							var selectedCountries = $('#wf-block-country-countries').val() || [];
 							var blockSite = $('#wf-block-country-site .wf-option-checkbox').hasClass('wf-checked') ? 1 : 0;
@@ -471,15 +471,15 @@ $wfBlockRange = filter_input(INPUT_GET, 'wfBlockRange', FILTER_DEFAULT, FILTER_R
 
 							var active = $('#wf-block-type > li.wf-active a').data('value');
 							var payload = {type: active};
-							
+
 							payload['duration'] = Date.parse('t + ' + $('#wf-block-duration').val());
 							if (payload['duration'] === null || !$('#wf-block-duration').val() || $('#wf-block-duration').val() == 'forever') {
 								payload['duration'] = 0;
 							}
 							else {
-								payload['duration'] = (Date.now().getTime() - payload['duration'].getTime()) / 1000; 
+								payload['duration'] = (Date.now().getTime() - payload['duration'].getTime()) / 1000;
 							}
-							
+
 							payload['reason'] = $('#wf-block-reason').val();
 							if (active == 'ip-address') {
 								payload['ip'] = $('#wf-block-ip').val();

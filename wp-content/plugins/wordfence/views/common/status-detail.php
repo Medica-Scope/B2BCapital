@@ -43,5 +43,5 @@ if (!isset($linkNewWindow)) { $linkNewWindow = false; }
 		'statusExtra' => (isset($statusExtra) ? $statusExtra : ''),
 		'helpLink' => $helpLink,
 	))->render();
-	?> 
+	?>
 </div>

@@ -238,11 +238,11 @@ if (!isset($collapseable)) {
 												payload['credentials'] = res.credentials;
 												payload['credentialsSignature'] = res.credentialsSignature;
 											}
-											
+
 											$('.wf-waf-uninstall-try-again').on('click', function(e) {
 												e.preventDefault();
 												e.stopPropagation();
-												
+
 												$(this).text('Retrying');
 												payload['retryAttempted'] = 1;
 
@@ -337,7 +337,7 @@ if (!isset($collapseable)) {
 													});
 												});
 											});
-											
+
 											var nginxNotice = $('.wf-nginx-waf-config');
 											var manualNotice = $('.wf-manual-waf-config');
 											$('#wf-waf-server-config').on('change', function() {
@@ -354,7 +354,7 @@ if (!isset($collapseable)) {
 														});
 													}
 												}
-												
+
 												var identifier = '.wf-waf-backups-' + el.val().replace(/[^a-z0-9\-]/i, '');
 												$('.wf-waf-backups').hide();
 												$(identifier).show();
@@ -480,7 +480,7 @@ if (!isset($collapseable)) {
 										array('value' => '1', 'label' => __('Disabled', 'wordfence')),
 										array('value' => '0', 'label' => __('Enabled', 'wordfence')),
 									);
-									
+
 									foreach ($states as $s):
 										$disableBlacklist = false;
 										try {

@@ -121,7 +121,7 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 			?></textarea>*/
 			?>
 <div <?php echo acf_esc_attrs( $div ); ?>>
-	
+
 	<div class="acf-hidden">
 		<a class="link-node" href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>"><?php echo esc_html( $link['title'] ); ?></a>
 			<?php foreach ( $link as $k => $v ) : ?>
@@ -136,15 +136,15 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 				?>
 		<?php endforeach; ?>
 	</div>
-	
+
 	<a href="#" class="button" data-name="add" target=""><?php _e( 'Select Link', 'acf' ); ?></a>
-	
+
 	<div class="link-wrap">
 		<span class="link-title"><?php echo esc_html( $link['title'] ); ?></span>
 		<a class="link-url" href="<?php echo esc_url( $link['url'] ); ?>" target="_blank"><?php echo esc_html( $link['url'] ); ?></a>
 		<i class="acf-icon -link-ext acf-js-tooltip" title="<?php _e( 'Opens in a new window/tab', 'acf' ); ?>"></i><a class="acf-icon -pencil -clear acf-js-tooltip" data-name="edit" href="#" title="<?php _e( 'Edit', 'acf' ); ?>"></a><a class="acf-icon -cancel -clear acf-js-tooltip" data-name="remove" href="#" title="<?php _e( 'Remove', 'acf' ); ?>"></a>
 	</div>
-	
+
 </div>
 			<?php
 

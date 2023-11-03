@@ -33,7 +33,7 @@ foreach ($default_options as $k => $v) {
 				}
 				?>
 				</select> <span class="updraft_files_timings"><?php echo apply_filters('updraftplus_schedule_showfileopts', '<input type="hidden" name="updraftplus_starttime_files" value="">', $selected_interval); ?></span>
-			
+
 
 				<?php
 
@@ -107,26 +107,26 @@ foreach ($default_options as $k => $v) {
 		<div id="remote-storage-container">
 		<?php
 			if (is_array($active_service)) $active_service = $updraftplus->just_one($active_service);
-			
+
 			// Change this to give a class that we can exclude
 			$multi = apply_filters('updraftplus_storage_printoptions_multi', '');
-			
+
 			foreach ($updraftplus->backup_methods as $method => $description) {
 				$backup_using = esc_attr(sprintf(__("Backup using %s?", 'updraftplus'), $description));
-				
+
 				echo "<input aria-label=\"$backup_using\" name=\"updraft_service[]\" class=\"updraft_servicecheckbox $method $multi\" id=\"updraft_servicecheckbox_$method\" type=\"checkbox\" value=\"$method\"";
 				if ($active_service === $method || (is_array($active_service) && in_array($method, $active_service))) echo ' checked="checked"';
 				echo " data-labelauty=\"".esc_attr($description)."\">";
 			}
 		?>
-		
+
 		<?php
 			if (false === apply_filters('updraftplus_storage_printoptions', false, $active_service)) {
 				echo '</div>';
 				echo '<p><a href="'.$updraftplus->get_url('premium').'" target="_blank">'.htmlspecialchars(__('You can send a backup to more than one destination with Premium.', 'updraftplus')).'</a></p>';
 			}
 		?>
-		
+
 		</td>
 	</tr>
 
@@ -163,11 +163,11 @@ foreach ($default_options as $k => $v) {
 		?>
 		</td>
 	</tr>
-	
+
 	<?php
 		if (!empty($options['include_database_decrypter'])) {
 		?>
-	
+
 		<tr class="backup-crypt-description">
 			<td></td>
 
@@ -200,7 +200,7 @@ foreach ($default_options as $k => $v) {
 				<?php } ?>
 
 			</div>
-			
+
 			<?php
 				$plugins = get_plugins();
 				$wp_optimize_file = false;
@@ -211,19 +211,19 @@ foreach ($default_options as $k => $v) {
 						break;
 					}
 				}
-				
+
 				if (!$wp_optimize_file) {
 					?><br><a href="https://wordpress.org/plugins/wp-optimize/" target="_blank"><?php _e('Recommended: optimize your database with WP-Optimize.', 'updraftplus');?></a>
 					<?php
 				}
 			?>
-			
+
 
 
 
 			</td>
 		</tr>
-	
+
 	<?php
 		}
 
@@ -265,7 +265,7 @@ foreach ($default_options as $k => $v) {
 				$is_email_storage = !empty($temp_services) && in_array('email', $temp_services);
 			?>
 			<label for="updraft_email" class="updraft_checkbox email_report">
-				<input type="checkbox" id="updraft_email" name="updraft_email" value="<?php esc_attr_e(get_bloginfo('admin_email')); ?>"<?php if ($is_email_storage || !empty($updraft_email)) echo ' checked="checked"';?> <?php if ($is_email_storage) echo 'disabled onclick="return false"'; ?>> 
+				<input type="checkbox" id="updraft_email" name="updraft_email" value="<?php esc_attr_e(get_bloginfo('admin_email')); ?>"<?php if ($is_email_storage || !empty($updraft_email)) echo ' checked="checked"';?> <?php if ($is_email_storage) echo 'disabled onclick="return false"'; ?>>
 				<?php
 					// have to add this hidden input so that when the form is submitted and if the udpraft_email checkbox is disabled, this hidden input will be passed to the server along with other active elements
 					if ($is_email_storage) echo '<input type="hidden" name="updraft_email" value="'.esc_attr(get_bloginfo('admin_email')).'">';
@@ -381,7 +381,7 @@ foreach ($default_options as $k => $v) {
 			?>
 		</td>
 	</tr>
-	
+
 	<?php if (!empty($options['include_save_button'])) { ?>
 	<tr>
 		<td></td>

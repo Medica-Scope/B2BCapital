@@ -24,14 +24,14 @@ class Admin extends Base {
 
 	/**
 	 * Module ID.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $directory = '';

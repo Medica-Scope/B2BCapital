@@ -489,7 +489,7 @@ if ( ! class_exists( 'acf_field_gallery' ) ) :
 								<img src="<?php echo esc_url( $a_thumbnail['url'] ); ?>" alt="" />
 							</div>
 							<?php if ( $a_type !== 'image' ) : ?>
-								<div class="filename"><?php echo acf_get_truncated( $a_filename, 30 ); ?></div>	
+								<div class="filename"><?php echo acf_get_truncated( $a_filename, 30 ); ?></div>
 							<?php endif; ?>
 						</div>
 						<div class="actions">
@@ -529,7 +529,7 @@ if ( ! class_exists( 'acf_field_gallery' ) ) :
 					</li>
 				</ul>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
 			<?php

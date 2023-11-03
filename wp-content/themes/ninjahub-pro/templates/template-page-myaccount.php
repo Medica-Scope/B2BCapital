@@ -40,13 +40,13 @@ $user     = $user_obj::get_current_user();
 		</nav>
 
 		<?php
-		$form_fields = [ 
-			'custom-html-1'                    => [ 
+		$form_fields = [
+			'custom-html-1'                    => [
 				'type'    => 'html',
 				'content' => '<div class="row">',
 				'order'   => 0,
 			],
-			'first_name'                       => [ 
+			'first_name'                       => [
 				'class'       => 'col-6 pr-3',
 				'type'        => 'text',
 				'label'       => __( 'First name', 'ninja' ),
@@ -56,7 +56,7 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your first name', 'ninja' ),
 				'order'       => 5,
 			],
-			'last_name'                        => [ 
+			'last_name'                        => [
 				'class'       => 'col-6 pl-3',
 				'type'        => 'text',
 				'label'       => __( 'Last name', 'ninja' ),
@@ -66,7 +66,7 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your last name', 'ninja' ),
 				'order'       => 10,
 			],
-			'phone_number'                     => [ 
+			'phone_number'                     => [
 				'class'       => 'col-12 col-md-6 pe-md-3',
 				'type'        => 'text',
 				'label'       => __( 'Phone number', 'ninja' ),
@@ -74,10 +74,10 @@ $user     = $user_obj::get_current_user();
 				'value'       => $user->user_meta['phone_number'],
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your phone number', 'ninja' ),
-				'extra_attr'  => [ 'disabled' => 'disable' ],
+//				'extra_attr'  => [ 'disabled' => 'disable' ],
 				'order'       => 15,
 			],
-			'user_email'                       => [ 
+			'user_email'                       => [
 				'class'       => 'col-12 col-md-6 ps-md-3',
 				'type'        => 'email',
 				'label'       => __( 'Email', 'ninja' ),
@@ -87,7 +87,7 @@ $user     = $user_obj::get_current_user();
 				'placeholder' => __( 'Enter your email', 'ninja' ),
 				'order'       => 20,
 			],
-			'site_language'                    => [ 
+			'site_language'                    => [
 				'class'          => 'col-6 pr-3',
 				'type'           => 'select',
 				'label'          => __( 'Profile language', 'ninja' ),
@@ -99,7 +99,7 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 25,
 			],
-			'widget_list'                      => [ 
+			'widget_list'                      => [
 				'class'          => 'col-6 pl-3',
 				'type'           => 'select',
 				'label'          => __( 'Widget list categories', 'ninja' ),
@@ -112,7 +112,7 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 30,
 			],
-			'preferred_opportunities_cat_list' => [ 
+			'preferred_opportunities_cat_list' => [
 				'class'          => 'col-6 pr-3',
 				'type'           => 'select',
 				'label'          => __( 'Preferred categories list for opportunities', 'ninja' ),
@@ -125,7 +125,7 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 35,
 			],
-			'preferred_articles_cat_list'      => [ 
+			'preferred_articles_cat_list'      => [
 				'class'          => 'col-6 pl-3',
 				'type'           => 'select',
 				'label'          => __( 'preferred categories list for articles', 'ninja' ),
@@ -138,19 +138,35 @@ $user     = $user_obj::get_current_user();
 				'before'         => '',
 				'order'          => 40,
 			],
-			'custom-html-3'                    => [ 
+			'verification_type'  => [
+				'class'          => 'col-6 pl-3',
+				'type'           => 'select',
+				'label'          => __( 'Account Verification Type', 'ninja' ),
+				'name'           => 'verification_type',
+				'required'       => TRUE,
+				'placeholder'    => __( 'Enter your verification type', 'ninja' ),
+				'options'        => [
+					Nh_User::VERIFICATION_TYPES['email'] => __( 'Email', 'ninja' ),
+					Nh_User::VERIFICATION_TYPES['mobile'] => __( 'Phone Number', 'ninja' ),
+					Nh_User::VERIFICATION_TYPES['whatsapp'] => __( 'Whatsapp', 'ninja' ),
+				],
+				'default_option' => '',
+				'select_option'  => [ $user->user_meta['verification_type'] ],
+				'order'          => 43,
+			],
+			'custom-html-3'                    => [
 				'type'    => 'html',
 				'content' => '</div>',
 				'order'   => 45,
 			],
-			'edit_profile_nonce'               => [ 
+			'edit_profile_nonce'               => [
 				'class' => '',
 				'type'  => 'nonce',
 				'name'  => 'edit_profile_nonce',
 				'value' => Nh::_DOMAIN_NAME . "_edit_profile_form",
 				'order' => 50
 			],
-			'submit'                           => [ 
+			'submit'                           => [
 				'parent_class'        => '',
 				'class'               => 'btn-lg text-uppercase',
 				'type'                => 'submit',
@@ -162,7 +178,7 @@ $user     = $user_obj::get_current_user();
 				'order'               => 55
 			],
 		];
-		$form_tags   = [ 
+		$form_tags   = [
 			'class' => Nh::_DOMAIN_NAME . '-edit-profile-form',
 			'id'    => Nh::_DOMAIN_NAME . '_edit_profile_form'
 		];

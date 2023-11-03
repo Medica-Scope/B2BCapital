@@ -13,7 +13,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 </div>
 <script type="application/javascript">
 	(function($) {
-		$(function() {	
+		$(function() {
 			$('#wf-onboarding-fresh-install').on('click', function(e) {
 				e.stopPropagation();
 			});

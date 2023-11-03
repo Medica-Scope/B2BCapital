@@ -138,7 +138,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 											else if (wfConfig::get('premiumPaymentHold')) {
 												$title = __('Payment Method Invalid', 'wordfence');
 											}
-											
+
 											if (isset($title)) {
 												$days = floor(((int) wfConfig::get('premiumNextRenew') - time()) / 86400);
 												if ($days <= 0) {
@@ -152,7 +152,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 															/* translators: Number of days */
 															__('License renews in %d days', 'wordfence'), $days);
 												}
-												
+
 												echo wfView::create('dashboard/status-payment-expiring', array(
 													'id' => 'wf-premium-alert',
 													'title' => $title,
@@ -173,10 +173,10 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 												else {
 													$subtitle = sprintf(__('License renews in %d days', 'wordfence'), $days);
 												}
-												
+
 												echo wfView::create('dashboard/status-renewing', array(
 													'id' => 'wf-premium-alert',
-													'title' => __('Premium License Expiring', 'wordfence'), 
+													'title' => __('Premium License Expiring', 'wordfence'),
 													'subtitle' => $subtitle,
 													'link' => 'https://www.wordfence.com/gnl1reviewExpiring/manage-wordfence-api-keys/',
 													'linkLabel' => __('Review Payment Method', 'wordfence'),
@@ -197,7 +197,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 													<?php endif ?>
 													</p>
 												<?php endif ?>
-											</div> 
+											</div>
 										<?php endif; ?>
 									</li>
 								</ul>
@@ -286,7 +286,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 				WFAD.tour('wfNewTour3', 'wf-dashboard-option-options', 'right', 'right', WFAD.tour2, WFAD.tourComplete);
 			};
 			WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_DASHBOARD); ?>'); };
-			
+
 			<?php if (wfOnboardingController::shouldShowNewTour(wfOnboardingController::TOUR_DASHBOARD) && !isset($_GET['onboarding'])): ?>
 			if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 			<?php endif; ?>
@@ -361,7 +361,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 				WFAD.tour('wfUpgradeTour4', 'toplevel_page_Wordfence', 'left', 'left', WFAD.tour3, WFAD.tourComplete);
 			};
 			WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_DASHBOARD); ?>'); };
-			
+
 			<?php if (wfOnboardingController::shouldShowUpgradeTour(wfOnboardingController::TOUR_DASHBOARD) && !isset($_GET['onboarding'])): ?>
 			if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 			<?php endif; ?>

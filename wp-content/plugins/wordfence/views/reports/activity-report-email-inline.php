@@ -149,7 +149,7 @@ h6 a:visited { color: purple !important; }
 						</tr>
 					</thead>
 					<tbody style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
-						<?php 
+						<?php
 						if ($top_ips_blocked):
 							require(dirname(__FILE__) . '/../../lib/flags.php'); /** @var array $flags */
 							foreach ($top_ips_blocked as $row):
@@ -212,7 +212,7 @@ h6 a:visited { color: purple !important; }
 								?>
 								<tr class="<?php echo $stripe ?>" style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
 									<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline">
-										<?php 
+										<?php
 										if ($row->countryCode):
 											$key = strtolower($row->countryCode);
 											$offset = '0px 0px';
@@ -283,11 +283,11 @@ h6 a:visited { color: purple !important; }
 				<p style="font-size: 100%; vertical-align: baseline; margin: 1em 0; padding: 0; border: 0;">
 					<a class="button" href="<?php echo wfUtils::wpAdminURL('admin.php?page=WordfenceWAF&subpage=waf_options#waf-options-bruteforce') ?>" style="font-size: 13px; vertical-align: baseline; outline: none; color: #FFF; text-decoration: none; display: inline-block; line-height: 26px; height: 28px; cursor: pointer; border-radius: 3px; white-space: nowrap; box-sizing: border-box; box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15); background-image: none; background-attachment: scroll; background-repeat: repeat; background-color: #2EA2CC; margin: 0; padding: 0 10px 1px; border: 1px solid #0074a2;"><?php esc_html_e('Update Login Security Options', 'wordfence'); ?></a>
 				</p>
-				
+
 				<?php wfHelperString::cycle(); ?>
-				
+
 				<h2 style="font-size: 20px; vertical-align: baseline; clear: both; color: #222 !important; margin: 20px 0 4px; padding: 0; border: 0;"><?php esc_html_e('Recently Blocked Attacks', 'wordfence'); ?></h2>
-				
+
 				<table class="activity-table" style="font-size: 100%; vertical-align: baseline; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; max-width: 100%; margin: 0; padding: 0; border: 0;">
 					<thead style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
 					<tr style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
@@ -305,7 +305,7 @@ h6 a:visited { color: purple !important; }
 						<tr class="<?php echo $stripe ?>" style="font-size: 100%; vertical-align: baseline; margin: 0; padding: 0; border: 0;">
 							<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;white-space: nowrap;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline"><?php echo $this->attackTime($attack_row->attackLogTime) ?></td>
 							<td style="font-size: 100%; vertical-align: baseline; font-weight: normal; text-align: left; border-collapse: collapse; margin: 0; padding: 6px 4px; border: 1px solid #cccccc;<?php echo $bg_colors[$stripe] ?>" align="left" valign="baseline">
-								<div style="font-weight: bold; font-size: 12px;"><?php echo $this->displayIP($attack_row->IP) ?></div> 
+								<div style="font-weight: bold; font-size: 12px;"><?php echo $this->displayIP($attack_row->IP) ?></div>
 								<pre class="display-file" style="font-size: 12px; vertical-align: baseline; width: 420px; margin: 0; padding: 0; border: 0; white-space: normal;"><?php echo wfUtils::potentialBinaryStringToHTML($attack_row->longDescription, true) ?></pre>
 							</td>
 						</tr>
@@ -319,13 +319,13 @@ h6 a:visited { color: purple !important; }
 					<?php endif ?>
 					</tbody>
 				</table>
-				
+
 				<?php
 				if ($omitted_firewall_activity > 10):
 				?>
 				<div style="font-size: 14px; vertical-align: baseline; clear: both; color: #f00 !important; margin: 8px 0 4px; padding: 0; border: 0;"><?php printf(esc_html__('and %d additional attacks', 'wordfence'), $omitted_firewall_activity); ?></div>
-				<?php endif ?> 
-				
+				<?php endif ?>
+
 				<p style="font-size: 100%; vertical-align: baseline; margin: 1em 0; padding: 0; border: 0;">
 					<a class="button" href="<?php echo wfUtils::wpAdminURL('admin.php?page=WordfenceTools&subpage=livetraffic') ?>" style="font-size: 13px; vertical-align: baseline; outline: none; color: #FFF; text-decoration: none; display: inline-block; line-height: 26px; height: 28px; cursor: pointer; border-radius: 3px; white-space: nowrap; box-sizing: border-box; box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15); background-image: none; background-attachment: scroll; background-repeat: repeat; background-color: #2EA2CC; margin: 0; padding: 0 10px 1px; border: 1px solid #0074a2;"><?php esc_html_e('View Recent Traffic', 'wordfence'); ?></a>
 				</p>
@@ -363,7 +363,7 @@ h6 a:visited { color: purple !important; }
 				<?php wfHelperString::cycle(); ?>
 
 				<h2 style="font-size: 20px; vertical-align: baseline; clear: both; color: #222 !important; margin: 20px 0 4px; padding: 0; border: 0;"><?php esc_html_e('Updates Needed', 'wordfence'); ?></h2>
-				
+
 				<?php
 				if (!is_array($updates_needed)) {
 					$updates_needed = array('core' => array(), 'plugins' => array(), 'themes' => array());
@@ -401,7 +401,7 @@ h6 a:visited { color: purple !important; }
 						<?php endforeach ?>
 					</ul>
 				<?php endif ?>
-				
+
 				<?php if ($updates_needed['core'] || $updates_needed['plugins'] || $updates_needed['themes']): ?>
 					<p style="font-size: 100%; vertical-align: baseline; margin: 1em 0; padding: 0; border: 0;">
 						<a class="button" href="<?php echo esc_attr(wfUtils::wpAdminURL('update-core.php')) ?>" style="font-size: 13px; vertical-align: baseline; outline: none; color: #FFF; text-decoration: none; display: inline-block; line-height: 26px; height: 28px; cursor: pointer; border-radius: 3px; white-space: nowrap; box-sizing: border-box; box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15); background-image: none; background-attachment: scroll; background-repeat: repeat; background-color: #2EA2CC; margin: 0; padding: 0 10px 1px; border: 1px solid #0074a2;"><?php esc_html_e('Update Now', 'wordfence'); ?></a>

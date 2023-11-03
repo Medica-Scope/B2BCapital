@@ -31,9 +31,9 @@
 	?>
 </table>
 
-<?php 
+<?php
 	if($diffResult){
-		echo $diffResult; 
+		echo $diffResult;
 	} else {
 		echo "<br />" . esc_html__('There are no differences between the original file and the file in the repository.', 'wordfence');
 	}

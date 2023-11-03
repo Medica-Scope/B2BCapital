@@ -159,13 +159,13 @@
 						rows="7"
 						cols="50"
 						id="critical_path_css_is_front_page"
-						class="large-text code" 
+						class="large-text code"
 						placeholder=".css-code { display: block; }"
 					><?php echo esc_textarea($wpo_minify_options['critical_path_css_is_front_page']); ?></textarea>
 				</fieldset>
 			</div>
 		<?php endif; ?>
-		
+
 		<p class="submit">
 			<input
 				class="wp-optimize-save-minify-settings button button-primary"

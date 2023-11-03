@@ -61,7 +61,7 @@ if (!isset($collapseable)) {
 						<?php
 						$whitelistedServices = wfConfig::getJSON('whitelistedServices', array());
 						$whitelistPresets = wfUtils::whitelistPresets();
-						
+
 						$names = array();
 						foreach ($whitelistPresets as $tag => $preset) {
 							if (!isset($preset['n'])) { continue; } //Not named, omitted from configurable list
@@ -71,7 +71,7 @@ if (!isset($collapseable)) {
 								$whitelistedServices[$tag] = 1;
 							}
 						}
-						
+
 						$options = array();
 						foreach ($names as $tag => $name) {
 							$options[] = array(
@@ -82,7 +82,7 @@ if (!isset($collapseable)) {
 								'title' => $name,
 							);
 						}
-						
+
 						echo wfView::create('options/option-toggled-multiple', array(
 							'options' => $options,
 							'title' => __('Allowlisted services', 'wordfence'),
@@ -179,7 +179,7 @@ if (!isset($collapseable)) {
 						$(this).find('.wf-boolean-switch-handle').trigger('click');
 					}
 				});
-				
+
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();

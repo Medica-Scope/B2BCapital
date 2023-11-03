@@ -22,7 +22,7 @@ $id = 'wfls-option-ntp';
 		<?php if ($failureCount > 0): ?>
 			<?php $remainingAttempts = $maxFailures - $failureCount; ?>
 			<p>
-				<strong><?php esc_html_e('NTP updates are currently failing.', 'wordfence-login-security') ?></strong> 
+				<strong><?php esc_html_e('NTP updates are currently failing.', 'wordfence-login-security') ?></strong>
 				<?php echo $remainingAttempts > 0 ? sprintf(esc_html__('NTP will be automatically disabled after %d more attempts.', 'wordfence-login-security'), $remainingAttempts) : esc_html__('NTP will be automatically disabled after 1 more attempt.', 'wordfence-login-security') ?>
 			</p>
 		<?php endif ?>

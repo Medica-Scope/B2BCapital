@@ -109,11 +109,11 @@ $support = @json_decode(wfConfig::get('supportContent'), true);
 				</div>
 			</div>
 			<div class="wf-row">
-				<div class="wf-col-xs-12 wf-col-sm-3 wf-col-sm-push-9 wf-col-sm-half-padding-left"> 
+				<div class="wf-col-xs-12 wf-col-sm-3 wf-col-sm-push-9 wf-col-sm-half-padding-left">
 					<div class="wf-block wf-active">
 						<div class="wf-block-content">
 							<div class="wf-support-top-block">
-								<h4><?php esc_html_e('Top Topics and Questions', 'wordfence'); ?></h4> 
+								<h4><?php esc_html_e('Top Topics and Questions', 'wordfence'); ?></h4>
 								<ol>
 								<?php
 								if (isset($support['top'])):
@@ -200,7 +200,7 @@ $support = @json_decode(wfConfig::get('supportContent'), true);
 							$('#wf-onboarding-continue').toggleClass('wf-disabled', wordfenceExt.parseEmails($('#wf-onboarding-alerts').val()).length == 0 || !($('#wf-onboarding-agree').is(':checked')) || $('#wf-onboarding-subscribe .wf-switch > li.wf-active').length == 0);
 						});
 					});
-					
+
 					$('#wf-onboarding-agree').on('change', function() {
 						$('#wf-onboarding-continue').toggleClass('wf-disabled', wordfenceExt.parseEmails($('#wf-onboarding-alerts').val()).length == 0 || !($('#wf-onboarding-agree').is(':checked')) || $('#wf-onboarding-subscribe .wf-switch > li.wf-active').length == 0);
 					});
@@ -224,7 +224,7 @@ $support = @json_decode(wfConfig::get('supportContent'), true);
 						if (emails.length > 0) {
 							var subscribe = !!parseInt($('#wf-onboarding-subscribe .wf-switch > li.wf-active').data('optionValue'));
 							wordfenceExt.onboardingProcessEmails(emails, subscribe, touppAgreed);
-							
+
 							<?php if (wfConfig::get('isPaid')): ?>
 							wordfenceExt.setOption('onboardingAttempt3', '<?php echo esc_attr(wfOnboardingController::ONBOARDING_LICENSE); ?>');
 							$('#wf-onboarding-banner').slideUp();

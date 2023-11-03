@@ -98,7 +98,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 				</p>
 			</div>
 		</div>
-		
+
 		<div class="about__section aligncenter">
 			<div class="column">
 				<h2>

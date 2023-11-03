@@ -17,7 +17,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				$('#wf-onboarding-dismiss, #wf-onboarding-plugin-overlay').on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
-					
+
 					$(window).trigger('wfOnboardingDismiss');
 					$('#wf-onboarding-plugin-overlay').fadeOut(400, function() {
 						$('#wf-onboarding-plugin-overlay').remove();

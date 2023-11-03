@@ -273,7 +273,7 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 				<span class="spinner"></span>
 				<input type="submit" accesskey="p" value="<?php echo $this->page['update_button']; ?>" class="button button-primary button-large" id="publish" name="publish">
 			</div>
-			
+
 			<?php
 			/**
 			 *   Fires before the major-publishing-actions div.
@@ -286,7 +286,7 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 			do_action( 'acf/options_page/submitbox_major_actions', $this->page );
 			?>
 			<div class="clear"></div>
-		
+
 		</div>
 			<?php
 		}
@@ -334,8 +334,8 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 			?>
 <script type="text/javascript">
 if( typeof acf !== 'undefined' ) {
-		
-	acf.newPostbox(<?php echo json_encode( $o ); ?>);	
+
+	acf.newPostbox(<?php echo json_encode( $o ); ?>);
 
 }
 </script>

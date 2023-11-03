@@ -74,7 +74,7 @@ if (!isset($collapseable)) {
 										<a href="#" class="wf-btn wf-btn-primary wf-btn-callout-subtle" style="display: none;" id="wf-install-license" role="button"><?php esc_html_e('Install License', 'wordfence'); ?></a>
 									</li>
 								</ul>
-								
+
 								<script type="application/javascript">
 									(function($) {
 										$(function() {

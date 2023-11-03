@@ -330,7 +330,7 @@ echo wfView::create('common/section-title', array(
 					$('#wf-migrate2fanew-prompt-confirm').on('click', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
-						
+
 						$('#wf-migrate2fanew-progress').show();
 						$('#wf-migrate2fanew-prompt-cancel, #wf-migrate2fanew-prompt-confirm').addClass('wf-disabled');
 
@@ -344,7 +344,7 @@ echo wfView::create('common/section-title', array(
 										$('#wf-migrate2fanewcomplete-prompt-close').on('click', function(e) {
 											e.preventDefault();
 											e.stopPropagation();
-	
+
 											WFAD.colorboxClose();
 										});
 									}});

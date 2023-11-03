@@ -42,7 +42,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 							$('#waf-top-enable-firewall').on('click', function(e) {
 								e.preventDefault();
 								e.stopPropagation();
-	
+
 								WFAD.setOption('wafStatus', 'enabled', function() {
 									window.location.reload(true);
 								});

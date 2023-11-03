@@ -73,7 +73,7 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 			<?php
 			if ( $options['show_please_select'] ) {
 				?>
-				<option value="" 
+				<option value=""
 				<?php
 				if ( '' == $options['selected'] ) {
 					echo 'selected="selected"';
@@ -86,7 +86,7 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 			}
 			foreach ( $languages as $lang ) {
 				?>
-				<option value="<?php echo esc_attr( $lang['code'] ); ?>" 
+				<option value="<?php echo esc_attr( $lang['code'] ); ?>"
 										  <?php
 											if ( $options['selected'] == $lang['code'] ) {
 												echo 'selected="selected"';

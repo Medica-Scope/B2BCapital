@@ -7,7 +7,7 @@ class Simple_Review {
 	private $messages;
 	private $link = 'https://wordpress.org/plugins/simple-custom-post-order/#reviews';
 	private $slug = 'simple-custom-post-order';
-	
+
 	function __construct() {
 
 		$this->messages = array(
@@ -61,7 +61,7 @@ class Simple_Review {
 
 		$value = time() + DAY_IN_SECONDS;
         update_option( 'simple-rate-time', $value );
-        
+
 		return $value;
 
 	}
@@ -69,7 +69,7 @@ class Simple_Review {
 	public function five_star_wp_rate_notice() {
 
 		$url = sprintf( $this->link, $this->slug );
-        
+
 		?>
 		<div id="<?php echo esc_attr($this->slug) ?>-epsilon-review-notice" class="notice notice-success is-dismissible" style="margin-top:30px;">
 			<p><?php echo sprintf( esc_html( $this->messages['notice'] ), $this->value ) ; ?></p>

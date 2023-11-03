@@ -17,16 +17,16 @@ $image_folder_url = UPDRAFTPLUS_URL.'/images/icons/';
 			<th class="backup-date"><?php _e('Backup date', 'updraftplus');?></th>
 			<th class="backup-data"><?php _e('Backup data (click to download)', 'updraftplus');?></th>
 			<th class="updraft_backup_actions"><?php _e('Actions', 'updraftplus');?></th>
-		</tr>		
+		</tr>
 	</thead>
 	<tbody>
 		<?php
-		
+
 		if (!defined('UPDRAFTCENTRAL_COMMAND') && $backup_count <= count($backup_history) - 1) {
 			$backup_history = array_slice($backup_history, 0, $backup_count, true);
 			$show_paging_actions = true;
 		}
-		
+
 		foreach ($backup_history as $key => $backup) {
 
 			$remote_sent = !empty($backup['service']) && ((is_array($backup['service']) && in_array('remotesend', $backup['service'])) || 'remotesend' === $backup['service']);
@@ -96,7 +96,7 @@ $image_folder_url = UPDRAFTPLUS_URL.'/images/icons/';
 						?>
 					</div>
 				</td>
-				
+
 				<td data-label="<?php _e('Backup data (click to download)', 'updraftplus');?>"><?php
 
 				if ($remote_sent) {
@@ -148,7 +148,7 @@ $image_folder_url = UPDRAFTPLUS_URL.'/images/icons/';
 					?>
 				</td>
 			</tr>
-		<?php } ?>	
+		<?php } ?>
 
 	</tbody>
 	<?php if ($show_paging_actions) : ?>

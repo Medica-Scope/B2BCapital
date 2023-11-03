@@ -34,12 +34,12 @@ foreach ($stateKeys as $k) {
 <script type="application/javascript">
 	(function($) {
 		$('.wf-toggle-all-sections').text($('.wf-toggle-all-sections').data('expanded') == 1 ? $('.wf-toggle-all-sections').data('expandedTitle') : $('.wf-toggle-all-sections').data('collapsedTitle'));
-		
+
 		$(function() {
 			$('.wf-toggle-all-sections').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-				
+
 				if ($(this).data('expanded') == 1) {
 					$('.wf-block[data-persistence-key]').each(function() {
 						var block = $(this);
@@ -53,7 +53,7 @@ foreach ($stateKeys as $k) {
 					});
 
 					WFAD.ajax('wordfence_saveDisclosureState', {names: <?php echo json_encode($stateKeys) ?>, state: false}, function() {}, function() {}, true);
-					
+
 					$(this).data('expanded', 0);
 					$('.wf-toggle-all-sections').text($('.wf-toggle-all-sections').data('collapsedTitle'));
 				}
@@ -70,11 +70,11 @@ foreach ($stateKeys as $k) {
 					});
 
 					WFAD.ajax('wordfence_saveDisclosureState', {names: <?php echo json_encode($stateKeys) ?>, state: true}, function() {}, function() {}, true);
-					
+
 					$(this).data('expanded', 1);
 					$('.wf-toggle-all-sections').text($('.wf-toggle-all-sections').data('expandedTitle'));
 				}
 			});
 		});
 	})(jQuery);
-</script> 
+</script>

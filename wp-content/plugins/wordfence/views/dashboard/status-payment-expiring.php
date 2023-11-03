@@ -8,7 +8,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 
 if (!isset($linkNewWindow)) { $linkNewWindow = false; }
 ?>
-<div id="<?php echo esc_attr($id); ?>" class="wf-status-detail"> 
+<div id="<?php echo esc_attr($id); ?>" class="wf-status-detail">
 	<div class="wf-status-payment-expiring">
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 644"><g><path style="fill:none" d="M66.3,269.5v205.4c0,2.9,1.1,5.5,3.2,7.6c2.1,2.1,4.7,3.2,7.6,3.2h413.6c8.8-72,65.8-129.1,137.8-138v-78.2
 		H66.3z M196,442.4h-86.5l0-43.2H196V442.4z M369,442.4H239.3v-43.2H369V442.4z"/><path style="fill:none" d="M628.4,64.1c0-2.9-1.1-5.4-3.2-7.6c-2.1-2.1-4.7-3.2-7.6-3.2H77.1c-2.9,0-5.5,1.1-7.6,3.2s-3.2,4.7-3.2,7.6

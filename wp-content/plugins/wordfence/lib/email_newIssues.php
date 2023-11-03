@@ -147,7 +147,7 @@ if (count($sentences)) {
 
 <?php if(! $isPaid){ ?>
 	<p><?php esc_html_e('NOTE: You are using the free version of Wordfence. Upgrade today:', 'wordfence'); ?></p>
-	
+
 	<ul>
 		<li><?php esc_html_e('Receive real-time Firewall and Scan engine rule updates for protection as threats emerge', 'wordfence'); ?></li>
 		<li><?php esc_html_e('Real-time IP Blocklist blocks the most malicious IPs from accessing your site', 'wordfence'); ?></li>
