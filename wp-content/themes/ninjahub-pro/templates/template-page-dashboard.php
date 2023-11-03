@@ -78,33 +78,122 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 									</button>
 									<div class="filter-con">
 										<?php
+										$business_type_terms          = $opportunities_obj->get_taxonomy_terms('business-type');
+										$business_options = [];
+										foreach ($business_type_terms as $key => $term) {
+											$status = get_term_meta($term->term_id, 'status', TRUE);
+											if (intval($status) !== 1) {
+												continue;
+											}
+											$business_options[$term->term_id] = $term->name;
+										}
 										echo Nh_Forms::get_instance()
-										->create_form( [ 
-											'search_input'                    => [ 
-												'type'   => 'text',
-												'name'   => 's',
+										->create_form( [
+											'business_type'    => [ 
+												'type'   => 'select',
+												'label'  => 'Business type',
+												'name'   => 'business_type',
 												'before' => '',
 												'after'  => '',
-												'value'  => isset($_GET['s'])?$_GET['s']:'',
+												'default_option'  => isset($_GET['business_type'])?$_GET['business_type']:'',
+												'options' => $business_options,
 												'order'  => 0
 											],
-											'filters_nonce'          => [ 
-												'class' => '',
-												'type'  => 'nonce',
-												'name'  => 'filters_nonce',
-												'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
-												'order' => 5
+											'based_in'    => [ 
+												'type'   => 'select',
+												'label'  => 'Based in',
+												'name'   => 'location',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['location'])?$_GET['location']:'',
+												'default_option'  => isset($_GET['location'])?$_GET['location']:'',
+												'options' => [
+													'Egypt' => 'Egypt',
+													'Russia' => 'Russia',
+												],
+												'order'  => 10
 											],
+											// 'ttm_gross_revenue'    => [ 
+											// 	'type'   => 'range',
+											// 	'label'  => 'TTM Gross Revenue',
+											// 	'from'   => 50,
+											// 	'to'     => 500000,
+											// 	'name'   => 'ttm_gross_revenue',
+											// 	'before' => '',
+											// 	'after'  => '',
+											// 	'value'  => isset($_GET['ttm_gross_revenue'])?$_GET['ttm_gross_revenue']:'',
+											// 	'order'  => 20
+											// ],
+											'ttm_net_profit'    => [ 
+												'type'   => 'range',
+												'label'   => 'TTM Net Profit',
+												'from'   => 50,
+												'to'     => 500000,
+												'name'   => 'net_profit',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['net_profit'])?$_GET['net_profit']:'',
+												'order'  => 30
+											],
+											'ttm_accruing_revenue'    => [ 
+												'type'   => 'range',
+												'label'   => 'TTM Accruing Revenue',
+												'from'   => 50,
+												'to'     => 500000,
+												'name'   => 'annual_accounting_revenue',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['annual_accounting_revenue'])?$_GET['annual_accounting_revenue']:'',
+												'order'  => 40
+											],
+											'annual_growth_rate'    => [ 
+												'type'   => 'range',
+												'label'	 => 'Annual Growth Rate',	
+												'from'   => 50,
+												'to'     => 500000,
+												'name'   => 'annual_growth_rate',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['annual_growth_rate'])?$_GET['annual_growth_rate']:'',
+												'order'  => 50
+											],
+											'asking_price'    => [ 
+												'type'   => 'range',
+												'label'  => 'Asking Price',
+												'from'   => 50,
+												'to'     => 500000,
+												'name'   => 'asking_price_in_usd',
+												'before' => '',
+												'after'  => '',
+												'value'  => isset($_GET['asking_price_in_usd'])?$_GET['asking_price_in_usd']:'',
+												'order'  => 60
+											],
+											'search_input'                    => [ 
+												'type'   => 'text',
+												'name'   => 'search',
+												'before' => '',
+												'after'  => '<div class="reset"><span class="reset-btn">Reset form</span></div>',
+												'placeholder' => 'Find topics by entering terms in the search box',
+												'value'  => isset($_GET['search'])?$_GET['search']:'',
+												'order'  => 70
+											],
+											// 'filters_nonce'          => [ 
+											// 	'class' => '',
+											// 	'type'  => 'nonce',
+											// 	'name'  => 'filters_nonce',
+											// 	'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
+											// 	'order' => 80
+											// ],
 											'submit_filters_request' => [ 
 												'class'               => 'btn btn-light bg-white filter-opportunities ninja-filter-opportunities',
 												'id'                  => 'submit_filters_request',
 												'type'                => 'submit',
-												'value'               => 'Save',
+												'value'               => 'Search',
 												'recaptcha_form_name' => 'frontend_filters',
-												'order'               => 10
+												'order'               => 90
 											],
 										], [ 
-											'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
+											'class' => Nh::_DOMAIN_NAME . '-filters-form',
 										] );
 										?>
 									</div>
@@ -113,7 +202,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 						</div>
 						<div class="opportunity-list">
 							<?php
-							$opportunities = $opportunities_obj->get_all_custom( [ 'publish' ], 12, 'date', 'DESC', [], [], $user_ID, $paged );
+							$search_fields = $_GET;
+							$opportunities = $opportunities_obj->get_all_custom( [ 'publish' ], 12, 'date', 'DESC', [], [], $user_ID, $paged, [], $search_fields );
 							if ( ! empty( $opportunities ) ) {
 							?>
 							<div class="row row-cols-1 row-cols-md-2 g-4 <?= (isset($_COOKIE['grid_view']))?$_COOKIE['grid_view']:'card-group' ?>">
