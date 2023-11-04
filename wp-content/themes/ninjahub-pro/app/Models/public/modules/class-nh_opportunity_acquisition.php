@@ -32,6 +32,7 @@
         public array $meta_data = [
             'opportunity',
             'acquisitions_stage',
+            'show_in_dashboard',
         ];
         public array $taxonomy  = [];
 
@@ -191,11 +192,6 @@
                     ],
                 ],
             ];
-
-            if ($current) {
-                $args['author'] = $user_ID;
-                unset($args['meta_query']);
-            }
 
             $acquisitions = new \WP_Query($args);
 

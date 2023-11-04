@@ -417,7 +417,7 @@
                         'value' => $value,
                     ];
                 }
-            }  
+            }
         if (!empty($tax_query)) {
             $args['tax_query'][] = $tax_query;
         }
@@ -438,7 +438,7 @@
             return $Nh_Posts;
         }
 
-        public function get_pagination(array $args)
+        public function get_pagination(array $args): array|string|null
         {
             $all_posts                   = $args;
             $all_posts['posts_per_page'] = -1;
@@ -580,7 +580,7 @@
             if (!wp_verify_nonce($form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
             }
-            
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_add_to_fav');
 
             if ($check_result !== TRUE) {
@@ -643,7 +643,7 @@
             if(!is_wp_error($profile)){
                 $favorites = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $favorites = array_combine($favorites, $favorites);
-            }   
+            }
             return isset($favorites[$opp_id]);
         }
 
@@ -686,7 +686,7 @@
                     $profile->update();
                     $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
                     update_post_meta($opp_id, 'ignore_count', (int)$ignore_count + 1);
-    
+
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
@@ -699,7 +699,7 @@
                     $profile->update();
                     $ignore_count = get_post_meta($opp_id, 'ignore_count', TRUE);
                     update_post_meta($opp_id, 'ignore_count', (int)$ignore_count - 1);
-                
+
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
@@ -735,7 +735,7 @@
             if(!is_wp_error($profile)){
                 $ignored_opportunities = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
-            }   
+            }
             return isset($ignored_opportunities[$opp_id]);
         }
 
@@ -768,7 +768,6 @@
 
             return $Nh_opportunities;
         }
-
 
         public function get_opportunities()
         {
