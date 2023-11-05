@@ -28,10 +28,13 @@ $ignore_chk      = false;
 if ( ( $single_post->meta_data['opportunity'] ) ) {
 	$opportunity = $opportunity_obj->get_by_id( $single_post->meta_data['opportunity'] );
 }
+$fav_class = 'bbc-star-o';
 if ( $user_ID ) {
 	$fav_chk    = $post_obj->is_post_in_user_favorites( $single_post->ID );
+	if($fav_chk){
+		$fav_class = 'bbc-star';
+	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );
-
 }
 ?>
 <div class="single-blog container container-xxl">
@@ -56,14 +59,9 @@ if ( $user_ID ) {
 				</small>
 
 				<?php if ( ! empty( $user_ID ) ) :
-					if ( $fav_chk ) {
-						$fav_class = 'bbc-star';
-					} else {
-						$fav_class = 'bbc-star-o';
-					}
-					echo Nh_Forms::get_instance()
-						->create_form( [ 
-							'opp_id'                    => [ 
+						echo Nh_Forms::get_instance()
+						->create_form([
+							'post_id'                   => [
 								'type'   => 'hidden',
 								'name'   => 'post_id',
 								'before' => '',
@@ -71,35 +69,58 @@ if ( $user_ID ) {
 								'value'  => $single_post->ID,
 								'order'  => 0
 							],
-							'add_to_fav_nonce'          => [ 
+							'add_to_fav_nonce'          => [
 								'class' => '',
 								'type'  => 'nonce',
 								'name'  => 'add_to_fav_nonce_nonce',
 								'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 								'order' => 5
 							],
-							'submit_add_to_fav_request' => [ 
+							'submit_add_to_fav_request' => [
 								'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
 								'id'                  => 'submit_add_to_fav_request',
 								'type'                => 'submit',
-								'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
+								'value'               => '<i class="'.$fav_class.' fav-star"></i> ' . __( 'Add To Favorite', 'ninja' ),
 								'recaptcha_form_name' => 'frontend_add_to_fav',
 								'order'               => 10
 							],
-						], [ 
+						], [
 							'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
-						] );
-				endif; ?>
-
-
-				<?php if ( ! empty( $user_ID ) ) : ?>
-					<div class="ninja-ignore-con">
-						<button class="ninja-add-to-ignore btn <?= ( $ignore_chk ) ? 'btn-outline-dark' : '' ?>" id="addToIgnore"
-							data-uID="<?= $user_ID ?>" data-id="<?= $single_post->ID ?>" data-type="<?= $single_post->type ?>"
-							type="button">X
-						</button>
-					</div>
-				<?php endif; ?>
+						]);
+						if ( $ignore_chk ) {
+							$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+						} else {
+							$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+						}
+					echo Nh_Forms::get_instance()
+						->create_form([
+							'post_id'              => [
+								'type'   => 'hidden',
+								'name'   => 'post_id',
+								'before' => '',
+								'after'  => '',
+								'value'  => $single_post->ID,
+								'order'  => 0
+							],
+							'ignore_article_nonce' => [
+								'class' => '',
+								'type'  => 'nonce',
+								'name'  => 'ignore_article_nonce',
+								'value' => Nh::_DOMAIN_NAME . "_ignore_article_nonce_form",
+								'order' => 5
+							],
+							'submit_ignore'        => [
+								'class'               => 'btn',
+								'id'                  => 'submit_submit_ignore',
+								'type'                => 'submit',
+								'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>'.__( 'Ignore', 'ninja' ),
+								'recaptcha_form_name' => 'frontend_ignore',
+								'order'               => 10
+							],
+						], [
+							'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
+						]);
+						endif; ?>
 			</div>
 
 			<?php if ( ! empty( $opportunity ) ) : ?>

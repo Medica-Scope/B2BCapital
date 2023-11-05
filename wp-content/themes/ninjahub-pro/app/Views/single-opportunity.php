@@ -121,7 +121,7 @@ if ( $user_ID ) {
 						'class'               => 'btn-danger',
 						'id'                  => 'submit_submit_ignore',
 						'type'                => 'submit',
-						'value'               => '<i class="bbc-x-circle"></i> ' . __( 'Ignore', 'ninja' ),
+						'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>'.__( 'Ignore', 'ninja' ),
 						'recaptcha_form_name' => 'frontend_ignore',
 						'order'               => 10
 					],

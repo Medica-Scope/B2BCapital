@@ -399,7 +399,7 @@
                 ]
             ];
             if(!empty($search_fields)){
-                if(isset($search_fields['business_type'])){
+                if(isset($search_fields['business_type']) && $search_fields['business_type']){
                     $args['tax_query'][] = [
                         'taxonomy' => 'business-type',
                         'terms' => (int)$search_fields['business_type'],
@@ -407,7 +407,7 @@
                     ];
                     unset($search_fields['business_type']);
                 }
-                if(isset($search_fields['search'])){
+                if(isset($search_fields['search']) && !empty($search_fields['search'])){
                     $args['s'] = $search_fields['search'];
                     unset($search_fields['search']);
                 }
@@ -779,11 +779,21 @@
         {
             global $user_ID;
 
+            if ($user_ID) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                // $fav_opportunities = $profile->meta_data['favorite_opportunities'];
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
             $opportunities = new \WP_Query([
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'orderby'     => 'ID',
                 'order'       => 'DESC',
+                "post__not_in"=> $not_in,
                 'author'      => $user_ID
             ]);
 
