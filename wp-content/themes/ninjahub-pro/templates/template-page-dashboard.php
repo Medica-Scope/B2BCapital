@@ -78,7 +78,7 @@
                                         <button class="btn btn-outline-warning opportunity-adv-filter" data-bs-toggle="button"><i
                                                 class="bbc-sliders"></i> Advanced Filters
                                         </button>
-                                        <div class="filter-con">
+                                        <div class="filter-con d-none">
                                             <?php
                                                 $business_type_terms = $opportunities_obj->get_taxonomy_terms('business-type');
                                                 $business_options    = [];
@@ -434,12 +434,12 @@
 
                                             foreach ($acquisitions as $acquisition) {
                                                 $args = [
-                                                    'opportunity_link'         => $acquisition->link,
-                                                    'opportunity_title'        => $acquisition->title,
-                                                    'opportunity_thumbnail'    => $acquisition->thumbnail,
-                                                    'opportunity_created_date' => $acquisition->created_date,
+                                                    'opportunity_link'         => $acquisition->opportunity->link,
+                                                    'opportunity_title'        => $acquisition->opportunity->title,
+                                                    'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
+                                                    'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
-                                                    'business_type'            => $acquisition->taxonomy['business-type'][0]->name
+                                                    'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name
                                                 ];
                                                 ?>
                                                 <div class="col">

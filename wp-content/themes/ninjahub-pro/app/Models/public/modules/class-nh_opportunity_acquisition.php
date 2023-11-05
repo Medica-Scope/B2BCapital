@@ -32,6 +32,7 @@
         public array $meta_data = [
             'opportunity',
             'acquisitions_stage',
+            'show_in_dashboard',
         ];
         public array $taxonomy  = [];
 
