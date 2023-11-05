@@ -603,6 +603,7 @@
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 1,
+                        'updated_text' => _e('Add to favorite', 'ninja')
                     ]);
                 } else {
                     $favorites[] = $opp_id;
@@ -611,7 +612,8 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 0
+                        'fav_active' => 0,
+                        'updated_text' => _e('Added to favorite', 'ninja')
                     ]);
                 }
             } else {
