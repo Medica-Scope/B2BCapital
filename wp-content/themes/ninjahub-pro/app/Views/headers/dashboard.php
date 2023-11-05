@@ -26,78 +26,42 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 		</div>
 
 		<?php
-		if ( Nh_User::get_user_role() == Nh_User::OWNER ) {
-			/**
-			 * Include owner type menu
-			 */
-			wp_nav_menu(
+		function get_wp_nav_menu( $theme_location = 'dashboard-guest-menu', $container_class = '' ) {
+			return wp_nav_menu(
 				[
-					'theme_location'  => 'dashboard-owner-menu',
-					'container_class' => 'bbc-default-menu-container',
+					'theme_location'  => $theme_location,
+					'container_class' => 'bbc-default-menu-container ' . $container_class,
 					'container_id'    => 'bbc-default-menu-container',
 					'menu_class'      => 'navbar-nav',
-					'menu_id'         => 'bbc-logged-in-navbar-nav',
-					'fallback_cb'     => '',
-					'depth'           => 2,
-					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]
-			);
-		} elseif ( Nh_User::get_user_role() == Nh_User::INVESTOR ) {
-			/**
-			 * Include investor type menu
-			 */
-			wp_nav_menu(
-				[
-					'theme_location'  => 'dashboard-investor-menu',
-					'container_class' => 'bbc-default-menu-container ',
-					'container_id'    => 'bbc-default-menu-container',
-					'menu_class'      => 'navbar-nav',
-					'fallback_cb'     => '',
 					'menu_id'         => 'bbc-default-navbar-nav',
-					'depth'           => 2,
-					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]
-			);
-		} elseif ( Nh_User::get_user_role() == Nh_User::ADMIN ) {
-			/**
-			 * Include Admin type menu
-			 */
-			wp_nav_menu(
-				[
-					'theme_location'  => 'dashboard-admin-menu',
-					'container_class' => 'bbc-default-menu-container',
-					'container_id'    => 'bbc-default-menu-container',
-					'menu_class'      => 'navbar-nav',
 					'fallback_cb'     => '',
-					'menu_id'         => 'bbc-default-navbar-nav',
-					'depth'           => 2,
-					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]
-			);
-		} else {
-			/**
-			 * Include guest menu
-			 */
-			wp_nav_menu(
-				[
-					'theme_location'  => 'dashboard-guest-menu',
-					'container_class' => 'bbc-default-menu-container',
-					'container_id'    => 'bbc-default-menu-container',
-					'menu_class'      => 'navbar-nav',
-					'fallback_cb'     => '',
-					'menu_id'         => 'bbc-default-navbar-nav',
 					'depth'           => 2,
 					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
 				]
 			);
 		}
 
+		switch ( Nh_User::get_user_role() ) {
+			case Nh_User::OWNER:
+				get_wp_nav_menu( 'dashboard-owner-menu', 'd-none d-lg-block' );
+				break;
+			case Nh_User::INVESTOR:
+				get_wp_nav_menu( 'dashboard-investor-menu', 'd-none d-lg-block' );
+				break;
+			case Nh_User::ADMIN:
+				get_wp_nav_menu( 'dashboard-admin-menu', 'd-none d-lg-block' );
+				break;
+			default:
+				get_wp_nav_menu( 'dashboard-guest-menu', 'd-none d-lg-block' );
+				break;
+		}
+
 		if ( is_user_logged_in() ) {
 			?>
-			<div class="bbc-logged-in-actions">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<?php
+		<div class="bbc-logged-in-actions">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<?php
 						echo Nh_Forms::get_instance()
 							->create_form(
 								[
@@ -118,37 +82,98 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 								]
 							);
 						?>
-					</li>
-					<li class="nav-item">
-						<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
-					</li>
-					<li class="nav-item bbc-user-profile-btn dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-							data-bs-toggle="dropdown" data-bs-auto-close="true">
-							<span class="btn-profile-title">
-								<?= sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
-							</span>
-							<span class="btn-profile-desc">
-								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
-							</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">My
-									Profile</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout">Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<?php
+				</li>
+				<li class="nav-item">
+					<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
+				</li>
+				<li class="nav-item bbc-user-profile-btn dropdown d-none d-lg-block">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+						data-bs-toggle="dropdown" data-bs-auto-close="true">
+						<span class="btn-profile-title">
+							<?= sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
+						</span>
+						<span class="btn-profile-desc">
+							<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
+						</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">My
+								Profile</a></li>
+						<li><a class="dropdown-item" href="#">Another action</a></li>
+						<li><a class="dropdown-item" href="#">Something else here</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout">Logout</a></li>
+					</ul>
+				</li>
+				<li class="d-lg-none ms-4">
+					<a href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
+						aria-controls="staticBackdrop">
+						<span class="user-action user-menu">
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40">
+								<g id="grid_layout_20" data-name="grid layout 20" transform="translate(-4 -4)">
+									<path id="Path_44799" data-name="Path 44799" d="M13,13H23V23H13Z" transform="translate(6 6)"
+										fill="#000" />
+									<path id="Path_44800" data-name="Path 44800" d="M4,13H15.667V23H4Z" transform="translate(0 6)"
+										fill="#000" />
+									<path id="Path_44801" data-name="Path 44801" d="M13,4H23V15.667H13Z" transform="translate(6)"
+										fill="#000" />
+									<path id="Path_44802" data-name="Path 44802" d="M21,13H32.667V23H21Z" transform="translate(11.333 6)"
+										fill="#000" />
+									<path id="Path_44803" data-name="Path 44803" d="M21,32.667h8.333a3.333,3.333,0,0,0,3.333-3.333V21H21Z"
+										transform="translate(11.333 11.333)" fill="#000" />
+									<path id="Path_44804" data-name="Path 44804"
+										d="M4,7.333v8.333H15.667V4H7.333A3.333,3.333,0,0,0,4,7.333Z" fill="#000" />
+									<path id="Path_44805" data-name="Path 44805" d="M13,21H23V32.667H13Z" transform="translate(6 11.333)"
+										fill="#000" />
+									<path id="Path_44806" data-name="Path 44806" d="M4,29.333a3.333,3.333,0,0,0,3.333,3.333h8.333V21H4Z"
+										transform="translate(0 11.333)" fill="#000" />
+									<circle id="Ellipse_12443" data-name="Ellipse 12443" cx="3.665" cy="3.665" r="3.665"
+										transform="translate(34.667 6)" fill="#fe6500" />
+								</g>
+							</svg>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<?php
 		}
 		?>
 
 	</nav><!-- #site-navigation -->
+
+
+	<div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="staticBackdrop"
+		aria-labelledby="staticBackdropLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="staticBackdropLabel">
+				<a href="<?= home_url() ?>" class="app-brand">
+					<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
+						alt="B2B Capital Logo" class="img-fluid">
+				</a>
+			</h5>
+			<button type="button" class="btn btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+		</div>
+		<div class="offcanvas-body">
+			<?php
+			switch ( Nh_User::get_user_role() ) {
+				case Nh_User::OWNER:
+					get_wp_nav_menu( 'dashboard-owner-menu' );
+					break;
+				case Nh_User::INVESTOR:
+					get_wp_nav_menu( 'dashboard-investor-menu' );
+					break;
+				case Nh_User::ADMIN:
+					get_wp_nav_menu( 'dashboard-admin-menu' );
+					break;
+				default:
+					get_wp_nav_menu( 'dashboard-guest-menu' );
+					break;
+			}
+			?>
+		</div>
+	</div>
 </header><!-- #masthead -->
