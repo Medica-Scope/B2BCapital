@@ -603,7 +603,7 @@
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 1,
-                        'updated_text' => _e('Add to favorite', 'ninja')
+                        'updated_text' => __('Add to favorites', 'ninja')
                     ]);
                 } else {
                     $favorites[] = $opp_id;
@@ -613,7 +613,7 @@
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 0,
-                        'updated_text' => _e('Added to favorite', 'ninja')
+                        'updated_text' => __('Added to favorites', 'ninja')
                     ]);
                 }
             } else {
@@ -693,7 +693,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated'       => ''
+                        'updated_text' => __('Ignore', 'ninja')
                     ]);
                 } else {
                     $ignored_opportunities[] = $opp_id;
@@ -706,14 +706,15 @@
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated'       => '',
+                        'updated_text' => __('Ignored', 'ninja')
                     ]);
                 }
             } else {
                 new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
                     'status'        => FALSE,
                     'msg'           => 'You must have profile',
-                    'ignore_active' => 1
+                    'ignore_active' => 1,
+                    
                 ]);
             }
         }

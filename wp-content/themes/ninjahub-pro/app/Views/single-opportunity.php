@@ -37,13 +37,30 @@ $opportunity_type            = isset( $opportunity->taxonomy['opportunity-type']
 $unique_type_name            = get_term_meta( $opportunity_type, 'unique_type_name', TRUE );
 $opportunity_bids            = $opportunity_obj->get_opportunity_bids( $opportunity->ID, TRUE );
 $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions( $opportunity->ID, TRUE );
-$fav_class = 'bbc-star-o';
+$fav_chk         = false;
+$ignore_chk      = false;
+$fav_class = '';
+$ignore_class = '';
+$fav_text = '';
+$ignore_text = '';
 if ( $user_ID ) {
 	$fav_chk    = $opportunity_obj->is_opportunity_in_user_favorites( $opportunity->ID );
 	if($fav_chk){
 		$fav_class = 'bbc-star';
+		$fav_text = __( 'Added to favorites', 'ninja' );
+	}else{
+		$fav_class = 'bbc-star-o';
+		$fav_text = __( 'Add to favorites', 'ninja' );
 	}
 	$ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored( $opportunity->ID );
+	if ( $ignore_chk ) {
+		$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+		$ignore_text = 	__( 'Ignored', 'ninja' );
+
+	} else {
+		$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+		$ignore_text = 	__( 'Ignore', 'ninja' );
+	}
 }
 ?>
 
@@ -90,7 +107,7 @@ if ( $user_ID ) {
 						'class'               => 'btn-secondary',
 						'id'                  => 'submit_add_to_fav_request',
 						'type'                => 'submit',
-						'value'               => '<i class="'.$fav_class.' fav-star"></i> ' . __( 'Add To Favorite', 'ninja' ),
+						'value'               => '<i class="'.$fav_class.' fav-star"></i> <span class="fav-text">' . $fav_text . '</span>',
 						'recaptcha_form_name' => 'frontend_add_to_fav',
 						'order'               => 10
 					],
@@ -121,7 +138,7 @@ if ( $user_ID ) {
 						'class'               => 'btn-danger',
 						'id'                  => 'submit_submit_ignore',
 						'type'                => 'submit',
-						'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>'.__( 'Ignore', 'ninja' ),
+						'value'               => '<i class="' . $ignore_class . ' ignore-star"></i> <span class="ignore-text">'. $ignore_text .'</span>',
 						'recaptcha_form_name' => 'frontend_ignore',
 						'order'               => 10
 					],
