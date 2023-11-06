@@ -18,7 +18,7 @@ $tabs = array(
 )
 ?>
 <ul class="wf-scan-tabs" role="tablist">
-  <?php foreach ($tabs as $index => $t): ?> 
+  <?php foreach ($tabs as $index => $t): ?>
 	<?php
 	$a = $t->a;
 	if (!preg_match('/^https?:\/\//i', $a)) {
@@ -105,7 +105,7 @@ $tabs = array(
 <script type="application/javascript">
 	(function($) {
 		WFAD.scanIssuesOffset = 0;
-		
+
 		var issuesWrapper = $('.wf-scan-results');
 		var hasScrolled = false;
 		$(window).on('scroll', function() {
@@ -127,7 +127,7 @@ $tabs = array(
 				// console.log('no infinite scroll');
 			}
 		});
-		
+
 		$(function() {
 			$('.wf-scan-tabs .wf-tab a').on('click', function(e) {
 				e.preventDefault();
@@ -142,7 +142,7 @@ $tabs = array(
 				var content = $('#wf-scan-results-' + tab.data('target'));
 				content.addClass('wf-active');
 			});
-			
+
 			$('#wf-scan-bulk-buttons-delete').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -150,7 +150,7 @@ $tabs = array(
 				var prompt = $('#wfTmpl_scannerDelete').tmpl();
 				var promptHTML = $("<div />").append(prompt).html();
 				WFAD.colorboxHTML((WFAD.isSmallScreen ? '300px' : '700px'), promptHTML, {overlayClose: false, closeButton: false, className: 'wf-modal', onComplete: function() {
-					$('#wf-scanner-prompt-cancel').on('click', function(e) { 
+					$('#wf-scanner-prompt-cancel').on('click', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
 

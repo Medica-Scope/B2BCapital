@@ -317,7 +317,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * Bugfix : "User response is missing." message has been fixed.
 * Pro : WPForms plugin issue with reCaptcha v2 has been fixed.
 * Pro : Hide reCaptcha for Administrator oprion for Contact Form 7 has been fixed.
-* Bugfix : Menu issue for WordPress 5.9 as been fixed. 
+* Bugfix : Menu issue for WordPress 5.9 as been fixed.
 * Bugfix : Other minor fixes.
 
 

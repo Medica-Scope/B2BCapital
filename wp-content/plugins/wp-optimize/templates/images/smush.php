@@ -33,7 +33,7 @@
 
 		<div class="wpo-fieldgroup__subgroup">
 			<label class="switch">
-				<input type="checkbox" id="smush-show-metabox" class="smush-options" <?php checked($smush_options['show_smush_metabox']); ?> > 
+				<input type="checkbox" id="smush-show-metabox" class="smush-options" <?php checked($smush_options['show_smush_metabox']); ?> >
 				<span class="slider round"></span>
 			</label>
 			<label for="smush-show-metabox" class="smush-options">
@@ -49,7 +49,7 @@
 
 		<div class="compression_options">
 			<h3><?php esc_html_e('Compression options', 'wp-optimize');?></h3>
-			<input type="radio" id="enable_lossy_compression" name="compression_level" <?php checked($smush_options['image_quality'], 60); ?> class="smush-options compression_level"> 
+			<input type="radio" id="enable_lossy_compression" name="compression_level" <?php checked($smush_options['image_quality'], 60); ?> class="smush-options compression_level">
 			<label for="enable_lossy_compression"><?php esc_html_e('Prioritize maximum compression', 'wp-optimize');?></label>
 			<?php
 				$message = __('Uses lossy compression to ensure maximum savings per image.', 'wp-optimize');
@@ -62,7 +62,7 @@
 			<label for="enable_lossless_compression"><?php esc_html_e('Prioritize retention of detail', 'wp-optimize');?></label>
 			<span tabindex="0" data-tooltip="<?php esc_attr_e('Uses lossless compression, which results in much better image quality but lower file size savings per image', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
 			<br>
-			<input id="enable_custom_compression" <?php checked($custom); ?> type="radio" name="compression_level" class="smush-options compression_level"> 
+			<input id="enable_custom_compression" <?php checked($custom); ?> type="radio" name="compression_level" class="smush-options compression_level">
 			<label for="enable_custom_compression"><?php esc_html_e('Custom', 'wp-optimize');?></label>
 			<br>
 			<div class="smush-options custom_compression" <?php if (!$custom) echo 'style="display:none;"';?> >
@@ -107,7 +107,7 @@
 			<?php endif; ?>
 			<div class="compression_server">
 				<h3><?php esc_html_e('Compression service', 'wp-optimize');?></h3>
-				<div> <input type="radio" name="compression_server" id="resmushit" value="resmushit" <?php checked($smush_options['compression_server'], 'resmushit'); ?> >			  
+				<div> <input type="radio" name="compression_server" id="resmushit" value="resmushit" <?php checked($smush_options['compression_server'], 'resmushit'); ?> >
 				<label for="resmushit">
 					<h4><?php esc_html_e('reSmush.it', 'wp-optimize');?></h4>
 					<p><?php esc_html_e('Can keep EXIF data', 'wp-optimize');?></p>
@@ -121,7 +121,7 @@
 				<input type="checkbox" id="smush-preserve-exif" class="smush-options preserve_exif" <?php checked($smush_options['preserve_exif']); ?> >
 				<label for="smush-preserve-exif" class="smush-options preserve_exif"><?php esc_html_e('Preserve EXIF data', 'wp-optimize');?></label>
 				<br>
-				<input type="checkbox" id="smush-backup-original" class="smush-options" <?php checked($smush_options['back_up_original']); ?> > 
+				<input type="checkbox" id="smush-backup-original" class="smush-options" <?php checked($smush_options['back_up_original']); ?> >
 				<label for="smush-backup-original"><?php esc_html_e('Backup original images', 'wp-optimize');?></label>
 				<span tabindex="0" data-tooltip="<?php esc_attr_e('The original images are stored alongside the compressed images, you can visit the edit screen of the individual images in the Media Library to restore them.', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
 				<br>
@@ -168,7 +168,7 @@
 				<a href="javascript:;" id="wpo_smush_images_select_none"><?php esc_html_e('Select none', 'wp-optimize');?></a>
 			</div>
 			<div class="smush-refresh-icon align-right">
-				<a href="javascript:;" id="wpo_smush_images_refresh" class="wpo-refresh-button"><?php esc_html_e('Refresh image list', 'wp-optimize');?> 
+				<a href="javascript:;" id="wpo_smush_images_refresh" class="wpo-refresh-button"><?php esc_html_e('Refresh image list', 'wp-optimize');?>
 					<span class="dashicons dashicons-image-rotate"></span>
 				</a>
 				<img class="wpo_smush_images_loader" width="16" height="16" src="<?php echo esc_url(admin_url('/images/spinner-2x.gif')); ?>" />
@@ -184,7 +184,7 @@
 </div>
 
 <div id="wpo_smush_images_information_container" style="display:none;">
-	<div id="wpo_smush_images_information_wrapper"> 
+	<div id="wpo_smush_images_information_wrapper">
 	<h3 id="wpo_smush_images_information_heading"><?php esc_html_e('Compressing images', 'wp-optimize');?></h3>
 	<h4 id="wpo_smush_images_information_server"></h4>
 	<div class="progress-bar orange stripes">
@@ -221,7 +221,7 @@
 
 <div id="smush-complete-summary" class="complete-animation" style="display:none;">
 	<span class="dashicons dashicons-no-alt close"></span>
-	<div class="animation"> 
+	<div class="animation">
 		<div class="checkmark-circle">
 		  <div class="background"></div>
 		  <div class="checkmark draw"></div>

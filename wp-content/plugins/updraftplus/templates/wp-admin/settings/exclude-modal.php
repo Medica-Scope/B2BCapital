@@ -3,7 +3,7 @@
 	<input type="hidden" id="updraft_exclude_modal_for" value=""/>
 	<input type="hidden" id="updraft_exclude_modal_path" value=""/>
 	<div id="updraft_exclude_modal_main">
-		<p><?php _e("Select a way to exclude files or directories from the backup", 'updraftplus');?>:</p>		
+		<p><?php _e("Select a way to exclude files or directories from the backup", 'updraftplus');?>:</p>
 		<ol class="updraft_exclude_actions_list">
 			<li>
 				<a href="#" class="updraft-exclude-link" data-panel="file-dir"><?php _e('File/directory', 'updraftplus');?></a>
@@ -40,7 +40,7 @@
 			?>
 		</div>
 	</div>
-	
+
 	<?php $panel = 'extension';?>
 	<div class="updraft-exclude-panel updraft-hidden" data-panel="<?php echo $panel;?>" style="display:none;">
 		<?php
@@ -52,7 +52,7 @@
 		$updraftplus_admin->include_template('wp-admin/settings/exclude-settings-modal/exclude-panel-submit.php', false, array('panel' => $panel));
 		?>
 	</div>
-	
+
 	<?php $panel = 'begin-with';?>
 	<div class="updraft-exclude-panel updraft-hidden" data-panel="<?php echo $panel;?>" style="display:none;">
 		<?php

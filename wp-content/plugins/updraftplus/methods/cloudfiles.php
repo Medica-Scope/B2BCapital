@@ -25,10 +25,10 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 	 * @return Array
 	 */
 	private function getCF($user, $apikey, $authurl, $useservercerts = false) {
-		
+
 		$storage = $this->get_storage();
 		if (!empty($storage)) return $storage;
-		
+
 		if (!class_exists('UpdraftPlus_CF_Authentication')) updraft_try_include_file('includes/cloudfiles/cloudfiles.php', 'include_once');
 
 		if (!defined('UPDRAFTPLUS_SSL_DISABLEVERIFY')) define('UPDRAFTPLUS_SSL_DISABLEVERIFY', UpdraftPlus_Options::get_updraft_option('updraft_ssl_disableverify'));
@@ -44,7 +44,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		if (!$useservercerts) $storage->ssl_use_cabundle(UPDRAFTPLUS_DIR.'/includes/cacert.pem');
 
 		$this->set_storage($storage);
-		
+
 		return $storage;
 
 	}
@@ -74,7 +74,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 			'region' => null
 		);
 	}
-	
+
 	/**
 	 * Check whether options have been set up by the user, or not
 	 *
@@ -185,11 +185,11 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 								} catch (Exception $e) {
 									$this->log("chunk upload: error: ($file / $i) (".$e->getMessage().")");
 									// Experience shows that Curl sometimes returns a select/poll error (curl error 55) even when everything succeeded. Google seems to indicate that this is a known bug.
-									
+
 									$chunk_object = new UpdraftPlus_CF_Object($container_object, $upload_remotepath);
 									$chunk_object->content_type = "application/zip";
 									$remote_size = (isset($chunk_object->content_length)) ? $chunk_object->content_length : 0;
-									
+
 									if ($remote_size >= $upload_size) {
 
 										$this->log("$file: Chunk now exists; ignoring error (presuming it was an apparently known curl bug)");
@@ -207,7 +207,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 						}
 						if ($errors_so_far) return false;
 						// All chunks are uploaded - now upload the manifest
-						
+
 						try {
 							$object->manifest = $container."/".$chunk_path."_";
 							// Put a zero-length file
@@ -275,7 +275,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		return $results;
 
 	}
-	
+
 	/**
 	 * Delete a single file from the service using the CloudFiles API
 	 *
@@ -378,7 +378,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		try {
 			// The third parameter causes an exception to be thrown if the object does not exist remotely
 			$object = new UpdraftPlus_CF_Object($container_object, $path, true);
-			
+
 			$fullpath = $updraft_dir.'/'.$file;
 
 			$start_offset = (file_exists($fullpath)) ? filesize($fullpath) : 0;
@@ -415,7 +415,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 				$this->log("$file: ".__('Error downloading remote file: Failed to download', 'updraftplus').' ('.$e->getMessage().")", 'error');
 				return false;
 			}
-			
+
 			// All-in-one-go method:
 			// $object->save_to_filename($fullpath);
 
@@ -443,7 +443,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		global $updraftplus_admin;
 
 		$classes = $this->get_css_classes(false);
-		
+
 		?>
 		<tr class="<?php echo $classes . ' ' . 'cloudfiles_pre_config_container';?>">
 			<td colspan="2">
@@ -484,7 +484,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 			</td>
 		</tr>
 		<input type="hidden" data-updraft_settings_test="region" '.$this->output_settings_field_name_and_id('region', true).' value="">';
-			
+
 			/*
 			// Can put a message here if someone asks why region storage is not available (only available on new SDK)
 			<tr class="updraftplusmethod cloudfiles">
@@ -522,7 +522,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		$opts['authurl'] = isset($opts['authurl']) ? $opts['authurl'] : '';
 		return $opts;
 	}
-	
+
 	/**
 	 * Perform a test of user-supplied credentials, and echo the result
 	 *

@@ -15,14 +15,14 @@
 					WFAD.tour('wfNewTour3', 'wfls-enable-auth-captcha', 'bottom', 'left', WFAD.tour2, WFAD.tourComplete);
 				};
 				WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_LOGIN_SECURITY); ?>'); };
-				
+
 				<?php if (wfOnboardingController::shouldShowNewTour(wfOnboardingController::TOUR_LOGIN_SECURITY)): ?>
 				if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 				<?php endif; ?>
 			});
 		})(jQuery);
 	</script>
-	
+
 	<script type="text/x-jquery-template" id="wfNewTour1">
 		<div>
 			<h3><?php esc_html_e('Introducing the New Wordfence 2FA', 'wordfence'); ?></h3>

@@ -15,7 +15,7 @@
 		<div id="wp-optimize-settings-save-results"></div>
 
 		<input type="hidden" name="action" value="save_redirect">
-		
+
 		<?php wp_nonce_field('wpo_optimization'); ?>
 
 		<h3 class="wpo-first-child"><?php esc_html_e('Wipe settings', 'wp-optimize'); ?></h3>

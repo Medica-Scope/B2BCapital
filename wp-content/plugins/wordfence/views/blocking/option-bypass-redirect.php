@@ -26,11 +26,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 						$(function() {
 							$('#wf-bypass-redir-url, #wf-bypass-redir-dest').on('change paste keyup', function() {
 								var e = this;
-								
+
 								setTimeout(function() {
 									var option = $(e).data('option');
 									var value = $(e).val();
-			
+
 									var originalValue = $(e).data('originalValue');
 									if (originalValue == value) {
 										delete WFAD.pendingChanges[option];
@@ -38,11 +38,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 									else {
 										WFAD.pendingChanges[option] = value;
 									}
-			
+
 									WFAD.updatePendingChanges();
 								}, 4);
 							});
-							
+
 							$(window).on('wfOptionsReset', function() {
 								$('#wf-bypass-redir-url, #wf-bypass-redir-dest').each(function() {
 									var originalValue = $(this).data('originalValue');

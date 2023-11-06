@@ -9,7 +9,7 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 	protected $chunk_size;
 
 	protected $client;
-	
+
 	protected $method;
 
 	protected $desc;
@@ -32,7 +32,7 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 		$default_chunk_size = (defined('UPDRAFTPLUS_UPLOAD_CHUNKSIZE') && UPDRAFTPLUS_UPLOAD_CHUNKSIZE > 0) ? max(UPDRAFTPLUS_UPLOAD_CHUNKSIZE, 1048576) : 5242880;
 
 		$this->chunk_size = $updraftplus->jobdata_get('openstack_chunk_size', $default_chunk_size);
-		
+
 		$opts = $this->get_options();
 
 		$this->container = $opts['path'];
@@ -58,11 +58,11 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 		}
 
 		foreach ($backup_array as $file) {
-		
+
 			$file_key = 'status_'.md5($file);
 			$file_status = $this->jobdata_get($file_key, null, 'openstack_'.$file_key);
 			if (is_array($file_status) && !empty($file_status['chunks']) && !empty($file_status['chunks'][1]['size'])) $this->chunk_size = $file_status['chunks'][1]['size'];
-		
+
 			// First, see the object's existing size (if any)
 			$uploaded_size = $this->get_remote_size($file);
 
@@ -141,15 +141,15 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 					'limit' => $page_size,
 					'marker' => $marker
 				);
-				
+
 				$objects = $this->container_object->objectList($params);
-				
+
 				$total = $objects->count();
-				
+
 				if (0 == $total) break;
-				
+
 				$index = 0;
-				
+
 				while (false !== ($file = $objects->offsetGet($index)) && !empty($file)) {
 					$index++;
 					try {
@@ -169,7 +169,7 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 					}
 					$marker = (!empty($file->name) && $total >= $page_size) ? $file->name : null;
 				}
-				
+
 			}
 		} catch (Exception $e) {
 			// Catch
@@ -194,7 +194,7 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 				'Content-Length'    => 0,
 				'X-Object-Manifest' => sprintf('%s/%s', $this->container, $chunk_path.'_')
 			);
-			
+
 			$url = $this->container_object->getUrl($file);
 			$this->container_object->getClient()->put($url, $headers)->send();
 			return true;
@@ -225,13 +225,13 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 
 		$file_key = 'status_'.md5($file);
 		$file_status = $this->jobdata_get($file_key, null, 'openstack_'.$file_key);
-		
+
 		$next_chunk_size = $upload_size;
-		
+
 		$bytes_already_uploaded = 0;
-		
+
 		$last_uploaded_chunk_index = 0;
-		
+
 		// Once a chunk is uploaded, its status is set, allowing the sequence to be reconstructed
 		if (is_array($file_status) && isset($file_status['chunks']) && !empty($file_status['chunks'])) {
 			foreach ($file_status['chunks'] as $c_id => $c_status) {
@@ -244,9 +244,9 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 		} else {
 			$file_status = array('chunks' => array());
 		}
-		
+
 		$this->jobdata_set($file_key, $file_status);
-		
+
 		if ($upload_start < $bytes_already_uploaded) {
 			if ($next_chunk_size != $upload_size) {
 				$response = new stdClass;
@@ -257,12 +257,12 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 				return 1;
 			}
 		}
-		
+
 		// Shouldn't be able to happen
 		if ($chunk_index <= $last_uploaded_chunk_index) {
 			$updraftplus->log($this->desc.": Chunk sequence error; chunk_index=$chunk_index, last_uploaded_chunk_index=$last_uploaded_chunk_index, upload_start=$upload_start, upload_end=$upload_end, file_status=".json_encode($file_status));
 		}
-		
+
 		// Used to use $chunk_index here, before switching to variable chunk sizes
 		$upload_remotepath = 'chunk-do-not-delete-'.$file.'_'.sprintf("%016d", $chunk_index);
 
@@ -289,23 +289,23 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 						$upload_rate = $upload_size / max($time_taken, 0.0001);
 						$upload_secs = min(floor($job_run_time), 10);
 						if ($job_run_time < 15) $upload_secs = max(6, $job_run_time*0.6);
-						
+
 						// In megabytes
 						$memory_limit_mb = $updraftplus->memory_check_current();
 						$bytes_used = memory_get_usage();
 						$bytes_free = $memory_limit_mb * 1048576 - $bytes_used;
-						
+
 						$new_chunk = max(min($upload_secs * $upload_rate * 0.9, 52428800, $bytes_free), 5242880);
 						$new_chunk = $new_chunk - ($new_chunk % 5242880);
 						$next_chunk_size = (int) $new_chunk;
 						$updraftplus->jobdata_set('openstack_chunk_size', $next_chunk_size);
 					}
 				}
-				
+
 			} catch (Exception $e) {
 				$updraftplus->log($this->desc." chunk upload: error: ($file / $chunk_index) (".$e->getMessage().") (line: ".$e->getLine().', file: '.$e->getFile().')');
 				// Experience shows that Curl sometimes returns a select/poll error (curl error 55) even when everything succeeded. Google seems to indicate that this is a known bug.
-				
+
 				$remote_size = $this->get_remote_size($upload_remotepath);
 
 				if ($remote_size >= $upload_size) {
@@ -316,21 +316,21 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 				}
 			}
 		}
-		
+
 		$file_status['chunks'][$chunk_index]['size'] = $upload_size;
 
 		$this->jobdata_set($file_key, $file_status);
-		
+
 		if ($next_chunk_size != $upload_size) {
 			$response = new stdClass;
 			$response->new_chunk_size = $next_chunk_size;
 			$response->log = true;
 			return $response;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Delete a single file from the service using OpenStack API
 	 *
@@ -558,7 +558,7 @@ class UpdraftPlus_BackupModule_openstack_base extends UpdraftPlus_BackupModule {
 		global $updraftplus_admin;
 
 		$classes = $this->get_css_classes(false);
-		
+
 		?>
 		<tr class="<?php echo $classes . ' ' . $this->method . '_pre_config_container';?>">
 			<td colspan="2">

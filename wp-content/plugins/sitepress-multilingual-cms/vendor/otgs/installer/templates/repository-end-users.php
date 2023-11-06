@@ -28,7 +28,7 @@ class EndUsers {
 		$findAccountInfo        = __( 'No worries. We can check that for you.', 'installer' );
 		$findAccountButton      = __( 'Check', 'installer' );
 		$findAccountPlaceholder = __( 'Your Email Address', 'installer' );
-		
+
 		if ( $model->endUserRenewalUrl ): ?>
             <div class="js-question">
                 <p class="otgs-installer-notice-status-item"><?php echo esc_html( $accountQuestion ); ?></p>

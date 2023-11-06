@@ -39,7 +39,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				array("iis", __('Windows (IIS)', 'wordfence'), $serverInfo->isIIS(), wfWAFAutoPrependHelper::helper('iis')->getFilesNeededForBackup()),
 				array("manual", __('Manual Configuration', 'wordfence'), false, array()),
 			);
-			
+
 			$hasRecommendedOption = false;
 			$wafPrependOptions = '';
 			foreach ($dropdown as $option) {
@@ -51,7 +51,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					$hasRecommendedOption = true;
 				}
 			}
-			
+
 			if (!$hasRecommendedOption): ?>
 				<p><?php esc_html_e('If you know your web server\'s configuration, please select it from the list below.', 'wordfence'); ?></p>
 			<?php else: ?>
@@ -77,7 +77,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					if (!file_exists($backup)) {
 						continue;
 					}
-					
+
 					$filteredBackups[$index] = $backup;
 				}
 				$jsonBackups = json_encode(array_map('basename', $filteredBackups));

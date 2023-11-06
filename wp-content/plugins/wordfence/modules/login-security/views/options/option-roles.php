@@ -95,7 +95,7 @@ $customerRoleWarning = __('Requiring 2FA for customers is not recommended as som
 			};
 			if (typeof notifyAll !== "undefined" && notifyAll)
 				request.notify_all = true;
-			WFLS.ajax('wordfence_ls_send_grace_period_notification', request, 
+			WFLS.ajax('wordfence_ls_send_grace_period_notification', request,
 				function(response) {
 					if (response.error) {
 						var settings = {
@@ -126,7 +126,7 @@ $customerRoleWarning = __('Requiring 2FA for customers is not recommended as som
 		$('#wfls-send-grace-period-notification').on('click', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			sendGracePeriodNotification();	
+			sendGracePeriodNotification();
 		});
 		$(document).on('click', '#wfls-send-grace-period-notification-over-limit', function() {
 			sendGracePeriodNotification(true);

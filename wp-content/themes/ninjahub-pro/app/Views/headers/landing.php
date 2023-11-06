@@ -20,7 +20,7 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 ?>
 <div class="landing-page main">
 	<div class="back-texture d-none d-xl-flex">
-		<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/landing-page/texture.webp" alt="Texture"
+		<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/landing-page/texture.webp" alt="Texture"
 			class="img-fluid">
 	</div>
 	<!-- App Sidebar -->
@@ -90,13 +90,13 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 					<?php
 					if ( ! is_user_logged_in() ) {
 						?>
-						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
+						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=investor"
 							class="user-action bbc-btn outline success">
-							<?php echo __( 'Join as Investor', 'ninja' ); ?>
+							<?= __( 'Join as Investor', 'ninja' ); ?>
 						</a>
-						<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
+						<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ); ?>?type=owner"
 							class="user-action bbc-btn outline action">
-							<?php echo __( 'Join as Owner', 'ninja' ); ?>
+							<?= __( 'Join as Owner', 'ninja' ); ?>
 						</a>
 						<?php
 					}
@@ -138,7 +138,7 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 							<div class="offcanvas-header">
 								<h5 class="offcanvas-title" id="staticBackdropLabel">
 									<a href="<?= home_url() ?>" class="app-brand">
-										<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
+										<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp"
 											alt="B2B Capital Logo" class="img-fluid">
 									</a>
 								</h5>
@@ -148,33 +148,33 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : false;
 							<div class="offcanvas-body">
 								<ul class="navbar-nav app-navigation">
 									<li class="nav-item mb-2">
-										<a class="nav-link text-white  <?php echo $active_link === 'dashboard' ? 'active' : ''; ?>"
+										<a class="nav-link text-white  <?= $active_link === 'dashboard' ? 'active' : ''; ?>"
 											href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
-											<?php echo __( 'Dashboard', 'ninja' ); ?>
+											<?= __( 'Dashboard', 'ninja' ); ?>
 										</a>
 									</li>
 									<li class="nav-item mb-2">
-										<a class="nav-link text-white  <?php echo $active_link === 'contact_us' ? 'active' : ''; ?>"
-											href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'contact-us' ) ) ); ?>">
-											<?php echo __( 'Contact Us', 'ninja' ); ?>
+										<a class="nav-link text-white  <?= $active_link === 'contact_us' ? 'active' : ''; ?>"
+											href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'contact-us' ) ) ); ?>">
+											<?= __( 'Contact Us', 'ninja' ); ?>
 										</a>
 									</li>
 									<li class="nav-item mb-2">
-										<a class="nav-link text-white  <?php echo $active_link === 'about_us' ? 'active' : ''; ?>"
-											href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'about' ) ) ); ?>">
-											<?php echo __( 'About', 'ninja' ); ?>
+										<a class="nav-link text-white  <?= $active_link === 'about_us' ? 'active' : ''; ?>"
+											href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'about' ) ) ); ?>">
+											<?= __( 'About', 'ninja' ); ?>
 										</a>
 									</li>
 									<li class="nav-item mb-2">
-										<a class="nav-link text-white  <?php echo $active_link === 'services' ? 'active' : ''; ?>"
-											href="<?php echo get_post_type_archive_link( 'service' ); ?>">
-											<?php echo __( 'Services', 'ninja' ); ?>
+										<a class="nav-link text-white  <?= $active_link === 'services' ? 'active' : ''; ?>"
+											href="<?= get_post_type_archive_link( 'service' ); ?>">
+											<?= __( 'Services', 'ninja' ); ?>
 										</a>
 									</li>
 									<li class="nav-item mb-2">
-										<a class="nav-link text-white  <?php echo $active_link === 'faq' ? 'active' : ''; ?>"
-											href="<?php echo get_post_type_archive_link( 'faq' ); ?>">
-											<?php echo __( 'FAQs', 'ninja' ); ?>
+										<a class="nav-link text-white  <?= $active_link === 'faq' ? 'active' : ''; ?>"
+											href="<?= get_post_type_archive_link( 'faq' ); ?>">
+											<?= __( 'FAQs', 'ninja' ); ?>
 										</a>
 									</li>
 								</ul>

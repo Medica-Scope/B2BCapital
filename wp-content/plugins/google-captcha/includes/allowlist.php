@@ -75,7 +75,7 @@ if ( ! class_exists( 'Gglcptch_Allowlist' ) ) {
 			$this->display_notices();
 			$this->prepare_items();
 			?>
-			<form class="form-table gglcptch_allowlist_form" method="post" action="admin.php?page=google-captcha-allowlist.php" 
+			<form class="form-table gglcptch_allowlist_form" method="post" action="admin.php?page=google-captcha-allowlist.php"
 			<?php
 			if ( ! ( isset( $_REQUEST['gglcptch_show_allowlist_form'] ) || isset( $_REQUEST['gglcptch_add_to_allowlist'] ) ) ) {
 				echo ' style="display: none;"';}

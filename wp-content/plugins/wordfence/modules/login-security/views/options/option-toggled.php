@@ -2,7 +2,7 @@
 if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 /**
  * Presents a boolean option with a checkbox toggle control.
- * 
+ *
  * @var string $optionName The option name. Required.
  * @var string $enabledValue The value to save in $option if the toggle is enabled. Required.
  * @var string $disabledValue The value to save in $option if the toggle is disabled. Required.

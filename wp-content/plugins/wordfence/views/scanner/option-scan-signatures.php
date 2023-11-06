@@ -63,12 +63,12 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 
 			$('#wf-scan-additional-signatures textarea').on('change paste keyup', function() {
 				var e = this;
-				
+
 				setTimeout(function() {
 					var optionElement = $(e).closest('ul').find('.wf-option.wf-option-scan-signatures');
 					var option = optionElement.data('textAreaOption');
 					var value = $(e).val();
-	
+
 					var originalValue = optionElement.data('originalTextAreaValue');
 					if (originalValue == value) {
 						delete WFAD.pendingChanges[option];
@@ -76,7 +76,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					else {
 						WFAD.pendingChanges[option] = value;
 					}
-	
+
 					WFAD.updatePendingChanges();
 				}, 4);
 			});
@@ -93,15 +93,15 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					$(this).val(originalValue);
 				});
 			});
-			
+
 			$('.wf-option.wf-option-scan-signatures .wf-option-disclosure').each(function() {
 				var disclosure = $(this).find('svg');
-				
+
 				$(this).closest('.wf-option').css('cursor', 'pointer');
 				$(this).closest('.wf-option').on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
-		
+
 					var isActive = $('#wf-scan-additional-signatures').hasClass('wf-active');
 					if (isActive) {
 						disclosure.css('transform', 'rotate(0deg)');
@@ -123,4 +123,4 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 			});
 		});
 	})(jQuery);
-</script> 
+</script>

@@ -288,17 +288,17 @@ if ( ! class_exists( 'ACF_Form_User' ) ) :
 			?>
 <script type="text/javascript">
 (function($) {
-	
+
 	// vars
 	var view = '<?php echo $this->view; ?>';
-	
+
 	// add missing spinners
 	var $submit = $('input.button-primary');
 	if( !$submit.next('.spinner').length ) {
 		$submit.after('<span class="spinner"></span>');
 	}
-	
-})(jQuery);	
+
+})(jQuery);
 </script>
 			<?php
 

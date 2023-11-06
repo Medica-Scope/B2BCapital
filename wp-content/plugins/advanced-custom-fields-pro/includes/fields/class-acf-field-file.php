@@ -164,11 +164,11 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 	</div>
 	<div class="hide-if-value">
 			<?php if ( $uploader == 'basic' ) : ?>
-			
+
 				<?php if ( $field['value'] && ! is_numeric( $field['value'] ) ) : ?>
 				<div class="acf-error-message"><p><?php echo acf_esc_html( $field['value'] ); ?></p></div>
 			<?php endif; ?>
-			
+
 			<label class="acf-basic-uploader">
 				<?php
 				acf_file_input(
@@ -180,13 +180,13 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 				);
 				?>
 			</label>
-			
+
 		<?php else : ?>
-			
+
 			<p><?php _e( 'No file selected', 'acf' ); ?> <a data-name="add" class="acf-button button" href="#"><?php _e( 'Add File', 'acf' ); ?></a></p>
-			
+
 		<?php endif; ?>
-		
+
 	</div>
 </div>
 			<?php

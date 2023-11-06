@@ -143,7 +143,7 @@
 							<a href="#" class="js--wpo-goto" data-tab="css"><?php esc_html_e('Settings', 'wp-optimize'); ?></a>
 						</label>
 					</div>
-				</div>			
+				</div>
 			</div>
 		</div>
 

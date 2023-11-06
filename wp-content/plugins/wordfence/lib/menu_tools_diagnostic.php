@@ -605,10 +605,10 @@ if (!isset($sendingDiagnosticEmail)) {
 									$displayKeyOrder[] = $k;
 								}
 							}
-							
+
 							$diff = array_diff($actualKeyOrder, $preferredKeyOrder);
 							$displayKeyOrder = array_merge($displayKeyOrder, $diff);
-							
+
 							?>
 							<tr>
 								<?php foreach ($displayKeyOrder as $tkey): ?>
@@ -684,7 +684,7 @@ if (!isset($sendingDiagnosticEmail)) {
 										$metadata[] = wfUtils::formatBytes(filesize($log));
 									}
 								}
-								
+
 								if (is_callable('lstat')) {
 									$rawStat = @lstat($log);
 									if (is_array($rawStat) && isset($rawStat['mtime'])) {
@@ -695,7 +695,7 @@ if (!isset($sendingDiagnosticEmail)) {
 										$metadata[] = $dt->format('M j, Y G:i:s') . ' ' . __('UTC', 'wordfence');
 									}
 								}
-								
+
 								$shortLog = $log;
 								if (strpos($shortLog, ABSPATH) === 0) {
 									$shortLog = '~/' . substr($shortLog, strlen(ABSPATH));
@@ -714,21 +714,21 @@ if (!isset($sendingDiagnosticEmail)) {
 			</div>
 		</div>
 	</div>
-	
+
 	<?php
 	if (!empty($inEmail)) {
 		echo '<h1>' . esc_html__('Scan Issues', 'wordfence') . "</h1>\n";
 		$issues = wfIssues::shared()->getIssues(0, 50, 0, 50);
 		$issueCounts = array_merge(array('new' => 0, 'ignoreP' => 0, 'ignoreC' => 0), wfIssues::shared()->getIssueCounts());
 		$issueTypes = wfIssues::validIssueTypes();
-		
+
 		echo '<h2>' . esc_html(sprintf(/* translators: Number of scan issues. */ __('New Issues (%d total)', 'wordfence'), $issueCounts['new'])) . "</h2>\n";
 		if (isset($issues['new']) && count($issues['new'])) {
 			foreach ($issues['new'] as $i) {
 				if (!in_array($i['type'], $issueTypes)) {
 					continue;
 				}
-				
+
 				$viewContent = '';
 				try {
 					$viewContent = wfView::create('scanner/issue-' . $i['type'], array('textOutput' => $i))->render();
@@ -736,7 +736,7 @@ if (!isset($sendingDiagnosticEmail)) {
 				catch (wfViewNotFoundException $e) {
 					//Ignore -- should never happen since we validate the type
 				}
-				
+
 				if (!empty($viewContent)) {
 					echo nl2br($viewContent) . "<br><br>\n";
 				}

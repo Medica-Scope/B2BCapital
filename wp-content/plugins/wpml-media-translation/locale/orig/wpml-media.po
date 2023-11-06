@@ -92,7 +92,7 @@ msgstr ""
 
 # /* translators: WPML Media Translation saddon/section name */
 # $media_translation_name = __( 'Media Translation', 'wpml-media' );
-# 
+#
 
 msgid "Media Translation"
 msgstr ""
@@ -171,7 +171,7 @@ msgstr ""
 
 # }
 # wp_send_json_success( array( 'status' => __( 'Running setup...', 'wpml-media' ) ) );
-# 
+#
 
 msgid "Running setup..."
 msgstr ""
@@ -262,7 +262,7 @@ msgstr ""
 
 # /* translators: name ot WPML-Media plugin */
 # $wpml_media = '<strong>' . __( 'WPML Media Translation', 'wpml-media' ) . '</strong>';
-# 
+#
 
 msgid "WPML Media Translation"
 msgstr ""
@@ -276,7 +276,7 @@ msgstr ""
 
 # <input type="button" class="button-primary alignright"
 # value="<?php esc_attr_e( 'Finish setup', 'wpml-media' ) ?>"/>
-# 
+#
 
 msgid "Finish setup"
 msgstr ""
@@ -564,21 +564,21 @@ msgstr ""
 
 # 'get_first_page_url' => $this->pagination->get_first_page_url(),
 # 'first_page'         => __( 'First page', 'wpml-media' ),
-# 
+#
 
 msgid "First page"
 msgstr ""
 
 # 'get_previous_page_url' => $this->pagination->get_previous_page_url(),
 # 'previous_page'         => __( 'Previous page', 'wpml-media' ),
-# 
+#
 
 msgid "Previous page"
 msgstr ""
 
 # 'get_next_page_url' => $this->pagination->get_next_page_url(),
 # 'next_page'         => __( 'Next page', 'wpml-media' ),
-# 
+#
 
 msgid "Next page"
 msgstr ""
@@ -649,7 +649,7 @@ msgstr ""
 
 # $button = '<a href="' . $url . '" target="_blank" class="button button-primary button-wpml button-lg">' .
 # esc_html__( 'Learn more', 'wpml-media' ) . '</a>';
-# 
+#
 
 msgid "Learn more"
 msgstr ""
@@ -724,9 +724,9 @@ msgstr ""
 msgid "WPML Media Translation will send the email address and name of each manager and assigned translator as well as the content itself to Advanced Translation Editor and to the translation services which are used."
 msgstr ""
 
-# 
+#
 # $message = __( 'Setting language to media: done!', 'wpml-media' );
-# 
+#
 
 msgid "Setting language to media: done!"
 msgstr ""
@@ -795,9 +795,9 @@ msgctxt "Update button label"
 msgid "Update"
 msgstr ""
 
-# 
+#
 # $response['message'] = __( 'Started...', 'wpml-media' );
-# 
+#
 
 msgid "Started..."
 msgstr ""

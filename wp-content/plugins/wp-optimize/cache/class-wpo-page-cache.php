@@ -300,7 +300,7 @@ class WPO_Page_Cache {
 	 */
 	public function show_notice($message, $type) {
 		global $current_screen;
-		
+
 		if ($current_screen && is_callable(array($current_screen, 'is_block_editor')) && $current_screen->is_block_editor()) : ?>
 			<script>
 				window.addEventListener('load', function() {
@@ -481,7 +481,7 @@ class WPO_Page_Cache {
 					if (0 == strcmp($d, '.') || 0 == strcmp($d, '..')) {
 						continue;
 					}
-					
+
 					if ($this->is_front_page_cache($d)) {
 						$modified_time = (int) filemtime("$cache_folder/$d");
 						if ($modified_time <= $expires) {
@@ -583,7 +583,7 @@ class WPO_Page_Cache {
 		if (!is_dir(WPO_CACHE_CONFIG_DIR) && !wp_mkdir_p(WPO_CACHE_CONFIG_DIR)) {
 			return new WP_Error('create_folders', sprintf(__('The request to the filesystem failed: unable to create directory %s.', 'wp-optimize'), str_ireplace(ABSPATH, '', WPO_CACHE_CONFIG_DIR)) .' '. $permissions_str);
 		}
-		
+
 		if (!is_dir(WPO_CACHE_FILES_DIR)) {
 			if (!wp_mkdir_p(WPO_CACHE_FILES_DIR)) {
 				return new WP_Error('create_folders', sprintf(__('The request to the filesystem failed: unable to create directory %s.', 'wp-optimize'), str_ireplace(ABSPATH, '', WPO_CACHE_FILES_DIR)) .' '. $permissions_str);
@@ -856,7 +856,7 @@ EOF;
 		}
 
 		$advanced_cache_file = untrailingslashit(WP_CONTENT_DIR).'/advanced-cache.php';
-		
+
 		// Now check wp-content. We need to be able to create files of the same user as this file.
 		if ((!file_exists($advanced_cache_file) || false === strpos(file_get_contents($advanced_cache_file), 'WP-Optimize advanced-cache.php')) && !is_writable($advanced_cache_file) && !is_writable(untrailingslashit(WP_CONTENT_DIR))) {
 			$this->log("Unable to write the file advanced-cache.php inside the wp-content folder; please check file/folder permissions");
@@ -870,7 +870,7 @@ EOF;
 				$this->add_warning('verify_cache', sprintf(__("Unable to write inside the cache files folder (%s); please check file/folder permissions (no cache files will be able to be created otherwise)", 'wp-optimize'), WPO_CACHE_FILES_DIR));
 			}
 		}
-		
+
 		if (file_exists(WPO_CACHE_CONFIG_DIR)) {
 			if (!is_writable(WPO_CACHE_CONFIG_DIR)) {
 				$this->log("Unable to write inside the cache configuration folder; please check file/folder permissions");
@@ -1061,7 +1061,7 @@ EOF;
 		if (!defined('WPO_CACHE_FILES_DIR')) return;
 
 		$post_url = get_permalink($post_id);
-	
+
 		$path = self::get_full_path_from_url($post_url);
 
 		// for posts with pagination run purging cache recursively.
@@ -1077,7 +1077,7 @@ EOF;
 	 * Delete cached home page files.
 	 */
 	public static function delete_homepage_cache() {
-	
+
 		if (!defined('WPO_CACHE_FILES_DIR')) return;
 
 		$homepage_url = get_home_url(get_current_blog_id());
@@ -1107,12 +1107,12 @@ EOF;
 			$file = readdir($handle);
 
 			while (false !== $file) {
-	
+
 				if ('.' != $file && '..' != $file && is_dir($path . $file) && preg_match('/.*sitemap.*\.xml/i', $file)) {
 					do_action('wpo_delete_cache_by_url', $path . $file, false);
 					wpo_delete_files($path . $file, true);
 				}
-	
+
 				$file = readdir($handle);
 			}
 		}
@@ -1151,7 +1151,7 @@ EOF;
 		if (!defined('WPO_CACHE_FILES_DIR')) return;
 
 		$post_url = get_permalink($post_id);
-	
+
 		$path = self::get_full_path_from_url($post_url) . 'feed/';
 
 		do_action('wpo_delete_cache_by_url', $path, true);
@@ -1255,7 +1255,7 @@ EOF;
 		}
 		$this->config->update($current_config, true);
 	}
-	
+
 	/**
 	 * Update `date_format` cache config value, used with hook `update_option_date_format`.
 	 *
@@ -1269,7 +1269,7 @@ EOF;
 		$current_config['date_format'] = $new_value;
 		$this->config->update($current_config, true);
 	}
-	
+
 	/**
 	 * Update `time_format` cache config value, used with hook `update_option_time_format`.
 	 *
@@ -1283,7 +1283,7 @@ EOF;
 		$current_config['time_format'] = $new_value;
 		$this->config->update($current_config, true);
 	}
- 
+
 	/**
 	 * Adds an error to the error store
 	 *

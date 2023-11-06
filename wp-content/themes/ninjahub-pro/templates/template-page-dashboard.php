@@ -190,7 +190,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 								<?= __( 'Create New Opportunity', 'ninja' ) ?>
 							</a>
 
-							<small class="pt-3 d-none d-md-block"><i class="bbc-lightbulb-o"></i>
+							<small class="pt-3 d-none d-md-flex"><i class="bbc-lightbulb-o"></i>
 								<?= __( 'Please Note You Can Add Only', 'ninja' ); ?> <span class="text-warning">
 									<?= __( 'One Opportunity In Month', 'ninja' ) ?>
 								</span>

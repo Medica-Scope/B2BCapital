@@ -62,7 +62,7 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 								}
 								else if (response.recovery) {
 									$('#wfls-recovery-code-count').text(response.text);
-									
+
 									var message = '<p><?php echo \WordfenceLS\Text\Model_JavaScript::esc_js(sprintf(__('Use one of these %d codes to log in if you lose access to your authenticator device. Codes are %d characters long plus optional spaces. Each one may be used only once.', 'wordfence'), \WordfenceLS\Controller_Users::RECOVERY_CODE_COUNT, \WordfenceLS\Controller_Users::RECOVERY_CODE_SIZE * 2)); ?></p><ul class="wfls-recovery-codes">';
 
 									var recoveryCodeFileContents = '<?php echo \WordfenceLS\Text\Model_JavaScript::esc_js(sprintf(__('Two-Factor Authentication Recovery Codes - %s (%s)', 'wordfence'), preg_replace('~^https?://~i', '', home_url()), $user->user_login)); ?>' + "\r\n";
@@ -98,4 +98,4 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 			});
 		});
 	})(jQuery);
-</script> 
+</script>

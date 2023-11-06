@@ -39,7 +39,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 		</ul>
 		<ul class="wf-scan-scheduling-manual<?php echo ($scanner->schedulingMode() == wfScanner::SCAN_SCHEDULING_MODE_MANUAL ? ' wf-active' : ''); ?>">
 			<li>
-				<strong class="wf-scan-scheduling-manual-presets-label">Shortcuts</strong> 
+				<strong class="wf-scan-scheduling-manual-presets-label">Shortcuts</strong>
 				<ul class="wf-scan-scheduling-manual-presets wf-overflow-x-auto-xs" data-option-name="manualScanType" data-original-value="<?php echo esc_attr(wfConfig::get('manualScanType')); ?>" role="radiogroup">
 					<li class="wf-nowrap <?php echo ($scanner->manualSchedulingType() == wfScanner::MANUAL_SCHEDULING_ONCE_DAILY ? 'wf-active' : ''); ?>" data-option-value="<?php echo esc_attr(wfScanner::MANUAL_SCHEDULING_ONCE_DAILY); ?>" data-show=".wf-scan-scheduling-manual-preset-options" data-hide=".wf-scan-scheduling-manual-custom-options" role="radio" aria-checked="<?php echo ($scanner->manualSchedulingType() == wfScanner::MANUAL_SCHEDULING_ONCE_DAILY ? 'true' : 'false'); ?>" tabindex="0"><?php esc_html_e('Once Daily', 'wordfence'); ?></li>
 					<li class="wf-nowrap <?php echo ($scanner->manualSchedulingType() == wfScanner::MANUAL_SCHEDULING_TWICE_DAILY ? 'wf-active' : ''); ?>" data-option-value="<?php echo esc_attr(wfScanner::MANUAL_SCHEDULING_TWICE_DAILY); ?>" data-show=".wf-scan-scheduling-manual-preset-options" data-hide=".wf-scan-scheduling-manual-custom-options" role="radio" aria-checked="<?php echo ($scanner->manualSchedulingType() == wfScanner::MANUAL_SCHEDULING_TWICE_DAILY ? 'true' : 'false'); ?>" tabindex="0"><?php esc_html_e('Twice Daily', 'wordfence'); ?></li>
@@ -61,7 +61,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 										$(this).trigger('click');
 									}
 								});
-								
+
 								$(this).find('.wf-option-radio').on('click', function(e) {
 									var optionElement = $(this).closest('.wf-option');
 									if (optionElement.hasClass('wf-option-premium') || optionElement.hasClass('wf-disabled')) {
@@ -79,7 +79,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 												$(toHide).removeClass('wf-active');
 											}
 										});
-										
+
 										value = optionElement.data('optionValue');
 										var toShow = optionElement.data('show');
 										if (toShow) {
@@ -98,7 +98,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 									WFAD.updatePendingChanges();
 								});
 							});
-							
+
 							$('.wf-scan-scheduling-manual-presets > li').each(function(index, element) {
 								$(element).on('keydown', function(e) {
 									if (e.keyCode == 32) {
@@ -108,7 +108,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 										$(this).trigger('click');
 									}
 								});
-								
+
 								$(element).on('click', function(e) {
 									e.preventDefault();
 									e.stopPropagation();
@@ -127,7 +127,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 										$(toShow).addClass('wf-active');
 									}
 
-									var toHide = $(this).data('hide'); 
+									var toHide = $(this).data('hide');
 									if (toHide) {
 										$(toHide).removeClass('wf-active');
 									}
@@ -155,14 +155,14 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 									var originalValue = groupElement.data('originalValue');
 									var option = groupElement.data('option');
 									var value = $(this).data('optionValue');
-									
+
 									$(this).find('.wf-option-radio').prop('checked', value == originalValue);
 									var toHideShow = $(this).data('show');
 									if (toHideShow) {
 										$(toHideShow).toggleClass('wf-active', value == originalValue);
 									}
 								});
-								
+
 								$('.wf-scan-scheduling-manual-presets').each(function() {
 									var originalValue = $(this).data('originalValue');
 									$(this).find('li').each(function() {
@@ -173,7 +173,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 												$(toShow).addClass('wf-active');
 											}
 
-											var toHide = $(this).data('hide'); 
+											var toHide = $(this).data('hide');
 											if (toHide) {
 												$(toHide).removeClass('wf-active');
 											}
@@ -189,7 +189,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				<ul class="wf-option wf-option-select" data-select-option="schedStartHour" data-original-select-value="<?php echo esc_attr($scanner->manualSchedulingStartHour()); ?>">
 					<li class="wf-option-title"><span class="wf-hidden-xs"><?php esc_html_e('Use preferred start time', 'wordfence'); ?></span><span class="wf-visible-xs"><?php esc_html_e('Start time', 'wordfence'); ?></span></li>
 					<li class="wf-option-select">
-						<select<?php echo (!(!wfConfig::p() && isset($premium) && $premium) ? '' : ' disabled'); ?> data-preferred-width="100px"> 
+						<select<?php echo (!(!wfConfig::p() && isset($premium) && $premium) ? '' : ' disabled'); ?> data-preferred-width="100px">
 							<?php
 							$selectOptions = array();
 							for ($i = 1; $i <= 24; $i++) {
@@ -197,17 +197,17 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 								if ($i > 12) {
 									$label = ($i - 12) . ':00 ';
 								}
-								
+
 								if ($i < 12 || $i > 23) {
 									$label .= __('AM', 'wordfence');
 								}
 								else {
 									$label .= __('PM', 'wordfence');
 								}
-								
+
 								$selectOptions[] = array('label' => $label, 'value' => $i);
 							}
-							
+
 							foreach ($selectOptions as $o):
 							?>
 								<option class="wf-option-select-option" value="<?php echo esc_attr($o['value']); ?>"<?php if ($o['value'] == $scanner->manualSchedulingStartHour()) { echo ' selected'; } ?>><?php echo esc_html($o['label']); ?></option>
@@ -277,11 +277,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 									$(this).trigger('click');
 								}
 							});
-							
+
 							$('.wf-schedule-time').on('click', function(e) {
 								e.preventDefault();
 								e.stopPropagation();
-								
+
 								var isActive = $(this).hasClass('wf-active');
 								$(this).toggleClass('wf-active', !isActive).attr('aria-checked', !isActive ? 'true' : 'false');
 								var originalValue = $('.wf-scan-schedule').data('originalValue');
@@ -289,11 +289,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 								if (!customSchedule) {
 									customSchedule = JSON.parse(JSON.stringify(originalValue));
 								}
-								
+
 								var day = $(this).closest('.wf-schedule-day').data('day');
 								var hour = $(this).data('hour');
 								customSchedule[day][hour] = isActive ? 0 : 1;
-								
+
 								var isOriginal = true;
 								var dayKeys = Object.keys(originalValue);
 								scheduleEqualityCheck:

@@ -132,7 +132,7 @@ if (!isset($collapseable)) {
 						else {
 							$users = explode("\n", wfUtils::cleanupOneEntryPerLine($blacklist));
 						}
-						
+
 						echo wfView::create('options/option-token', array(
 							'tokenOptionName' => 'loginSec_userBlacklist',
 							'tokenValue' => $users,

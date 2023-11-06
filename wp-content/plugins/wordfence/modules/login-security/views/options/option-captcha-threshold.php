@@ -79,7 +79,7 @@ $selectOptions = array(
 				});
 			});
 		});
-		
+
 		$(window).on('wfls-tab-change.recaptcha-score-history', function(e, target) {
 			if (target == 'settings') {
 				var barChartData = {

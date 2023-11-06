@@ -277,6 +277,9 @@ class NhValidator
                             preferred_articles_cat_list: {
                                 required: true,
                             },
+                            verification_type: {
+                                required: true,
+                            },
                         },
                     });
                 }

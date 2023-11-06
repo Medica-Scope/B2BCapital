@@ -244,80 +244,80 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 			?>
 <script type="text/javascript">
 (function($) {
-	
+
 	// Define vars.
 	var view = '<?php echo $this->view; ?>';
 	var $form = $('#' + view + 'tag');
 	var $submit = $('#' + view + 'tag input[type="submit"]:last');
-	
+
 	// Add missing spinner.
 	if( !$submit.next('.spinner').length ) {
 		$submit.after('<span class="spinner"></span>');
 	}
-	
+
 			<?php
 
 			// View: Add.
 			if ( $this->view == 'add' ) :
 				?>
-	
+
 	// vars
 	var $fields = $('#acf-term-fields');
 	var html = '';
-	
+
 	// Store a copy of the $fields html used later to replace after AJAX request.
 	// Hook into 'prepare' action to allow ACF core helpers to first modify DOM.
 	// Fixes issue where hidden #acf-hidden-wp-editor is initialized again.
 	acf.addAction('prepare', function(){
 		html = $fields.html();
 	}, 6);
-		
+
 	// WP triggers click as primary action
 	$submit.on('click', function( e ){
-		
+
 		// validate
 		var valid = acf.validateForm({
 			form: $form,
 			event: e,
 			reset: true
 		});
-		
+
 		// if not valid, stop event and allow validation to continue
 		if( !valid ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 		}
 	});
-	
+
 	// listen to AJAX add-tag complete
 	$(document).ajaxComplete(function(event, xhr, settings) {
-		
+
 		// bail early if is other ajax call
 		if( settings.data.indexOf('action=add-tag') == -1 ) {
 			return;
 		}
-		
+
 		// bail early if response contains error
 		if( xhr.responseText.indexOf('wp_error') !== -1 ) {
 			return;
 		}
-		
+
 		// action for 3rd party customization
 		acf.doAction('remove', $fields);
-		
+
 		// reset HTML
 		$fields.html( html );
-		
+
 		// action for 3rd party customization
 		acf.doAction('append', $fields);
-		
+
 		// reset unload
 		acf.unload.reset();
 	});
-	
+
 		<?php endif; ?>
-	
-})(jQuery);	
+
+})(jQuery);
 </script>
 			<?php
 

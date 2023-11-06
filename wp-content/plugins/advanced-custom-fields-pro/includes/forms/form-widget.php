@@ -195,10 +195,10 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 				if ( $widget->updated ) : ?>
 			<script type="text/javascript">
 			(function($) {
-				
+
 				acf.doAction('append', $('[id^="widget"][id$="<?php echo $widget->id; ?>"]') );
-				
-			})(jQuery);	
+
+			})(jQuery);
 			</script>
 					<?php
 			endif;
@@ -265,44 +265,44 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 			?>
 <script type="text/javascript">
 (function($) {
-	
+
 	// vars
 	acf.set('post_id', 'widgets');
-	
+
 	// Only initialize visible fields.
 	acf.addFilter('find_fields', function( $fields ){
-		
+
 		// not templates
 		$fields = $fields.not('#available-widgets .acf-field');
-		
+
 		// not widget dragging in
 		$fields = $fields.not('.widget.ui-draggable-dragging .acf-field');
-		
+
 		// return
 		return $fields;
 	});
-	
+
 	// on publish
 	$('#widgets-right').on('click', '.widget-control-save', function( e ){
-		
+
 		// vars
 		var $button = $(this);
 		var $form = $button.closest('form');
-		
+
 		// validate
 		var valid = acf.validateForm({
 			form: $form,
 			event: e,
 			reset: true
 		});
-		
+
 		// if not valid, stop event and allow validation to continue
 		if( !valid ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 		}
 	});
-	
+
 	// show
 	$('#widgets-right').on('click', '.widget-top', function(){
 		var $widget = $(this).parent();
@@ -312,16 +312,16 @@ if ( ! class_exists( 'acf_form_widget' ) ) :
 			acf.doAction('show', $widget);
 		}
 	});
-	
+
 	$(document).on('widget-added', function( e, $widget ){
-		
+
 		// - use delay to avoid rendering issues with customizer (ensures div is visible)
 		setTimeout(function(){
 			acf.doAction('append', $widget );
 		}, 100);
 	});
-	
-})(jQuery);	
+
+})(jQuery);
 </script>
 			<?php
 

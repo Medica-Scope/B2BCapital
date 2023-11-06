@@ -40,13 +40,13 @@ $partners      = get_field( 'partners', $post->ID );
 				if ( ! empty( $sliders_group ) ) {
 					foreach ( $sliders_group as $key => $value ) {
 						?>
-						<button type="button" data-bs-target="#landingPageCarousel" data-bs-slide-to="<?php echo $key; ?>"
-							class="slide-indicator <?php echo $key === 0 ? 'active' : ''; ?>" aria-label="Slider indicator"></button>
+						<button type="button" data-bs-target="#landingPageCarousel" data-bs-slide-to="<?= $key; ?>"
+							class="slide-indicator <?= $key === 0 ? 'active' : ''; ?>" aria-label="Slider indicator"></button>
 						<?php
 					}
 				}
 				?>
-				<a href="<?php echo apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/choose-type' ) ) ); ?>"
+				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/choose-type' ) ) ); ?>"
 					class="skip-intro">
 					<?= __( 'Skip', 'ninja' ) ?><i class="bbc-arrow-right2"></i>
 				</a>
@@ -57,22 +57,22 @@ $partners      = get_field( 'partners', $post->ID );
 				if ( ! empty( $sliders_group ) ) {
 					foreach ( $sliders_group as $key => $slide ) {
 						?>
-						<div class="carousel-item <?php echo $key === 0 ? 'active' : ''; ?>">
+						<div class="carousel-item <?= $key === 0 ? 'active' : ''; ?>">
 							<div class="slide">
 								<div class="slide-content">
 									<h1 class="b2b-title">
-										<?php echo $slide['slider_titles']['tag_line']; ?>
+										<?= $slide['slider_titles']['tag_line']; ?>
 									</h1>
 									<h2 class="slide-title">
-										<?php echo $slide['slider_titles']['main_title']; ?> <span class="highlighted">
-											<?php echo $slide['slider_titles']['main_title_highlighted_']; ?>
+										<?= $slide['slider_titles']['main_title']; ?> <span class="highlighted">
+											<?= $slide['slider_titles']['main_title_highlighted_']; ?>
 										</span>
 									</h2>
 									<h3 class="slide-subtitle">
-										<?php echo $slide['slider_titles']['second_title']; ?>
+										<?= $slide['slider_titles']['second_title']; ?>
 									</h3>
 									<p class="description">
-										<?php echo $slide['slider_titles']['content']; ?>
+										<?= $slide['slider_titles']['content']; ?>
 									</p>
 
 									<div class="statistics">
@@ -85,13 +85,13 @@ $partners      = get_field( 'partners', $post->ID );
 												?>
 												<div class="statistic">
 													<h4 class="statistic-count">
-														<?php echo $statistic['statistic_number']; ?>
+														<?= $statistic['statistic_number']; ?>
 														<span class="icon">
 															<?= trim( $statistic['statistic_operator'], ' ' ); ?>
 														</span>
 													</h4>
 													<p class="statistic-name">
-														<?php echo $statistic['statistic_title']; ?>
+														<?= $statistic['statistic_title']; ?>
 													</p>
 												</div>
 												<?php
@@ -102,7 +102,7 @@ $partners      = get_field( 'partners', $post->ID );
 								</div>
 								<div class="slide-banner">
 									<div class="banner-wrapper large">
-										<img src="<?php echo $slide['slider_image']['url']; ?>" alt="Slide 1" class="img-fluid">
+										<img src="<?= $slide['slider_image']['url']; ?>" alt="Slide 1" class="img-fluid">
 									</div>
 								</div>
 							</div>
@@ -125,7 +125,7 @@ $partners      = get_field( 'partners', $post->ID );
 						</span>
 						<span class="icon-wrapper">
 							<dotlottie-player
-								src="<?php echo Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/arrow-right-white.lottie/animations/12345.json"
+								src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/arrow-right-white.lottie/animations/12345.json"
 								background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
 								autoplay>
 							</dotlottie-player>
@@ -150,8 +150,8 @@ $partners      = get_field( 'partners', $post->ID );
 					foreach ( $partners as $partner ) {
 						?>
 						<span class="partner-logo">
-							<img src="<?php echo $partner['partner_logo']['sizes']['thumbnail']; ?>"
-								alt="<?php echo $partner['partner_name']; ?>" class="img-fluid">
+							<img src="<?= $partner['partner_logo']['sizes']['thumbnail']; ?>"
+								alt="<?= $partner['partner_name']; ?>" class="img-fluid">
 						</span>
 						<?php
 					}

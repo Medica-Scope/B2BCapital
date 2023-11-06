@@ -15,7 +15,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 		<tr>
 			<th width="40%"><?php esc_html_e('IP', 'wordfence'); ?></th>
 			<th width="35%"><?php esc_html_e('Country', 'wordfence'); ?></th>
-			<th width="25%"><?php esc_html_e('Block Count', 'wordfence'); ?></th> 
+			<th width="25%"><?php esc_html_e('Block Count', 'wordfence'); ?></th>
 		</tr>
 	</thead>
 	<tbody>

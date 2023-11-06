@@ -81,16 +81,16 @@
 		$('.wf-dismiss-notification').on('click', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			
+
 			var n = $(this).closest('.wf-notification');
 			var id = n.data('notification');
 			n.fadeOut(400, function() {
 				n.remove();
-				
+
 				var count = $('.wf-dismiss-notification').length;
 				WFDash.updateNotificationCount(count);
 			});
-			
+
 			WFAD.ajax('wordfence_dismissNotification', {
 				id: id
 			}, function(res) {

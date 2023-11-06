@@ -51,7 +51,7 @@
 																		pointHitRadius: 10,
 																		spanGaps: false,
 STYLING;
-								
+
 								?>
 								(function($) {
 									$(document).ready(function() {
@@ -62,7 +62,7 @@ STYLING;
 												$blocks = $d->networkBlock24h;
 												$labels = array();
 												$values = array();
-												
+
 												foreach ($blocks as $b) {
 													$values[] = $b['c'];
 													$labels[] = "'" . wfUtils::formatLocalTime('g a', $b['t']) . "'";
@@ -106,7 +106,7 @@ STYLING;
 												$blocks = $d->networkBlock7d;
 												$labels = array();
 												$values = array();
-												
+
 												foreach ($blocks as $b) {
 													$values[] = $b['c'];
 													$labels[] = "'" . wfUtils::formatLocalTime('M j', $b['t']) . "'";
@@ -150,7 +150,7 @@ STYLING;
 												$blocks = $d->networkBlock30d;
 												$labels = array();
 												$values = array();
-												
+
 												foreach ($blocks as $b) {
 													$values[] = $b['c'];
 													$labels[] = "'" . wfUtils::formatLocalTime('M j', $b['t']) . "'";
@@ -187,7 +187,7 @@ STYLING;
 											}
 										});
 									});
-									
+
 									$('.wf-dashboard-graph-attacks').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();

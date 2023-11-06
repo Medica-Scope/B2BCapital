@@ -39,7 +39,7 @@ if (!isset($hideShowMenuItem)) {
 				<p>
 					<?php echo wp_kses(__('These options let you choose which traffic to log and to ignore certain types of visitors, based on their level of access, usernames, IP address, or browser type. If you run a high-traffic website where it is not feasible to see your visitors in real-time, simply change the <strong>Traffic logging mode</strong> to "Security Only."', 'wordfence'), array('strong'=>array())); ?>
 				</p>
-				
+
 				<div class="wf-row">
 					<div class="wf-col-xs-12">
 						<?php

@@ -594,7 +594,7 @@ if ( ! function_exists( 'bws_affiliate_postbox' ) ) {
 				<input type="hidden" name="bws_hide_affiliate_banner" value="hide" />
 				<?php wp_nonce_field( 'bws_affiliate_postbox', 'bws_settings_nonce_name' ); ?>
 			</form>
-			<p>BESTWEBSOFT</p>	
+			<p>BESTWEBSOFT</p>
 			<h3><?php esc_html_e( 'Affiliate Program', 'bestwebsoft' ); ?></h3>
 			<div class="bws-affiliate-get"><?php printf( esc_html__( 'Get %s', 'bestwebsoft' ), '20%' ); ?></div>
 			<div><?php esc_html_e( 'from each BestWebSoft plugin and theme sale you refer', 'bestwebsoft' ); ?></div>

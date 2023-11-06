@@ -42,9 +42,12 @@ $current_page = (isset($args['current_page'])) ? $args['current_page'] : '';
 			</div>
 		</div>
 		<div class="card-body p-0">
-			<p class="card-text"><small class="text-body-secondary">
+			<p class="card-text">
+				<small class="text-body-secondary">
 					<?= __('Business Type', 'ninja'); ?>
-				</small></p>
+				</small>
+				<?= $opportunity->taxonomy['business-type'][0]->name ?>
+			</p>
 
 			<a href="<?= $opportunity_link ?>" class="card-title btn btn-link btn-link-dark">
 				<?= $opportunity_title; ?>

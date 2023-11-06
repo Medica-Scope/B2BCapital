@@ -186,7 +186,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 					);
 					?>
 				</div>
-				<div class="bws_info warning gglcptch_settings_form"> 
+				<div class="bws_info warning gglcptch_settings_form">
 						<?php
 						printf(
 							esc_html__( 'The Google reCaptcha block loads the webfont "Roboto" from fonts.googleapis.com. If you do not want to load this font use %1$sCaptcha by BestWebSoft%2$s plugin.', 'google-captcha-pro' ),
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 						<td>
 							<input class="regular-text" type="text" name="<?php echo esc_attr( $fields['form_name'] ); ?>" value="<?php echo esc_attr( $this->options[ $key . '_key' ] ); ?>" maxlength="200" />
 							<label class="gglcptch_error_msg error"><?php echo esc_html( $fields['error_msg'] ); ?></label>
-							<span class="dashicons dashicons-yes gglcptch_verified 
+							<span class="dashicons dashicons-yes gglcptch_verified
 							<?php
 							if ( ! isset( $this->options['keys_verified'] ) || true !== $this->options['keys_verified'] ) {
 								echo esc_attr( 'hidden' );
@@ -235,7 +235,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 							</div>
 						</td>
 					</tr>
-				<?php } ?>				
+				<?php } ?>
 				<tr valign="top">
 					<th scope="row"><?php esc_html_e( 'Enable reCaptcha for', 'google-captcha' ); ?></th>
 					<td>
@@ -366,7 +366,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 			</table>
 
 			<div class="bws_tab_sub_label"><?php esc_html_e( 'Additional Protective Measures', 'google-captcha' ); ?></div>
-			<table class="form-table">	
+			<table class="form-table">
 				<tr class="gglcptch_score_v3" valign="top">
 					<th scope="row">
 						<?php esc_html_e( 'Score', 'google-captcha' ); ?>
@@ -376,7 +376,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 						<output id="gglcptch_score_out_v3" for="gglcptch_score_v3"></output>
 						<span class="bws_info" style="display: block;"><?php printf( esc_html__( 'Set the minimum verification score from %1$s to %2$s (default is %3$s).', 'google-captcha' ), 0, 1, 0.5 ); ?></span>
 					</td>
-				</tr>		
+				</tr>
 			</table>
 			<?php if ( ! $this->hide_pro_tabs ) { ?>
 				<div class="bws_pro_version_bloc gglcptch_badge_v3">
