@@ -910,12 +910,16 @@ class Nh_Forms extends Nh_Hooks {
 					<?= $input_data['label'] ?>
 				</label>
 				<input type="<?= $input_data['type'] ?>"
-					class="<?= $input_data['input_class'] . ' ' . Nh::_DOMAIN_NAME ?>-range" id="<?= $input_data['id'] ?>"
-					name="<?= $input_data['name'] ?>" value="<?= $input_data['value'] ?>"
+					class="<?= $input_data['input_class'] . ' ' . Nh::_DOMAIN_NAME ?>-range" 
+					id="<?= $input_data['id'] ?>"
+					name="<?= $input_data['name'] ?>" 
+					value="<?= $input_data['value'] ?>"
 					min="<?= $input_data['from'] ?>"
 					max="<?= $input_data['to'] ?>"
+					oninput="document.getElementById('rangeValue-<?= $input_data['id'] ?>').innerText = this.value"
 					<?= $input_data['required'] ? 'required="required"' : '' ?> <?= $this->create_attr( $input_data['extra_attr'] ) ?>
 					>
+					<p id="rangeValue-<?= $input_data['id'] ?>"><?= $input_data['value'] ?></p>
 					<?= $input_data['after'] ?>
 			</div>
 		</div>
