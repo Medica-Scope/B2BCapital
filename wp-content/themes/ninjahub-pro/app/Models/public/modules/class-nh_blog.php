@@ -123,7 +123,8 @@
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'     => TRUE,
                         'msg'        => 'post removed',
-                        'fav_active' => 1
+                        'fav_active' => 1,
+                        'updated_text' => __('Add to favorites', 'ninja')
                     ]);
                 } else {
                     $favorites[] = $post_id;
@@ -134,7 +135,8 @@
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'status'     => TRUE,
                         'msg'        => 'post added',
-                        'fav_active' => 0
+                        'fav_active' => 0,
+                        'updated_text' => __('Added to favorites', 'ninja')
                     ]);
                 }
             } else {
@@ -246,7 +248,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated'       => ''
+                        'updated_text' => __('Ignore', 'ninja')
                     ]);
                 } else {
                     $ignored_articles[] = $post_id;
@@ -259,7 +261,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated'       => ''
+                        'updated_text' => __('Ignored', 'ninja')
                     ]);
                 }
             } else {

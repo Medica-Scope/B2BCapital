@@ -179,11 +179,20 @@
         {
             global $user_ID;
 
+            if ($user_ID) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
             $args = [
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'orderby'     => 'ID',
                 'order'       => 'DESC',
+                "post__not_in"=> $not_in,
                 'meta_query'  => [
                     [
                         'key'     => 'acquisitions_stage',
@@ -192,6 +201,10 @@
                     ],
                 ],
             ];
+            if ($current) {
+                $args['author'] = $user_ID;
+                unset($args['meta_query']);
+            }
 
             $acquisitions = new \WP_Query($args);
 
@@ -211,11 +224,20 @@
         {
             global $user_ID;
 
+            if ($user_ID) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
             $args = [
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'orderby'     => 'ID',
                 'order'       => 'DESC',
+                "post__not_in"=> $not_in,
                 'meta_query'  => [
                     [
                         'key'     => 'acquisitions_stage',
