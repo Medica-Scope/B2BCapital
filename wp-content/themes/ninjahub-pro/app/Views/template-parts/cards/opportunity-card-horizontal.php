@@ -11,6 +11,10 @@
     $is_item_controllers      = !empty($args['is_item_controllers']) ? $args['is_item_controllers'] : FALSE;
     $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : FALSE;
     $business_type            = !empty($args['business_type']) ? $args['business_type'] : FALSE;
+    $location                 = !empty($args['location']) ? $args['location'] : FALSE;
+    $location_appearance      = !empty($args['location_appearance']) ? $args['location_appearance'] : FALSE;
+    $valuation                = !empty($args['valuation']) ? $args['valuation'] : FALSE;
+    $valuation_appearance     = !empty($args['valuation_appearance']) ? $args['valuation_appearance'] : FALSE;
 ?>
 <div class="opportunity-item card card-horizontal shadow border p-0">
     <div class="row g-0">
@@ -99,15 +103,16 @@
                     <small class="text-body-secondary">
                         <?= __('Business Type', 'ninja'); ?>
                     </small>
-					<?= $business_type ?>
+                    <?= $business_type ?>
                 </p>
 
                 <a href="<?= esc_url($opportunity_link); ?>" class="card-title btn btn-link btn-link-dark">
                     <?= $opportunity_title; ?>
                 </a>
 
-                <p class="card-text"><small class="text-body-secondary">
-                        <?= $opportunity_created_date; ?>
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        <?= date('F j, Y', strtotime($opportunity_created_date));; ?>
                     </small>
                 </p>
             </div>
@@ -116,11 +121,23 @@
     <div class="card-footer card-extra-info">
         <div class="card-info-item">
             <small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
-            <p class="card-text fw-bold">Egypt</p>
+            <?php
+                if ((int)$location_appearance === 1) {
+                    ?><p class="card-text fw-bold"><?= $location; ?></p><?php
+                } else {
+                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                }
+            ?>
         </div>
         <div class="card-info-item">
             <small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
-            <p class="card-text fw-bold">95460$</p>
+            <?php
+                if ((int)$valuation_appearance === 1) {
+                    ?><p class="card-text fw-bold"><?= '$ ' . $valuation; ?></p><?php
+                } else {
+                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                }
+            ?>
         </div>
     </div>
 </div>

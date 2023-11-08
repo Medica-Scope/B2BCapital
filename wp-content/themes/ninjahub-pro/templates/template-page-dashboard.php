@@ -380,6 +380,10 @@
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
                                                         'business_type'            => $acquisition->taxonomy['business-type'][0]->name,
+                                                        'location'                 => $opportunity->meta_data['location_group_location'],
+                                                        'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
+                                                        'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
+                                                        'valuation_appearance'     => $opportunity->meta_data['valuation_in_usd_group_appearance'],
                                                     ];
 
                                                     ?>
@@ -401,6 +405,10 @@
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
                                                         'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
+                                                        'location'                 => $opportunity->meta_data['location_group_location'],
+                                                        'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
+                                                        'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
+                                                        'valuation_appearance'     => $opportunity->meta_data['valuation_in_usd_group_appearance'],
                                                     ];
                                                     ?>
                                                     <div class="col">
@@ -439,7 +447,11 @@
                                                     'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
-                                                    'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name
+                                                    'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
+                                                    'location'                 => $opportunity->meta_data['location_group_location'],
+                                                    'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
+                                                    'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
+                                                    'valuation_appearance'     => $opportunity->meta_data['valuation_in_usd_group_appearance'],
                                                 ];
                                                 ?>
                                                 <div class="col">

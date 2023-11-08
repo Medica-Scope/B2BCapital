@@ -148,10 +148,16 @@
             }
 
 			if(is_singular(['opportunity'])){
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
 			}
 
             if (is_post_type_archive('faq')) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
             }
 
@@ -176,12 +182,6 @@
             if (is_post_type_archive('service') || is_singular('service') || is_tax('service-category')) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-service', Nh_Hooks::PATHS['public']['js'] . '/service-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front');
-            }
-
-            if (is_singular('opportunity')) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
             }
 
             $this->hooks->run();

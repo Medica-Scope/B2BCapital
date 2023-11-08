@@ -37,13 +37,30 @@
     $unique_type_name            = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
     $opportunity_bids            = $opportunity_obj->get_opportunity_bids($opportunity->ID, TRUE);
     $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions($opportunity->ID, TRUE);
-    $fav_class                   = 'bbc-star-o';
+    $fav_chk                     = FALSE;
+    $ignore_chk                  = FALSE;
+    $fav_class                   = '';
+    $ignore_class                = '';
+    $fav_text                    = '';
+    $ignore_text                 = '';
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
             $fav_class = 'bbc-star';
+            $fav_text  = __('Added to favorites', 'ninja');
+        } else {
+            $fav_class = 'bbc-star-o';
+            $fav_text  = __('Add to favorites', 'ninja');
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
+        if ($ignore_chk) {
+            $ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+            $ignore_text  = __('Ignored', 'ninja');
+
+        } else {
+            $ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+            $ignore_text  = __('Ignore', 'ninja');
+        }
     }
 ?>
 
@@ -90,7 +107,7 @@
                                          'class'               => 'btn-secondary',
                                          'id'                  => 'submit_add_to_fav_request',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="' . $fav_class . ' fav-star"></i> ' . __('Add To Favorite', 'ninja'),
+                                         'value'               => '<i class="' . $fav_class . ' fav-star"></i> <span class="fav-text">' . $fav_text . '</span>',
                                          'recaptcha_form_name' => 'frontend_add_to_fav',
                                          'order'               => 10
                                      ],
@@ -121,7 +138,7 @@
                                          'class'               => 'btn-danger',
                                          'id'                  => 'submit_submit_ignore',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="bbc-x-circle"></i> ' . __('Ignore', 'ninja'),
+                                         'value'               => '<i class="' . $ignore_class . ' ignore-star"></i> <span class="ignore-text">' . $ignore_text . '</span>',
                                          'recaptcha_form_name' => 'frontend_ignore',
                                          'order'               => 10
                                      ],
@@ -360,7 +377,7 @@
                                                 if ((int)$opportunity->meta_data['date_founded_group_appearance'] === 1) {
                                                     echo date('F j, Y', strtotime($opportunity->meta_data['date_founded_group_date_founded']));
                                                 } else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
                                                 }
                                             ?>
                                         </p>
@@ -371,9 +388,9 @@
                                         </small>
                                         <p class="card-text fw-bold text-success">
                                             <?php
-                                                if ((int) $opportunity->meta_data['asking_price_in_usd_group_appearance'] === 1) {
+                                                if ((int)$opportunity->meta_data['asking_price_in_usd_group_appearance'] === 1) {
                                                     echo '$ ' . $opportunity->meta_data['asking_price_in_usd_group_asking_price_in_usd'];
-												} else {
+                                                } else {
                                                     _ex('<span class="">HIDDEN</span>', 'ninja');
                                                 }
                                             ?>
@@ -384,13 +401,13 @@
                                             <?= __('Number of Customers', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['number_of_customers_group_appearance'] === 1) {
-													echo $opportunity->meta_data['number_of_customers_group_number_of_customers'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['number_of_customers_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['number_of_customers_group_number_of_customers'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -398,13 +415,13 @@
                                             <?= __('Business Team size', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['business_team_size_group_appearance'] === 1) {
-													echo $opportunity->meta_data['business_team_size_group_business_team_size'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['business_team_size_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['business_team_size_group_business_team_size'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                 </div>
@@ -427,13 +444,13 @@
                                             <?= __('Net Profit', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold text-success">
-											<?php
-												if ((int) $opportunity->meta_data['net_profit_group_appearance'] === 1) {
-													echo '$ ' . $opportunity->meta_data['net_profit_group_net_profit'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['net_profit_group_appearance'] === 1) {
+                                                    echo '$ ' . $opportunity->meta_data['net_profit_group_net_profit'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -441,13 +458,13 @@
                                             <?= __('Valuation in USD', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold text-success">
-											<?php
-												if ((int) $opportunity->meta_data['valuation_in_usd_group_appearance'] === 1) {
-													echo '$ ' . $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['valuation_in_usd_group_appearance'] === 1) {
+                                                    echo '$ ' . $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -455,13 +472,13 @@
                                             <?= __('Stake to be sold', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['stake_to_be_sold_percentage_group_appearance'] === 1) {
-													echo $opportunity->meta_data['stake_to_be_sold_percentage_group_stake_to_be_sold_percentage'] . '%';
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['stake_to_be_sold_percentage_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['stake_to_be_sold_percentage_group_stake_to_be_sold_percentage'] . '%';
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -469,13 +486,13 @@
                                             <?= __('USD Exchange rate used in conversion', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_appearance'] === 1) {
-													echo $opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
 
                                         </p>
                                     </div>
@@ -486,13 +503,13 @@
                                             <?= __('Annual Accounting Revenue', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold text-success">
-											<?php
-												if ((int) $opportunity->meta_data['annual_accounting_revenue_group_appearance'] === 1) {
-													echo '$ ' . $opportunity->meta_data['annual_accounting_revenue_group_annual_accounting_revenue'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['annual_accounting_revenue_group_appearance'] === 1) {
+                                                    echo '$ ' . $opportunity->meta_data['annual_accounting_revenue_group_annual_accounting_revenue'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -500,13 +517,13 @@
                                             <?= __('Annual Growth Rate', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['annual_growth_rate_percentage_group_appearance'] === 1) {
-													echo $opportunity->meta_data['annual_growth_rate_percentage_group_annual_growth_rate_percentage'] . '%';
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['annual_growth_rate_percentage_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['annual_growth_rate_percentage_group_annual_growth_rate_percentage'] . '%';
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -514,13 +531,13 @@
                                             <?= __('Annual Growth Rate', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold text-success">
-											<?php
-												if ((int) $opportunity->meta_data['annual_growth_rate_group_appearance'] === 1) {
-													echo '$ ' . $opportunity->meta_data['annual_growth_rate_group_annual_growth_rate'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['annual_growth_rate_group_appearance'] === 1) {
+                                                    echo '$ ' . $opportunity->meta_data['annual_growth_rate_group_annual_growth_rate'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                 </div>
@@ -551,13 +568,13 @@
                                             <?= __('Tech stack this product is built on', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['tech_stack_this_product_is_built_on_group_appearance'] === 1) {
-													echo $opportunity->meta_data['tech_stack_this_product_is_built_on_group_tech_stack_this_product_is_built_on'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['tech_stack_this_product_is_built_on_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['tech_stack_this_product_is_built_on_group_tech_stack_this_product_is_built_on'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                     <div class="card-info-item">
@@ -565,24 +582,24 @@
                                             <?= __('Product competitors', 'ninja') ?>
                                         </small>
                                         <p class="card-text fw-bold">
-											<?php
-												if ((int) $opportunity->meta_data['product_competitors_group_appearance'] === 1) {
-													echo $opportunity->meta_data['product_competitors_group_product_competitors'];
-												} else {
-													_ex('<span class="">HIDDEN</span>', 'ninja');
-												}
-											?>
+                                            <?php
+                                                if ((int)$opportunity->meta_data['product_competitors_group_appearance'] === 1) {
+                                                    echo $opportunity->meta_data['product_competitors_group_product_competitors'];
+                                                } else {
+                                                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                                                }
+                                            ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="extra-info">
-									<?php
-										if ((int) $opportunity->meta_data['extra_details_group_appearance'] === 1) {
-											echo $opportunity->meta_data['extra_details_group_extra_details'];
-										} else {
-											_ex('<span class="">BUSINESS INFORMATION ARE HIDDEN</span>', 'ninja');
-										}
-									?>
+                                    <?php
+                                        if ((int)$opportunity->meta_data['extra_details_group_appearance'] === 1) {
+                                            echo $opportunity->meta_data['extra_details_group_extra_details'];
+                                        } else {
+                                            _ex('<span class="">BUSINESS INFORMATION ARE HIDDEN</span>', 'ninja');
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>

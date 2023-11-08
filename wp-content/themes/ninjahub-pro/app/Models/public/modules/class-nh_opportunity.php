@@ -486,8 +486,8 @@
                     'relation' => 'AND',
                 ]
             ];
-            if (!empty($search_fields)) {
-                if (isset($search_fields['business_type'])) {
+            if(!empty($search_fields)){
+                if(isset($search_fields['business_type']) && $search_fields['business_type']){
                     $args['tax_query'][] = [
                         'taxonomy' => 'business-type',
                         'terms'    => (int)$search_fields['business_type'],
@@ -495,7 +495,7 @@
                     ];
                     unset($search_fields['business_type']);
                 }
-                if (isset($search_fields['search'])) {
+                if(isset($search_fields['search']) && !empty($search_fields['search'])){
                     $args['s'] = $search_fields['search'];
                     unset($search_fields['search']);
                 }
@@ -691,6 +691,7 @@
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
                         'fav_active' => 1,
+                        'updated_text' => __('Add to favorites', 'ninja')
                     ]);
                 } else {
                     $favorites[] = $opp_id;
@@ -699,7 +700,8 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 0
+                        'fav_active' => 0,
+                        'updated_text' => __('Added to favorites', 'ninja')
                     ]);
                 }
             } else {
@@ -781,7 +783,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated'       => ''
+                        'updated_text' => __('Ignore', 'ninja')
                     ]);
                 } else {
                     $ignored_opportunities[] = $opp_id;
@@ -794,14 +796,15 @@
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated'       => '',
+                        'updated_text' => __('Ignored', 'ninja')
                     ]);
                 }
             } else {
                 new Nh_Ajax_Response(TRUE, __('Error Response!', 'ninja'), [
                     'status'        => FALSE,
                     'msg'           => 'You must have profile',
-                    'ignore_active' => 1
+                    'ignore_active' => 1,
+                    
                 ]);
             }
         }
@@ -868,11 +871,21 @@
         {
             global $user_ID;
 
+            if ($user_ID) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                // $fav_opportunities = $profile->meta_data['favorite_opportunities'];
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
             $opportunities = new \WP_Query([
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'orderby'     => 'ID',
                 'order'       => 'DESC',
+                "post__not_in"=> $not_in,
                 'author'      => $user_ID
             ]);
 
