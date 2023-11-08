@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, x, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 6.3.1
-Stable tag: 3.1.10
+Tested up to: 6.3.2
+Stable tag: 3.1.11
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Providers are the services which the visitors can use to register and log in to 
 * UserPro compatibility
 * Ultimate Member compatibility
 * Easy Digital Downloads compatibility
-* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack, TikTok, Steam, Twitch, Kakao and more coming soon
+* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack, TikTok, Steam, Twitch, Kakao, Reddit and more coming soon
 * Configure whether email address should be asked on registration at each provider
 * Configure whether username should be asked on registration at each provider
 * Choose from icons or wide buttons
@@ -124,6 +124,18 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 4. The Settings page of the Facebook provider.
 
 == Changelog ==
+
+= 3.1.11 =
+* Fix: The default "Terms and conditions" text can now be translated with our language files.
+* Improvement: [Facebook Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-facebook/#configuration) Update
+* Improvement: [Shortcode](https://nextendweb.com/nextend-social-login-docs/theme-developer/#shortcode) - customlabel shortcode parameter added, which can be used for specifying a custom label for the connect state of the social buttons rendered by the currently used shortcode. Also you can use the {{providerName}} placeholder to display the name of the given provider in your custom text.
+
+* PRO: Improvement: Register form - Password template HTML has been updated according to the latest WordPress default Forget Password form structure.
+* PRO: Improvement: [Custom Actions](https://nextendweb.com/nextend-social-login-docs/global-settings-custom-actions/) - Full Site Editing compatibility: the Custom Actions feature now attempts to render the buttons on any actions which are fired after the "init" action. ( Earlier, we tried only on the actions fired after the "login_head" and "wp_head" actions, so the buttons weren't rendered on the actions that were called within the Block Theme widgets. )
+* PRO: Improvement: [PayPal Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-paypal/#configuration) Update
+* PRO: Improvement: [PayPal](https://nextendweb.com/nextend-social-login-docs/provider-paypal/) integration updated according to the new PayPal endpoint and API changes.
+* PRO: New provider: [Reddit](https://nextendweb.com/nextend-social-login-docs/provider-reddit/)
+
 
 = 3.1.10 =
 * Fix: Fixed a crash during login when "Support login restrictions" is enabled while WP 2FA plugin is installed.

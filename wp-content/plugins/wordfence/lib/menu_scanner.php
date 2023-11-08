@@ -21,7 +21,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 	<div class="wf-container-fluid">
 		<div class="wf-row">
 			<div class="wf-col-xs-12">
-				<div class="wp-header-end"></div>
+				<div class="wp-header-end"></div> 
 				<?php
 				echo wfView::create('common/section-title', array(
 					'title' => __('Scan', 'wordfence'),
@@ -171,7 +171,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
             <div class="wf-col-xs-12">
 			  <?php
 			  echo wfView::create('scanner/scan-results', array(
-				'scanner' => $scanner,
+				'scanner' => $scanner, 
 				 'issues' => $issues,
 			  ))->render();
 			  ?>
@@ -200,7 +200,7 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 	<?php
 	echo wfView::create('common/modal-prompt', array(
 		'title' => __('Are you sure you want to delete?', 'wordfence'),
-		'messageHTML' => '<p class="wf-callout-warning"><i class="wf-fa wf-fa-exclamation-triangle" aria-hidden="true"></i> ' . wp_kses(__('<strong>WARNING:</strong> If you delete the wrong file, it could cause your WordPress website to stop functioning, and you will probably have to restore from a backup.', 'wordfence'), array('strong'=>array())) . '</p>' .
+		'messageHTML' => '<p class="wf-callout-warning"><i class="wf-fa wf-fa-exclamation-triangle" aria-hidden="true"></i> ' . wp_kses(__('<strong>WARNING:</strong> If you delete the wrong file, it could cause your WordPress website to stop functioning, and you will probably have to restore from a backup.', 'wordfence'), array('strong'=>array())) . '</p>' . 
 			'<p>' . wp_kses(sprintf(
 			/* translators: Support URL. */
 					__('Do not delete files on your system unless you\'re ABSOLUTELY sure you know what you\'re doing. If you delete the wrong file it could cause your WordPress website to stop functioning and you will probably have to restore from backups. If you\'re unsure, Cancel and work with your hosting provider to clean your system of infected files. If you\'d like to learn more, <a href="%s" target="_blank" rel="noopener noreferrer">click here for our help article<span class="screen-reader-text"> (opens in new tab)</span></a>.', 'wordfence'), wfSupportController::esc_supportURL(wfSupportController::ITEM_SCAN_BULK_DELETE_WARNING)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()), 'span'=>array('class'=>array()))) . '</p>',
@@ -280,7 +280,7 @@ if (wfOnboardingController::willShowNewTour(wfOnboardingController::TOUR_SCAN)):
 					WFAD.tour('wfNewTour2', 'wf-scan-option-all-options', 'right', 'right', WFAD.tour1, WFAD.tour3);
 				};
 				WFAD.tour3 = function() {
-					WFAD.tour('wfNewTour3', 'wf-scan-starter', 'left', 'left', WFAD.tour2, WFAD.tourComplete);
+					WFAD.tour('wfNewTour3', 'wf-scan-starter', 'left', 'left', WFAD.tour2, WFAD.tourComplete); 
 				};
 				WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_SCAN); ?>'); };
 

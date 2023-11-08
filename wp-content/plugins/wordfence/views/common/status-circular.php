@@ -1,10 +1,10 @@
 <?php
 if (!defined('WORDFENCE_VERSION')) { exit; }
-/**
- * Expects $id, $diameter (in pixels), $percentage (as decimal value), $inactiveColor, and $activeColor to be defined.
+/** 
+ * Expects $id, $diameter (in pixels), $percentage (as decimal value), $inactiveColor, and $activeColor to be defined. 
  * $animateIn is optional and defaults to true.
  * $strokeWidth is option and defaults to 3 (pixels).
- *
+ * 
  * @var string $id
  */
 

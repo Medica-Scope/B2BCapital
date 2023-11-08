@@ -35,19 +35,19 @@ switch ($state) {
 			color: #333;
 			background-color: #fff;
 		}
-
+		
 		h1, h2, h3, h4, h45, h6 {
 			font-weight: 500;
 			line-height: 1.1;
 		}
-
+		
 		h1 { font-size: 36px; }
 		h2 { font-size: 30px; }
 		h3 { font-size: 24px; }
 		h4 { font-size: 18px; }
 		h5 { font-size: 14px; }
 		h6 { font-size: 12px; }
-
+		
 		h1, h2, h3 {
 			margin-top: 20px;
 			margin-bottom: 10px;
@@ -56,7 +56,7 @@ switch ($state) {
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
-
+		
 		.btn {
 			background-color: #00709e;
 			border: 1px solid #09486C;
@@ -77,14 +77,14 @@ switch ($state) {
 			white-space: nowrap;
 			word-spacing: 0px;
 		}
-
+		
 		hr {
 			margin-top: 20px;
 			margin-bottom: 20px;
 			border: 0;
 			border-top: 1px solid #eee
 		}
-
+		
 		.btn.disabled, .btn[disabled] {
 			background-color: #9f9fa0;
 			border: 1px solid #7E7E7F;

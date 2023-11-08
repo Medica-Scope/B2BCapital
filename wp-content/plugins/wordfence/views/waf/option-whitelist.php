@@ -3,7 +3,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 ?>
 <ul id="wf-option-wafWhitelist" class="wf-option wf-flex-vertical wf-flex-full-width">
 	<li><strong><?php esc_html_e('Add Allowlisted URL/Param', 'wordfence'); ?></strong> <a href="<?php echo wfSupportController::esc_supportURL(wfSupportController::ITEM_FIREWALL_WAF_WHITELIST); ?>"  target="_blank" rel="noopener noreferrer" class="wf-inline-help"><i class="wf-fa wf-fa-question-circle-o" aria-hidden="true"></i><span class="screen-reader-text"> (<?php esc_html_e('opens in new tab', 'wordfence') ?>)</span></a> <?php esc_html_e('The URL/parameters in this table will not be tested by the firewall. They are typically added while the firewall is in Learning Mode or by an admin who identifies a particular action/request is a false positive.', 'wordfence'); ?></li>
-	<li id="whitelist-form">
+	<li id="whitelist-form"> 
 		<div class="wf-form-inline">
 			<div class="wf-form-group">
 				<input class="wf-form-control" type="text" name="whitelistURL" id="whitelistURL" placeholder="<?php esc_attr_e('URL', 'wordfence'); ?>">
@@ -30,7 +30,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 							$('#waf-whitelisted-urls-add').toggleClass('wf-disabled', $('#whitelistURL').val().length == 0 || $('#whitelistParamName').val().length == 0);
 						}, 100);
 					});
-
+					
 					$('#waf-whitelisted-urls-add').on('click', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
@@ -53,7 +53,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 								WFAD.colorboxModal((WFAD.isSmallScreen ? '300px' : '400px'), '<?php esc_attr_e('Allowlist Entry Exists', 'wordfence'); ?>', '<?php esc_attr_e('An allowlist entry for this URL and parameter already exists.', 'wordfence'); ?>');
 								return;
 							}
-
+							
 							//Generate entry and add to display data set
 							var entry = {
 								data: {
@@ -83,7 +83,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 
 							WFAD.pendingChanges['whitelistedURLParams']['add'][key] = entry;
 							WFAD.updatePendingChanges();
-
+							
 							//Reload and reset add form
 							var whitelistedIPsEl = $('#waf-whitelisted-urls-tmpl').tmpl(WFAD.wafData);
 							$('#waf-whitelisted-urls-wrapper').html(whitelistedIPsEl);
@@ -139,7 +139,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					return 'Param Type: ' + item.text;
 				}
 			});
-
+			
 			$('#whitelist-table-controls select').wfselect2({
 				minimumResultsForSearch: -1,
 				placeholder: "Filter By",
@@ -148,7 +148,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					return 'Filter By: ' + item.text;
 				}
 			});
-
+			
 			$('#whitelist-bulk-delete').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -177,4 +177,4 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 			});
 		});
 	})(jQuery);
-</script>
+</script> 

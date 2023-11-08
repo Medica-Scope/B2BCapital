@@ -7,7 +7,7 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
  * @var string|\WordfenceLS\Text\Model_HTML $title The overall title shown for the options. Required.
  * @var string $helpLink The link to the corresponding external help page. Optional.
  * @var bool $wrap Whether or not the options should be allowed to wrap. Optional, defaults to false.
- *
+ * 
  * $options is an array of
  * 	array(
  * 		'name' => string <option name>,

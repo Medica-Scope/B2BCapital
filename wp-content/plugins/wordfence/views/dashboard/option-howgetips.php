@@ -88,22 +88,22 @@ $selectOptions = array(
 				}
 
 				WFAD.updatePendingChanges();
-
+				
 				updateIPPreview();
 			});
 
 			var coalescingUpdateTimer;
 			$('#howGetIPs-trusted-proxies textarea').on('change paste keyup', function() {
 				var e = this;
-
+				
 				setTimeout(function() {
 					clearTimeout(coalescingUpdateTimer);
 					coalescingUpdateTimer = setTimeout(updateIPPreview, 1000);
-
+	
 					var optionElement = $(e).closest('.wf-option.wf-option-textarea');
 					var option = optionElement.data('textOption');
 					var value = $(e).val();
-
+	
 					var originalValue = optionElement.data('originalTextValue');
 					if (originalValue == value) {
 						delete WFAD.pendingChanges[option];
@@ -111,7 +111,7 @@ $selectOptions = array(
 					else {
 						WFAD.pendingChanges[option] = value;
 					}
-
+	
 					WFAD.updatePendingChanges();
 				}, 4);
 			});
@@ -121,10 +121,10 @@ $selectOptions = array(
 					var optionElement = $(this).closest('.wf-option.wf-option-howgetips');
 					var option = optionElement.data('option');
 					var originalValue = optionElement.data('originalValue');
-
+					
 					$(this).prop('checked', originalValue == $(this).attr('value'));
 				});
-
+						
 				$('#howGetIPs-trusted-proxies textarea').each(function() {
 					var optionElement = $(this).closest('.wf-option.wf-option-textarea');
 					var originalValue = optionElement.data('originalTextAreaValue');
@@ -143,7 +143,7 @@ $selectOptions = array(
 						$(this).trigger('click');
 					}
 				});
-
+				
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
@@ -157,7 +157,7 @@ $selectOptions = array(
 						});
 					}
 					else {
-						$(this).parent().slideUp();
+						$(this).parent().slideUp(); 
 						$('#howGetIPs-trusted-proxies').slideDown({
 							always: function() {
 								$('#howGetIPs-trusted-proxies').addClass('wf-active');
@@ -168,4 +168,4 @@ $selectOptions = array(
 			});
 		});
 	})(jQuery);
-</script>
+</script> 

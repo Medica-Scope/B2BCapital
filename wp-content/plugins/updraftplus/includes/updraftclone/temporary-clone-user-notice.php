@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) die('No direct access allowed');
 
 class UpdraftPlus_Temporary_Clone_User_Notice {
-
+	
 	/**
 	 * Constructor for the class.
 	 */
@@ -45,7 +45,7 @@ class UpdraftPlus_Temporary_Clone_User_Notice {
 	public function wp_authenticate_user($user) {
 		// The WP_User object does not exist in WP 3.2, so we don't check for that
 		if (is_wp_error($user) || !is_object($user) || empty($user->ID)) return $user;
-
+		
 		$admin_login = get_site_option('updraftplus_clone_admin_only_login');
 		$user_is_admin = user_can($user->ID, 'manage_options');
 
@@ -75,7 +75,7 @@ class UpdraftPlus_Temporary_Clone_User_Notice {
 	 */
 	public function process_user_notice_ajax() {
 		$return = array('code' => 'fail', 'data' => '');
-
+		
 		if (!isset($_POST['subaction'])) {
 			$return['code'] = 'error';
 			$return['data'] = 'Missing subaction';
@@ -94,7 +94,7 @@ class UpdraftPlus_Temporary_Clone_User_Notice {
 			}
 
 			$admin_only = ('true' === $_POST['admin_only_login']);
-
+			
 			update_site_option('updraftplus_clone_admin_only_login', $admin_only);
 
 			$return['code'] = 'success';

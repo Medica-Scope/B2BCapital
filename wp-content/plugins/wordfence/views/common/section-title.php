@@ -2,7 +2,7 @@
 if (!defined('WORDFENCE_VERSION')) { exit; }
 /**
  * Expects $title (or $titleHTML) to be defined. If $helpLink and $helpLabel (or $helpLabelHTML) are defined, the help link will be shown.
- *
+ * 
  * @var $title string The page title.
  * @var $titleHTML string The page title as raw HTML
  * @var $helpLink string The URL for the help link.

@@ -186,7 +186,7 @@ if (!isset($collapseable)) {
 						$(this).trigger('click');
 					}
 				});
-
+				
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
@@ -218,7 +218,7 @@ if (!isset($collapseable)) {
 						$(this).trigger('click');
 					}
 				});
-
+				
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
@@ -244,7 +244,7 @@ if (!isset($collapseable)) {
 						$(this).trigger('click');
 					}
 				});
-
+				
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();

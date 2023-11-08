@@ -22,7 +22,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 		?>
 	<?php else: ?>
 	<img src="<?php echo esc_attr(wfUtils::getBaseURL() . 'images/' . $img); ?>" class="wf-block-navigation-option-icon" alt="<?php echo esc_attr($title); ?>">
-	<?php endif; ?>
+	<?php endif; ?> 
 	<div class="wf-block-navigation-option-content">
 		<h4><a href="<?php echo esc_attr($link); ?>"><?php echo esc_html($title); ?></a></h4>
 		<p><?php echo esc_html($subtitle); ?></p>

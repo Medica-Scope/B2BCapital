@@ -81,4 +81,4 @@ if ($ownUser->ID == $user->ID) {
 			});
 		});
 	})(jQuery);
-</script>
+</script> 

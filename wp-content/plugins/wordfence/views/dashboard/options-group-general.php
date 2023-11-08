@@ -35,7 +35,7 @@ if (!isset($collapseable)) {
 							$subtitle .= '<br>';
 							$subtitle .= '<a href="' . wfSupportController::esc_supportURL(wfSupportController::ITEM_DASHBOARD_OPTION_LITESPEED_WARNING) . '" target="_blank" rel="noopener noreferrer">' . esc_html__('Please read this article in our FAQ to make an important change that will ensure your site stability during an update.', 'wordfence') . '<span class="screen-reader-text"> (' . esc_html__('opens in new tab', 'wordfence') . ')</span></a>';
 						}
-
+						
 						echo wfView::create('options/option-toggled', array(
 							'optionName' => 'autoUpdate',
 							'enabledValue' => 1,

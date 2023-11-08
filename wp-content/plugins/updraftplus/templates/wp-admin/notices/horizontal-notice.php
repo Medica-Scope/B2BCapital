@@ -11,7 +11,7 @@
 			<p>
 				<?php echo $text; ?>
 			</p>
-
+					
 			<?php if (!empty($button_link)) { ?>
 				<div class="updraft_advert_button_container">
 					<a class="button button-primary" href="<?php esc_attr_e(apply_filters('updraftplus_com_link', $button_link));?>" target="_blank" onclick="jQuery('.updraft-ad-container').slideUp(); jQuery.post(ajaxurl, {action: 'updraft_ajax', subaction: '<?php echo $dismiss_time;?>', nonce: '<?php echo wp_create_nonce('updraftplus-credentialtest-nonce');?>', dismiss_forever: '1' });">
@@ -56,7 +56,7 @@
 					echo $text;
 
 					if (isset($discount_code)) echo ' <b>' . $discount_code . '</b>';
-
+					
 					if (!empty($button_link) && !empty($button_meta)) {
 				?>
 				<a class="updraft_notice_link" href="<?php esc_attr_e(apply_filters('updraftplus_com_link', $button_link));?>"><?php

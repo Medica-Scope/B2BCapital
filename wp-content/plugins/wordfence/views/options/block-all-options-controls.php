@@ -69,7 +69,7 @@ if (isset($backLabel) && !isset($backLabelHTML)) {
 	<script type="application/javascript">
 		(function($) {
 			$('.wf-options-searcher').css('display', 'none');
-
+			
 			$(function() {
 				var initialTop = parseInt($('.wf-options-controls').css('top'));
 				$(window).bind("scroll", function() {
@@ -85,7 +85,7 @@ if (isset($backLabel) && !isset($backLabelHTML)) {
 					minimumResultsForSearch: -1,
 					minimumInputLength: 2,
 					selectOnClose: false,
-					width: (WFAD.screenSize(WFAD.SCREEN_MD) ? '250px' : '500px'),
+					width: (WFAD.screenSize(WFAD.SCREEN_MD) ? '250px' : '500px'),  
 					createTag: function (params) {
 						return null; //No custom tags
 					}
@@ -102,7 +102,7 @@ if (isset($backLabel) && !isset($backLabelHTML)) {
 					else if (typeof selection !== 'string') {
 						selection = false;
 					}
-
+					
 					if (selection !== false) {
 						var el = $('#' + selection);
 						if (el.is(':visible')) {
@@ -138,7 +138,7 @@ if (isset($backLabel) && !isset($backLabelHTML)) {
 				if ($('.wf-options-searcher').length > 0) {
 					$('.wf-options-searcher').data('wfselect2').$container.addClass('wf-select2-placeholder-fix wf-select2-hide-tags');
 				}
-
+				
 				$(window).on('resize', function(e) {
 					$('.wf-options-searcher').wfselect2({
 						tags: true,

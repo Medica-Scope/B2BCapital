@@ -64,7 +64,7 @@ if (!empty($options['include_header'])) echo '<h2>'.__('Existing backups', 'updr
 	<?php
 		if (!empty($options['include_uploader'])) {
 		?>
-
+	
 		<div id="updraft-plupload-modal" style="display:none;" title="<?php _e('UpdraftPlus - Upload backup files', 'updraftplus'); ?>">
 		<p class="upload"><em><?php _e("Upload files into UpdraftPlus.", 'updraftplus');?> <?php echo htmlspecialchars(__('Or, you can place them manually into your UpdraftPlus directory (usually wp-content/updraft), e.g. via FTP, and then use the "rescan" link above.', 'updraftplus'));?></em></p>
 		<?php

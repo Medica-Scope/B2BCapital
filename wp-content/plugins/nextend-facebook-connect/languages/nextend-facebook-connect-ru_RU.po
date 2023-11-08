@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2023-09-13 10:34+0200\n"
-"PO-Revision-Date: 2023-09-13 10:34+0200\n"
+"POT-Creation-Date: 2023-11-03 17:51+0100\n"
+"PO-Revision-Date: 2023-11-03 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: ru\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
@@ -837,8 +837,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Enabling this option will add a GET parameter to the URL where we redirect "
-"after a successful registration or login with social login. %1$sLearn "
-"more%2$s."
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
 msgstr ""
 
 msgid "Page for register flow"
@@ -992,11 +992,6 @@ msgid "No link buttons"
 msgstr ""
 
 msgid "Link buttons after account details"
-msgstr ""
-
-msgid ""
-"By clicking Register, you accept our <a href=\"#privacy_policy_url\" "
-"target=\"_blank\">Privacy Policy</a>"
 msgstr ""
 
 msgid "Store"
@@ -1225,6 +1220,11 @@ msgstr ""
 msgid "Update now!"
 msgstr ""
 
+msgid ""
+"By clicking Register, you accept our <a href=\"#privacy_policy_url\" target="
+"\"_blank\">Privacy Policy</a>"
+msgstr ""
+
 msgid "Hold On"
 msgstr ""
 
@@ -1264,7 +1264,12 @@ msgstr ""
 #, php-format
 msgid ""
 "Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s product, then choose %4$s."
+"that appears next to the %3$s item."
+msgstr ""
+
+#, php-format
+msgid ""
+"Press the %1$s button that you can find below the %2$s section, next to %3$s."
 msgstr ""
 
 #, php-format
@@ -1272,7 +1277,7 @@ msgid "Add the following URL to the %s field:"
 msgstr ""
 
 #, php-format
-msgid "Press the %s button."
+msgid "Click on the %1$s button."
 msgstr ""
 
 #, php-format
@@ -1340,23 +1345,31 @@ msgid "Click the %1$s button and complete the Security Check."
 msgstr ""
 
 #, php-format
-msgid "Request access to the %1$s permission:"
+msgid ""
+"A message at the top of the page might prompt you to switch to %1$s. Ignore "
+"that, as our integration is for %2$s!"
 msgstr ""
 
 #, php-format
 msgid ""
-"Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s item."
-msgstr ""
-
-#, php-format
-msgid "Find the %1$s permission and click the %2$s button."
+"Click on the %1$s button. (If you receive a blank page after you pressed the "
+"%1$s button, you might need to refresh the page.)"
 msgstr ""
 
 #, php-format
 msgid ""
 "Press the %1$s button on the top right corner, so you can return to the "
 "previous page."
+msgstr ""
+
+#, php-format
+msgid ""
+"Below the %1$s section, find the %2$s permission and click on the %3$s "
+"button."
+msgstr ""
+
+#, php-format
+msgid "Press the %1$s button on the top right corner again."
 msgstr ""
 
 #, php-format
@@ -1411,6 +1424,10 @@ msgstr ""
 msgid ""
 "Select %1$s platform, then press %2$s and enter the following URL into the "
 "%3$s field: %4$s"
+msgstr ""
+
+#, php-format
+msgid "Press the %s button."
 msgstr ""
 
 #, php-format
@@ -1476,8 +1493,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"If you are not sure what is your %1$s, please head over to <a "
-"href=\"%2$s\">Getting Started</a>"
+"If you are not sure what is your %1$s, please head over to <a href=\"%2$s"
+"\">Getting Started</a>"
 msgstr ""
 
 msgid "App Secret"
@@ -1538,8 +1555,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: "
-"<b>%s</b>"
+"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: <b>"
+"%s</b>"
 msgstr ""
 
 #, php-format
@@ -1650,9 +1667,9 @@ msgstr ""
 #, php-format
 msgid ""
 "Currently your App is in %1$s mode, so only limited number of people can use "
-"it. To allow this App for any user with a Google Account, click on the "
-"\"%2$s\" option on the left side, then click the \"%3$s\" button under the "
-"\"%4$s\" section, and press the \"%5$s\" button. "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
 msgstr ""
 
 msgid "Client ID"
@@ -1816,9 +1833,9 @@ msgstr ""
 
 #, php-format
 msgid ""
-"You’ll find your API key and secret on this page. Copy and paste the "
-"\"<b>%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s "
-"and press \"<b>Save Changes</b>\"."
+"You’ll find your API key and secret on this page. Copy and paste the \"<b>"
+"%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s and "
+"press \"<b>Save Changes</b>\"."
 msgstr ""
 
 #, php-format
@@ -2022,8 +2039,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</"
-"b>\" and \"<b>Consent Privacy Notice URL</b>\"."
+"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</b>"
+"\" and \"<b>Consent Privacy Notice URL</b>\"."
 msgstr ""
 
 msgid "Once you filled all the required fields, click \"<b>Save</b>\"."
@@ -2031,8 +2048,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr ""
 
 msgid "When all fields are filled, click \"<b>Save</b>\"."
@@ -2083,8 +2100,8 @@ msgid ""
 "To allow your visitors to log in with their %1$s account, first you must "
 "create an %1$s App. The following guide will help you through the %1$s App "
 "creation process. After you have created your %1$s App, head over to "
-"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and "
-"\"%5$s\" according to your %1$s App."
+"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and \"%5$s"
+"\" according to your %1$s App."
 msgstr ""
 
 msgid ""
@@ -2151,13 +2168,13 @@ msgstr ""
 
 msgid ""
 "If you have multiple Apps, then at the \"<b>Choose a Primary App ID</b>\" "
-"field <b>select the App what you just created</b>, then click \"<b>Save</"
-"b>\"."
+"field <b>select the App what you just created</b>, then click \"<b>Save</b>"
+"\"."
 msgstr ""
 
 msgid ""
-"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</"
-"b>\" button."
+"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</b>"
+"\" button."
 msgstr ""
 
 msgid "<b>Don't download the key yet!</b>"
@@ -2246,8 +2263,8 @@ msgstr ""
 
 msgid ""
 "<b>Open the downloaded file</b> with a text editor, like Notepad, <b><u>copy "
-"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</"
-"b>\" field of Nextend Social Login."
+"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</b>"
+"\" field of Nextend Social Login."
 msgstr ""
 
 msgid "<strong><u>Team Identifier:</u></strong>"
@@ -3077,12 +3094,20 @@ msgstr ""
 msgid "Click on the name of your %s App, under the REST API apps section."
 msgstr ""
 
+#, php-format
 msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading and click \"<b>Show</b>\"."
+"Scroll down to %1$s section, find the %2$s feature and and click on the %3$s "
+"link."
 msgstr ""
 
-msgid "Click on \"Save\""
+#, php-format
+msgid "Add the following URL to the %s field and press %2$s:"
+msgstr ""
+
+#, php-format
+msgid ""
+"Wait for %1$s to approve the %2$s feature ( this might take up to 7 business "
+"days ). The %3$s row will indicate the current status. "
 msgstr ""
 
 #, php-format
@@ -3108,51 +3133,56 @@ msgid ""
 "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
 msgstr ""
 
+#, php-format
 msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading then click \"<b>Show</b>\"."
-msgstr ""
-
-msgid ""
-"Scroll down to \"<b>App feature options</b>\" section and tick \"<b>Log In "
-"with PayPal</b>\"."
+"Scroll down to %1$s section, and turn off all features. ( If you are trying "
+"to set up social login in an existing App, then create a new App, as this "
+"App should be used only for social login because some of the non used "
+"features might cause scope specific problems. )"
 msgstr ""
 
 #, php-format
-msgid "Click %1$s that appears after the %2$s text."
+msgid "Find the %1$s feature and check the checkbox."
 msgstr ""
 
-msgid "Tick \"<b>Full name</b>\"."
+#, php-format
+msgid "Click on the %1$s link that you can find below the %2$s feature."
+msgstr ""
+
+#, php-format
+msgid "Scroll down to %1$s section, and tick the %2$s field."
 msgstr ""
 
 #, php-format
 msgid ""
 "If you want to get the email address as well, then don't forget to tick %1$s "
 "option. In this case you should also enable the %2$s setting in our %3$s "
-"%4$s tab."
+"%4$s tab. ( If you enabled extra fields on our Sync data tab, don't forget "
+"to tick the other necessary fields either! )"
 msgstr ""
 
 msgid "Email scope"
 msgstr ""
 
-msgid "Fill \"<b>Privacy policy URL</b>\" and  \"<b>User agreement URL</b>\"."
-msgstr ""
-
-msgid ""
-"Scroll up to \"<b>LIVE API CREDENTIALS</b>\" section and find the necessary "
-"\"<b>Client ID</b>\" and \"<b>Secret</b>\"! ( Make sure you are in "
-"\"<b>Live</b>\" mode and not \"Sandbox\". )"
+#, php-format
+msgid "Fill the %1$s and %2$s fields."
 msgstr ""
 
 #, php-format
 msgid ""
-"%1$s Before you could start using the App, it requires an App review, which "
-"might take up to 7 business days to process. Below the %2$s field you can "
-"check the %3$s. Once your App got approved, you could continue with the "
-"provider verification in our %4$s tab."
+"Optional: If you want the unverified %1$s accounts to be able to login with "
+"your App, then check the %2$s field, too."
 msgstr ""
 
-msgid "Important note:"
+#, php-format
+msgid "When all fields are filled, click %1$s in the modal."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once the %1$s feature is approved, scroll up to the %2$s section and find "
+"the necessary %3$s and %4$s values, you will need these on the %5$s tab of "
+"the plugin!"
 msgstr ""
 
 msgid "Secret"
@@ -3173,6 +3203,61 @@ msgstr "Связать аккаунты с <b>PayPal</b>"
 
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "Отвязать аккаунты от <b>PayPal</b>"
+
+#, php-format
+msgid "Click on %1$s in the bottom left corner of your %2$s App."
+msgstr ""
+
+#, php-format
+msgid "Replace your existing %s with this URL:"
+msgstr ""
+
+#, php-format
+msgid "Click on the %s button"
+msgstr ""
+
+#, php-format
+msgid "Make sure you have the %s radio option selected!"
+msgstr ""
+
+#, php-format
+msgid "Enter a %s for your App."
+msgstr ""
+
+#, php-format
+msgid "Optional: Enter a %1$s and set an %2$s for your App."
+msgstr ""
+
+#, php-format
+msgid "Complete the Human test and click the %s button."
+msgstr ""
+
+#, php-format
+msgid ""
+"Finally find your %1$s, which is the value just below the name and type of "
+"your app, and the %2$s, which is the value next to %3$s. These will be "
+"needed in the plugin's settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>VK</b>"
+msgid "Continue with <b>Reddit</b>"
+msgstr "Войти через <b>VK</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>VK</b>"
+msgid "Sign up with <b>Reddit</b>"
+msgstr "Войти через <b>VK</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>VK</b>"
+msgid "Link account with <b>Reddit</b>"
+msgstr "Связать аккаунты с <b>VK</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>VK</b>"
+msgid "Unlink account from <b>Reddit</b>"
+msgstr "Отвязать аккаунты от <b>VK</b>"
 
 #, php-format
 msgid "Select your %s App."
@@ -3241,8 +3326,8 @@ msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
 msgstr ""
 
 msgid ""
-"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</"
-"b>\". "
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
 msgstr ""
 
 msgid "Click on the \"<b>Activate Public Distribution</b>\" button."
@@ -3331,8 +3416,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn "
-"more%3$s."
+"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn more"
+"%3$s."
 msgstr ""
 
 msgid "Web API Key"
@@ -3522,10 +3607,6 @@ msgid "Click on the %s button on the right side."
 msgstr ""
 
 #, php-format
-msgid "Enter a %s for your App."
-msgstr ""
-
-#, php-format
 msgid "Select the %1$s option in the %2$s list."
 msgstr ""
 
@@ -3578,8 +3659,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Fill \"<b>Website address</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Website address</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr ""
 
 #, php-format
@@ -3730,6 +3811,9 @@ msgid "Registration confirmation will be emailed to you."
 msgstr ""
 
 msgid "Password"
+msgstr ""
+
+msgid "Hide password"
 msgstr ""
 
 msgid "Strength indicator"

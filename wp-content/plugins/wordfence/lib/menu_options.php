@@ -22,7 +22,7 @@ if (isset($_GET['source']) && wfPage::isValidPage($_GET['source'])) {
 
 		$(function() {
 			document.title = "<?php esc_attr_e('All Options', 'wordfence'); ?>" + " \u2039 " + WFAD.basePageName;
-
+			
 			WFAD.wafConfigPageRender();
 
 			//Hash-based option block linking
@@ -189,14 +189,14 @@ if (isset($_GET['source']) && wfPage::isValidPage($_GET['source'])) {
 				'wf-option-exportOptions' => __('Export this site\'s Wordfence options for import on another site', 'wordfence'),
 				'wf-option-importOptions' => __('Import Wordfence options from another site using a token', 'wordfence'),
 			);
-
+			
 			if (wfCredentialsController::useLegacy2FA()) {
 				$indexOptions['wf-option-loginSec-requireAdminTwoFactor'] = __('Require Cellphone Sign-in for all Administrators', 'wordfence');
 				$indexOptions['wf-option-loginSec-enableSeparateTwoFactor'] = __('Enable Separate Prompt for Two Factor Code', 'wordfence');
 			}
-
+			
 			$indexOptions = array_merge($indexOptions, wfModuleController::shared()->optionIndexes);
-
+			
 			echo wfView::create('options/block-all-options-controls', array(
 				'showIcon' => false,
 				'indexOptions' => $indexOptions,
@@ -256,77 +256,77 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 						'wf-unified-2fa-options',
 						'wf-unified-live-traffic-options',
 					);
-
+					
 					echo wfView::create('options/options-title', array(
 						'title' => __('All Options', 'wordfence'),
 						'stateKeys' => $stateKeys,
 						'showIcon' => true,
 					))->render();
 					?>
-
+					
 					<p><?php esc_html_e('These options are also available throughout the plugin pages, in the relevant sections. This page is provided for easier setup for experienced Wordfence users.', 'wordfence'); ?></p>
-
+					
 					<?php
 					echo wfView::create('common/section-subtitle', array(
 						'title' => __('Wordfence Global Options', 'wordfence'),
 						'showIcon' => false,
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-license', array(
 						'stateKey' => 'wf-unified-global-options-license',
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-view-customization', array(
 						'stateKey' => 'wf-unified-global-options-view-customization',
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-general', array(
 						'stateKey' => 'wf-unified-global-options-general',
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-dashboard', array(
 						'stateKey' => 'wf-unified-global-options-dashboard',
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-alert', array(
 						'stateKey' => 'wf-unified-global-options-alert',
 					))->render();
-
+					
 					echo wfView::create('dashboard/options-group-email-summary', array(
 						'stateKey' => 'wf-unified-global-options-email-summary',
 					))->render();
 					?>
-
+					
 					<?php
 					echo wfView::create('common/section-subtitle', array(
 						'title' => __('Firewall Options', 'wordfence'),
 						'showIcon' => false,
 					))->render();
-
+					
 					echo wfView::create('waf/options-group-basic-firewall', array(
 						'firewall' => $firewall,
 						'waf' => $waf,
 						'stateKey' => 'wf-unified-waf-options-basic',
 					))->render();
-
+					
 					echo wfView::create('waf/options-group-advanced-firewall', array(
 						'firewall' => $firewall,
 						'waf' => $waf,
 						'stateKey' => 'wf-unified-waf-options-advanced',
 					))->render();
-
+					
 					echo wfView::create('waf/options-group-brute-force', array(
 						'firewall' => $firewall,
 						'waf' => $waf,
 						'stateKey' => 'wf-unified-waf-options-bruteforce',
 					))->render();
-
+					
 					echo wfView::create('waf/options-group-rate-limiting', array(
 						'firewall' => $firewall,
 						'waf' => $waf,
 						'stateKey' => 'wf-unified-waf-options-ratelimiting',
 					))->render();
-
+					
 					echo wfView::create('waf/options-group-whitelisted', array(
 						'firewall' => $firewall,
 						'waf' => $waf,
@@ -339,38 +339,38 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 						'title' => __('Blocking Options', 'wordfence'),
 						'showIcon' => false,
 					))->render();
-
+					
 					echo wfView::create('blocking/options-group-advanced-country', array(
 						'stateKey' => 'wf-unified-blocking-options-country',
 					))->render();
 					?>
-
+					
 					<?php
 					echo wfView::create('common/section-subtitle', array(
 						'title' => __('Scan Options', 'wordfence'),
 						'showIcon' => false,
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-scan-schedule', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-unified-scanner-options-schedule',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-basic', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-unified-scanner-options-basic',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-general', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-unified-scanner-options-general',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-performance', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-unified-scanner-options-performance',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-advanced', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-unified-scanner-options-custom',
@@ -382,13 +382,13 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 						'title' => __('Tool Options', 'wordfence'),
 						'showIcon' => false,
 					))->render();
-
+					
 					if (wfCredentialsController::useLegacy2FA()) {
 						echo wfView::create('tools/options-group-2fa', array(
 							'stateKey' => 'wf-unified-2fa-options',
 						))->render();
 					}
-
+					
 					echo wfView::create('tools/options-group-live-traffic', array(
 						'stateKey' => 'wf-unified-live-traffic-options',
 						'hideShowMenuItem' => true,

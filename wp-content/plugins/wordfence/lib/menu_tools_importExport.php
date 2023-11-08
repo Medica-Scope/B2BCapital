@@ -16,9 +16,9 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				__('<a href="%s" target="_blank" rel="noopener noreferrer" class="wf-help-link">Learn more<span class="wf-hidden-xs"> about importing and exporting options</span><span class="screen-reader-text"> (opens in new tab)</span></a>', 'wordfence'), wfSupportController::esc_supportURL(wfSupportController::ITEM_TOOLS_IMPORT_EXPORT)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array(), 'class'=>array()), 'span'=>array('class'=>array()))); ?>
 			<i class="wf-fa wf-fa-external-link" aria-hidden="true"></i></span>
 	</div>
-
+	
 	<p><?php esc_html_e("To clone one site's configuration to another, use the import/export tools below.", 'wordfence') ?></p>
-
+	
 	<?php
 	echo wfView::create('dashboard/options-group-import', array(
 		'stateKey' => 'global-options-import',

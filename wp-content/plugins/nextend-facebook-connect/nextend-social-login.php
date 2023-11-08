@@ -20,9 +20,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.10';
+    public static $version = '3.1.11';
 
-    public static $nslPROMinVersion = '3.1.10';
+    public static $nslPROMinVersion = '3.1.11';
 
     public static $proxyPage = false;
 
@@ -1052,7 +1052,7 @@ class NextendSocialLogin {
             'link'     => 0,
             'unlink'   => 0,
             'heading'  => false,
-            'align'    => 'left',
+            'align'    => 'left'
         ), $atts);
 
         $providers  = false;
@@ -1070,10 +1070,11 @@ class NextendSocialLogin {
             $atts = array_merge(array(
                 'redirect'    => false,
                 'trackerdata' => false,
-                'labeltype'   => 'login'
+                'labeltype'   => 'login',
+                'customlabel' => false
             ), $atts);
 
-            return self::renderButtonsWithContainerAndTitle($atts['heading'], $atts['style'], $providers, $atts['redirect'], $atts['trackerdata'], $atts['align'], $atts['labeltype']);
+            return self::renderButtonsWithContainerAndTitle($atts['heading'], $atts['style'], $providers, $atts['redirect'], $atts['trackerdata'], $atts['align'], $atts['labeltype'], $atts['customlabel']);
         }
 
         $link   = filter_var($atts['link'], FILTER_VALIDATE_BOOLEAN);
@@ -1100,7 +1101,7 @@ class NextendSocialLogin {
         return self::renderButtonsWithContainerAndTitle(false, $style, $providers, $redirect_to, $trackerData, $align, $labelType);
     }
 
-    private static function renderButtonsWithContainerAndTitle($heading = false, $style = 'default', $providers = false, $redirect_to = false, $trackerData = false, $align = 'left', $labelType = 'login') {
+    private static function renderButtonsWithContainerAndTitle($heading = false, $style = 'default', $providers = false, $redirect_to = false, $trackerData = false, $align = 'left', $labelType = 'login', $customLabel = false) {
         if (!is_user_logged_in()) {
 
             /**
@@ -1135,7 +1136,7 @@ class NextendSocialLogin {
             if (count($enabledProviders)) {
                 $buttons = '';
                 foreach ($enabledProviders as $provider) {
-                    $buttons .= $provider->getConnectButton($style, $redirect_to, $trackerData, $labelType);
+                    $buttons .= $provider->getConnectButton($style, $redirect_to, $trackerData, $labelType, $customLabel);
                 }
 
                 if (!empty($heading)) {

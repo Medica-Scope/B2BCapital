@@ -17,7 +17,7 @@ class Controller_WordfenceLS {
 	private $management_assets_registered = false;
 	private $management_assets_enqueued = false;
 	private $use_core_font_awesome_styles = null;
-
+	
 	/**
 	 * Returns the singleton Controller_Wordfence2FA.
 	 *
@@ -30,7 +30,7 @@ class Controller_WordfenceLS {
 		}
 		return $_shared;
 	}
-
+	
 	public function init() {
 		$this->_init_actions();
 		Controller_AJAX::shared()->init();
@@ -38,20 +38,20 @@ class Controller_WordfenceLS {
 		Controller_Time::shared()->init();
 		Controller_Permissions::shared()->init();
 	}
-
+	
 	protected function _init_actions() {
 		register_activation_hook(WORDFENCE_LS_FCPATH, array($this, '_install_plugin'));
 		register_deactivation_hook(WORDFENCE_LS_FCPATH, array($this, '_uninstall_plugin'));
-
+		
 		$versionInOptions = ((is_multisite() && function_exists('get_network_option')) ? get_network_option(null, self::VERSION_KEY, false) : get_option(self::VERSION_KEY, false));
 		if (!$versionInOptions || version_compare(WORDFENCE_LS_VERSION, $versionInOptions, '>')) { //Either there is no version in options or the version in options is greater and we need to run the upgrade
 			$this->_install();
 		}
-
+		
 		if (!Controller_Settings::shared()->get_bool(Controller_Settings::OPTION_ALLOW_XML_RPC)) {
 			add_filter('xmlrpc_enabled', array($this, '_block_xml_rpc'));
 		}
-
+		
 		add_action('admin_init', array($this, '_admin_init'));
 		add_action('login_enqueue_scripts', array($this, '_login_enqueue_scripts'));
 		add_filter('authenticate', array($this, '_authenticate'), 25, 3);
@@ -64,25 +64,25 @@ class Controller_WordfenceLS {
 		}
 		add_action('user_new_form', array($this, '_user_new_form'));
 		add_action('user_register', array($this, '_user_register'));
-
+		
 		$useSubmenu = WORDFENCE_LS_FROM_CORE;
 		if (is_multisite() && !is_network_admin()) {
 			$useSubmenu = false;
 		}
-
+		
 		add_action('admin_menu', array($this, '_admin_menu'), $useSubmenu ? 55 : 10);
 		if (is_multisite()) {
 			add_action('network_admin_menu', array($this, '_admin_menu'), $useSubmenu ? 55 : 10);
 		}
 		add_action('admin_enqueue_scripts', array($this, '_admin_enqueue_scripts'));
-
+		
 		add_action('show_user_profile', array($this, '_edit_user_profile'), 0); //We can't add it to the password section directly -- priority 0 is as close as we can get
 		add_action('edit_user_profile', array($this, '_edit_user_profile'), 0);
 
 		add_action('init', array($this, '_wordpress_init'));
 		if ($this->is_shortcode_enabled())
 			add_action('wp_enqueue_scripts', array($this, '_handle_shortcode_prerequisites'));
-
+		
 		Controller_Permissions::_init_actions();
 	}
 
@@ -105,7 +105,7 @@ class Controller_WordfenceLS {
 			add_action('wp_enqueue_scripts', array($this, '_woocommerce_account_enqueue_assets'));
 		}
 	}
-
+	
 	public function _admin_init() {
 		if (WORDFENCE_LS_FROM_CORE) {
 			\wfModuleController::shared()->addOptionIndex('wfls-option-enable-2fa-roles', __('Login Security: Enable 2FA for these roles', 'wordfence-login-security'));
@@ -114,7 +114,7 @@ class Controller_WordfenceLS {
 			\wfModuleController::shared()->addOptionIndex('wfls-option-disable-xml-rpc', __('Login Security: Disable XML-RPC authentication', 'wordfence-login-security'));
 			\wfModuleController::shared()->addOptionIndex('wfls-option-whitelist-2fa', __('Login Security: Allowlisted IP addresses that bypass 2FA and reCAPTCHA', 'wordfence-login-security'));
 			\wfModuleController::shared()->addOptionIndex('wfls-option-enable-captcha', __('Login Security: Enable reCAPTCHA on the login and user registration pages', 'wordfence-login-security'));
-
+			
 			$title = __('Login Security Options', 'wordfence-login-security');
 			$description = __('Login Security options are available on the Login Security options page', 'wordfence-login-security');
 			$url = esc_url(network_admin_url('admin.php?page=WFLS#top#settings'));
@@ -182,15 +182,15 @@ END
 			}
 		}
 	}
-
+	
 	/**
 	 * Notices
 	 */
-
+	
 	public function _jetpack_xml_rpc_notice() {
 		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(__('XML-RPC authentication is disabled. Jetpack is currently active and requires XML-RPC authentication to work correctly. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
 	}
-
+	
 	public function _recaptcha_test_notice() {
 		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(__('reCAPTCHA test mode is enabled. While enabled, login and registration requests will be checked for their score but will not be blocked if the score is below the minimum score. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
 	}
@@ -205,59 +205,59 @@ END
 		</div>
 <?php
 	}
-
+	
 	/**
 	 * Installation/Uninstallation
 	 */
-
+	
 	public function _install_plugin() {
 		$this->_install();
 	}
-
+	
 	public function _uninstall_plugin() {
 		Controller_Time::shared()->uninstall();
 		Controller_Permissions::shared()->uninstall();
-
+		
 		foreach (array(self::VERSION_KEY) as $opt) {
 			if (is_multisite() && function_exists('delete_network_option')) {
 				delete_network_option(null, $opt);
 			}
 			delete_option($opt);
 		}
-
+		
 		if (Controller_Settings::shared()->get_bool(Controller_Settings::OPTION_DELETE_ON_DEACTIVATION)) {
 			Controller_DB::shared()->uninstall();
 		}
 
 		$this->purge_rewrite_rules();
 	}
-
+	
 	protected function _install() {
 		static $_runInstallCalled = false;
 		if ($_runInstallCalled) { return; }
 		$_runInstallCalled = true;
-
+		
 		if (function_exists('ignore_user_abort')) {
 			@ignore_user_abort(true);
 		}
-
+		
 		if (!defined('DONOTCACHEDB')) { define('DONOTCACHEDB', true); }
-
+		
 		$previousVersion = ((is_multisite() && function_exists('get_network_option')) ? get_network_option(null, self::VERSION_KEY, '0.0.0') : get_option(self::VERSION_KEY, '0.0.0'));
 		if (is_multisite() && function_exists('update_network_option')) {
-			update_network_option(null, self::VERSION_KEY, WORDFENCE_LS_VERSION); //In case we have a fatal error we don't want to keep running install.
+			update_network_option(null, self::VERSION_KEY, WORDFENCE_LS_VERSION); //In case we have a fatal error we don't want to keep running install.	
 		}
 		else {
 			update_option(self::VERSION_KEY, WORDFENCE_LS_VERSION); //In case we have a fatal error we don't want to keep running install.
 		}
-
+		
 		Controller_DB::shared()->install();
 		Controller_Settings::shared()->set_defaults();
-
+		
 		if (\WordfenceLS\Controller_Time::time() > Controller_Settings::shared()->get_int(Controller_Settings::OPTION_LAST_SECRET_REFRESH) + 180 * 86400) {
 			Model_Crypto::refresh_secrets();
 		}
-
+		
 		Controller_Time::shared()->install();
 		Controller_Permissions::shared()->install();
 
@@ -280,7 +280,7 @@ END
 		$this->register_rewrite_endpoints();
 		flush_rewrite_rules();
 	}
-
+	
 	public function _block_xml_rpc() {
 		/**
 		 * Fires just prior to blocking an XML-RPC request. After firing this action hook the XML-RPC request is blocked.
@@ -322,19 +322,19 @@ END
 		}
 		$this->_woocommerce_login_enqueue_scripts();
 	}
-
+	
 	/**
 	 * Login Page
-	 */
+	 */	
 	public function _login_enqueue_scripts() {
 		$useCAPTCHA = Controller_CAPTCHA::shared()->enabled();
 		if ($useCAPTCHA) {
 			wp_enqueue_script('wordfence-ls-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . urlencode(Controller_Settings::shared()->get(Controller_Settings::OPTION_RECAPTCHA_SITE_KEY)));
 		}
-
+		
 		if ($useCAPTCHA || Controller_Users::shared()->any_2fa_active()) {
 			$this->validate_email_verification_token(null, $verification);
-
+			
 			Model_Script::create('wordfence-ls-login', Model_Asset::js('login.js'), array('jquery'), WORDFENCE_LS_VERSION)
 				->withTranslations(array(
 					'Message to Support' => __('Message to Support', 'wordfence-login-security'),
@@ -387,7 +387,7 @@ END
 			Model_Script::create('wordfence-ls-jquery.tmpl', Model_Asset::js('jquery.tmpl.min.js'), array('jquery'), WORDFENCE_LS_VERSION),
 			Model_Script::create('wordfence-ls-jquery.colorbox', Model_Asset::js('jquery.colorbox.min.js'), array('jquery'), WORDFENCE_LS_VERSION)
 		);
-		if (Controller_Permissions::shared()->can_manage_settings()) {
+		if (Controller_Permissions::shared()->can_manage_settings()) { 
 			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css', Model_Asset::css('jquery-ui.min.css'), array(), WORDFENCE_LS_VERSION);
 			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.structure', Model_Asset::css('jquery-ui.structure.min.css'), array(), WORDFENCE_LS_VERSION);
 			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.theme', Model_Asset::css('jquery-ui.theme.min.css'), array(), WORDFENCE_LS_VERSION);
@@ -439,10 +439,10 @@ END
 		else {
 			wp_enqueue_style('wordfence-ls-admin-global', Model_Asset::css('admin-global.css'), array(), WORDFENCE_LS_VERSION);
 		}
-
+		
 		if (Controller_Notices::shared()->has_notice(wp_get_current_user()) || in_array($hookSuffix, array('user-edit.php', 'user-new.php', 'profile.php'))) {
 			wp_enqueue_script('wordfence-ls-admin-global', Model_Asset::js('admin-global.js'), array('jquery'), WORDFENCE_LS_VERSION);
-
+			
 			wp_localize_script('wordfence-ls-admin-global', 'GWFLSVars', array(
 				'ajaxurl' => admin_url('admin-ajax.php'),
 				'nonce' => wp_create_nonce('wp-ajax'),
@@ -450,7 +450,7 @@ END
 		}
 
 	}
-
+	
 	public function _edit_user_profile($user) {
 		if ($user->ID == get_current_user_id() || !current_user_can(Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
 			$manageURL = admin_url('admin.php?page=WFLS');
@@ -458,7 +458,7 @@ END
 		else {
 			$manageURL = admin_url('admin.php?page=WFLS&user=' . ((int) $user->ID));
 		}
-
+		
 		if (is_multisite() && is_super_admin()) {
 			if ($user->ID == get_current_user_id()) {
 				$manageURL = network_admin_url('admin.php?page=WFLS');
@@ -525,7 +525,7 @@ END
 <?php
 		endif;
 	}
-
+	
 	/**
 	 * Authentication
 	 */
@@ -543,12 +543,12 @@ END
 
 		return ( isset( $_POST['login'], $_POST['username'], $_POST['password'] ) && is_string($nonceValue) && wp_verify_nonce( $nonceValue, 'woocommerce-login' ) );
 	}
-
+	
 	public function _authenticate($user, $username, $password) {
 		if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST && !Controller_Settings::shared()->get_bool(Controller_Settings::OPTION_XMLRPC_ENABLED)) { //XML-RPC call and we're not enforcing 2FA on it
 			return $user;
 		}
-
+		
 		if (Controller_Whitelist::shared()->is_whitelisted(Model_Request::current()->ip())) { //Whitelisted, so we're not enforcing 2FA
 			return $user;
 		}
@@ -594,31 +594,31 @@ END
 				}
 			}
 		}
-
+		
 		/*
 		 * CAPTCHA Check
-		 *
+		 * 
 		 * It will be enforced so long as:
-		 *
+		 * 
 		 * 1. It's enabled and keys are set.
 		 * 2. This is not an XML-RPC request. An XML-RPC request is de facto an automated request, so a CAPTCHA makes
 		 *    no sense.
 		 * 3. A filter does not override it. This is to allow plugins with REST endpoints that handle authentication
 		 *    themselves to opt out of the requirement.
-		 * 4. The user does not have 2FA enabled. 2FA exempts the user from requiring email verification if the score is
+		 * 4. The user does not have 2FA enabled. 2FA exempts the user from requiring email verification if the score is 
 		 *    below the threshold.
 		 * 5. The request is not a WooCommerce login while WC integration is disabled
 		 */
 		if ($isLogin && !empty($username) && (!$this->_is_woocommerce_login() || Controller_Settings::shared()->get_bool(Controller_Settings::OPTION_ENABLE_WOOCOMMERCE_INTEGRATION))) { //Login attempt, not just a wp-login.php page load
 
 			$requireCAPTCHA = Controller_CAPTCHA::shared()->is_captcha_required();
-
+			
 			$performVerification = false;
 			$token = Controller_CAPTCHA::shared()->get_token();
 			if ($requireCAPTCHA && empty($token) && !Controller_CAPTCHA::shared()->test_mode()) { //No CAPTCHA token means forced additional verification (if neither 2FA nor test mode are active)
 				$performVerification = true;
 			}
-
+			
 			if ($requireCAPTCHA && !$performVerification) {
 				$score = Controller_CAPTCHA::shared()->score($token);
 				if ($score === false && !Controller_CAPTCHA::shared()->test_mode()) { //An invalid token will require additional verification (if neither 2FA nor test mode are active)
@@ -627,13 +627,13 @@ END
 			}
 
 			if (!isset($score)) { $score = false; }
-
+			
 			if (is_object($user) && $user instanceof \WP_User) {
 				if (Controller_Users::shared()->has_2fa_active($user)) { //CAPTCHA enforcement skipped for users with 2FA active
 					$requireCAPTCHA = false;
 					$performVerification = false;
 				}
-
+				
 				Controller_Users::shared()->record_captcha_score($user, $score);
 
 				//Skip the CAPTCHA check if the email address was verified
@@ -641,7 +641,7 @@ END
 					$requireCAPTCHA = false;
 					$performVerification = false;
 				}
-
+				
 				if ($requireCAPTCHA && ($performVerification || !Controller_CAPTCHA::shared()->is_human($score))) {
 					if ($this->has_woocommerce() && array_key_exists('woocommerce-login-nonce', $_POST)) {
 						$loginUrl = get_permalink(get_option('woocommerce_myaccount_page_id'));
@@ -707,7 +707,7 @@ END
 
 		return $user;
 	}
-
+	
 	public function _set_logged_in_cookie($logged_in_cookie, $expire, $expiration, $user_id) {
 		$user = new \WP_User($user_id);
 		if (Controller_Users::shared()->has_2fa_active($user) && isset($_POST['wfls-remember-device']) && $_POST['wfls-remember-device']) {
@@ -715,14 +715,14 @@ END
 		}
 		delete_user_meta($user_id, 'wfls-captcha-nonce');
 	}
-
+	
 	public function _record_login($user_login/*, $user -- we'd like to use the second parameter instead, but too many plugins call this hook and only provide one of the two required parameters*/) {
 		$user = get_user_by('login', $user_login);
 		if (is_object($user) && $user instanceof \WP_User && $user->exists()) {
 			update_user_meta($user->ID, 'wfls-last-login', Controller_Time::time());
 		}
 	}
-
+	
 	public function _register_post($sanitized_user_login, $user_email, $errors) {
 		if (!empty($sanitized_user_login)) {
 			$captchaResult = $this->process_registration_captcha_with_hooks();
@@ -757,7 +757,7 @@ END
 		}
 		return $errors;
 	}
-
+	
 	public function legacy_2fa_active() {
 		$wfLegacy2FAActive = false;
 		if (class_exists('wfConfig') && \wfConfig::get('isPaid')) {
@@ -773,18 +773,18 @@ END
 					}
 				}
 			}
-
+			
 			if ($wfLegacy2FAActive && class_exists('wfCredentialsController') && method_exists('wfCredentialsController', 'useLegacy2FA') && !\wfCredentialsController::useLegacy2FA()) {
 				$wfLegacy2FAActive = false;
 			}
 		}
 		return $wfLegacy2FAActive;
 	}
-
+	
 	/**
 	 * Menu
 	 */
-
+	
 	public function _admin_menu() {
 		$user = wp_get_current_user();
 		if (Controller_Notices::shared()->has_notice($user)) {
@@ -793,18 +793,18 @@ END
 				Controller_Notices::shared()->remove_notice(false, 'wfls-will-be-required', $user);
 			}
 		}
-
+		
 		Controller_Notices::shared()->enqueue_notices();
-
+		
 		$useSubmenu = WORDFENCE_LS_FROM_CORE && current_user_can('activate_plugins');
 		if (is_multisite() && !is_network_admin()) {
 			$useSubmenu = false;
-
+			
 			if (is_super_admin()) {
 				return;
 			}
 		}
-
+		
 		if ($useSubmenu) {
 			add_submenu_page('Wordfence', __('Login Security', 'wordfence-login-security'), __('Login Security', 'wordfence-login-security'), Controller_Permissions::CAP_ACTIVATE_2FA_SELF, 'WFLS', array($this, '_menu'));
 		}
@@ -812,7 +812,7 @@ END
 			add_menu_page(__('Login Security', 'wordfence-login-security'), __('Login Security', 'wordfence-login-security'), Controller_Permissions::CAP_ACTIVATE_2FA_SELF, 'WFLS', array($this, '_menu'), Model_Asset::img('menu.svg'));
 		}
 	}
-
+	
 	public function _menu() {
 		$user = wp_get_current_user();
 		$administrator = false;
@@ -820,7 +820,7 @@ END
 		if (Controller_Permissions::shared()->can_manage_settings($user)) {
 			$administrator = true;
 		}
-
+		
 		if (user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
 			$canEditUsers = true;
 			if (isset($_GET['user'])) {
@@ -876,7 +876,7 @@ END
 				);
 			}
 		}
-		else {
+		else {	
 			$sections[] = array(
 				'tab' => new Model_Tab('manage', 'manage', __('Two-Factor Authentication', 'wordfence-login-security'), __('Two-Factor Authentication', 'wordfence-login-security')),
 				'title' => new Model_Title('manage', __('Two-Factor Authentication', 'wordfence-login-security'), Controller_Support::supportURL(Controller_Support::ITEM_MODULE_LOGIN_SECURITY_2FA), new Model_HTML(wp_kses(__('Learn more<span class="wfls-hidden-xs"> about Two-Factor Authentication</span>', 'wordfence-login-security'), array('span'=>array('class'=>array()))))),
@@ -885,7 +885,7 @@ END
 					'canEditUsers' => $canEditUsers,
 				)),
 			);
-
+			
 			if ($administrator) {
 				$sections[] = array(
 					'tab' => new Model_Tab('settings', 'settings', __('Settings', 'wordfence-login-security'), __('Settings', 'wordfence-login-security')),
@@ -896,7 +896,7 @@ END
 				);
 			}
 		}
-
+		
 		$view = new Model_View('page/page', array(
 			'sections' => $sections,
 		));
@@ -1002,7 +1002,7 @@ END
 		if (!Controller_Permissions::shared()->can_manage_settings($creator) || $creator->ID == $newUserId)
 			return;
 		if (isset($_POST['wfls-grace-period-toggle']))
-			Controller_Users::shared()->allow_grace_period($newUserId);
+			Controller_Users::shared()->allow_grace_period($newUserId); 
 	}
 
 	public function _woocommerce_account_menu_items($items) {

@@ -10,11 +10,11 @@ $search_placeholder = __('Search for table', 'updraftplus');
 		<strong><?php _e('Total Size', 'updraftplus'); ?>: <span class="total-size"></span></strong>
 	</p>
 		<?php
-
+		
 		if (!class_exists('UpdraftPlus_Database_Utility')) updraft_try_include_file('includes/class-database-utility.php', 'include_once');
-
+		
 		$install_activate_link_of_wp_optimize_plugin = UpdraftPlus_Database_Utility::get_install_activate_link_of_wp_optimize_plugin();
-
+		
 		if (!empty($install_activate_link_of_wp_optimize_plugin)) {
 			echo '<p>'.__('Reducing your database size with WP-Optimize helps to maintain a fast, efficient, and user-friendly website.', 'updraftplus').' '.wp_kses_post($install_activate_link_of_wp_optimize_plugin).' <a href="https://wordpress.org/plugins/wp-optimize/" target="_blank">'.__('Go here for more information.', 'updraftplus').'</a></p>';
 		}

@@ -6,7 +6,7 @@
 			<?php _e('JavaScript warning', 'updraftplus').': ';?><span style="color:red"><?php echo __('This admin interface uses JavaScript heavily.', 'updraftplus').' '.__('You either need to activate it within your browser, or to use a JavaScript-capable browser.', 'updraftplus');?></span>
 		</div>
 	</noscript>
-
+	
 	<?php
 	if ($backup_disabled) {
 		$this->show_admin_warning(
@@ -15,7 +15,7 @@
 		);
 	}
 	?>
-
+	
 	<h3 class="updraft_next_scheduled_backups_heading"><?php _e('Next scheduled backups', 'updraftplus');?>:</h3>
 	<div class="updraft_next_scheduled_backups_wrapper postbox">
 		<div class="schedule">
@@ -67,30 +67,30 @@
 		</div>
 	</div>
 
-
+	
 	<div id="updraft_lastlogmessagerow">
 		<h3><?php _e('Last log message', 'updraftplus');?>:</h3>
 		<?php $this->most_recently_modified_log_link(); ?>
 		<div class="postbox">
-			<span id="updraft_lastlogcontainer"><?php echo htmlspecialchars(UpdraftPlus_Options::get_updraft_lastmessage()); ?></span>
+			<span id="updraft_lastlogcontainer"><?php echo htmlspecialchars(UpdraftPlus_Options::get_updraft_lastmessage()); ?></span>			
 		</div>
 	</div>
-
+	
 	<div id="updraft-iframe-modal">
 		<div id="updraft-iframe-modal-innards">
 		</div>
 	</div>
-
+	
 	<div id="updraft-authenticate-modal" style="display:none;" title="<?php esc_attr_e('Remote storage authentication', 'updraftplus');?>">
 		<p><?php _e('You have selected a remote storage option which has an authorization step to complete:', 'updraftplus'); ?></p>
 		<div id="updraft-authenticate-modal-innards">
 		</div>
 	</div>
-
+	
 	<div id="updraft-backupnow-modal" title="UpdraftPlus - <?php _e('Perform a backup', 'updraftplus'); ?>">
 		<?php echo $updraftplus_admin->backupnow_modal_contents(); ?>
 	</div>
-
+	
 	<?php if (is_multisite() && !file_exists(UPDRAFTPLUS_DIR.'/addons/multisite.php')) { ?>
 		<h2>UpdraftPlus <?php _e('Multisite', 'updraftplus');?></h2>
 		<table>

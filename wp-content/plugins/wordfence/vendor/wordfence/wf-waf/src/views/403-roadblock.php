@@ -6,7 +6,7 @@ if (!defined('WFWAF_VIEW_RENDERING')) { exit; }
 
 /*
  * IMPORTANT:
- *
+ * 
  * If the form variables below change name or format, admin.ajaxWatcher.js in the main plugin also needs changed. It
  * processes these to generate its whitelist button.
  */

@@ -34,4 +34,4 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 			renderQrCode();
 		});
 	})(jQuery);
-</script>
+</script> 

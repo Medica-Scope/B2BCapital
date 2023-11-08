@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel='stylesheet' id='wordfence-main-style-css'  href='<?php echo wfUtils::getBaseURL() . wfUtils::versionedAsset('css/phpinfo.css'); ?>?ver=<?php echo WORDFENCE_VERSION; ?>' type='text/css' media='all' />
 <body>
-<?php
+<?php 
 ob_start();
 if (wfUtils::funcEnabled('phpinfo')) { phpinfo(INFO_ALL); } else { echo '<center><strong>' . esc_html__('Unable to output phpinfo content because it is disabled', 'wordfence') . "</strong></center>\n"; }
 $out = ob_get_clean();

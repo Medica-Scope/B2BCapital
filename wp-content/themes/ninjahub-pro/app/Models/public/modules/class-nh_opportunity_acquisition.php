@@ -185,9 +185,15 @@
                 'orderby'     => 'ID',
                 'order'       => 'DESC',
                 'meta_query'  => [
+                    'relation' => 'AND',
                     [
                         'key'     => 'acquisitions_stage',
                         'value'   => 'closed',
+                        'compare' => '=',
+                    ],
+                    [
+                        'key'     => 'show_in_dashboard',
+                        'value'   => '1',
                         'compare' => '=',
                     ],
                 ],

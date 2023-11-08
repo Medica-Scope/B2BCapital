@@ -457,7 +457,7 @@ if (!wfConfig::liveTrafficEnabled($overridden)):
 															<div data-bind="visible: (jQuery.inArray(parseInt(statusCode(), 10), [403, 503, 404]) !== -1 || action() == 'loginFailValidUsername' || action() == 'loginFailInvalidUsername')">
 																<strong><?php esc_html_e('Human/Bot:', 'wordfence') ?></strong> <span data-bind="text: (jsRun() === '1' ? <?php echo esc_attr(json_encode(__('Human', 'wordfence'))) ?> : <?php echo esc_attr(json_encode(__('Bot', 'wordfence'))) ?>)"></span>
 															</div>
-															<div class="wf-split-word" data-bind="text: UA"></div>
+															<div class="wf-split-word" data-bind="text: UA"></div> 
 															<div class="wf-live-traffic-actions">
 																<span data-bind="if: blocked()">
 																	<a class="wf-btn wf-btn-default wf-btn-sm"
@@ -527,7 +527,7 @@ if (!wfConfig::liveTrafficEnabled($overridden)):
 					$('#wf-live-traffic').toggleClass('wf-live-traffic-display-expanded', isOn);
 				});
 			});
-
+			
 			$(document).on('heartbeat-tick', function(heartbeat) {
 				WFAD.serverMicrotime = heartbeat.timeStamp / 1000;
 				WFAD.updateTimeAgo();
@@ -558,7 +558,7 @@ if (!wfConfig::liveTrafficEnabled($overridden)):
 					WFAD.tour('wfNewTour1', 'wf-live-traffic', 'bottom', 'bottom', null, WFAD.tourComplete);
 				};
 				WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_LIVE_TRAFFIC); ?>'); };
-
+				
 				<?php if (wfOnboardingController::shouldShowNewTour(wfOnboardingController::TOUR_LIVE_TRAFFIC)): ?>
 				if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 				<?php endif; ?>
@@ -589,7 +589,7 @@ if (!wfConfig::liveTrafficEnabled($overridden)):
 					WFAD.tour('wfUpgradeTour1', 'wf-live-traffic', 'bottom', 'bottom', null, WFAD.tourComplete);
 				};
 				WFAD.tourComplete = function() { WFAD.tourFinish('<?php echo esc_attr(wfOnboardingController::TOUR_LIVE_TRAFFIC); ?>'); };
-
+				
 				<?php if (wfOnboardingController::shouldShowUpgradeTour(wfOnboardingController::TOUR_LIVE_TRAFFIC)): ?>
 				if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 				<?php endif; ?>

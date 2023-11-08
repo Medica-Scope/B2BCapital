@@ -6,7 +6,7 @@ if (!defined('WFWAF_VIEW_RENDERING')) { exit; }
 
 /*
  * IMPORTANT:
- *
+ * 
  * If the form variables below change name or format, admin.ajaxWatcher.js in the main plugin also needs changed. It
  * processes these to generate its whitelist button.
  */
@@ -19,18 +19,18 @@ if (is_array($request->getHeaders())) {
 			case 'cookie':
 				$headerString .= 'Cookie: ' . trim($request->getCookieString()) . "\n";
 				break;
-
+			
 			case 'host':
 				$headerString .= 'Host: ' . $request->getHost() . "\n";
 				break;
-
+			
 			case 'authorization':
 				$hasAuth = true;
 				if ($request->getAuth()) {
 					$headerString .= 'Authorization: Basic <redacted>' . "\n";
 				}
 				break;
-
+			
 			default:
 				$headerString .= $header . ': ' . $value . "\n";
 				break;
@@ -85,19 +85,19 @@ $payload = "-----BEGIN REPORT-----\n" . implode("\n", str_split($message, 60)) .
 			color: #333;
 			background-color: #fff;
 		}
-
+		
 		h1, h2, h3, h4, h45, h6 {
 			font-weight: 500;
 			line-height: 1.1;
 		}
-
+		
 		h1 { font-size: 36px; }
 		h2 { font-size: 30px; }
 		h3 { font-size: 24px; }
 		h4 { font-size: 18px; }
 		h5 { font-size: 14px; }
 		h6 { font-size: 12px; }
-
+		
 		h1, h2, h3 {
 			margin-top: 20px;
 			margin-bottom: 10px;
@@ -106,7 +106,7 @@ $payload = "-----BEGIN REPORT-----\n" . implode("\n", str_split($message, 60)) .
 			margin-top: 10px;
 			margin-bottom: 10px;
 		}
-
+		
 		.btn {
 			background-color: #00709e;
 			border: 1px solid #09486C;
@@ -127,7 +127,7 @@ $payload = "-----BEGIN REPORT-----\n" . implode("\n", str_split($message, 60)) .
 			white-space: nowrap;
 			word-spacing: 0px;
 		}
-
+		
 		textarea {
 			display: block;
 			height: 48px;
@@ -146,21 +146,21 @@ $payload = "-----BEGIN REPORT-----\n" . implode("\n", str_split($message, 60)) .
 			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 			font-family: monospace;
 		}
-
+		
 		textarea:focus {
 			border-color: #66afe9;
 			outline: 0;
 			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 		}
-
+		
 		hr {
 			margin-top: 20px;
 			margin-bottom: 20px;
 			border: 0;
 			border-top: 1px solid #eee
 		}
-
+		
 		.btn.disabled, .btn[disabled] {
 			background-color: #9f9fa0;
 			border: 1px solid #7E7E7F;
@@ -201,7 +201,7 @@ if (!empty($errorNonce)) { echo '<!-- WFWAF NONCE: ' . htmlentities($errorNonce)
 		var height = 1 + lines.length;
 		var pixelHeight = Math.min(height * parseInt(cs.getPropertyValue('line-height')), 600);
 		textarea.style.height = pixelHeight + 'px';
-
+		
 		textarea.addEventListener('focus', function() {
 			document.getElementById('reportButton').className = document.getElementById('reportButton').className.replace(new RegExp('(?:^|\\s)'+ 'disabled' + '(?:\\s|$)'), ' ');
 			document.getElementById('reportButton').href = 'ht' + 'tps:/' + '/user-reports.wordfence' + '.com';
