@@ -69,8 +69,8 @@
 				</li>
 			</ul>
 		<?php endif; ?>
-		</div>		
-		
+		</div>
+
 	</div>
 
 	<form method="post" action="#">
@@ -256,7 +256,7 @@
 					</p>
 				</fieldset>
 			</div>
-	
+
 			<h3><?php esc_html_e('External URLs to merge', 'wp-optimize'); ?></h3>
 			<div class="wpo-fieldgroup">
 				<fieldset>
@@ -274,13 +274,13 @@
 					><?php echo esc_textarea($wpo_minify_options['merge_allowed_urls']); ?></textarea>
 				</fieldset>
 			</div>
-	
+
 			<h1><?php esc_html_e('CDN Options', 'wp-optimize'); ?></h1>
 			<p class="wpo_min-bold-green">
 				<?php printf(esc_html__('When the "Enable defer on processed JavaScript files" option is enabled, JavaScript and CSS files will not be loaded from the CDN due to %scompatibility%s reasons.', 'wp-optimize'), '<a target="_blank" href="https://www.chromestatus.com/feature/5718547946799104">', '</a>'); ?>
 				<?php esc_html_e('However, you can define a CDN Domain below, in order to use it for all of the static assets "inside" your CSS and JS files.', 'wp-optimize'); ?>
 			</p>
-	
+
 			<h3><?php esc_html_e('Your CDN domain', 'wp-optimize'); ?></h3>
 			<div class="wpo-fieldgroup">
 				<fieldset>
@@ -305,7 +305,7 @@
 					</label>
 				</fieldset>
 			</div>
-	
+
 			<h3><?php esc_html_e('Force the CDN Usage', 'wp-optimize'); ?></h3>
 			<div class="wpo-fieldgroup">
 				<p class="wpo_min-bold-green wpo_min-rowintro">

@@ -20,14 +20,14 @@ msgstr ""
 msgid "WPML String Translation is attempting to write .mo files with translations to folder:"
 msgstr ""
 
-# 
+#
 # $text .= '<p>' . esc_html__( 'This folder appears to be not writable. This is blocking translation for strings from appearing on the site.',
 # 'wpml-string-translation' ) . '</p>';
 
 msgid "This folder appears to be not writable. This is blocking translation for strings from appearing on the site."
 msgstr ""
 
-# 
+#
 # $text .= '<p>' . esc_html__( 'To resolve this, please contact your hosting company and request that they make that folder writable.',
 # 'wpml-string-translation' ) . '</p>';
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "WPML's documentation on troubleshooting .mo files generation."
 msgstr ""
 
-# 
+#
 # $text .= '<p>' . sprintf( esc_html__( 'For more details, see %s.', 'wpml-string-translation' ),
 # $link ) . '</p>';
 
@@ -504,7 +504,7 @@ msgctxt "MO Import blocked short 1/3"
 msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
 msgstr ""
 
-# 
+#
 # $message .= ' ' . _x( 'WPML support team knows how to fix it.',
 # 'MO Import blocked short 2/3', 'wpml-string-translation' );
 
@@ -512,7 +512,7 @@ msgctxt "MO Import blocked short 2/3"
 msgid "WPML support team knows how to fix it."
 msgstr ""
 
-# 
+#
 # $message .= ' ' . sprintf( _x( 'Please add a message in the relevant <a href="%s" target="_blank" >support thread</a> and we\'ll fix it for you.',
 # 'MO Import blocked short 3/3', 'wpml-string-translation' ), $this->link );
 
@@ -528,7 +528,7 @@ msgctxt "MO Import blocked 1/4"
 msgid "There is a problem with the String Translation table in your site."
 msgstr ""
 
-# 
+#
 # $message .= ' ' . _x( 'This problem is not causing a problem running the site right now, but can become a critical issue in the future.',
 # 'MO Import blocked 2/4', 'wpml-string-translation' );
 
@@ -536,7 +536,7 @@ msgctxt "MO Import blocked 2/4"
 msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
 msgstr ""
 
-# 
+#
 # $message .= ' ' . _x( 'WPML support team knows how to fix it.',
 # 'MO Import blocked 3/4', 'wpml-string-translation' );
 
@@ -544,7 +544,7 @@ msgctxt "MO Import blocked 3/4"
 msgid "WPML support team knows how to fix it."
 msgstr ""
 
-# 
+#
 # $message .= ' ' . sprintf( _x( 'Please add a message in the relevant <a href="%s" target="_blank">support thread</a> and we\'ll fix it for you.',
 # 'MO Import blocked 4/4', 'wpml-string-translation' ), $this->link );
 
@@ -603,35 +603,35 @@ msgstr ""
 
 # case ICL_STRING_TRANSLATION_COMPLETE:
 # return __( 'Translation complete', 'wpml-string-translation' );
-# 
+#
 
 msgid "Translation complete"
 msgstr ""
 
 # case ICL_STRING_TRANSLATION_PARTIAL:
 # return __( 'Partial translation', 'wpml-string-translation' );
-# 
+#
 
 msgid "Partial translation"
 msgstr ""
 
 # case ICL_STRING_TRANSLATION_NEEDS_UPDATE:
 # return __( 'Translation needs update', 'wpml-string-translation' );
-# 
+#
 
 msgid "Translation needs update"
 msgstr ""
 
 # case ICL_STRING_TRANSLATION_NOT_TRANSLATED:
 # return __( 'Not translated', 'wpml-string-translation' );
-# 
+#
 
 msgid "Not translated"
 msgstr ""
 
 # case ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR:
 # return __( 'Waiting for translator', 'wpml-string-translation' );
-# 
+#
 
 msgid "Waiting for translator"
 msgstr ""
@@ -659,26 +659,26 @@ msgstr ""
 
 # $html = '<div class="wrap">';
 # $html .= '<h2>' . __( 'Auto-download WordPress translations', 'wpml-string-translation' ) . '</h2>';
-# 
+#
 
 msgid "Auto-download WordPress translations"
 msgstr ""
 
 # private function render_nothing_to_be_added() {
 # $html = '<p>' . __( 'There is nothing to be updated or to be added.', 'wpml-string-translation' ) . '</p>';
-# 
+#
 
 msgid "There is nothing to be updated or to be added."
 msgstr ""
 
 # $html .= '<p><a href="' . admin_url( 'admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php' ) . '"';
 # $html .= 'class="button-secondary">' . __( 'Check other languages', 'wpml-string-translation' ) . '</a></p>';
-# 
+#
 
 msgid "Check other languages"
 msgstr ""
 
-# 
+#
 # $html = '<h3>' . sprintf( __( 'Updated translations (%d)', 'wpml-string-translation' ), count( $updated_translations ) ) . '</h3>';
 # $html .= '<table id="icl_admo_list_table" class="widefat">';
 
@@ -699,7 +699,7 @@ msgstr ""
 msgid "New translation"
 msgstr ""
 
-# 
+#
 # $html = '<h3>' . sprintf( __( 'New translations (%d)', 'wpml-string-translation' ), count( $new_translations ) ) . '</h3>';
 # $html .= '<table class="widefat">';
 
@@ -715,14 +715,14 @@ msgstr ""
 
 # $html .= '<label><input type="checkbox" name="add_new" value="' . base64_encode( serialize( $new_translations ) ) . '" checked="checked" />&nbsp;';
 # $html .= __( 'Add the new translations.', 'wpml-string-translation' ) . '</label>';
-# 
+#
 
 msgid "Add the new translations."
 msgstr ""
 
-# 
+#
 # $link_to_bottom_of_page = '<a href="#adm-proceed">' . __( 'bottom of this page', 'wpml-string-translation' ) . '</a>';
-# 
+#
 
 msgid "bottom of this page"
 msgstr ""
@@ -811,7 +811,7 @@ msgstr ""
 msgid "The following files were processed:"
 msgstr ""
 
-# 
+#
 # $this->add_stat( sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $file ) );
 # $this->add_scanned_file( $file );
 
@@ -832,7 +832,7 @@ msgstr ""
 msgid "No string found"
 msgstr ""
 
-# 
+#
 # $this->metabox_data[ 'title' ]                  = __( 'WPML Translation', 'wpml-string-translation' );
 # if ( $this->is_package_language_active( ) ) {
 
@@ -909,9 +909,9 @@ msgstr ""
 msgid "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
 msgstr ""
 
-# 
+#
 # $select_one_lang_message = __( 'Please select at least one language to translate into.', 'wpml-string-translation' );
-# 
+#
 
 msgid "Please select at least one language to translate into."
 msgstr ""
@@ -937,7 +937,7 @@ msgstr ""
 msgid "Post \"%s\" will be ignored for %s, because translation is already waiting for translator."
 msgstr ""
 
-# 
+#
 # $table_title                 = __( 'Package Management', 'wpml-string-translation' );
 # $package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
 
@@ -951,7 +951,7 @@ msgstr ""
 msgid "Display packages for this kind:"
 msgstr ""
 
-# 
+#
 # <input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ) ?>" disabled="disabled"/>
 # &nbsp;
 
@@ -960,7 +960,7 @@ msgstr ""
 
 # <span class="spinner"></span>
 # <span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ) ?></span>
-# 
+#
 
 msgid "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too."
 msgstr ""
@@ -995,7 +995,7 @@ msgstr ""
 
 # }
 # $package_statuses[ ] = __( 'Default package language', 'wpml-string-translation' ) . ': ' . $default_package_language;
-# 
+#
 
 msgid "Default package language"
 msgstr ""
@@ -1128,7 +1128,7 @@ msgstr ""
 
 # <div class="wrap">
 # <h2><?php echo __( 'Admin Texts Translation', 'wpml-string-translation' ) ?></h2>
-# 
+#
 
 msgid "Admin Texts Translation"
 msgstr ""
@@ -1140,7 +1140,7 @@ msgstr ""
 msgid "Return to String Translation"
 msgstr ""
 
-# 
+#
 # $createOption( __( 'All strings', 'wpml-string-translation' ), false  );
 # $createOption( WPML_ST_String_Statuses::get_status( ICL_TM_COMPLETE ), ICL_TM_COMPLETE );
 
@@ -1177,7 +1177,7 @@ msgstr ""
 
 # ?>
 # <?php printf(__('Translating users of types: %s', 'wpml-string-translation'), $tustr); ?>
-# 
+#
 
 msgid "Translating users of types: %s"
 msgstr ""
@@ -1261,7 +1261,7 @@ msgstr ""
 
 # <div id="wpml-st-filter-and-select-all-box">
 # <input type="input" name="search" placeholder="<?php echo esc_attr__('Search', 'wpml-string-translation')?>" />
-# 
+#
 
 msgid "Search"
 msgstr ""
@@ -1273,14 +1273,14 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-# 
+#
 # <h2><?php echo esc_html__( 'String translation', 'wpml-string-translation' ) ?></h2>
-# 
+#
 
 msgid "String translation"
 msgstr ""
 
-# 
+#
 # <p><?php printf( esc_html__( "These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %sbottom of this screen%s. You can exclude individual strings by clearing the check boxes next to them.", 'wpml-string-translation' ), '<a href="#add_po_strings_confirm">', '</a>' ); ?></p>
 # <form method="post" id="wpml_add_strings" action="<?php echo admin_url("admin.php?page=" . WPML_ST_FOLDER . "/menu/string-translation.php");?>">
 
@@ -1366,7 +1366,7 @@ msgstr ""
 
 # <?php
 # echo esc_html__( 'Strings per page:', 'wpml-string-translation' );
-# 
+#
 
 msgid "Strings per page:"
 msgstr ""
@@ -1527,7 +1527,7 @@ msgstr ""
 
 # $tustr .= '</span>';
 # $tustr .= '&nbsp;&nbsp;<a href="#" onclick="jQuery(\'#icl_st_tusers\').slideToggle();return false;">' . esc_html__( 'edit', 'wpml-string-translation' ) . '</a>';
-# 
+#
 
 msgid "edit"
 msgstr ""
@@ -1560,14 +1560,14 @@ msgstr ""
 msgid "Performance considerations"
 msgstr ""
 
-# 
+#
 # <a href="admin.php?page=<?php echo WPML_ST_FOLDER ?>/menu/string-translation.php&amp;trop=1"><?php esc_html_e( 'Translate texts in admin screens &raquo;', 'wpml-string-translation' ); ?></a>
-# 
+#
 
 msgid "Translate texts in admin screens &raquo;"
 msgstr ""
 
-# 
+#
 # $anchor_text         = esc_attr_x( 'String Tracking', 'String Tracking warning: sentence 1, anchor text', 'wpml-string-translation' );
 # $message_sentences[] = esc_html_x( '%s allows you to see where strings come from, so you can translate them accurately.', 'String Tracking warning: sentence 1', 'wpml-string-translation' );
 
@@ -1601,7 +1601,7 @@ msgstr ""
 
 # $message_sentences[] = esc_html_x( 'This feature is CPU-intensive and should only be used while you are developing sites.', 'String Tracking warning: sentence 3', 'wpml-string-translation' );
 # $message_sentences[] = esc_html_x( 'Remember to turn it off before going to production, to avoid performance problems.', 'String Tracking warning: sentence 4', 'wpml-string-translation' );
-# 
+#
 
 msgctxt "String Tracking warning: sentence 4"
 msgid "Remember to turn it off before going to production, to avoid performance problems."

@@ -339,13 +339,13 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 </div>
 <script type="text/javascript">
 (function($) {
-	
+
 	// append html
 	var html = $('#tmpl-acf-menu-settings').html();
 	$('#tmpl-acf-menu-settings').remove();
 	$('#post-body-content').append( html );
-	
-	
+
+
 	// avoid WP over-writing $_POST data
 	// - https://core.trac.wordpress.org/ticket/41502#ticket
 	$(document).on('submit', '#update-nav-menu', function() {
@@ -353,37 +353,37 @@ if ( ! class_exists( 'acf_form_nav_menu' ) ) :
 		// vars
 		var $form = $(this);
 		var $input = $('input[name="nav-menu-data"]');
-		
-		
+
+
 		// decode json
 		var json = $form.serializeArray();
 		var json2 = [];
-		
-		
+
+
 		// loop
 		$.each( json, function( i, pair ) {
-			
+
 			// avoid nesting (unlike WP)
 			if( pair.name === 'nav-menu-data' ) return;
-			
-			
+
+
 			// bail early if is 'acf[' input
 			if( pair.name.indexOf('acf[') > -1 ) return;
-						
-			
+
+
 			// append
 			json2.push( pair );
-			
+
 		});
-		
-		
+
+
 		// update
 		$input.val( JSON.stringify(json2) );
-		
+
 	});
-		
-		
-})(jQuery);	
+
+
+})(jQuery);
 </script>
 			<?php
 

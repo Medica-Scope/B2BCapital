@@ -109,6 +109,9 @@ class Nh_Forms extends Nh_Hooks {
 			} elseif ( $field['type'] === 'select' ) {
 				// Generate HTML code for select input fields
 				$form .= $this->selectBox_inputs( $field );
+			} elseif ( $field['type'] === 'range' ) {
+				// Generate HTML code for range input fields
+				$form .= $this->range_inputs( $field );
 			} elseif ( $field['type'] === 'nonce' ) {
 				// Generate HTML code for nonce input fields
 				$form .= $this->create_nonce( $field );
@@ -871,6 +874,54 @@ class Nh_Forms extends Nh_Hooks {
 			<?= boolval( $input_data['inline'] ) ? '</div>' : '' ?>
 
 			<?= $input_data['after'] ?>
+		</div>
+		<?php
+				return ob_get_clean();
+	}
+
+	public function range_inputs( array $args = [] ): string {
+		ob_start();
+		$defaults   = [
+			'type'        => 'range',
+			'class'       => '',
+			'input_class' => '',
+			'label_class' => '',
+			'from' 		  => 0,
+			'to' 		  => 0,
+			'before'      => '',
+			'after'       => '',
+			'order'       => 0,
+			'required'	  => FALSE,
+			'id'          => ( empty( $args['name'] ) ) ? "" : Nh::_DOMAIN_NAME . '_' . $args['name'],
+			'before'      => '',
+			'abbr'        => __( "This field is required", "ninja" ),
+			'extra_attr'  => [],
+		];
+		$input_data = array_merge( $defaults, $args );
+		?>
+		<div class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>">
+			<?php
+					echo $input_data['before'];
+					$count = 0;
+						?>
+			<div class="form-range <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= $input_data['class'] ?>">
+				<?= $input_data['before'] ?>
+				<label for="<?= $input_data['id'] ?>" class="<?= $input_data['label_class'] . ' ' . Nh::_DOMAIN_NAME ?>-label">
+					<?= $input_data['label'] ?>
+				</label>
+				<input type="<?= $input_data['type'] ?>"
+					class="<?= $input_data['input_class'] . ' ' . Nh::_DOMAIN_NAME ?>-range" 
+					id="<?= $input_data['id'] ?>"
+					name="<?= $input_data['name'] ?>" 
+					value="<?= $input_data['value'] ?>"
+					min="<?= $input_data['from'] ?>"
+					max="<?= $input_data['to'] ?>"
+					oninput="document.getElementById('rangeValue-<?= $input_data['id'] ?>').innerText = this.value"
+					<?= $input_data['required'] ? 'required="required"' : '' ?> <?= $this->create_attr( $input_data['extra_attr'] ) ?>
+					>
+					<p id="rangeValue-<?= $input_data['id'] ?>"><?= $input_data['value'] ?></p>
+					<?= $input_data['after'] ?>
+			</div>
 		</div>
 		<?php
 				return ob_get_clean();

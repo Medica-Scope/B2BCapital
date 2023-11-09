@@ -260,7 +260,7 @@ class SCPO_Engine {
 					",
 					$object
 				);
-				
+
 				$result = $wpdb->get_results($query); // à corriger
 
 				if ( $result[0]->cnt == 0 || $result[0]->cnt == $result[0]->max ) {
@@ -310,7 +310,7 @@ class SCPO_Engine {
 					",
 					$taxonomy
 				);
-				
+
 				$results = $wpdb->get_results($query); //Passage en requette préparée
 				foreach ( $results as $key => $result ) {
 					$wpdb->update( $wpdb->terms, array( 'term_order' => $key + 1 ), array( 'term_id' => $result->term_id ) );
@@ -490,7 +490,7 @@ class SCPO_Engine {
 						$taxonomy
 					)
 				);// Passage en requette préparée
-				
+
 				if ( $result[0]->cnt == 0 || $result[0]->cnt == $result[0]->max ) {
 					continue;
 				}
@@ -802,7 +802,7 @@ function scporder_doing_ajax() {
  * SCP Order Uninstall hook
  */
 
- 
+
 register_uninstall_hook( __FILE__, 'scporder_uninstall' );
 
 function scporder_uninstall() {

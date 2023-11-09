@@ -432,19 +432,19 @@ if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 			 */
 			do_action( __CLASS__ . '_display_custom_messages', $save_results );
 			?>
-			<div class="updated fade inline" 
+			<div class="updated fade inline"
 			<?php
 			if ( empty( $save_results['message'] ) ) {
 				echo 'style="display:none"';}
 			?>
 			><p><strong><?php echo wp_kses_post( $save_results['message'] ); ?></strong></p></div>
-			<div class="updated bws-notice inline" 
+			<div class="updated bws-notice inline"
 			<?php
 			if ( empty( $save_results['notice'] ) ) {
 				echo 'style="display:none"';}
 			?>
 			><p><strong><?php echo wp_kses_post( $save_results['notice'] ); ?></strong></p></div>
-			<div class="error inline" 
+			<div class="error inline"
 			<?php
 			if ( empty( $save_results['error'] ) ) {
 				echo 'style="display:none"';}
@@ -577,7 +577,7 @@ if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 								</p>
 								<p class="bws_info">
 									<label>
-										<input type="checkbox" value="1" 
+										<input type="checkbox" value="1"
 											<?php
 											if ( $this->custom_code_args[ "is_{$extension}_active" ] ) {
 												echo 'checked';}
@@ -656,7 +656,7 @@ if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 							<th scope="row"><?php esc_html_e( 'Pro Options', 'bestwebsoft' ); ?></th>
 							<td>
 								<label>
-									<input <?php echo esc_attr( wp_kses_data( $this->change_permission_attr ) ); ?> name="bws_hide_premium_options_submit" type="checkbox" value="1" 
+									<input <?php echo esc_attr( wp_kses_data( $this->change_permission_attr ) ); ?> name="bws_hide_premium_options_submit" type="checkbox" value="1"
 										<?php
 										if ( ! $this->hide_pro_tabs ) {
 											echo 'checked="checked "';}
@@ -671,7 +671,7 @@ if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 						<th scope="row"><?php esc_html_e( 'Track Usage', 'bestwebsoft' ); ?></th>
 						<td>
 							<label>
-								<input <?php echo esc_attr( wp_kses_data( $this->change_permission_attr ) ); ?> name="bws_track_usage" type="checkbox" value="1" 
+								<input <?php echo esc_attr( wp_kses_data( $this->change_permission_attr ) ); ?> name="bws_track_usage" type="checkbox" value="1"
 									<?php
 									if ( ! empty( $bstwbsftwppdtplgns_options['track_usage']['products'][ $this->plugin_basename ] ) ) {
 										echo 'checked="checked "';}
@@ -863,7 +863,7 @@ if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 										<br>
 										<a target="_blank" href="https://bestwebsoft.com/documentation/how-to-install-a-wordpress-product/how-to-install-a-wordpress-plugin/"><?php esc_html_e( 'How to install WordPress plugin from your admin Dashboard (ZIP archive)', 'bestwebsoft' ); ?></a>
 									</p>
-									<br>					
+									<br>
 									<p>
 										<strong><?php esc_html_e( 'Get Started', 'bestwebsoft' ); ?></strong>
 										<br>

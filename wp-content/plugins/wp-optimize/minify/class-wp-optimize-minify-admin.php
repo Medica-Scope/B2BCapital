@@ -73,7 +73,7 @@ class WP_Optimize_Minify_Admin {
 		global $wp_version;
 		include ABSPATH . WPINC . '/version.php';
 		$errors = array();
-		
+
 		if (!WPO_MINIFY_PHP_VERSION_MET) {
 			$errors[] = __('WP-Optimize Minify requires PHP 5.4 or higher.', 'wp-optimize') . ' ' . sprintf(__("You're using version %s.", 'wp-optimize'), PHP_VERSION);
 		}
@@ -81,7 +81,7 @@ class WP_Optimize_Minify_Admin {
 		if (!extension_loaded('mbstring')) {
 			$errors[] = __('WP-Optimize Minify requires the PHP mbstring module to be installed on the server; please ask your web hosting company for advice on how to enable it on your server.', 'wp-optimize');
 		}
-		
+
 		if (version_compare($wp_version, $this->wp_version_required, '<')) {
 			$errors[] = sprintf(__('WP-Optimize Minify requires WordPress version %s or higher.', 'wp-optimize'), $this->wp_version_required) . ' ' . sprintf(__("You're using version %s.", 'wp-optimize'),  $wp_version);
 		}

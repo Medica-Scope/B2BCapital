@@ -290,6 +290,9 @@ class NhOpportunity extends Nh
                     }else{
                         $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
+                    if(res.data.updated_text && $('.fav-text').length){
+                        $('.fav-text').html(res.data.updated_text);
+                    }
                     UiCtrl.blockUI($el, false);
 
                 }
@@ -319,12 +322,12 @@ class NhOpportunity extends Nh
             success: function (res) {
                 if (res.success) {
                     if(res.data.ignore_active == 0){
-                        $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
+                        $el.find('.ignore-star').toggleClass('bbc-thumbs-down bbc-thumbs-up');
                     }else{
-                        $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
+                        $el.find('.ignore-star').toggleClass('bbc-thumbs-up bbc-thumbs-down');
                     }
-                    if(res.data.updated){
-                        $('.opportunity-list .card-group').html(res.data.updated);
+                    if(res.data.updated_text && $('.ignore-text').length){
+                        $('.ignore-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
 

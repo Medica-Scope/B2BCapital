@@ -447,7 +447,7 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 			?>
 			<div class="acf-field acf-field-setting-sub_fields" data-setting="group" data-name="sub_fields">
 				<div class="acf-label">
-					<label><?php _e( 'Sub Fields', 'acf' ); ?></label>	
+					<label><?php _e( 'Sub Fields', 'acf' ); ?></label>
 				</div>
 				<div class="acf-input acf-input-sub">
 					<?php

@@ -177,11 +177,9 @@
 					.user-action {
 						padding: 0.5rem 1rem;
 						margin-right: 1rem;
-						font-size: 0.7rem;
 						font-family: $bbc-primary-en-font-medium;
 						@include large-screen {
 							padding: 0.55rem 1.2rem;
-							font-size: 0.8rem;
 						}
 						@include xLarge-screen {
 							padding: 0.9rem 1.7rem;

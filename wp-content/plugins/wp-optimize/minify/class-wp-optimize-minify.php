@@ -40,7 +40,7 @@ class WP_Optimize_Minify {
 		if (!WPO_MINIFY_PHP_VERSION_MET) return;
 
 		add_filter('wpo_cache_admin_bar_menu_items', array($this, 'admin_bar_menu'), 30, 1);
-		
+
 		if (WP_Optimize::is_premium()) {
 			$this->load_premium();
 		}
@@ -59,7 +59,7 @@ class WP_Optimize_Minify {
 
 		// cron job to delete old wpo_min cache
 		add_action('wpo_minify_purge_old_cache', array('WP_Optimize_Minify_Cache_Functions', 'purge_old'));
-		
+
 		if ($this->enabled) {
 			$this->schedule_purge_old_cache_event();
 		}
@@ -92,7 +92,7 @@ class WP_Optimize_Minify {
 		$wpo_minify_options = wp_optimize_minify_config()->get();
 
 		if (!$wpo_minify_options['enabled'] || !current_user_can('manage_options') || !($wpo_minify_options['enable_css'] || $wpo_minify_options['enable_js'])) return $menu_items;
-		
+
 		$act_url = remove_query_arg('wpo_minify_cache_purged');
 		$cache_path = WP_Optimize_Minify_Cache_Functions::cache_path();
 		$cache_size_info = '<h4>'.__('Minify cache', 'wp-optimize').'</h4><span><span class="label">'.__('Cache size:', 'wp-optimize').'</span> <span class="stats">'.esc_html(WP_Optimize_Minify_Cache_Functions::get_cachestats($cache_path['cachedir'])).'</span></span>';
@@ -134,7 +134,7 @@ class WP_Optimize_Minify {
 		}
 
 		if (!isset($_GET['_wpo_purge_minify_cache'])) return;
-		
+
 		if (wp_verify_nonce($_GET['_wpo_purge_minify_cache'], 'wpo_purge_minify_cache')) {
 			$success = false;
 
@@ -190,7 +190,7 @@ class WP_Optimize_Minify {
 		if (class_exists('WP_Optimize_Minify_Cache_Functions')) {
 			WP_Optimize_Minify_Cache_Functions::cache_increment();
 		}
-		
+
 		// old cache purge event cron
 		wp_clear_scheduled_hook('wpo_minify_purge_old_cache');
 		$this->schedule_purge_old_cache_event();
@@ -204,7 +204,7 @@ class WP_Optimize_Minify {
 			wp_schedule_event(time() + 43200, 'daily', 'wpo_minify_purge_old_cache');
 		}
 	}
-	
+
 	/**
 	 * Run during plugin deactivation
 	 *
@@ -256,7 +256,7 @@ class WP_Optimize_Minify {
 	 */
 	public function show_notice($message, $type) {
 		global $current_screen;
-		
+
 		if ($current_screen && is_callable(array($current_screen, 'is_block_editor')) && $current_screen->is_block_editor()) :
 		?>
 			<script>

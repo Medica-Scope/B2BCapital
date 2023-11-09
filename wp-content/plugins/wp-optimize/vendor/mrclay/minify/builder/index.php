@@ -76,7 +76,7 @@ b {color:#c00}
 </p>
 
 <p id=minRewriteFailed class="hide"><strong>Note:</strong> Your webserver does not seem to
- support mod_rewrite (used in /min/.htaccess). Your Minify URIs will contain "?", which 
+ support mod_rewrite (used in /min/.htaccess). Your Minify URIs will contain "?", which
 <a href="http://www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/"
 >may reduce the benefit of proxy cache servers</a>.</p>
 
@@ -130,9 +130,9 @@ available URIs to add.</p>
 </div>
 
 <h3>Combining CSS files that contain <code>@import</code></h3>
-<p>If your CSS files contain <code>@import</code> declarations, Minify will not 
+<p>If your CSS files contain <code>@import</code> declarations, Minify will not
 remove them. Therefore, you will want to remove those that point to files already
-in your list, and move any others to the top of the first file in your list 
+in your list, and move any others to the top of the first file in your list
 (imports below any styles will be ignored by browsers as invalid).</p>
 <p>If you desire, you can use Minify URIs in imports and they will not be touched
 by Minify. E.g. <code>@import "<span class=minRoot>/min/?</span>g=css2";</code></p>

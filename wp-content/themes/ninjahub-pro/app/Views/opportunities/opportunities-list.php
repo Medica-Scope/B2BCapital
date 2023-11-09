@@ -118,7 +118,7 @@ if ($results['posts']) { ?>
                         'class'               => 'btn',
                         'id'                  => 'submit_submit_ignore',
                         'type'                => 'submit',
-                        'value'               => '<i class=' . $ignore_class . ' fav-star></i>',
+                        'value'               => '<i class=' . $ignore_class . ' ignore-star></i>',
                         'recaptcha_form_name' => 'frontend_ignore',
                         'order'               => 10
                     ],

@@ -2,7 +2,7 @@
 <div class="wpo_section wpo_group">
 	<form id="wpo_minify_settings_form">
 		<div id="wpo_settings_warnings"></div>
-	
+
 		<h3><?php esc_html_e('Miscellaneous', 'wp-optimize'); ?></h3>
 		<div class="wpo-fieldgroup">
 			<fieldset>

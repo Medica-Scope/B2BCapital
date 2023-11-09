@@ -4,7 +4,7 @@
 	<h3><?php esc_html_e('Your web hosting company/server handles: ', 'wp-optimize'); ?></h3>
 	<p><?php esc_html_e('Page caching', 'wp-optimize'); ?><span class="dashicons dashicons-saved"></span></p>
 	<p><?php esc_html_e('Gzip compression', 'wp-optimize'); ?><span class="dashicons dashicons-saved"></span></p>
-	<p><?php esc_html_e('Browser static file caching (via headers)', 'wp-optimize'); ?><span class="dashicons dashicons-saved"></span></p>	
+	<p><?php esc_html_e('Browser static file caching (via headers)', 'wp-optimize'); ?><span class="dashicons dashicons-saved"></span></p>
 </div>
 <?php else : ?>
 <div class="wpo-info">

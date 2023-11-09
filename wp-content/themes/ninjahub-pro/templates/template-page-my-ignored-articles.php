@@ -27,21 +27,21 @@ use NH\Nh;
 
 get_header();
 
-Nh_Hooks::enqueue_style(Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account');
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
 
 global $user_ID;
-$Blog_obj  = new Nh_Blog();
+$Blog_obj = new Nh_Blog();
 // $blogs    = $Blog_obj->get_profile_ignored_articles();
-$ignored_articles     = [];
-if(!empty($user_ID)){
-$profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
-$profile_obj = new Nh_Profile();
-$profile     = $profile_obj->get_by_id((int)$profile_id);
-    if (!is_wp_error($profile)) {
-        $ignored_articles = is_array($profile->meta_data['ignored_articles']) ? $profile->meta_data['ignored_articles'] : [];
-    }
+$ignored_articles = [];
+if ( ! empty( $user_ID ) ) {
+	$profile_id  = get_user_meta( $user_ID, 'profile_id', TRUE );
+	$profile_obj = new Nh_Profile();
+	$profile     = $profile_obj->get_by_id( (int) $profile_id );
+	if ( ! is_wp_error( $profile ) ) {
+		$ignored_articles = is_array( $profile->meta_data['ignored_articles'] ) ? $profile->meta_data['ignored_articles'] : [];
+	}
 }
-$user_obj         = Nh_User::get_current_user();
+$user_obj = Nh_User::get_current_user();
 ?>
 
 <main class="my-fav-opportunities">
@@ -76,43 +76,8 @@ $user_obj         = Nh_User::get_current_user();
                         $args['fav_form'] = '';
                         $args['ignore_form'] = '';
                         if (!empty($user_ID)) {
-                            $fav_chk            = $blog_obj->is_post_in_user_favorites($single_post->ID);
                             $ignore_chk         = $blog_obj->is_post_in_user_ignored($single_post->ID);
-                            $args['fav_chk']    = $fav_chk;
                             $args['ignore_chk'] = $ignore_chk;
-                            if ($fav_chk) {
-                                $fav_class = 'bbc-star';
-                            } else {
-                                $fav_class = 'bbc-star-o';
-                            }
-                            $args['fav_form'] = Nh_Forms::get_instance()
-                                ->create_form([
-                                    'post_id'                   => [
-                                        'type'   => 'hidden',
-                                        'name'   => 'post_id',
-                                        'before' => '',
-                                        'after'  => '',
-                                        'value'  => $single_post->ID,
-                                        'order'  => 0
-                                    ],
-                                    'add_to_fav_nonce'          => [
-                                        'class' => '',
-                                        'type'  => 'nonce',
-                                        'name'  => 'add_to_fav_nonce_nonce',
-                                        'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
-                                        'order' => 5
-                                    ],
-                                    'submit_add_to_fav_request' => [
-                                        'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
-                                        'id'                  => 'submit_add_to_fav_request',
-                                        'type'                => 'submit',
-                                        'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
-                                        'recaptcha_form_name' => 'frontend_add_to_fav',
-                                        'order'               => 10
-                                    ],
-                                ], [
-                                    'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
-                                ]);
                             if ($ignore_chk) {
                                 $ignore_class = 'bbc-star';
                             } else {
@@ -139,7 +104,7 @@ $user_obj         = Nh_User::get_current_user();
                                         'class'               => 'btn',
                                         'id'                  => 'submit_submit_ignore',
                                         'type'                => 'submit',
-                                        'value'               => '<i class="' . $ignore_class . ' fav-star"></i>',
+                                        'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
                                         'recaptcha_form_name' => 'frontend_ignore',
                                         'order'               => 10
                                     ],
@@ -166,10 +131,10 @@ $user_obj         = Nh_User::get_current_user();
                 <?php
 
                 } else {
-                    get_template_part('app/Views/none');
+                    get_template_part('app/Views/blogs/blogs', 'empty');
                 }
             }else{
-                get_template_part('app/Views/none');
+                get_template_part('app/Views/blogs/blogs', 'empty');
             }
             ?>
         </div>
