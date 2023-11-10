@@ -54,31 +54,37 @@
                 </a>
 
                 <p class="card-text">
-					<small class="text-body-secondary">
-                        <?= date('F j, Y', strtotime($opportunity_created_date));; ?>
+                    <small class="text-body-secondary">
+                        <?= date('F j, Y', strtotime($opportunity_created_date)); ?>
                     </small>
                 </p>
 
                 <div class="card-extra-info">
+
                     <div class="card-info-item">
-                        <small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
-                        <?php
+                        <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_location'] === 1) { ?>
+                            <small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
+                            <?php
                             if ((int)$opportunity->meta_data['location_group_appearance'] === 1) {
                                 ?><p class="card-text fw-bold"><?= $opportunity->meta_data['location_group_location']; ?></p><?php
                             } else {
-                                _ex('<span class="">HIDDEN</span>', 'ninja');
+                                _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
                             }
-                        ?>
+                            ?>
+                        <?php } ?>
                     </div>
+
                     <div class="card-info-item">
-                        <small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
-                        <?php
+                        <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1) { ?>
+                            <small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
+                            <?php
                             if ((int)$opportunity->meta_data['valuation_in_usd_group_appearance'] === 1) {
-								?><p class="card-text fw-bold"><?= '$ ' . $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd']; ?></p><?php
+                                ?><p class="card-text fw-bold"><?= '$ ' . $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd']; ?></p><?php
                             } else {
-                                _ex('<span class="">HIDDEN</span>', 'ninja');
+                                _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
                             }
-                        ?>
+                            ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

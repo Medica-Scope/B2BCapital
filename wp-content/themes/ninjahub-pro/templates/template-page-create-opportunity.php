@@ -499,6 +499,33 @@
                     }
                     $form_fields['business_model']['options'][$term->term_id] = $term->name;
                 }
+
+                $configurable_fields = [
+                    'date_founded',
+                    'asking_price_in_usd',
+                    'number_of_customers',
+                    'business_team_size',
+                    'location',
+                    'net_profit',
+                    'valuation_in_usd',
+                    'stake_to_be_sold_percentage',
+                    'usd_exchange_rate_used_in_conversion',
+                    'annual_accounting_revenue',
+                    'annual_growth_rate_percentage',
+                    'annual_growth_rate',
+                    'tech_stack_this_product_is_built_on',
+                    'product_competitors',
+                    'extra_details'
+                ];
+
+                foreach ($configurable_fields as $field) {
+                    if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_' . $field] === 0 ) {
+                        $form_fields[$field]['class'] .= ' d-none';
+                    }
+                }
+
+
+
                 echo Nh_Forms::get_instance()
                              ->create_form($form_fields, $form_tags);
             ?>

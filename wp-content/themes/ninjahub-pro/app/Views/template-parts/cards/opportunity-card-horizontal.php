@@ -120,24 +120,28 @@
     </div>
     <div class="card-footer card-extra-info">
         <div class="card-info-item">
-            <small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
-            <?php
+            <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_location'] === 1) { ?>
+                <small class="text-body-secondary"><?= __('Location', 'ninja') ?></small>
+                <?php
                 if ((int)$location_appearance === 1) {
                     ?><p class="card-text fw-bold"><?= $location; ?></p><?php
                 } else {
-                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                    _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
                 }
-            ?>
+                ?>
+            <?php } ?>
         </div>
         <div class="card-info-item">
-            <small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
-            <?php
+            <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1) { ?>
+                <small class="text-body-secondary"><?= __('Valuation', 'ninja') ?></small>
+                <?php
                 if ((int)$valuation_appearance === 1) {
                     ?><p class="card-text fw-bold"><?= '$ ' . $valuation; ?></p><?php
                 } else {
-                    _ex('<span class="">HIDDEN</span>', 'ninja');
+                    _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
                 }
-            ?>
+                ?>
+            <?php } ?>
         </div>
     </div>
 </div>

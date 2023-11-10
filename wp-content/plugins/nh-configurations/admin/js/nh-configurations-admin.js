@@ -42,6 +42,7 @@
             apps.init();
             exportForm.init();
             importForm.init();
+            opportunitiesForm.init();
         },
 
         'global': function () {
@@ -327,6 +328,62 @@
                 type: 'POST',
                 data: {
                     action: `${KEY}_contact_ajax`,
+                    data: formData,
+                },
+                beforeSend: function () {
+                    $el.trigger('nhConfig.updating', [formData]);
+                },
+                success: function (res) {
+                    if (res.success) {
+                        $el.trigger('nhConfig.updated:success', [res]);
+                    } else {
+                        $el.trigger('nhConfig.updated:failed', [res]);
+                    }
+                    $el.trigger('nhConfig.updated', [res]);
+                },
+                error: function (xhr) {
+                    let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                    if (xhr.statusText !== 'abort') {
+                        console.error(errorMessage);
+                    }
+                },
+            });
+        },
+    };
+
+    const opportunitiesForm = {
+        'init': function () {
+            this.options_form();
+        },
+        'options_form': function () {
+            let that  = this,
+                $form = $(`#${KEY}_opportunities_form`);
+
+            $form.on('submit', function (e) {
+                e.preventDefault();
+                let $this    = $(e.currentTarget),
+                    formData = $this.serializeObject();
+                console.log(formData);
+                if (typeof ajaxRequests.opportunities !== 'undefined') {
+                    ajaxRequests.opportunities.abort();
+                }
+
+                if (!$this.isValid()) {
+                    e.stopPropagation();
+                } else {
+                    $this.addClass('was-validated');
+                    that.ajax(formData, $this);
+                }
+
+            });
+        },
+
+        'ajax': (formData, $el) => {
+            ajaxRequests.opportunities = $.ajax({
+                url: nhGlobals.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: `${KEY}_opportunities_ajax`,
                     data: formData,
                 },
                 beforeSend: function () {

@@ -272,6 +272,67 @@
                 }
             }
 
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_date_founded'] === 1 && empty($date_founded)) {
+                new Nh_Ajax_Response(FALSE, __("The date founded field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_asking_price_in_usd'] === 1 && empty($asking_price_in_usd)) {
+                new Nh_Ajax_Response(FALSE, __("The asking price in usd field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_number_of_customers'] === 1 && empty($number_of_customers)) {
+                new Nh_Ajax_Response(FALSE, __("The number of customers field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_business_team_size'] === 1 && empty($business_team_size)) {
+                new Nh_Ajax_Response(FALSE, __("The business team size field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_location'] === 1 && empty($location)) {
+                new Nh_Ajax_Response(FALSE, __("The location field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_net_profit'] === 1 && empty($net_profit)) {
+                new Nh_Ajax_Response(FALSE, __("The net profit field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1 && empty($valuation_in_usd)) {
+                new Nh_Ajax_Response(FALSE, __("The valuation in usd field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1 && empty($stake_to_be_sold_percentage)) {
+                new Nh_Ajax_Response(FALSE, __("The stake to be sold percentage field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion'] === 1 && empty($usd_exchange_rate_used_in_conversion)) {
+                new Nh_Ajax_Response(FALSE, __("The usd exchange rate used in conversion field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_accounting_revenue'] === 1 && empty($annual_accounting_revenue)) {
+                new Nh_Ajax_Response(FALSE, __("The annual accounting revenue field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1 && empty($annual_growth_rate_percentage)) {
+                new Nh_Ajax_Response(FALSE, __("The annual growth rate percentage field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate'] === 1 && empty($annual_growth_rate)) {
+                new Nh_Ajax_Response(FALSE, __("The annual growth rate field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_tech_stack_this_product_is_built_on'] === 1 && empty($tech_stack_this_product_is_built_on)) {
+                new Nh_Ajax_Response(FALSE, __("The tech stack this product is built on field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_product_competitors'] === 1 && empty($product_competitors)) {
+                new Nh_Ajax_Response(FALSE, __("The product competitors field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_extra_details'] === 1 && empty($extra_details)) {
+                new Nh_Ajax_Response(FALSE, __("The extra details field shouldn't be empty!.", 'ninja'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_opportunity');
 
             if ($check_result !== TRUE) {
@@ -486,8 +547,8 @@
                     'relation' => 'AND',
                 ]
             ];
-            if(!empty($search_fields)){
-                if(isset($search_fields['business_type']) && $search_fields['business_type']){
+            if (!empty($search_fields)) {
+                if (isset($search_fields['business_type']) && $search_fields['business_type']) {
                     $args['tax_query'][] = [
                         'taxonomy' => 'business-type',
                         'terms'    => (int)$search_fields['business_type'],
@@ -495,7 +556,7 @@
                     ];
                     unset($search_fields['business_type']);
                 }
-                if(isset($search_fields['search']) && !empty($search_fields['search'])){
+                if (isset($search_fields['search']) && !empty($search_fields['search'])) {
                     $args['s'] = $search_fields['search'];
                     unset($search_fields['search']);
                 }
@@ -690,7 +751,7 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 1,
+                        'fav_active'   => 1,
                         'updated_text' => __('Add to favorites', 'ninja')
                     ]);
                 } else {
@@ -700,7 +761,7 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 0,
+                        'fav_active'   => 0,
                         'updated_text' => __('Added to favorites', 'ninja')
                     ]);
                 }
@@ -783,7 +844,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated_text' => __('Ignore', 'ninja')
+                        'updated_text'  => __('Ignore', 'ninja')
                     ]);
                 } else {
                     $ignored_opportunities[] = $opp_id;
@@ -796,7 +857,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated_text' => __('Ignored', 'ninja')
+                        'updated_text'  => __('Ignored', 'ninja')
                     ]);
                 }
             } else {
@@ -804,7 +865,7 @@
                     'status'        => FALSE,
                     'msg'           => 'You must have profile',
                     'ignore_active' => 1,
-                    
+
                 ]);
             }
         }
@@ -881,12 +942,12 @@
                 }
             }
             $opportunities = new \WP_Query([
-                'post_type'   => $this->module,
-                'post_status' => 'publish',
-                'orderby'     => 'ID',
-                'order'       => 'DESC',
-                "post__not_in"=> $not_in,
-                'author'      => $user_ID
+                'post_type'    => $this->module,
+                'post_status'  => 'publish',
+                'orderby'      => 'ID',
+                'order'        => 'DESC',
+                "post__not_in" => $not_in,
+                'author'       => $user_ID
             ]);
 
             $Nh_opportunities = [];

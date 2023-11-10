@@ -10,7 +10,7 @@
      * @subpackage Nh_Configurations/admin
      */
 
-     use NH\Nh;
+    use NH\Nh;
 
     /**
      * The admin-specific functionality of the plugin.
@@ -43,10 +43,11 @@
          */
         private string $version;
 
-        private array                 $pages;
-        private Nh_Config_Contact    $contact;
-        private Nh_Config_Export     $export;
-        private Nh_Config_Import     $import;
+        private array                   $pages;
+        private Nh_Config_Contact       $contact;
+        private Nh_Config_Export        $export;
+        private Nh_Config_Import        $import;
+        private Nh_Config_Opportunities $opportunities;
 
         /**
          * Initialize the class and set its properties.
@@ -63,8 +64,9 @@
             $this->version     = $version;
             $this->pages       = [
                 'nh-configuration' => __('Contact', 'ninja'),
-                'nh-export'        => __('Export Tool', 'ninja'),
-                'nh-import'        => __('Import Tool', 'ninja'),
+//                'nh-export'        => __('Export Tool', 'ninja'),
+//                'nh-import'        => __('Import Tool', 'ninja'),
+                'nh-opportunities' => __('Opportunities Fields', 'ninja'),
             ];
 
             $this->load_dependencies();
@@ -83,6 +85,9 @@
 
             require_once PLUGIN_PATH . 'admin/classes/nh-config-import.php';
             $this->import = new Nh_Config_Import($this->pages);
+
+            require_once PLUGIN_PATH . 'admin/classes/nh-config-opportunities.php';
+            $this->opportunities = new Nh_Config_Opportunities($this->pages);
         }
 
         protected function add_actions()
@@ -108,13 +113,17 @@
                 $this->contact,
                 'nh_contact_info_page'
             ]);
-            add_submenu_page('nh-configuration', $this->pages['nh-export'], $this->pages['nh-export'], 'manage_options', 'nh-export', [
-                $this->export,
-                'nh_export_page'
-            ]);
-            add_submenu_page('nh-configuration', $this->pages['nh-import'], $this->pages['nh-import'], 'manage_options', 'nh-import', [
-                $this->import,
-                'nh_import_page'
+//            add_submenu_page('nh-configuration', $this->pages['nh-export'], $this->pages['nh-export'], 'manage_options', 'nh-export', [
+//                $this->export,
+//                'nh_export_page'
+//            ]);
+//            add_submenu_page('nh-configuration', $this->pages['nh-import'], $this->pages['nh-import'], 'manage_options', 'nh-import', [
+//                $this->import,
+//                'nh_import_page'
+//            ]);
+            add_submenu_page('nh-configuration', $this->pages['nh-opportunities'], $this->pages['nh-opportunities'], 'manage_options', 'nh-opportunities', [
+                $this->opportunities,
+                'nh_opportunities_page'
             ]);
         }
 
