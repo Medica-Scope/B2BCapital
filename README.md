@@ -1,11 +1,11 @@
 
-B2B -
+B2B Capital
 ===============================================
 
 #### POWERED BY Medica Scope.
 
 
-`b2b` is a theme based on starter theme called 'underscores', Requires PHP version 8.1+
+`NinjaHub-Pro` is a theme based on starter theme called 'underscores', Requires PHP version 8.1+
 
 Installation
 ---------------
@@ -47,7 +47,7 @@ Password: `mds@12345`
 
 ### Setup
 
-To start using all the tools that come with `b2b`  you need to install the necessary Node.js and Composer dependencies :
+To start using all the tools that come with `NinjaHub-pro`  you need to install the necessary Node.js and Composer dependencies :
 
 ```sh
 $ composer install
@@ -56,7 +56,7 @@ $ npm install
 
 ### Available CLI commands
 
-`b2b` comes packed with CLI commands tailored for WordPress theme development :
+`NinjaHub-pro` comes packed with CLI commands tailored for WordPress theme development :
 
 - `npm run start` : Start watching all files [SASS, JS, PHP] and compile them all.
 - `npm run publicStyles` : Compile the sass files included in the public path.
