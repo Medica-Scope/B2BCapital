@@ -163,3 +163,47 @@
     //    }
     //    curl_close($ch);
 
+
+    add_action('save_post', 'my_custom_save_post_function', 10, 3);
+    function my_custom_save_post_function($post_id, $post, $update)
+    {
+        global $pagenow;
+
+        // Check if this is an autosave
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+            return;
+
+        // Check the user's permissions
+        if (!current_user_can('edit_post', $post_id))
+            return;
+
+        if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
+            if ($update && $post->post_type == 'opportunity') {
+                $new_stage_test = get_field('opportunity_stage', $post_id);
+                switch ($new_stage_test) {
+                    case "new":
+                        break;
+                    case "approved":
+                        break;
+                    case "hold":
+                        break;
+                    case "cancel":
+                        break;
+                    case "content-verified":
+                        break;
+                    case "seo-verified":
+                        break;
+                    case "translated":
+                        break;
+                    case "publish" :
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+
+        // Perform your actions here
+    }

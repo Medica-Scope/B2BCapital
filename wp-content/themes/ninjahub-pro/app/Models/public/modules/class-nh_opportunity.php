@@ -432,15 +432,15 @@
                 $this->set_meta_data($key, $value);
             }
 
-            $opportunity = $this->insert();
+            $opportunity    = $this->insert();
             $opportunity_id = $opportunity->ID;
 
             // DRAFT FOR CLIENT
-            $this->title        = $opportunity->title . ' - [CLIENT VERSION]';
-            $this->parent       = $opportunity->ID;
-            $this->ID           = 0;
-            $this->status       = 'draft';
-            $opportunity_client = $this->insert();
+            $this->title           = $opportunity->title . ' - [CLIENT VERSION]';
+            $this->parent          = $opportunity->ID;
+            $this->ID              = 0;
+            $this->status          = 'draft';
+            $opportunity_client    = $this->insert();
             $opportunity_client_id = $opportunity_client->ID;
 
             if (is_wp_error($opportunity)) {
@@ -463,11 +463,14 @@
                         'status' => TRUE,
                         'ID'     => $opportunity->ID
                     ];
+
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
                     ]);
                 }
             }
+
+            // TODO:: Send
 
             new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                 'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities')))
@@ -491,10 +494,16 @@
                         session_start();
                     }
 
-                    remove_action('acf/save_post', [ $this, 'after_acf_form_submission' ], 20);
+                    remove_action('acf/save_post', [
+                        $this,
+                        'after_acf_form_submission'
+                    ], 20);
                     $_POST['_acf_post_id'] = $data['opp_client_id']; // Temporarily set post_id to the current post in the loop
                     acf_save_post($data['opp_client_id']); // Save the ACF data for this post
-                    add_action('acf/save_post', [ $this, 'after_acf_form_submission' ], 20);
+                    add_action('acf/save_post', [
+                        $this,
+                        'after_acf_form_submission'
+                    ], 20);
 
 
                     $_SESSION['step_two'] = [];
