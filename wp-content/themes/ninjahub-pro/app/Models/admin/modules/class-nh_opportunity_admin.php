@@ -55,7 +55,7 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
-            $this->hooks->add_action('restrict_manage_posts', $this, 'my_custom_meta_key_filter_dropdown');
+            $this->hooks->add_action('restrict_manage_posts', $this, 'filter_opportunities_by_meta_key');
             $this->hooks->add_action('save_post', $this, 'notifications_handler', 10, 3);
 
         }
@@ -292,11 +292,10 @@
                 // $counts->en->publish = count(get_posts($query));
 
             }
-            // var_dump($counts);
             return $counts;
         }
 
-        public function my_custom_meta_key_filter_dropdown()
+        public function filter_opportunities_by_meta_key(): void
         {
             global $pagenow, $post_type;
 
