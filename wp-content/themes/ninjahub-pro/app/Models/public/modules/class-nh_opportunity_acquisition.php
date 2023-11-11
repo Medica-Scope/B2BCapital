@@ -129,6 +129,7 @@
             $acquisition_obj->title  = 'New Request From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
             $acquisition_obj->author = $current_user->ID;
             $acquisition_obj->set_meta_data('opportunity', $opp_id);
+
             // TODO:: RECAP
             $acquisition_obj->set_meta_data('acquisitions_stage', 'open');
             $insert = $acquisition_obj->insert();

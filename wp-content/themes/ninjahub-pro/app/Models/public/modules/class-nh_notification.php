@@ -247,10 +247,10 @@
 
                         // SEND EMAIL
                         $this->send_email('opportunity_new', [
-                            'to_email'    => $user->email,
-                            'role'        => Nh_User::REVIEWER,
-                            'user'        => $user,
-                            'opportunity_id' => $data['opportunity_id'],
+                            'to_email'          => $user->email,
+                            'role'              => Nh_User::REVIEWER,
+                            'user'              => $user,
+                            'opportunity_id'    => $data['opportunity_id'],
                             'opportunity_title' => $data['opportunity_title'],
                         ]);
                     }
@@ -271,10 +271,10 @@
 
                         // SEND EMAIL
                         $this->send_email('opportunity_new', [
-                            'to_email'    => $user->email,
-                            'role'        => Nh_User::ADMIN,
-                            'user'        => $user,
-                            'opportunity_id' => $data['opportunity_id'],
+                            'to_email'          => $user->email,
+                            'role'              => Nh_User::ADMIN,
+                            'user'              => $user,
+                            'opportunity_id'    => $data['opportunity_id'],
                             'opportunity_title' => $data['opportunity_title'],
                         ]);
                     }
