@@ -6,16 +6,27 @@
     $opportunity_short_description = !empty($args['opportunity_short_description']) ? $args['opportunity_short_description'] : '';
     $opportunity_stage             = !empty($args['opportunity_stage']) ? $args['opportunity_stage'] : '';
     $badge_status_classes_arr      = [
+        'new'      => 'text-bg-primary',
         'approved'      => 'text-bg-success',
-        'success'       => 'text-bg-success',
-        'published'     => 'text-bg-success',
-        'pending'       => 'text-bg-danger',
-        'closed'        => 'text-bg-dark',
+        'publish'     => 'text-bg-success',
         'translated'    => 'text-bg-secondary',
-        'review'        => 'text-bg-secondary',
-        'held'          => 'text-bg-warning',
-        'seo_verified'  => 'text-bg-primary',
-        'bidding_start' => 'text-bg-primary',
+        'cancel'        => 'text-bg-secondary',
+        'hold'          => 'text-bg-warning',
+        'seo-verified'  => 'text-bg-primary',
+        'content-verified' => 'text-bg-primary',
+        'content-rejected' => 'text-bg-warning',
+    ];
+
+    $stages_string = [
+        'new'              => __('New', 'ninja'),
+        'approved'         => __('Approved', 'ninja'),
+        'hold'             => __('Held', 'ninja'),
+        'cancel'           => __('Canceled', 'ninja'),
+        'content-verified' => __('Content Verified', 'ninja'),
+        'content-rejected' => __('Content Rejected', 'ninja'),
+        'seo-verified'     => __('SEO Verified', 'ninja'),
+        'translated'       => __('Translated', 'ninja'),
+        'publish'          => __('Published', 'ninja'),
     ];
 
     $opportunity_stage_key = str_replace(' ', '_', strtolower($opportunity_stage));
@@ -23,20 +34,15 @@
 ?>
 <div class="my-opportunities-card">
     <div class="opportunities-card-header row p-0 position-relative">
-        <?php
-            if (strtotime($opportunity_modified) >= strtotime(date('Y-m-d', strtotime('-30 days')))) {
-                ?>
-                <span class="badge"><?= __('New', 'ninja'); ?></span>
-                <?php
-            }
-        ?>
+
+        <span class="badge"><?= __('New', 'ninja'); ?></span>
 
         <h3 class="col-8">
             <a href="<?= $opportunity_link ?>"><?= $opportunity_title; ?></a>
         </h3>
         <div class="col-4 d-flex justify-content-end align-items-start">
 			<span class="status badge <?= $badge_status_class; ?>">
-				<?= $opportunity_stage; ?>
+				<?= $stages_string[$opportunity_stage]; ?>
 			</span>
         </div>
     </div>
