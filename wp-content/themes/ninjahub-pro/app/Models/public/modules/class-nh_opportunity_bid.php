@@ -111,6 +111,10 @@
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message(), $opportunity->get_error_data());
             }
 
+            if ($opportunity->meta_data['opportunity_stage'] !== 'publish') {
+                new Nh_Ajax_Response(FALSE, __("You can't bid to this opportunity.", 'ninja'));
+            }
+
             $start_bidding_amount = (int)$opportunity->meta_data['start_bidding_amount'];
 
             if ($bid_amount < $start_bidding_amount) {

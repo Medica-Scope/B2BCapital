@@ -116,7 +116,7 @@
                     'minlength'      => __("Please enter at least {0} characters.", "ninja"),
                     'max'            => __("Please enter a value less than or equal to {0}.", "ninja"),
                     'min'            => __("Please enter a value greater than or equal to {0}.", "ninja"),
-                    'pass_regex'     => __("Password doesn't complexity.", "ninja"),
+                    'pass_regex'     => __("Your password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the following: ! @ # $ % ^ & *.", "ninja"),
                     'phone_regex'    => __("Please enter a valid Phone number.", "ninja"),
                     'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "ninja"),
                     'email_regex'    => __("Please enter a valid email address.", "ninja"),

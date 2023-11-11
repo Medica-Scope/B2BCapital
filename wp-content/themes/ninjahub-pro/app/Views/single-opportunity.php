@@ -147,7 +147,7 @@
                                      'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opportunity_form'
                                  ]);
 
-                    if ($opportunity->meta_data['opportunity_stage'] !== 'success') {
+                    if ($opportunity->meta_data['opportunity_stage'] === 'publish') {
 
                         if (Nh_User::get_user_role() === Nh_User::INVESTOR) {
                             if ($unique_type_name === 'bidding') {
@@ -343,6 +343,10 @@
                             }
                         }
 
+                    } else {
+                        if (Nh_User::get_user_role() !== Nh_User::INVESTOR) {
+                            _ex('<p>Opportunity is under reviewing..</p>', 'ninja');
+                        }
                     }
                 ?>
             </div>
