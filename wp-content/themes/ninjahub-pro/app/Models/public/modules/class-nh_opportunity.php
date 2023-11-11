@@ -453,7 +453,7 @@
                     $_SESSION['step_two'] = [
                         'status'    => TRUE,
                         'ID'        => $opportunity->ID,
-                        'client_id' => $opportunity_client->ID,
+//                        'client_id' => $opportunity_client->ID,
                     ];
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
