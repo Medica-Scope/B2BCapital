@@ -587,7 +587,7 @@
                         'to_email'    => $user->email,
                         'role'        => Nh_User::ADMIN,
                         'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -610,7 +610,7 @@
                             'to_email'    => $user->email,
                             'role'        => Nh_User::ADMIN,
                             'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
                     }
 
@@ -633,7 +633,7 @@
                         'to_email'    => $user->email,
                         'role'        => Nh_User::ADMIN,
                         'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -656,7 +656,7 @@
                             'to_email'    => $user->email,
                             'role'        => Nh_User::ADMIN,
                             'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
 
                     }
@@ -680,7 +680,7 @@
                         'to_email'    => $user->email,
                         'role'        => Nh_User::ADMIN,
                         'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -704,7 +704,7 @@
                             'to_email'    => $user->email,
                             'role'        => Nh_User::ADMIN,
                             'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
                     }
                     break;
