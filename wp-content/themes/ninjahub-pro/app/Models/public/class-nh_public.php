@@ -156,7 +156,7 @@
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
 			}
 
-            if (is_post_type_archive('faq')) {
+            if (is_post_type_archive('faq') || is_home() || is_singular()) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
             }

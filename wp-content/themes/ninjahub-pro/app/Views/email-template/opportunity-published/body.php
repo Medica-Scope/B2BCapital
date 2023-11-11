@@ -11,4 +11,4 @@
 <p> Hello <?= $data['user']->first_name ?>,
 </p>
 
-<p>Opportunity <strong><a href="<?= get_permalink($data['opportunity_id']) ?>"><?= $data['opportunity_title'] ?></a></strong> has been published</p>
+<p>Opportunity <strong><a href="<?= get_permalink($data['opportunity']->ID) ?>"><?= $data['opportunity']->post_title ?></a></strong>  has been published</p>
