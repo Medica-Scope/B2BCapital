@@ -48,7 +48,7 @@ locate_template( "inc/template-tags.php", TRUE );
 class Nh {
 	const _ENVIRONMENT = 'production';
 	const _DOMAIN_NAME = 'ninja';
-	const _VERSION = '0.2.1';
+	const _VERSION = '0.2.3';
 
 	public function __construct() {
 		Nh_Init::get_instance()
@@ -143,7 +143,7 @@ class Nh {
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses wp_nav_menu() in one location.
-		register_nav_menus( [ 
+		register_nav_menus( [
 			'default-menu'            => esc_html__( 'Default', 'ninja' ),
 			'dashboard-guest-menu'    => esc_html__( 'Dashboard Guest', 'ninja' ),
 			'dashboard-admin-menu'    => esc_html__( 'Dashboard Admin', 'ninja' ),
@@ -159,7 +159,7 @@ class Nh {
 		 * Switch default core markup for search form, comment form, and comments
 		 * to output valid HTML5.
 		 */
-		add_theme_support( 'html5', [ 
+		add_theme_support( 'html5', [
 			'search-form',
 			'comment-form',
 			'comment-list',
@@ -170,7 +170,7 @@ class Nh {
 		] );
 
 		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'nh_custom_background_args', [ 
+		add_theme_support( 'custom-background', apply_filters( 'nh_custom_background_args', [
 			'default-color' => 'ffffff',
 			'default-image' => '',
 		] ) );
@@ -183,7 +183,7 @@ class Nh {
 		 *
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
-		add_theme_support( 'custom-logo', [ 
+		add_theme_support( 'custom-logo', [
 			'height'      => 250,
 			'width'       => 250,
 			'flex-width'  => TRUE,
@@ -195,7 +195,7 @@ class Nh {
 	 * Register widget area.
 	 */
 	public function nh_widgets_init(): void {
-		register_sidebar( [ 
+		register_sidebar( [
 			'name'          => esc_html__( 'Sidebar', 'ninja' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here.', 'ninja' ),
@@ -205,7 +205,7 @@ class Nh {
 			'after_title'   => '</h2>',
 		] );
 
-		register_sidebar( [ 
+		register_sidebar( [
 			'name'          => esc_html__( 'Footer', 'ninja' ),
 			'id'            => 'nh-footer',
 			'description'   => esc_html__( 'Add widgets here.', 'ninja' ),
@@ -230,13 +230,13 @@ class Nh {
 	 */
 	public function theme_customizer( $wp_customize ): void {
 		// Register a new setting for the second logo
-		$wp_customize->add_setting( 'second_logo', [ 
+		$wp_customize->add_setting( 'second_logo', [
 			'default'           => '',
 			'sanitize_callback' => 'esc_url_raw',
 		] );
 
 		// Add a control to upload the second logo
-		$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, 'second_logo', [ 
+		$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, 'second_logo', [
 			'label'    => __( 'Second Logo', 'ninja' ),
 			'section'  => 'title_tagline',
 			// This places the control in the Site Identity section
