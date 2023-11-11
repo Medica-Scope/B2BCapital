@@ -110,6 +110,7 @@
 
             // Status
             'opportunity_stage',
+            'opportunity_stage_old',
 
             'related_opportunities',
 
@@ -307,7 +308,8 @@
                 new Nh_Ajax_Response(FALSE, __("The valuation in usd field shouldn't be empty!.", 'ninja'));
             }
 
-            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1 && empty($stake_to_be_sold_percentage)) {
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1 && $stake_to_be_sold_percentage != 0 && empty
+            ($stake_to_be_sold_percentage)) {
                 new Nh_Ajax_Response(FALSE, __("The stake to be sold percentage field shouldn't be empty!.", 'ninja'));
             }
 
@@ -319,7 +321,8 @@
                 new Nh_Ajax_Response(FALSE, __("The annual accounting revenue field shouldn't be empty!.", 'ninja'));
             }
 
-            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1 && empty($annual_growth_rate_percentage)) {
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1 && $annual_growth_rate_percentage != 0 && empty
+            ($annual_growth_rate_percentage)) {
                 new Nh_Ajax_Response(FALSE, __("The annual growth rate percentage field shouldn't be empty!.", 'ninja'));
             }
 
@@ -425,7 +428,8 @@
                 'project_assets_amount'            => $project_assets_amount,
                 'project_yearly_cashflow_amount'   => $project_yearly_cashflow_amount,
                 'project_yearly_net_profit_amount' => $project_yearly_net_profit_amount,
-                'opportunity_stage'                => 'new'
+                'opportunity_stage'                => 'new',
+                'opportunity_stage_old'                => 'new',
             ];
 
             foreach ($groups as $key => $value) {
@@ -434,6 +438,7 @@
 
             $opportunity    = $this->insert();
             $opportunity_id = $opportunity->ID;
+            $opportunity_title = $opportunity->title;
 
             // DRAFT FOR CLIENT
             $this->title           = $opportunity->title . ' - [CLIENT VERSION]';
@@ -464,13 +469,23 @@
                         'ID'     => $opportunity->ID
                     ];
 
+                    $notifications = new Nh_Notification();
+                    $notifications->send(0, 0, 'opportunity_new', [
+                        'opportunity_id' => $opportunity_id,
+                        'opportunity'    => $opportunity_title
+                    ]);
+
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
                     ]);
                 }
             }
 
-            // TODO:: Send
+            $notifications = new Nh_Notification();
+            $notifications->send(0, 0, 'opportunity_new', [
+                'opportunity_id' => $opportunity_id,
+                'opportunity'    => $opportunity_title
+            ]);
 
             new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                 'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities')))
