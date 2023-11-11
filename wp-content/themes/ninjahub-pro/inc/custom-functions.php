@@ -5,6 +5,7 @@
      * @package NinjaHub
      */
 
+    use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Cryptor;
     use NH\Nh;
 
@@ -132,10 +133,10 @@
         tgmpa($plugins, $config);
     }
 
-        // $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
-        // for ($i = 0; $i < 7; $i++) {
-        //     $notifications->send(18, 1, 'bidding', [ 'opportunity_id' => '1762' ]);
-        // }
+    // $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
+    // for ($i = 0; $i < 7; $i++) {
+    //     $notifications->send(18, 1, 'bidding', [ 'opportunity_id' => '1762' ]);
+    // }
 
 
     //    $ch = curl_init();
@@ -161,6 +162,4 @@
     //        echo 'Error:' . curl_error($ch);
     //    }
     //    curl_close($ch);
-
-
 

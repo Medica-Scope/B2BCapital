@@ -448,10 +448,10 @@
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
                                                     'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
-                                                    'location'                 => $opportunity->meta_data['location_group_location'],
-                                                    'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
-                                                    'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
-                                                    'valuation_appearance'     => $opportunity->meta_data['valuation_in_usd_group_appearance'],
+                                                    'location'                 => $acquisition->opportunity->meta_data['location_group_location'],
+                                                    'location_appearance'      => $acquisition->opportunity->meta_data['location_group_appearance'],
+                                                    'valuation'                => $acquisition->opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
+                                                    'valuation_appearance'     => $acquisition->opportunity->meta_data['valuation_in_usd_group_appearance'],
                                                 ];
                                                 ?>
                                                 <div class="col">

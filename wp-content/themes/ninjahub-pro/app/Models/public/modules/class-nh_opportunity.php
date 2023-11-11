@@ -174,6 +174,8 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+            $this->hooks->add_filter('filter_opportunities_stage', $this, 'filter_opportunities_stage', 10, 2);
+
         }
 
         /**
@@ -428,6 +430,12 @@
 
             $opportunity = $this->insert();
 
+            // DRAFT FOR CLIENT
+//            $this->parent       = $opportunity->ID;
+//            $this->status       = 'draft';
+//            $opportunity_client = $this->insert();
+
+
             if (is_wp_error($opportunity)) {
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message());
             }
@@ -443,8 +451,9 @@
                         session_start();
                     }
                     $_SESSION['step_two'] = [
-                        'status' => TRUE,
-                        'ID'     => $opportunity->ID
+                        'status'    => TRUE,
+                        'ID'        => $opportunity->ID,
+                        'client_id' => $opportunity_client->ID,
                     ];
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
@@ -545,6 +554,11 @@
                 ],
                 "meta_query"     => [
                     'relation' => 'AND',
+                    [
+                        'key'     => 'opportunity_stage',
+                        'value'   => 'published',
+                        'compare' => '=',
+                    ]
                 ]
             ];
             if (!empty($search_fields)) {
@@ -891,6 +905,22 @@
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
             }
             return isset($ignored_opportunities[$opp_id]);
+        }
+
+
+        public function filter_opportunities_stage($opportunity, $stage = []): array
+        {
+            $opportunities = [];
+
+            if (property_exists($opportunity, 'meta_data')) {
+                if (in_array($stage, $opportunity->meta_data['opportunity_stage'])) {
+                    $opportunities[] = $opportunity;
+                }
+            } else {
+                $opportunities = $opportunity;
+            }
+
+            return $opportunities;
         }
 
         /**

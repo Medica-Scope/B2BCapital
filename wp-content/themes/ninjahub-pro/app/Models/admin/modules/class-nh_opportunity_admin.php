@@ -10,6 +10,7 @@
 
     use NH\APP\CLASSES\Nh_Module;
     use NH\APP\CLASSES\Nh_Post;
+    use NH\APP\CLASSES\Nh_User;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 
 
@@ -54,7 +55,6 @@
         protected function actions($module_name): void
         {
             // TODO: Implement actions() method.
-            $this->hooks->add_action('init', $this, 'register_opportunity_statuses');
         }
 
         /**
@@ -64,8 +64,7 @@
         {
             // TODO: Implement filters() method.
             $this->hooks->add_filter('acf/location/rule_match/post', $this, 'acf_location_rules', 10, 4);
-//            $this->hooks->add_filter('quick_edit_dropdown_pages_args', $this,'opportunity_quick_edit_dropdown', 10, 2);
-//            $this->hooks->add_filter('quick_edit_dropdown_posts_args', $this, 'opportunity_quick_edit_dropdown', 10, 2);
+            $this->hooks->add_filter('pre_get_posts', $this, 'filter_opportunities_by_user_role_and_opp_stage', 10, 1);
         }
 
         public function acf_location_rules($match, $rule, $options, $field_group)
@@ -97,101 +96,86 @@
             return $match;
         }
 
-        public function register_opportunity_statuses(): void
+        public function filter_opportunities_by_user_role_and_opp_stage($query): void
         {
-            register_post_status('new', array(
-                'label'                     => _x('New', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('New (%s)', 'New (%s)', 'ninja'),
-            ));
-
-            register_post_status('approved', array(
-                'label'                     => _x('Approved', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Approved (%s)', 'Approved (%s)', 'ninja'),
-            ));
-
-            register_post_status('held', array(
-                'label'                     => _x('Held', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Held (%s)', 'Held (%s)', 'ninja'),
-            ));
-
-            register_post_status('review', array(
-                'label'                     => _x('Review', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Review (%s)', 'Review (%s)', 'ninja'),
-            ));
-
-            register_post_status('verified', array(
-                'label'                     => _x('Verified', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Verified (%s)', 'Verified (%s)', 'ninja'),
-            ));
-
-            register_post_status('seo_verified', array(
-                'label'                     => _x('SEO Verified', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('SEO Verified (%s)', 'SEO Verified (%s)', 'ninja'),
-            ));
-
-            register_post_status('translated', array(
-                'label'                     => _x('Translated', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Translated (%s)', 'Translated (%s)', 'ninja'),
-            ));
-
-            register_post_status('success', array(
-                'label'                     => _x('Success', 'Opportunity status', 'ninja'),
-                'public'                    => true,
-                'exclude_from_search'       => false,
-                'show_in_admin_all_list'    => true,
-                'show_in_admin_status_list' => true,
-                'label_count'               => _n_noop('Success (%s)', 'Success (%s)', 'ninja'),
-            ));
-        }
-
-        // Add custom statuses to quick edit options
-        public function opportunity_quick_edit_dropdown($statuses, $post) {
-            if ($post->post_type === 'opportunity') {
-                $custom_statuses = array(
-                    'new'         => 'New',
-                    'approved'    => 'Approved',
-                    'held'        => 'Held',
-                    'review'      => 'Review',
-                    'verified'    => 'Verified',
-                    'seo_verified' => 'SEO Verified',
-                    'translated'  => 'Translated',
-                    'success'     => 'Success',
-                );
-
-                foreach ($custom_statuses as $key => $value) {
-                    $statuses[$key] = $value;
-                }
+            if (!is_admin() || !$query->is_main_query()) {
+                return;
             }
 
-            return $statuses;
+            // Ensure we are in the admin area and working with the main query
+            // Get the current screen
+            $screen = get_current_screen();
+
+            // Check if we're on the main admin post list page
+            if ($screen && $screen->id === 'edit-opportunity') {
+
+                // Check the post type
+                if ($query->get('post_type') === 'opportunity') {
+                    // Get the current user's role
+                    $current_user = wp_get_current_user();
+                    $roles        = $current_user->roles;
+
+                    // Check for specific roles and modify the query
+                    if (in_array(Nh_User::ADMIN, $roles)) {
+                        $meta_query = [
+                            [
+                                'key'     => 'opportunity_stage',
+                                'value'   => [
+                                    'new',
+                                    'approved',
+                                    'hold',
+                                    'cancel'
+                                ],
+                                'compare' => 'IN',
+                            ],
+                        ];
+
+                        $query->set('meta_query', $meta_query);
+                    } elseif (in_array(Nh_User::CMS, $roles)) {
+                        $meta_query = [
+                            [
+                                'key'     => 'opportunity_stage',
+                                'value'   => [
+                                    'approved',
+                                    'content-verified',
+                                    'content-rejected',
+                                    'translated',
+                                    'publish'
+                                ],
+                                'compare' => 'IN',
+                            ],
+                        ];
+
+                        $query->set('meta_query', $meta_query);
+                    } elseif (in_array(Nh_User::SEO, $roles)) {
+                        $meta_query = [
+                            [
+                                'key'     => 'opportunity_stage',
+                                'value'   => [
+                                    'content-verified',
+                                    'seo-verified'
+                                ],
+                                'compare' => 'IN',
+                            ],
+                        ];
+
+                        $query->set('meta_query', $meta_query);
+                    } elseif (in_array(Nh_User::TRANSLATOR, $roles)) {
+                        $meta_query = [
+                            [
+                                'key'     => 'opportunity_stage',
+                                'value'   => [
+                                    'translated',
+                                    'seo-verified'
+                                ],
+                                'compare' => 'IN',
+                            ],
+                        ];
+                        $query->set('meta_query', $meta_query);
+                    }
+                }
+
+            }
         }
 
         private function get_field_groups_by_post_id($post_id): array
