@@ -757,7 +757,6 @@
                 new Nh_Ajax_Response(FALSE, __("The last name field is empty!.", 'ninja'));
             }
 
-            // TODO:: To be enabled in version 2
             if (empty($phone_number)) {
                 new Nh_Ajax_Response(FALSE, __("The phone number field is empty!.", 'ninja'));
             }

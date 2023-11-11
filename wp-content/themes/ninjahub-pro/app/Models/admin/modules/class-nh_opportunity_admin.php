@@ -116,7 +116,7 @@
                     $roles        = $current_user->roles;
 
                     // Check for specific roles and modify the query
-                    if (in_array(Nh_User::ADMIN, $roles)) {
+                    if (in_array(Nh_User::REVIEWER, $roles)) {
                         $meta_query = [
                             [
                                 'key'     => 'opportunity_stage',
@@ -124,7 +124,8 @@
                                     'new',
                                     'approved',
                                     'hold',
-                                    'cancel'
+                                    'cancel',
+                                    'content-rejected'
                                 ],
                                 'compare' => 'IN',
                             ],

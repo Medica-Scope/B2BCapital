@@ -30,7 +30,8 @@
     class Nh_Opportunity_Bid extends Nh_Module
     {
         public array $meta_data = [
-            'opportunity'
+            'opportunity',
+            'bidding_stage',
         ];
         public array $taxonomy  = [];
 
