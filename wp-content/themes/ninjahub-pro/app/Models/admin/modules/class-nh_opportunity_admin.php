@@ -1,19 +1,18 @@
 <?php
+    /**
+     * @Filename: class-nh_opportunity_admin.php
+     * @Description:
+     * @User: NINJA MASTER - Mustafa Shaaban
+     * @Date: 5/10/2023
+     */
 
-/**
- * @Filename: class-nh_opportunity_admin.php
- * @Description:
- * @User: NINJA MASTER - Mustafa Shaaban
- * @Date: 5/10/2023
- */
+    namespace NH\APP\MODELS\ADMIN\MODULES;
 
-namespace NH\APP\MODELS\ADMIN\MODULES;
-
-use NH\APP\CLASSES\Nh_Module;
-use NH\APP\CLASSES\Nh_Post;
-use NH\APP\CLASSES\Nh_User;
-use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
-use stdClass;
+    use NH\APP\CLASSES\Nh_Module;
+    use NH\APP\CLASSES\Nh_Post;
+    use NH\APP\CLASSES\Nh_User;
+    use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
+    use stdClass;
 
 /**
  * Description...
@@ -57,8 +56,9 @@ class Nh_Opportunity_Admin extends Nh_Module
     {
         // TODO: Implement actions() method.
         $this->hooks->add_action('restrict_manage_posts', $this, 'my_custom_meta_key_filter_dropdown');
-    }
+        $this->hooks->add_action('save_post', $this, 'notifications_handler', 10, 3);
 
+    }
     /**
      * @inheritDoc
      */
@@ -296,7 +296,6 @@ class Nh_Opportunity_Admin extends Nh_Module
             // $counts->en->publish = count(get_posts($query));
 
         }
-
         // var_dump($counts);
         return $counts;
     }
@@ -348,6 +347,123 @@ class Nh_Opportunity_Admin extends Nh_Module
             }
             echo '</select>';
         }
+    }
+
+    public function notifications_handler($post_id, $post, $update): void
+    {
+        global $pagenow, $user_ID;
+
+        // Check if this is an autosave
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+            return;
+
+        // Check the user's permissions
+        if (!current_user_can('edit_post', $post_id))
+            return;
+
+        if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
+            if ($update && $post->post_type == 'opportunity') {
+
+                if (!class_exists('NH\APP\MODELS\FRONT\MODULES\Nh_Notification')) {
+                    locate_template("app/Models/public/modules/class-nh_notification.php", TRUE);
+                }
+
+                $old_stage = get_post_meta($post_id, 'opportunity_stage_old', TRUE);
+                $new_stage = get_field('opportunity_stage', $post_id);
+
+                update_post_meta($post_id, 'opportunity_stage_old', $new_stage);
+
+                switch ($new_stage) {
+                    //                        case "new":
+                    //                            $notifications = new Nh_Notification();
+                    //                            $notifications->send($user_ID, $post->post_author, 'opportunity_new', [
+                    //                                'opportunity_id' => $post->ID,
+                    //                                'opportunity'    => $post
+                    //                            ]);
+                    //                            break;
+                    case "approved":
+                        if (in_array($old_stage, [
+                            'new',
+                            'hold',
+                            'cancel'
+                        ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_approve', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    case "hold":
+                        if (in_array($old_stage, [
+                            'new',
+                            'cancel'
+                        ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_hold', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    case "cancel":
+                        if (in_array($old_stage, [
+                            'new',
+                            'hold'
+                        ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_cancel', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    case "content-verified":
+                        if (in_array($old_stage, [ 'approved',
+                                                   'hold', 'cancel', 'content-rejected' ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_content_verified', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                            break;
+                        }
+                    case "seo-verified":
+                        if (in_array($old_stage, [ 'content-verified' ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_seo_verified', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    case "translated":
+                        if (in_array($old_stage, [ 'seo-verified' ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_translated', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    case "publish" :
+                        if (in_array($old_stage, [ 'translated' ])) {
+                            $notifications = new Nh_Notification();
+                            $notifications->send($user_ID, $post->post_author, 'opportunity_published', [
+                                'opportunity_id' => $post->ID,
+                                'opportunity'    => $post
+                            ]);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+
+        // Perform your actions here
     }
 
     private function get_field_groups_by_post_id($post_id): array

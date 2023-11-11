@@ -208,9 +208,9 @@
 
             // Add filter to override user avatar in users table
             if (is_admin() && ('users.php' == $pagenow || 'profile.php' == $pagenow)) {
-//                $hooks = new Nh_Hooks();
-//                $hooks->add_filter('get_avatar_data', $this, 'override_user_table_avatar', 1, 2);
-//                $hooks->run();
+                //                $hooks = new Nh_Hooks();
+                //                $hooks->add_filter('get_avatar_data', $this, 'override_user_table_avatar', 1, 2);
+                //                $hooks->run();
             }
         }
 
@@ -905,6 +905,39 @@
                 ]);
                 return $error; // Return the WP_Error object
             }
+        }
+
+        /**
+         * Description...
+         *
+         * @param array $role
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public static function get_users_by_role(array $role = []): array
+        {
+            $args = [
+                'role__in' => $role,
+                'orderby'      => 'user_nicename',
+                'order'        => 'ASC'
+            ];
+
+            $users = get_users($args);
+
+            $nh_users = [];
+
+            if ($users && !is_wp_error($users)) {
+                foreach ($users as $user) {
+                    $nh_users[] = self::get_user($user);
+                }
+            }
+
+            return $nh_users;
+
         }
 
         /**

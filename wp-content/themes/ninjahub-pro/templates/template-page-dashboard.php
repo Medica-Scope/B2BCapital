@@ -441,6 +441,9 @@
                                             $acquisitions = $acquisitions_obj->get_dashboard_sidebar_acquisitions();
 
                                             foreach ($acquisitions as $acquisition) {
+                                                if (is_wp_error($acquisition->opportunity)) {
+                                                    continue;
+                                                }
                                                 $args = [
                                                     'opportunity_link'         => $acquisition->opportunity->link,
                                                     'opportunity_title'        => $acquisition->opportunity->title,

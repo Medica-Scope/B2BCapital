@@ -107,6 +107,10 @@
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message(), $opportunity->get_error_data());
             }
 
+            if ($opportunity->meta_data['opportunity_stage'] !== 'publish') {
+                new Nh_Ajax_Response(FALSE, __("You can't send an acquisitions request.", 'ninja'));
+            }
+
             $current_user = Nh_User::get_current_user();
 
             if ($current_user->profile->ID === 0) {
@@ -125,6 +129,7 @@
             $acquisition_obj->title  = 'New Request From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
             $acquisition_obj->author = $current_user->ID;
             $acquisition_obj->set_meta_data('opportunity', $opp_id);
+
             // TODO:: RECAP
             $acquisition_obj->set_meta_data('acquisitions_stage', 'open');
             $insert = $acquisition_obj->insert();
