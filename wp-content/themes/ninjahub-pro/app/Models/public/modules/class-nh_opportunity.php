@@ -309,7 +309,7 @@
             }
 
             if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1 && $stake_to_be_sold_percentage != 0 && empty
-            ($stake_to_be_sold_percentage)) {
+                ($stake_to_be_sold_percentage)) {
                 new Nh_Ajax_Response(FALSE, __("The stake to be sold percentage field shouldn't be empty!.", 'ninja'));
             }
 
@@ -322,7 +322,7 @@
             }
 
             if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1 && $annual_growth_rate_percentage != 0 && empty
-            ($annual_growth_rate_percentage)) {
+                ($annual_growth_rate_percentage)) {
                 new Nh_Ajax_Response(FALSE, __("The annual growth rate percentage field shouldn't be empty!.", 'ninja'));
             }
 
@@ -429,15 +429,15 @@
                 'project_yearly_cashflow_amount'   => $project_yearly_cashflow_amount,
                 'project_yearly_net_profit_amount' => $project_yearly_net_profit_amount,
                 'opportunity_stage'                => 'new',
-                'opportunity_stage_old'                => 'new',
+                'opportunity_stage_old'            => 'new',
             ];
 
             foreach ($groups as $key => $value) {
                 $this->set_meta_data($key, $value);
             }
 
-            $opportunity    = $this->insert();
-            $opportunity_id = $opportunity->ID;
+            $opportunity       = $this->insert();
+            $opportunity_id    = $opportunity->ID;
             $opportunity_title = $opportunity->title;
 
             // DRAFT FOR CLIENT
@@ -595,7 +595,7 @@
                     'relation' => 'AND',
                     [
                         'key'     => 'opportunity_stage',
-                        'value'   => 'published',
+                        'value'   => 'publish',
                         'compare' => '=',
                     ]
                 ]
