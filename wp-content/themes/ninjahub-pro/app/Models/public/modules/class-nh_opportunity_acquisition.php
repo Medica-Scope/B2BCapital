@@ -141,7 +141,7 @@
             $opportunity_acquisitions   = empty($opportunity->meta_data['opportunity_acquisitions']) ? [] : $opportunity->meta_data['opportunity_acquisitions'];
             $opportunity_acquisitions[] = $insert->ID;
             $opportunity->set_meta_data('opportunity_acquisitions', $opportunity_acquisitions);
-            $opportunity->set_meta_data('opportunity_stage', 'acquisition-start');
+            // $opportunity->set_meta_data('opportunity_stage', 'acquisition-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {
