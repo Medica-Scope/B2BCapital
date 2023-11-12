@@ -139,7 +139,7 @@
             $opportunity_investments   = empty($opportunity->meta_data['opportunity_investments']) ? [] : $opportunity->meta_data['opportunity_investments'];
             $opportunity_investments[] = $insert->ID;
             $opportunity->set_meta_data('opportunity_investments', $opportunity_investments);
-            $opportunity->set_meta_data('opportunity_stage', 'investment-start');
+            // $opportunity->set_meta_data('opportunity_stage', 'investment-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {

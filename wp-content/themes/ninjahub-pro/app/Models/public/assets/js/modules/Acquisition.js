@@ -51,6 +51,7 @@ class NhAcquisition extends Nh
                 }
                 $el.form.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.form, false);
+                // window.location.reload();
                 that.createNewToken();
             },
             error: function (xhr) {

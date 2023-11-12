@@ -238,6 +238,12 @@
                                         </div>
                                     </div>
                                     <?php
+                                } else {
+                                    ?>
+                                    <button type="button" class="btn btn-primary">
+                                        <?= __('Bid Sent', 'ninja') ?>
+                                    </button>
+                                    <?php
                                 }
 
                                 ?>
@@ -278,6 +284,12 @@
                                                      'class' => Nh::_DOMAIN_NAME . '-create-acquisition-form',
                                                      'id'    => Nh::_DOMAIN_NAME . '_create_acquisition_form'
                                                  ]);
+                                } else {
+                                    ?>
+                                    <button type="button" class="btn btn-primary">
+                                        <?= __('Acquisition Request Sent', 'ninja') ?>
+                                    </button>
+                                    <?php
                                 }
                             }
 
@@ -312,6 +324,12 @@
                                                      'class' => Nh::_DOMAIN_NAME . '-create-investment-form',
                                                      'id'    => Nh::_DOMAIN_NAME . '_create_investment_form'
                                                  ]);
+                                } else {
+                                    ?>
+                                    <button type="button" class="btn btn-primary">
+                                        <?= __('Investment Request Sent', 'ninja') ?>
+                                    </button>
+                                    <?php
                                 }
                             }
 
