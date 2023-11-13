@@ -44,11 +44,11 @@ if ( $user_ID ) {
 	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );
 	if ( $ignore_chk ) {
-		$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+		$ignore_class = 'controll-icon bbc-thumbs-up text-success';
 		$ignore_text  = __( 'Ignored', 'ninja' );
 
 	} else {
-		$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+		$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
 		$ignore_text  = __( 'Ignore', 'ninja' );
 	}
 }
@@ -76,8 +76,8 @@ if ( $user_ID ) {
 
 				<?php if ( ! empty( $user_ID ) ) :
 					echo Nh_Forms::get_instance()
-						->create_form( [
-							'post_id'                   => [
+						->create_form( [ 
+							'post_id'                   => [ 
 								'type'   => 'hidden',
 								'name'   => 'post_id',
 								'before' => '',
@@ -85,14 +85,14 @@ if ( $user_ID ) {
 								'value'  => $single_post->ID,
 								'order'  => 0
 							],
-							'add_to_fav_nonce'          => [
+							'add_to_fav_nonce'          => [ 
 								'class' => '',
 								'type'  => 'nonce',
 								'name'  => 'add_to_fav_nonce_nonce',
 								'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 								'order' => 5
 							],
-							'submit_add_to_fav_request' => [
+							'submit_add_to_fav_request' => [ 
 								'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
 								'id'                  => 'submit_add_to_fav_request',
 								'type'                => 'submit',
@@ -100,12 +100,12 @@ if ( $user_ID ) {
 								'recaptcha_form_name' => 'frontend_add_to_fav',
 								'order'               => 10
 							],
-						], [
+						], [ 
 							'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 						] );
 					echo Nh_Forms::get_instance()
-						->create_form( [
-							'post_id'              => [
+						->create_form( [ 
+							'post_id'              => [ 
 								'type'   => 'hidden',
 								'name'   => 'post_id',
 								'before' => '',
@@ -113,38 +113,38 @@ if ( $user_ID ) {
 								'value'  => $single_post->ID,
 								'order'  => 0
 							],
-							'ignore_article_nonce' => [
+							'ignore_article_nonce' => [ 
 								'class' => '',
 								'type'  => 'nonce',
 								'name'  => 'ignore_article_nonce',
 								'value' => Nh::_DOMAIN_NAME . "_ignore_article_nonce_form",
 								'order' => 5
 							],
-							'submit_ignore'        => [
-								'class'               => 'btn',
+							'submit_ignore'        => [ 
+								'class'               => 'btn-light bg-white',
 								'id'                  => 'submit_submit_ignore',
 								'type'                => 'submit',
 								'value'               => '<i class="' . $ignore_class . ' ignore-star"></i> <span class="ignore-text">' . __( 'Ignore', 'ninja' ) . '</span>',
 								'recaptcha_form_name' => 'frontend_ignore',
 								'order'               => 10
 							],
-						], [
+						], [ 
 							'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
 						] );
 				endif; ?>
 			</div>
 
 			<?php if ( ! empty( $opportunity ) ) : ?>
-			<div class="opportunity">
-				<a href="<?= $opportunity->link ?>">
-					<?= $opportunity->name; ?>
-				</a>
-			</div>
-			<div class="opportunity-short-description">
-				<p>
-					<?= $opportunity->meta_data['short_description']; ?>
-				</p>
-			</div>
+				<div class="opportunity">
+					<a href="<?= $opportunity->link ?>">
+						<?= $opportunity->name; ?>
+					</a>
+				</div>
+				<div class="opportunity-short-description">
+					<p>
+						<?= $opportunity->meta_data['short_description']; ?>
+					</p>
+				</div>
 			<?php endif; ?>
 
 			<div class="content">
@@ -168,8 +168,8 @@ if ( $user_ID ) {
 		</h3>
 		<?php
 		/* $related = $post_obj->get_all_custom( [ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ] );
-																								if ( ! empty( $related ) ) {
-																									foreach ( $related['posts'] as $single_related ) { */
+																											if ( ! empty( $related ) ) {
+																												foreach ( $related['posts'] as $single_related ) { */
 		?>
 		<div class="related-card">
 			<a class="blog-item" href="<?php /* echo  $single_related->link */?>">
@@ -189,7 +189,7 @@ if ( $user_ID ) {
 		</div>
 		<?php
 		/*}
-																							 } */
+																										 } */
 		?>
 	</div> -->
 		</div>
