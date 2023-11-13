@@ -9,10 +9,22 @@
  * @package NinjaHub
  */
 
+global $post;
+
 $dashboard = [
 	'my-account',
 	'dashboard',
-	'create-opportunity'
+	'authentication',
+	'change-password',
+	'my-favorite-articles',
+	'my-favorite-opportunities',
+	'my-ignored-articles',
+	'my-ignored-opportunities',
+	'my-notifications',
+	'my-opportunities',
+	'my-widgets',
+	'create-opportunity',
+	'create-opportunity-step-2',
 ];
 
 $my_account = [
@@ -25,7 +37,7 @@ $my_account = [
 	'authentication',
 ];
 
-if ( is_page( $dashboard ) ) {
+if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] )) {
 	get_template_part( 'app/Views/footers/dashboard' );
 } elseif ( is_page( $my_account ) ) {
 	get_template_part( 'app/Views/footers/my-account' );
