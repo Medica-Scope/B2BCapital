@@ -223,7 +223,7 @@ if (!isset($collapseable)) {
 
 							$(warningElement).css('display', hide ? 'none' : 'block');
 						};
-
+						
 						$(function() {
 							$('.wf-option.wf-option-rate-limit > .wf-option-content > ul > li.wf-option-select select').wfselect2({
 								minimumResultsForSearch: -1

@@ -21,6 +21,10 @@
                     'opportunity_created_date' => $opportunity->created_date,
                     'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
                     'is_item_controllers'      => TRUE,
+                    'location'                 => $opportunity->meta_data['location_group_location'],
+                    'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
+                    'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
+                    'valuation_appearance'     => $opportunity->meta_data['valuation_in_usd_group_appearance'],
                 ];
                 ?>
                 <div class="col-4">

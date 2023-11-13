@@ -106,6 +106,10 @@
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message(), $opportunity->get_error_data());
             }
 
+            if ($opportunity->meta_data['opportunity_stage'] !== 'publish') {
+                new Nh_Ajax_Response(FALSE, __("You can't send an investments request.", 'ninja'));
+            }
+
             $current_user = Nh_User::get_current_user();
 
             if ($current_user->profile->ID === 0) {
@@ -135,7 +139,7 @@
             $opportunity_investments   = empty($opportunity->meta_data['opportunity_investments']) ? [] : $opportunity->meta_data['opportunity_investments'];
             $opportunity_investments[] = $insert->ID;
             $opportunity->set_meta_data('opportunity_investments', $opportunity_investments);
-            $opportunity->set_meta_data('opportunity_stage', 'investment-start');
+            // $opportunity->set_meta_data('opportunity_stage', 'investment-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {

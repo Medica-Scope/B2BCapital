@@ -116,7 +116,7 @@
                     'minlength'      => __("Please enter at least {0} characters.", "ninja"),
                     'max'            => __("Please enter a value less than or equal to {0}.", "ninja"),
                     'min'            => __("Please enter a value greater than or equal to {0}.", "ninja"),
-                    'pass_regex'     => __("Password doesn't complexity.", "ninja"),
+                    'pass_regex'     => __("Your password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the following: ! @ # $ % ^ & *.", "ninja"),
                     'phone_regex'    => __("Please enter a valid Phone number.", "ninja"),
                     'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "ninja"),
                     'email_regex'    => __("Please enter a valid email address.", "ninja"),
@@ -148,10 +148,16 @@
             }
 
 			if(is_singular(['opportunity'])){
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
 			}
 
-            if (is_post_type_archive('faq')) {
+            if (is_post_type_archive('faq') || is_home() || is_singular()) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
             }
 
@@ -176,12 +182,6 @@
             if (is_post_type_archive('service') || is_singular('service') || is_tax('service-category')) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-service', Nh_Hooks::PATHS['public']['js'] . '/service-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front');
-            }
-
-            if (is_singular('opportunity')) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front');
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
             }
 
             $this->hooks->run();

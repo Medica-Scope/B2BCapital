@@ -28,7 +28,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 		<?php
 		$contents = file_get_contents($currentAutoPrependFile);
 		$refersToWAF = preg_match('/define\s*\(\s*(["\'])WFWAF_LOG_PATH\1\s*,\s*(__DIR__\s*\.\s*)?(["\']).+?\3\s*\)\s*/', $contents);
-
+		
 		if (!$refersToWAF):
 		?>
 			<p><?php echo wp_kses(sprintf(/* translators: Support URL. */ __('Automatic uninstallation cannot be completed, but you may still be able to <a href="%s" target="_blank" rel="noopener noreferrer">manually uninstall extended protection<span class="screen-reader-text"> (opens in new tab)</span></a>.', 'wordfence'), wfSupportController::esc_supportURL(wfSupportController::ITEM_FIREWALL_WAF_REMOVE_MANUALLY)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()), 'span'=>array('class'=>array()))); ?></p>
@@ -44,7 +44,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					array("nginx", __('NGINX', 'wordfence'), $serverInfo->isNGINX(), wfWAFAutoPrependHelper::helper('nginx')->getFilesNeededForBackup()),
 					array("iis", __('Windows (IIS)', 'wordfence'), $serverInfo->isIIS(), wfWAFAutoPrependHelper::helper('iis')->getFilesNeededForBackup()),
 				);
-
+				
 				$hasRecommendedOption = false;
 				$wafPrependOptions = '';
 				foreach ($dropdown as $option) {
@@ -56,7 +56,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 						$hasRecommendedOption = true;
 					}
 				}
-
+				
 				if (!$hasRecommendedOption): ?>
 					<p><?php esc_html_e('If you know your web server\'s configuration, please select it from the list below.', 'wordfence'); ?></p>
 				<?php else: ?>
@@ -78,7 +78,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 						if (!file_exists($backup)) {
 							continue;
 						}
-
+						
 						$filteredBackups[$index] = $backup;
 					}
 					$jsonBackups = json_encode(array_map('basename', $filteredBackups));

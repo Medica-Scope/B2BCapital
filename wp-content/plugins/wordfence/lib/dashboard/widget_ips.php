@@ -72,14 +72,14 @@ if (!isset($limit)) { $limit = 10; $initial = true; }
 										$('.wf-ips').addClass('wf-hidden');
 										$('.wf-ips-' + $(this).data('grouping')).removeClass('wf-hidden');
 									});
-
+									
 									$('.wf-ips .wf-dashboard-show-more a').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-
+										
 										var grouping = $(this).parent().data('grouping');
 										var period = $(this).parent().data('period');
-
+										
 										$(this).closest('.wf-dashboard-item-list-text').fadeOut();
 
 										var self = this;

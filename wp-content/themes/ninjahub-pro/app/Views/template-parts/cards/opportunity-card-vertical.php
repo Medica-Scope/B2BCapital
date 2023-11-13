@@ -12,6 +12,10 @@
     $is_card_horizontal       = !empty($args['is_card_horizontal']) ? $args['is_card_horizontal'] : FALSE;
     $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : FALSE;
     $business_type            = !empty($args['business_type']) ? $args['business_type'] : FALSE;
+    $location                 = !empty($args['location']) ? $args['location'] : FALSE;
+    $location_appearance      = !empty($args['location_appearance']) ? $args['location_appearance'] : FALSE;
+    $valuation                = !empty($args['valuation']) ? $args['valuation'] : FALSE;
+    $valuation_appearance     = !empty($args['valuation_appearance']) ? $args['valuation_appearance'] : FALSE;
 
 ?>
 <div class="opportunity-item card shadow border-0">
@@ -108,27 +112,37 @@
             </a>
 
             <p class="card-text"><small class="text-body-secondary">
-                    <?= $opportunity_created_date; ?>
+                    <?= date('F j, Y', strtotime($opportunity_created_date)); ?>
                 </small>
             </p>
 
             <div class="card-extra-info">
+                <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_location'] === 1) { ?>
                 <div class="card-info-item">
                     <small class="text-body-secondary">Location</small>
-                    <p class="card-text fw-bold">Egypt</p>
+                    <?php
+                        if ((int)$location_appearance === 1) {
+                            ?><p class="card-text fw-bold"><?= $location; ?></p><?php
+                        } else {
+                            _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
+                        }
+                    ?>
                 </div>
+                <?php } ?>
+
+                <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1) { ?>
                 <div class="card-info-item">
                     <small class="text-body-secondary">Valuation</small>
-                    <p class="card-text fw-bold">95460$</p>
+                    <?php
+                        if ((int)$valuation_appearance === 1) {
+                            ?><p class="card-text fw-bold"><?= '$ ' . $valuation; ?></p><?php
+                        } else {
+                            _ex('<p class="card-text fw-bold">HIDDEN</p>', 'ninja');
+                        }
+                    ?>
                 </div>
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Location</small>
-                    <p class="card-text fw-bold">Egypt</p>
-                </div>
-                <div class="card-info-item">
-                    <small class="text-body-secondary">Valuation</small>
-                    <p class="card-text fw-bold">95460$</p>
-                </div>
+                <?php } ?>
+
             </div>
         </div>
     </div>

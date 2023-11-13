@@ -22,7 +22,7 @@ $id = 'wfls-option-ntp';
 		<?php if ($failureCount > 0): ?>
 			<?php $remainingAttempts = $maxFailures - $failureCount; ?>
 			<p>
-				<strong><?php esc_html_e('NTP updates are currently failing.', 'wordfence') ?></strong>
+				<strong><?php esc_html_e('NTP updates are currently failing.', 'wordfence') ?></strong> 
 				<?php echo $remainingAttempts > 0 ? sprintf(esc_html__('NTP will be automatically disabled after %d more attempts.', 'wordfence'), $remainingAttempts) : esc_html__('NTP will be automatically disabled after 1 more attempt.', 'wordfence') ?>
 			</p>
 		<?php endif ?>

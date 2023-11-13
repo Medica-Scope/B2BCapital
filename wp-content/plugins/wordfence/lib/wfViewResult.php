@@ -12,7 +12,7 @@
 <tr><td><?php esc_html_e('File last modified:', 'wordfence') ?></td><td><?php echo $fileMTime; ?></td></tr>
 </table>
 
-<?php
+<?php 
 	if($isEmpty){
 		echo "File is empty.";
 	} else {

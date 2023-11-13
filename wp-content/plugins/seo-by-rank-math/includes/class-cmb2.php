@@ -13,9 +13,9 @@
 namespace RankMath;
 
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Str;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Helpers\Str;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -358,7 +358,7 @@ class CMB2 {
 	/**
 	 * Handles sanitization for custom webmaster tags.
 	 * Only <meta> tags are allowed.
-	 *
+	 * 
 	 * @param mixed $value The unsanitized value from the form.
 	 */
 	public static function sanitize_custom_webmaster_tags( $value ) {

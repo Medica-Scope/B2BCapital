@@ -16,11 +16,11 @@ use RankMath\Module\Base;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Admin\Page;
-use MyThemeShop\Helpers\Arr;
-use MyThemeShop\Helpers\Param;
-use MyThemeShop\Helpers\WordPress;
-use MyThemeShop\Helpers\Conditional;
+use RankMath\Admin\Page;
+use RankMath\Helpers\Arr;
+use RankMath\Helpers\Param;
+use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Conditional;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,35 +33,35 @@ class Admin extends Base {
 
 	/**
 	 * Module ID.
-	 *
+	 * 
 	 * @var string
 	 */
 	public $id = '';
 
 	/**
 	 * Module directory.
-	 *
+	 * 
 	 * @var string
 	 */
 	public $directory = '';
 
 	/**
 	 * List table object.
-	 *
+	 * 
 	 * @var object
 	 */
 	public $table;
 
 	/**
 	 * Screen options.
-	 *
+	 * 
 	 * @var array
 	 */
 	public $screen_options = [];
 
 	/**
 	 * Module page.
-	 *
+	 * 
 	 * @var object
 	 */
 	public $page;

@@ -75,7 +75,7 @@ $wafRemoveURL = network_admin_url('admin.php?page=WordfenceWAF&subpage=waf_optio
 									'statusList' => $firewall->wafStatusList('blacklist'),
 									'helpLink' => __('https://www.wordfence.com/help/firewall/#firewall-status', 'wordfence'),
 								))->render();
-
+								
 								if ($firewall->ruleMode() == wfFirewall::RULE_MODE_PREMIUM && $firewall->blacklistMode() == wfFirewall::BLACKLIST_MODE_DISABLED):
 								?>
 								<script type="application/javascript">
@@ -230,7 +230,7 @@ $wafRemoveURL = network_admin_url('admin.php?page=WordfenceWAF&subpage=waf_optio
 						if (!WFAD.isSmallScreen) { WFAD.tour1(); }
 					}
 				});
-
+				
 				if ($('#waf').hasClass('wf-active')) {
 					WFAD.wafTourShown = true;
 					WFAD.setUpFirewallTour();

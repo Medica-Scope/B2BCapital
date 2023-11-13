@@ -16,7 +16,7 @@ use RankMath\Traits\Hooker;
 use RankMath\Traits\Wizard;
 use RankMath\Helpers\Security;
 use RankMath\Admin\Importers\Detector;
-use MyThemeShop\Helpers\Param;
+use RankMath\Helpers\Param;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -71,7 +71,7 @@ class Setup_Wizard {
 
 	/**
 	 * Hook suffix.
-	 *
+	 * 
 	 * @var string
 	 */
 	public $hook_suffix = '';

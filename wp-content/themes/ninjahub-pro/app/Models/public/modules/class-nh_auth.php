@@ -559,7 +559,7 @@
         {
 
             $form_data                     = $_POST['data'];
-            $industries                    = $form_data['industries'];
+            $industries                    = !empty($form_data['industries']) && !is_array($form_data['industries']) ? [$form_data['industries']] : [];
             $expected_value                = $form_data['expected_value'];
             $entity_legal_type             = $form_data['entity_legal_type'];
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
@@ -757,7 +757,6 @@
                 new Nh_Ajax_Response(FALSE, __("The last name field is empty!.", 'ninja'));
             }
 
-            // TODO:: To be enabled in version 2
             if (empty($phone_number)) {
                 new Nh_Ajax_Response(FALSE, __("The phone number field is empty!.", 'ninja'));
             }

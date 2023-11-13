@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) die('No direct access allowed');
 
 class UpdraftPlus_Temporary_Clone_Dash_Notice {
-
+	
 	/**
 	 * Constructor for the class.
 	 */
@@ -11,7 +11,7 @@ class UpdraftPlus_Temporary_Clone_Dash_Notice {
 		add_action('updraftplus_temporary_clone_refresh_connection', array($this, 'refresh_connection'));
 		add_action('wp_ajax_updraftplus_dash_notice_ajax', array($this, 'updraftplus_dash_notice_ajax'));
 		add_action('all_admin_notices', array($this, 'all_admin_notices_dashboard_notice'));
-
+		
 		if (!wp_next_scheduled('updraftplus_temporary_clone_refresh_connection')) {
 			wp_schedule_event(time(), 'twicedaily', 'updraftplus_temporary_clone_refresh_connection');
 		}
@@ -135,7 +135,7 @@ class UpdraftPlus_Temporary_Clone_Dash_Notice {
 
 		if (empty($vps_info['scheduled_removal'])) return array('code' => 'error', 'data' => 'No scheduled removal date found');
 		if (empty($vps_info['package_cost'])) return array('code' => 'error', 'data' => 'Missing the expected clone package cost information');
-
+		
 		update_site_option('updraftplus_clone_scheduled_removal', $vps_info['scheduled_removal']);
 		update_site_option('updraftplus_clone_package_cost', $vps_info['package_cost']);
 

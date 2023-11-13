@@ -30,9 +30,9 @@ $recovery = $initializationData->get_recovery_codes();
 			?>
 		</ul>
 		<p class="wfls-center"><a href="#" class="wfls-btn wfls-btn-default" id="wfls-recovery-download" target="_blank" rel="noopener noreferrer"><i class="dashicons dashicons-download"></i> <?php esc_html_e('Download', 'wordfence-login-security'); ?></a></p>
-
+		
 		<hr class="wfls-half">
-
+		
 		<p><?php esc_html_e('Enter the code from your authenticator app below to verify and activate two-factor authentication for this account.', 'wordfence-login-security'); ?></p>
 		<p><input type="text" id="wfls-activate-field" value="" size="6" maxlength="6" placeholder="123456" autocomplete="off"></p>
 	</div>
@@ -50,29 +50,29 @@ $recovery = $initializationData->get_recovery_codes();
 		$(function() {
 			$('#wfls-activate-field').on('keyup', function(e) {
 				$('#wfls-activate').toggleClass('wfls-disabled', $('#wfls-activate-field').val().length != 6);
-
+				
 				if (e.keyCode == 13) {
 					$('#wfls-activate').trigger('click');
 				}
 			});
-
+			
 			$('#wfls-recovery-download').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				saveAs(new Blob(["<?php echo str_replace("\n", "\\n", str_replace("\r", "\\r", addslashes($recoveryCodeFileContents))); ?>"], {type: "text/plain;charset=" + document.characterSet}), '<?php echo \WordfenceLS\Text\Model_JavaScript::esc_js(preg_replace('~^https?://~i', '', home_url())) . '_' . \WordfenceLS\Text\Model_JavaScript::esc_js($user->user_login) . '_recoverycodes.txt'; ?>');
 				WFLS.savedRecoveryCodes = true;
 			});
-
+			
 			$('#wfls-activate').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-
+				
 				if (WFLS.userIsActivating) { //Likely a double-click
 					return;
 				}
-
+				
 				WFLS.userIsActivating = true;
-
+				
 				var payload = {
 					secret: '<?php echo bin2hex($initializationData->get_raw_secret()); ?>',
 					recovery: ['<?php echo implode('\', \'', array_map(function($c) { return bin2hex($c); }, $recovery)); ?>'],
@@ -81,7 +81,7 @@ $recovery = $initializationData->get_recovery_codes();
 				};
 
 				WFLS.ajax(
-					'wordfence_ls_activate',
+					'wordfence_ls_activate', 
 					payload,
 					function(response) {
 						if (response.error) {
@@ -94,7 +94,7 @@ $recovery = $initializationData->get_recovery_codes();
 							$('#wfls-activate-field').val('');
 
 							$('.wfls-notice[data-notice-type="wfls-will-be-required"]').find('.wfls-dismiss-link').trigger('click');
-
+							
 							if (!WFLS.savedRecoveryCodes) {
 								var prompt = $('#wfls-tmpl-recovery-skipped-prompt').tmpl({});
 								var promptHTML = $("<div />").append(prompt).html();

@@ -115,13 +115,13 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 			$('.wf-blocks-table-bulk-checkbox.wf-option-checkbox').toggleClass('wf-checked', checked);
 			$(window).trigger('wordfenceUpdateBlockButtons');
 		};
-
-
+		
+		
 		$(window).on('wordfenceRefreshBlockList', function(e, payload, append) {
 			if (!payload.hasOwnProperty('loading')) {
 				payload['loading'] = false;
 			}
-
+			
 			//Create table if needed
 			var table = $(".wf-blocks-table-container");
 			if (table.length == 0) {
@@ -129,11 +129,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				$('#wf-blocks-wrapper').append(wrapperTemplate);
 				table = $(".wf-blocks-table-container");
 			}
-
+			
 			if (!append) {
 				table.find('.wf-block-record').remove();
 			}
-
+			
 			//Create header if needed
 			if (table.find('thead > .wf-blocks-columns').length == 0) {
 				table.find('thead').append($('#wf-blocks-columns-tmpl').tmpl());
@@ -182,7 +182,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					}
 				});
 			}
-
+			
 			//Create or remove footer if needed
 			var loadedBlockCount = $('.wf-block-record').length + payload['blocks'].length;
 			if (loadedBlockCount > 5 && table.find('tfoot > .wf-blocks-columns').length == 0) {
@@ -237,7 +237,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 			else {
 				table.find('tfoot > .wf-blocks-columns').remove();
 			}
-
+			
 			//Add row(s)
 			$('#wf-blocks-loading').remove();
 			if (!append && payload['blocks'].length == 0) {
@@ -276,7 +276,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 							}, 800);
 						}
 					});
-
+					
 					var reasonDisplayChunks = payload['blocks'][i]['reasonDisplay'].split(/\s+/);
 					for (var n = 0; n < reasonDisplayChunks.length; n++) {
 						if (reasonDisplayChunks[n].length >= 50) {
@@ -284,7 +284,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 							break;
 						}
 					}
-
+					
 					var existing = table.find('tbody tr[data-id="' + payload['blocks'][i]['id'] + '"]');
 					if (existing.length > 0) {
 						existing.replaceWith(row);
@@ -294,14 +294,14 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					}
 				}
 			}
-
+			
 			try {
 				$('#wf-blocks-wrapper').data('hasCountryBlock', JSON.parse(payload.hasCountryBlock));
 			}
 			catch (e) {
 				$('#wf-blocks-wrapper').data('hasCountryBlock', '');
 			}
-
+			
 			if (table.find('.wf-blocks-columns > .wf-sortable.wf-sorted-ascending, .wf-blocks-columns > .wf-sortable.wf-sorted-descending').length == 0) {
 				table.find('thead > .wf-blocks-columns > .wf-sortable[data-column="ruleAdded"]').addClass('wf-sorted-ascending').trigger('click', [true]);
 			}
@@ -323,7 +323,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					}
 				}
 			}
-
+			
 			$('#blocks-bulk-unblock').toggleClass('wf-disabled', !allowUnblock);
 			$('#blocks-bulk-make-permanent').toggleClass('wf-disabled', !allowMakeForever);
 			$('#blocks-export-ips').toggleClass('wf-disabled', (totalCount == 0));
@@ -337,18 +337,18 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 
 		$(window).on('wordfenceLoadBlocks', function(e, reload) {
 			var offset = reload ? 0 : $('.wf-block-record').length;
-
+			
 			WFAD.loadingBlocks = true;
 			WFAD.ajax('wordfence_getBlocks', {offset: offset, sortColumn: WFAD.sortColumn, sortDirection: WFAD.sortDirection, blocksFilter: WFAD.blocksFilter}, function(res) {
 				$(window).trigger('wordfenceRefreshBlockList', [res, !reload]);
 				WFAD.loadingBlocks = false;
 			});
 		});
-
+		
 		$(function() {
 			WFAD.sortColumn = 'ruleAdded';
 			WFAD.sortDirection = 'descending';
-
+			
 			$(window).trigger('wordfenceRefreshBlockList', [{blocks: [], loading: true}, false]);
 			$(window).trigger('wordfenceLoadBlocks', [true]);
 
@@ -386,11 +386,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					}
 				}, 4);
 			});
-
+			
 			$('#wf-blocks-apply-filter').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
-
+				
 				var mode = $('#wf-blocks-apply-filter').data('filterMode') || '';
 				if (mode != 'filtered') {
 					WFAD.blocksFilter = $('#wf-blocks-filter-field').val() || '';
@@ -403,7 +403,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 				$('#wf-blocks-filter-field').trigger('keyup');
 				$(window).trigger('wordfenceLoadBlocks', [true]);
 			});
-
+			
 			$('#blocks-bulk-unblock').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -418,7 +418,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					var tr = $(checked[i]).closest('tr');
 					rows.push(tr);
 					blockIDs.push(tr.data('id'));
-
+					
 					if (tr.find('td[data-column="type"]').data('sort') == <?php echo (int) wfBlock::TYPE_COUNTRY; ?>) {
 						removingCountryBlock = true;
 					}
@@ -430,7 +430,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					$('#wf-blocking-prompt-cancel').on('click', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
-
+						
 						WFAD.colorboxClose();
 					});
 
@@ -448,11 +448,11 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 								for (var i = 0; i < rows.length; i++) {
 									$(rows[i]).remove();
 								}
-
+								
 								if (removingCountryBlock) {
 									$('#wf-blocks-wrapper').data('hasCountryBlock', '');
 								}
-
+								
 								$(window).trigger('wordfenceUpdateBulkSelect');
 								$(window).trigger('wordfenceUpdateBlockButtons');
 							}
@@ -462,7 +462,7 @@ if (!defined('WORDFENCE_VERSION')) { exit; }
 					});
 				}});
 			});
-
+			
 			$('#blocks-bulk-make-permanent').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();

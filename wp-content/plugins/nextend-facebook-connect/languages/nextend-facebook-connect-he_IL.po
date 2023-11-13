@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-13 10:24+0200\n"
-"PO-Revision-Date: 2023-09-13 10:25+0200\n"
+"POT-Creation-Date: 2023-11-03 17:51+0100\n"
+"PO-Revision-Date: 2023-11-03 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: עִבְרִית\n"
 "Language: he_IL\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
@@ -169,8 +169,8 @@ msgid ""
 "register flow</b>\" and \"<b>OAuth redirect uri proxy page</b>\" in %1$s to "
 "work properly."
 msgstr ""
-"%1$s זיהה כי %2$s הותקן באתר שלך. עליך להגדיר את \"<b>דף עבור זרימת רישום</"
-"b>\" ואת \"<b>דף proxy של ניתוב מחדש של OAuth</b>\" ב - %1$s כדי לעבוד כראוי."
+"%1$s זיהה כי %2$s הותקן באתר שלך. עליך להגדיר את \"<b>דף עבור זרימת רישום</b>"
+"\" ואת \"<b>דף proxy של ניתוב מחדש של OAuth</b>\" ב - %1$s כדי לעבוד כראוי."
 
 msgid "Fix now"
 msgstr "תקן עכשיו"
@@ -897,8 +897,8 @@ msgstr "עקוף את המטמון בניתוב מחדש"
 #, php-format
 msgid ""
 "Enabling this option will add a GET parameter to the URL where we redirect "
-"after a successful registration or login with social login. %1$sLearn "
-"more%2$s."
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
 msgstr ""
 "הפעלת אפשרות זו תוסיף פרמטר GET לכתובת ה - URL שאליה ננתב מחדש לאחר רישום או "
 "התחברות מוצלחת עם התחברות חברתית. %1$s למידע נוסף%2$s."
@@ -1064,13 +1064,6 @@ msgstr "אין לחצני קישור"
 
 msgid "Link buttons after account details"
 msgstr "קישור לחצנים אחרי פרטי החשבון"
-
-msgid ""
-"By clicking Register, you accept our <a href=\"#privacy_policy_url\" "
-"target=\"_blank\">Privacy Policy</a>"
-msgstr ""
-"על ידי לחיצה על הרשמה, אתה מקבל את <a href=\"#privacy_policy_url\" "
-"target=\"_blank\">מדיניות הפרטיות</a> שלנו"
 
 msgid "Store"
 msgstr "חנות"
@@ -1319,6 +1312,13 @@ msgstr "יש לעדכן את %1$s לגרסה %2$s או גרסה חדשה יות�
 msgid "Update now!"
 msgstr "לעדכן כעת"
 
+msgid ""
+"By clicking Register, you accept our <a href=\"#privacy_policy_url\" target="
+"\"_blank\">Privacy Policy</a>"
+msgstr ""
+"על ידי לחיצה על הרשמה, אתה מקבל את <a href=\"#privacy_policy_url\" target="
+"\"_blank\">מדיניות הפרטיות</a> שלנו"
+
 msgid "Hold On"
 msgstr "חכה. "
 
@@ -1358,16 +1358,22 @@ msgstr "יש ללחוץ על האפליקציה עם מזהה האפליקציה
 #, php-format
 msgid ""
 "Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s product, then choose %4$s."
+"that appears next to the %3$s item."
+msgstr ""
+
+#, php-format
+msgid ""
+"Press the %1$s button that you can find below the %2$s section, next to %3$s."
 msgstr ""
 
 #, php-format
 msgid "Add the following URL to the %s field:"
 msgstr "הוסף את כתובת האתר הבאה לשדה %s:"
 
-#, php-format
-msgid "Press the %s button."
-msgstr "לחץ על לחצן %s."
+#, fuzzy, php-format
+#| msgid "Click on the %1$s button at %2$s."
+msgid "Click on the %1$s button."
+msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
 
 #, php-format
 msgid ""
@@ -1450,21 +1456,21 @@ msgid "Click the %1$s button and complete the Security Check."
 msgstr "יש ללחוץ על הלחצן '<b>יצירת אפליקציה</b>' ולהשלים את בדיקת האבטחה."
 
 #, php-format
-msgid "Request access to the %1$s permission:"
-msgstr ""
-
-#, php-format
 msgid ""
-"Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s item."
+"A message at the top of the page might prompt you to switch to %1$s. Ignore "
+"that, as our integration is for %2$s!"
 msgstr ""
 
 #, fuzzy, php-format
 #| msgid ""
-#| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
-#| "button."
-msgid "Find the %1$s permission and click the %2$s button."
-msgstr "ודא שהכרטיסייה <b>%1$s</b> נבחרה ולחץ על הלחצן <b>%2$s</b>."
+#| "Click the \"<b>Create New App</b>\" button. (If you can not see this "
+#| "button, you might need to create a workspace first!)"
+msgid ""
+"Click on the %1$s button. (If you receive a blank page after you pressed the "
+"%1$s button, you might need to refresh the page.)"
+msgstr ""
+"לחץ על הלחצן '<b>צור אפליקציה חדשה</b> '. (אם אינך רואה לחצן זה, ייתכן שיהיה "
+"עליך ליצור סביבת עבודה תחילה!)"
 
 #, php-format
 msgid ""
@@ -1474,12 +1480,27 @@ msgstr ""
 
 #, fuzzy, php-format
 #| msgid ""
+#| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
+#| "button."
+msgid ""
+"Below the %1$s section, find the %2$s permission and click on the %3$s "
+"button."
+msgstr "ודא שהכרטיסייה <b>%1$s</b> נבחרה ולחץ על הלחצן <b>%2$s</b>."
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Click on the \"<b>Create an App</b>\" button on the top right corner."
+msgid "Press the %1$s button on the top right corner again."
+msgstr "לחץ על הלחצן \"<b>צור אפליקציה</b>\" בפינה השמאלית העליונה."
+
+#, fuzzy, php-format
+#| msgid ""
 #| "On the top left side, click on the “<b>%1$s</b>” menu point, then click "
 #| "“<b>%2$s</b>”."
 msgid "On the left side, click on the %1$s tab, then click %2$s."
 msgstr ""
-"בצד ימין למעלה, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על "
-"\"<b>%2$s</b> \"."
+"בצד ימין למעלה, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על \"<b>"
+"%2$s</b> \"."
 
 #, php-format
 msgid "Enter your domain name to the %1$s field, probably: %2$s"
@@ -1565,6 +1586,10 @@ msgid ""
 msgstr "מצא את המקטע %1$s והוסף את כתובת האתר הבאה לשדה %2$s:"
 
 #, php-format
+msgid "Press the %s button."
+msgstr "לחץ על לחצן %s."
+
+#, php-format
 msgid ""
 "By default, your application only has Standard Access for the %1$s and %2$s "
 "permissions, which means that only you can log in with it. To get Advanced "
@@ -1630,8 +1655,8 @@ msgstr ""
 "<strong><u>בדיקת שימוש בנתונים בפייסבוק:</u></strong> כדי להגן על הפרטיות של "
 "אנשים, פייסבוק עשויה לבקש ממך למלא טפסים מסוימים, כדי שהם יוכלו להבטיח "
 "שהגישה שלך ל-API והשימוש בנתונים תואמים למדיניות פייסבוק. \n"
-"אם פייסבוק מציגה את המודאל \"%1$s\" עבור האפליקציה שלך, אז "
-"ב-%2$sdocumentation%3$s שלנו תוכל למצוא מידע נוסף על ההרשאות שאנו צריכים."
+"אם פייסבוק מציגה את המודאל \"%1$s\" עבור האפליקציה שלך, אז ב-"
+"%2$sdocumentation%3$s שלנו תוכל למצוא מידע נוסף על ההרשאות שאנו צריכים."
 
 #, php-format
 msgid "I am done setting up my %s"
@@ -1645,8 +1670,8 @@ msgstr "נחוץ"
 
 #, php-format
 msgid ""
-"If you are not sure what is your %1$s, please head over to <a "
-"href=\"%2$s\">Getting Started</a>"
+"If you are not sure what is your %1$s, please head over to <a href=\"%2$s"
+"\">Getting Started</a>"
 msgstr ""
 "אם אתם לא בטוחים מה ה %1$s שלכם, יש לעבור אל <a href=\"%2$s\">תחילת העבודה</"
 "a>"
@@ -1709,8 +1734,8 @@ msgstr "לחץ על \"<b>אישורים</b>\" בתפריט הימני"
 
 #, php-format
 msgid ""
-"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: "
-"<b>%s</b>"
+"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: <b>"
+"%s</b>"
 msgstr ""
 "תחת המקטע \"<b>OAuth 2.0 מזהי לקוח</b>\" מצא את מזהה הלקוח שלך: <b>%s</b>"
 
@@ -1732,8 +1757,8 @@ msgid ""
 msgstr ""
 "אם עדיין אין לך פרויקט, תצטרך ליצור אחד. אפשר לעשות זאת על ידי לחיצה על "
 "הטקסט הכחול \"<b>%1$s</b>\" בצד ימין!  ( אם כבר יש לך פרויקט, ולאחר מכן "
-"בסרגל העליון לחץ על שם הפרויקט שלך במקום, אשר יביא את מודאלי ולחץ על "
-"<b>\"%2$s</b> \")."
+"בסרגל העליון לחץ על שם הפרויקט שלך במקום, אשר יביא את מודאלי ולחץ על <b>"
+"\"%2$s</b> \")."
 
 #, php-format
 msgid "Name your project and then click on the \"<b>%1$s</b>\" button again!"
@@ -1758,8 +1783,8 @@ msgid ""
 "account, then pick the \"%4$s\" option!"
 msgstr ""
 "יש לבחור <b>%1$s</b> בהתאם לצרכים שלך וללחוץ על \"<b>%2$s</b> \". אם ברצונך "
-"להפעיל את ההתחברות החברתית עם %3$s עבור משתמשים בעלי חשבון %3$s, בחר "
-"באפשרות\" %4$s \"!"
+"להפעיל את ההתחברות החברתית עם %3$s עבור משתמשים בעלי חשבון %3$s, בחר באפשרות"
+"\" %4$s \"!"
 
 #, php-format
 msgid ""
@@ -1814,8 +1839,8 @@ msgid ""
 "On the left side, click on the \"<b>%1$s</b>\" menu point, then click the "
 "\"<b>%2$s</b>\" button in the top bar."
 msgstr ""
-"בצד ימין, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על הלחצן "
-"\"<b>%2$s</b>\" בסרגל העליון."
+"בצד ימין, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על הלחצן \"<b>"
+"%2$s</b>\" בסרגל העליון."
 
 #, php-format
 msgid "Choose the \"<b>%1$s</b>\" option."
@@ -1847,9 +1872,9 @@ msgstr ""
 #, php-format
 msgid ""
 "Currently your App is in %1$s mode, so only limited number of people can use "
-"it. To allow this App for any user with a Google Account, click on the "
-"\"%2$s\" option on the left side, then click the \"%3$s\" button under the "
-"\"%4$s\" section, and press the \"%5$s\" button. "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
 msgstr ""
 "כרגע האפליקציה שלך במצב %1$s, לכן רק מספר מוגבל של אנשים יכולים להשתמש בה. "
 "כדי לאפשר יישום זה עבור כל משתמש עם חשבון Google, לחץ על האפשרות \"%2$s\" "
@@ -1983,9 +2008,9 @@ msgstr "יש ללחוץ על %s."
 
 #, fuzzy, php-format
 #| msgid ""
-#| "You’ll find your API key and secret on this page. Copy and paste the "
-#| "\"<b>%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at "
-#| "%3$s and press \"<b>Save Changes</b>\"."
+#| "You’ll find your API key and secret on this page. Copy and paste the \"<b>"
+#| "%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s "
+#| "and press \"<b>Save Changes</b>\"."
 msgid ""
 "Find your %1$s and %2$s. Copy and paste the credentials to the corresponding "
 "fields at %3$s and press %4$s."
@@ -2036,9 +2061,9 @@ msgstr ""
 
 #, php-format
 msgid ""
-"You’ll find your API key and secret on this page. Copy and paste the "
-"\"<b>%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s "
-"and press \"<b>Save Changes</b>\"."
+"You’ll find your API key and secret on this page. Copy and paste the \"<b>"
+"%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s and "
+"press \"<b>Save Changes</b>\"."
 msgstr ""
 "תוכל למצוא את מפתח ה - API והסוד שלך בדף זה. העתק והדבק את \"<b>%1$s</b>\" "
 "ואת \"<b>%2$s</b>\" לשדות המתאימים ב - %3$s ולחץ על \"<b>שמור שינויים</b> \"."
@@ -2273,8 +2298,8 @@ msgstr ""
 "לחיצה על הלחצן הכתום \"<b>צור פרופיל אבטחה חדש</b>\" בצד שמאל."
 
 msgid ""
-"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</"
-"b>\" and \"<b>Consent Privacy Notice URL</b>\"."
+"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</b>"
+"\" and \"<b>Consent Privacy Notice URL</b>\"."
 msgstr ""
 "מלא את \"<b>שם פרופיל האבטחה</b> \",\"<b> תיאור פרופיל האבטחה</b> \"ואת\" "
 "כתובת ה -<b> URL של הודעת הפרטיות להסכמה</b> \"."
@@ -2284,11 +2309,11 @@ msgstr "לאחר שמילאת את כל השדות הנדרשים, לחץ על \
 
 #, php-format
 msgid ""
-"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr ""
-"מלא את \"<b>מקורות מותרים</b>\" בכתובת האתר של דף הבית שלך, ככל הנראה: "
-"<b>%s</b>"
+"מלא את \"<b>מקורות מותרים</b>\" בכתובת האתר של דף הבית שלך, ככל הנראה: <b>"
+"%s</b>"
 
 msgid "When all fields are filled, click \"<b>Save</b>\"."
 msgstr "כאשר כל השדות מלאים, לחץ על \"<b>שמור</b> \"."
@@ -2328,8 +2353,8 @@ msgid ""
 "Fill the \"<b>Domains and Subdomains</b>\" field with your domain name "
 "probably: <b>%s</b>"
 msgstr ""
-"מלא את השדה \"<b>דומיינים ותת</b> - דומיינים\" עם שם הדומיין שלך כנראה: "
-"<b>%s</b>"
+"מלא את השדה \"<b>דומיינים ותת</b> - דומיינים\" עם שם הדומיין שלך כנראה: <b>"
+"%s</b>"
 
 msgid ""
 "Finally press \"<b>Next</b>\" then \"<b>Done</b>\" and finally click on the "
@@ -2343,13 +2368,13 @@ msgid ""
 "To allow your visitors to log in with their %1$s account, first you must "
 "create an %1$s App. The following guide will help you through the %1$s App "
 "creation process. After you have created your %1$s App, head over to "
-"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and "
-"\"%5$s\" according to your %1$s App."
+"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and \"%5$s"
+"\" according to your %1$s App."
 msgstr ""
 "כדי לאפשר למבקרים שלך להתחבר באמצעות חשבון %1$s שלהם, תחילה עליך ליצור יישום "
 "%1$s. המדריך הבא יעזור לכם בתהליך יצירת האפליקציה %1$s. לאחר יצירת אפליקציית "
-"%1$s, יש לעבור אל \"הגדרות\" ולקבוע את התצורה של \"%2$s \",\" %3$s \", "
-"\"%4$s\" ו -\" %5$s \"בהתאם לאפליקציית %1$s."
+"%1$s, יש לעבור אל \"הגדרות\" ולקבוע את התצורה של \"%2$s \",\" %3$s \", \"%4$s"
+"\" ו -\" %5$s \"בהתאם לאפליקציית %1$s."
 
 msgid ""
 "Make sure you have an <strong>active subscription for the <a href=\"https://"
@@ -2430,15 +2455,15 @@ msgstr ""
 
 msgid ""
 "If you have multiple Apps, then at the \"<b>Choose a Primary App ID</b>\" "
-"field <b>select the App what you just created</b>, then click \"<b>Save</"
-"b>\"."
+"field <b>select the App what you just created</b>, then click \"<b>Save</b>"
+"\"."
 msgstr ""
 "אם יש לך מספר אפליקציות, בשדה \"<b>בחר מזהה אפליקציה ראשי</b>\" <b>בחר את "
 "האפליקציה שיצרת זה עתה</b>, ולאחר מכן לחץ על \"<b>שמור</b> \"."
 
 msgid ""
-"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</"
-"b>\" button."
+"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</b>"
+"\" button."
 msgstr ""
 "לבסוף לחץ על הלחצן \"<b>המשך</b>\" ולאחר מכן על הלחצן \"<b>הירשם</b> \"."
 
@@ -2539,8 +2564,8 @@ msgstr ""
 
 msgid ""
 "<b>Open the downloaded file</b> with a text editor, like Notepad, <b><u>copy "
-"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</"
-"b>\" field of Nextend Social Login."
+"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</b>"
+"\" field of Nextend Social Login."
 msgstr ""
 "<b>פתח את הקובץ שהורד</b> באמצעות עורך טקסט, כגון פנקס רשימות, <b><u>העתק את "
 "כל תוכנו</u></b> <b>והדבק אותו</b> בשדה \"<b>מפתח פרטי</b>\" של Nextend "
@@ -2668,8 +2693,8 @@ msgid ""
 "Optional: Select an \"<b>App Icon</b>\" and add a \"<b>Terms of Service URL</"
 "b>\" and \"<b>Privacy Policy URL</b>\"."
 msgstr ""
-"אופציונלי: בחר \"<b>סמל אפליקציה</b>\" והוסף \"<b>כתובת אתר של תנאי שירות</"
-"b>\" ו\"כתובת<b> אתר של מדיניות פרטיות</b> \"."
+"אופציונלי: בחר \"<b>סמל אפליקציה</b>\" והוסף \"<b>כתובת אתר של תנאי שירות</b>"
+"\" ו\"כתובת<b> אתר של מדיניות פרטיות</b> \"."
 
 #, php-format
 msgid ""
@@ -2891,8 +2916,8 @@ msgid ""
 "Then in the side bar on the left side, find the \"%1$s\" menu and click on "
 "the \"%2$s\" menu point. Click on the \"%3$s\" button, then on \"%4$s\"."
 msgstr ""
-"בצד ימין, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על הלחצן "
-"\"<b>%2$s</b>\" בסרגל העליון."
+"בצד ימין, לחץ על נקודת התפריט \"<b>%1$s</b>\" ולאחר מכן לחץ על הלחצן \"<b>"
+"%2$s</b>\" בסרגל העליון."
 
 #, php-format
 msgid ""
@@ -3261,8 +3286,8 @@ msgstr "ודא שהכרטיסייה <b>%1$s</b> נבחרה ולחץ על הלח�
 #, fuzzy, php-format
 #| msgid ""
 #| "A modal will appear where you need to tick the \"<b>I have read and agree "
-#| "to these terms</b>\" checkbox and finally press the \"<b>Add product</"
-#| "b>\" button."
+#| "to these terms</b>\" checkbox and finally press the \"<b>Add product</b>"
+#| "\" button."
 msgid ""
 "A modal will appear where you need to tick the %1$s checkbox and finally "
 "press the %2$s button."
@@ -3456,15 +3481,25 @@ msgstr "יש מתג Sandbox/Live. ודא כי \"<b>Live</b>\" נבחר!"
 msgid "Click on the name of your %s App, under the REST API apps section."
 msgstr "לחץ על השם של אפליקציית ה %s שלך, בקטע אפליקציות ה - API של REST."
 
+#, fuzzy, php-format
+#| msgid ""
+#| "Under the \"<b>%1$s</b>\" section click \"<b>%2$s</b>\" and add the "
+#| "following URL:"
 msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading and click \"<b>Show</b>\"."
-msgstr ""
-"יש לגלול למטה אל '<b>הגדרות האפליקציה בזמן אמת</b> ', לאתר את הכותרת'<b> "
-"כתובת URL להחזרה בזמן אמת</b> 'וללחוץ על'<b> הצגה</b> '."
+"Scroll down to %1$s section, find the %2$s feature and and click on the %3$s "
+"link."
+msgstr "בקטע \"<b>%1$s</b>\" לחץ על \"<b>%2$s</b>\" והוסף את כתובת האתר הבאה:"
 
-msgid "Click on \"Save\""
-msgstr "לוחצים על \"שמירה\""
+#, fuzzy, php-format
+#| msgid "Add the following URL to the %s field:"
+msgid "Add the following URL to the %s field and press %2$s:"
+msgstr "הוסף את כתובת האתר הבאה לשדה %s:"
+
+#, php-format
+msgid ""
+"Wait for %1$s to approve the %2$s feature ( this might take up to 7 business "
+"days ). The %3$s row will indicate the current status. "
+msgstr ""
 
 #, php-format
 msgid ""
@@ -3492,32 +3527,41 @@ msgid ""
 msgstr ""
 "מלא את השדה \"<b>שם אפליקציה</b>\" ולחץ על הלחצן \"<b>צור אפליקציה</b> \"."
 
-msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading then click \"<b>Show</b>\"."
-msgstr ""
-"גלול למטה אל \"<b>הגדרות אפליקציה חיה</b> \", מצא את הכותרת\"<b> כתובת URL "
-"של החזרה חיה</b> \"ולחץ על\"<b> הצג</b> \"."
-
-msgid ""
-"Scroll down to \"<b>App feature options</b>\" section and tick \"<b>Log In "
-"with PayPal</b>\"."
-msgstr ""
-"יש לגלול למטה לקטע '<b>אפשרויות תכונת אפליקציה</b>' ולסמן את האפשרות "
-"'<b>התחברות באמצעות PayPal</b> '."
-
 #, php-format
-msgid "Click %1$s that appears after the %2$s text."
-msgstr "יש ללחוץ על %1$s שמופיע אחרי הטקסט %2$s."
+msgid ""
+"Scroll down to %1$s section, and turn off all features. ( If you are trying "
+"to set up social login in an existing App, then create a new App, as this "
+"App should be used only for social login because some of the non used "
+"features might cause scope specific problems. )"
+msgstr ""
 
-msgid "Tick \"<b>Full name</b>\"."
-msgstr "סמן \"<b>שם מלא</b> \"."
+#, fuzzy, php-format
+#| msgid ""
+#| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
+#| "button."
+msgid "Find the %1$s feature and check the checkbox."
+msgstr "ודא שהכרטיסייה <b>%1$s</b> נבחרה ולחץ על הלחצן <b>%2$s</b>."
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Click on the %1$s button at %2$s."
+msgid "Click on the %1$s link that you can find below the %2$s feature."
+msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
+
+#, fuzzy, php-format
+#| msgid "Scroll down to the %s section."
+msgid "Scroll down to %1$s section, and tick the %2$s field."
+msgstr "גלול מטה לקטע %s."
+
+#, fuzzy, php-format
+#| msgid ""
+#| "If you want to get the email address as well, then don't forget to tick "
+#| "%1$s option. In this case you should also enable the %2$s setting in our "
+#| "%3$s %4$s tab."
 msgid ""
 "If you want to get the email address as well, then don't forget to tick %1$s "
 "option. In this case you should also enable the %2$s setting in our %3$s "
-"%4$s tab."
+"%4$s tab. ( If you enabled extra fields on our Sync data tab, don't forget "
+"to tick the other necessary fields either! )"
 msgstr ""
 "אם ברצונך לקבל גם את כתובת הדוא\"ל, אל תשכח לסמן את האפשרות %1$s. במקרה זה "
 "עליך גם להפעיל את ההגדרה %2$s בכרטיסייה %3$s %4$s."
@@ -3525,32 +3569,30 @@ msgstr ""
 msgid "Email scope"
 msgstr "היקף דוא\"ל"
 
-msgid "Fill \"<b>Privacy policy URL</b>\" and  \"<b>User agreement URL</b>\"."
-msgstr ""
-"מלא את \"<b>כתובת אתר של מדיניות פרטיות</b>\" ואת  \"<b>כתובת אתר של הסכם "
-"המשתמש</b> \"."
-
-msgid ""
-"Scroll up to \"<b>LIVE API CREDENTIALS</b>\" section and find the necessary "
-"\"<b>Client ID</b>\" and \"<b>Secret</b>\"! ( Make sure you are in "
-"\"<b>Live</b>\" mode and not \"Sandbox\". )"
-msgstr ""
-"גלול למעלה לקטע \"<b>אישורי API חיים</b>\" ומצא את \"<b>מזהה לקוח</b>\"<b></"
-"b> ו\"סוד \"! ( ודא שאתה נמצא במצב \"<b>חי</b>\" ולא \"ארגז חול \")."
+#, fuzzy, php-format
+#| msgid ""
+#| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
+#| "button."
+msgid "Fill the %1$s and %2$s fields."
+msgstr "ודא שהכרטיסייה <b>%1$s</b> נבחרה ולחץ על הלחצן <b>%2$s</b>."
 
 #, php-format
 msgid ""
-"%1$s Before you could start using the App, it requires an App review, which "
-"might take up to 7 business days to process. Below the %2$s field you can "
-"check the %3$s. Once your App got approved, you could continue with the "
-"provider verification in our %4$s tab."
+"Optional: If you want the unverified %1$s accounts to be able to login with "
+"your App, then check the %2$s field, too."
 msgstr ""
-"%1$s לפני שתוכל להתחיל להשתמש באפליקציה, נדרשת בדיקת אפליקציה, שעשויה להימשך "
-"עד 7 ימי עסקים. מתחת לשדה %2$s אפשר לבדוק את ה %3$s. לאחר שהאפליקציה שלך "
-"תאושר, תוכל להמשיך עם אימות הספק בכרטיסייה %4$s שלנו."
 
-msgid "Important note:"
-msgstr "הערה חשובה:"
+#, fuzzy, php-format
+#| msgid "When all fields are filled, click \"<b>Save</b>\"."
+msgid "When all fields are filled, click %1$s in the modal."
+msgstr "כאשר כל השדות מלאים, לחץ על \"<b>שמור</b> \"."
+
+#, php-format
+msgid ""
+"Once the %1$s feature is approved, scroll up to the %2$s section and find "
+"the necessary %3$s and %4$s values, you will need these on the %5$s tab of "
+"the plugin!"
+msgstr ""
 
 msgid "Secret"
 msgstr "סוד"
@@ -3569,6 +3611,68 @@ msgstr "קישור החשבון ל <b>- PayPal</b>"
 
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "ביטול הקישור של החשבון ל - <b>PayPal</b>"
+
+#, fuzzy, php-format
+#| msgid "Click on the name of your %s App."
+msgid "Click on %1$s in the bottom left corner of your %2$s App."
+msgstr "לחץ על שם אפליקציית ה %s שלך."
+
+#, php-format
+msgid "Replace your existing %s with this URL:"
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the %1$s button at %2$s."
+msgid "Click on the %s button"
+msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
+
+#, php-format
+msgid "Make sure you have the %s radio option selected!"
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Enter a \"<b>Description</b>\" for your app!"
+msgid "Enter a %s for your App."
+msgstr "הזן \"<b>תיאור</b>\" עבור האפליקציה שלך!"
+
+#, fuzzy, php-format
+#| msgid "Enter a \"<b>Description</b>\" for your app!"
+msgid "Optional: Enter a %1$s and set an %2$s for your App."
+msgstr "הזן \"<b>תיאור</b>\" עבור האפליקציה שלך!"
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Complete the Human test and click the \"<b>Register my application</b>\" "
+#| "button."
+msgid "Complete the Human test and click the %s button."
+msgstr "השלם את המבחן האנושי ולחץ על הלחצן \"<b>רשום את היישום שלי</b> \"."
+
+#, php-format
+msgid ""
+"Finally find your %1$s, which is the value just below the name and type of "
+"your app, and the %2$s, which is the value next to %3$s. These will be "
+"needed in the plugin's settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>VK</b>"
+msgid "Continue with <b>Reddit</b>"
+msgstr "המשך עם <b>VK</b>"
+
+#, fuzzy
+#| msgid "Sign up with <b>VK</b>"
+msgid "Sign up with <b>Reddit</b>"
+msgstr "הרשמה באמצעות <b>VK</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>VK</b>"
+msgid "Link account with <b>Reddit</b>"
+msgstr "קשר חשבון עם <b>VK</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>VK</b>"
+msgid "Unlink account from <b>Reddit</b>"
+msgstr "בטל קישור של חשבון מ - <b>VK</b>"
 
 #, php-format
 msgid "Select your %s App."
@@ -3604,8 +3708,8 @@ msgid ""
 "Fill the \"<b>App Name</b>\" field, select your workspace and click the "
 "\"<b>Create App</b>\" button."
 msgstr ""
-"מלא את השדה \"<b>שם אפליקציה</b> \", בחר את סביבת העבודה שלך ולחץ על "
-"הלחצן\"<b> צור אפליקציה</b> \"."
+"מלא את השדה \"<b>שם אפליקציה</b> \", בחר את סביבת העבודה שלך ולחץ על הלחצן"
+"\"<b> צור אפליקציה</b> \"."
 
 msgid "Scroll down to the \"<b>Redirect URLs</b>\" section."
 msgstr "גלול מטה לקטע \"<b>כתובות אתרים להפניה מחדש</b> \"."
@@ -3648,8 +3752,8 @@ msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
 msgstr "גלול מטה לקטע \"<b>הסר מידע מוצפן קשיח</b> \"."
 
 msgid ""
-"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</"
-"b>\". "
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
 msgstr "לחץ על \"<b>בדקתי והסרתי כל מידע מקודד \".</b>"
 
 msgid "Click on the \"<b>Activate Public Distribution</b>\" button."
@@ -3740,11 +3844,11 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn "
-"more%3$s."
+"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn more"
+"%3$s."
 msgstr ""
-"<b>אזהרה:</b> ה-API של %1$s אינו יכול להחזיר אף כתובת דוא\"ל! %2$sלמידע "
-"נוסף%3$s."
+"<b>אזהרה:</b> ה-API של %1$s אינו יכול להחזיר אף כתובת דוא\"ל! %2$sלמידע נוסף"
+"%3$s."
 
 msgid "Web API Key"
 msgstr "מפתח API של האינטרנט"
@@ -3893,8 +3997,8 @@ msgid ""
 "<b>WARNING:</b> The %1$s API can not return any email address or phone "
 "number! %2$sLearn more%3$s."
 msgstr ""
-"<b>אזהרה:</b> ה-API של %1$s אינו יכול להחזיר אף כתובת דוא\"ל! %2$sלמידע "
-"נוסף%3$s."
+"<b>אזהרה:</b> ה-API של %1$s אינו יכול להחזיר אף כתובת דוא\"ל! %2$sלמידע נוסף"
+"%3$s."
 
 msgid "Client Key"
 msgstr "מפתח לקוח"
@@ -3950,11 +4054,6 @@ msgstr "לנווט אל %s"
 #| msgid "Click on the %1$s button at %2$s."
 msgid "Click on the %s button on the right side."
 msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
-
-#, fuzzy, php-format
-#| msgid "Enter a \"<b>Description</b>\" for your app!"
-msgid "Enter a %s for your App."
-msgstr "הזן \"<b>תיאור</b>\" עבור האפליקציה שלך!"
 
 #, fuzzy, php-format
 #| msgid "Click on the %1$s button at %2$s."
@@ -4018,8 +4117,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Fill \"<b>Website address</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Website address</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr ""
 "מלא \"<b>כתובת אתר</b>\" עם כתובת ה - URL של דף הבית שלך, כנראה: <b>%s</b>"
 
@@ -4185,6 +4284,11 @@ msgstr "אישור הרשמה יישלח אליך במייל."
 msgid "Password"
 msgstr "סיסמה"
 
+#, fuzzy
+#| msgid "Confirm password"
+msgid "Hide password"
+msgstr "אימות סיסמה"
+
 msgid "Strength indicator"
 msgstr "חוזק סיסמא"
 
@@ -4196,6 +4300,66 @@ msgstr "אימות סיסמה"
 
 msgid "Username"
 msgstr "שם משתמש"
+
+#~ msgid ""
+#~ "Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return "
+#~ "URL</b>\" heading and click \"<b>Show</b>\"."
+#~ msgstr ""
+#~ "יש לגלול למטה אל '<b>הגדרות האפליקציה בזמן אמת</b> ', לאתר את הכותרת'<b> "
+#~ "כתובת URL להחזרה בזמן אמת</b> 'וללחוץ על'<b> הצגה</b> '."
+
+#~ msgid "Click on \"Save\""
+#~ msgstr "לוחצים על \"שמירה\""
+
+#~ msgid ""
+#~ "Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return "
+#~ "URL</b>\" heading then click \"<b>Show</b>\"."
+#~ msgstr ""
+#~ "גלול למטה אל \"<b>הגדרות אפליקציה חיה</b> \", מצא את הכותרת\"<b> כתובת "
+#~ "URL של החזרה חיה</b> \"ולחץ על\"<b> הצג</b> \"."
+
+#~ msgid ""
+#~ "Scroll down to \"<b>App feature options</b>\" section and tick \"<b>Log "
+#~ "In with PayPal</b>\"."
+#~ msgstr ""
+#~ "יש לגלול למטה לקטע '<b>אפשרויות תכונת אפליקציה</b>' ולסמן את האפשרות "
+#~ "'<b>התחברות באמצעות PayPal</b> '."
+
+#, php-format
+#~ msgid "Click %1$s that appears after the %2$s text."
+#~ msgstr "יש ללחוץ על %1$s שמופיע אחרי הטקסט %2$s."
+
+#~ msgid "Tick \"<b>Full name</b>\"."
+#~ msgstr "סמן \"<b>שם מלא</b> \"."
+
+#~ msgid ""
+#~ "Fill \"<b>Privacy policy URL</b>\" and  \"<b>User agreement URL</b>\"."
+#~ msgstr ""
+#~ "מלא את \"<b>כתובת אתר של מדיניות פרטיות</b>\" ואת  \"<b>כתובת אתר של הסכם "
+#~ "המשתמש</b> \"."
+
+#~ msgid ""
+#~ "Scroll up to \"<b>LIVE API CREDENTIALS</b>\" section and find the "
+#~ "necessary \"<b>Client ID</b>\" and \"<b>Secret</b>\"! ( Make sure you are "
+#~ "in \"<b>Live</b>\" mode and not \"Sandbox\". )"
+#~ msgstr ""
+#~ "גלול למעלה לקטע \"<b>אישורי API חיים</b>\" ומצא את \"<b>מזהה לקוח</b>"
+#~ "\"<b></b> ו\"סוד \"! ( ודא שאתה נמצא במצב \"<b>חי</b>\" ולא \"ארגז חול "
+#~ "\")."
+
+#, php-format
+#~ msgid ""
+#~ "%1$s Before you could start using the App, it requires an App review, "
+#~ "which might take up to 7 business days to process. Below the %2$s field "
+#~ "you can check the %3$s. Once your App got approved, you could continue "
+#~ "with the provider verification in our %4$s tab."
+#~ msgstr ""
+#~ "%1$s לפני שתוכל להתחיל להשתמש באפליקציה, נדרשת בדיקת אפליקציה, שעשויה "
+#~ "להימשך עד 7 ימי עסקים. מתחת לשדה %2$s אפשר לבדוק את ה %3$s. לאחר "
+#~ "שהאפליקציה שלך תאושר, תוכל להמשיך עם אימות הספק בכרטיסייה %4$s שלנו."
+
+#~ msgid "Important note:"
+#~ msgstr "הערה חשובה:"
 
 #~ msgid ""
 #~ "Enter your \"<b>Privacy policy URL</b>\" and upload an \"<b>App logo</b>\""
@@ -4280,8 +4444,8 @@ msgstr "שם משתמש"
 
 #, php-format
 #~ msgid ""
-#~ "Select \"<b>Web</b>\" and enter the following URL to the \"<b>Site URL</"
-#~ "b>\" field: <b>%s</b>"
+#~ "Select \"<b>Web</b>\" and enter the following URL to the \"<b>Site URL</b>"
+#~ "\" field: <b>%s</b>"
 #~ msgstr ""
 #~ "בחר \"<b>אינטרנט</b>\" והזן את כתובת ה - URL הבאה לשדה \"<b>כתובת אתר</b> "
 #~ "\": <b>%s</b>"
@@ -4302,8 +4466,8 @@ msgstr "שם משתמש"
 
 #, php-format
 #~ msgid ""
-#~ "Enter your domain name to the \"<b>App Domains</b>\" field, probably: "
-#~ "<b>%s</b>"
+#~ "Enter your domain name to the \"<b>App Domains</b>\" field, probably: <b>"
+#~ "%s</b>"
 #~ msgstr ""
 #~ "הזן את שם הדומיין שלך לשדה \"<b>דומיינים של אפליקציות</b> \", ככל הנראה: "
 #~ "<b>%s</b>"

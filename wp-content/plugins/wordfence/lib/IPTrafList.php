@@ -60,7 +60,7 @@ if (!wfUtils::isAdmin()) {
 					<?php if ($v['loc']['city']) {
 						echo esc_html($v['loc']['city']) . ', ';
 					} ?>
-					<?php
+					<?php 
 					if ($v['loc']['region'] && wfUtils::shouldDisplayRegion($v['loc']['countryName'])) {
 						echo esc_html($v['loc']['region']) . ', ';
 					} ?>

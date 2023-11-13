@@ -42,28 +42,75 @@
 
             //Basic Info
             'short_description',
-            'date_founded',
-            'asking_price_in_usd',
-            'number_of_customers',
-            'business_team_size',
-            'location',
+            //            'date_founded',
+            //            'asking_price_in_usd',
+            //            'number_of_customers',
+            //            'business_team_size',
+            //            'location',
+
+            'date_founded_group_date_founded',
+            'date_founded_group_appearance',
+
+            'asking_price_in_usd_group_asking_price_in_usd',
+            'asking_price_in_usd_group_appearance',
+
+            'number_of_customers_group_number_of_customers',
+            'number_of_customers_group_appearance',
+
+            'business_team_size_group_business_team_size',
+            'business_team_size_group_appearance',
+
+            'location_group_location',
+            'location_group_appearance',
 
             // Financial Info
-            'net_profit',
-            'valuation_in_usd',
-            'stake_to_be_sold_percentage',
-            'usd_exchange_rate_used_in_conversion',
-            'annual_accounting_revenue',
-            'annual_growth_rate_percentage',
-            'annual_growth_rate',
+            //            'net_profit',
+            //            'valuation_in_usd',
+            //            'stake_to_be_sold_percentage',
+            //            'usd_exchange_rate_used_in_conversion',
+            //            'annual_accounting_revenue',
+            //            'annual_growth_rate_percentage',
+            //            'annual_growth_rate',
+
+            'net_profit_group_net_profit',
+            'net_profit_group_appearance',
+
+            'valuation_in_usd_group_valuation_in_usd',
+            'valuation_in_usd_group_appearance',
+
+            'stake_to_be_sold_percentage_group_stake_to_be_sold_percentage',
+            'stake_to_be_sold_percentage_group_appearance',
+
+            'usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion',
+            'usd_exchange_rate_used_in_conversion_group_appearance',
+
+            'annual_accounting_revenue_group_annual_accounting_revenue',
+            'annual_accounting_revenue_group_appearance',
+
+            'annual_growth_rate_percentage_group_annual_growth_rate_percentage',
+            'annual_growth_rate_percentage_group_appearance',
+
+            'annual_growth_rate_group_annual_growth_rate',
+            'annual_growth_rate_group_appearance',
+
 
             // Business Information
-            'tech_stack_this_product_is_built_on',
-            'product_competitors',
-            'extra_details',
+            //            'tech_stack_this_product_is_built_on',
+            //            'product_competitors',
+            //            'extra_details',
+
+            'tech_stack_this_product_is_built_on_group_tech_stack_this_product_is_built_on',
+            'tech_stack_this_product_is_built_on_group_appearance',
+
+            'product_competitors_group_product_competitors',
+            'product_competitors_group_appearance',
+
+            'extra_details_group_extra_details',
+            'extra_details_group_appearance',
 
             // Status
             'opportunity_stage',
+            'opportunity_stage_old',
 
             'related_opportunities',
 
@@ -128,6 +175,8 @@
         protected function filters($module_name): void
         {
             // TODO: Implement filters() method.
+            $this->hooks->add_filter('filter_opportunities_stage', $this, 'filter_opportunities_stage', 10, 2);
+
         }
 
         /**
@@ -176,11 +225,15 @@
 
 
             if (empty($form_data)) {
-                new Nh_Ajax_Response(FALSE, __("Can't register with empty credentials.", 'ninja'));
+                new Nh_Ajax_Response(FALSE, __("Can't create with empty credentials.", 'ninja'));
             }
 
             if (!wp_verify_nonce($form_data['create_opportunity_nonce'], Nh::_DOMAIN_NAME . "_create_opportunity_form")) {
                 new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+
+            if (Nh_User::get_user_role() !== Nh_User::OWNER) {
+                new Nh_Ajax_Response(FALSE, __("You are not eligible to create opportunities!.", 'ninja'));
             }
 
             if (empty($project_name)) {
@@ -226,6 +279,69 @@
                 }
             }
 
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_date_founded'] === 1 && empty($date_founded)) {
+                new Nh_Ajax_Response(FALSE, __("The date founded field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_asking_price_in_usd'] === 1 && empty($asking_price_in_usd)) {
+                new Nh_Ajax_Response(FALSE, __("The asking price in usd field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_number_of_customers'] === 1 && empty($number_of_customers)) {
+                new Nh_Ajax_Response(FALSE, __("The number of customers field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_business_team_size'] === 1 && empty($business_team_size)) {
+                new Nh_Ajax_Response(FALSE, __("The business team size field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_location'] === 1 && empty($location)) {
+                new Nh_Ajax_Response(FALSE, __("The location field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_net_profit'] === 1 && empty($net_profit)) {
+                new Nh_Ajax_Response(FALSE, __("The net profit field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1 && empty($valuation_in_usd)) {
+                new Nh_Ajax_Response(FALSE, __("The valuation in usd field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1 && $stake_to_be_sold_percentage != 0 && empty
+                ($stake_to_be_sold_percentage)) {
+                new Nh_Ajax_Response(FALSE, __("The stake to be sold percentage field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion'] === 1 && empty($usd_exchange_rate_used_in_conversion)) {
+                new Nh_Ajax_Response(FALSE, __("The usd exchange rate used in conversion field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_accounting_revenue'] === 1 && empty($annual_accounting_revenue)) {
+                new Nh_Ajax_Response(FALSE, __("The annual accounting revenue field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1 && $annual_growth_rate_percentage != 0 && empty
+                ($annual_growth_rate_percentage)) {
+                new Nh_Ajax_Response(FALSE, __("The annual growth rate percentage field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate'] === 1 && empty($annual_growth_rate)) {
+                new Nh_Ajax_Response(FALSE, __("The annual growth rate field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_tech_stack_this_product_is_built_on'] === 1 && empty($tech_stack_this_product_is_built_on)) {
+                new Nh_Ajax_Response(FALSE, __("The tech stack this product is built on field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_product_competitors'] === 1 && empty($product_competitors)) {
+                new Nh_Ajax_Response(FALSE, __("The product competitors field shouldn't be empty!.", 'ninja'));
+            }
+
+            if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_extra_details'] === 1 && empty($extra_details)) {
+                new Nh_Ajax_Response(FALSE, __("The extra details field shouldn't be empty!.", 'ninja'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_opportunity');
 
             if ($check_result !== TRUE) {
@@ -251,33 +367,86 @@
             $opportunity_type_slug = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
 
 
-            $this->set_meta_data('short_description', $short_description);
-            $this->set_meta_data('opportunity_type', $opportunity_type_slug);
-            $this->set_meta_data('start_bidding_amount', $start_bidding_amount);
-            $this->set_meta_data('target_amount', $target_amount);
-            $this->set_meta_data('project_phase', $project_phase);
-            $this->set_meta_data('project_start_date', $project_start_date);
-            $this->set_meta_data('project_assets_amount', $project_assets_amount);
-            $this->set_meta_data('project_yearly_cashflow_amount', $project_yearly_cashflow_amount);
-            $this->set_meta_data('project_yearly_net_profit_amount', $project_yearly_net_profit_amount);
-            $this->set_meta_data('date_founded', $date_founded);
-            $this->set_meta_data('asking_price_in_usd', $asking_price_in_usd);
-            $this->set_meta_data('number_of_customers', $number_of_customers);
-            $this->set_meta_data('business_team_size', $business_team_size);
-            $this->set_meta_data('location', $location);
-            $this->set_meta_data('net_profit', $net_profit);
-            $this->set_meta_data('valuation_in_usd', $valuation_in_usd);
-            $this->set_meta_data('stake_to_be_sold_percentage', $stake_to_be_sold_percentage);
-            $this->set_meta_data('usd_exchange_rate_used_in_conversion', $usd_exchange_rate_used_in_conversion);
-            $this->set_meta_data('annual_accounting_revenue', $annual_accounting_revenue);
-            $this->set_meta_data('annual_growth_rate_percentage', $annual_growth_rate_percentage);
-            $this->set_meta_data('annual_growth_rate', $annual_growth_rate);
-            $this->set_meta_data('tech_stack_this_product_is_built_on', $tech_stack_this_product_is_built_on);
-            $this->set_meta_data('product_competitors', $product_competitors);
-            $this->set_meta_data('extra_details', $extra_details);
-            $this->set_meta_data('opportunity_stage', 'new');
+            $groups = [
+                //Basic Info
+                'date_founded_group_date_founded' => $date_founded,
+                'date_founded_group_appearance'   => '1',
 
-            $opportunity = $this->insert();
+                'asking_price_in_usd_group_asking_price_in_usd' => $asking_price_in_usd,
+                'asking_price_in_usd_group_appearance'          => '1',
+
+                'number_of_customers_group_number_of_customers' => $number_of_customers,
+                'number_of_customers_group_appearance'          => '1',
+
+                'business_team_size_group_business_team_size' => $business_team_size,
+                'business_team_size_group_appearance'         => '1',
+
+                'location_group_location'     => $location,
+                'location_group_appearance'   => '1',
+
+
+                // Financial Info
+                'net_profit_group_net_profit' => $net_profit,
+                'net_profit_group_appearance' => '1',
+
+                'valuation_in_usd_group_valuation_in_usd' => $valuation_in_usd,
+                'valuation_in_usd_group_appearance'       => '1',
+
+                'stake_to_be_sold_percentage_group_stake_to_be_sold_percentage' => $stake_to_be_sold_percentage,
+                'stake_to_be_sold_percentage_group_appearance'                  => '1',
+
+                'usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion' => $usd_exchange_rate_used_in_conversion,
+                'usd_exchange_rate_used_in_conversion_group_appearance'                           => '1',
+
+                'annual_accounting_revenue_group_annual_accounting_revenue' => $annual_accounting_revenue,
+                'annual_accounting_revenue_group_appearance'                => '1',
+
+                'annual_growth_rate_percentage_group_annual_growth_rate_percentage' => $annual_growth_rate_percentage,
+                'annual_growth_rate_percentage_group_appearance'                    => '1',
+
+                'annual_growth_rate_group_annual_growth_rate'                                   => $annual_growth_rate,
+                'annual_growth_rate_group_appearance'                                           => '1',
+
+
+                // Business Information
+                'tech_stack_this_product_is_built_on_group_tech_stack_this_product_is_built_on' => $tech_stack_this_product_is_built_on,
+                'tech_stack_this_product_is_built_on_group_appearance'                          => '1',
+
+                'product_competitors_group_product_competitors' => $product_competitors,
+                'product_competitors_group_appearance'          => '1',
+
+                'extra_details_group_extra_details' => $extra_details,
+                'extra_details_group_appearance'    => '1',
+
+
+                'short_description'                => $short_description,
+                'opportunity_type'                 => $opportunity_type_slug,
+                'start_bidding_amount'             => $start_bidding_amount,
+                'target_amount'                    => $target_amount,
+                'project_phase'                    => $project_phase,
+                'project_start_date'               => $project_start_date,
+                'project_assets_amount'            => $project_assets_amount,
+                'project_yearly_cashflow_amount'   => $project_yearly_cashflow_amount,
+                'project_yearly_net_profit_amount' => $project_yearly_net_profit_amount,
+                'opportunity_stage'                => 'new',
+                'opportunity_stage_old'            => 'new',
+            ];
+
+            foreach ($groups as $key => $value) {
+                $this->set_meta_data($key, $value);
+            }
+
+            $opportunity       = $this->insert();
+            $opportunity_id    = $opportunity->ID;
+            $opportunity_title = $opportunity->title;
+
+            // DRAFT FOR CLIENT
+            $this->title           = $opportunity->title . ' - [CLIENT VERSION]';
+            $this->parent          = $opportunity->ID;
+            $this->ID              = 0;
+            $this->status          = 'draft';
+            $opportunity_client    = $this->insert();
+            $opportunity_client_id = $opportunity_client->ID;
 
             if (is_wp_error($opportunity)) {
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message());
@@ -288,20 +457,35 @@
             if (!empty($form_template)) {
                 $field_group = self::get_field_groups_by_post_id($form_template);
                 if (!empty($field_group)) {
-                    $field_group[0]['opp_id'] = $opportunity->ID;
+                    $field_group[0]['opp_id']        = $opportunity_id;
+                    $field_group[0]['opp_client_id'] = $opportunity_client_id;
 
                     if (!session_id()) {
                         session_start();
                     }
+
                     $_SESSION['step_two'] = [
                         'status' => TRUE,
                         'ID'     => $opportunity->ID
                     ];
+
+                    $notifications = new Nh_Notification();
+                    $notifications->send(0, 0, 'opportunity_new', [
+                        'opportunity_id' => $opportunity_id,
+                        'opportunity'    => $opportunity_title
+                    ]);
+
                     new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                         'redirect_url' => add_query_arg([ 'q' => Nh_Cryptor::Encrypt(serialize($field_group[0])) ], apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard/create-opportunity/create-opportunity-step-2'))))
                     ]);
                 }
             }
+
+            $notifications = new Nh_Notification();
+            $notifications->send(0, 0, 'opportunity_new', [
+                'opportunity_id' => $opportunity_id,
+                'opportunity'    => $opportunity_title
+            ]);
 
             new Nh_Ajax_Response(TRUE, __('Opportunity has been added successfully', 'ninja'), [
                 'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities')))
@@ -324,6 +508,19 @@
                     if (!session_id()) {
                         session_start();
                     }
+
+                    remove_action('acf/save_post', [
+                        $this,
+                        'after_acf_form_submission'
+                    ], 20);
+                    $_POST['_acf_post_id'] = $data['opp_client_id']; // Temporarily set post_id to the current post in the loop
+                    acf_save_post($data['opp_client_id']); // Save the ACF data for this post
+                    add_action('acf/save_post', [
+                        $this,
+                        'after_acf_form_submission'
+                    ], 20);
+
+
                     $_SESSION['step_two'] = [];
                     wp_safe_redirect(apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))));
                     exit();
@@ -383,7 +580,7 @@
                 }
             }
 
-            $args     = [
+            $args = [
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
@@ -394,34 +591,39 @@
                 "tax_query"      => [
                     'relation' => 'AND',
                 ],
-                "meta_query"      => [
+                "meta_query"     => [
                     'relation' => 'AND',
+                    [
+                        'key'     => 'opportunity_stage',
+                        'value'   => 'publish',
+                        'compare' => '=',
+                    ]
                 ]
             ];
-            if(!empty($search_fields)){
-                if(isset($search_fields['business_type']) && $search_fields['business_type']){
+            if (!empty($search_fields)) {
+                if (isset($search_fields['business_type']) && $search_fields['business_type']) {
                     $args['tax_query'][] = [
                         'taxonomy' => 'business-type',
-                        'terms' => (int)$search_fields['business_type'],
-                        'field' => 'term_id',
+                        'terms'    => (int)$search_fields['business_type'],
+                        'field'    => 'term_id',
                     ];
                     unset($search_fields['business_type']);
                 }
-                if(isset($search_fields['search']) && !empty($search_fields['search'])){
+                if (isset($search_fields['search']) && !empty($search_fields['search'])) {
                     $args['s'] = $search_fields['search'];
                     unset($search_fields['search']);
                 }
-                foreach($search_fields as $key => $value){
+                foreach ($search_fields as $key => $value) {
                     $args['meta_query'][] = [
-                        'key' => $key,
+                        'key'   => $key,
                         'value' => $value,
                     ];
                 }
             }
-        if (!empty($tax_query)) {
-            $args['tax_query'][] = $tax_query;
-        }
-            if(!empty($in)){
+            if (!empty($tax_query)) {
+                $args['tax_query'][] = $tax_query;
+            }
+            if (!empty($in)) {
                 $args['post__in'] = $in;
             }
             $posts    = new \WP_Query($args);
@@ -573,7 +775,7 @@
             global $user_ID;
 
             $form_data                     = $_POST['data'];
-            $opp_id                       = (int)sanitize_text_field($form_data['opp_id']);
+            $opp_id                        = (int)sanitize_text_field($form_data['opp_id']);
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -602,7 +804,7 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count - 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 1,
+                        'fav_active'   => 1,
                         'updated_text' => __('Add to favorites', 'ninja')
                     ]);
                 } else {
@@ -612,7 +814,7 @@
                     $fav_count = get_post_meta($opp_id, 'fav_count', TRUE);
                     update_post_meta($opp_id, 'fav_count', (int)$fav_count + 1);
                     new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
-                        'fav_active' => 0,
+                        'fav_active'   => 0,
                         'updated_text' => __('Added to favorites', 'ninja')
                     ]);
                 }
@@ -630,7 +832,9 @@
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
+         *
          * @param post_id
+         *
          * @author Ahmed Gamal
          * @return bool
          */
@@ -641,8 +845,8 @@
             $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
             $profile_obj = new Nh_Profile();
             $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $favorites = array();
-            if(!is_wp_error($profile)){
+            $favorites   = [];
+            if (!is_wp_error($profile)) {
                 $favorites = is_array($profile->meta_data['favorite_opportunities']) ? $profile->meta_data['favorite_opportunities'] : [];
                 $favorites = array_combine($favorites, $favorites);
             }
@@ -659,9 +863,9 @@
          */
         public function ignore_opportunity(): void
         {
-            global $user_ID,$wp;
+            global $user_ID, $wp;
             $form_data                     = $_POST['data'];
-            $opp_id                       = (int)sanitize_text_field($form_data['opp_id']);
+            $opp_id                        = (int)sanitize_text_field($form_data['opp_id']);
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -693,7 +897,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post un-ignored',
                         'ignore_active' => 1,
-                        'updated_text' => __('Ignore', 'ninja')
+                        'updated_text'  => __('Ignore', 'ninja')
                     ]);
                 } else {
                     $ignored_opportunities[] = $opp_id;
@@ -706,7 +910,7 @@
                         'status'        => TRUE,
                         'msg'           => 'post ignored!',
                         'ignore_active' => 0,
-                        'updated_text' => __('Ignored', 'ninja')
+                        'updated_text'  => __('Ignored', 'ninja')
                     ]);
                 }
             } else {
@@ -714,7 +918,7 @@
                     'status'        => FALSE,
                     'msg'           => 'You must have profile',
                     'ignore_active' => 1,
-                    
+
                 ]);
             }
         }
@@ -731,15 +935,31 @@
         {
             global $user_ID;
 
-            $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
-            $profile_obj = new Nh_Profile();
-            $profile     = $profile_obj->get_by_id((int)$profile_id);
-            $ignored_opportunities = array();
-            if(!is_wp_error($profile)){
+            $profile_id            = get_user_meta($user_ID, 'profile_id', TRUE);
+            $profile_obj           = new Nh_Profile();
+            $profile               = $profile_obj->get_by_id((int)$profile_id);
+            $ignored_opportunities = [];
+            if (!is_wp_error($profile)) {
                 $ignored_opportunities = is_array($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];
                 $ignored_opportunities = array_combine($ignored_opportunities, $ignored_opportunities);
             }
             return isset($ignored_opportunities[$opp_id]);
+        }
+
+
+        public function filter_opportunities_stage($opportunity, $stage = []): array
+        {
+            $opportunities = [];
+
+            if (property_exists($opportunity, 'meta_data')) {
+                if (in_array($stage, $opportunity->meta_data['opportunity_stage'])) {
+                    $opportunities[] = $opportunity;
+                }
+            } else {
+                $opportunities = $opportunity;
+            }
+
+            return $opportunities;
         }
 
         /**
@@ -791,12 +1011,12 @@
                 }
             }
             $opportunities = new \WP_Query([
-                'post_type'   => $this->module,
-                'post_status' => 'publish',
-                'orderby'     => 'ID',
-                'order'       => 'DESC',
-                "post__not_in"=> $not_in,
-                'author'      => $user_ID
+                'post_type'    => $this->module,
+                'post_status'  => 'publish',
+                'orderby'      => 'ID',
+                'order'        => 'DESC',
+                "post__not_in" => $not_in,
+                'author'       => $user_ID
             ]);
 
             $Nh_opportunities = [];
@@ -865,6 +1085,7 @@
 
             return $Nh_opportunities;
         }
+
         /**
          * Description...
          * @version 1.0
@@ -907,14 +1128,14 @@
 
         }
 
-        public function get_opportunity_bids(int $opp_id = 0, $count = false): int|array
+        public function get_opportunity_bids(int $opp_id = 0, $count = FALSE): int|array
         {
-            $id = $opp_id ? $opp_id : $this->ID;
+            $id                      = $opp_id ? $opp_id : $this->ID;
             $nh_opportunity_bids_obj = new Nh_Opportunity_Bid();
-            $nh_opportunity_bids = [];
+            $nh_opportunity_bids     = [];
 
             $bids = new \WP_Query([
-                'post_type' => $nh_opportunity_bids_obj->module,
+                'post_type'   => $nh_opportunity_bids_obj->module,
                 'post_status' => 'publish',
                 'meta_query'  => [
                     [
@@ -939,14 +1160,14 @@
 
         }
 
-        public function get_opportunity_acquisitions(int $opp_id = 0, $count = false): int|array
+        public function get_opportunity_acquisitions(int $opp_id = 0, $count = FALSE): int|array
         {
-            $id = $opp_id ? $opp_id : $this->ID;
+            $id                              = $opp_id ? $opp_id : $this->ID;
             $nh_opportunity_acquisitions_obj = new Nh_Opportunity_Acquisition();
-            $nh_opportunity_acquisitions = [];
+            $nh_opportunity_acquisitions     = [];
 
             $acquisitions = new \WP_Query([
-                'post_type' => $nh_opportunity_acquisitions_obj->module,
+                'post_type'   => $nh_opportunity_acquisitions_obj->module,
                 'post_status' => 'publish',
                 'meta_query'  => [
                     [

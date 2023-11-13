@@ -31,7 +31,7 @@ $letters = str_split($letters);
 		<div class="wf-modal-content">
 			<ul class="wf-country-selector-controls">
 				<li>
-					<ul class="wf-country-selector-section-options">
+					<ul class="wf-country-selector-section-options"> 
 						<?php
 						foreach ($letters as $l) {
 							echo '<li><a href="#" data-letter="' . esc_attr($l) . '" role="button">' . esc_html($l) . '</a></li>';
@@ -60,7 +60,7 @@ $letters = str_split($letters);
 							<li id="wf-country-option-<?php echo esc_attr(strtolower($code)); ?>" data-country="<?php echo esc_attr($code); ?>"><a href="#" role="button"><?php echo esc_html($name); ?></a></li>
 					<?php
 					}
-
+							
 					if ($current != '') {
 						echo '</ul>';
 					}

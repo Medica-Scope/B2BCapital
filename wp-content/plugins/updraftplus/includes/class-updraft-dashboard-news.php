@@ -6,42 +6,42 @@ if (!class_exists('Updraft_Dashboard_News')) :
  * Handles all stuffs related to Dashboard News
  */
 class Updraft_Dashboard_News {
-
+	
 	/**
 	 * dashboard news feed URL
 	 *
 	 * @var String
 	 */
 	private $feed_url;
-
+	
 	/**
 	 * news page URL
 	 *
 	 * @var String
 	 */
 	private $link;
-
+	
 	/**
 	 * various translations to use in the UI
 	 *
 	 * @var Array
 	 */
 	private $translations;
-
+	
 	/**
 	 * slug to use, where needed
 	 *
 	 * @var String
 	 */
 	private $slug;
-
+	
 	/**
 	 * Valid ajax callback pages
 	 *
 	 * @var Array
 	 */
 	private $valid_callback_pages;
-
+	
 	/**
 	 * constructor of class Updraft_Dashboard_News
 	 *
@@ -50,16 +50,16 @@ class Updraft_Dashboard_News {
 	 * @param Array  $translations - an array of translations, with keys: product_title, item_prefix, item_description, dismiss_confirm
 	 */
 	public function __construct($feed_url, $link, $translations) {
-
+	
 		$this->feed_url = $feed_url;
 		$this->link = $link;
 		$this->translations = $translations;
 		$this->slug = sanitize_title($translations['product_title']);
-
+		
 		$dashboard_news_transient_name = $this->get_transient_name();
 		add_filter('pre_set_transient_'.$dashboard_news_transient_name, array($this, 'pre_set_transient_for_dashboard_news'), 10);
 		add_filter('transient_'.$dashboard_news_transient_name, array($this, 'transient_for_dashboard_news'), 10);
-
+		
 		add_action('wp_ajax_'.$this->slug.'_ajax_dismiss_dashboard_news', array($this, 'dismiss_dashboard_news'));
 
 		if ('index.php' == $GLOBALS['pagenow'] && !get_user_meta(get_current_user_id(), $this->slug.'_dismiss_dashboard_news', true)) {
@@ -67,14 +67,14 @@ class Updraft_Dashboard_News {
 		}
 		add_action('wp_ajax_dashboard-widgets', array($this, 'wp_ajax_dashboard_widgets_low_priority'), 1);
 		add_action('wp_ajax_dashboard-widgets', array($this, 'wp_ajax_dashboard_widgets_high_priority'), 20);
-
+		
 		$this->valid_callback_pages = array(
 			'dashboard-user',
 			'dashboard-network',
 			'dashboard',
 		);
 	}
-
+	
 	/**
 	 * Get the transient name
 	 *
@@ -87,7 +87,7 @@ class Updraft_Dashboard_News {
 		$dash_prefix = version_compare($wp_version, '4.8', '>=') ? 'dash_v2_' : 'dash_';
 		return version_compare($wp_version, '4.3', '>=') ? $dash_prefix.md5('dashboard_primary_'.$locale) : 'dash_'.md5('dashboard_primary');
 	}
-
+	
 	/**
 	 * Filters a transient for dashboard news before its value is set
 	 *
@@ -103,18 +103,18 @@ class Updraft_Dashboard_News {
 		}
 		return $value;
 	}
-
+	
 	/**
 	 * wp_ajax_dashboard-widgets ajax action handler with low priority
 	 */
 	public function wp_ajax_dashboard_widgets_low_priority() {
-
+		
 		if (!$this->do_ajax_dashboard_news()) return;
-
+		
 		add_filter('wp_die_ajax_handler', array($this, 'wp_die_ajax_handler'));
-
+		
 	}
-
+	
 	/**
 	 * Dummy wp die handler
 	 *
@@ -127,19 +127,19 @@ class Updraft_Dashboard_News {
 		// Here, We can use __return_empty_string function name, but __return_empty_string is available since WP 3.7. Whereas __return_true function name available since WP 3.0
 		return '__return_true';
 	}
-
+	
 	/**
 	 * wp_ajax_dashboard-widgets ajax action handler with high priority
 	 */
 	public function wp_ajax_dashboard_widgets_high_priority() {
-
+		
 		if (!$this->do_ajax_dashboard_news()) return;
-
+		
 		remove_filter('wp_die_ajax_handler', array($this, 'wp_die_ajax_handler'));
 		echo $this->get_dashboard_news_html();
 		wp_die();
 	}
-
+	
 	/**
 	 * Check whether valid ajax for dashboard news or not
 	 *
@@ -149,7 +149,7 @@ class Updraft_Dashboard_News {
 		$ajax_callback_page = !empty($_GET['pagenow']) ? $_GET['pagenow'] : '';
 		return (in_array($ajax_callback_page, $this->valid_callback_pages) && !empty($_GET['widget']) && 'dashboard_primary' == $_GET['widget']);
 	}
-
+	
 	/**
 	 * Filters a transient for dashboard news when getting transient value
 	 *
@@ -164,14 +164,14 @@ class Updraft_Dashboard_News {
 		}
 		return $value;
 	}
-
+	
 	/**
 	 * get dashboard news html
 	 *
 	 * @return String - the resulting message
 	 */
 	private function get_dashboard_news_html() {
-
+	
 		$cache_key = $this->slug.'_dashboard_news';
 		if (false !== ($output = get_transient($cache_key))) return $output;
 
@@ -195,7 +195,7 @@ class Updraft_Dashboard_News {
 
 		return $formatted_news;
 	}
-
+	
 	/**
 	 * Prints javascripts in admin footer
 	 */
@@ -223,14 +223,14 @@ class Updraft_Dashboard_News {
 		</script>
 		<?php
 	}
-
+	
 	/**
 	 * Dismiss dashboard news
 	 */
 	public function dismiss_dashboard_news() {
 		$nonce = empty($_REQUEST['nonce']) ? '' : $_REQUEST['nonce'];
 		if (!wp_verify_nonce($nonce, $this->slug.'-dismiss-news-nonce')) die('Security check.');
-
+		
 		update_user_meta(get_current_user_id(), $this->slug.'_dismiss_dashboard_news', true);
 		die();
 	}

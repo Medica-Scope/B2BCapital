@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2023-09-13 10:34+0200\n"
-"PO-Revision-Date: 2023-09-13 10:35+0200\n"
+"POT-Creation-Date: 2023-11-03 17:52+0100\n"
+"PO-Revision-Date: 2023-11-03 17:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: zh_CN\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
@@ -953,8 +953,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Enabling this option will add a GET parameter to the URL where we redirect "
-"after a successful registration or login with social login. %1$sLearn "
-"more%2$s."
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
 msgstr ""
 
 #, fuzzy
@@ -1137,11 +1137,6 @@ msgstr ""
 
 msgid "Link buttons after account details"
 msgstr "链接按钮在账户详情后面"
-
-msgid ""
-"By clicking Register, you accept our <a href=\"#privacy_policy_url\" "
-"target=\"_blank\">Privacy Policy</a>"
-msgstr ""
 
 msgid "Store"
 msgstr ""
@@ -1401,6 +1396,11 @@ msgstr "请更新 %1$s 到 %2$s 版本."
 msgid "Update now!"
 msgstr "现在更新！"
 
+msgid ""
+"By clicking Register, you accept our <a href=\"#privacy_policy_url\" target="
+"\"_blank\">Privacy Policy</a>"
+msgstr ""
+
 msgid "Hold On"
 msgstr ""
 
@@ -1444,7 +1444,12 @@ msgstr "点击应用程序ID为：%s"
 #, php-format
 msgid ""
 "Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s product, then choose %4$s."
+"that appears next to the %3$s item."
+msgstr ""
+
+#, php-format
+msgid ""
+"Press the %1$s button that you can find below the %2$s section, next to %3$s."
 msgstr ""
 
 #, fuzzy, php-format
@@ -1454,9 +1459,10 @@ msgstr ""
 msgid "Add the following URL to the %s field:"
 msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
 
-#, php-format
-msgid "Press the %s button."
-msgstr ""
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Click on the %1$s button."
+msgstr "点击创建按钮"
 
 #, php-format
 msgid ""
@@ -1528,25 +1534,35 @@ msgid "Click the %1$s button and complete the Security Check."
 msgstr "点击\"创建新应用\"按钮"
 
 #, php-format
-msgid "Request access to the %1$s permission:"
-msgstr ""
-
-#, php-format
 msgid ""
-"Click on the %1$s tab on the left side and then click on the %2$s button "
-"that appears next to the %3$s item."
+"A message at the top of the page might prompt you to switch to %1$s. Ignore "
+"that, as our integration is for %2$s!"
 msgstr ""
 
 #, fuzzy, php-format
-#| msgid "Name your project and then click on the Create button"
-msgid "Find the %1$s permission and click the %2$s button."
-msgstr "命名您的项目，然后点击创建按钮"
+#| msgid "Click on the \"Create New App\" button"
+msgid ""
+"Click on the %1$s button. (If you receive a blank page after you pressed the "
+"%1$s button, you might need to refresh the page.)"
+msgstr "点击\"创建新应用\"按钮"
 
 #, php-format
 msgid ""
 "Press the %1$s button on the top right corner, so you can return to the "
 "previous page."
 msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid ""
+"Below the %1$s section, find the %2$s permission and click on the %3$s "
+"button."
+msgstr "命名您的项目，然后点击创建按钮"
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Press the %1$s button on the top right corner again."
+msgstr "点击创建按钮"
 
 #, fuzzy, php-format
 #| msgid "Name your project and then click on the Create button"
@@ -1613,6 +1629,10 @@ msgid ""
 "Select %1$s platform, then press %2$s and enter the following URL into the "
 "%3$s field: %4$s"
 msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, php-format
+msgid "Press the %s button."
+msgstr ""
 
 #, php-format
 msgid ""
@@ -1684,8 +1704,8 @@ msgstr "请求"
 
 #, php-format
 msgid ""
-"If you are not sure what is your %1$s, please head over to <a "
-"href=\"%2$s\">Getting Started</a>"
+"If you are not sure what is your %1$s, please head over to <a href=\"%2$s"
+"\">Getting Started</a>"
 msgstr "如果你不确定，什么是你的 %1$s, 请转到 <a href=\"%2$s\">现在开始</a>"
 
 msgid "App Secret"
@@ -1748,8 +1768,8 @@ msgstr "点击左侧菜单的\"凭据\""
 
 #, php-format
 msgid ""
-"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: "
-"<b>%s</b>"
+"Under the \"<b>OAuth 2.0 Client IDs</b>\" section find your Client ID: <b>"
+"%s</b>"
 msgstr ""
 
 #, fuzzy, php-format
@@ -1882,9 +1902,9 @@ msgstr ""
 #, php-format
 msgid ""
 "Currently your App is in %1$s mode, so only limited number of people can use "
-"it. To allow this App for any user with a Google Account, click on the "
-"\"%2$s\" option on the left side, then click the \"%3$s\" button under the "
-"\"%4$s\" section, and press the \"%5$s\" button. "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
 msgstr ""
 
 msgid "Client ID"
@@ -2073,9 +2093,9 @@ msgstr ""
 
 #, php-format
 msgid ""
-"You’ll find your API key and secret on this page. Copy and paste the "
-"\"<b>%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s "
-"and press \"<b>Save Changes</b>\"."
+"You’ll find your API key and secret on this page. Copy and paste the \"<b>"
+"%1$s</b>\" and the \"<b>%2$s</b>\" to the corresponding fields at %3$s and "
+"press \"<b>Save Changes</b>\"."
 msgstr ""
 
 #, fuzzy, php-format
@@ -2311,8 +2331,8 @@ msgstr ""
 "操作"
 
 msgid ""
-"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</"
-"b>\" and \"<b>Consent Privacy Notice URL</b>\"."
+"Fill \"<b>Security Profile Name</b>\", \"<b>Security Profile Description</b>"
+"\" and \"<b>Consent Privacy Notice URL</b>\"."
 msgstr ""
 
 msgid "Once you filled all the required fields, click \"<b>Save</b>\"."
@@ -2321,8 +2341,8 @@ msgstr ""
 #, fuzzy, php-format
 #| msgid "Fill \"Site URL\" with the url of your homepage, probably: <b>%s</b>"
 msgid ""
-"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Allowed Origins</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr "将你网站的首页URL填写到 \"网站URL\"，应该是 <b>%s</b>"
 
 msgid "When all fields are filled, click \"<b>Save</b>\"."
@@ -2390,8 +2410,8 @@ msgid ""
 "To allow your visitors to log in with their %1$s account, first you must "
 "create an %1$s App. The following guide will help you through the %1$s App "
 "creation process. After you have created your %1$s App, head over to "
-"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and "
-"\"%5$s\" according to your %1$s App."
+"\"Settings\" and configure the given \"%2$s\", \"%3$s\", \"%4$s\" and \"%5$s"
+"\" according to your %1$s App."
 msgstr ""
 "要想允许你的访问者使用 %1$s 账号登录，你首先要建立一个 %1$s 应用。下面的导航"
 "将帮助你了解 %1$s 应用建立的过程，然后你可以建立一个你自己的 %1$s App。转到"
@@ -2461,13 +2481,13 @@ msgstr ""
 
 msgid ""
 "If you have multiple Apps, then at the \"<b>Choose a Primary App ID</b>\" "
-"field <b>select the App what you just created</b>, then click \"<b>Save</"
-"b>\"."
+"field <b>select the App what you just created</b>, then click \"<b>Save</b>"
+"\"."
 msgstr ""
 
 msgid ""
-"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</"
-"b>\" button."
+"Finally press the \"<b>Continue</b>\" button and then the \"<b>Register</b>"
+"\" button."
 msgstr ""
 
 msgid "<b>Don't download the key yet!</b>"
@@ -2561,8 +2581,8 @@ msgstr ""
 
 msgid ""
 "<b>Open the downloaded file</b> with a text editor, like Notepad, <b><u>copy "
-"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</"
-"b>\" field of Nextend Social Login."
+"all of its contents</u></b> and <b>paste it</b> into the \"<b>Private Key</b>"
+"\" field of Nextend Social Login."
 msgstr ""
 
 msgid "<strong><u>Team Identifier:</u></strong>"
@@ -3536,13 +3556,25 @@ msgstr ""
 msgid "Click on the name of your %s App, under the REST API apps section."
 msgstr "点击创建按钮"
 
+#, fuzzy, php-format
+#| msgid "Make sure that the \"%1$s\" field contains %2$s"
 msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading and click \"<b>Show</b>\"."
-msgstr ""
+"Scroll down to %1$s section, find the %2$s feature and and click on the %3$s "
+"link."
+msgstr "确保 \"%1$s\" 包含 %2$s"
 
-msgid "Click on \"Save\""
-msgstr "点击\"保存“"
+#, fuzzy, php-format
+#| msgid ""
+#| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
+#| "b>"
+msgid "Add the following URL to the %s field and press %2$s:"
+msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, php-format
+msgid ""
+"Wait for %1$s to approve the %2$s feature ( this might take up to 7 business "
+"days ). The %3$s row will indicate the current status. "
+msgstr ""
 
 #, php-format
 msgid ""
@@ -3570,30 +3602,35 @@ msgid ""
 "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
 msgstr ""
 
-msgid ""
-"Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
-"b>\" heading then click \"<b>Show</b>\"."
-msgstr ""
-
-msgid ""
-"Scroll down to \"<b>App feature options</b>\" section and tick \"<b>Log In "
-"with PayPal</b>\"."
-msgstr ""
-
 #, php-format
-msgid "Click %1$s that appears after the %2$s text."
+msgid ""
+"Scroll down to %1$s section, and turn off all features. ( If you are trying "
+"to set up social login in an existing App, then create a new App, as this "
+"App should be used only for social login because some of the non used "
+"features might cause scope specific problems. )"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please enter an email address."
-msgid "Tick \"<b>Full name</b>\"."
-msgstr "请输入电子邮箱."
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid "Find the %1$s feature and check the checkbox."
+msgstr "命名您的项目，然后点击创建按钮"
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Click on the %1$s link that you can find below the %2$s feature."
+msgstr "点击创建按钮"
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Scroll down to %1$s section, and tick the %2$s field."
+msgstr "点击创建按钮"
 
 #, php-format
 msgid ""
 "If you want to get the email address as well, then don't forget to tick %1$s "
 "option. In this case you should also enable the %2$s setting in our %3$s "
-"%4$s tab."
+"%4$s tab. ( If you enabled extra fields on our Sync data tab, don't forget "
+"to tick the other necessary fields either! )"
 msgstr ""
 
 #, fuzzy
@@ -3601,27 +3638,27 @@ msgstr ""
 msgid "Email scope"
 msgstr "Email"
 
-msgid "Fill \"<b>Privacy policy URL</b>\" and  \"<b>User agreement URL</b>\"."
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid "Fill the %1$s and %2$s fields."
+msgstr "命名您的项目，然后点击创建按钮"
+
+#, php-format
+msgid ""
+"Optional: If you want the unverified %1$s accounts to be able to login with "
+"your App, then check the %2$s field, too."
 msgstr ""
 
-msgid ""
-"Scroll up to \"<b>LIVE API CREDENTIALS</b>\" section and find the necessary "
-"\"<b>Client ID</b>\" and \"<b>Secret</b>\"! ( Make sure you are in "
-"\"<b>Live</b>\" mode and not \"Sandbox\". )"
+#, php-format
+msgid "When all fields are filled, click %1$s in the modal."
 msgstr ""
 
 #, php-format
 msgid ""
-"%1$s Before you could start using the App, it requires an App review, which "
-"might take up to 7 business days to process. Below the %2$s field you can "
-"check the %3$s. Once your App got approved, you could continue with the "
-"provider verification in our %4$s tab."
+"Once the %1$s feature is approved, scroll up to the %2$s section and find "
+"the necessary %3$s and %4$s values, you will need these on the %5$s tab of "
+"the plugin!"
 msgstr ""
-
-#, fuzzy
-#| msgid "Import"
-msgid "Important note:"
-msgstr "导入"
 
 #, fuzzy
 #| msgid "App Secret"
@@ -3644,6 +3681,64 @@ msgstr "关联 <b>PayPal</b>"
 
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "取消关联 <b>PayPal</b>"
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Click on %1$s in the bottom left corner of your %2$s App."
+msgstr "点击创建按钮"
+
+#, php-format
+msgid "Replace your existing %s with this URL:"
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Click on the %s button"
+msgstr "点击创建按钮"
+
+#, php-format
+msgid "Make sure you have the %s radio option selected!"
+msgstr ""
+
+#, php-format
+msgid "Enter a %s for your App."
+msgstr ""
+
+#, php-format
+msgid "Optional: Enter a %1$s and set an %2$s for your App."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the \"Create New App\" button"
+msgid "Complete the Human test and click the %s button."
+msgstr "点击\"创建新应用\"按钮"
+
+#, php-format
+msgid ""
+"Finally find your %1$s, which is the value just below the name and type of "
+"your app, and the %2$s, which is the value next to %3$s. These will be "
+"needed in the plugin's settings."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>VK</b>"
+msgid "Continue with <b>Reddit</b>"
+msgstr "通过 <b>VK</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>VK</b>"
+msgid "Sign up with <b>Reddit</b>"
+msgstr "通过 <b>VK</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>VK</b>"
+msgid "Link account with <b>Reddit</b>"
+msgstr "关联 <b>VK</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>VK</b>"
+msgid "Unlink account from <b>Reddit</b>"
+msgstr "取消关联 <b>VK</b>"
 
 #, fuzzy, php-format
 #| msgid "Select your app."
@@ -3742,8 +3837,8 @@ msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
 msgstr ""
 
 msgid ""
-"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</"
-"b>\". "
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
 msgstr ""
 
 #, fuzzy
@@ -3853,8 +3948,8 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn "
-"more%3$s."
+"<b>WARNING:</b> The %1$s API can not return any email address! %2$sLearn more"
+"%3$s."
 msgstr ""
 
 msgid "Web API Key"
@@ -4055,10 +4150,6 @@ msgstr "导航 %s"
 msgid "Click on the %s button on the right side."
 msgstr "点击创建按钮"
 
-#, php-format
-msgid "Enter a %s for your App."
-msgstr ""
-
 #, fuzzy, php-format
 #| msgid "Click on the Create button"
 msgid "Select the %1$s option in the %2$s list."
@@ -4129,8 +4220,8 @@ msgstr ""
 #, fuzzy, php-format
 #| msgid "Fill \"Site URL\" with the url of your homepage, probably: <b>%s</b>"
 msgid ""
-"Fill \"<b>Website address</b>\" with the url of your homepage, probably: "
-"<b>%s</b>"
+"Fill \"<b>Website address</b>\" with the url of your homepage, probably: <b>"
+"%s</b>"
 msgstr "将你网站的首页URL填写到 \"网站URL\"，应该是 <b>%s</b>"
 
 #, fuzzy, php-format
@@ -4328,6 +4419,9 @@ msgstr "注册确认将通过电子邮件发送给您。"
 msgid "Password"
 msgstr ""
 
+msgid "Hide password"
+msgstr ""
+
 msgid "Strength indicator"
 msgstr ""
 
@@ -4339,6 +4433,19 @@ msgstr ""
 
 msgid "Username"
 msgstr "用户名"
+
+#~ msgid "Click on \"Save\""
+#~ msgstr "点击\"保存“"
+
+#, fuzzy
+#~| msgid "Please enter an email address."
+#~ msgid "Tick \"<b>Full name</b>\"."
+#~ msgstr "请输入电子邮箱."
+
+#, fuzzy
+#~| msgid "Import"
+#~ msgid "Important note:"
+#~ msgstr "导入"
 
 #, fuzzy
 #~| msgid "Name your project and then click on the Create button"
@@ -4405,8 +4512,8 @@ msgstr "用户名"
 #~| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
 #~| "b>"
 #~ msgid ""
-#~ "Select \"<b>Web</b>\" and enter the following URL to the \"<b>Site URL</"
-#~ "b>\" field: <b>%s</b>"
+#~ "Select \"<b>Web</b>\" and enter the following URL to the \"<b>Site URL</b>"
+#~ "\" field: <b>%s</b>"
 #~ msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
 
 #, fuzzy
@@ -4422,8 +4529,8 @@ msgstr "用户名"
 #, fuzzy, php-format
 #~| msgid "Enter your domain name to the App Domains"
 #~ msgid ""
-#~ "Enter your domain name to the \"<b>App Domains</b>\" field, probably: "
-#~ "<b>%s</b>"
+#~ "Enter your domain name to the \"<b>App Domains</b>\" field, probably: <b>"
+#~ "%s</b>"
 #~ msgstr "填写你的域名到 应用域名"
 
 #, fuzzy
@@ -4583,8 +4690,8 @@ msgstr "用户名"
 #~| "Add the following URL to the \"Authorised redirect URIs\" field: <b>%s</"
 #~| "b>"
 #~ msgid ""
-#~ "Add the following URL to the \"<b>Authorized redirect URI</b>\" field "
-#~ "<b>%s</b> "
+#~ "Add the following URL to the \"<b>Authorized redirect URI</b>\" field <b>"
+#~ "%s</b> "
 #~ msgstr "将旁边的URL 填入\"Authorised redirect URIs\" 应该是 <b>%s</b>"
 
 #~ msgid "ERROR"

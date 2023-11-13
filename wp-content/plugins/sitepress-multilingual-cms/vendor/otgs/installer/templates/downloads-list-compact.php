@@ -1,6 +1,6 @@
-
+                    
                     <form method="post" class="otgsi_downloads_form">
-
+                    
                     <table class="installer-plugins-list-compact">
                         <thead>
                             <tr>
@@ -11,18 +11,18 @@
                                 <th><img src="<?php echo $this->plugin_url() ?>/res/img/dn2.gif" alt="<?php esc_attr_e('Downloading', 'installer') ?>" width="16" height="16"></th>
                                 <th><img src="<?php echo $this->plugin_url() ?>/res/img/on.png" alt="<?php esc_attr_e('Activate', 'installer') ?>" width="16" height="16"></th>
                             </tr>
-                        </thead>
+                        </thead>                        
                         <tbody>
                         <?php foreach($product['downloads'] as $download): ?>
                             <?php if(empty($tr_oddeven) || $tr_oddeven == 'even') $tr_oddeven = 'odd'; else $tr_oddeven = 'even'; ?>
                             <tr class="<?php echo $tr_oddeven ?>">
                                 <td>
                                     <label>
-                                    <?php
+                                    <?php 
                                         $url =  $this->append_site_key_to_download_url($download['url'], $site_key, $repository_id );
 
                                         $download_data = array(
-                                            'url'           => $url,
+                                            'url'           => $url, 
                                             'slug'          => $download['slug'],
                                             'nonce'         => wp_create_nonce('install_plugin_' . $url),
                                             'repository_id' => $repository_id
@@ -37,8 +37,8 @@
                                     ?>
                                     <input type="checkbox" name="downloads[]" value="<?php echo base64_encode( (string) json_encode($download_data)); ?>" <?php
                                         if($disabled): ?>disabled="disabled"<?php endif; ?> />&nbsp;
-
-                                    </label>
+                                        
+                                    </label>                                
                                 </td>
                                 <td class="installer_plugin_name"><?php echo $download['name'] ?></td>
                                 <td><?php echo $download['version'] ?></td>
@@ -55,7 +55,7 @@
                                 <td class="twelve">
                                     <div class="installer-status-activating"><?php _e('activating', 'installer') ?></div>
                                     <div class="installer-status-activated"><?php _e('activated', 'installer') ?></div>
-                                </td>
+                                </td>                                
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -77,4 +77,4 @@
                     <div class="installer-status-success"><?php _e('Operation complete!', 'installer') ?></div>
 
                     <span class="installer-revalidate-message hidden"><?php _e("Download failed!\n\nClick OK to revalidate your subscription or CANCEL to try again.", 'installer') ?></span>
-                    </form>
+                    </form>         

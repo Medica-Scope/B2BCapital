@@ -30,7 +30,8 @@
     class Nh_Opportunity_Bid extends Nh_Module
     {
         public array $meta_data = [
-            'opportunity'
+            'opportunity',
+            'bidding_stage',
         ];
         public array $taxonomy  = [];
 
@@ -110,6 +111,10 @@
                 new Nh_Ajax_Response(FALSE, $opportunity->get_error_message(), $opportunity->get_error_data());
             }
 
+            if ($opportunity->meta_data['opportunity_stage'] !== 'publish') {
+                new Nh_Ajax_Response(FALSE, __("You can't bid to this opportunity.", 'ninja'));
+            }
+
             $start_bidding_amount = (int)$opportunity->meta_data['start_bidding_amount'];
 
             if ($bid_amount < $start_bidding_amount) {
@@ -143,7 +148,7 @@
             $opportunity_bids   = empty($opportunity->meta_data['opportunity_bids']) ? [] : $opportunity->meta_data['opportunity_bids'];
             $opportunity_bids[] = $insert->ID;
             $opportunity->set_meta_data('opportunity_bids', $opportunity_bids);
-            $opportunity->set_meta_data('opportunity_stage', 'bidding-start');
+            // $opportunity->set_meta_data('opportunity_stage', 'bidding-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {

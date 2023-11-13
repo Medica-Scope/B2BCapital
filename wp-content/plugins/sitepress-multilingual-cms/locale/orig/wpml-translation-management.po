@@ -20,9 +20,9 @@ msgstr ""
 msgid "Custom XML Configuration"
 msgstr ""
 
-#
+# 
 # $messageText = sprintf( __( 'To translate your content, go to %1$s. Or, go to the %2$s tab to automatically translate your content in bulk.', 'wpml-translation-management' ), $translationsLink, $automaticTranslationTabLink );
-#
+# 
 
 msgid "To translate your content, go to %1$s. Or, go to the %2$s tab to automatically translate your content in bulk."
 msgstr ""
@@ -34,7 +34,7 @@ msgstr ""
 msgid "WPML → Translations"
 msgstr ""
 
-#
+# 
 # $automaticTranslationTabText = esc_html__(
 # 'Automatic Translation',
 
@@ -184,7 +184,7 @@ msgstr ""
 
 # $description = _x( 'WPML needs an Internet connection to translate your site’s content. It seems that your server is not allowing external connections, or your network is temporarily down.', 'part1', 'wpml-translation-management' );
 # $description .= _x( 'If this is the first time you’re seeing this message, please wait a minute and reload the page. If the problem persists, contact %1$s for help and mention that your website ID is %2$s.', 'part2', 'wpml-translation-management' );
-#
+# 
 
 msgctxt "part2"
 msgid "If this is the first time you’re seeing this message, please wait a minute and reload the page. If the problem persists, contact %1$s for help and mention that your website ID is %2$s."
@@ -200,7 +200,7 @@ msgstr ""
 
 # $description = _x( 'WPML cannot connect to the translation editor. If this is the first time you’re seeing this message, please wait a minute and reload the page.', 'part1', 'wpml-translation-management' );
 # $description .= _x( 'If the problem persists, contact %1$s for help and mention that your website ID is %2$s.', 'part2', 'wpml-translation-management' );
-#
+# 
 
 msgctxt "part2"
 msgid "If the problem persists, contact %1$s for help and mention that your website ID is %2$s."
@@ -220,7 +220,7 @@ msgstr ""
 msgid "There was a problem communicating with ATE: %s "
 msgstr ""
 
-#
+# 
 # $message = __( '%1$s jobs added to the Advanced Translation Editor.', 'wpml-translation-management' );
 # $this->add_message( 'updated', sprintf( $message, count( $created_jobs ) ), 'wpml_tm_ate_create_job' );
 
@@ -437,16 +437,16 @@ msgstr ""
 msgid " There is an issue with automatic translation that needs attention from a translation manager."
 msgstr ""
 
-#
+# 
 # $fix = __( 'Fix it to continue translating automatically', 'wpml-translation-management' );
-#
+# 
 
 msgid "Fix it to continue translating automatically"
 msgstr ""
 
-#
+# 
 # $translate = __( 'Translate content myself', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translate content myself"
 msgstr ""
@@ -528,7 +528,7 @@ msgstr ""
 msgid "Failed step: %s"
 msgstr ""
 
-#
+# 
 # $button_label = __( 'Try again', 'wpml-translation-management' );
 # $button_url   = add_query_arg(
 
@@ -549,7 +549,7 @@ msgstr ""
 msgid "Error details"
 msgstr ""
 
-#
+# 
 # $title     = '<h3>' . esc_html__(
 # 'ICanLocalize migration could not complete',
 
@@ -584,14 +584,14 @@ msgstr ""
 msgid "Ask us"
 msgstr ""
 
-#
+# 
 # $button_label = esc_html__( 'Start the update', 'wpml-translation-management' );
-#
+# 
 
 msgid "Start the update"
 msgstr ""
 
-#
+# 
 # $message[] = esc_html__(
 # 'WPML 3.9 changes the way it works with ICanLocalize. This requires WPML to move to a new interface with ICanLocalize.',
 
@@ -626,16 +626,16 @@ msgstr ""
 msgid "Not sure? %s."
 msgstr ""
 
-#
+# 
 # $message[] = esc_html__(
 # 'WPML updated your connection to ICanLocalize. You can continue sending content to translation.',
 
 msgid "WPML updated your connection to ICanLocalize. You can continue sending content to translation."
 msgstr ""
 
-#
+# 
 # $label = esc_html__( 'This is indeed my production site', 'wpml-translation-management' );
-#
+# 
 
 msgid "This is indeed my production site"
 msgstr ""
@@ -733,7 +733,7 @@ msgstr ""
 
 # $message = $this->email_view->render_model( $model, self::REQUEST_ACTIVATION_TEMPLATE );
 # $subject = sprintf( __( "Request to use WPML's Advanced Translation Editor by %s", 'wpml-translation-management' ), $site_name );
-#
+# 
 
 msgid "Request to use WPML's Advanced Translation Editor by %s"
 msgstr ""
@@ -909,7 +909,7 @@ msgstr ""
 
 # /* translators: Promote translation services: Promote translation services: used to build a link to the translation services page */
 # $promoteB = esc_html_x( 'professional translation services integrated with WPML', 'Promote translation services: used to build a link to the translation services page', 'wpml-translation-management' );
-#
+# 
 
 msgctxt "Promote translation services: used to build a link to the translation services page"
 msgid "professional translation services integrated with WPML"
@@ -953,7 +953,7 @@ msgstr ""
 
 # /* translators: List of translation jobs: used to build a link to the translation jobs page */
 # $message_to_translation_jobsB = esc_html_x( 'list of translation jobs', 'List of translation jobs: used to build a link to the translation jobs page', 'wpml-translation-management' );
-#
+# 
 
 msgctxt "List of translation jobs: used to build a link to the translation jobs page"
 msgid "list of translation jobs"
@@ -989,7 +989,7 @@ msgstr ""
 
 # $title_singular  = __( 'There is 1 job waiting for a translator:', 'wpml-translation-management' );
 # $title_plural    = __( 'There are %s jobs waiting for a translator:', 'wpml-translation-management' );
-#
+# 
 
 msgid "There are %s jobs waiting for a translator:"
 msgstr ""
@@ -1045,12 +1045,12 @@ msgstr ""
 
 # if ( WPML_TM_ATE_Status::is_enabled_and_activated() ) {
 # $link = '<a href="https://wpml.org/documentation/translating-your-contents/advanced-translation-editor/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmltm">' . __( "WPML's Advanced Translation Editor", 'wpml-translation-management' ) . '</a>';
-#
+# 
 
 msgid "WPML's Advanced Translation Editor"
 msgstr ""
 
-#
+# 
 # $sentence = sprintf( __( "Need help translating? Read how to use %s.", 'wpml-translation-management' ), $link );
 # }
 
@@ -1156,14 +1156,14 @@ msgstr ""
 msgid "try a translation service"
 msgstr ""
 
-#
+# 
 # $subject     = sprintf( __( 'Translator job updated for %s', 'wpml-translation-management' ), get_bloginfo( 'name' ) );
 # $placeholder = esc_html__(
 
 msgid "Translator job updated for %s"
 msgstr ""
 
-#
+# 
 # $subject     = sprintf( __( 'Translator job canceled for %s', 'wpml-translation-management' ), get_bloginfo( 'name' ) );
 # $placeholder = esc_html__(
 
@@ -1319,7 +1319,7 @@ msgstr ""
 
 # $select_attributes_name  = 'filter[from_lang]';
 # $select_attributes_label = __( 'in', 'wpml-translation-management' );
-#
+# 
 
 msgid "in"
 msgstr ""
@@ -1424,7 +1424,7 @@ msgstr ""
 
 # class="button-secondary" type="submit"
 # value="<?php esc_attr_e( 'Filter', 'wpml-translation-management' ); ?>"/>
-#
+# 
 
 msgid "Filter"
 msgstr ""
@@ -1471,9 +1471,9 @@ msgstr ""
 msgid "All Translation Priorities"
 msgstr ""
 
-#
+# 
 # <a type="reset" href="<?php echo esc_url( $reset_url ); ?>" class="wpml-reset-filter"><i class="otgs-ico-close"> </i><?php esc_html_e( 'Reset filter', 'wpml-translation-management' ); ?></a>
-#
+# 
 
 msgid "Reset filter"
 msgstr ""
@@ -2291,7 +2291,7 @@ msgstr ""
 msgid "Term Meta"
 msgstr ""
 
-#
+# 
 # $main_message     = __( 'Adjust links in posts so they point to the translated content', 'wpml-translation-management' );
 # $complete_message = __( 'All posts have been processed. %s links were changed to point to the translated content.', 'wpml-translation-management' );
 
@@ -2342,7 +2342,7 @@ msgstr ""
 
 # date_i18n( $format, $last_picked_up ) :
 # __( 'never', 'wpml-translation-management' );
-#
+# 
 
 msgid "never"
 msgstr ""
@@ -2544,7 +2544,7 @@ msgctxt "1/2 Confirm to disconnect duplicates"
 msgid "You are about to translate duplicated posts."
 msgstr ""
 
-#
+# 
 # $message .= esc_html_x(
 # 'These items will be automatically disconnected from originals, so translation is not lost when you update the originals.',
 
@@ -2566,7 +2566,7 @@ msgstr ""
 msgid "No duplicate posts found to disconnect."
 msgstr ""
 
-#
+# 
 # wp_send_json_success( esc_html__( 'Successfully disconnected posts', 'wpml-translation-management' ) );
 # }
 
@@ -2706,7 +2706,7 @@ msgstr ""
 msgid "You've sent the content for translation to %1$s. Currently, we are processing it and delivering to %1$s."
 msgstr ""
 
-#
+# 
 # $link_text = __( 'Check the batch delivery status', 'wpml-translation-management' );
 # }
 
@@ -2720,7 +2720,7 @@ msgstr ""
 msgid "No items found in basket"
 msgstr ""
 
-#
+# 
 # $message_content  = sprintf( __( '%s items in basket:', 'wpml-translation-management' ), $total_count );
 # $message_content .= $message_content_details;
 
@@ -2750,7 +2750,7 @@ msgstr ""
 
 # $data['link_url']  = $this->job_instance->get_url( true );
 # $data['link_text'] = $this->job_instance instanceof WPML_External_Translation_Job ? '' : sprintf( __( 'View %s', 'wpml-translation-management' ), $type_title );
-#
+# 
 
 msgid "View %s"
 msgstr ""
@@ -3107,7 +3107,7 @@ msgstr ""
 
 # <div class="wrap">
 # <h2><?php echo __( 'Translations queue', 'wpml-translation-management' ); ?></h2>
-#
+# 
 
 msgid "Translations queue"
 msgstr ""
@@ -3170,7 +3170,7 @@ msgstr ""
 
 # public function get_caption() {
 # return __( 'Translators', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translators"
 msgstr ""
@@ -3464,12 +3464,12 @@ msgstr ""
 
 # ),
 # 'progressJobsCount'                => __( 'You are downloading %d jobs', 'wpml-translation-management' ),
-#
+# 
 
 msgid "You are downloading %d jobs"
 msgstr ""
 
-#
+# 
 # 'statusChecked'                    => __( 'Status checked:', 'wpml-translation-management' ),
 # 'dismissNotice'                    => __( 'Dismiss this notice.', 'wpml-translation-management' ),
 
@@ -3497,14 +3497,14 @@ msgstr ""
 msgid "%d translation jobs have been finished and applied."
 msgstr ""
 
-#
+# 
 # 'errorMessage'                     => __(
 # 'A communication error has appeared. Please wait a few minutes and try again.',
 
 msgid "A communication error has appeared. Please wait a few minutes and try again."
 msgstr ""
 
-#
+# 
 # 'lastCheck'                        => __( 'Last check: %s', 'wpml-translation-management' ),
 # 'never'                            => __( 'never', 'wpml-translation-management' ),
 
@@ -3548,7 +3548,7 @@ msgstr ""
 
 # $tm_url      = '<a href="' . admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php' ) . '">' . __( 'Translation Dashboard', 'sitepress' ) . '</a>';
 # $description = sprintf( __( 'WPML completed updating the translations history. Next, please visit the %s and click on the button to "Check status and get translations".', 'wpml-translation-management' ), $tm_url );
-#
+# 
 
 msgid "WPML completed updating the translations history. Next, please visit the %s and click on the button to \"Check status and get translations\"."
 msgstr ""
@@ -3770,7 +3770,7 @@ msgstr ""
 msgid "Use WPML's Translation Editor"
 msgstr ""
 
-#
+# 
 # $wpml_tm_editor = esc_html__( "Use WPML's Translation Editor to translate:", 'wpml-translation-management' );
 # $wp_editor      = esc_html__( "Use the WordPress Editor to translate:", 'wpml-translation-management' );
 
@@ -4246,7 +4246,7 @@ msgstr ""
 msgid "String"
 msgstr ""
 
-#
+# 
 # return __( 'Unknown string Package', 'wpml-translation-management' );
 # }
 
@@ -4344,7 +4344,7 @@ msgstr ""
 msgid "You cannot add strings in this language to the basket since it already contains posts or strings of another source language! Either submit the current basket or delete the posts of differing language in the current basket"
 msgstr ""
 
-#
+# 
 # $mail['body'] .= __( ' - A xliff file is attached.', 'wpml-translation-management' );
 # }
 
@@ -4353,42 +4353,42 @@ msgstr ""
 
 # if ( 0 === (int) $file['size'] ) {
 # $this->error = new WP_Error( 'empty_file', __( 'You are trying to import an empty file.', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "You are trying to import an empty file."
 msgstr ""
 
 # if ( true !== $zopen ) {
 # $this->error = new WP_Error( 'incompatible_archive', __( 'Incompatible Archive.', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "Incompatible Archive."
 msgstr ""
 
 # if ( ! $info = $z->statIndex( $i ) ) {
 # $this->error = new WP_Error( 'stat_failed', __( 'Could not retrieve file from archive.', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "Could not retrieve file from archive."
 msgstr ""
 
 # if ( $empty_files ) {
 # $this->error = new WP_Error( 'extract_failed', __( 'The archive contains one or more empty files.', 'wpml-translation-management' ), $empty_files );
-#
+# 
 
 msgid "The archive contains one or more empty files."
 msgstr ""
 
 # if ( false == $archive_files ) {
 # $this->error = new WP_Error( 'incompatible_archive', __( 'You are trying to import an incompatible Archive.', 'wpml-translation-management' ), $archive->errorInfo( true ) );
-#
+# 
 
 msgid "You are trying to import an incompatible Archive."
 msgstr ""
 
 # if ( 0 === count( $archive_files ) ) {
 # $this->error = new WP_Error( 'empty_archive', __( 'You are trying to import an empty archive.', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "You are trying to import an empty archive."
 msgstr ""
@@ -4414,9 +4414,9 @@ msgstr ""
 msgid "No translation jobs were selected for export."
 msgstr ""
 
-#
+# 
 # $export_label = esc_html__( 'Export all jobs:', 'wpml-translation-management' );
-#
+# 
 
 msgid "Export all jobs:"
 msgstr ""
@@ -4486,21 +4486,21 @@ msgstr ""
 
 # protected function not_the_job_owner_error( $job ) {
 # $message = sprintf( __( 'The translation job (%s) doesn\'t belong to you.', 'wpml-translation-management' ), $job->job_id );
-#
+# 
 
 msgid "The translation job (%s) doesn't belong to you."
 msgstr ""
 
 # protected function not_xml_file_error( $name ) {
 # $message = sprintf( __( '"%s" is not a valid XLIFF file.', 'wpml-translation-management' ), $name );
-#
+# 
 
 msgid "\"%s\" is not a valid XLIFF file."
 msgstr ""
 
 # protected function invalid_xliff_error( array $missing_data = array() ) {
 # $message = __( 'The uploaded xliff file does not seem to be properly formed.', 'wpml-translation-management' );
-#
+# 
 
 msgid "The uploaded xliff file does not seem to be properly formed."
 msgstr ""
@@ -4512,7 +4512,7 @@ msgstr ""
 msgid "Missing or wrong data:"
 msgstr ""
 
-#
+# 
 # return new WP_Error( 'xliff_does_not_match', __( "The uploaded xliff file doesn't belong to this system.", 'wpml-translation-management' ) );
 # }
 
@@ -4748,7 +4748,7 @@ msgstr ""
 
 # }
 # $menu_label = __( 'Translation Management', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translation Management"
 msgstr ""
@@ -4762,7 +4762,7 @@ msgstr ""
 
 # }
 # $menu_label = __( 'Settings', 'wpml-translation-management' );
-#
+# 
 
 msgid "Settings"
 msgstr ""
@@ -4776,14 +4776,14 @@ msgstr ""
 
 # /* translators: %s is replaced with current service name */
 # $notification_message .= sprintf( __( 'One more step before you can use %s', 'wpml-translation-management' ), $current_service_name );
-#
+# 
 
 msgid "One more step before you can use %s"
 msgstr ""
 
 # /* translators: %1$s is replaced with current service name */
 # $notification_message .= sprintf( __( 'Remember to authenticate this site\'s connection with %1$s. Before you authenticate, you cannot send jobs to translation to %1$s.', 'wpml-translation-management' ), $current_service_name );
-#
+# 
 
 msgid "Remember to authenticate this site's connection with %1$s. Before you authenticate, you cannot send jobs to translation to %1$s."
 msgstr ""
@@ -4839,7 +4839,7 @@ msgstr ""
 
 # if ( ! $this->is_translators_tab() ) {
 # $translator_tab_name = esc_html__( 'Translators Tab', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translators Tab"
 msgstr ""
@@ -4907,7 +4907,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#
+# 
 # $text  = __( 'The items you have selected are now in the translation basket &ndash;', 'wpml-translation-management' );
 # $text .= ' ' . sprintf( __( '<a href="%s">Send to translation &raquo;</a>', 'wpml-translation-management' ), $basket_link );
 
@@ -4916,7 +4916,7 @@ msgstr ""
 
 # $text  = __( 'The items you have selected are now in the translation basket &ndash;', 'wpml-translation-management' );
 # $text .= ' ' . sprintf( __( '<a href="%s">Send to translation &raquo;</a>', 'wpml-translation-management' ), $basket_link );
-#
+# 
 
 msgid "<a href=\"%s\">Send to translation &raquo;</a>"
 msgstr ""
@@ -4942,16 +4942,16 @@ msgstr ""
 msgid "You cannot add strings  in this language to the basket since it already contains posts or strings of another source language!\n\t\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
 msgstr ""
 
-#
+# 
 # $html .= '<h3>3. ' . __( 'Select additional options', 'wpml-translation-management' ) . ' <a href="#" id="basket_extra_fields_refresh">(' . __( 'Refresh', 'wpml-translation-management' ) . ')</a></h3>';
-#
+# 
 
 msgid "Select additional options"
 msgstr ""
 
-#
+# 
 # $html .= '<h3>3. ' . __( 'Select additional options', 'wpml-translation-management' ) . ' <a href="#" id="basket_extra_fields_refresh">(' . __( 'Refresh', 'wpml-translation-management' ) . ')</a></h3>';
-#
+# 
 
 msgid "Refresh"
 msgstr ""
@@ -5005,7 +5005,7 @@ msgstr ""
 msgid "Hide this"
 msgstr ""
 
-#
+# 
 # $output .= '<a class="' . $col_hidden . '" id="icl_show_promo" href="#">' . __( 'Need translators?', 'wpml-translation-management' ) . '</a>';
 # }
 
@@ -5026,7 +5026,7 @@ msgstr ""
 msgid "Could not update the translation pickup mode."
 msgstr ""
 
-#
+# 
 # wp_send_json_success( array( 'message' => __( 'Ok', 'wpml-translation-management' ) ) );
 # break;
 
@@ -5166,7 +5166,7 @@ msgstr ""
 msgid "account status"
 msgstr ""
 
-#
+# 
 # $this->heading( __( '2. Select translation options', 'wpml-translation-management' ) );
 # $this->build_content_dashboard_documents_options();
 
@@ -5175,28 +5175,28 @@ msgstr ""
 
 # /* translators: This text will be used to build a link to the translation roles page */
 # $translators_link = $this->get_translation_roles_link( __( 'at least one translator', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "at least one translator"
 msgstr ""
 
 # /* translators: This text will be used to build a link to the translation services page */
 # $translation_services_link = $this->get_translation_services_link( __( 'active and authenticated translation service', 'wpml-translation-management' ) );
-#
+# 
 
 msgid "active and authenticated translation service"
 msgstr ""
 
 # /* translators: %1$s contains a link to the translation roles page with "at least one translator" as a text whilst %2$s is a link to the translation services page with "active and authenticated translation service" as a text */
 # $tooltip_text = __( 'To send content to translation first make sure you either have %1$s or an %2$s.', 'wpml-translation-management' );
-#
+# 
 
 msgid "To send content to translation first make sure you either have %1$s or an %2$s."
 msgstr ""
 
 # /* translators: %s is replaced with the name of the active translation service */
 # $tooltip_text = __( 'To send content to translation first make sure "%s" is authenticated or you have at least one translator.', 'wpml-translation-management' );
-#
+# 
 
 msgid "To send content to translation first make sure \"%s\" is authenticated or you have at least one translator."
 msgstr ""
@@ -5215,7 +5215,7 @@ msgstr ""
 msgid "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
 msgstr ""
 
-#
+# 
 # $this->heading( __( '1. Review documents for translation', 'wpml-translation-management' ) );
 # ?>
 
@@ -5320,16 +5320,16 @@ msgstr ""
 msgid "Clear log"
 msgstr ""
 
-#
+# 
 # <input class="button-secondary" type="submit" name="tp-com-disable-log" value="<?php echo esc_attr__( 'Disable logging', 'wpml-translation-management' ); ?>">
-#
+# 
 
 msgid "Disable logging"
 msgstr ""
 
 # <br />
 # <input class="button-secondary" type="submit" name="tp-com-enable-log" value="<?php echo esc_attr__( 'Enable logging', 'wpml-translation-management' ); ?>">
-#
+# 
 
 msgid "Enable logging"
 msgstr ""
@@ -5397,23 +5397,23 @@ msgstr ""
 msgid "No documents found"
 msgstr ""
 
-#
+# 
 # $basket_items_count_caption = esc_html__( 'Translation Basket', 'wpml-translation-management' );
 # if ( $basket_items_count > 0 ) {
 
 msgid "Translation Basket"
 msgstr ""
 
-#
+# 
 # $tooltip_content = esc_html__( 'This deadline is what WPML suggests according to the amount of work that you already sent to this translator. You can modify this date to set the deadline manually.', 'wpml-translation-management' );
-#
+# 
 
 msgid "This deadline is what WPML suggests according to the amount of work that you already sent to this translator. You can modify this date to set the deadline manually."
 msgstr ""
 
-#
+# 
 # <?php echo esc_html__( "This is a log of the communication between your site and the translation system. It doesn't include any private information and allows WPML support to help with problems related to sending content to translation.", 'wpml-translation-management' ); ?>
-#
+# 
 
 msgid "This is a log of the communication between your site and the translation system. It doesn't include any private information and allows WPML support to help with problems related to sending content to translation."
 msgstr ""
@@ -5427,7 +5427,7 @@ msgstr ""
 
 # <?php else : ?>
 # <?php echo esc_html__( 'Communication logging is currently disabled. To allow WPML support to help you with issues related to sending content to translation, you need to enable the communication logging.', 'wpml-translation-management' ); ?>
-#
+# 
 
 msgid "Communication logging is currently disabled. To allow WPML support to help you with issues related to sending content to translation, you need to enable the communication logging."
 msgstr ""
@@ -5446,9 +5446,9 @@ msgstr ""
 msgid "Translate Link Targets"
 msgstr ""
 
-#
+# 
 # $this->mcsetup_sections['ml-content-setup-sec-1'] = esc_html__( 'Translation Editor', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translation Editor"
 msgstr ""
@@ -5462,14 +5462,14 @@ msgstr ""
 
 # $this->mcsetup_sections['ml-content-setup-sec-2'] = esc_html__( 'Posts and pages synchronization', 'wpml-translation-management' );
 # $this->mcsetup_sections['ml-content-setup-sec-3'] = esc_html__( 'Translated documents options', 'wpml-translation-management' );
-#
+# 
 
 msgid "Translated documents options"
 msgstr ""
 
-#
+# 
 # $this->mcsetup_sections['ml-content-setup-sec-wp-login'] = esc_html__( 'Login and registration pages', 'wpml-translation-management' );
-#
+# 
 
 msgid "Login and registration pages"
 msgstr ""
@@ -5488,9 +5488,9 @@ msgstr ""
 msgid "Translation pickup mode"
 msgstr ""
 
-#
+# 
 # $this->mcsetup_sections['ml-content-setup-sec-5-1'] = esc_html__( 'XLIFF file options', 'wpml-translation-management' );
-#
+# 
 
 msgid "XLIFF file options"
 msgstr ""
@@ -5516,7 +5516,7 @@ msgstr ""
 msgid "Admin Strings to Translate"
 msgstr ""
 
-#
+# 
 # $this->tab_items['mcsetup']['caption'] = esc_html__( 'Multilingual Content Setup', 'wpml-translation-management' );
 # $translate_link_targets                = new WPML_Translate_Link_Target_Global_State( $sitepress );
 
@@ -5546,7 +5546,7 @@ msgstr ""
 
 # /* translators: Heading shown for selecting the editor to use with WPML's Translation Management when creating new content */
 # echo esc_html__( 'Editor for new translations', 'wpml-translation-management' );
-#
+# 
 
 msgid "Editor for new translations"
 msgstr ""
@@ -5679,21 +5679,21 @@ msgstr ""
 
 # /* translators: heading shown for selecting the editor to use when updating content that was created with WPML's Classic Translation Editor */
 # esc_html_e( "Editor for translations previously created using Classic Translation Editor", 'wpml-translation-management' );
-#
+# 
 
 msgid "Editor for translations previously created using Classic Translation Editor"
 msgstr ""
 
 # /* translators: Which editor to use when updating content that was created with WPML's Classic Translation Editor? */
 # esc_html_e( "Classic Translation Editor (recommended)", 'wpml-translation-management' );
-#
+# 
 
 msgid "Classic Translation Editor (recommended)"
 msgstr ""
 
 # <div class="wrap">
 # <h2><?php echo __( 'XLIFF translation', 'wpml-translation-management' ); ?></h2>
-#
+# 
 
 msgid "XLIFF translation"
 msgstr ""
@@ -5726,21 +5726,21 @@ msgstr ""
 msgid "Please choose"
 msgstr ""
 
-#
+# 
 # <h4><?php esc_html_e( 'XLIFF version', 'wpml-translation-management' ); ?></h4>
-#
+# 
 
 msgid "XLIFF version"
 msgstr ""
 
 # <p>
 # <?php esc_html_e( 'Choose default format for XLIFF file:', 'wpml-translation-management' ); ?>
-#
+# 
 
 msgid "Choose default format for XLIFF file:"
 msgstr ""
 
-#
+# 
 # <h4><?php esc_html_e( 'New lines character', 'wpml-translation-management' ); ?></h4>
 # <p>
 

@@ -2,9 +2,9 @@
 	if (!defined('UPDRAFTPLUS_DIR')) die('No direct access.');
 
 	global $updraftplus;
-
+	
 	$premium_link = apply_filters('updraftplus_com_link', 'https://updraftplus.com/landing/updraftplus-premium');
-
+	
 	$free_ret = '<em>'.__('All WordPress tables will be backed up.', 'updraftplus').' <a href="'.$premium_link.'">'. __('With UpdraftPlus Premium, you can choose to backup non-WordPress tables, backup only specified tables, and backup other databases too.', 'updraftplus').'</a></em>'."\n";
 ?>
 
@@ -34,19 +34,19 @@
 	</div>
 
 </p>
-
+	
 <p>
 	<input type="checkbox" class="new-backups-only" id="backupnow_includefiles" checked="checked">
 	<label id="backupnow_includefiles_label" for="backupnow_includefiles"><?php _e("Include your files in the backup", 'updraftplus'); ?></label>
-
+	
 	(<a href="<?php echo esc_url($updraftplus->get_current_clean_url()); ?>" id="backupnow_includefiles_showmoreoptions">...</a>)<br>
 
 	<div id="backupnow_includefiles_moreoptions" class="updraft-hidden" style="display:none;">
 		<em><?php _e('Your saved settings also affect what is backed up - e.g. files excluded.', 'updraftplus'); ?></em><br>
-
+		
 		<?php echo $updraftplus_admin->files_selector_widgetry('backupnow_files_', false, 'sometimes'); ?>
 	</div>
-
+	
 </p>
 
 <div class="backupnow_modal_afterfileoptions">

@@ -31,6 +31,8 @@
                 <div class="tab-content">
                     <div class="tab-pane nh-admin-page-body active">
                         <div class="accordion" id="accordionExample">
+
+                            <?php /*
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
@@ -130,6 +132,8 @@
                                     </div>
                                 </div>
                             </div>
+                            */?>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
@@ -137,7 +141,7 @@
                                         <?= __('Social Media Links', 'ninja'); ?>
                                     </button>
                                 </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                                     <div class="accordion-body">
                                         <?= Nh_Forms::get_instance()
                                                      ->create_form([
@@ -242,6 +246,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <?php /*
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
@@ -298,6 +304,7 @@
                                     </div>
                                 </div>
                             </div>
+                            */?>
                         </div>
                     </div>
                 </div>

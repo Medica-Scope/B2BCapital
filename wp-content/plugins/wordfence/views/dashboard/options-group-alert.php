@@ -132,7 +132,7 @@ if (!isset($collapseable)) {
 							'disabledValue' => 0,
 							'value' => wfConfig::get('alertOn_adminLogin') ? 1 : 0,
 							'title' => __('Alert me when someone with administrator access signs in', 'wordfence'),
-
+							
 							'subOptionName' => 'alertOn_firstAdminLoginOnly',
 							'subEnabledValue' => 1,
 							'subDisabledValue' => 0,
@@ -149,7 +149,7 @@ if (!isset($collapseable)) {
 							'disabledValue' => 0,
 							'value' => wfConfig::get('alertOn_nonAdminLogin') ? 1 : 0,
 							'title' => __('Alert me when a non-admin user signs in', 'wordfence'),
-
+							
 							'subOptionName' => 'alertOn_firstNonAdminLoginOnly',
 							'subEnabledValue' => 1,
 							'subDisabledValue' => 0,

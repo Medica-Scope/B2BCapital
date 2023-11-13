@@ -39,14 +39,14 @@ if (!empty($options['include_header'])) echo '<h2>'.__('Existing backups', 'updr
 	}
 	$updraftplus_admin->take_backup_content();
 	?>
-
+	
 	<div class="updraft_existing_backups_wrapper">
 		<h3 id="updraft-existing-backups-heading"><?php echo __('Existing backups', 'updraftplus');?> <span class="updraft_existing_backups_count"><?php echo count($backup_history);?></span></h3>
 		<ul class="updraft-disk-space-actions">
 			<?php
 				echo UpdraftPlus_Filesystem_Functions::web_server_disk_space($options['will_immediately_calculate_disk_space']);
 			?>
-
+	
 			<li class="updraft-server-scan">
 				<strong><?php _e('More tasks:', 'updraftplus');?></strong>
 				<?php
@@ -66,7 +66,7 @@ if (!empty($options['include_header'])) echo '<h2>'.__('Existing backups', 'updr
 		<?php
 			if (!empty($options['include_uploader'])) {
 			?>
-
+		
 			<div id="updraft-plupload-modal" style="display:none;" title="<?php _e('UpdraftPlus - Upload backup files', 'updraftplus'); ?>">
 			<p class="upload"><em><?php _e("Upload files into UpdraftPlus.", 'updraftplus');?> <?php echo htmlspecialchars(__('Or, you can place them manually into your UpdraftPlus directory (usually wp-content/updraft), e.g. via FTP, and then use the "rescan" link above.', 'updraftplus'));?></em></p>
 			<?php
@@ -91,7 +91,7 @@ if (!empty($options['include_header'])) echo '<h2>'.__('Existing backups', 'updr
 			</div>
 		<?php
 			}
-		?>
+		?>		
 		<div class="ud_downloadstatus"></div>
 		<div class="updraft_existing_backups">
 			<?php echo UpdraftPlus_Backup_History::existing_backup_table($backup_history); ?>

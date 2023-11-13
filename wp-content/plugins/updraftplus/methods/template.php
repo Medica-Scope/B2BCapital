@@ -97,14 +97,14 @@ class UpdraftPlus_BackupModule_template extends UpdraftPlus_BackupModule {
 	public function get_configuration_template() {
 
 		ob_start();
-
+	
 		$classes = $this->get_css_classes();
-
+	
 		?>
 			<tr class="updraftplusmethod <?php echo $classes;?>">
 				<th>My Method:</th>
 				<td>
-
+					
 				</td>
 			</tr>
 

@@ -46,10 +46,10 @@
 									$('.wf-dashboard-login-attempts').on('click', function(e) {
 										e.preventDefault();
 										e.stopPropagation();
-
+										
 										$(this).closest('ul').find('li').removeClass('wf-active');
-										$(this).closest('li').addClass('wf-active');
-
+										$(this).closest('li').addClass('wf-active'); 
+										
 										$('.wf-recent-logins').addClass('wf-hidden');
 										$('.wf-recent-logins-' + $(this).data('grouping')).removeClass('wf-hidden');
 									});

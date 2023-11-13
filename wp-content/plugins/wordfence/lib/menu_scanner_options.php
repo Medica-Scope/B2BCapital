@@ -12,7 +12,7 @@ if (isset($_GET['source']) && wfPage::isValidPage($_GET['source'])) {
 	(function($) {
 		$(function() {
 			document.title = "<?php esc_attr_e('Scanner Options', 'wordfence'); ?>" + " \u2039 " + WFAD.basePageName;
-
+			
 			//Hash-based option block linking
 			if (window.location.hash) {
 				var hashes = WFAD.parseHashes();
@@ -23,7 +23,7 @@ if (isset($_GET['source']) && wfPage::isValidPage($_GET['source'])) {
 						block.find('.wf-block-content').slideDown({
 							always: function() {
 								block.addClass('wf-active');
-
+								
 								if (hashes.length > 1 && $('#' + hashes[hashes.length - 2]).hasClass('wf-option')) {
 									$('html, body').animate({
 										scrollTop: $('#' + hashes[hashes.length - 2]).offset().top - 100
@@ -164,23 +164,23 @@ if (!wfOnboardingController::shouldShowAttempt3() && wfConfig::get('touppPromptN
 						'scanner' => $scanner,
 						'stateKey' => 'wf-scanner-options-schedule',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-basic', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-scanner-options-basic',
 						'collapseable' => false,
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-general', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-scanner-options-general',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-performance', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-scanner-options-performance',
 					))->render();
-
+					
 					echo wfView::create('scanner/options-group-advanced', array(
 						'scanner' => $scanner,
 						'stateKey' => 'wf-scanner-options-custom',
