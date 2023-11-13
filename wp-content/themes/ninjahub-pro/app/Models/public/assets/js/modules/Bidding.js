@@ -10,7 +10,6 @@
 import $         from 'jquery';
 import UiCtrl    from '../inc/UiCtrl';
 import Nh        from './Nh';
-import bootstrap from 'bootstrap';
 import _         from 'lodash';
 
 class NhBidding extends Nh

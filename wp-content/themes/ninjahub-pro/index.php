@@ -92,9 +92,9 @@ global $wp_query, $post, $user_ID;
 								'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 							] );
 						if ( $ignore_chk ) {
-							$ignore_class = 'controll-icon bbc-thumbs-up text-dark';
+							$ignore_class = 'controll-icon bbc-thumbs-up text-success';
 						} else {
-							$ignore_class = 'controll-icon bbc-thumbs-down text-dark';
+							$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
 						}
 						$args['ignore_form'] = Nh_Forms::get_instance()
 							->create_form( [ 
@@ -136,12 +136,12 @@ global $wp_query, $post, $user_ID;
 				}
 
 				?>
-				<div class="pagination-con">
+					<div class="pagination-con">
+						<?php
+						echo $results['pagination'];
+						?>
+					</div>
 					<?php
-					echo $results['pagination'];
-					?>
-				</div>
-				<?php
 
 			} else {
 				get_template_part( 'app/Views/none' );
