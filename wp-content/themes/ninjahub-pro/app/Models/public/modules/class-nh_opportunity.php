@@ -349,7 +349,7 @@
             }
 
             if (!$this->can_create_opportunity()) {
-                new Nh_Ajax_Response(FALSE, __("You have exceeded your creation limit for this month.", 'ninja'));
+                //new Nh_Ajax_Response(FALSE, __("You have exceeded your creation limit for this month.", 'ninja'));
             }
 
             $this->title           = $project_name;
