@@ -36,10 +36,10 @@ $fav_class = 'bbc-star-o';
 if ( $user_ID ) {
 	$fav_chk = $post_obj->is_post_in_user_favorites( $single_post->ID );
 	if ( $fav_chk ) {
-		$fav_class = 'bbc-star';
+		$fav_class = 'bbc-star text-success';
 		$fav_text  = __( 'Unfavored', 'ninja' );
 	} else {
-		$fav_class = 'bbc-star-o';
+		$fav_class = 'bbc-star-o text-danger';
 		$fav_text  = __( 'Favorite', 'ninja' );
 	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );
@@ -69,7 +69,7 @@ if ( $user_ID ) {
 		<div class="container-md content-container">
 			<div class="date">
 				<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
-				<small class="text-muted">
+				<small class="text-muted mr-auto">
 					<?= __( 'on', 'ninja' ) ?>
 					<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
 				</small>
@@ -93,10 +93,10 @@ if ( $user_ID ) {
 								'order' => 5
 							],
 							'submit_add_to_fav_request' => [ 
-								'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+								'class'               => 'btn-light bg-white article-to-favorite ninja-add-to-fav ms-4 me-2',
 								'id'                  => 'submit_add_to_fav_request',
 								'type'                => 'submit',
-								'value'               => '<i class="' . $fav_class . ' fav-star"></i> <span class="fav-text">' . __( 'Add To Favorite', 'ninja' ) . '</span>',
+								'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
 								'recaptcha_form_name' => 'frontend_add_to_fav',
 								'order'               => 10
 							],
@@ -124,7 +124,7 @@ if ( $user_ID ) {
 								'class'               => 'btn-light bg-white',
 								'id'                  => 'submit_submit_ignore',
 								'type'                => 'submit',
-								'value'               => '<i class="' . $ignore_class . ' ignore-star"></i> <span class="ignore-text">' . __( 'Ignore', 'ninja' ) . '</span>',
+								'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
 								'recaptcha_form_name' => 'frontend_ignore',
 								'order'               => 10
 							],
@@ -168,8 +168,8 @@ if ( $user_ID ) {
 		</h3>
 		<?php
 		/* $related = $post_obj->get_all_custom( [ 'publish' ], 10, 'rand', 'ASC', [ $single_post->ID ] );
-																											if ( ! empty( $related ) ) {
-																												foreach ( $related['posts'] as $single_related ) { */
+																																if ( ! empty( $related ) ) {
+																																	foreach ( $related['posts'] as $single_related ) { */
 		?>
 		<div class="related-card">
 			<a class="blog-item" href="<?php /* echo  $single_related->link */?>">
@@ -189,7 +189,7 @@ if ( $user_ID ) {
 		</div>
 		<?php
 		/*}
-																										 } */
+																															 } */
 		?>
 	</div> -->
 		</div>
