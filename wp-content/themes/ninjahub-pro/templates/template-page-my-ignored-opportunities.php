@@ -50,10 +50,10 @@ $user_obj        = Nh_User::get_current_user();
 							$ignored_check = $opportunity_obj->is_opportunity_in_user_ignored( $opportunity->ID );
 							$ignore_class  = '';
 							if ( $ignored_check ) {
-                                $ignore_class = 'controll-icon bbc-thumbs-up text-dark';
-                            } else {
-                                $ignore_class = 'controll-icon bbc-thumbs-down text-dark';
-                            }
+								$ignore_class = 'controll-icon bbc-thumbs-up text-success';
+							} else {
+								$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+							}
 
 							$args['ignore_form']  = Nh_Forms::get_instance()
 								->create_form( [ 
@@ -73,7 +73,7 @@ $user_obj        = Nh_User::get_current_user();
 										'order' => 5
 									],
 									'submit_ignore'            => [ 
-										'class'               => 'btn',
+										'class'               => 'btn-light bg-white',
 										'id'                  => 'submit_submit_ignore',
 										'type'                => 'submit',
 										'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
