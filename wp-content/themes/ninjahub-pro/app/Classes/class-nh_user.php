@@ -305,7 +305,7 @@
             $role = [];
             if (!empty($ID) && is_numeric($ID)) {
                 $user_meta = get_userdata($ID);
-                return $role = ($single) ? $user_meta->roles[0] : $user_meta->roles;
+                return $role = ($single) ? reset($user_meta->roles) : $user_meta->roles;
             }
             return $role;
         }
@@ -964,7 +964,7 @@
             $new_user->last_name      = $this->last_name;
             $new_user->nickname       = $this->nickname;
             $new_user->display_name   = $user->data->display_name;
-            $new_user->role           = $user->roles[0];
+            $new_user->role           = (!empty($user->roles) && is_array($user->roles))?reset($user->roles):'';
             $new_user->status         = $user->data->user_status;
             $new_user->registered     = $user->data->user_registered;
             $new_user->activation_key = $user->data->user_activation_key;
