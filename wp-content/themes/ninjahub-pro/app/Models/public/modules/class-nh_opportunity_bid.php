@@ -148,7 +148,7 @@
             $opportunity_bids   = empty($opportunity->meta_data['opportunity_bids']) ? [] : $opportunity->meta_data['opportunity_bids'];
             $opportunity_bids[] = $insert->ID;
             $opportunity->set_meta_data('opportunity_bids', $opportunity_bids);
-            $opportunity->set_meta_data('opportunity_stage', 'bidding-start');
+            // $opportunity->set_meta_data('opportunity_stage', 'bidding-start');
             $update = $opportunity->update();
 
             if (is_wp_error($update)) {

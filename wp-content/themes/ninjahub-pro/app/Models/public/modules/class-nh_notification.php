@@ -279,6 +279,7 @@
                         ]);
                     }
                     break;
+
                 case 'opportunity_approve':
                     $user                                             = Nh_User::get_user_by('ID', $to);
                     $notification_obj                                 = new $class();
@@ -584,10 +585,10 @@
 
                     // SEND EMAIL
                     $this->send_email('bidding', [
-                        'to_email'    => $user->email,
-                        'role'        => Nh_User::ADMIN,
-                        'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -607,10 +608,10 @@
 
                         // SEND EMAIL
                         $this->send_email('bidding', [
-                            'to_email'    => $user->email,
-                            'role'        => Nh_User::ADMIN,
-                            'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
                     }
 
@@ -630,10 +631,10 @@
 
                     // SEND EMAIL
                     $this->send_email('acquisition', [
-                        'to_email'    => $user->email,
-                        'role'        => Nh_User::ADMIN,
-                        'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -653,10 +654,10 @@
 
                         // SEND EMAIL
                         $this->send_email('acquisition', [
-                            'to_email'    => $user->email,
-                            'role'        => Nh_User::ADMIN,
-                            'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
 
                     }
@@ -677,10 +678,10 @@
 
                     // SEND EMAIL
                     $this->send_email('investment', [
-                        'to_email'    => $user->email,
-                        'role'        => Nh_User::ADMIN,
-                        'user'        => $user,
-                        'opportunity' => $data['opportunity'],
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
                     ]);
 
 
@@ -701,10 +702,10 @@
 
                         // SEND EMAIL
                         $this->send_email('investment', [
-                            'to_email'    => $user->email,
-                            'role'        => Nh_User::ADMIN,
-                            'user'        => $user,
-                            'opportunity' => $data['opportunity'],
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
                         ]);
                     }
                     break;

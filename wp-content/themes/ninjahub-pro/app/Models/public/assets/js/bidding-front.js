@@ -14,7 +14,6 @@ import $ from 'jquery';
 import NhValidator from './helpers/Validator';
 import NhUiCtrl    from './inc/UiCtrl';
 import NhBidding   from './modules/Bidding';
-import bootstrap   from 'bootstrap';
 
 class NhBiddingFront extends NhBidding
 {
@@ -41,7 +40,7 @@ class NhBiddingFront extends NhBidding
 
     initialization()
     {
-        this.CreateBidFront();
+        // this.CreateBidFront();
     }
 
     CreateBidFront()

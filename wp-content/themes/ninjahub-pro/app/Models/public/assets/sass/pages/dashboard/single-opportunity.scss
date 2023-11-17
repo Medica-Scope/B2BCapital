@@ -28,10 +28,12 @@
 }
 .actions {
 	display: flex;
-	justify-content: space-between;
-	.ninja_form_container {
-		width: 49%;
-	}
+	gap: 1rem;
+	justify-content: flex-end;
+	align-items: center;
+	// .ninja_form_container {
+	// 	width: 49%;
+	// }
 }
 .card-body {
 	padding-top: 0;

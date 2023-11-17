@@ -10,7 +10,6 @@
 import $         from 'jquery';
 import UiCtrl    from '../inc/UiCtrl';
 import Nh        from './Nh';
-import bootstrap from 'bootstrap';
 import _         from 'lodash';
 
 class NhBidding extends Nh
@@ -61,6 +60,7 @@ class NhBidding extends Nh
 
                 $el.form.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.form, false);
+                // window.location.reload();
                 that.createNewToken();
             },
             error: function (xhr) {
