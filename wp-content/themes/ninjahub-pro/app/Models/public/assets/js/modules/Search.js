@@ -7,17 +7,20 @@
 
 /* globals nhGlobals, KEY */
 // import theme 3d party modules
-import $ from 'jquery';
+import $        from 'jquery';
 import NhUiCtrl from '../inc/UiCtrl';
-import Nh from './Nh';
+import Nh       from './Nh';
 
-class NhSearch extends Nh {
-    constructor() {
+class NhSearch extends Nh
+{
+    constructor()
+    {
         super();
         this.ajaxRequests = {};
     }
 
-    search(formData, type, $el) {
+    search(formData, type, $el)
+    {
         let that = this;
 
         this.ajaxRequests.search = $.ajax({
@@ -26,7 +29,7 @@ class NhSearch extends Nh {
             data: {
                 action: `${KEY}_search_ajax`,
                 s: formData,
-                type: type
+                type: type,
             },
             beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
@@ -43,12 +46,13 @@ class NhSearch extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
-    loadmore(formData, $el) {
-        let that = this,
+    loadmore(formData, $el)
+    {
+        let that       = this,
             loopParent = $(`.search-success`);
 
         this.ajaxRequests.searchLoadmore = $.ajax({
@@ -56,7 +60,7 @@ class NhSearch extends Nh {
             type: 'POST',
             data: {
                 action: `${KEY}_search_loadmore_ajax`,
-                data: formData
+                data: formData,
             },
             beforeSend: function () {
                 $el.parent.find('input, button').prop('disabled', true);
@@ -69,10 +73,10 @@ class NhSearch extends Nh {
 
                 NhUiCtrl.blockUI(loopParent, false);
                 if (res.data.last) {
-                    loopParent.attr('data-last', 'true')
+                    loopParent.attr('data-last', 'true');
                 }
                 loopParent.append(res.data.html);
-                loopParent.attr('data-page', Number(loopParent.attr('data-page')) + 1)
+                loopParent.attr('data-page', Number(loopParent.attr('data-page')) + 1);
 
             },
             error: function (xhr) {
@@ -80,10 +84,19 @@ class NhSearch extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('input[name="g-recaptcha-response"]').val(token);
+            });
+        });
+    }
 }
 
 export default NhSearch;
