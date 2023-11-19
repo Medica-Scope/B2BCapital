@@ -14,6 +14,7 @@
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Ajax_Response;
     use NH\APP\HELPERS\Nh_Cryptor;
+    use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
     use WP_Post;
 
@@ -135,10 +136,24 @@
                 new Nh_Ajax_Response(FALSE, __("You can't bid twice at the same opportunity.", 'ninja'));
             }
 
+
+            // get relative opp ID's
+            $relative_opportunities = [];
+            foreach (Nh_Public::get_available_languages() as $lang) {
+                if ($lang['code'] !== NH_lANG) {
+                    // Get the term's ID in the French language
+                    $translated_opp_id = wpml_object_id_filter($opp_id, 'post', FALSE, $lang['code']);
+                    if ($translated_opp_id) {
+                        $relative_opportunities[] = $translated_opp_id;
+                    }
+                }
+
+            }
+
             $bidding_obj         = new Nh_Opportunity_Bid();
             $bidding_obj->title  = 'New Bidding From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
             $bidding_obj->author = $current_user->ID;
-            $bidding_obj->set_meta_data('opportunity', $opp_id);
+            $bidding_obj->set_meta_data('opportunity', $relative_opportunities);
             $insert = $bidding_obj->insert();
 
             if (is_wp_error($insert)) {

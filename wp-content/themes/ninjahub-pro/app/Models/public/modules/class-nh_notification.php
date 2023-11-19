@@ -642,7 +642,7 @@
                     foreach ($admin_users as $user) {
                         $notification_obj                                 = new $class();
                         $notification_obj->title                          = __("New Acquisition Request", 'ninja');
-                        $notification_obj->content                        = __("New acquisition request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
+                        $notification_obj->content                        = __("New acquisition request on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
                             'type'           => 'opportunity_published',

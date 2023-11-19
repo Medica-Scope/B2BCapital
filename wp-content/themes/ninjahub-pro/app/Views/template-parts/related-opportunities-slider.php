@@ -14,6 +14,9 @@
             $opportunities     = isset($args['related_opportunities']) && is_array($args['related_opportunities']) ? $args['related_opportunities'] : [];
             foreach ($opportunities as $opportunity_id) {
                 $opportunity = $opportunities_obj->get_by_id($opportunity_id);
+                if ($opportunity->meta_data['opportunity_stage'] !== 'publish') {
+                    continue;
+                }
                 $args        = [
                     'opportunity_link'         => $opportunity->link,
                     'opportunity_title'        => $opportunity->title,
