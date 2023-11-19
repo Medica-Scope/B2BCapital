@@ -1098,14 +1098,16 @@
             $profile_obj         = new Nh_Profile();
             $profile_obj->author = $user_id;
             $wp_user_obj         = get_user_by('id', $user_id);
+            $wp_user_obj->set_role(static::INVESTOR);
             $profile_obj->title  = $wp_user_obj->display_name;
             $profile_obj->insert();
-            $user = self::get_user($wp_user_obj);
-            $wp_user_obj->set_role(static::INVESTOR);
+            $user = Nh_User::get_user_by('id', $user_id);
             $user->set_user_meta('email_verification_status', 1, TRUE);
             $user->set_user_meta('account_authentication_status', 1, TRUE);
             $user->set_user_meta('account_verification_status', 1, TRUE);
             $user->set_user_meta('verification_key', '', TRUE);
             $user->set_user_meta('verification_expire_date', '', TRUE);
+            $user->update();
+
         }
     }
