@@ -87,8 +87,8 @@ if ( $user_ID ) {
 			<?php
 
 			echo Nh_Forms::get_instance()
-				->create_form( [ 
-					'opp_id'                    => [ 
+				->create_form( [
+					'opp_id'                    => [
 						'type'   => 'hidden',
 						'name'   => 'opp_id',
 						'before' => '',
@@ -96,14 +96,14 @@ if ( $user_ID ) {
 						'value'  => $opportunity->ID,
 						'order'  => 0
 					],
-					'add_to_fav_nonce'          => [ 
+					'add_to_fav_nonce'          => [
 						'class' => '',
 						'type'  => 'nonce',
 						'name'  => 'add_to_fav_nonce_nonce',
 						'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 						'order' => 5
 					],
-					'submit_add_to_fav_request' => [ 
+					'submit_add_to_fav_request' => [
 						'class'               => 'btn-success',
 						'id'                  => 'submit_add_to_fav_request',
 						'type'                => 'submit',
@@ -111,15 +111,15 @@ if ( $user_ID ) {
 						'recaptcha_form_name' => 'frontend_add_to_fav',
 						'order'               => 10
 					],
-				], [ 
+				], [
 					'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 					'id'    => Nh::_DOMAIN_NAME . '_add_to_fav_form'
 				] );
 
 
 			echo Nh_Forms::get_instance()
-				->create_form( [ 
-					'opp_id'                   => [ 
+				->create_form( [
+					'opp_id'                   => [
 						'type'   => 'hidden',
 						'name'   => 'opp_id',
 						'before' => '',
@@ -127,14 +127,14 @@ if ( $user_ID ) {
 						'value'  => $opportunity->ID,
 						'order'  => 0
 					],
-					'ignore_opportunity_nonce' => [ 
+					'ignore_opportunity_nonce' => [
 						'class' => '',
 						'type'  => 'nonce',
 						'name'  => 'ignore_opportunity_nonce',
 						'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
 						'order' => 5
 					],
-					'submit_ignore'            => [ 
+					'submit_ignore'            => [
 						'class'               => 'btn-light bg-white',
 						'id'                  => 'submit_submit_ignore',
 						'type'                => 'submit',
@@ -142,7 +142,7 @@ if ( $user_ID ) {
 						'recaptcha_form_name' => 'frontend_ignore',
 						'order'               => 10
 					],
-				], [ 
+				], [
 					'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
 					'id'    => Nh::_DOMAIN_NAME . '_create_ignore_opportunity_form'
 				] );
@@ -192,8 +192,8 @@ if ( $user_ID ) {
 
 												<div>
 													<?= Nh_Forms::get_instance()
-														->create_form( [ 
-															'bid_amount'    => [ 
+														->create_form( [
+															'bid_amount'    => [
 																'class'       => '',
 																'type'        => 'number',
 																'name'        => 'bid_amount',
@@ -201,7 +201,7 @@ if ( $user_ID ) {
 																'before'      => '',
 																'order'       => 0,
 															],
-															'opp_id'        => [ 
+															'opp_id'        => [
 																'type'   => 'hidden',
 																'name'   => 'opp_id',
 																'before' => '',
@@ -209,21 +209,21 @@ if ( $user_ID ) {
 																'value'  => $opportunity->ID,
 																'order'  => 5
 															],
-															'start_bid'     => [ 
+															'start_bid'     => [
 																'type'  => 'hidden',
 																'id'    => Nh::_DOMAIN_NAME . '_start_bid',
 																'name'  => 'start_bid',
 																'value' => (int) $opportunity->meta_data['start_bidding_amount'],
 																'order' => 10
 															],
-															'add_bid_nonce' => [ 
+															'add_bid_nonce' => [
 																'class' => '',
 																'type'  => 'nonce',
 																'name'  => 'add_bid_nonce',
 																'value' => Nh::_DOMAIN_NAME . "_add_bid_nonce_form",
 																'order' => 15
 															],
-															'submit_bid'    => [ 
+															'submit_bid'    => [
 																'class'               => 'btn',
 																'id'                  => 'submit_bid',
 																'type'                => 'submit',
@@ -231,7 +231,7 @@ if ( $user_ID ) {
 																'recaptcha_form_name' => 'frontend_add_bid',
 																'order'               => 20
 															],
-														], [ 
+														], [
 															'class' => Nh::_DOMAIN_NAME . '-add-bid-form',
 															'id'    => Nh::_DOMAIN_NAME . '_add_bid_form'
 														] ); ?>
@@ -260,8 +260,8 @@ if ( $user_ID ) {
 					if ( $unique_type_name === 'acquisition' ) {
 						if ( $opportunity_acquisition_obj->user_can_acquire( $user_ID, $opportunity->ID ) ) {
 							echo Nh_Forms::get_instance()
-								->create_form( [ 
-									'opp_id'                      => [ 
+								->create_form( [
+									'opp_id'                      => [
 										'type'   => 'hidden',
 										'name'   => 'opp_id',
 										'before' => '',
@@ -269,14 +269,14 @@ if ( $user_ID ) {
 										'value'  => $opportunity->ID,
 										'order'  => 0
 									],
-									'create_acquisitions_nonce'   => [ 
+									'create_acquisitions_nonce'   => [
 										'class' => '',
 										'type'  => 'nonce',
 										'name'  => 'create_acquisitions_nonce',
 										'value' => Nh::_DOMAIN_NAME . "_create_acquisitions_nonce_form",
 										'order' => 5
 									],
-									'submit_acquisitions_request' => [ 
+									'submit_acquisitions_request' => [
 										'class'               => 'btn',
 										'id'                  => 'submit_acquisitions_request',
 										'type'                => 'submit',
@@ -284,7 +284,7 @@ if ( $user_ID ) {
 										'recaptcha_form_name' => 'frontend_create_acquisitions',
 										'order'               => 15
 									],
-								], [ 
+								], [
 									'class' => Nh::_DOMAIN_NAME . '-create-acquisition-form',
 									'id'    => Nh::_DOMAIN_NAME . '_create_acquisition_form'
 								] );
@@ -300,8 +300,8 @@ if ( $user_ID ) {
 					if ( $unique_type_name === 'regular' ) {
 						if ( $opportunity_investments_obj->user_can_invest( $user_ID, $opportunity->ID ) ) {
 							echo Nh_Forms::get_instance()
-								->create_form( [ 
-									'opp_id'                     => [ 
+								->create_form( [
+									'opp_id'                     => [
 										'type'   => 'hidden',
 										'name'   => 'opp_id',
 										'before' => '',
@@ -309,14 +309,14 @@ if ( $user_ID ) {
 										'value'  => $opportunity->ID,
 										'order'  => 0
 									],
-									'create_investments_nonce'   => [ 
+									'create_investments_nonce'   => [
 										'class' => '',
 										'type'  => 'nonce',
 										'name'  => 'create_investments_nonce',
 										'value' => Nh::_DOMAIN_NAME . "_create_investments_nonce_form",
 										'order' => 5
 									],
-									'submit_investments_request' => [ 
+									'submit_investments_request' => [
 										'class'               => 'btn',
 										'id'                  => 'submit_investments_request',
 										'type'                => 'submit',
@@ -324,7 +324,7 @@ if ( $user_ID ) {
 										'recaptcha_form_name' => 'frontend_create_investments',
 										'order'               => 15
 									],
-								], [ 
+								], [
 									'class' => Nh::_DOMAIN_NAME . '-create-investment-form',
 									'id'    => Nh::_DOMAIN_NAME . '_create_investment_form'
 								] );
@@ -369,7 +369,13 @@ if ( $user_ID ) {
 
 			} else {
 				if ( Nh_User::get_user_role() !== Nh_User::INVESTOR ) {
-					_ex( '<p>Opportunity is under reviewing..</p>', 'ninja' );
+					if ($opportunity->meta_data['opportunity_stage'] === 'cancel') {
+						_ex( '<p>Opportunity is canceled..</p>', 'ninja' );
+					}elseif ($opportunity->meta_data['opportunity_stage'] === 'hold') {
+						_ex( '<p>Opportunity is on hold..</p>', 'ninja' );
+					} else {
+						_ex( '<p>Opportunity is under reviewing..</p>', 'ninja' );
+					}
 				}
 			}
 			?>
