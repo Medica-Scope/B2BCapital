@@ -59,8 +59,9 @@ class NhOpportunity extends Nh
     //     });
     // }
 
-    createOpportunity(formData, $el) {
-        let that = this;
+    createOpportunity(formData, $el)
+    {
+        let that                  = this;
         // Creating an AJAX request for login
         this.ajaxRequests.getForm = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -69,11 +70,11 @@ class NhOpportunity extends Nh
                 action: `${KEY}_create_opportunity_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
 
                 if (res.success) {
@@ -87,7 +88,7 @@ class NhOpportunity extends Nh
                 that.createNewToken();
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -97,21 +98,13 @@ class NhOpportunity extends Nh
         });
     }
 
-    // Method for creating a new token
-    createNewToken() {
-        grecaptcha.ready(function() {
-            grecaptcha.execute(nhGlobals.publicKey).then(function(token) {
-                $('#g-recaptcha-response').val(token);
-            });
-        });
-    }
-
-    ajax_upload($wrapper, data, target, $input, $el) {
-        let that = this,
+    ajax_upload($wrapper, data, target, $input, $el)
+    {
+        let that         = this,
             ajaxRequests = this.ajaxRequests;
-        let file = data.get('file');
-        let file_name = that.renameFile(file.name);
-        let $file = $(that.createAttachment(file_name));
+        let file         = data.get('file');
+        let file_name    = that.renameFile(file.name);
+        let $file        = $(that.createAttachment(file_name));
 
         ajaxRequests.ninjaAttacmentUpload = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -130,8 +123,8 @@ class NhOpportunity extends Nh
                 xhr.upload.addEventListener('progress', function (evt) {
                     if (evt.lengthComputable) {
                         let percentComplete = evt.loaded / evt.total,
-                            progress = $file.find('.ninja-progress');
-                        percentComplete = parseInt(percentComplete * 100);
+                            progress        = $file.find('.ninja-progress');
+                        percentComplete     = parseInt(percentComplete * 100);
                         progress.width(percentComplete + '%');
                     }
                 }, false);
@@ -164,8 +157,8 @@ class NhOpportunity extends Nh
                 } else {
                     // Reset Input
                     $input.val('');
-                    $(`input[name="${target}"]`).val(""); // input that should hold the attachment ID
-                    $(`input[data-target="${target}"]`).val(""); // file input type
+                    $(`input[name="${target}"]`).val(''); // input that should hold the attachment ID
+                    $(`input[data-target="${target}"]`).val(''); // file input type
                     $el.form.find('input, button').prop('disabled', false);
                     UiCtrl.notices($wrapper.closest('form'), res.msg);
                     UiCtrl.blockUI($el.form, false);
@@ -185,8 +178,8 @@ class NhOpportunity extends Nh
                 if (xhr.statusText !== 'abort') {
                     $file.remove();
                     $el.form.find('input, button').prop('disabled', false);
-                    $(`input[name="${target}"]`).val(""); // input that should hold the attachment ID
-                    $(`input[data-target="${target}"]`).val(""); // file input type
+                    $(`input[name="${target}"]`).val(''); // input that should hold the attachment ID
+                    $(`input[data-target="${target}"]`).val(''); // file input type
                     // UiCtrl.notices($wrapper.closest('form'), res.msg);
                     UiCtrl.blockUI($el.form, false);
                     console.error(errorMessage);
@@ -195,9 +188,9 @@ class NhOpportunity extends Nh
         });
     }
 
-
-    ajax_remove($wrapper, data, $btn, $el) {
-        let that = this,
+    ajax_remove($wrapper, data, $btn, $el)
+    {
+        let that         = this,
             ajaxRequests = this.ajaxRequests;
 
         ajaxRequests.ninjaAttacmentRemove = $.ajax({
@@ -272,7 +265,7 @@ class NhOpportunity extends Nh
 
     toggleFavoriteOpportunity(formData, $el)
     {
-        let that                      = this;
+        let that                    = this;
         this.ajaxRequests.toggleFav = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
@@ -285,12 +278,12 @@ class NhOpportunity extends Nh
             },
             success: function (res) {
                 if (res.success) {
-                    if(res.data.fav_active == 0){
+                    if (res.data.fav_active == 0) {
                         $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
-                    }else{
+                    } else {
                         $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
                     }
-                    if(res.data.updated_text && $('.fav-text').length){
+                    if (res.data.updated_text && $('.fav-text').length) {
                         $('.fav-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
@@ -302,13 +295,13 @@ class NhOpportunity extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
     ignoreOpportunity(formData, $el)
     {
-        let that                      = this;
+        let that                            = this;
         this.ajaxRequests.ignoreOpportunity = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
@@ -321,12 +314,12 @@ class NhOpportunity extends Nh
             },
             success: function (res) {
                 if (res.success) {
-                    if(res.data.ignore_active == 0){
+                    if (res.data.ignore_active == 0) {
                         $el.find('.ignore-star').toggleClass('bbc-thumbs-down bbc-thumbs-up');
-                    }else{
+                    } else {
                         $el.find('.ignore-star').toggleClass('bbc-thumbs-up bbc-thumbs-down');
                     }
-                    if(res.data.updated_text && $('.ignore-text').length){
+                    if (res.data.updated_text && $('.ignore-text').length) {
                         $('.ignore-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
@@ -338,7 +331,17 @@ class NhOpportunity extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
+        });
+    }
+
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('input[name="g-recaptcha-response"]').val(token);
+            });
         });
     }
 }
