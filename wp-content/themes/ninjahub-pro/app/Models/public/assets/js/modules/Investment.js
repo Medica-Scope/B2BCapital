@@ -69,7 +69,7 @@ class NhInvestment extends Nh
     {
         grecaptcha.ready(function () {
             grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
-                $('#g-recaptcha-response').val(token);
+                $('input[name="g-recaptcha-response"]').val(token);
             });
         });
     }
