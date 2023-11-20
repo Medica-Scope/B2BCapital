@@ -7,10 +7,10 @@
 
 /* globals nhGlobals, KEY */
 // import theme 3d party modules
-import $         from 'jquery';
-import UiCtrl    from '../inc/UiCtrl';
-import Nh        from './Nh';
-import _         from 'lodash';
+import $      from 'jquery';
+import UiCtrl from '../inc/UiCtrl';
+import Nh     from './Nh';
+import _      from 'lodash';
 
 class NhBidding extends Nh
 {
@@ -22,7 +22,7 @@ class NhBidding extends Nh
 
     createBid(formData, $el)
     {
-        let that        = this;
+        let that = this;
 
         this.ajaxRequests.createBid = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -78,7 +78,7 @@ class NhBidding extends Nh
     {
         grecaptcha.ready(function () {
             grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
-                $('#g-recaptcha-response').val(token);
+                $('input[name="g-recaptcha-response"]').val(token);
             });
         });
     }

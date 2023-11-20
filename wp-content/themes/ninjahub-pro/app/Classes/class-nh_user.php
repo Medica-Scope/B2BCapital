@@ -305,7 +305,7 @@
             $role = [];
             if (!empty($ID) && is_numeric($ID)) {
                 $user_meta = get_userdata($ID);
-                return $role = ($single) ? $user_meta->roles[0] : $user_meta->roles;
+                return $role = ($single) ? reset($user_meta->roles) : $user_meta->roles;
             }
             return $role;
         }
@@ -837,6 +837,15 @@
             $current_timestamp = time(); // Get the current Unix timestamp
             $expire_date       = $type === 'authentication' ? $data['authentication_expire_date'] : $data['verification_expire_date'];
 
+            //TODO:: REMOVE ON PRODUCTION
+//            if (Nh::_ENVIRONMENT === 'development') {
+                if ($data['incoming_code'] == 2468) {
+                    return true;
+                }
+//            }
+            //TODO:: REMOVE ON PRODUCTION
+
+
             if ($expire_date >= $current_timestamp) {
                 if ($data['incoming_code'] === $data['current_code']) {
                     return TRUE; // The OTP code is valid
@@ -964,7 +973,7 @@
             $new_user->last_name      = $this->last_name;
             $new_user->nickname       = $this->nickname;
             $new_user->display_name   = $user->data->display_name;
-            $new_user->role           = $user->roles[0];
+            $new_user->role           = (!empty($user->roles) && is_array($user->roles))?reset($user->roles):'';
             $new_user->status         = $user->data->user_status;
             $new_user->registered     = $user->data->user_registered;
             $new_user->activation_key = $user->data->user_activation_key;

@@ -4,19 +4,22 @@
  * @User: NINJA MASTER - Mustafa Shaaban
  * @Date: 1/4/2023
 
-/* globals nhGlobals, KEY */
+ /* globals nhGlobals, KEY */
 // import theme 3d party modules
-import $ from 'jquery';
+import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
-import Nh from './Nh';
+import Nh     from './Nh';
 
-class NhService extends Nh {
-    constructor() {
+class NhService extends Nh
+{
+    constructor()
+    {
         super();
         this.ajaxRequests = {};
     }
 
-    service(formData, type, $el) {
+    service(formData, type, $el)
+    {
         let that = this;
 
         this.ajaxRequests.search = $.ajax({
@@ -25,7 +28,7 @@ class NhService extends Nh {
             data: {
                 action: `${KEY}_search_ajax`,
                 s: formData,
-                type: type
+                type: type,
             },
             beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
@@ -42,10 +45,19 @@ class NhService extends Nh {
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('input[name="g-recaptcha-response"]').val(token);
+            });
+        });
+    }
 }
 
 export default NhService;

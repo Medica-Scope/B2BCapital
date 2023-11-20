@@ -8,21 +8,24 @@
 /* global nhGlobals, KEY */
 
 // Importing the required modules
-import $ from 'jquery';
+import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
 import Nh     from './Nh';
 import _      from 'lodash';
 
 // Defining the NhAuth class that extends the Nh class
-class NhAuth extends Nh {
-    constructor() {
+class NhAuth extends Nh
+{
+    constructor()
+    {
         super();
         this.ajaxRequests = {};
     }
 
     // Method for user registration
-    registration(formData, $el) {
-        let that = this;
+    registration(formData, $el)
+    {
+        let that                       = this;
         // Creating an AJAX request for registration
         this.ajaxRequests.registration = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -31,11 +34,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_registration_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -47,7 +50,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -58,8 +61,9 @@ class NhAuth extends Nh {
     }
 
     // Method for user login
-    login(formData, $el) {
-        let that = this;
+    login(formData, $el)
+    {
+        let that                = this;
         // Creating an AJAX request for login
         this.ajaxRequests.login = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -68,11 +72,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_login_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -84,7 +88,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -95,8 +99,9 @@ class NhAuth extends Nh {
     }
 
     // Method for verification
-    verification(formData, $el) {
-        let that = this;
+    verification(formData, $el)
+    {
+        let that                       = this;
         // Creating an AJAX request for verification
         this.ajaxRequests.verification = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -105,11 +110,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_verification_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     $($el).append(_.template($('#ninja_modal_auth_verif').html())({
@@ -126,7 +131,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -137,8 +142,9 @@ class NhAuth extends Nh {
     }
 
     // Method for authentication
-    authentication(formData, $el) {
-        let that = this;
+    authentication(formData, $el)
+    {
+        let that                         = this;
         // Creating an AJAX request for authentication
         this.ajaxRequests.authentication = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -147,11 +153,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_authentication_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -163,7 +169,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -174,8 +180,9 @@ class NhAuth extends Nh {
     }
 
     // Method for resending verification code
-    resendVerCode(formData, $el) {
-        let that = this;
+    resendVerCode(formData, $el)
+    {
+        let that                        = this;
         // Creating an AJAX request for resending verification code
         this.ajaxRequests.resendVerCode = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -184,11 +191,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_resendVerCode_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.closest('form').find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el.closest('form'));
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el.closest('form'), res.msg, 'success');
@@ -203,7 +210,7 @@ class NhAuth extends Nh {
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -214,8 +221,9 @@ class NhAuth extends Nh {
     }
 
     // Method for resending authentication code
-    resendAuthCode(formData, $el) {
-        let that = this;
+    resendAuthCode(formData, $el)
+    {
+        let that                         = this;
         // Creating an AJAX request for resending authentication code
         this.ajaxRequests.resendAuthCode = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -224,11 +232,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_resendAuthCode_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.closest('form').find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el.closest('form'));
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el.closest('form'), res.msg, 'success');
@@ -243,7 +251,7 @@ class NhAuth extends Nh {
                 $el.closest('form').find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el.closest('form'), false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -254,8 +262,9 @@ class NhAuth extends Nh {
     }
 
     // Method for selecting industries
-    industries(formData, $el) {
-        let that = this;
+    industries(formData, $el)
+    {
+        let that                     = this;
         // Creating an AJAX request for industries
         this.ajaxRequests.industries = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -264,11 +273,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_industries_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -280,7 +289,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -291,8 +300,9 @@ class NhAuth extends Nh {
     }
 
     // Method for forgot password
-    forgotPassword(formData, $el) {
-        let that = this;
+    forgotPassword(formData, $el)
+    {
+        let that                 = this;
         // Creating an AJAX request for forgot password
         this.ajaxRequests.forgot = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -301,11 +311,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_forgot_password_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -318,7 +328,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -329,8 +339,9 @@ class NhAuth extends Nh {
     }
 
     // Method for changing password
-    changePassword(formData, $el) {
-        let that = this;
+    changePassword(formData, $el)
+    {
+        let that                         = this;
         // Creating an AJAX request for changing password
         this.ajaxRequests.changePassword = $.ajax({
             url: nhGlobals.ajaxUrl,
@@ -339,11 +350,11 @@ class NhAuth extends Nh {
                 action: `${KEY}_change_password_ajax`,
                 data: formData,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 $el.find('input, button').prop('disabled', true);
                 UiCtrl.beforeSendPrepare($el);
             },
-            success: function(res) {
+            success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
@@ -356,7 +367,7 @@ class NhAuth extends Nh {
                 $el.find('input, button').prop('disabled', false);
                 UiCtrl.blockUI($el, false);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
@@ -440,34 +451,26 @@ class NhAuth extends Nh {
         });
     }
 
-    // Method for creating a new token
-    createNewToken() {
-        grecaptcha.ready(function() {
-            grecaptcha.execute(nhGlobals.publicKey).then(function(token) {
-                $('#g-recaptcha-response').val(token);
-            });
-        });
-    }
-
     // Method for the code countdown
-    codeCountDown() {
-        let that = this,
-            $codeForm = this.$el.codeForm,
+    codeCountDown()
+    {
+        let that              = this,
+            $codeForm         = this.$el.codeForm,
             $resendCodeParent = $('.ninja-resend-code-patent'),
-            $CodeCountDown = $('<span class="ninja-code-count-down"></span>');
+            $CodeCountDown    = $('<span class="ninja-code-count-down"></span>');
 
         $('.ninja-code-count-down').remove();
         $resendCodeParent.append($CodeCountDown);
 
         if ($CodeCountDown.length > 0) {
             // Given timestamp
-            let givenTimestamp = $resendCodeParent.attr('data-expire'),
+            let givenTimestamp   = $resendCodeParent.attr('data-expire'),
 
                 // Get the current timestamp
                 currentTimestamp = Math.floor(Date.now() / 1000),
 
                 // Calculate the difference in seconds
-                difference = givenTimestamp - currentTimestamp;
+                difference       = givenTimestamp - currentTimestamp;
 
             if (difference <= 0) {
                 $codeForm.resendCode.show();
@@ -475,7 +478,7 @@ class NhAuth extends Nh {
             }
 
             // Update the countdown timer every second
-            let countdownInterval = setInterval(function() {
+            let countdownInterval = setInterval(function () {
                 // Calculate minutes and seconds
                 let minutes = Math.floor(difference / 60),
                     seconds = difference % 60;
@@ -494,6 +497,16 @@ class NhAuth extends Nh {
                 }
             }, 1000);
         }
+    }
+
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('input[name="g-recaptcha-response"]').val(token);
+            });
+        });
     }
 }
 

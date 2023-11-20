@@ -95,6 +95,7 @@ class NhAuthentication extends NhAuth {
 
     // Perform necessary initializations
     initialization() {
+        this.globalEvents();
         this.registrationFront();
         this.loginFront();
         this.verificationFront();
@@ -106,6 +107,12 @@ class NhAuthentication extends NhAuth {
         this.editPasswordFront();
         this.showPassword();
         this.codeCountDown();
+    }
+
+    globalEvents() {
+        $('input[type="password"]').on('copy paste', function(e){
+            e.preventDefault();
+        });
     }
 
     // Front-end code for the registration form

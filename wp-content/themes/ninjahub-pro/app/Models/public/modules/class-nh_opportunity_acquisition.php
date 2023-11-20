@@ -14,6 +14,7 @@
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Ajax_Response;
     use NH\APP\HELPERS\Nh_Cryptor;
+    use NH\APP\MODELS\FRONT\Nh_Public;
     use NH\Nh;
     use WP_Post;
 
@@ -125,10 +126,24 @@
                 new Nh_Ajax_Response(FALSE, __("You can't send an acquisition request twice for the same opportunity.", 'ninja'));
             }
 
+
+            // get relative opp ID's
+            $relative_opportunities = [];
+            foreach (Nh_Public::get_available_languages() as $lang) {
+                if ($lang['code'] !== NH_lANG) {
+                    // Get the term's ID in the French language
+                    $translated_opp_id = wpml_object_id_filter($opp_id, 'post', FALSE, $lang['code']);
+                    if ($translated_opp_id) {
+                        $relative_opportunities[] = $translated_opp_id;
+                    }
+                }
+
+            }
+
             $acquisition_obj         = new Nh_Opportunity_Acquisition();
             $acquisition_obj->title  = 'New Request From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
             $acquisition_obj->author = $current_user->ID;
-            $acquisition_obj->set_meta_data('opportunity', $opp_id);
+            $acquisition_obj->set_meta_data('opportunity', $relative_opportunities);
 
             // TODO:: RECAP
             $acquisition_obj->set_meta_data('acquisitions_stage', 'open');
@@ -154,8 +169,8 @@
             //TODO:: SEND EMAILS
 
             new Nh_Ajax_Response(TRUE, sprintf(__('Your request for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
-                    'button_text' => __('Done', 'ninja')
-                ]);
+                'button_text' => __('Done', 'ninja')
+            ]);
         }
 
         public function user_can_acquire($user_ID, $opp_ID): bool
@@ -193,12 +208,12 @@
                 }
             }
             $args = [
-                'post_type'   => $this->module,
-                'post_status' => 'publish',
-                'orderby'     => 'ID',
-                'order'       => 'DESC',
-                "post__not_in"=> $not_in,
-                'meta_query'  => [
+                'post_type'    => $this->module,
+                'post_status'  => 'publish',
+                'orderby'      => 'ID',
+                'order'        => 'DESC',
+                "post__not_in" => $not_in,
+                'meta_query'   => [
                     'relation' => 'AND',
                     [
                         'key'     => 'acquisitions_stage',
@@ -244,12 +259,12 @@
                 }
             }
             $args = [
-                'post_type'   => $this->module,
-                'post_status' => 'publish',
-                'orderby'     => 'ID',
-                'order'       => 'DESC',
-                "post__not_in"=> $not_in,
-                'meta_query'  => [
+                'post_type'    => $this->module,
+                'post_status'  => 'publish',
+                'orderby'      => 'ID',
+                'order'        => 'DESC',
+                "post__not_in" => $not_in,
+                'meta_query'   => [
                     [
                         'key'     => 'acquisitions_stage',
                         'value'   => 'closed',
