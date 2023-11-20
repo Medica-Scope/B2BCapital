@@ -11,7 +11,7 @@
 import $ from 'jquery';
 
 // import theme modules
-import '@dotlottie/player-component';
+// import '@dotlottie/player-component';
 
 class NhMain
 {
@@ -49,4 +49,3 @@ class NhMain
 }
 
 new NhMain();
-
