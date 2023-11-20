@@ -1,6 +1,6 @@
 /* Imports */
 // import '../../../../../node_modules/';
-
+console.log('landing-main.js');
 /* Functions Declaration */
 /* Handle Show/Hide Next & Prev Buttons Based On Active Carousel Item */
 const handleCarouselAnimation = () => {
@@ -15,13 +15,15 @@ const handleCarouselAnimation = () => {
 			const carouselInner = document.querySelector('.carousel-inner');
 			const firstSlide = carouselInner.firstElementChild;
 			const lastSlide = carouselInner.lastElementChild;
+			const prevCarouselControl = document.querySelector('.carousel-control.prev');
+			const nextCarouselControl = document.querySelector('.carousel-control.next');
 			if (firstSlide.classList.contains('active')) {
-				const prevCarouselControl = document.querySelector('.carousel-control.prev');
 				prevCarouselControl.classList.add('d-none');
 			}
 			if (lastSlide.classList.contains('active')) {
-				const nextCarouselControl = document.querySelector('.carousel-control.next');
 				nextCarouselControl.classList.add('d-none');
+				prevCarouselControl.classList.remove('d-none');
+				prevCarouselControl.classList.add('d-block');
 			}
 		});
 	}
