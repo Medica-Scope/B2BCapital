@@ -1268,7 +1268,7 @@
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
                     'from' => '+12109608261',
-                    'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
+                    'body' => sprintf(__('Your authentication code for B2B is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1282,7 +1282,7 @@
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
                     'from' => '+12109608261',
-                    'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1320,8 +1320,8 @@
                 // If the type is authentication, send the authentication code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+12109608261',
-                    'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1334,8 +1334,8 @@
                 // If the type is verification, send the verification code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+12109608261',
-                    'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1404,7 +1404,7 @@
 
             $response = json_decode($result);
 
-            if ($response->status === 400) {
+            if ($response->status !== 'queued') {
                 // If the response status is 400, add the error to the error object and return it.
                 $error->add('sending_error', __("Response Error!", 'ninja'), [
                     'status'  => FALSE,
