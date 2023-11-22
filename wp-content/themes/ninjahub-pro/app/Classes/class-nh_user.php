@@ -1267,7 +1267,7 @@
                 // If the type is authentication, send the authentication code via phone.
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
-                    'from' => '+19894738633',
+                    'from' => '+12109608261',
                     'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
                 ]);
 
@@ -1281,7 +1281,7 @@
                 // If the type is verification, send the verification code via phone.
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
-                    'from' => '+19894738633',
+                    'from' => '+12109608261',
                     'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
                 ]);
 
@@ -1320,7 +1320,7 @@
                 // If the type is authentication, send the authentication code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+19894738633',
+                    'from' => 'whatsapp:+12109608261',
                     'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
                 ]);
 
@@ -1334,7 +1334,7 @@
                 // If the type is verification, send the verification code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+19894738633',
+                    'from' => 'whatsapp:+12109608261',
                     'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
                 ]);
 
@@ -1361,12 +1361,12 @@
          * @package NinjaHub
          * @throws \Exception
          */
-        private function send_by_twilio(array $data): \stdClass|\WP_Error
+            public function send_by_twilio(array $data): \stdClass|\WP_Error
         {
             $error      = new WP_Error(); // Create a new WordPress error object.
-            $account_ID = 'AC6fd8e3d3e4b54dcfbb681ebd0fec3cec';
-            $username   = 'AC6fd8e3d3e4b54dcfbb681ebd0fec3cec';
-            $password   = '859d2d5288fd109930458ae91f2b342f';
+            $account_ID = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
+            $username   = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
+            $password   = '86e8940f1af42f710f89ddcb20c22146';
             $to         = $data['to'];
             $from       = $data['from'];
             $body       = $data['body'];
@@ -1376,6 +1376,7 @@
             curl_setopt($ch, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/$account_ID/Messages.json");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_USERPWD, "$username" . ':' . "$password");
 
             $data = [
