@@ -138,7 +138,7 @@
 
 
             // get relative opp ID's
-            $relative_opportunities = [];
+            $relative_opportunities = [$opp_id];
             foreach (Nh_Public::get_available_languages() as $lang) {
                 if ($lang['code'] !== NH_lANG) {
                     // Get the term's ID in the French language
@@ -189,8 +189,8 @@
                 'meta_query'  => [
                     [
                         'key'     => 'opportunity',
-                        'value'   => $opp_ID,
-                        'compare' => '=',
+                        'value'   => serialize($opp_ID),
+                        'compare' => 'LIKE',
                     ],
                 ],
             ]);

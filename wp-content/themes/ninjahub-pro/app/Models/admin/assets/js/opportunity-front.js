@@ -26,19 +26,18 @@ class NhOpportunityFront extends NhOpportunity
 
     initialization()
     {
-        // this.adminStatus();
+        this.adminStatus();
     }
 
     adminStatus() {
         let that          = this;
-        $('select[name="_status"]').append('<option value="new">New</option>');
-        $('select[name="_status"]').append('<option value="approved">Approved</option>');
-        $('select[name="_status"]').append('<option value="held">Held</option>');
-        $('select[name="_status"]').append('<option value="review">Review</option>');
-        $('select[name="_status"]').append('<option value="verified">Verified</option>');
-        $('select[name="_status"]').append('<option value="seo_verified">SEO Verified</option>');
-        $('select[name="_status"]').append('<option value="translated">Translated</option>');
-        $('select[name="_status"]').append('<option value="success">Success</option>');
+        setInterval(function (e) {
+            $('input, textarea, button, select, button').attr('disabled', 'disabled');
+            $('.acf-button').on('click', function (e) {
+                e.preventDefault();
+                return false;
+            })
+        }, 1)
     }
 
 }

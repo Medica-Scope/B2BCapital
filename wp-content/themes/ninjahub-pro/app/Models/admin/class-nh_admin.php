@@ -62,17 +62,33 @@
 
         public function enqueue_styles(): void
         {
+            $current_screen = get_current_screen();
+
             $this->hooks->add_style('admin-style-main', Nh_Hooks::PATHS['admin']['css'] . '/style');
+
+            if ($current_screen->id === 'opportunity') {
+                if (current_user_can(Nh_User::REVIEWER)) {
+                    $this->hooks->add_style('admin-style-opportunity', Nh_Hooks::PATHS['admin']['css'] . '/opportunity');
+                }
+            }
+
         }
 
         public function enqueue_scripts(): void
         {
+            $current_screen = get_current_screen();
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-admin-script-main', Nh_Hooks::PATHS['admin']['js'] . '/main', [ 'jquery' ]);
             $this->hooks->add_localization(Nh::_DOMAIN_NAME . '-admin-script-main', 'nhGlobals', [
                 'domain_key' => Nh::_DOMAIN_NAME,
                 'ajaxUrl'    => admin_url('admin-ajax.php'),
             ]);
-            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-opportunity-script-main', Nh_Hooks::PATHS['admin']['js'] . '/opportunity-front', [ 'jquery' ]);
+
+            if ($current_screen->id === 'opportunity') {
+                if (current_user_can(Nh_User::REVIEWER)) {
+                    $this->hooks->add_script(Nh::_DOMAIN_NAME . '-opportunity-script-main', Nh_Hooks::PATHS['admin']['js'] . '/opportunity-front', [ 'jquery' ]);
+                }
+            }
+
 
             $this->hooks->run();
 
@@ -132,19 +148,22 @@
          * @author Ahmed Gamal
          * @return string
          */
-        public function add_new_columns($columns) {
-            $columns['fav_count'] = 'Favorite count';
+        public function add_new_columns($columns)
+        {
+            $columns['fav_count']    = 'Favorite count';
             $columns['ignore_count'] = 'Ignore count';
-            $columns['read_count'] = 'Read count';
+            $columns['read_count']   = 'Read count';
             return $columns;
         }
-        public function populate_columns($column, $post_id) {
+
+        public function populate_columns($column, $post_id)
+        {
             if ($column == 'fav_count') {
-                echo get_post_meta($post_id, 'fav_count', true);
+                echo get_post_meta($post_id, 'fav_count', TRUE);
             } elseif ($column == 'ignore_count') {
-                echo get_post_meta($post_id, 'ignore_count', true);
+                echo get_post_meta($post_id, 'ignore_count', TRUE);
             } elseif ($column == 'read_count') {
-                echo get_post_meta($post_id, 'read_count', true);
+                echo get_post_meta($post_id, 'read_count', TRUE);
             }
         }
 
