@@ -28,7 +28,7 @@ const paths = {
     styles: {
         admin: {
             watch: 'app/Models/admin/assets/sass/**/*.scss',
-            src: 'app/Models/admin/assets/sass/style.scss',
+            src: 'app/Models/admin/assets/sass/**/*.scss',
             dest: 'app/Models/admin/css',
         },
         public: {

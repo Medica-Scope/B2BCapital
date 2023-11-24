@@ -1,0 +1,11 @@
+/**
+ * @Filename: opportunity.scss
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 11/24/2023
+ */
+
+.editor-post-publish-button, .editor-post-switch-to-draft, .editor-post-trash {
+  display: none !important;
+  pointer-events: none;
+}

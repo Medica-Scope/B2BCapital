@@ -393,7 +393,15 @@
 
             update_user_meta($this->ID, 'profile_id', $profile->ID); // Update user meta data with the profile ID.
 
-            $this->setup_verification('verification'); // Set up user verification.
+            $verification = $this->setup_verification('verification'); // Set up user verification.
+
+            if (is_wp_error($verification)) {
+                $error->add('auth_code', __("Couldn't send the verification code", 'ninja'), [
+                    'status' => FALSE,
+                ]);
+                wp_logout();
+                return $error;
+            }
 
             $cred = [
                 'user_login'    => $this->username,
@@ -838,11 +846,11 @@
             $expire_date       = $type === 'authentication' ? $data['authentication_expire_date'] : $data['verification_expire_date'];
 
             //TODO:: REMOVE ON PRODUCTION
-//            if (Nh::_ENVIRONMENT === 'development') {
-                if ($data['incoming_code'] == 2468) {
-                    return true;
-                }
-//            }
+            //            if (Nh::_ENVIRONMENT === 'development') {
+            if ($data['incoming_code'] == 2468) {
+                return TRUE;
+            }
+            //            }
             //TODO:: REMOVE ON PRODUCTION
 
 
@@ -931,8 +939,8 @@
         {
             $args = [
                 'role__in' => $role,
-                'orderby'      => 'user_nicename',
-                'order'        => 'ASC'
+                'orderby'  => 'user_nicename',
+                'order'    => 'ASC'
             ];
 
             $users = get_users($args);
@@ -973,7 +981,7 @@
             $new_user->last_name      = $this->last_name;
             $new_user->nickname       = $this->nickname;
             $new_user->display_name   = $user->data->display_name;
-            $new_user->role           = (!empty($user->roles) && is_array($user->roles))?reset($user->roles):'';
+            $new_user->role           = (!empty($user->roles) && is_array($user->roles)) ? reset($user->roles) : '';
             $new_user->status         = $user->data->user_status;
             $new_user->registered     = $user->data->user_registered;
             $new_user->activation_key = $user->data->user_activation_key;
@@ -1124,7 +1132,16 @@
 
                 if (!$this->is_confirm()) {
                     // The account is not confirmed, send verification code
-                    $this->setup_verification('verification');
+                    $verification = $this->setup_verification('verification');
+
+                    if (is_wp_error($verification)) {
+                        $error->add('auth_code', __("Couldn't send the verification code", 'ninja'), [
+                            'status' => FALSE,
+                        ]);
+                        wp_logout();
+                        return $error;
+                    }
+
                     $error->add('account_verification', __("Your account is pending! Please check your E-mail/Mobile/WhatsApp to activate your account.", 'ninja'), [
                         'status'  => FALSE,
                         'details' => [ 'email' => $this->user_meta['account_verification_status'] ]
@@ -1138,7 +1155,14 @@
                 ];
 
                 if (in_array($this->role, $front_dashboard)) {
-                    $this->setup_verification('authentication');
+                    $authentication = $this->setup_verification('authentication');
+                    if (is_wp_error($authentication)) {
+                        $error->add('auth_code', __("Couldn't send the authentication code", 'ninja'), [
+                            'status' => FALSE,
+                        ]);
+                        wp_logout();
+                        return $error;
+                    }
                 }
 
                 $profile_id = get_user_meta($login->ID, 'profile_id', TRUE);
@@ -1184,15 +1208,15 @@
          *
          * @param string $type The type of verification process.
          *
-         * @throws \Exception
-         * @return \WP_Error|bool The WP_Error object or a boolean value indicating the success of the verification setup.
+         * @return \stdClass|\WP_Error|bool The WP_Error object or a boolean value indicating the success of the verification setup.
          *
+         * @throws \Exception
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
          * @author Mustafa Shaaban
          */
-        public function setup_verification(string $type): WP_Error|bool
+        public function setup_verification(string $type): \stdClass|WP_Error|bool
         {
             $error = new WP_Error(); // Create a new WordPress error object.
 
@@ -1257,7 +1281,7 @@
          * @author Mustafa Shaaban
          * @throws \Exception
          */
-        public function send_phone_otp_code(string $type, string $to = ''): WP_Error|bool
+        public function send_phone_otp_code(string $type, string $to = ''): \stdClass|WP_Error|bool
         {
             $error        = new WP_Error(); // Create a new WordPress error object.
             $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
@@ -1268,7 +1292,7 @@
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
                     'from' => '+12109608261',
-                    'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
+                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1282,7 +1306,7 @@
                 $send = $this->send_by_twilio([
                     'to'   => '+' . $to,
                     'from' => '+12109608261',
-                    'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
@@ -1310,7 +1334,7 @@
          * @author Mustafa Shaaban
          * @throws \Exception
          */
-        public function send_whatsapp_otp_code(string $type, string $to = ''): \stdClass|\WP_Error
+        public function send_whatsapp_otp_code(string $type, string $to = ''): \stdClass|\WP_Error|bool
         {
             $error        = new WP_Error(); // Create a new WordPress error object.
             $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
@@ -1320,12 +1344,12 @@
                 // If the type is authentication, send the authentication code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+12109608261',
-                    'body' => sprintf(__('Your authentication code for NH is %s', 'ninja'), $randomNumber)
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user meta data.
+                    // If sending the code was successful, update the user metadata.
                     $this->set_user_meta('account_authentication_status', 0, TRUE);
                     $this->set_user_meta('authentication_key', $randomNumber, TRUE);
                     $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
@@ -1334,12 +1358,12 @@
                 // If the type is verification, send the verification code via WhatsApp.
                 $send = $this->send_by_twilio([
                     'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+12109608261',
-                    'body' => sprintf(__('Your verification code for NH is %s', 'ninja'), $randomNumber)
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
                 ]);
 
                 if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user meta data.
+                    // If sending the code was successful, update the user metadata.
                     $this->set_user_meta('account_verification_status', 0, TRUE);
                     $this->set_user_meta('verification_key', $randomNumber, TRUE);
                     $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
@@ -1361,7 +1385,7 @@
          * @package NinjaHub
          * @throws \Exception
          */
-            public function send_by_twilio(array $data): \stdClass|\WP_Error
+        public function send_by_twilio(array $data): \stdClass|\WP_Error
         {
             $error      = new WP_Error(); // Create a new WordPress error object.
             $account_ID = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
@@ -1442,7 +1466,7 @@
 
                 $email = Nh_Mail::init()
                                 ->to($this->email)
-                                ->subject('Welcome to Nh - Please Authenticate Your Email')
+                                ->subject('Welcome to B2b - Please Authenticate Your Email')
                                 ->template('account-authentication/body', [
                                     'data' => [
                                         'user'   => $this,
@@ -1458,7 +1482,7 @@
 
                 $email = Nh_Mail::init()
                                 ->to($this->email)
-                                ->subject('Welcome to Nh - Please Verify Your Email')
+                                ->subject('Welcome to B2b - Please Verify Your Email')
                                 ->template('account-verification/body', [
                                     'data' => [
                                         'user'   => $this,

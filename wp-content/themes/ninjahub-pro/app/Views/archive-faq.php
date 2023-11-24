@@ -146,27 +146,31 @@
                             ?>
                             <div class="col-12 col-md-6 items-left pe-5">
                                 <?php
-                                    foreach ($faqs_chunk[0] as $faq_item) {
-                                        ?>
-                                        <div class="faq-item">
-                                            <a class="title btn btn-link text-dark" href="<?= $faq_item->link ?>">
-                                                <?= $faq_item->title ?>
-                                            </a>
-                                        </div>
-                                        <?php
+                                    if (isset($faqs_chunk[0])) {
+                                        foreach ($faqs_chunk[0] as $faq_item) {
+                                            ?>
+                                            <div class="faq-item">
+                                                <a class="title btn btn-link text-dark" href="<?= $faq_item->link ?>">
+                                                    <?= $faq_item->title ?>
+                                                </a>
+                                            </div>
+                                            <?php
+                                        }
                                     }
                                 ?>
                             </div>
                             <div class="col-12 col-md-6 items-right">
                                 <?php
-                                    foreach ($faqs_chunk[1] as $faq_item) {
-                                        ?>
-                                        <div class="faq-item">
-                                            <a class="title btn btn-link text-dark" href="<?= $faq_item->link ?>">
-                                                <?= $faq_item->title ?>
-                                            </a>
-                                        </div>
-                                        <?php
+                                    if (isset($faqs_chunk[1])) {
+                                        foreach ($faqs_chunk[1] as $faq_item) {
+                                            ?>
+                                            <div class="faq-item">
+                                                <a class="title btn btn-link text-dark" href="<?= $faq_item->link ?>">
+                                                    <?= $faq_item->title ?>
+                                                </a>
+                                            </div>
+                                            <?php
+                                        }
                                     }
                                 ?>
                             </div>

@@ -559,7 +559,7 @@
         {
 
             $form_data                     = $_POST['data'];
-            $industries                    = !empty($form_data['industries']) && !is_array($form_data['industries']) ? [$form_data['industries']] : $form_data['industries'];
+            $industries                    = !empty($form_data['industries']) && !is_array($form_data['industries']) ? [ $form_data['industries'] ] : $form_data['industries'];
             $expected_value                = $form_data['expected_value'];
             $entity_legal_type             = $form_data['entity_legal_type'];
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
@@ -735,12 +735,12 @@
             $user_email                       = sanitize_text_field($form_data['user_email']);
             $site_language                    = sanitize_text_field($form_data['site_language']);
             $widget_list                      = !is_array($form_data['widget_list']) ? [ $form_data['widget_list'] ] : $form_data['widget_list'];
-            $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
-            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_articles_cat_list'];
+            $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [ $form_data['preferred_opportunities_cat_list'] ] : $form_data['preferred_opportunities_cat_list'];
+            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [ $form_data['preferred_articles_cat_list'] ] : $form_data['preferred_articles_cat_list'];
             $verification_type                = empty(sanitize_text_field($form_data['verification_type'])) ? 'email' : sanitize_text_field($form_data['verification_type']);
             $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"]    = $recaptcha_response;
-            $redirect = false;
+            $redirect                         = FALSE;
             if (empty($form_data)) {
                 new Nh_Ajax_Response(FALSE, __("Profile data can't be empty.", 'ninja'));
             }
@@ -832,7 +832,7 @@
             $current_user_obj = Nh_User::get_current_user();
 
             if ($current_user_obj->user_meta['site_language'] !== $site_language) {
-                $redirect = true;
+                $redirect = TRUE;
             }
             $current_user_obj->username     = $phone_number;
             $current_user_obj->email        = $user_email;
@@ -1103,7 +1103,7 @@
             $profile_obj->author = $user_id;
             $wp_user_obj         = get_user_by('id', $user_id);
             $wp_user_obj->set_role(static::INVESTOR);
-            $profile_obj->title  = $wp_user_obj->display_name;
+            $profile_obj->title = $wp_user_obj->display_name;
             $profile_obj->insert();
             $user = Nh_User::get_user_by('id', $user_id);
             $user->set_user_meta('email_verification_status', 1, TRUE);
