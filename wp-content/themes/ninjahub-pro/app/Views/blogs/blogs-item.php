@@ -39,13 +39,13 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 
 			<?php if ( ! empty( $user_ID ) ) : ?>
-				<div class="opportunity-item-controllers">
-					<?php
+			<div class="opportunity-item-controllers">
+				<?php
 					echo $args['fav_form'];
 					echo $args['ignore_form'];
 					?>
-				</div>
-				<?php
+			</div>
+			<?php
 			endif;
 			?>
 		</div>
@@ -58,20 +58,20 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 
 		<?php if ( ! empty( $single_post->taxonomy['category'] ) ) : ?>
-			<div class="category">
-				<small class="text-muted">
-					<?= $single_post->taxonomy['category'][0]->name ?>
-				</small>
-			</div>
+		<div class="category">
+			<small class="text-muted">
+				<?= $single_post->taxonomy['category'][0]->name ?>
+			</small>
+		</div>
 		<?php endif; ?>
 
 
 		<?php if ( ! empty( $opportunity ) ) : ?>
-			<div class="opportunity">
-				<a href="<?= $opportunity->link ?>">
-					<?= $opportunity->name; ?>
-				</a>
-			</div>
+		<div class="opportunity">
+			<a href="<?= $opportunity->link ?>">
+				<?= $opportunity->name; ?>
+			</a>
+		</div>
 		<?php endif; ?>
 
 
@@ -82,7 +82,7 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
 			</p>
 		</div>
-		<div class="short-description">
+		<div class="short-description text-break">
 			<?= $single_post->excerpt ?>
 		</div>
 	</div>

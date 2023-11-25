@@ -33,8 +33,8 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 		<div class="service-banner-wrapper">
 			<div class="service-banner">
 				<a href="<?= get_post_type_archive_link( 'service' ); ?>" class="back-link">
-					<i class="icon bbc-previous-circle"></i>
-					<?= __( 'Bak To Services', 'ninja' ) ?>
+					<i class="bbc-arrow-left-circle text-white me-2"></i>
+					<?= __( 'Back To Services', 'ninja' ) ?>
 				</a>
 				<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/services/service-banner.webp" alt="Service Banner"
 					class="banner">

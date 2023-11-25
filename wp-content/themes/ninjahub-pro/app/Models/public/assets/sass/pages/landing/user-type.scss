@@ -4,19 +4,11 @@
 	&.main {
 		.app-brand {
 			width: 4rem;
-			z-index: 2;
-			position: absolute;
-			top: 2rem;
-			left: 1rem;
 			@include large-screen {
 				width: 4.6875rem;
-				top: 3rem;
-				left: 1rem;
 			}
 			@include xLarge-screen {
 				width: 7.875rem;
-				top: 3rem;
-				left: 1rem;
 			}
 		}
 		main {

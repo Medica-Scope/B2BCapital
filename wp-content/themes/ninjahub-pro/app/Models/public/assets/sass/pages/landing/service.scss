@@ -258,18 +258,19 @@
 								.date {
 									margin-bottom: 0.25rem;
 									color: $layout-light;
-									font-size: 1rem;
+									font-size: 0.8rem;
+									font-weight: bold;
 									font-family: $bbc-primary-en-font-regular;
 								}
 								.time {
 									font-family: $bbc-primary-en-font-semi-bold;
-									font-size: 0.8rem;
+									font-size: 0.7rem;
 									margin: 0.2rem 0;
 									color: $highlight-dark;
 									font-weight: bold;
-									@include xLarge-screen {
-										font-size: 1rem;
-									}
+									// @include xLarge-screen {
+									// 	font-size: 1rem;
+									// }
 
 									&.active-slot-time {
 										color: $highlight;
@@ -280,29 +281,31 @@
 								display: none;
 								&:checked {
 									+ .time-slot-details {
-										border: 1px dashed $success;
-										background-color: transparent;
+										border: 1px solid $layout-light;
+										background-color: $layout-light;
 										position: relative;
 										@include xLarge-screen {
-											border: 2px dashed $success;
+											border: 2px solid $layout-light;
 										}
-										// &::after {
-										// 	content: '\e91a';
-										// 	font-size: 0.65rem;
-										// 	font-family: B2BCapital, serif;
-										// 	color: $success;
-										// 	position: absolute;
-										// 	top: 0.25rem;
-										// 	right: 0.25rem;
-										// 	@include large-screen {
-										// 		font-size: 0.75rem;
-										// 	}
-										// 	@include xLarge-screen {
-										// 		font-size: 1rem;
-										// 	}
-										// }
-										.date {
-											color: $layout;
+										&::after {
+											content: '\2713';
+											font-size: 0.6rem;
+											font-weight: bold;
+											color: $layout-light;
+											background-color: $success;
+											border-radius: 50%;
+											width: 14px;
+											height: 14px;
+											position: absolute;
+											top: 0.2rem;
+											right: 0.2rem;
+										}
+										.date{
+											font-weight: bold;
+										}
+										.date,
+										.time {
+											color: $black;
 										}
 										&::webkit-scrollbar {
 											width: 0 !important;
