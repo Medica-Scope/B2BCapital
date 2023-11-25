@@ -135,7 +135,7 @@ $opportunity_obj = new Nh_Opportunity();
 						],
 						[ 
 							'class'      => '',
-							'label'      => __( 'Round investment', 'ninja' ),
+							'label'      => __( 'Investment Round', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
 							'value'      => 'round-investment',

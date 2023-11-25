@@ -87,9 +87,9 @@ class Nh_Public {
 			'registration',
 			'forgot-password'
 		] ) || $is_single_service || is_404() ) {
-			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player.js' );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player' );
 
-			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main.js', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ] );
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ] );
 		}
 
 
