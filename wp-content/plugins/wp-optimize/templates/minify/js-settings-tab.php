@@ -70,7 +70,7 @@
 				<h4><label>
 					<input
 						name="enable_defer_js"
-						type="radio"
+						type="radio" 
 						value="individual"
 						<?php echo checked($wpo_minify_options['enable_defer_js'], 'individual'); ?>
 					>
@@ -111,13 +111,13 @@
 					</label>
 				</div>
 			</fieldset>
-
+			
 			<fieldset>
 				<h4>
 					<label>
 						<input
 							name="enable_defer_js"
-							type="radio"
+							type="radio" 
 							value="all"
 							<?php echo checked($wpo_minify_options['enable_defer_js'], 'all'); ?>
 						>
@@ -135,7 +135,7 @@
 					<label>
 						<input
 							name="defer_js_type"
-							type="radio"
+							type="radio" 
 							value="defer"
 							<?php echo checked($wpo_minify_options['defer_js_type'], 'defer'); ?>
 						>
@@ -145,7 +145,7 @@
 					<label>
 						<input
 							name="defer_js_type"
-							type="radio"
+							type="radio" 
 							value="async_using_js"
 							<?php echo checked($wpo_minify_options['defer_js_type'], 'async_using_js'); ?>
 						>
