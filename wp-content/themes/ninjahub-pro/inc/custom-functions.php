@@ -152,7 +152,7 @@
     //
     //    $data = [
     //        'To'   => '+2010169997000',
-    //        'From' => '+19894738633',
+    //        'From' => '+12109608261',
     //        'Body' => 'test'
     //    ];
     //    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
@@ -162,6 +162,3 @@
     //        echo 'Error:' . curl_error($ch);
     //    }
     //    curl_close($ch);
-
-
-

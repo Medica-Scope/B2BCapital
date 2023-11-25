@@ -11,7 +11,7 @@
 		<div class="save_settings_reminder"><?php esc_html_e('Remember to save your settings so that your changes take effect.', 'wp-optimize');?></div>
 
 		<?php
-
+		
 		$loggers = $wp_optimize->wpo_loggers();
 
 		if (count($loggers) > 0) {
@@ -56,7 +56,7 @@
 						<div class="wpo_additional_logger_options wpo_hidden">
 							<input class="wpo_hidden" type="hidden" name="wpo-logger-type[]"
 									value="<?php echo esc_attr($logger_id); ?>"/>
-
+							
 							<?php
 							$options_list = $logger->get_options_list();
 							$options_values = $logger->get_options_values();
@@ -96,9 +96,9 @@
 					<?php
 				}
 				?>
-			</div><!-- End #wp-optimize-logging-options -->
+			</div><!-- End #wp-optimize-logging-options -->	
 			<?php
 		}
-		?>
+		?>	
 	</div><!-- End #wp-optimize-logger-settings -->
 </div>

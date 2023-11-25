@@ -19,7 +19,7 @@
 					<td><?php echo esc_html(WP_Optimize()->format_size($info['original'], 1)); ?></td>
 					<td><?php echo esc_html(WP_Optimize()->format_size($info['compressed'], 1)); ?></td>
 					<td><?php echo esc_html($saved); ?>%</td>
-				</tr>
+				</tr>    
 			<?php } ?>
 		</tbody>
 	</table>
