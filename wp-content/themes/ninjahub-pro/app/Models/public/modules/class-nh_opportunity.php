@@ -153,6 +153,8 @@ class Nh_Opportunity extends Nh_Module {
 	 */
 	protected function actions( $module_name ): void {
 		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_create_opportunity_ajax', $this, 'create_opportunity' );
+		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_filter_opportunity_ajax', $this, 'filter_opportunity' );
+		$this->hooks->add_action( 'wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_filter_opportunity_ajax', $this, 'filter_opportunity' );
 		$this->hooks->add_action( 'get_header', $this, 'acf_form_head' );
 		$this->hooks->add_action( 'acf/save_post', $this, 'after_acf_form_submission', 20 );
 		$this->hooks->add_action( 'wp_ajax_' . Nh::_DOMAIN_NAME . '_upload_attachment', $this, 'upload_attachment' );
@@ -483,6 +485,72 @@ class Nh_Opportunity extends Nh_Module {
 
 		new Nh_Ajax_Response( TRUE, __( 'Opportunity has been added successfully', 'ninja' ), [ 
 			'redirect_url' => apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-opportunities' ) ) )
+		] );
+	}
+
+	public function filter_opportunity(): void {
+		global $user_ID;
+
+		$form_data                        = $_POST['data'];
+		$opportunity_type                 = (int) sanitize_text_field( $form_data['opportunity_type'] );
+		$opportunity_status                 = sanitize_text_field( $form_data['opportunity_status'] );
+
+		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
+		$_POST["g-recaptcha-response"] = $recaptcha_response;
+
+
+		if ( empty( $form_data ) ) {
+			new Nh_Ajax_Response( FALSE, __( "Can't create with empty credentials.", 'ninja' ) );
+		}
+
+		if ( ! wp_verify_nonce( $form_data['filter_opportunity_nonce'], Nh::_DOMAIN_NAME . "_filter_opportunity_form" ) ) {
+			new Nh_Ajax_Response( FALSE, __( "Something went wrong!.", 'ninja' ) );
+		}
+		$check_result = apply_filters( 'gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_create_opportunity' );
+
+		if ( $check_result !== TRUE ) {
+			new Nh_Ajax_Response( FALSE, __( $check_result, 'ninja' ) ); /* the reCAPTCHA answer  */
+		}
+		$args = [ 
+			'post_type'    => $this->module,
+			'post_status'  => 'publish',
+			'orderby'      => 'ID',
+			'order'        => 'DESC',
+			'author'       => $user_ID
+		];
+		if($opportunity_status){
+			$args['meta_key'] = 'opportunity_stage';
+			$args['meta_value'] = $opportunity_status;
+		}
+		if($opportunity_type){
+			$args['tax_query'] = [
+				'taxonomy'	=> 'opportunity_type',
+				'terms'    => $opportunity_type,
+				'field'    => 'term_id',
+			];
+		}
+		$opportunities = new \WP_Query($args);
+		ob_start();
+		if(!empty($opportunities->get_posts())){
+			foreach ($opportunities->get_posts() as $opportunity_post) {
+				$opportunity = $this->convert( $opportunity_post, $this->meta_data );
+				echo '<div class="col">';
+					get_template_part( 'app/Views/template-parts/cards/my-opportunities-card', NULL, [ 
+						'opportunity_title'             => $opportunity->title,
+						'opportunity_link'              => $opportunity->link,
+						'opportunity_modified'          => $opportunity->modified,
+						'opportunity_created_date'      => $opportunity->created_date,
+						'opportunity_short_description' => $opportunity->meta_data['short_description'],
+						'opportunity_stage'             => $opportunity->meta_data['opportunity_stage'],
+					] );
+				echo '</div>';
+			}
+		}else{
+			get_template_part( 'app/Views/template-parts/cards/my-opportunities-empty', NULL, [] );
+		}
+		$html = ob_get_clean();
+		new Nh_Ajax_Response( TRUE, __( 'Opportunities filtered successfully', 'ninja' ), [ 
+			'html' => $html,
 		] );
 	}
 
