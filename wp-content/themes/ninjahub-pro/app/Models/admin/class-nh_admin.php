@@ -66,11 +66,11 @@
 
             $this->hooks->add_style('admin-style-main', Nh_Hooks::PATHS['admin']['css'] . '/style');
 
-            if ($current_screen->id === 'opportunity') {
-                if (current_user_can(Nh_User::REVIEWER)) {
-                    $this->hooks->add_style('admin-style-opportunity', Nh_Hooks::PATHS['admin']['css'] . '/opportunity');
-                }
-            }
+//            if ($current_screen->id === 'opportunity') {
+//                if (current_user_can(Nh_User::REVIEWER)) {
+//                    $this->hooks->add_style('admin-style-opportunity', Nh_Hooks::PATHS['admin']['css'] . '/opportunity');
+//                }
+//            }
 
         }
 
@@ -83,11 +83,11 @@
                 'ajaxUrl'    => admin_url('admin-ajax.php'),
             ]);
 
-            if ($current_screen->id === 'opportunity') {
-                if (current_user_can(Nh_User::REVIEWER)) {
-                    $this->hooks->add_script(Nh::_DOMAIN_NAME . '-opportunity-script-main', Nh_Hooks::PATHS['admin']['js'] . '/opportunity-front', [ 'jquery' ]);
-                }
-            }
+//            if ($current_screen->id === 'opportunity') {
+//                if (current_user_can(Nh_User::REVIEWER)) {
+//                    $this->hooks->add_script(Nh::_DOMAIN_NAME . '-opportunity-script-main', Nh_Hooks::PATHS['admin']['js'] . '/opportunity-front', [ 'jquery' ]);
+//                }
+//            }
 
 
             $this->hooks->run();
