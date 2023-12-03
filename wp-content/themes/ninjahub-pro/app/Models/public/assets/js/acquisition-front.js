@@ -29,6 +29,7 @@ class NhAcquisitionFront extends NhAcquisition
                 form: $(`#${KEY}_create_acquisition_form`),
                 parent: $(`#${KEY}_create_acquisition_form`).parent(),
                 acquisitions_numbers: $(`.acquisitions-numbers`),
+                modalFormSubmit: $(`#modalFormSubmit`),
             },
         };
 
@@ -46,6 +47,14 @@ class NhAcquisitionFront extends NhAcquisition
             $acquisition = this.$el.acquisition,
             ajaxRequests = this.ajaxRequests;
 
+
+        $acquisition.modalFormSubmit.on('click', function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                $target = $this.attr('data-target');
+
+            $('#' + $target).trigger('click');
+        })
 
         // Handle form submission
         $acquisition.form.on('submit', $acquisition.parent, function (e) {
