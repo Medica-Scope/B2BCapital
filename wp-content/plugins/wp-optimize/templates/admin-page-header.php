@@ -6,7 +6,7 @@
 		<?php $wp_optimize->wp_optimize_url('https://getwpo.com/', __('Home', 'wp-optimize')); ?> |
 
 		<?php $wp_optimize->wp_optimize_url('https://updraftplus.com/', 'UpdraftPlus'); ?> |
-
+		
 		<?php $wp_optimize->wp_optimize_url('https://updraftplus.com/news/', __('News', 'wp-optimize')); ?> |
 
 		<?php $wp_optimize->wp_optimize_url('https://twitter.com/updraftplus', __('Twitter', 'wp-optimize')); ?> |
@@ -16,7 +16,7 @@
 		<?php $wp_optimize->wp_optimize_url('https://updraftplus.com/newsletter-signup', __('Newsletter', 'wp-optimize')); ?> |
 
 		<?php $wp_optimize->wp_optimize_url('https://david.dw-perspective.org.uk', __("Team lead", 'wp-optimize')); ?> |
-
+		
 		<?php $wp_optimize->wp_optimize_url('https://getwpo.com/faqs/', __("FAQs", 'wp-optimize')); ?> |
 
 		<?php $wp_optimize->wp_optimize_url('https://www.simbahosting.co.uk/s3/shop/', __("More plugins", 'wp-optimize')); ?>
@@ -26,7 +26,7 @@
 		<img class="wpo-logo" src="<?php echo esc_url(trailingslashit(WPO_PLUGIN_URL) . 'images/notices/wp_optimize_logo.png');?>" alt="" />
 		<?php
 			$sqlversion = (string) $wp_optimize->get_db_info()->get_version();
-			echo '<strong>WP-Optimize '.(WP_Optimize::is_premium() ? esc_html__('Premium', 'wp-optimize') : '' ).' <span class="wpo-version">'.WPO_VERSION.'</span></strong>';
+			echo '<strong>WP-Optimize '.(WP_Optimize::is_premium() ? esc_html__('Premium', 'wp-optimize') : '' ).' <span class="wpo-version">'.esc_html(WPO_VERSION).'</span></strong>';
 		?>
 		<span class="wpo-subheader"><?php esc_html_e('Make your site fast & efficient', 'wp-optimize'); ?></span>
 	</div>
@@ -36,7 +36,7 @@
 </header>
 <?php
 	if ($show_notices) {
-
+		
 		$installed = $wp_optimize->get_options()->get_option('installed-for', 0);
 		$installed_for = time() - $installed;
 		$advert = false;

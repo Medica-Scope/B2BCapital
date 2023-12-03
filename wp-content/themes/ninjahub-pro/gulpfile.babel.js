@@ -33,7 +33,7 @@ const paths = {
         },
         public: {
             watch: 'app/Models/public/assets/sass/**/*.scss',
-            src: 'app/Models/public/assets/sass/**/*.scss',
+            src: 'app/Models/public/assets/sass/theme.scss',
             dest: 'app/Models/public/css',
         }
     },

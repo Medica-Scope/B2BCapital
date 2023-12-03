@@ -34,7 +34,7 @@
 		i[class*=' bbc-'] {
 			position: absolute;
 			left: 0.8rem;
-			top: 55%;
+			top: 3.1rem;
 			transform: translateY(-50%);
 			background-color: $layout-light;
 			padding: 0.3rem;
@@ -45,7 +45,7 @@
 			left: 1.7rem !important;
 		}
 		.showPassIcon {
-			top: 44% !important;
+			top: 2.5rem !important;
 			left: initial !important;
 			right: 0.8rem !important;
 			transform: initial !important;
@@ -93,6 +93,8 @@
 			border-bottom: 1px solid $error;
 		}
 	}
+	.error,
+	.error *,
 	.ninja-error {
 		color: $error;
 		font-size: 0.8rem;
@@ -287,6 +289,13 @@
 
 .iti__selected-flag {
 	max-height: 52.19px;
+}
+
+.error,
+.error *,
+.ninja-error {
+	color: $error;
+	font-size: 0.8rem;
 }
 /* </Login & Registration forms styles> */
 

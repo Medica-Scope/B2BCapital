@@ -28,7 +28,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 		<?php
 		function get_wp_nav_menu( $theme_location = 'dashboard-guest-menu', $container_class = '' ) {
 			return wp_nav_menu(
-				[
+				[ 
 					'theme_location'  => $theme_location,
 					'container_class' => 'bbc-default-menu-container ' . $container_class,
 					'container_id'    => 'bbc-default-menu-container',
@@ -63,8 +63,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 					<li class="nav-item">
 						<?php
 						echo Nh_Forms::get_instance()
-							->create_form( [
-								'search' => [
+							->create_form( [ 
+								'search' => [ 
 									'class'       => 'm-0 p-0 ninja-s',
 									'type'        => 'text',
 									'name'        => 's',
@@ -73,7 +73,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 									'after'       => '<i class="bbc-search2 ninja-header-search-icon"></i>',
 									'order'       => 0,
 								],
-							], [
+							], [ 
 								'action' => apply_filters( 'nhml_permalink', home_url() ),
 								'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
 								'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
@@ -87,7 +87,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
 							data-bs-toggle="dropdown" data-bs-auto-close="true">
 							<span class="btn-profile-title">
-								<?= sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
+								<?= sprintf( _x( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
 							<span class="btn-profile-desc">
 								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
@@ -107,13 +107,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 								</a>
 							</li>
 
-							<?php if (Nh_User::get_user_role() === Nh_User::OWNER) { ?>
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ) ?>">
-									<?= __( 'Create Opportunities', 'ninja' ) ?>
-								</a>
-							</li>
+							<?php if ( Nh_User::get_user_role() === Nh_User::OWNER ) { ?>
+								<li>
+									<a class="dropdown-item"
+										href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ) ?>">
+										<?= __( 'Create Opportunities', 'ninja' ) ?>
+									</a>
+								</li>
 							<?php } ?>
 
 							<li>
@@ -131,7 +131,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout">Logout</a></li>
+							<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout"><i
+										class="bbc-log-out text-danger"></i></i>
+									<?= __( 'Logout', 'ninja' ); ?>
+								</a></li>
 						</ul>
 					</li>
 				</ul>

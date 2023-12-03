@@ -82,7 +82,7 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
 			</p>
 		</div>
-		<div class="short-description">
+		<div class="short-description text-break">
 			<?= $single_post->excerpt ?>
 		</div>
 	</div>

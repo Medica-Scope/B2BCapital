@@ -6,8 +6,13 @@
  * @Date: 4/26/2023
  */
 
+    use NH\Nh;
+
 ?>
 
 <footer>
+    <div class="whatsapp-chat">
+        <a href="https://web.whatsapp.com/send?phone=+201001831001&text=<?= NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_whatsapp_msg'] ?>">Chat with Us</a>
+    </div>
 	<?php dynamic_sidebar( 'footer' ); ?>
 </footer>

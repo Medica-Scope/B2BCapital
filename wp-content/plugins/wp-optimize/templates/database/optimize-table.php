@@ -32,9 +32,9 @@ if (!defined('WPO_VERSION')) die('No direct access allowed');
 		$message .= __('Continue?', 'wp-optimize');
 	?>
 	<form onsubmit="return confirm('<?php echo esc_js($message); ?>')" action="#" method="post" enctype="multipart/form-data" name="optimize_form" id="optimize_form">
-
+	
 	<?php wp_nonce_field('wpo_optimization'); ?>
-
+	
 		<h3><?php esc_html_e('Optimizations', 'wp-optimize'); ?></h3>
 
 
@@ -42,7 +42,7 @@ if (!defined('WPO_VERSION')) die('No direct access allowed');
 			<?php $button_caption = apply_filters('wpo_run_button_caption', __('Run all selected optimizations', 'wp-optimize')); ?>
 			<input class="button button-primary button-large" type="submit" id="wp-optimize" name="wp-optimize" value="<?php echo esc_attr($button_caption); ?>"><?php WP_Optimize()->include_template('take-a-backup.php', false, array('checkbox_name' => 'enable-auto-backup')); ?>
 		</div>
-
+		
 		<?php do_action('wpo_additional_options'); ?>
 
 		<?php
@@ -53,7 +53,7 @@ if (!defined('WPO_VERSION')) die('No direct access allowed');
 			<div class="wp-optimize-optimizations-table-placeholder">
 			</div>
 		<?php } ?>
-
+		
 		<p class="wp-optimize-sensitive-tables-warning">
 			<span style="color: #E07575;">
 				<span class="dashicons dashicons-warning"></span>

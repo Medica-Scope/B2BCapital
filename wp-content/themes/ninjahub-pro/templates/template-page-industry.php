@@ -67,18 +67,18 @@ $opportunity_obj = new Nh_Opportunity();
 			<?php
 			$terms = $opportunity_obj->get_taxonomy_terms( 'industry' );
 
-			$form_fields = [ 
-				'custom-html-step-1-open'  => [ 
+			$form_fields = [
+				'custom-html-step-1-open'          => [
 					'type'    => 'html',
 					'content' => "<div class='form-steps form-step-1'>",
 					'order'   => 0
 				],
-				'custom-html-2'            => [ 
+				'custom-html-2'                    => [
 					'type'    => 'html',
 					'content' => "<div class='d-flex justify-content-between align-items-center'><span class='available text-muted'>" . sprintf( __( '(%s Industry Available)', 'ninja' ), count( $terms ) ) . "</span><span class='industries-selected'>" . sprintf( __( '(%s Selected)', 'ninja' ), '<span class="selected-number">0</span>' ) . "</span></div>",
 					'order'   => 5
 				],
-				'industries'               => [ 
+				'industries'                       => [
 					'class'       => 'container',
 					'input_class' => 'btn-check',
 					'label_class' => 'btn btn-outline-light',
@@ -86,34 +86,34 @@ $opportunity_obj = new Nh_Opportunity();
 					'choices'     => [],
 					'order'       => 10,
 				],
-				'continue'                 => [ 
+				'continue'                         => [
 					'class'      => 'step-wizard',
 					'type'       => 'button',
 					'value'      => __( 'Continue', 'ninja' ),
 					'before'     => '',
 					'after'      => '',
-					'extra_attr' => [ 
+					'extra_attr' => [
 						'data-target' => 'form-step-2'
 					],
 					'order'      => 15
 				],
-				'custom-html-step-1-close' => [ 
+				'custom-html-step-1-close'         => [
 					'type'    => 'html',
 					'content' => "</div>",
 					'order'   => 20
 				],
-				'custom-html-step-2-open'  => [ 
+				'custom-html-step-2-open'          => [
 					'type'    => 'html',
 					'content' => "<div class='form-steps form-step-2 nh-hidden'>",
 					'order'   => 25
 				],
-				'expected_value'           => [ 
+				'expected_value'                   => [
 					'class'   => 'container',
 					'type'    => 'radio',
 					'name'    => 'expected_value',
 					'title'   => __( '- What is the expected value Of the investment amount?', 'ninja' ),
-					'choices' => [ 
-						[ 
+					'choices' => [
+						[
 							'class'      => '',
 							'label'      => __( 'Partnership', 'ninja' ),
 							'before'     => '',
@@ -123,7 +123,7 @@ $opportunity_obj = new Nh_Opportunity();
 							'checked'    => '',
 							'order'      => 0
 						],
-						[ 
+						[
 							'class'      => '',
 							'label'      => __( 'Stock joint', 'ninja' ),
 							'before'     => '',
@@ -133,9 +133,9 @@ $opportunity_obj = new Nh_Opportunity();
 							'checked'    => '',
 							'order'      => 5
 						],
-						[ 
+						[
 							'class'      => '',
-							'label'      => __( 'Round investment', 'ninja' ),
+							'label'      => __( 'Investment Round', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
 							'value'      => 'round-investment',
@@ -143,7 +143,7 @@ $opportunity_obj = new Nh_Opportunity();
 							'checked'    => '',
 							'order'      => 10
 						],
-						[ 
+						[
 							'class'      => '',
 							'label'      => __( 'Franchise', 'ninja' ),
 							'before'     => '',
@@ -156,13 +156,13 @@ $opportunity_obj = new Nh_Opportunity();
 					],
 					'order'   => 30,
 				],
-				'entity_legal_type'        => [ 
-					'class'          => 'col-6',
+				'entity_legal_type'                => [
+					'class'          => 'container',
 					'type'           => 'select',
 					'label'          => __( "- What's you entity legal type?", 'ninja' ),
 					'name'           => 'entity_legal_type',
 					'placeholder'    => __( 'EX: private company limited by shares...', 'ninja' ),
-					'options'        => [ 
+					'options'        => [
 						'public-limited-company'  => __( 'Public limited company', 'ninja' ),
 						'private-limited-company' => __( 'Private limited company', 'ninja' ),
 						'other'                   => __( 'Other', 'ninja' )
@@ -172,40 +172,50 @@ $opportunity_obj = new Nh_Opportunity();
 					'before'         => '',
 					'order'          => 35,
 				],
-				'industries_nonce'         => [ 
+				'industries_nonce'                 => [
 					'class' => '',
 					'type'  => 'nonce',
 					'name'  => 'industries_nonce',
 					'value' => Nh::_DOMAIN_NAME . "_industries_form",
 					'order' => 40
 				],
-				'submit'                   => [ 
-					'class'               => '',
+				'custom-html-action-buttons'       => [
+					'type'    => 'html',
+					'content' => "<div class='row action-buttons'>",
+					'order'   => 45
+				],
+				'submit'                           => [
+					'class'               => 'btn-success',
 					'type'                => 'submit',
 					'value'               => __( 'Finish and go to dashboard', 'ninja' ),
 					'before'              => '',
 					'after'               => '',
 					'recaptcha_form_name' => 'frontend_industries',
-					'order'               => 45
+					'order'               => 50
 				],
-				'back'                     => [ 
-					'class'      => 'btn-light step-wizard',
+				'back'                             => [
+					'class'      => 'btn-light text-black step-wizard',
 					'type'       => 'button',
 					'value'      => __( 'Back', 'ninja' ),
 					'before'     => '',
 					'after'      => '',
-					'extra_attr' => [ 
+					'extra_attr' => [
 						'data-target' => 'form-step-1'
 					],
-					'order'      => 50
+					'order'      => 55
 				],
-				'custom-html-step-2-close' => [ 
+				'custom-html-action-buttons-close' => [
 					'type'    => 'html',
 					'content' => "</div>",
-					'order'   => 55
+					'order'   => 60
+				],
+				'custom-html-step-2-close'         => [
+					'type'    => 'html',
+					'content' => "</div>",
+					'order'   => 65
 				],
 			];
-			$form_tags   = [ 
+			$form_tags   = [
 				'class' => Nh::_DOMAIN_NAME . '-industries-form',
 				'id'    => Nh::_DOMAIN_NAME . '_industries_form'
 			];
@@ -214,7 +224,7 @@ $opportunity_obj = new Nh_Opportunity();
 				$icon_id                                = get_term_meta( $term->term_id, 'icon', TRUE );
 				$icon_link                              = (int) $icon_id > 0 ? wp_get_attachment_image_url( $icon_id ) : '';
 				$hidden_class                           = $key > 4 ? 'hidden-tag' : '';
-				$form_fields['industries']['choices'][] = [ 
+				$form_fields['industries']['choices'][] = [
 					'class' => 'industries-tags col-auto ' . $hidden_class,
 					'label' => ! empty( $icon_link ) ? '<img src="' . $icon_link . '" alt="Industry Icon"/> ' . $term->name : $term->name,
 					'name'  => 'industries',
@@ -223,7 +233,7 @@ $opportunity_obj = new Nh_Opportunity();
 				];
 				if ( count( $terms ) > 4 && count( $terms ) - 1 === $key ) {
 					$rest                            = count( $terms ) - 5;
-					$form_fields['custom-html-last'] = [ 
+					$form_fields['custom-html-last'] = [
 						'type'    => 'html',
 						'content' => "<a href='javascript:(0);' class='show-tags'>" . sprintf( __( '%s more..', 'ninja' ), $rest ) . "</a>",
 						'order'   => 10

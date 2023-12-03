@@ -11,7 +11,7 @@
 			<p>
 				<?php echo $text; ?>
 			</p>
-
+					
 			<?php if (!empty($button_link)) { ?>
 				<div class="updraft_advert_button_container">
 					<a class="button button-primary" href="<?php echo esc_url($button_link);?>" target="_blank" onclick="jQuery('.updraft-ad-container').slideUp(); jQuery.post(ajaxurl, {action: 'wp_optimize_ajax', subaction: '<?php echo esc_js($dismiss_time);?>', nonce: '<?php echo esc_js(wp_create_nonce('wp-optimize-ajax-nonce'));?>', dismiss_forever: '1' });">

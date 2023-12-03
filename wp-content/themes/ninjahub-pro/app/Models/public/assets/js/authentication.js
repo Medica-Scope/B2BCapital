@@ -126,10 +126,12 @@ class NhAuthentication extends NhAuth {
             const input = $('#ninja_phone_number')[0];
 
             window.ITIOBJ.registration = intlTelInput(input, {
-                initialCountry: 'EG',
-                separateDialCode: true,
+                // initialCountry: 'EG',
+                separateDialCode: false,
                 autoInsertDialCode: true,
+                nationalMode: true,
                 allowDropdown: true,
+                autoPlaceholder:"polite",
                 utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
             });
         }
@@ -431,7 +433,7 @@ class NhAuthentication extends NhAuth {
             const input = $('#ninja_phone_number')[0];
 
             window.ITIOBJ.editProfile = intlTelInput(input, {
-                initialCountry: 'EG',
+                // initialCountry: 'EG',
                 separateDialCode: true,
                 autoInsertDialCode: true,
                 allowDropdown: true,

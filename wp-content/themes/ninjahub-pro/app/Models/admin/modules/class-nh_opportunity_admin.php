@@ -57,6 +57,8 @@
             // TODO: Implement actions() method.
             $this->hooks->add_action('restrict_manage_posts', $this, 'filter_opportunities_by_meta_key');
             $this->hooks->add_action('save_post', $this, 'notifications_handler', 10, 3);
+            $this->hooks->add_action('manage_opportunity_posts_custom_column', $this, 'fill_opportunity_stage_column_with_data', 10, 2);
+
 
         }
 
@@ -68,7 +70,8 @@
             // TODO: Implement filters() method.
             $this->hooks->add_filter('acf/location/rule_match/post', $this, 'acf_location_rules', 10, 4);
             $this->hooks->add_filter('pre_get_posts', $this, 'filter_opportunities_by_user_role_and_opp_stage', 10, 1);
-            $this->hooks->add_filter('wp_count_posts', $this, 'custom_post_count', 10, 3);
+            $this->hooks->add_filter('wp_count_posts', $this, 'post_counter', 10, 3);
+            $this->hooks->add_filter('manage_opportunity_posts_columns', $this, 'add_stage_column_to_opportunity');
         }
 
         public function acf_location_rules($match, $rule, $options, $field_group)
@@ -102,6 +105,11 @@
 
         public function filter_opportunities_by_user_role_and_opp_stage($query): void
         {
+            // handling filters admin dashboard
+            global $pagenow;
+            $post_type = 'opportunity';
+            $meta_key  = 'opportunity_stage';
+
             if (!is_admin() || !$query->is_main_query()) {
                 return;
             }
@@ -111,10 +119,8 @@
             $screen = get_current_screen();
 
             // Check if we're on the main admin post list page
-            if ($screen && $screen->id === 'edit-opportunity') {
+            if ($screen && $screen->id === 'edit-opportunity' && $query->query['post_type'] == $post_type && is_admin() && $pagenow == 'edit.php' && $query->is_main_query()) {
 
-                // Check the post type
-                if ($query->get('post_type') === 'opportunity') {
                     // Get the current user's role
                     $current_user = wp_get_current_user();
                     $roles        = $current_user->roles;
@@ -129,7 +135,8 @@
                                     'approved',
                                     'hold',
                                     'cancel',
-                                    'content-rejected'
+                                    // 'content-rejected',
+                                    'draft',
                                 ],
                                 'compare' => 'IN',
                             ],
@@ -177,20 +184,50 @@
                             ],
                         ];
                         $query->set('meta_query', $meta_query);
+                    }elseif (in_array(Nh_User::ADMIN, $roles)) {
+                        $meta_query = [
+                            'key'     => 'opportunity_stage',
+                            'value'   => [
+                                'new',
+                                'cancel',
+                                'hold',
+                                'approved',
+                                'content-verified',
+                                'content-rejected',
+                                'seo-verified',
+                                'translated',
+                                'publish',
+                                'draft',
+                            ],
+                            'compare' => 'IN',
+                        ];
+                        $query->set('meta_query', $meta_query);
                     }
-                }
 
-                global $pagenow;
-                $post_type = 'opportunity';
-                $meta_key  = 'opportunity_stage';
-                if (is_admin() && $pagenow == 'edit.php' && $query->is_main_query() && !empty($_GET[$meta_key]) && $query->query['post_type'] == $post_type) {
-                    $query->set('meta_key', $meta_key);
-                    $query->set('meta_value', $_GET[$meta_key]);
-                }
+                    $taxonomy_name = 'opportunity-type';
+
+                
+                    if (!empty($_GET[$meta_key])) {
+                        $query->set('meta_key', $meta_key);
+                        $query->set('meta_value', $_GET[$meta_key]);
+                    }
+                    if (isset($_GET[$taxonomy_name])) {
+                        $term = $_GET[$taxonomy_name];
+                        unset($query->query_vars[$taxonomy_name]);
+                        if (!empty($term)) {
+                            $query->set('tax_query', array(
+                                array(
+                                    'taxonomy' => $taxonomy_name,
+                                    'field'    => 'id',
+                                    'terms'    => $term
+                                )
+                            ));
+                        }
+                    }
             }
         }
 
-        public function custom_post_count($counts, $type, $perm)
+        public function post_counter($counts, $type, $perm)
         {
             // Check if we're in the admin interface and if it's the correct post type
             if (is_admin() && $type == 'opportunity') {
@@ -235,7 +272,8 @@
                             'approved',
                             'hold',
                             'cancel',
-                            'content-rejected'
+                            // 'content-rejected',
+                            'draft',
                         ],
                         'compare' => 'IN',
                     ];
@@ -286,10 +324,31 @@
                         $meta_query['value'] = $_GET['opportunity_stage'];
                     }
                     $query['meta_query'][] = $meta_query;
+                } elseif (in_array(Nh_User::ADMIN, $roles)) {
+                    $meta_query = [
+                        'key'     => 'opportunity_stage',
+                        'value'   => [
+                            'new',
+                            'cancel',
+                            'hold',
+                            'approved',
+                            'content-verified',
+                            'content-rejected',
+                            'seo-verified',
+                            'translated',
+                            'publish',
+                            'draft',
+                        ],
+                        'compare' => 'IN',
+                    ];
+                    if (!empty($_GET['opportunity_stage'])) {
+                        $meta_query['value'] = $_GET['opportunity_stage'];
+                    }
+                    $query['meta_query'][] = $meta_query;
                 }
 
-                $counts->publish = count(get_posts($query));
-                // $counts->en->publish = count(get_posts($query));
+            $counts->publish = count(get_posts($query));
+            // $counts->en->publish = count(get_posts($query));
 
             }
             return $counts;
@@ -301,7 +360,9 @@
 
             $meta_key = 'opportunity_stage';
 
-            if ('opportunity' === $post_type && 'edit.php' === $pagenow) {
+
+            ////////// display opportunity stage filter ////////
+            if ('opportunity' === $post_type && 'edit.php' === $pagenow) {  
                 $current_user = wp_get_current_user();
                 $roles        = $current_user->roles;
 
@@ -312,7 +373,8 @@
                         'approved',
                         'hold',
                         'cancel',
-                        'content-rejected'
+                        // 'content-rejected',
+                        'draft',
                     ];
                 } elseif (in_array(Nh_User::CMS, $roles)) {
                     $options = [
@@ -332,15 +394,71 @@
                         'translated',
                         'seo-verified'
                     ];
+                } elseif (in_array(Nh_User::ADMIN, $roles)) {
+                    $options = [
+                        'new',
+                        'cancel',
+                        'hold',
+                        'approved',
+                        'content-verified',
+                        'content-rejected',
+                        'seo-verified',
+                        'translated',
+                        'publish',
+                        'draft',
+                    ];
                 }
-
+                if($options)
                 echo '<select name="' . esc_attr($meta_key) . '">';
-                echo '<option value="">All</option>';
+                echo '<option value="">All opportunity stages</option>';
                 foreach ($options as $option) {
                     $selected = isset($_GET[$meta_key]) && $_GET[$meta_key] == $option ? ' selected="selected"' : '';
                     echo '<option value="' . esc_attr($option) . '"' . $selected . '>' . esc_html($option) . '</option>';
                 }
                 echo '</select>';
+                /// end opportunity stage filter
+
+
+                ////////// display opportunity type filter ////////
+                $taxonomy_name = 'opportunity-type'; 
+                $selected = isset($_GET[$taxonomy_name]) ? $_GET[$taxonomy_name] : '';
+                $info_taxonomy = get_taxonomy($taxonomy_name);
+                wp_dropdown_categories(array(
+                    'show_option_all' => __("Show All {$info_taxonomy->label}"),
+                    'taxonomy'        => $taxonomy_name,
+                    'name'            => $taxonomy_name,
+                    'orderby'         => 'name',
+                    'selected'        => $selected,
+                    'show_count'      => false,
+                    'hide_empty'      => true,
+                ));
+
+                /// end opportunity type filter
+
+
+            }
+        }
+
+        public function add_stage_column_to_opportunity($columns): array {
+            $new_columns = array();
+            $column_key = 'opp_stage'; // The key for your column
+            $column_label = 'Opportunity Stage'; // The label for your column
+        
+            foreach ($columns as $key => $label) {
+                // Add your column before the 'Date' column
+                if ($key == 'date') {
+                    $new_columns[$column_key] = $column_label;
+                }
+                $new_columns[$key] = $label;
+            }
+        
+            return $new_columns;
+        }
+
+        public function fill_opportunity_stage_column_with_data($column, $post_id): void {
+            if ($column == 'opp_stage') {
+                $meta_value = get_post_meta($post_id, 'opportunity_stage', true);
+                echo $meta_value ? '<strong>'.$meta_value.'</strong>' : 'N/A';
             }
         }
 
@@ -462,6 +580,15 @@
                             if (in_array($old_stage, [ 'translated' ])) {
                                 $notifications = new Nh_Notification();
                                 $notifications->send($user_ID, $post->post_author, 'opportunity_published', [
+                                    'opportunity_id' => $post->ID,
+                                    'opportunity'    => $post
+                                ]);
+                            }
+                            break;
+                        case "draft" :
+                            if (in_array($old_stage, [ 'publish' ])) {
+                                $notifications = new Nh_Notification();
+                                $notifications->send($user_ID, $post->post_author, 'opportunity_drafted', [
                                     'opportunity_id' => $post->ID,
                                     'opportunity'    => $post
                                 ]);

@@ -20,10 +20,10 @@
 		<h3 class="wpo-first-child"><?php esc_html_e('Preload now', 'wp-optimize'); ?></h3>
 		<div class="wpo-fieldgroup">
 			<p>
-				<input id="wp_optimize_run_minify_preload"
-					class="button button-primary" type="submit"
-					name="wp_optimize_run_minify_preload"
-					value="<?php echo $is_running ? esc_attr__('Cancel', 'wp-optimize') : esc_attr__('Run now', 'wp-optimize'); ?>"
+				<input id="wp_optimize_run_minify_preload" 
+					class="button button-primary" type="submit" 
+					name="wp_optimize_run_minify_preload" 
+					value="<?php echo $is_running ? esc_attr__('Cancel', 'wp-optimize') : esc_attr__('Run now', 'wp-optimize'); ?>" 
 					<?php echo $is_running ? 'data-running="1"' : ''; ?>
 					<?php echo $is_cache_enabled ? "disabled" : ""; ?>
 				>
