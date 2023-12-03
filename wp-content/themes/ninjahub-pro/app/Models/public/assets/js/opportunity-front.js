@@ -33,6 +33,10 @@ class NhOpportunityFront extends NhOpportunity
                 category: $(`#${KEY}_category`).parent(),
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
+            filter_opportunity: {
+                form: $(`#${KEY}_filter_opportunity_form`),
+                parent: $(`#${KEY}_filter_opportunity_form`).parent(),
+            },
             favorite: {
                 form: $(`.${KEY}-add-to-fav-form`),
                 parent: $(`.${KEY}-add-to-fav-form`).parent(),
@@ -53,6 +57,7 @@ class NhOpportunityFront extends NhOpportunity
     initialization()
     {
         this.CreateOpportunityFront();
+        this.FilterOpportunityFront()
         this.CreateOpportunityFormFieldsFront();
         this.upload();
         this.remove();
@@ -111,6 +116,33 @@ class NhOpportunityFront extends NhOpportunity
             // Validate the form and perform registration if valid
             if ($this.valid()) {
                 that.createOpportunity(formData, $this);
+            }
+        });
+    }
+
+    FilterOpportunityFront()
+    {
+        let that         = this,
+            $opportunity = this.$el.filter_opportunity,
+            ajaxRequests = this.ajaxRequests;
+
+        // Initialize form validation
+        NhValidator.initOpportunityValidation($opportunity, 'filterOpportunity');
+
+        // Handle form submission
+        $opportunity.form.on('submit', $opportunity.parent, function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                formData = $this.serializeObject();
+
+            // Abort any ongoing registration requests
+            if (typeof ajaxRequests.filterOpportunity !== 'undefined') {
+                ajaxRequests.filterOpportunity.abort();
+            }
+
+            // Validate the form and perform registration if valid
+            if ($this.valid()) {
+                that.filterOpportunity(formData, $this);
             }
         });
     }

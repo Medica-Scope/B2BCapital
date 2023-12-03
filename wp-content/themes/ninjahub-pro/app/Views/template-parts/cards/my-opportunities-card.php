@@ -27,6 +27,7 @@ $stages_string = [
 	'seo-verified'     => __( 'SEO Verified', 'ninja' ),
 	'translated'       => __( 'Translated', 'ninja' ),
 	'publish'          => __( 'Published', 'ninja' ),
+	'draft'          => __( 'Drafted', 'ninja' ),
 ];
 
 $opportunity_stage_key = str_replace( ' ', '_', strtolower( $opportunity_stage ) );
