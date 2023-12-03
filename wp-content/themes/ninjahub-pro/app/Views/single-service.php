@@ -64,27 +64,27 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 				<?php
 				if ( ! empty( $service->meta_data['features'] ) ) {
 					?>
-					<h3 class="service-subtitle">
-						<?= __( 'Important features of the service:', 'ninja' ) ?>
-					</h3>
-					<ul class="service-features">
-						<?php
+				<h3 class="service-subtitle">
+					<?= __( 'Important features of the service:', 'ninja' ) ?>
+				</h3>
+				<ul class="service-features">
+					<?php
 						$features = get_field( 'features', $service->ID );
 						foreach ( $features as $key => $feature ) {
 							?>
-							<li class="service-feature">
-								<span class="service-features-number">
-									<?= $key + 1 ?>
-								</span>
-								<span class="service-feature-text">
-									<?= $feature['feature'] ?>
-								</span>
-							</li>
-							<?php
+					<li class="service-feature">
+						<span class="service-features-number">
+							<?= $key + 1 ?>
+						</span>
+						<span class="service-feature-text">
+							<?= $feature['feature'] ?>
+						</span>
+					</li>
+					<?php
 						}
 						?>
-					</ul>
-					<?php
+				</ul>
+				<?php
 				}
 				?>
 			</div>
@@ -119,20 +119,20 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 						<?php
 						foreach ( $available_slots as $slot ) {
 							?>
-							<div class="time-slots-group">
-								<?php
+						<div class="time-slots-group">
+							<?php
 								foreach ( $slot as $key => $single_slot ) {
 									?>
-									<div class="time-slot">
-										<input type="radio" name="timeslot" value="slot<?= $key ?>" class="form-check-input" required>
-										<div class="time-slot-details">
-											<span class="date">
-												<?= $single_slot['full_data_format'] ?>
-											</span>
-											<?php
+							<div class="time-slot">
+								<input type="radio" name="timeslot" value="slot<?= $key ?>" class="form-check-input" required>
+								<div class="time-slot-details">
+									<span class="date">
+										<?= $single_slot['full_data_format'] ?>
+									</span>
+									<?php
 											foreach ( $single_slot['slots'] as $time_slot ) {
 
-												if ( $appointments->check_appointment_slot( [ 
+												if ( $appointments->check_appointment_slot( [
 													'day'  => $single_slot['data']['day'],
 													'date' => $single_slot['data']['date'],
 													'time' => $time_slot
@@ -141,19 +141,19 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 												}
 
 												?><span class="time ninja-single-time d-block" data-day="<?= $single_slot['data']['day'] ?>"
-													data-date="<?= $single_slot['data']['date'] ?>" data-time="<?= $time_slot ?>">
-													<?= $time_slot ?>
-												</span>
-												<?php
+										data-date="<?= $single_slot['data']['date'] ?>" data-time="<?= $time_slot ?>">
+										<?= $time_slot ?>
+									</span>
+									<?php
 											}
 											?>
-										</div>
-									</div>
-									<?php
-								}
-								?>
+								</div>
 							</div>
 							<?php
+								}
+								?>
+						</div>
+						<?php
 						}
 						?>
 					</div>
@@ -163,7 +163,8 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 								<?= __( "You've to pay.", 'ninja' ) ?>
 							</p>
 							<span>
-								<?= __( 'Help', 'ninja' ) ?>
+								<a href="<?= get_post_type_archive_link( 'faq' ); ?>"><i
+										class="icon bbc-question"></i><?= __( 'Help', 'ninja' ); ?></a>
 							</span>
 						</div>
 						<?= $service->price_formated_html ?>

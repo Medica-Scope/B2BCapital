@@ -233,8 +233,17 @@
 				}
 				.offcanvas {
 					background-color: $primary-semi-dark;
-					.offcanvas-header{
+					.offcanvas-header {
 						padding-top: 6rem;
+					}
+					.offcanvas-body {
+						.nav-item {
+							&.active {
+								.nav-link {
+									color: $highlight !important;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -494,11 +503,11 @@
 															font-size: 2rem;
 															font-family: $bbc-secondary-en-font-medium;
 															// @include large-screen {
-																// font-size: 0.85rem;
+															// font-size: 0.85rem;
 															// }
 															// @include xLarge-screen {
-																// margin-left: -2px;
-																// font-size: 2.065rem;
+															// margin-left: -2px;
+															// font-size: 2.065rem;
 															// }
 														}
 													}
