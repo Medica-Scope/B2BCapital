@@ -37,7 +37,7 @@
 				max-height: 500px;
 				overflow-y: auto;
 				color: $layout-light;
-				&::-webkit-scrollbar{
+				&::-webkit-scrollbar {
 					width: 4px;
 				}
 				.page-section-title {
@@ -227,6 +227,11 @@
 				}
 			}
 			.award {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				align-self: center;
 				position: relative;
 				margin-left: auto;
 			}
@@ -282,7 +287,7 @@
 								justify-content: center;
 								border-radius: 5px;
 								background-color: $layout-light;
-								&:last-of-type{
+								&:last-of-type {
 									margin: 0;
 								}
 								@include large-screen {
