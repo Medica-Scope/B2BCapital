@@ -533,6 +533,24 @@ class NhValidator
                     });
                 }
             },
+            filterOpportunity: function () {
+                if ($el.form.length > 0) {
+                    $el.form.validate({
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
+                        rules: {
+                            opportunity_type: {
+                                required: false,
+                            },
+                            opportunity_status: {
+                                required: false,
+                            },
+                            
+                        },
+                    });
+                }
+            },
         };
 
         if (_.has(forms, type)) {

@@ -135,7 +135,8 @@
                                     'approved',
                                     'hold',
                                     'cancel',
-                                    'content-rejected'
+                                    // 'content-rejected',
+                                    'draft',
                                 ],
                                 'compare' => 'IN',
                             ],
@@ -188,14 +189,15 @@
                             'key'     => 'opportunity_stage',
                             'value'   => [
                                 'new',
-                                'approved',
-                                'hold',
                                 'cancel',
+                                'hold',
+                                'approved',
+                                'content-verified',
                                 'content-rejected',
+                                'seo-verified',
                                 'translated',
                                 'publish',
-                                'content-verified',
-                                'seo-verified',
+                                'draft',
                             ],
                             'compare' => 'IN',
                         ];
@@ -270,7 +272,8 @@
                             'approved',
                             'hold',
                             'cancel',
-                            'content-rejected'
+                            // 'content-rejected',
+                            'draft',
                         ],
                         'compare' => 'IN',
                     ];
@@ -326,14 +329,15 @@
                         'key'     => 'opportunity_stage',
                         'value'   => [
                             'new',
-                            'approved',
-                            'hold',
                             'cancel',
+                            'hold',
+                            'approved',
+                            'content-verified',
                             'content-rejected',
+                            'seo-verified',
                             'translated',
                             'publish',
-                            'content-verified',
-                            'seo-verified',
+                            'draft',
                         ],
                         'compare' => 'IN',
                     ];
@@ -369,7 +373,8 @@
                         'approved',
                         'hold',
                         'cancel',
-                        'content-rejected'
+                        // 'content-rejected',
+                        'draft',
                     ];
                 } elseif (in_array(Nh_User::CMS, $roles)) {
                     $options = [
@@ -392,14 +397,15 @@
                 } elseif (in_array(Nh_User::ADMIN, $roles)) {
                     $options = [
                         'new',
-                        'approved',
-                        'hold',
                         'cancel',
+                        'hold',
+                        'approved',
+                        'content-verified',
                         'content-rejected',
+                        'seo-verified',
                         'translated',
                         'publish',
-                        'content-verified',
-                        'seo-verified',
+                        'draft',
                     ];
                 }
                 if($options)
@@ -574,6 +580,15 @@
                             if (in_array($old_stage, [ 'translated' ])) {
                                 $notifications = new Nh_Notification();
                                 $notifications->send($user_ID, $post->post_author, 'opportunity_published', [
+                                    'opportunity_id' => $post->ID,
+                                    'opportunity'    => $post
+                                ]);
+                            }
+                            break;
+                        case "draft" :
+                            if (in_array($old_stage, [ 'publish' ])) {
+                                $notifications = new Nh_Notification();
+                                $notifications->send($user_ID, $post->post_author, 'opportunity_drafted', [
                                     'opportunity_id' => $post->ID,
                                     'opportunity'    => $post
                                 ]);
