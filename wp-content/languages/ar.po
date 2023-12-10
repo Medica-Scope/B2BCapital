@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.4.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-11-01 15:34:53+0000\n"
+"PO-Revision-Date: 2023-11-24 10:35:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -364,6 +364,18 @@ msgstr "كل الأنماط"
 msgid "View Patterns"
 msgstr "عرض الأنماط"
 
+#: wp-includes/post.php:304
+msgid "Pattern updated."
+msgstr "تم تحديث النمط."
+
+#: wp-includes/post.php:295 wp-includes/js/dist/edit-site.js:36220
+msgid "No patterns found."
+msgstr "لم يتم العثور على أنماط."
+
+#: wp-includes/post.php:294
+msgid "Search Patterns"
+msgstr "البحث عن أنماط"
+
 #: wp-includes/post.php:289
 msgid "New Pattern"
 msgstr "نمط جديد"
@@ -403,6 +415,18 @@ msgstr "جميع الأرشيفات"
 
 #: wp-includes/block-template-utils.php:71
 msgctxt "template part area"
+msgid "Header"
+msgstr "الترويسة"
+
+#: wp-includes/block-template-utils.php:80
+msgctxt "template part area"
+msgid "Footer"
+msgstr "تذييل"
+
+#: wp-includes/admin-bar.php:1105
+#: wp-admin/includes/class-custom-image-header.php:75
+#: wp-admin/includes/class-custom-image-header.php:76 wp-admin/menu.php:231
+msgctxt "custom image header"
 msgid "Header"
 msgstr "الترويسة"
 
@@ -690,6 +714,11 @@ msgstr "اسم الموقع (الدليل الفرعي فقط):"
 msgid "The date and time the preferences were updated."
 msgstr "التاريخ والوقت التي تم حفظ التفضيلات فيه."
 
+#. translators: %s: wp-config.php
+#: wp-load.php:88
+msgid "There doesn't seem to be a %s file. It is needed before the installation can continue."
+msgstr "يبدو أن ملف %s غير موجود. لابد من تواجد الملف لإستمرار عملية التثبيت."
+
 #: wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:80
 msgid "The slug of the template to get the fallback for"
 msgstr "الاسم اللطيف للقالب للحصول على النموذج الاحتياطي"
@@ -702,11 +731,11 @@ msgstr "إذا كانت القيمة سلسلة نصية، فإن القيمة �
 msgid "Revisions not enabled."
 msgstr "المراجعات غير مُفعلة."
 
-#: wp-includes/theme.php:4141
+#: wp-includes/theme.php:4104
 msgid "Whether the theme disables generated layout styles."
 msgstr "ما إذا كان القالب يقوم بتعطيل تنسيقات التخطيط التي تم إنشاؤها أم لا."
 
-#: wp-includes/theme.php:3951
+#: wp-includes/theme.php:3914
 msgid "Whether a theme uses block-based template parts."
 msgstr "ما إذا كان القالب يستخدم أجزاء قوالب مستندة إلى المكوّنات."
 
@@ -843,7 +872,7 @@ msgctxt "Block pattern category"
 msgid "Footers"
 msgstr "التذييلات"
 
-#: wp-includes/theme.php:3944
+#: wp-includes/theme.php:3907
 msgid "Whether a theme uses block-based templates."
 msgstr "ما إذا كان القالب يستخدم القوالب المستندة إلى المكوّنات."
 
@@ -1074,11 +1103,11 @@ msgid "The password cannot be a space or all spaces."
 msgstr "لا يمكن أن تكون كلمة المرور مسافة أو كلها مسافات."
 
 #. translators: %s: Database name.
-#: wp-includes/class-wpdb.php:1199
+#: wp-includes/class-wpdb.php:1214
 msgid "The database server could be connected to (which means your username and password is okay) but the %s database could not be selected."
 msgstr "يمكن الاتصال بخادم قاعدة البيانات (مما يعني أن اسم المستخدم وكلمة المرور على ما يرام) ولكن لا يمكن تحديد قاعدة البيانات %s."
 
-#: wp-includes/class-wpdb.php:1195
+#: wp-includes/class-wpdb.php:1210
 msgid "Cannot select database"
 msgstr "تعذر تحديد قاعدة البيانات"
 
@@ -1461,24 +1490,24 @@ msgid "Confirm"
 msgstr "تأكيد"
 
 #. translators: %s: Database fields where the error occurred.
-#: wp-includes/class-wpdb.php:2833
+#: wp-includes/class-wpdb.php:2848
 msgid "WordPress database error: Processing the values for the following fields failed: %s. The supplied values may be too long or contain invalid data."
 msgstr "خطأ في قاعدة بيانات ووردبريس: فشلت معالجة قيم الحقول التالية: %s. قد تكون القيم المستخدمة طويلة جداً أو تحتوي على بيانات غير صالحة."
 
-#: wp-includes/class-wpdb.php:3670
+#: wp-includes/class-wpdb.php:3685
 msgid "Could not strip invalid text."
 msgstr "تعذر تجريد النص غير الصالح."
 
-#: wp-includes/class-wpdb.php:3217
+#: wp-includes/class-wpdb.php:3232
 msgid "Could not retrieve table charset."
 msgstr "تعذر استرداد جدول مجموعة الأحرف (charset)."
 
 #. translators: %s: Database field where the error occurred.
-#: wp-includes/class-wpdb.php:2827
+#: wp-includes/class-wpdb.php:2842
 msgid "WordPress database error: Processing the value for the following field failed: %s. The supplied value may be too long or contains invalid data."
 msgstr "خطا في قاعدة بيانات ووردبريس: فشلت معالجة قيمة الحقل التالي: %s. قد تكون القيمة المستخدمة طويلة جداً أو تحتوي على بيانات غير صالحة."
 
-#: wp-includes/class-wpdb.php:2237
+#: wp-includes/class-wpdb.php:2252
 msgid "WordPress database error: Could not perform query because it contains invalid data."
 msgstr "خطأ في قاعدة بيانات ووردبريس:  تعذر تنفيذ عملية الاستعلام لأنها تحتوي على بيانات غير صالحة."
 
@@ -4456,11 +4485,11 @@ msgstr "تم إنشاء طلب إعادة تعيين كلمة المرور من 
 msgid "The handler for the route is invalid."
 msgstr "الـ handler المتعلق بالمسار غير صالح."
 
-#: wp-includes/rest-api/class-wp-rest-server.php:1618
+#: wp-includes/rest-api/class-wp-rest-server.php:1625
 msgid "Could not parse the path."
 msgstr "تعذر تحليل المسار."
 
-#: wp-includes/rest-api/class-wp-rest-server.php:1668
+#: wp-includes/rest-api/class-wp-rest-server.php:1675
 msgid "The requested route does not support batch requests."
 msgstr "المسار المطلوب لا يدعم الطلبات بالدفعة."
 
@@ -4472,7 +4501,7 @@ msgstr "نسخة الـ API للمكوّن."
 msgid "Invalid parameters."
 msgstr "المُعامِلات (parameters) غير صالحة."
 
-#: wp-includes/theme.php:2717
+#: wp-includes/theme.php:2680
 msgid "You need to pass an array of post formats."
 msgstr "تحتاج إلى تمرير مصفوفة من صيغ المقال."
 
@@ -4596,7 +4625,7 @@ msgid "Please use %s to add new schema properties."
 msgstr "يرجى استخدام %s لإضافة خصائص مخطط جديدة."
 
 #. translators: %s: prepare_callback
-#: wp-includes/theme.php:3352
+#: wp-includes/theme.php:3315
 msgid "The \"%s\" must be a callable function."
 msgstr "يجب أن تكون \"%s\" دالة قابلة للاستدعاء."
 
@@ -5417,44 +5446,44 @@ msgstr "تخطيطات تنسيق المكوّن."
 msgid "RSS Feed"
 msgstr "خلاصة RSS"
 
-#: wp-includes/theme.php:4277
+#: wp-includes/theme.php:4240
 msgid "The post types that support thumbnails or true if all post types are supported."
 msgstr "أنواع المقالات التي تدعم الصور المصغّرة أو الصحيحة، إذا كانت جميع أنواع المقالات مدعومة."
 
-#: wp-includes/theme.php:3332
+#: wp-includes/theme.php:3295
 msgid "When registering an \"array\" feature, the feature's schema must include the \"items\" keyword."
 msgstr "عند تسجيل ميزة مصفوفة \"array\"، يجب أن يتضمن مخطط الميزة على الكلمة المفتاحية \"items\"."
 
-#: wp-includes/theme.php:3339
+#: wp-includes/theme.php:3302
 msgid "When registering an \"object\" feature, the feature's schema must include the \"properties\" keyword."
 msgstr "عند تسجيل ميزة كائن \"object\"، يجب أن يتضمن مخطط الميزة على الكلمة المفتاحية \"properties\"."
 
 #. translators: %s: Theme name.
-#: wp-includes/theme.php:1013
+#: wp-includes/theme.php:976
 msgctxt "theme"
 msgid "<strong>Error:</strong> Current WordPress version does not meet minimum requirements for %s."
 msgstr "<strong>خطأ:</strong> لا يلبي إصدار ووردبريس الحالي، الحدّ الأدنى لمتطلبات %s."
 
-#: wp-includes/theme.php:3310
+#: wp-includes/theme.php:3273
 msgid "The feature \"type\" is not valid JSON Schema type."
 msgstr "الميزة \"type\" ليست نوع مخطط JSON صالحًا."
 
-#: wp-includes/theme.php:3317
+#: wp-includes/theme.php:3280
 msgid "When registering a \"variadic\" theme feature, the \"type\" must be an \"array\"."
 msgstr "عند تسجيل ميزة قالب \"variadic\"، يجب أن يكون الـ \"type\" عبارة عن مصفوفة \"array\"."
 
-#: wp-includes/theme.php:3325
+#: wp-includes/theme.php:3288
 msgid "When registering an \"array\" or \"object\" feature to show in the REST API, the feature's schema must also be defined."
 msgstr "عند تسجيل ميزة مصفوفة \"array\" أو كائن \"object\" لعرضها في الـ REST API، يجب أيضًا تحديد مخطط الميزة."
 
 #. translators: %s: Theme name.
-#: wp-includes/theme.php:995
+#: wp-includes/theme.php:958
 msgctxt "theme"
 msgid "<strong>Error:</strong> Current WordPress and PHP versions do not meet minimum requirements for %s."
 msgstr "<strong>خطأ:</strong> لا تلبي إصدارات ووردبريس و PHP الحالية، الحدّ الأدنى لمتطلبات %s."
 
 #. translators: %s: Theme name.
-#: wp-includes/theme.php:1004
+#: wp-includes/theme.php:967
 msgctxt "theme"
 msgid "<strong>Error:</strong> Current PHP version does not meet minimum requirements for %s."
 msgstr "<strong>خطأ:</strong> لا يلبي إصدار PHP الحالي، الحدّ الأدنى لمتطلبات %s."
@@ -5697,71 +5726,71 @@ msgstr "حصر النتائج بناءً على العلاقة بين عدة ف�
 msgid "The \"%1$s\" taxonomy \"%2$s\" property (%3$s) conflicts with an existing property on the REST API Posts Controller. Specify a custom \"rest_base\" when registering the taxonomy to avoid this error."
 msgstr "خاصية \"%2$s\" للفئة \"%1$s\" تتعارض (%3$s) مع خاصية موجودة على وحدة تحكّم المقالات REST API. حدّد \"rest_base\" مخصّص عند تسجيل الفئة لتجنب هذا الخطأ."
 
-#: wp-includes/theme.php:4298
+#: wp-includes/theme.php:4261
 msgid "Whether the theme can manage the document title tag."
 msgstr "ما إذا كان القالب باستطاعته إدارة وسم عنوان المستند."
 
-#: wp-includes/theme.php:4231
+#: wp-includes/theme.php:4194
 msgid "Allows use of HTML5 markup for search forms, comment forms, comment lists, gallery, and caption."
 msgstr "يسمح باستخدام أكواد html5 لنماذج البحث، ونماذج التعليقات، وقوائم التعليقات، المعرض، والكلمات التوضيحية."
 
-#: wp-includes/theme.php:4305
+#: wp-includes/theme.php:4268
 msgid "Whether theme opts in to default WordPress block styles for viewing."
 msgstr "ما إذا كان القالب يطبق تنسيقات ووردبريس الافتراضية للمكوّنات عند العرض."
 
-#: wp-includes/theme.php:4149
+#: wp-includes/theme.php:4112
 msgid "Custom color palette if defined by the theme."
 msgstr "لوحة ألوان مخصصة في حال تم تعيينها من القالب."
 
-#: wp-includes/theme.php:4028
+#: wp-includes/theme.php:3991
 msgid "Custom header if defined by the theme."
 msgstr "ترويسة مخصصة في حال تم تعيينها من القالب."
 
-#: wp-includes/theme.php:3958
+#: wp-includes/theme.php:3921
 msgid "Custom background if defined by the theme."
 msgstr "خلفية مخصصة في حال تم تعيينها من القالب."
 
-#: wp-includes/theme.php:4073
+#: wp-includes/theme.php:4036
 msgid "Custom logo if defined by the theme."
 msgstr "شعار مخصص في حال تم تعيينه من القالب."
 
-#: wp-includes/theme.php:4174
+#: wp-includes/theme.php:4137
 msgid "Custom font sizes if defined by the theme."
 msgstr "أحجام خطوط مخصصة في حال تم تعيينها من القالب."
 
-#: wp-includes/theme.php:4199
+#: wp-includes/theme.php:4162
 msgid "Custom gradient presets if defined by the theme."
 msgstr "تخصيص إعدادات مسبقة للتدرّج في حال تم تعيينها من القالب."
 
-#: wp-includes/theme.php:4134
+#: wp-includes/theme.php:4097
 msgid "Whether the theme disables custom gradients."
 msgstr "ما إذا كان القالب يعطّل التدرجات المخصصة."
 
-#: wp-includes/theme.php:4113
+#: wp-includes/theme.php:4076
 msgid "Whether theme opts in to the dark editor style UI."
 msgstr "ما إذا كان القالب يختار تنسيق الوضع الداكن لواجهة المحرر."
 
-#: wp-includes/theme.php:3937
+#: wp-includes/theme.php:3900
 msgid "Whether posts and comments RSS feed links are added to head."
 msgstr "ما إذا كانت روابط خلاصة المقالات والتعليقات RSS تضاف إلى الترويسة."
 
-#: wp-includes/theme.php:4106
+#: wp-includes/theme.php:4069
 msgid "Whether the theme enables Selective Refresh for Widgets being managed with the Customizer."
 msgstr "ما إذا كان القالب يتيح التحديث الانتقائي للودجات التي تتم إدارتها باستخدام أداة التخصيص."
 
-#: wp-includes/theme.php:4120
+#: wp-includes/theme.php:4083
 msgid "Whether the theme disables custom colors."
 msgstr "ما إذا كان القالب يعطل الألوان المخصصة."
 
-#: wp-includes/theme.php:4127
+#: wp-includes/theme.php:4090
 msgid "Whether the theme disables custom font sizes."
 msgstr "ما إذا كان القالب يعطل أحجام الخطوط المخصصة."
 
-#: wp-includes/theme.php:4223
+#: wp-includes/theme.php:4186
 msgid "Whether theme opts in to the editor styles CSS wrapper."
 msgstr "ما إذا كان القالب يختار محرر تنسيقات غلاف CSS."
 
-#: wp-includes/theme.php:3930
+#: wp-includes/theme.php:3893
 msgid "Whether theme opts in to wide alignment CSS class."
 msgstr "ما إذا كان القالب يختار فئة CSS ذات المحاذاة الواسعة."
 
@@ -6290,8 +6319,8 @@ msgid "Support"
 msgstr "الدعم"
 
 #. translators: Localized Support reference.
-#: wp-includes/admin-bar.php:213 wp-includes/class-wpdb.php:1224
-#: wp-includes/class-wpdb.php:2009 wp-includes/class-wpdb.php:2169
+#: wp-includes/admin-bar.php:213 wp-includes/class-wpdb.php:1239
+#: wp-includes/class-wpdb.php:2024 wp-includes/class-wpdb.php:2184
 #: wp-includes/customize/class-wp-customize-themes-section.php:90
 #: wp-includes/load.php:191
 #: wp-includes/rest-api/endpoints/class-wp-rest-pattern-directory-controller.php:150
@@ -6912,7 +6941,7 @@ msgstr "عذرًا، غير مسموح لك بقراءة المكوّنات له
 msgid "Attributes for the block."
 msgstr "خصائص المكوّن."
 
-#: wp-includes/theme.php:4291
+#: wp-includes/theme.php:4254
 msgid "Whether the theme supports responsive embedded content."
 msgstr "ما إذا كان القالب يدعم المحتوى المضمّن المتجاوب."
 
@@ -6986,7 +7015,7 @@ msgstr "قالب الرابط الدائم للمقالة."
 msgid "The current user can post unfiltered HTML markup and JavaScript."
 msgstr "يُمكن للمستخدم الحالي نشر أكواد HTML وجافا سكربت غير مُصفاة."
 
-#: wp-includes/theme.php:4254
+#: wp-includes/theme.php:4217
 msgid "Post formats supported."
 msgstr "صيغ المقال مدعومة."
 
@@ -7510,7 +7539,7 @@ msgstr "%s يقوم بعدّة تغييرات على تخصيص الموقع ب�
 msgid "Update anyway, even though it might break your site?"
 msgstr "تحديث على أية حال، على الرغم من أنه قد يؤدي إلى تعطيل موقعك؟"
 
-#: wp-includes/class-wpdb.php:1667
+#: wp-includes/class-wpdb.php:1682
 msgid "The query only expected one placeholder, but an array of multiple placeholders was sent."
 msgstr "الاستعلام توقع نائب (placeholder) واحد، ولكن مصفوفة متعددة تم إرسالها."
 
@@ -7585,7 +7614,7 @@ msgid "%s has taken over and is currently customizing."
 msgstr "%s قام بتولي المهمة ويقوم بالتخصيص الآن."
 
 #: wp-includes/class-wp-customize-manager.php:4322 wp-admin/comment.php:79
-#: wp-admin/comment.php:291 wp-admin/includes/post.php:1808
+#: wp-admin/comment.php:291 wp-admin/includes/post.php:1795
 #: wp-admin/plugin-editor.php:362 wp-admin/theme-editor.php:416
 msgid "Go back"
 msgstr "العودة للخلف"
@@ -7617,7 +7646,7 @@ msgid "Looks like something&#8217;s gone wrong. Wait a couple seconds, and then 
 msgstr "يبدو أنه حدث خطأ ما. انتظر بضع ثواني، ومن ثم حاول مرة أخرى."
 
 #: wp-includes/class-wp-customize-manager.php:4326
-#: wp-includes/js/dist/editor.js:7566 wp-admin/includes/post.php:1891
+#: wp-includes/js/dist/editor.js:7566 wp-admin/includes/post.php:1878
 msgid "Take over"
 msgstr "تولى المهمة"
 
@@ -7680,7 +7709,7 @@ msgid "No themes found. Try a different search."
 msgstr "لا توجد قوالب. جرب البحث بكلمات مختلفة."
 
 #. translators: %s: Value type.
-#: wp-includes/class-wpdb.php:1727
+#: wp-includes/class-wpdb.php:1742
 msgid "Unsupported value type (%s)."
 msgstr "نوع القيمة (%s) غير مدعوم."
 
@@ -7690,7 +7719,7 @@ msgid "Site Name: %s"
 msgstr "اسم الموقع: %s"
 
 #. translators: 1: Number of placeholders, 2: Number of arguments passed.
-#: wp-includes/class-wpdb.php:1683
+#: wp-includes/class-wpdb.php:1698
 msgid "The query does not contain the correct number of placeholders (%1$d) for the number of arguments passed (%2$d)."
 msgstr "لا يحتوي الاستعلام على العدد الصحيح من العناصر النائبة (%1$d) لعدد المعاملات التي تم تمريرها (%2$d)."
 
@@ -9299,55 +9328,55 @@ msgstr "محتوى التعليق غير صالح."
 msgid "Invalid JSONP callback function."
 msgstr "دالة JSONP غير صالحة"
 
-#: wp-includes/theme.php:1732
+#: wp-includes/theme.php:1695
 msgid "Video is playing."
 msgstr "الفيديو في حالة تشغيل."
 
-#: wp-includes/theme.php:1731
+#: wp-includes/theme.php:1694
 msgid "Video is paused."
 msgstr "الفيديو توقف مؤقتًا."
 
-#: wp-includes/theme.php:2334
+#: wp-includes/theme.php:2297
 msgctxt "Theme starter content"
 msgid "Archives"
 msgstr "الآرشيفات"
 
-#: wp-includes/theme.php:2486
+#: wp-includes/theme.php:2449
 msgctxt "Theme starter content"
 msgid "This is an example of a homepage section. Homepage sections can be any page other than the homepage itself, including the page that shows your latest blog posts."
 msgstr "هذا مثال عن قسم الصفحة الرئيسية. أقسام الصفحة الرئيسية يمكن أن تكون أي صفحة أخرى غير الصفحة الرئيسية نفسها, شاملة الصفحة التي تعرض آخر مقالات مدونتك."
 
-#: wp-includes/theme.php:2478
+#: wp-includes/theme.php:2441
 msgctxt "Theme starter content"
 msgid "News"
 msgstr "الأخبار"
 
-#: wp-includes/theme.php:2469
+#: wp-includes/theme.php:2432
 msgctxt "Theme starter content"
 msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
 msgstr "هذه صفحة تحتوي على بعض معلومات الاتصال الأساسية, مثل العنوان ورقم الهاتف. قد ترغب أيضًا بتثبيت إضافة لعرض نموذج مراسلة."
 
-#: wp-includes/theme.php:2364
+#: wp-includes/theme.php:2327
 msgctxt "Theme starter content"
 msgid "Recent Posts"
 msgstr "أحدث المقالات"
 
-#: wp-includes/theme.php:2358
+#: wp-includes/theme.php:2321
 msgctxt "Theme starter content"
 msgid "Recent Comments"
 msgstr "أحدث التعليقات"
 
-#: wp-includes/theme.php:2453
+#: wp-includes/theme.php:2416
 msgctxt "Theme starter content"
 msgid "Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time."
 msgstr "مرحبًا بك في موقعك! هذه صفحتك الرئيسية، التي سيراها أغلب الزوار عندما يزورون موقعك لأول مرة."
 
-#: wp-includes/theme.php:2340
+#: wp-includes/theme.php:2303
 msgctxt "Theme starter content"
 msgid "Calendar"
 msgstr "التقويم"
 
-#: wp-includes/theme.php:2352
+#: wp-includes/theme.php:2315
 msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "منوعات"
@@ -9415,27 +9444,27 @@ msgstr "عذراً، غير مسموح لك استعراض عناصر القائ
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "عذرًا، غير مسموح لك بقراءة تعليقات بدون مقالة."
 
-#: wp-includes/theme.php:2419
+#: wp-includes/theme.php:2382
 msgctxt "Theme starter content"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: wp-includes/theme.php:2431
+#: wp-includes/theme.php:2394
 msgctxt "Theme starter content"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: wp-includes/theme.php:2415
+#: wp-includes/theme.php:2378
 msgctxt "Theme starter content"
 msgid "Foursquare"
 msgstr "Foursquare"
 
-#: wp-includes/theme.php:2427
+#: wp-includes/theme.php:2390
 msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: wp-includes/theme.php:2443
+#: wp-includes/theme.php:2406
 msgctxt "Theme starter content"
 msgid "YouTube"
 msgstr "YouTube"
@@ -9458,12 +9487,12 @@ msgstr "عذرًا, غير مسموح لك بإسناد العناصر المُ�
 msgid "Sorry, you are not allowed to make posts sticky."
 msgstr "عذرًا, غير مسموح لك بتثبيت المقالات."
 
-#: wp-includes/theme.php:2325
+#: wp-includes/theme.php:2288
 msgctxt "Theme starter content"
 msgid "About This Site"
 msgstr "حول هذا الموقع"
 
-#: wp-includes/theme.php:2326
+#: wp-includes/theme.php:2289
 msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "قد يكون هذا مكانًا جيدًا لتقديم نفسك وموقعك أو تضمين بعض الشكر والتقدير."
@@ -9495,97 +9524,97 @@ msgstr "اختيار فيديو"
 msgid "Change video"
 msgstr "تغيير الفيديو"
 
-#: wp-includes/theme.php:2483
+#: wp-includes/theme.php:2446
 msgctxt "Theme starter content"
 msgid "A homepage section"
 msgstr "قسم الصفحة الرئيسية"
 
-#: wp-includes/theme.php:2466
+#: wp-includes/theme.php:2429
 msgctxt "Theme starter content"
 msgid "Contact"
 msgstr "اتصال"
 
-#: wp-includes/theme.php:2474
+#: wp-includes/theme.php:2437
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "المدونة"
 
-#: wp-includes/theme.php:2377 wp-includes/theme.php:2450
+#: wp-includes/theme.php:2340 wp-includes/theme.php:2413
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "الرئيسية"
 
-#: wp-includes/theme.php:2407
+#: wp-includes/theme.php:2370
 msgctxt "Theme starter content"
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
-#: wp-includes/theme.php:2423
+#: wp-includes/theme.php:2386
 msgctxt "Theme starter content"
 msgid "Instagram"
 msgstr "Instagram"
 
-#: wp-includes/theme.php:2458
+#: wp-includes/theme.php:2421
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "حول"
 
-#: wp-includes/theme.php:2435
+#: wp-includes/theme.php:2398
 msgctxt "Theme starter content"
 msgid "Twitter"
 msgstr "تويتر"
 
-#: wp-includes/theme.php:2411
+#: wp-includes/theme.php:2374
 msgctxt "Theme starter content"
 msgid "Facebook"
 msgstr "فيسبوك"
 
-#: wp-includes/theme.php:2439
+#: wp-includes/theme.php:2402
 msgctxt "Theme starter content"
 msgid "Yelp"
 msgstr "Yelp"
 
-#: wp-includes/theme.php:2370
+#: wp-includes/theme.php:2333
 msgctxt "Theme starter content"
 msgid "Search"
 msgstr "بحث"
 
-#: wp-includes/theme.php:2346
+#: wp-includes/theme.php:2309
 msgctxt "Theme starter content"
 msgid "Categories"
 msgstr "التصنيفات"
 
-#: wp-includes/theme.php:2313
+#: wp-includes/theme.php:2276
 msgctxt "Theme starter content"
 msgid "Hours"
 msgstr "الساعات"
 
-#: wp-includes/theme.php:2312
+#: wp-includes/theme.php:2275
 msgctxt "Theme starter content"
 msgid "New York, NY 10001"
 msgstr "نيويورك، 10001"
 
-#: wp-includes/theme.php:2311
+#: wp-includes/theme.php:2274
 msgctxt "Theme starter content"
 msgid "123 Main Street"
 msgstr "123 الشارع الرئيسي"
 
-#: wp-includes/theme.php:2315
+#: wp-includes/theme.php:2278
 msgctxt "Theme starter content"
 msgid "Saturday &amp; Sunday: 11:00AM&ndash;3:00PM"
 msgstr "السبت &amp; الأحد: 11:00ص&ndash;3:00م"
 
-#: wp-includes/theme.php:2314
+#: wp-includes/theme.php:2277
 msgctxt "Theme starter content"
 msgid "Monday&ndash;Friday: 9:00AM&ndash;5:00PM"
 msgstr "الأثنين&ndash;الجمعة: 9:00ص&ndash;5:00م"
 
-#: wp-includes/theme.php:2306
+#: wp-includes/theme.php:2269
 msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "ابحث عنا"
 
-#: wp-includes/theme.php:2310
+#: wp-includes/theme.php:2273
 msgctxt "Theme starter content"
 msgid "Address"
 msgstr "العنوان"
@@ -10936,7 +10965,7 @@ msgstr "منطقة نص منسق. اضغط Control-Option-H للمساعدة."
 msgid "Use Left/Right Arrow keys to advance one second, Up/Down arrows to advance ten seconds."
 msgstr "استخدم مفاتيح الأسهم يسار/يمين للتقدم ثانية واحدة، أسهم أعلى/أسفل للتقدم عشر ثواني."
 
-#: wp-includes/script-loader.php:1079 wp-includes/theme.php:1730
+#: wp-includes/script-loader.php:1079 wp-includes/theme.php:1693
 msgid "Play"
 msgstr "تشغيل"
 
@@ -10960,7 +10989,7 @@ msgstr "استخدم مفاتيح الأسهم أعلى/أسفل لزيادة أ
 msgid "Volume Slider"
 msgstr "شريط تمرير مستوى الصوت"
 
-#: wp-includes/script-loader.php:1080 wp-includes/theme.php:1729
+#: wp-includes/script-loader.php:1080 wp-includes/theme.php:1692
 msgid "Pause"
 msgstr "إيقاف مؤقت"
 
@@ -11048,7 +11077,7 @@ msgstr "عذرًا، غير مسموح لك تحرير هذه الصفحة."
 msgid "Today"
 msgstr "اليوم"
 
-#: wp-includes/class-wpdb.php:2276
+#: wp-includes/class-wpdb.php:2291
 msgid "Unable to retrieve the error message from MySQL"
 msgstr "غير قادر على استرداد رسالة الخطأ من MySQL"
 
@@ -11600,58 +11629,58 @@ msgstr "العنوان المُرسَل:"
 msgid "Author:"
 msgstr "الكاتب:"
 
-#: wp-includes/class-wpdb.php:2153
+#: wp-includes/class-wpdb.php:2168
 msgid "Error reconnecting to the database"
 msgstr "خطأ في إعادة الإتصال بقاعدة البيانات"
 
-#: wp-includes/class-wpdb.php:2002
+#: wp-includes/class-wpdb.php:2017
 msgid "Are you sure you have typed the correct hostname?"
 msgstr "هل أنت متأكد بأنك كتبت اسم المُضيف الصحيح؟"
 
-#: wp-includes/class-wpdb.php:2003 wp-includes/class-wpdb.php:2162
+#: wp-includes/class-wpdb.php:2018 wp-includes/class-wpdb.php:2177
 msgid "Are you sure the database server is running?"
 msgstr "هل أنت متأكد أن خادم قاعدة البيانات قيد التشغيل؟"
 
 #. translators: %s: Database host.
-#: wp-includes/class-wpdb.php:2157
+#: wp-includes/class-wpdb.php:2172
 msgid "This means that the contact with the database server at %s was lost. This could mean your host&#8217;s database server is down."
 msgstr "هذا يعني أننا قد فقدنا الإتصال بخادم قاعدة البيانات على %s. وهذا قد يعني أن الخادم المُضيف لقاعدة البيانات قد تعطّل."
 
-#: wp-includes/class-wpdb.php:2163
+#: wp-includes/class-wpdb.php:2178
 msgid "Are you sure the database server is not under particularly heavy load?"
 msgstr "هل أنت متأكد أن خادم قاعدة البيانات ليس تحت ضغط ثقيل؟"
 
 #. translators: %s: Support forums URL.
-#: wp-includes/class-wpdb.php:2008 wp-includes/class-wpdb.php:2168
+#: wp-includes/class-wpdb.php:2023 wp-includes/class-wpdb.php:2183
 #: wp-includes/load.php:190
 msgid "If you are unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href=\"%s\">WordPress support forums</a>."
 msgstr "إن لم تكن متأكدًا من ما تعنيه هذه المصطلحات فلربما عليك مراسلة المُضيف، إذا احتجت لأي مساعدة يمكنك دائمًا زيارة <a href=\"%s\">منتديات الدعم الفني لووردبريس</a>."
 
-#: wp-includes/class-wpdb.php:2001
+#: wp-includes/class-wpdb.php:2016
 msgid "Are you sure you have the correct username and password?"
 msgstr "هل أنت متأكد أنك تملك اسم المستخدم وكلمة المرور الصحيحين؟"
 
 #. translators: 1: wp-config.php, 2: Database host.
-#: wp-includes/class-wpdb.php:1995
+#: wp-includes/class-wpdb.php:2010
 msgid "This either means that the username and password information in your %1$s file is incorrect or that contact with the database server at %2$s could not be established. This could mean your host&#8217;s database server is down."
 msgstr "إما أن يعني هذا أن اسم المستخدم وكلمة المرور الموجودان في ملف %1$s غير صحيحين أو أننا لا نستطيع الإتصال بخادم قاعدة البيانات على %2$s. وهذا قد يعني أن الخادم المُضيف لقاعدة البيانات متوقف."
 
 #. translators: %s: Support forums URL.
-#: wp-includes/class-wpdb.php:1223
+#: wp-includes/class-wpdb.php:1238
 msgid "If you do not know how to set up a database you should <strong>contact your host</strong>. If all else fails you may find help at the <a href=\"%s\">WordPress support forums</a>."
 msgstr "إذا كنت لا تعرف كيف تنشئ قاعدة بيانات فعليك <strong>مُراسلة مُضيفك</strong>. إذا فشلت كل محاولاتك فابحث عن مساعدة في <a href=\"%s\">منتديات الدعم الفني لووردبريس</a>."
 
-#: wp-includes/class-wpdb.php:1204
+#: wp-includes/class-wpdb.php:1219
 msgid "Are you sure it exists?"
 msgstr "هل أنت متأكد أنها موجودة؟"
 
 #. translators: 1: Database user, 2: Database name.
-#: wp-includes/class-wpdb.php:1208
+#: wp-includes/class-wpdb.php:1223
 msgid "Does the user %1$s have permission to use the %2$s database?"
 msgstr "هل المستخدم %1$s لديه صلاحية استخدام قاعدة البيانات %2$s؟"
 
 #. translators: %s: Database name.
-#: wp-includes/class-wpdb.php:1215
+#: wp-includes/class-wpdb.php:1230
 msgid "On some systems the name of your database is prefixed with your username, so it would be like <code>username_%1$s</code>. Could that be the problem?"
 msgstr "على بعض الأنظمة اسم قاعدة البيانات يبدأ باسم المستخدم الخاص بك،  لذلك قد يبدو الاسم مثل <code>username_%1$s</code>. هل يمكن أن تكون هذه هي المشكلة؟"
 
@@ -11707,7 +11736,7 @@ msgstr "اسم الكود القصير غير صالح: المُعطى اسم ف
 msgid "Invalid shortcode name: %1$s. Do not use spaces or reserved characters: %2$s"
 msgstr "اسم الكود القصير الغير صالح: %1$s. لا تستخدم فراغات أو أحرف محجوزة: %2$s"
 
-#: wp-includes/rest-api/class-wp-rest-server.php:1418
+#: wp-includes/rest-api/class-wp-rest-server.php:1425
 msgid "The specified namespace could not be found."
 msgstr "تعذر العثور على مساحة التسمية (namespace) المحددة."
 
@@ -11721,7 +11750,7 @@ msgstr "%1$s (منذ %2$s; استخدم %3$s بدلاً عنها)"
 msgid "No route was found matching the URL and request method."
 msgstr "لم يتم العثور على مسار يتوافق مع الرابط URL وطريقة الطلب."
 
-#: wp-includes/rest-api/class-wp-rest-server.php:1741
+#: wp-includes/rest-api/class-wp-rest-server.php:1748
 msgid "The handler for the route is invalid"
 msgstr "الـ handler المتعلق بالمسار غير صالح"
 
@@ -12148,7 +12177,7 @@ msgstr "أضف للقائمة: %1$s (%2$s)"
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "عندما تبدأ بفقرة جديدة بإستعمال اختصارات التنسيق متبوعًا بمسافة فإنّه سوف يتمّ تطبيق التنسيق بشكل تلقائي. اضغط ( Backspace ) أو ( Esc ) في لوحة المفاتيح للتراجع."
 
-#: wp-includes/class-wpdb.php:1820 wp-includes/class-wpdb.php:1837
+#: wp-includes/class-wpdb.php:1835 wp-includes/class-wpdb.php:1852
 msgid "WordPress database error:"
 msgstr "خطأ فى قاعدة بيانات ووردبريس:"
 
@@ -12702,7 +12731,7 @@ msgstr "غير قادر على تقسيم الفئة المشتركة."
 msgid "Taxonomy names must be between 1 and 32 characters in length."
 msgstr "أسماء الفئة يجب أن يكون طولها بين 1 و 32 حرفًا."
 
-#: wp-includes/theme.php:3736
+#: wp-includes/theme.php:3699
 msgid "Customizer"
 msgstr "مخصّص"
 
@@ -12905,7 +12934,7 @@ msgid "Distraction-free writing mode"
 msgstr "نمط الكتابة بدون إلهاء"
 
 #. translators: 1: title-tag, 2: wp_loaded
-#: wp-includes/theme.php:2922
+#: wp-includes/theme.php:2885
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "ينبغي أن يُسجل دعم القالب لـ %1$s قبل خُطاف %2$s."
 
@@ -12948,7 +12977,7 @@ msgstr "لا تصف القيم التالية تاريخًا صالحًا: شه�
 
 #. translators: %s: Database access abstraction class, usually wpdb or a class
 #. extending wpdb.
-#: wp-includes/class-wpdb.php:1274
+#: wp-includes/class-wpdb.php:1289
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s يجب أن يعين إتصالاً مع قاعدة بيانات للاستخدام مع دوال التهريب."
 
@@ -12956,7 +12985,7 @@ msgstr "%s يجب أن يعين إتصالاً مع قاعدة بيانات لل
 msgid "A term with the name provided already exists in this taxonomy."
 msgstr "هناك عنصر بنفس الاسم والاسم اللطيف موجود مسبقًا في هذه الفئة."
 
-#: wp-includes/theme.php:2729
+#: wp-includes/theme.php:2692
 msgid "You need to pass an array of types."
 msgstr "تحتاج إلى تمرير مصفوفة أنواع."
 
@@ -13853,7 +13882,7 @@ msgid "There are no associated subtitles."
 msgstr "لا توجد ترجمات مرتبطة."
 
 #. translators: %s: wpdb::prepare()
-#: wp-includes/class-wpdb.php:1460
+#: wp-includes/class-wpdb.php:1475
 msgid "The query argument of %s must have a placeholder."
 msgstr "معامل الإستعلام للدالة %s يجب أن يحتوي على عنصر نائب."
 
@@ -15431,14 +15460,14 @@ msgstr "نوع رابط الصورة الافتراضي"
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:489
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:804
 #: wp-admin/includes/ajax-actions.php:2066 wp-admin/includes/media.php:3810
-#: wp-admin/includes/post.php:288 wp-admin/includes/post.php:2073
-#: wp-admin/includes/post.php:2077
+#: wp-admin/includes/post.php:288 wp-admin/includes/post.php:2060
+#: wp-admin/includes/post.php:2064
 msgid "Sorry, you are not allowed to edit this post."
 msgstr "عذرًا، غير مسموح لك بتحرير هذه المقالة."
 
 #: wp-includes/post.php:5289 wp-admin/includes/ajax-actions.php:124
 #: wp-admin/includes/meta-boxes.php:583 wp-admin/includes/post.php:576
-#: wp-admin/includes/post.php:2251 wp-admin/js/inline-edit-post.js:400
+#: wp-admin/includes/post.php:2238 wp-admin/js/inline-edit-post.js:358
 #: wp-admin/js/tags-box.js:9 wp-admin/js/tags-suggest.js:12
 msgctxt "tag delimiter"
 msgid ","
@@ -15659,7 +15688,7 @@ msgstr "&hellip;"
 msgid "Database Error"
 msgstr "خطأ في قاعدة البيانات"
 
-#: wp-includes/class-wpdb.php:1991 wp-includes/functions.php:5412
+#: wp-includes/class-wpdb.php:2006 wp-includes/functions.php:5412
 #: wp-includes/ms-load.php:475
 msgid "Error establishing a database connection"
 msgstr "خطأ في إنشاء اتصال بقاعدة البيانات"
@@ -18123,7 +18152,7 @@ msgid "This file is too big. Files must be less than %s KB in size."
 msgstr "هذا الملف كبير للغاية. يجب أن يكون حجم الملفات أقل من %s كيلو بايت."
 
 #: wp-includes/class-wp-editor.php:1370 wp-includes/script-loader.php:1293
-#: wp-includes/theme.php:3735 wp-admin/js/nav-menu.js:1260
+#: wp-includes/theme.php:3698 wp-admin/js/nav-menu.js:1260
 #: wp-admin/js/post.js:512 wp-admin/js/theme-plugin-editor.js:71
 #: wp-admin/js/widgets.js:98
 msgid "The changes you made will be lost if you navigate away from this page."
@@ -18321,7 +18350,7 @@ msgstr "<strong>خطأ:</strong> يرجى إدخال اسم المستخدم أ�
 
 #. translators: 1: WordPress version number, 2: Minimum required MySQL version
 #. number.
-#: wp-includes/class-wpdb.php:3989
+#: wp-includes/class-wpdb.php:4004
 msgid "<strong>Error:</strong> WordPress %1$s requires MySQL %2$s or higher"
 msgstr "<strong>خطأ:</strong> ووردبريس %1$s يتطلب MySQL %2$s أو أعلى"
 
@@ -18982,7 +19011,7 @@ msgstr "تعليقات"
 #: wp-admin/includes/class-wp-users-list-table.php:472
 #: wp-admin/includes/dashboard.php:758 wp-admin/includes/meta-boxes.php:135
 #: wp-admin/includes/meta-boxes.php:197 wp-admin/includes/meta-boxes.php:292
-#: wp-admin/includes/post.php:1595
+#: wp-admin/includes/post.php:1582
 #: wp-admin/includes/class-wp-ms-sites-list-table.php:740
 #: wp-admin/includes/class-wp-ms-users-list-table.php:406
 #: wp-admin/includes/class-wp-ms-users-list-table.php:527
@@ -19357,7 +19386,7 @@ msgstr "المقتطف"
 #: wp-includes/js/dist/edit-site.js:20449 wp-includes/js/dist/editor.js:10278
 #: wp-admin/includes/ajax-actions.php:2255 wp-admin/includes/media.php:3331
 #: wp-admin/includes/revision.php:61 wp-admin/includes/revision.php:64
-#: wp-admin/includes/template.php:2097 wp-admin/js/inline-edit-post.js:204
+#: wp-admin/includes/template.php:2097 wp-admin/js/inline-edit-post.js:201
 msgid "(no title)"
 msgstr "(بدون عنوان)"
 
@@ -19371,7 +19400,7 @@ msgstr "(بدون عنوان)"
 #: wp-admin/includes/class-custom-image-header.php:551
 #: wp-admin/includes/class-wp-posts-list-table.php:1542
 #: wp-admin/includes/class-wp-theme-install-list-table.php:346
-#: wp-admin/includes/meta-boxes.php:73 wp-admin/includes/post.php:1884
+#: wp-admin/includes/meta-boxes.php:73 wp-admin/includes/post.php:1871
 #: wp-admin/theme-install.php:426 wp-admin/theme-install.php:439
 #: wp-admin/theme-install.php:449 wp-admin/theme-install.php:456
 #: wp-admin/theme-install.php:609

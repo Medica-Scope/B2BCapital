@@ -118,12 +118,12 @@ msgid "Download &#8220;%s&#8221;"
 msgstr "تنزيل &#8220;%s&#8221;"
 
 #. translators: The localized WordPress download URL.
-#: wp-admin/about.php:350
+#: wp-admin/about.php:406
 msgid "https://wordpress.org/download/"
 msgstr "https://ar.wordpress.org/download/"
 
 #. translators: %s: The major version of WordPress for this branch.
-#: wp-admin/about.php:347
+#: wp-admin/about.php:403
 msgid "This is the final release of WordPress %s"
 msgstr "هذا هو الإصدار الأخير من ووردبريس %s"
 
@@ -314,17 +314,17 @@ msgid "Reach out to WordPress Core developers to ensure you'll never have this p
 msgstr "تواصل مع مطوري نواة الووردبريس للتأكد من أنك لن تواجه هذه المشكلة مرة أخرى."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:344
+#: wp-admin/about.php:400
 msgid "Important! Your version of WordPress (%1$s) will stop receiving security updates in the near future. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "هامّ! سيتوقف قريبًا إصدار تحديثات لنسخة ووردبريس (%1$s) التي لديك. إذا أردت أن يبقى موقعك آمنًا، <a href=\"%2$s\">حدّث رجاءً نسخة ووردبريس التي لديك</a>."
 
 #. translators: 1: WordPress version number, 2: Link to update WordPress
-#: wp-admin/about.php:341
+#: wp-admin/about.php:397
 msgid "Important! Your version of WordPress (%1$s) is no longer supported, you will not receive any security updates for your website. To keep your site secure, please <a href=\"%2$s\">update to the latest version of WordPress</a>."
 msgstr "هامّ! تم رفع الدعم عن نسخة ووربريس (%1$s) التي لديك، ولذا فإن موقعك لن يتلقى أي تحديثات لتعزيز الأمان. إذا أردت أن يبقى موقعك آمنا، رجاءً <a href=\"%2$s\">حدّث نسخة ووردبريس التي لديك</a>."
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:215
+#: wp-admin/about.php:271
 msgid "Learn more about WordPress %s"
 msgstr "معرفة المزيد حول ووردبريس %s"
 
@@ -388,7 +388,7 @@ msgstr "<strong>خطأ:</strong>ملف %1$s الخاص بك <a href=\"%2$s\">غ�
 msgid "An avatar is an image that can be associated with a user across multiple websites. In this area, you can choose to display avatars of users who interact with the site."
 msgstr "الصورة الرمزية (أفاتار) هي صورة يمكن ربطها بمستخدم ما عبر مواقع إلكترونية متعددة. يمكنك هنا اختيار عرض الصور الرمزية المستخدمين الذين يتفاعلون مع الموقع."
 
-#: wp-admin/includes/post.php:1580
+#: wp-admin/includes/post.php:1567
 msgid "Change Permalink Structure"
 msgstr "تغيير بنية الرابط الدائم"
 
@@ -1245,7 +1245,7 @@ msgstr "إضافة كلمة مرور التطبيق الجديدة"
 msgid "Required to create an Application Password, but not to update the user."
 msgstr "مطلوب لإنشاء كلمة مرور التطبيق، ولكن ليس لتحديث المستخدم."
 
-#: wp-admin/about.php:285
+#: wp-admin/about.php:341
 msgid "Go to Updates"
 msgstr "الانتقال إلى التحديثات"
 
@@ -1602,7 +1602,7 @@ msgstr "قيمة الـ \"%1$s\" أصغر من \"%2$s\""
 msgid "Environment type"
 msgstr "نوع البيئة"
 
-#: wp-admin/about.php:201
+#: wp-admin/about.php:257
 msgid "Accessibility"
 msgstr "إمكانية الوصول"
 
@@ -3262,7 +3262,7 @@ msgstr "https://make.wordpress.org/hosting/handbook/handbook/server-environment/
 msgid "The WordPress Hosting Team maintains a list of those modules, both recommended and required, in <a href=\"%1$s\" %2$s>the team handbook%3$s</a>."
 msgstr "يحافظ فريق استضافة ووردبريس على صيانة قائمة هذه الوحدات، الموصى بها والمطلوب منها، في <a href=\"%1$s\" %2$s>الدليل الإرشادي للفريق%3$s</a>"
 
-#: wp-admin/about.php:191 wp-admin/includes/class-wp-site-health.php:259
+#: wp-admin/about.php:247 wp-admin/includes/class-wp-site-health.php:259
 #: wp-admin/includes/class-wp-site-health.php:737
 #: wp-admin/includes/class-wp-site-health.php:884
 #: wp-admin/includes/class-wp-site-health.php:1122
@@ -5753,12 +5753,12 @@ msgid "Theme Installation"
 msgstr "تنصيب القالب"
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/post.php:1865
+#: wp-admin/includes/post.php:1852
 msgid "%s is currently editing this post."
 msgstr "%s يقوم بتحرير هذه المقالة حاليًا."
 
 #. translators: %s: User's display name.
-#: wp-admin/includes/post.php:1862
+#: wp-admin/includes/post.php:1849
 msgid "%s is currently editing this post. Do you want to take over?"
 msgstr "%s يقوم بتحرير هذه المقالة حاليًا. هل تريد الاستيلاء على التحرير بدلاً منه؟"
 
@@ -6673,7 +6673,7 @@ msgstr "ملف القالب مضغوط ZIP"
 msgid "Attach to existing content"
 msgstr "أرفق مع محتوى موجود"
 
-#: wp-admin/includes/post.php:1669
+#: wp-admin/includes/post.php:1656
 msgid "Click the image to edit or update"
 msgstr "انقر على الصورة للتعديل أو التحديث"
 
@@ -6931,7 +6931,7 @@ msgid "(Currently set to: %s)"
 msgstr "(حاليًا معيّنة لـ: %s)"
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:315
+#: wp-admin/about.php:371
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>النسخة %s</strong> عالجت مشكلة أمنية واحدة."
 
@@ -6943,15 +6943,15 @@ msgstr "https://en.gravatar.com/"
 msgid "Profile Picture"
 msgstr "صورة الحساب"
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:48 wp-admin/about.php:368
 msgid "Maintenance and Security Releases"
 msgstr "الصيانة والإصدارات الأمنية"
 
-#: wp-admin/about.php:309
+#: wp-admin/about.php:365
 msgid "Security Releases"
 msgstr "الإصدارات الأمنية"
 
-#: wp-admin/about.php:306
+#: wp-admin/about.php:362
 msgid "Maintenance Releases"
 msgstr "إصدارات الصيانة"
 
@@ -7187,11 +7187,11 @@ msgstr "احصل على النسخة %s"
 msgid "Toggle panel: %s"
 msgstr "تبديل اللوحة: %s"
 
-#: wp-admin/includes/post.php:1905
+#: wp-admin/includes/post.php:1892
 msgid "Saving revision&hellip;"
 msgstr "جاري حفظ المراجعة&hellip;"
 
-#: wp-admin/includes/post.php:1595
+#: wp-admin/includes/post.php:1582
 msgid "Edit permalink"
 msgstr "تحرير الرابط الدائم"
 
@@ -9346,7 +9346,7 @@ msgstr "يتم استخدام هذه الشاشة لإدارة قوائم الت
 msgid "Menu locations updated."
 msgstr "تم تحديث مواضع القائمة."
 
-#: wp-admin/includes/post.php:1906
+#: wp-admin/includes/post.php:1893
 msgid "Your latest changes were saved as a revision."
 msgstr "تم حفظ آخر التغييرات كمراجعة."
 
@@ -10352,14 +10352,15 @@ msgstr "أدخل عنوان البريد الإلكتروني التابع لع�
 msgid "Show Toolbar when viewing site"
 msgstr "إظهار شريط الأدوات في واجهة الموقع"
 
+#. translators: %s: HelpHub URL.
 #. translators: %s: Documentation URL.
-#: wp-admin/about.php:338
+#: wp-admin/about.php:65 wp-admin/about.php:90 wp-admin/about.php:394
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "لمزيد من المعلومات، شاهد <a href=\"%s\">ملاحظات الإصدار</a>."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:332
+#: wp-admin/about.php:388
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>النسخة %1$s</strong> عالجت بعض المشاكل الأمنية وأصلحت %2$s أخطاء."
@@ -10369,9 +10370,10 @@ msgstr[3] "<strong>النسخة %1$s</strong> عالجت بعض المشاكل �
 msgstr[4] "<strong>النسخة %1$s</strong> عالجت بعض المشاكل الأمنية وأصلحت %2$s خطأ."
 msgstr[5] "<strong>النسخة %1$s</strong> عالجت بعض المشاكل الأمنية وأصلحت %2$s أخطاء."
 
+#. translators: 1: WordPress version number, 2: Plural number of bugs.
 #. translators: 1: WordPress version number, 2: Plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:326
+#: wp-admin/about.php:78 wp-admin/about.php:382
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>النسخة %1$s</strong> عالجت مشكلة أمنية وأصلحت %2$s أخطاء."
@@ -10382,7 +10384,7 @@ msgstr[4] "<strong>النسخة %1$s</strong> عالجت مشكلة أمنية �
 msgstr[5] "<strong>النسخة %1$s</strong> عالجت مشكلة أمنية وأصلحت %2$s أخطاء."
 
 #. translators: 1: WordPress version number, 2: Plural number of bugs.
-#: wp-admin/about.php:320
+#: wp-admin/about.php:53 wp-admin/about.php:376
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>النسخة %1$s</strong> عالجت %2$s أخطاء."
@@ -10393,19 +10395,19 @@ msgstr[4] "<strong>النسخة %1$s</strong> عالجت %2$s خطأ."
 msgstr[5] "<strong>النسخة %1$s</strong> عالجت %2$s أخطاء."
 
 #. translators: %s: WordPress version number.
-#: wp-admin/about.php:317
+#: wp-admin/about.php:373
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>النسخة %s</strong> عالجت عدة مُشكلات أمنية."
 
-#: wp-admin/about.php:311
+#: wp-admin/about.php:367
 msgid "Maintenance and Security Release"
 msgstr "إصدار صيانة وأمني"
 
-#: wp-admin/about.php:308
+#: wp-admin/about.php:364
 msgid "Security Release"
 msgstr "إصدار أمني"
 
-#: wp-admin/about.php:305
+#: wp-admin/about.php:361
 msgid "Maintenance Release"
 msgstr "إصدار صيانة"
 
@@ -10675,15 +10677,15 @@ msgid "Because this is a multisite installation, you may add accounts that alrea
 msgstr "كونك تستخدم نسخة المواقع المتعدّدة (Multi-Site)، تستطيع إذاً إضافة حسابات جديدة موجودة سابقاً على الشبكة وذلك عن طريق تحديد اسم المستخدم أو البريد الإلكتروني، ثمّ تحديد الدور. للمزيد من الخيارات، مثل تحديد كلمة المرور، يجب أن تكون لديك صلاحيات مدير الشبكة وحينها يمكنك التوجّه إلى (إدارة الشبكة > كافة الأعضاء) ومن ثمّ إجراء التعديلات التي تريدها."
 
 #. translators: %s: Version number.
-#: wp-admin/about.php:52
+#: wp-admin/about.php:108
 msgid "Welcome to WordPress %s"
 msgstr "مرحبًا بك في ووردبريس %s"
 
-#: wp-admin/about.php:292
+#: wp-admin/about.php:348
 msgid "Go to Dashboard &rarr; Home"
 msgstr "الانتقال إلى لوحة التحكم &larr; الرئيسية"
 
-#: wp-admin/about.php:285
+#: wp-admin/about.php:341
 msgid "Go to Dashboard &rarr; Updates"
 msgstr "الانتقال إلى لوحة التحكم &larr; تحديثات"
 
@@ -12111,11 +12113,11 @@ msgstr "موقع ووردبريس جديد"
 msgid "My Site"
 msgstr "موقعي"
 
-#: wp-admin/includes/post.php:913
+#: wp-admin/includes/post.php:900
 msgid "Sorry, you are not allowed to create posts or drafts on this site."
 msgstr "عذرًا، لا يُسمح لك بإنشاء مقالات أو مسودات على هذا الموقع."
 
-#: wp-admin/includes/post.php:911
+#: wp-admin/includes/post.php:898
 msgid "Sorry, you are not allowed to create pages on this site."
 msgstr "عذرًا، لا يُسمح لك بإنشاء صفحات على هذا الموقع."
 
@@ -12439,7 +12441,7 @@ msgstr "تحديثات ووردبريس"
 msgid "Edit menu item"
 msgstr "تحرير عنصر القائمة"
 
-#: wp-admin/about.php:292 wp-admin/includes/network.php:166
+#: wp-admin/about.php:348 wp-admin/includes/network.php:166
 msgid "Go to Dashboard"
 msgstr "إذهب إلى الصفحة الرئيسية في لوحة التحكم"
 
@@ -12589,12 +12591,12 @@ msgstr "ودجات متوفرة"
 msgid "Error in displaying the widget settings form."
 msgstr "خطأ في عرض نموذج إعدادات الودجت."
 
-#: wp-admin/includes/misc.php:1367 wp-admin/includes/post.php:2140
+#: wp-admin/includes/misc.php:1367 wp-admin/includes/post.php:2127
 #: wp-admin/widgets-form.php:367
 msgid "Error while saving."
 msgstr "حصل خلل أثناء حفظ التغييرات."
 
-#: wp-admin/widgets-form.php:363 wp-admin/js/inline-edit-post.js:513
+#: wp-admin/widgets-form.php:363 wp-admin/js/inline-edit-post.js:471
 #: wp-admin/js/inline-edit-tax.js:227
 msgid "Changes saved."
 msgstr "تم حفظ التغييرات"
@@ -12897,7 +12899,7 @@ msgid "You cannot edit this item because it is in the Trash. Please restore it a
 msgstr "لا تستطيع تحرير هذا البند لأنه موجود في سلة المهملات، فضلاً قم باستعادته ثم حاول من جديد."
 
 #: wp-admin/edit-tags.php:173 wp-admin/includes/class-wp-screen.php:297
-#: wp-admin/includes/post.php:2146 wp-admin/media-upload.php:47
+#: wp-admin/includes/post.php:2133 wp-admin/media-upload.php:47
 #: wp-admin/post.php:20 wp-admin/post.php:47 wp-admin/post.php:139
 #: wp-admin/term.php:43
 msgid "Sorry, you are not allowed to edit this item."
@@ -13950,11 +13952,11 @@ msgstr "موقع آخر في %s"
 msgid "Just another WordPress site"
 msgstr "موقع ووردبريس عربي آخر"
 
-#: wp-admin/includes/post.php:1567 wp-admin/includes/post.php:1592
+#: wp-admin/includes/post.php:1554 wp-admin/includes/post.php:1579
 msgid "Permalink:"
 msgstr "الرابط الدائم:"
 
-#: wp-admin/includes/post.php:761
+#: wp-admin/includes/post.php:748
 msgid "Auto Draft"
 msgstr "مسودة تلقائية"
 
