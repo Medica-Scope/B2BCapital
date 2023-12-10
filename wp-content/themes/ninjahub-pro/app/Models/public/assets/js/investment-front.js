@@ -29,6 +29,7 @@ class NhInvestmentFront extends NhInvestment
                 form: $(`#${KEY}_create_investment_form`),
                 parent: $(`#${KEY}_create_investment_form`).parent(),
                 investments_numbers: $(`.investments-numbers`),
+                modalFormSubmit: $(`#modalFormSubmit`),
             },
         };
 
@@ -46,6 +47,14 @@ class NhInvestmentFront extends NhInvestment
             $investment = this.$el.investment,
             ajaxRequests = this.ajaxRequests;
 
+
+        $investment.modalFormSubmit.on('click', function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget),
+                $target = $this.attr('data-target');
+
+            $('#' + $target).trigger('click');
+        })
 
         // Handle form submission
         $investment.form.on('submit', $investment.parent, function (e) {

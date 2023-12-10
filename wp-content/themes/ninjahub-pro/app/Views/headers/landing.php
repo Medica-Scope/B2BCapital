@@ -188,6 +188,11 @@ $active_link  = $current_slug;
 											<?= __( 'FAQs', 'ninja' ); ?>
 										</a>
 									</li>
+									<li class="nav-item mb-2">
+										<a class="nav-link text-white" href="/nh_account/nh_logout">
+											<?= __( 'Logout', 'ninja' ); ?>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>

@@ -32,7 +32,6 @@
                     <div class="tab-pane nh-admin-page-body active">
                         <div class="accordion" id="accordionExample">
 
-                            <?php /*
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
@@ -45,71 +44,70 @@
                                         <?=
                                         Nh_Forms::get_instance()
                                                      ->create_form([
-                                                             'contact_address_en' => [
+//                                                             'contact_address_en' => [
+//                                                                     'class'       => 'mb-4',
+//                                                                     'type'        => 'text',
+//                                                                     'label'       => __('Address in english', 'ninja'),
+//                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_address_en',
+//                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_address_en'],
+//                                                                     'required'    => TRUE,
+//                                                                     'placeholder' => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, velit.', 'ninja'),
+//                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
+//                                                                     'before'      => '',
+//                                                                     'after'       => '',
+//                                                                     'inline'      => TRUE,
+//                                                                     'order'       => 0,
+//                                                             ],
+//                                                             'contact_address_ar' => [
+//                                                                     'class'       => 'mb-4',
+//                                                                     'type'        => 'text',
+//                                                                     'label'       => __('Address in arabic', 'ninja'),
+//                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_address_ar',
+//                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_address_ar'],
+//                                                                     'required'    => TRUE,
+//                                                                     'placeholder' => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, velit.', 'ninja'),
+//                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
+//                                                                     'before'      => '',
+//                                                                     'after'       => '',
+//                                                                     'inline'      => TRUE,
+//                                                                     'order'       => 0,
+//                                                             ],
+//                                                             'contact_email'      => [
+//                                                                     'class'       => 'mb-4',
+//                                                                     'type'        => 'email',
+//                                                                     'label'       => __('Email', 'ninja'),
+//                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_email',
+//                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_email'],
+//                                                                     'required'    => TRUE,
+//                                                                     'placeholder' => __('info@nh.org', 'ninja'),
+//                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
+//                                                                     'before'      => '',
+//                                                                     'after'       => '',
+//                                                                     'inline'      => TRUE,
+//                                                                     'order'       => 5,
+//                                                             ],
+//                                                             'contact_phone'      => [
+//                                                                     'class'       => 'mb-4',
+//                                                                     'type'        => 'text',
+//                                                                     'label'       => __('Phone', 'ninja'),
+//                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_phone',
+//                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_phone'],
+//                                                                     'required'    => TRUE,
+//                                                                     'placeholder' => __('+2 15057', 'ninja'),
+//                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
+//                                                                     'before'      => '',
+//                                                                     'after'       => '',
+//                                                                     'inline'      => TRUE,
+//                                                                     'order'       => 10,
+//                                                             ],
+                                                             'whatsapp_msg'      => [
                                                                      'class'       => 'mb-4',
                                                                      'type'        => 'text',
-                                                                     'label'       => __('Address in english', 'ninja'),
-                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_address_en',
-                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_address_en'],
+                                                                     'label'       => __('WhatsApp Starter Message', 'ninja'),
+                                                                     'name'        => Nh::_DOMAIN_NAME . '_whatsapp_msg',
+                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_whatsapp_msg'],
                                                                      'required'    => TRUE,
-                                                                     'placeholder' => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, velit.', 'ninja'),
-                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
-                                                                     'before'      => '',
-                                                                     'after'       => '',
-                                                                     'inline'      => TRUE,
-                                                                     'order'       => 0,
-                                                             ],
-                                                             'contact_address_ar' => [
-                                                                     'class'       => 'mb-4',
-                                                                     'type'        => 'text',
-                                                                     'label'       => __('Address in arabic', 'ninja'),
-                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_address_ar',
-                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_address_ar'],
-                                                                     'required'    => TRUE,
-                                                                     'placeholder' => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, velit.', 'ninja'),
-                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
-                                                                     'before'      => '',
-                                                                     'after'       => '',
-                                                                     'inline'      => TRUE,
-                                                                     'order'       => 0,
-                                                             ],
-                                                             'contact_email'      => [
-                                                                     'class'       => 'mb-4',
-                                                                     'type'        => 'email',
-                                                                     'label'       => __('Email', 'ninja'),
-                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_email',
-                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_email'],
-                                                                     'required'    => TRUE,
-                                                                     'placeholder' => __('info@nh.org', 'ninja'),
-                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
-                                                                     'before'      => '',
-                                                                     'after'       => '',
-                                                                     'inline'      => TRUE,
-                                                                     'order'       => 5,
-                                                             ],
-                                                             'contact_phone'      => [
-                                                                     'class'       => 'mb-4',
-                                                                     'type'        => 'text',
-                                                                     'label'       => __('Phone', 'ninja'),
-                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_phone',
-                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_phone'],
-                                                                     'required'    => TRUE,
-                                                                     'placeholder' => __('+2 15057', 'ninja'),
-                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
-                                                                     'before'      => '',
-                                                                     'after'       => '',
-                                                                     'inline'      => TRUE,
-                                                                     'order'       => 10,
-                                                             ],
-                                                             'contact_mobile'      => [
-                                                                     'class'       => 'mb-4',
-                                                                     'type'        => 'text',
-                                                                     'label'       => __('Mobile', 'ninja'),
-                                                                     'name'        => Nh::_DOMAIN_NAME . '_contact_mobile',
-                                                                     'value'       => NH_CONFIGURATION['contact'][Nh::_DOMAIN_NAME . '_contact_mobile'],
-                                                                     'required'    => TRUE,
-                                                                     'placeholder' => __('+20 0111545057', 'ninja'),
-                                                                     'hint'        => __("This info will be used in contact us page.", 'ninja'),
+                                                                     'placeholder' => __('Hello!', 'ninja'),
                                                                      'before'      => '',
                                                                      'after'       => '',
                                                                      'inline'      => TRUE,
@@ -132,7 +130,6 @@
                                     </div>
                                 </div>
                             </div>
-                            */?>
 
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">

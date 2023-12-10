@@ -87,7 +87,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
 							data-bs-toggle="dropdown" data-bs-auto-close="true">
 							<span class="btn-profile-title">
-								<?= sprintf( __( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
+								<?= sprintf( _x( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
 							<span class="btn-profile-desc">
 								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>

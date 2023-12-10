@@ -859,14 +859,14 @@
                     return TRUE; // The OTP code is valid
                 } else {
                     // The OTP code is invalid
-                    $error->add('invalid_key', __("Your reset key is invalid!.", 'ninja'), [
+                    $error->add('invalid_key', __("Your key is invalid!.", 'ninja'), [
                         'status' => FALSE
                     ]);
                     return $error; // Return the WP_Error object
                 }
             } else {
                 // The OTP code has expired
-                $error->add('expire_date', __("Your reset key is expired.", 'ninja'), [
+                $error->add('expire_date', __("Your key is expired.", 'ninja'), [
                     'status' => FALSE
                 ]);
                 return $error; // Return the WP_Error object

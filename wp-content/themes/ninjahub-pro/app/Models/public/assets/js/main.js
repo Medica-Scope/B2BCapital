@@ -17,7 +17,7 @@ class NhMain
 {
     constructor()
     {
-        window.KEY = nhGlobals.domain_key;
+        window.KEY    = nhGlobals.domain_key;
         window.ITIOBJ = {};
         this.initialization();
     }
