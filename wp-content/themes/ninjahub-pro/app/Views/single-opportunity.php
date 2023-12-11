@@ -745,7 +745,26 @@
             <h3>
                 <?= __('Related Opportunities', 'ninja'); ?>
             </h3>
-            <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]); ?>
+            <?php
+            $profile_id            = get_user_meta( $user_ID, 'profile_id', TRUE );
+            $profile_obj           = new Nh_Profile();
+            $profile               = $profile_obj->get_by_id( (int) $profile_id );
+            if ( ! is_wp_error( $profile ) && isset($profile->meta_data['preferred_opportunities_cat_list']) && !empty($profile->meta_data['preferred_opportunities_cat_list']) ) {
+                $related_opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'desc', [], 
+                [
+                'taxonomy' => 'opportunity-category',
+                'terms'    => $profile->meta_data['preferred_opportunities_cat_list'],
+                'field'    => 'term_id'
+                ], $user_ID, 1, [], [], 'ids');
+                if(!empty($related_opportunities['posts'])){
+                    get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $related_opportunities['posts'] ]); 
+                }else{
+                    get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]);
+                }
+            }else{
+             get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]); 
+            }
+            ?>
         </div>
     </main><!-- #main -->
 
