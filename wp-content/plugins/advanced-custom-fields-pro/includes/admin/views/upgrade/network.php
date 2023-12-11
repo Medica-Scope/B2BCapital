@@ -12,20 +12,20 @@
 
 ?>
 <style type="text/css">
-
+	
 	/* hide steps */
 	.show-on-complete {
 		display: none;
-	}
-
+	}	
+	
 </style>
 <div id="acf-upgrade-wrap" class="wrap">
-
+	
 	<h1><?php _e( 'Upgrade Database', 'acf' ); ?></h1>
-
-	<p><?php echo sprintf( __( 'The following sites require a DB upgrade. Check the ones you want to update and then click %s.', 'acf' ), '"' . __( 'Upgrade Sites', 'acf' ) . '"' ); ?></p>
+	
+	<p><?php printf( __( 'The following sites require a DB upgrade. Check the ones you want to update and then click %s.', 'acf' ), '"' . __( 'Upgrade Sites', 'acf' ) . '"' ); ?></p>
 	<p><input type="submit" name="upgrade" value="<?php _e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites"></p>
-
+	
 	<table class="wp-list-table widefat">
 		<thead>
 			<tr>
@@ -64,7 +64,7 @@
 				<?php
 				if ( $i % 2 == 0 ) :
 					?>
-				 class="alternate"<?php endif; ?>>
+				class="alternate"<?php endif; ?>>
 				<th class="check-column" scope="row">
 				<?php if ( acf_has_upgrade() ) : ?>
 					<input type="checkbox" value="<?php echo $site['blog_id']; ?>" name="checked[]">
@@ -85,20 +85,19 @@
 
 				// restore
 				restore_current_blog();
-
 		endforeach;
 		endif;
 
 		?>
 		</tbody>
 	</table>
-
+	
 	<p><input type="submit" name="upgrade" value="<?php _e( 'Upgrade Sites', 'acf' ); ?>" class="button" id="upgrade-sites-2"></p>
-	<p class="show-on-complete"><?php echo sprintf( __( 'Database Upgrade complete. <a href="%s">Return to network dashboard</a>', 'acf' ), network_admin_url() ); ?></p>
-
+	<p class="show-on-complete"><?php printf( __( 'Database Upgrade complete. <a href="%s">Return to network dashboard</a>', 'acf' ), network_admin_url() ); ?></p>
+	
 	<script type="text/javascript">
 	(function($) {
-
+		
 		var upgrader = new acf.Model({
 			events: {
 				'click #upgrade-sites':		'onClick',
@@ -108,45 +107,45 @@
 				return $('#the-list input:checked');
 			},
 			onClick: function( e, $el ){
-
+				
 				// prevent default
 				e.preventDefault();
-
+				
 				// bail early if no selection
 				if( !this.$inputs().length ) {
 					return alert('<?php _e( 'Please select at least one site to upgrade.', 'acf' ); ?>');
 				}
-
+				
 				// confirm action
 				if( !confirm("<?php _e( 'It is strongly recommended that you backup your database before proceeding. Are you sure you wish to run the updater now?', 'acf' ); ?>") ) {
 					return;
 				}
-
+				
 				// upgrade
 				this.upgrade();
 			},
 			upgrade: function(){
-
+				
 				// vars
 				var $inputs = this.$inputs();
-
+				
 				// bail early if no sites selected
 				if( !$inputs.length ) {
 					return this.complete();
 				}
-
+				
 				// disable buttons
 				$('.button').prop('disabled', true);
-
+				
 				// vars
 				var $input = $inputs.first();
 				var $row = $input.closest('tr');
 				var text = '';
 				var success = false;
-
+				
 				// show loading
 				$row.find('.response').html('<i class="acf-loading"></i></span> <?php printf( __( 'Upgrading data to version %s', 'acf' ), ACF_VERSION ); ?>');
-
+				
 				// send ajax request to upgrade DB
 				$.ajax({
 					url: acf.get('ajaxurl'),
@@ -159,7 +158,7 @@
 					success: function( json ){
 						success = true;
 						$input.remove();
-						text = '<?php _e( 'Upgrade complete.', 'acf' ); ?>';
+						text = '<?php _e( 'Upgrade complete.', 'acf' ); ?>';	
 					},
 					error: function( jqXHR, textStatus, errorThrown ){
 						text = '<?php _e( 'Upgrade failed.', 'acf' ); ?>';
@@ -168,10 +167,10 @@
 						}
 					},
 					complete: this.proxy(function(){
-
+						
 						// display text
 						$row.find('.response').html( text );
-
+						
 						// if successful upgrade, proceed to next site. Otherwise, skip to complete.
 						if( success ) {
 							this.upgrade();
@@ -182,15 +181,15 @@
 				});
 			},
 			complete: function(){
-
+				
 				// enable buttons
 				$('.button').prop('disabled', false);
-
+				
 				// show message
 				$('.show-on-complete').show();
 			}
 		});
-
-	})(jQuery);
+				
+	})(jQuery);	
 	</script>
 </div>

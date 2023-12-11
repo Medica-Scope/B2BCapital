@@ -30,7 +30,6 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 			$this->defaults      = array(
 				'return_format' => 'array',
 			);
-
 		}
 
 
@@ -58,25 +57,20 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// array (ACF 5.6.0)
 			if ( is_array( $value ) ) {
-
 				$link = array_merge( $link, $value );
 
 				// post id (ACF < 5.6.0)
 			} elseif ( is_numeric( $value ) ) {
-
 				$link['title'] = get_the_title( $value );
 				$link['url']   = get_permalink( $value );
 
 				// string (ACF < 5.6.0)
 			} elseif ( is_string( $value ) ) {
-
 				$link['url'] = $value;
-
 			}
 
 			// return
 			return $link;
-
 		}
 
 
@@ -121,7 +115,7 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 			?></textarea>*/
 			?>
 <div <?php echo acf_esc_attrs( $div ); ?>>
-
+	
 	<div class="acf-hidden">
 		<a class="link-node" href="<?php echo esc_url( $link['url'] ); ?>" target="<?php echo esc_attr( $link['target'] ); ?>"><?php echo esc_html( $link['title'] ); ?></a>
 			<?php foreach ( $link as $k => $v ) : ?>
@@ -136,18 +130,17 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 				?>
 		<?php endforeach; ?>
 	</div>
-
+	
 	<a href="#" class="button" data-name="add" target=""><?php _e( 'Select Link', 'acf' ); ?></a>
-
+	
 	<div class="link-wrap">
 		<span class="link-title"><?php echo esc_html( $link['title'] ); ?></span>
 		<a class="link-url" href="<?php echo esc_url( $link['url'] ); ?>" target="_blank"><?php echo esc_html( $link['url'] ); ?></a>
 		<i class="acf-icon -link-ext acf-js-tooltip" title="<?php _e( 'Opens in a new window/tab', 'acf' ); ?>"></i><a class="acf-icon -pencil -clear acf-js-tooltip" data-name="edit" href="#" title="<?php _e( 'Edit', 'acf' ); ?>"></a><a class="acf-icon -cancel -clear acf-js-tooltip" data-name="remove" href="#" title="<?php _e( 'Remove', 'acf' ); ?>"></a>
 	</div>
-
+	
 </div>
 			<?php
-
 		}
 
 
@@ -178,7 +171,6 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 					),
 				)
 			);
-
 		}
 
 		/*
@@ -209,14 +201,11 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// format value
 			if ( $field['return_format'] == 'url' ) {
-
 				return $link['url'];
-
 			}
 
 			// return link
 			return $link;
-
 		}
 
 
@@ -242,14 +231,11 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 			// URL is required
 			if ( empty( $value ) || empty( $value['url'] ) ) {
-
 				return false;
-
 			}
 
 			// return
 			return $valid;
-
 		}
 
 
@@ -310,7 +296,6 @@ if ( ! class_exists( 'acf_field_link' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_link' );
-
 endif; // class_exists check
 
 ?>

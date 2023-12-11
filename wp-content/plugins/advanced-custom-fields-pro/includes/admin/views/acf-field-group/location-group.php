@@ -1,7 +1,7 @@
 <div class="rule-group" data-id="<?php echo $group_id; ?>">
 
 	<h4><?php echo ( $group_id == 'group_0' ) ? __( 'Show this field group if', 'acf' ) : __( 'or', 'acf' ); ?></h4>
-
+	
 	<table class="acf-table -clear">
 		<tbody>
 			<?php
@@ -21,10 +21,9 @@
 						'rule' => $rule,
 					)
 				);
-
-			 endforeach;
+			endforeach;
 			?>
 		</tbody>
 	</table>
-
+	
 </div>
