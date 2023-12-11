@@ -67,3 +67,4 @@ node_modules/
 /.htaccess.bk
 /.user.ini
 /.maintenance
+/.wp-cli
