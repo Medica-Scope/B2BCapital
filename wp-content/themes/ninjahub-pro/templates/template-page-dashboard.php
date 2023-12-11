@@ -75,10 +75,12 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 									</button>
 								</div>
 								<div class="filters">
-									<button class="btn btn-outline-warning opportunity-adv-filter" data-bs-toggle="button"><i
-											class="bbc-sliders"></i> Advanced Filters
+
+									<button class="btn btn-outline-warning opportunity-adv-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+										<i class="bbc-sliders"></i> <?= __('Advanced Filters', 'ninja') ?>
 									</button>
-									<div class="filter-con d-none">
+									<div class="collapse" id="collapseFilter">
+									<div class="filter-con">
 										<?php
 										$business_type_terms = $opportunities_obj->get_taxonomy_terms( 'business-type' );
 										$business_options    = [];
@@ -198,6 +200,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												'class' => Nh::_DOMAIN_NAME . '-filters-form',
 											] );
 										?>
+									</div>
 									</div>
 								</div>
 							</div>
