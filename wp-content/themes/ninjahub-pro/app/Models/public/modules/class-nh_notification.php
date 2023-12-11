@@ -306,7 +306,7 @@
                     $cms_users = Nh_User::get_users_by_role([ Nh_User::CMS ]);
                     foreach ($cms_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification.", 'ninja');
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification", 'ninja');
                         $notification_obj->content                        = __("New opportunity assigned to you to be verified.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -397,7 +397,7 @@
                     $seo_users = Nh_User::get_users_by_role([ Nh_User::SEO ]);
                     foreach ($seo_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification.", 'ninja');
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification", 'ninja');
                         $notification_obj->content                        = __("New opportunity assigned to you to be verified.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -443,7 +443,7 @@
                     $translators_users = Nh_User::get_users_by_role([ Nh_User::TRANSLATOR ]);
                     foreach ($translators_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your translation.", 'ninja');
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your translation", 'ninja');
                         $notification_obj->content                        = __("New opportunity assigned to you to be translated.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -489,7 +489,7 @@
                     $cms_users = Nh_User::get_users_by_role([ Nh_User::CMS ]);
                     foreach ($cms_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New Opportunity - <strong>%s</strong> is waiting for your action.", 'ninja');
+                        $notification_obj->title                          = __("New Opportunity - <strong>%s</strong> is waiting for your action", 'ninja');
                         $notification_obj->content                        = __("New opportunity assigned to you to be published.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -534,7 +534,7 @@
                     $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
                     foreach ($admin_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("Opportunity Published.", 'ninja');
+                        $notification_obj->title                          = __("Opportunity Published", 'ninja');
                         $notification_obj->content                        = __("The opportunity <strong>%s</strong> is published and ready.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -558,7 +558,7 @@
                     $investor_users = Nh_User::get_users_by_role([ Nh_User::INVESTOR ]);
                     foreach ($investor_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("A New Opportunity <strong>%s</strong> is published!.", 'ninja');
+                        $notification_obj->title                          = __("A New Opportunity <strong>%s</strong> is published!", 'ninja');
                         $notification_obj->content                        = __("opportunity <strong>%s</strong> is published check it now!.", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -573,7 +573,7 @@
                 case 'bidding':
                     $user                                             = Nh_User::get_user_by('ID', $from);
                     $notification_obj->title                          = __("New Bidding", 'ninja');
-                    $notification_obj->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->content                        = __('You have a new bidding on your project <strong>%s</strong>', 'ninja');
                     $notification_obj->author                         = $to;
                     $notification_obj->meta_data['notification_data'] = [
                         'type'           => 'bidding',
@@ -595,7 +595,7 @@
                     $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
                     foreach ($admin_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New bid for <strong>%s</strong>.", 'ninja');
+                        $notification_obj->title                          = __("New bid for <strong>%s</strong>", 'ninja');
                         $notification_obj->content                        = __("<strong>%s</strong> bid on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
@@ -642,7 +642,7 @@
                     foreach ($admin_users as $user) {
                         $notification_obj                                 = new $class();
                         $notification_obj->title                          = __("New Acquisition Request", 'ninja');
-                        $notification_obj->content                        = __("New acquisition request on <strong>%s</strong>", 'ninja');
+                        $notification_obj->content                        = __("New acquisition request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
                             'type'           => 'opportunity_published',
@@ -689,8 +689,8 @@
 
                     foreach ($admin_users as $user) {
                         $notification_obj                                 = new $class();
-                        $notification_obj->title                          = __("New Investment Request.", 'ninja');
-                        $notification_obj->content                        = __("New investment request on <strong>%s</strong>", 'ninja');
+                        $notification_obj->title                          = __("New Investment Request", 'ninja');
+                        $notification_obj->content                        = __("New investment request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
                             'type'           => 'opportunity_published',
@@ -709,7 +709,6 @@
                         ]);
                     }
                     break;
-
                 default:
                     break;
             }
@@ -930,9 +929,7 @@
                     $formatted->new       = (int)$notification->meta_data['new'];
                     break;
 
-                case 'acquisition':
                 case 'bidding':
-                case 'investment':
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
 
@@ -951,7 +948,39 @@
                     $opportunity          = $opportunity_obj->get_by_id($opportunity_id);
                     $formatted->ID        = $notification->ID;
                     $formatted->title     = __($notification->title, 'ninja');
-                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
+                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    $formatted->thumbnail = $opportunity->thumbnail;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+
+                    if (Nh_User::get_user_role() === Nh_User::ADMIN) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
+                    }
+
+                    break;
+                case 'investment':
+                case 'acquisition':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+
+                    if (!$opportunity_id) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+                    $opportunity          = $opportunity_obj->get_by_id($opportunity_id);
+                    $formatted->ID        = $notification->ID;
+                    $formatted->title     = __($notification->title, 'ninja');
+                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $opportunity->title);
                     $formatted->thumbnail = $opportunity->thumbnail;
                     $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
                     $formatted->date      = $this->time_elapsed_string($notification->created_date);
