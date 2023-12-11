@@ -127,7 +127,7 @@
 
 
             // get relative opp ID's
-            $relative_opportunities = [$opp_id];
+            $relative_opportunities = [ $opp_id ];
             foreach (Nh_Public::get_available_languages() as $lang) {
                 if ($lang['code'] !== NH_lANG) {
                     // Get the term's ID in the French language
@@ -144,7 +144,7 @@
             $investment_obj->author = $current_user->ID;
             $investment_obj->set_meta_data('opportunity', $relative_opportunities);
             // TODO:: RECAP
-            $investment_obj->set_meta_data('investments_stage', 'open');
+            $investment_obj->set_meta_data('investments_stage', 'pending');
             $insert = $investment_obj->insert();
 
             if (is_wp_error($insert)) {
@@ -166,9 +166,9 @@
 
             //TODO:: SEND EMAILS
 
-            new Nh_Ajax_Response(TRUE, sprintf(__('Your request for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
-                    'button_text' => __('Done', 'ninja')
-                ]);
+            new Nh_Ajax_Response(TRUE, sprintf(__('Your request for <strong>%s</strong> has been sent successfully, Page will be reloaded after 5 seconds...', 'ninja'), $opportunity->title), [
+                'button_text' => __('Done', 'ninja')
+            ]);
         }
 
         public function user_can_invest($user_ID, $opp_ID): bool
@@ -205,7 +205,7 @@
                 'meta_query'  => [
                     [
                         'key'     => 'investments_stage',
-                        'value'   => 'closed',
+                        'value'   => 'accepted',
                         'compare' => '=',
                     ],
                 ],
@@ -222,7 +222,7 @@
 
             foreach ($investments->get_posts() as $investment) {
                 $single_investment              = $this->convert($investment, $this->meta_data);
-                $opportunity_obj                 = new Nh_Opportunity();
+                $opportunity_obj                = new Nh_Opportunity();
                 $single_investment->opportunity = $opportunity_obj->get_by_id((int)$single_investment->meta_data['opportunity']);
                 $Nh_investments[]               = $single_investment;
             }
@@ -238,14 +238,7 @@
                 'post_type'   => $this->module,
                 'post_status' => 'publish',
                 'orderby'     => 'ID',
-                'order'       => 'DESC',
-                'meta_query'  => [
-                    [
-                        'key'     => 'investments_stage',
-                        'value'   => 'closed',
-                        'compare' => '=',
-                    ],
-                ],
+                'order'       => 'DESC'
             ];
 
             if ($current) {
@@ -258,10 +251,13 @@
             $Nh_investments = [];
 
             foreach ($investments->get_posts() as $investment) {
-                $single_investment              = $this->convert($investment, $this->meta_data);
-                $opportunity_obj                 = new Nh_Opportunity();
-                $single_investment->opportunity = $opportunity_obj->get_by_id((int)$single_investment->meta_data['opportunity']);
-                $Nh_investments[]               = $single_investment;
+                $single_investment = $this->convert($investment, $this->meta_data);
+                $opportunity_obj   = new Nh_Opportunity();
+                foreach ($single_investment->meta_data['opportunity'] as $opp_id) {
+                    $translated_opp_id              = wpml_object_id_filter($opp_id, 'post', FALSE, NH_lANG);
+                    $single_investment->opportunity = $opportunity_obj->get_by_id((int)$translated_opp_id);
+                }
+                $Nh_investments[] = $single_investment;
             }
 
             return $Nh_investments;

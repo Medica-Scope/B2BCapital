@@ -37,6 +37,7 @@
     $unique_type_name            = get_term_meta($opportunity_type, 'unique_type_name', TRUE);
     $opportunity_bids            = $opportunity_obj->get_opportunity_bids($opportunity->ID, TRUE);
     $opportunity_acquisitions    = $opportunity_obj->get_opportunity_acquisitions($opportunity->ID, TRUE);
+    $opportunity_investments     = $opportunity_obj->get_opportunity_investments($opportunity->ID, TRUE);
     $fav_chk                     = FALSE;
     $ignore_chk                  = FALSE;
     $fav_class                   = '';
@@ -153,11 +154,9 @@
                             if ($unique_type_name === 'bidding') {
                                 if ($opportunity_bids_obj->user_can_bid($user_ID, $opportunity->ID)) {
                                     ?>
-
                                     <div class="bidding-modal">
                                         <!-- Button trigger modal -->
-                                        <button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#addBidModal">
+                                        <button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBidModal">
                                             <?= __('Add Bid', 'ninja') ?>
                                         </button>
 
@@ -249,12 +248,6 @@
                                     </button>
                                     <?php
                                 }
-
-                                ?>
-                                <span class="text-dark">
-							<?= sprintf(__('%s Bid', 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
-						</span>
-                                <?php
                             }
 
                             if ($unique_type_name === 'acquisition') {
@@ -309,7 +302,7 @@
                                                     ?>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
+                                                    <button type="button" class="btn btn-secondary btn-dismiss" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
                                                     <button type="button" class="btn btn-primary" id="modalFormSubmit"
                                                             data-target="submit_acquisitions_request"><?= __('Acquisition', 'ninja') ?></button>
                                                 </div>
@@ -379,7 +372,7 @@
                                                     ?>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
+                                                    <button type="button" class="btn btn-secondary btn-dismiss" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
                                                     <button type="button" class="btn btn-primary" id="modalFormSubmit"
                                                             data-target="submit_investments_request"><?= __('Invest Request', 'ninja') ?></button>
                                                 </div>
@@ -395,33 +388,30 @@
                                     <?php
                                 }
                             }
-
                         }
-                        ?>
 
-                        <?php
                         if (Nh_User::get_user_role() === Nh_User::OWNER) {
                             if ($unique_type_name === 'bidding') {
                                 ?>
                                 <span class="text-dark">
-							<?= sprintf(__('%s Bid', 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
-						</span>
+                                    <?= sprintf(_n('%s Bid', '%s Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
+                                </span>
                                 <?php
                             }
 
                             if ($unique_type_name === 'acquisition') {
                                 ?>
                                 <span class="text-dark">
-							<?= sprintf(__('%s Request', 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
-						</span>
+                                    <?= sprintf(_n('%s Request', '%s Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
+                                </span>
                                 <?php
                             }
 
                             if ($unique_type_name === 'regular') {
                                 ?>
                                 <span class="text-dark">
-							<?= sprintf(__('%s Request', 'ninja'), "<span class='regular-numbers'>" . $opportunity_acquisitions . "</span>") ?>
-						</span>
+                                    <?= sprintf(_n('%s Request', '%s Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
+                                </span>
                                 <?php
                             }
                         }
@@ -440,6 +430,7 @@
                 ?>
             </div>
         </div>
+
         <div class="opportunity-details row row-cols-1 row-cols-md-2 g-4 mt-2">
             <div class="col details-items">
                 <div class="card shadow">
@@ -757,6 +748,8 @@
             <?php get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]); ?>
         </div>
     </main><!-- #main -->
+
 <?php get_template_part('app/Views/js-templates/horizontal-scroll', NULL, [ 'scrollable_container' => '.related-opportunities-slider .overflow-x-auto' ]); ?>
+
 <?php
     get_footer();

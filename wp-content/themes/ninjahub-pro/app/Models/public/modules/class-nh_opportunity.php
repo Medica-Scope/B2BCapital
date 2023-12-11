@@ -28,7 +28,7 @@ use WP_Post;
  * @author Mustafa Shaaban
  */
 class Nh_Opportunity extends Nh_Module {
-	public array $meta_data = [ 
+	public array $meta_data = [
 		// Opportunity Data
 		'opportunity_type',
 		'start_bidding_amount',
@@ -120,7 +120,7 @@ class Nh_Opportunity extends Nh_Module {
 		'opportunity_acquisitions',
 		'opportunity_investments',
 	];
-	public array $taxonomy = [ 
+	public array $taxonomy = [
 		'opportunity-category',
 		'opportunity-type',
 		'industry',
@@ -352,7 +352,7 @@ class Nh_Opportunity extends Nh_Module {
 		$this->content         = $description;
 		$this->author          = $user_ID;
 		$this->thumbnail       = $attachment_id;
-		$this->taxonomy        = [ 
+		$this->taxonomy        = [
 			'opportunity-category' => [ $category ],
 			'opportunity-type'     => [ $opportunity_type ],
 			'business-type'        => [ $business_type ],
@@ -363,7 +363,7 @@ class Nh_Opportunity extends Nh_Module {
 		$opportunity_type_slug = get_term_meta( $opportunity_type, 'unique_type_name', TRUE );
 
 
-		$groups = [ 
+		$groups = [
 			//Basic Info
 			'date_founded_group_date_founded'                                                 => $date_founded,
 			'date_founded_group_appearance'                                                   => '1',
@@ -460,30 +460,30 @@ class Nh_Opportunity extends Nh_Module {
 					session_start();
 				}
 
-				$_SESSION['step_two'] = [ 
+				$_SESSION['step_two'] = [
 					'status' => TRUE,
 					'ID'     => $opportunity->ID
 				];
 
 				$notifications = new Nh_Notification();
-				$notifications->send( 0, 0, 'opportunity_new', [ 
+				$notifications->send( 0, 0, 'opportunity_new', [
 					'opportunity_id' => $opportunity_id,
 					'opportunity'    => $opportunity_title
 				] );
 
-				new Nh_Ajax_Response( TRUE, __( 'Opportunity has been added successfully', 'ninja' ), [ 
+				new Nh_Ajax_Response( TRUE, __( 'Opportunity has been added successfully', 'ninja' ), [
 					'redirect_url' => add_query_arg( [ 'q' => Nh_Cryptor::Encrypt( serialize( $field_group[0] ) ) ], apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity/create-opportunity-step-2' ) ) ) )
 				] );
 			}
 		}
 
 		$notifications = new Nh_Notification();
-		$notifications->send( 0, 0, 'opportunity_new', [ 
+		$notifications->send( 0, 0, 'opportunity_new', [
 			'opportunity_id' => $opportunity_id,
 			'opportunity'    => $opportunity_title
 		] );
 
-		new Nh_Ajax_Response( TRUE, __( 'Opportunity has been added successfully', 'ninja' ), [ 
+		new Nh_Ajax_Response( TRUE, __( 'Opportunity has been added successfully', 'ninja' ), [
 			'redirect_url' => apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-opportunities' ) ) )
 		] );
 	}
@@ -511,7 +511,7 @@ class Nh_Opportunity extends Nh_Module {
 		if ( $check_result !== TRUE ) {
 			new Nh_Ajax_Response( FALSE, __( $check_result, 'ninja' ) ); /* the reCAPTCHA answer  */
 		}
-		$args = [ 
+		$args = [
 			'post_type'    => $this->module,
 			'post_status'  => 'publish',
 			'orderby'      => 'ID',
@@ -535,7 +535,7 @@ class Nh_Opportunity extends Nh_Module {
 			foreach ($opportunities->get_posts() as $opportunity_post) {
 				$opportunity = $this->convert( $opportunity_post, $this->meta_data );
 				echo '<div class="col">';
-					get_template_part( 'app/Views/template-parts/cards/my-opportunities-card', NULL, [ 
+					get_template_part( 'app/Views/template-parts/cards/my-opportunities-card', NULL, [
 						'opportunity_title'             => $opportunity->title,
 						'opportunity_link'              => $opportunity->link,
 						'opportunity_modified'          => $opportunity->modified,
@@ -549,7 +549,7 @@ class Nh_Opportunity extends Nh_Module {
 			get_template_part( 'app/Views/template-parts/cards/my-opportunities-empty', NULL, [] );
 		}
 		$html = ob_get_clean();
-		new Nh_Ajax_Response( TRUE, __( 'Opportunities filtered successfully', 'ninja' ), [ 
+		new Nh_Ajax_Response( TRUE, __( 'Opportunities filtered successfully', 'ninja' ), [
 			'html' => $html,
 		] );
 	}
@@ -569,13 +569,13 @@ class Nh_Opportunity extends Nh_Module {
 					session_start();
 				}
 
-				remove_action( 'acf/save_post', [ 
+				remove_action( 'acf/save_post', [
 					$this,
 					'after_acf_form_submission'
 				], 20 );
 				$_POST['_acf_post_id'] = $data['opp_client_id']; // Temporarily set post_id to the current post in the loop
 				acf_save_post( $data['opp_client_id'] ); // Save the ACF data for this post
-				add_action( 'acf/save_post', [ 
+				add_action( 'acf/save_post', [
 					$this,
 					'after_acf_form_submission'
 				], 20 );
@@ -603,7 +603,7 @@ class Nh_Opportunity extends Nh_Module {
 
 						if ( // Check if field group is assigned to the specific post ID
 							( $rule['param'] === 'post' && $rule['operator'] === '==' && intval( $rule['value'] ) === (int) $post_id ) ) {
-							$matched_groups[] = [ 
+							$matched_groups[] = [
 								'ID'  => $field_group['ID'],
 								'key' => $field_group['key']
 							]; // Store the field group key
@@ -638,7 +638,7 @@ class Nh_Opportunity extends Nh_Module {
 			}
 		}
 
-		$args = [ 
+		$args = [
 			"post_type"      => $this->module,
 			"post_status"    => $status,
 			"posts_per_page" => $limit,
@@ -646,21 +646,21 @@ class Nh_Opportunity extends Nh_Module {
 			"orderby"        => $orderby,
 			"post__not_in"   => $not_in,
 			"order"          => $order,
-			"tax_query"      => [ 
+			"tax_query"      => [
 				'relation' => 'AND',
 			],
-			"meta_query"     => [ 
+			"meta_query"     => [
 					'relation' => 'AND',
-					[ 
+					[
 						'key'     => 'opportunity_stage',
-						'value'   => 'publish',
-						'compare' => '=',
+						'value'   => ['publish','closed'],
+						'compare' => 'IN',
 					]
 				]
 		];
 		if ( ! empty( $search_fields ) ) {
 			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
-				$args['tax_query'][] = [ 
+				$args['tax_query'][] = [
 					'taxonomy' => 'business-type',
 					'terms'    => (int) $search_fields['business_type'],
 					'field'    => 'term_id',
@@ -672,7 +672,7 @@ class Nh_Opportunity extends Nh_Module {
 				unset( $search_fields['search'] );
 			}
 			foreach ( $search_fields as $key => $value ) {
-				$args['meta_query'][] = [ 
+				$args['meta_query'][] = [
 					'key'   => $key,
 					'value' => $value,
 				];
@@ -705,7 +705,7 @@ class Nh_Opportunity extends Nh_Module {
 		$all_posts                   = new \WP_Query( $all_posts );
 		$count                       = $all_posts->found_posts;
 		$big                         = 999999999;
-		$pagination                  = paginate_links( [ 
+		$pagination                  = paginate_links( [
 			'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 			'format'    => '?paged=%#%',
 			'current'   => max( 1, get_query_var( 'paged' ) ),
@@ -742,7 +742,7 @@ class Nh_Opportunity extends Nh_Module {
 
 			$upload     = wp_upload_bits( $file['file']['name'], NULL, file_get_contents( $file['file']['tmp_name'] ) );
 			$maxsize    = 5242880;
-			$acceptable = [ 
+			$acceptable = [
 				'image/jpeg',
 				'image/jpg',
 				'image/png'
@@ -764,7 +764,7 @@ class Nh_Opportunity extends Nh_Module {
 
 			$wp_upload_dir = wp_upload_dir();
 
-			$attachment = [ 
+			$attachment = [
 				'guid'           => $wp_upload_dir['baseurl'] . _wp_relative_upload_path( $upload['file'] ),
 				'post_mime_type' => $wp_filetype['type'],
 				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $upload['file'] ) ),
@@ -780,7 +780,7 @@ class Nh_Opportunity extends Nh_Module {
 
 			wp_upload_bits( $file['file']["name"], NULL, file_get_contents( $file['file']["tmp_name"] ) );
 
-			new Nh_Ajax_Response( TRUE, __( 'Attachment has been uploaded successfully.', 'ninja' ), [ 
+			new Nh_Ajax_Response( TRUE, __( 'Attachment has been uploaded successfully.', 'ninja' ), [
 				'attachment_ID' => Nh_Cryptor::Encrypt( $attach_id )
 			] );
 		} else {
@@ -857,7 +857,7 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count - 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
+				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
 					'fav_active'   => 1,
 					'updated_text' => __( 'Favorite', 'ninja' )
 				] );
@@ -867,13 +867,13 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count + 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
+				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
 					'fav_active'   => 0,
 					'updated_text' => __( 'Unfavored', 'ninja' )
 				] );
 			}
 		} else {
-			new Nh_Ajax_Response( TRUE, __( 'Something went wrong!', 'ninja' ), [ 
+			new Nh_Ajax_Response( TRUE, __( 'Something went wrong!', 'ninja' ), [
 				'status'     => FALSE,
 				'msg'        => 'Invalid profile ID',
 				'fav_active' => 1
@@ -945,7 +945,7 @@ class Nh_Opportunity extends Nh_Module {
 				$ignore_count = get_post_meta( $opp_id, 'ignore_count', TRUE );
 				update_post_meta( $opp_id, 'ignore_count', (int) $ignore_count + 1 );
 
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
+				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
 					'status'        => TRUE,
 					'msg'           => 'post un-ignored',
 					'ignore_active' => 1,
@@ -958,7 +958,7 @@ class Nh_Opportunity extends Nh_Module {
 				$ignore_count = get_post_meta( $opp_id, 'ignore_count', TRUE );
 				update_post_meta( $opp_id, 'ignore_count', (int) $ignore_count - 1 );
 
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
+				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
 					'status'        => TRUE,
 					'msg'           => 'post ignored!',
 					'ignore_active' => 0,
@@ -966,7 +966,7 @@ class Nh_Opportunity extends Nh_Module {
 				] );
 			}
 		} else {
-			new Nh_Ajax_Response( TRUE, __( 'Error Response!', 'ninja' ), [ 
+			new Nh_Ajax_Response( TRUE, __( 'Error Response!', 'ninja' ), [
 				'status'        => FALSE,
 				'msg'           => 'You must have profile',
 				'ignore_active' => 1,
@@ -1023,7 +1023,7 @@ class Nh_Opportunity extends Nh_Module {
 	public function get_dashboard_sidebar_opportunities(): array {
 		global $user_ID;
 
-		$opportunities = new \WP_Query( [ 
+		$opportunities = new \WP_Query( [
 			'post_type'      => $this->module,
 			'post_status'    => 'publish',
 			'orderby'        => 'ID',
@@ -1057,7 +1057,7 @@ class Nh_Opportunity extends Nh_Module {
 				$not_in = ( $profile->meta_data['ignored_opportunities'] ) ? $profile->meta_data['ignored_opportunities'] : []; // for ignored opportunities
 			}
 		}
-		$opportunities = new \WP_Query( [ 
+		$opportunities = new \WP_Query( [
 			'post_type'    => $this->module,
 			'post_status'  => 'publish',
 			'orderby'      => 'ID',
@@ -1087,7 +1087,7 @@ class Nh_Opportunity extends Nh_Module {
 			$fav_ids = is_array( $profile->meta_data['favorite_opportunities'] ) ? $profile->meta_data['favorite_opportunities'] : [];
 
 			if ( ! empty( $fav_ids ) ) {
-				$opportunities = new \WP_Query( [ 
+				$opportunities = new \WP_Query( [
 					'post_type'   => $this->module,
 					'post_status' => 'publish',
 					'orderby'     => 'ID',
@@ -1115,7 +1115,7 @@ class Nh_Opportunity extends Nh_Module {
 			$ignored_ids = is_array( $profile->meta_data['ignored_opportunities'] ) ? $profile->meta_data['ignored_opportunities'] : [];
 
 			if ( ! empty( $ignored_ids ) ) {
-				$opportunities = new \WP_Query( [ 
+				$opportunities = new \WP_Query( [
 					'post_type'   => $this->module,
 					'post_status' => 'publish',
 					'orderby'     => 'ID',
@@ -1143,7 +1143,7 @@ class Nh_Opportunity extends Nh_Module {
 	public function can_create_opportunity(): bool {
 		global $user_ID;
 
-		$opportunities = new \WP_Query( [ 
+		$opportunities = new \WP_Query( [
 			'post_type'      => $this->module,
 			'post_status'    => 'publish',
 			'orderby'        => 'ID',
@@ -1177,14 +1177,14 @@ class Nh_Opportunity extends Nh_Module {
 		$nh_opportunity_bids_obj = new Nh_Opportunity_Bid();
 		$nh_opportunity_bids     = [];
 
-		$bids = new \WP_Query( [ 
+		$bids = new \WP_Query( [
 			'post_type'   => $nh_opportunity_bids_obj->module,
 			'post_status' => 'publish',
-			'meta_query'  => [ 
-				[ 
+			'meta_query'  => [
+				[
 					'key'     => 'opportunity',
-					'value'   => $id,
-					'compare' => '=',
+					'value'   => serialize($id),
+					'compare' => 'LIKE',
 				],
 			],
 		] );
@@ -1208,14 +1208,14 @@ class Nh_Opportunity extends Nh_Module {
 		$nh_opportunity_acquisitions_obj = new Nh_Opportunity_Acquisition();
 		$nh_opportunity_acquisitions     = [];
 
-		$acquisitions = new \WP_Query( [ 
+		$acquisitions = new \WP_Query( [
 			'post_type'   => $nh_opportunity_acquisitions_obj->module,
 			'post_status' => 'publish',
-			'meta_query'  => [ 
-				[ 
+			'meta_query'  => [
+				[
 					'key'     => 'opportunity',
-					'value'   => $id,
-					'compare' => '=',
+                    'value'   => serialize($id),
+                    'compare' => 'LIKE',
 				],
 			],
 		] );
@@ -1233,4 +1233,35 @@ class Nh_Opportunity extends Nh_Module {
 		return $nh_opportunity_acquisitions;
 
 	}
+
+    public function get_opportunity_investments( int $opp_id = 0, $count = FALSE ): int|array {
+        $id                              = $opp_id ? $opp_id : $this->ID;
+        $nh_opportunity_investments_obj = new Nh_Opportunity_Investments();
+        $nh_opportunity_investments     = [];
+
+        $investments = new \WP_Query( [
+            'post_type'   => $nh_opportunity_investments_obj->module,
+            'post_status' => 'publish',
+            'meta_query'  => [
+                [
+                    'key'     => 'opportunity',
+                    'value'   => serialize($id),
+                    'compare' => 'LIKE',
+                ],
+            ],
+        ] );
+
+        if ( $count ) {
+            return $investments->found_posts;
+        }
+
+        if ( $investments->have_posts() ) {
+            foreach ( $investments->posts as $single ) {
+                $nh_opportunity_investments[] = $nh_opportunity_investments_obj->convert( $single );
+            }
+        }
+
+        return $nh_opportunity_investments;
+
+    }
 }

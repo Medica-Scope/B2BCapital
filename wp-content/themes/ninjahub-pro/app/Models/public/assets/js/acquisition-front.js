@@ -45,6 +45,7 @@ class NhAcquisitionFront extends NhAcquisition
     {
         let that         = this,
             $acquisition = this.$el.acquisition,
+            createAcquisitionModal  = document.getElementById('createAcquisitionModal'),
             ajaxRequests = this.ajaxRequests;
 
 
@@ -55,6 +56,12 @@ class NhAcquisitionFront extends NhAcquisition
 
             $('#' + $target).trigger('click');
         })
+
+        if (createAcquisitionModal !== null) {
+            createAcquisitionModal.addEventListener('shown.bs.modal', function () {
+                that.createNewToken();
+            });
+        }
 
         // Handle form submission
         $acquisition.form.on('submit', $acquisition.parent, function (e) {

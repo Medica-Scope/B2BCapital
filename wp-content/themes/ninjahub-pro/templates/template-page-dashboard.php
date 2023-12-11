@@ -90,8 +90,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 											$business_options[ $term->term_id ] = $term->name;
 										}
 										echo Nh_Forms::get_instance()
-											->create_form( [ 
-												'business_type'          => [ 
+											->create_form( [
+												'business_type'          => [
 													'type'           => 'select',
 													'label'          => 'Business type',
 													'name'           => 'business_type',
@@ -101,7 +101,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'options'        => $business_options,
 													'order'          => 0
 												],
-												'based_in'               => [ 
+												'based_in'               => [
 													'type'           => 'select',
 													'label'          => 'Based in',
 													'name'           => 'location',
@@ -109,7 +109,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'after'          => '',
 													'value'          => isset( $_GET['location'] ) ? $_GET['location'] : '',
 													'default_option' => isset( $_GET['location'] ) ? $_GET['location'] : '',
-													'options'        => [ 
+													'options'        => [
 														'Egypt'  => 'Egypt',
 														'Russia' => 'Russia',
 													],
@@ -126,7 +126,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												// 	'value'  => isset($_GET['ttm_gross_revenue'])?$_GET['ttm_gross_revenue']:'',
 												// 	'order'  => 20
 												// ],
-												'ttm_net_profit'         => [ 
+												'ttm_net_profit'         => [
 													'type'   => 'range',
 													'label'  => 'TTM Net Profit',
 													'from'   => 50,
@@ -137,7 +137,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'value'  => isset( $_GET['net_profit'] ) ? $_GET['net_profit'] : '',
 													'order'  => 30
 												],
-												'ttm_accruing_revenue'   => [ 
+												'ttm_accruing_revenue'   => [
 													'type'   => 'range',
 													'label'  => 'TTM Accruing Revenue',
 													'from'   => 50,
@@ -148,7 +148,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'value'  => isset( $_GET['annual_accounting_revenue'] ) ? $_GET['annual_accounting_revenue'] : '',
 													'order'  => 40
 												],
-												'annual_growth_rate'     => [ 
+												'annual_growth_rate'     => [
 													'type'   => 'range',
 													'label'  => 'Annual Growth Rate',
 													'from'   => 50,
@@ -159,7 +159,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'value'  => isset( $_GET['annual_growth_rate'] ) ? $_GET['annual_growth_rate'] : '',
 													'order'  => 50
 												],
-												'asking_price'           => [ 
+												'asking_price'           => [
 													'type'   => 'range',
 													'label'  => 'Asking Price',
 													'from'   => 50,
@@ -170,7 +170,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'value'  => isset( $_GET['asking_price_in_usd'] ) ? $_GET['asking_price_in_usd'] : '',
 													'order'  => 60
 												],
-												'search_input'           => [ 
+												'search_input'           => [
 													'type'        => 'text',
 													'name'        => 'search',
 													'before'      => '',
@@ -186,7 +186,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												// 	'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
 												// 	'order' => 80
 												// ],
-												'submit_filters_request' => [ 
+												'submit_filters_request' => [
 													'class'               => 'btn btn-light bg-white filter-opportunities ninja-filter-opportunities',
 													'id'                  => 'submit_filters_request',
 													'type'                => 'submit',
@@ -194,7 +194,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'recaptcha_form_name' => 'frontend_filters',
 													'order'               => 90
 												],
-											], [ 
+											], [
 												'class' => Nh::_DOMAIN_NAME . '-filters-form',
 											] );
 										?>
@@ -226,8 +226,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												$fav_class = 'controll-icon bbc-star-o';
 											}
 											$args['fav_form'] = Nh_Forms::get_instance()
-												->create_form( [ 
-													'opp_id'                    => [ 
+												->create_form( [
+													'opp_id'                    => [
 														'type'   => 'hidden',
 														'name'   => 'opp_id',
 														'before' => '',
@@ -235,14 +235,14 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'value'  => $opportunity->ID,
 														'order'  => 0
 													],
-													'add_to_fav_nonce'          => [ 
+													'add_to_fav_nonce'          => [
 														'class' => '',
 														'type'  => 'nonce',
 														'name'  => 'add_to_fav_nonce_nonce',
 														'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 														'order' => 5
 													],
-													'submit_add_to_fav_request' => [ 
+													'submit_add_to_fav_request' => [
 														'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
 														'id'                  => 'submit_add_to_fav_request',
 														'type'                => 'submit',
@@ -250,7 +250,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'recaptcha_form_name' => 'frontend_add_to_fav',
 														'order'               => 10
 													],
-												], [ 
+												], [
 													'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 												] );
 											if ( $ignore_chk ) {
@@ -259,8 +259,8 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
 											}
 											$args['ignore_form'] = Nh_Forms::get_instance()
-												->create_form( [ 
-													'opp_id'                   => [ 
+												->create_form( [
+													'opp_id'                   => [
 														'type'   => 'hidden',
 														'name'   => 'opp_id',
 														'before' => '',
@@ -268,14 +268,14 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'value'  => $opportunity->ID,
 														'order'  => 0
 													],
-													'ignore_opportunity_nonce' => [ 
+													'ignore_opportunity_nonce' => [
 														'class' => '',
 														'type'  => 'nonce',
 														'name'  => 'ignore_opportunity_nonce',
 														'value' => Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form",
 														'order' => 5
 													],
-													'submit_ignore'            => [ 
+													'submit_ignore'            => [
 														'class'               => 'btn btn-light bg-white ms-2',
 														'id'                  => 'submit_submit_ignore',
 														'type'                => 'submit',
@@ -283,7 +283,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 														'recaptcha_form_name' => 'frontend_ignore',
 														'order'               => 10
 													],
-												], [ 
+												], [
 													'class' => Nh::_DOMAIN_NAME . '-create-ignore-opportunity-form',
 												] );
 										}
@@ -373,14 +373,14 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										$acquisitions = $acquisitions_obj->get_dashboard_sidebar_acquisitions( TRUE );
 
 										foreach ( $acquisitions as $acquisition ) {
-											$args = [ 
+											$args = [
 												'opportunity_link'         => $acquisition->opportunity->link,
 												'opportunity_title'        => $acquisition->opportunity->title,
 												'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
 												'opportunity_created_date' => $acquisition->opportunity->created_date,
 												'is_item_controllers'      => FALSE,
 												'opportunity_id'           => $opportunity->ID,
-												'business_type'            => $acquisition->taxonomy['business-type'][0]->name,
+												'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
 												'location'                 => $opportunity->meta_data['location_group_location'],
 												'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
 												'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -398,7 +398,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										$opportunities = $opportunities_obj->get_dashboard_sidebar_opportunities();
 
 										foreach ( $opportunities as $opportunity ) {
-											$args = [ 
+											$args = [
 												'opportunity_link'         => $opportunity->link,
 												'opportunity_title'        => $opportunity->title,
 												'opportunity_thumbnail'    => $opportunity->thumbnail,
@@ -445,7 +445,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 										if ( is_wp_error( $acquisition->opportunity ) ) {
 											continue;
 										}
-										$args = [ 
+										$args = [
 											'opportunity_link'         => $acquisition->opportunity->link,
 											'opportunity_title'        => $acquisition->opportunity->title,
 											'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,

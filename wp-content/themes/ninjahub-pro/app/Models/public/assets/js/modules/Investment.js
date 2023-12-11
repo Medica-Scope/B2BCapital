@@ -46,6 +46,10 @@ class NhInvestment extends Nh
                     }));
                     let successModal = new bootstrap.Modal(document.getElementById('opportunitySuccess'), {});
                     successModal.show();
+                    $('.btn-dismiss').click();
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 5000);
                 } else {
                     UiCtrl.notices($el.form, res.msg);
                 }

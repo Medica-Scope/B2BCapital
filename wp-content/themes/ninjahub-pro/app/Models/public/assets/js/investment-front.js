@@ -45,6 +45,7 @@ class NhInvestmentFront extends NhInvestment
     {
         let that         = this,
             $investment = this.$el.investment,
+            createInvestModal  = document.getElementById('createInvestModal'),
             ajaxRequests = this.ajaxRequests;
 
 
@@ -55,6 +56,12 @@ class NhInvestmentFront extends NhInvestment
 
             $('#' + $target).trigger('click');
         })
+
+        if (createInvestModal !== null) {
+            createInvestModal.addEventListener('shown.bs.modal', function () {
+                that.createNewToken();
+            });
+        }
 
         // Handle form submission
         $investment.form.on('submit', $investment.parent, function (e) {

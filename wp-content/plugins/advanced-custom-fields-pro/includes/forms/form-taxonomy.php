@@ -41,7 +41,6 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 			// delete
 			add_action( 'delete_term', array( $this, 'delete_term' ), 10, 4 );
-
 		}
 
 
@@ -65,9 +64,7 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 			// validate page
 			if ( $pagenow === 'edit-tags.php' || $pagenow === 'term.php' ) {
-
 				return true;
-
 			}
 
 			// return
@@ -93,9 +90,7 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 			// validate page
 			if ( ! $this->validate_page() ) {
-
 				return;
-
 			}
 
 			// vars
@@ -109,7 +104,6 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 			add_action( 'admin_footer', array( $this, 'admin_footer' ), 10, 1 );
 			add_action( "{$taxonomy}_add_form_fields", array( $this, 'add_term' ), 10, 1 );
 			add_action( "{$taxonomy}_edit_form", array( $this, 'edit_term' ), 10, 2 );
-
 		}
 
 
@@ -163,9 +157,7 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 				// wrap
 				echo '</div>';
-
 			}
-
 		}
 
 
@@ -199,7 +191,6 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 			// render
 			if ( ! empty( $field_groups ) ) {
-
 				acf_form_data(
 					array(
 						'screen'  => 'taxonomy',
@@ -219,10 +210,8 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 					$fields = acf_get_fields( $field_group );
 					acf_render_fields( $fields, $post_id, 'tr', 'field' );
 						echo '</table>';
-
 				}
 			}
-
 		}
 
 
@@ -244,83 +233,82 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 			?>
 <script type="text/javascript">
 (function($) {
-
+	
 	// Define vars.
 	var view = '<?php echo $this->view; ?>';
 	var $form = $('#' + view + 'tag');
 	var $submit = $('#' + view + 'tag input[type="submit"]:last');
-
+	
 	// Add missing spinner.
 	if( !$submit.next('.spinner').length ) {
 		$submit.after('<span class="spinner"></span>');
 	}
-
+	
 			<?php
 
 			// View: Add.
 			if ( $this->view == 'add' ) :
 				?>
-
+	
 	// vars
 	var $fields = $('#acf-term-fields');
 	var html = '';
-
+	
 	// Store a copy of the $fields html used later to replace after AJAX request.
 	// Hook into 'prepare' action to allow ACF core helpers to first modify DOM.
 	// Fixes issue where hidden #acf-hidden-wp-editor is initialized again.
 	acf.addAction('prepare', function(){
 		html = $fields.html();
 	}, 6);
-
+		
 	// WP triggers click as primary action
 	$submit.on('click', function( e ){
-
+		
 		// validate
 		var valid = acf.validateForm({
 			form: $form,
 			event: e,
 			reset: true
 		});
-
+		
 		// if not valid, stop event and allow validation to continue
 		if( !valid ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 		}
 	});
-
+	
 	// listen to AJAX add-tag complete
 	$(document).ajaxComplete(function(event, xhr, settings) {
-
+		
 		// bail early if is other ajax call
 		if( settings.data.indexOf('action=add-tag') == -1 ) {
 			return;
 		}
-
+		
 		// bail early if response contains error
 		if( xhr.responseText.indexOf('wp_error') !== -1 ) {
 			return;
 		}
-
+		
 		// action for 3rd party customization
 		acf.doAction('remove', $fields);
-
+		
 		// reset HTML
 		$fields.html( html );
-
+		
 		// action for 3rd party customization
 		acf.doAction('append', $fields);
-
+		
 		// reset unload
 		acf.unload.reset();
 	});
-
+	
 		<?php endif; ?>
-
-})(jQuery);
+	
+})(jQuery);	
 </script>
 			<?php
-
 		}
 
 
@@ -352,7 +340,6 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 
 			// save
 			acf_save_post( $post_id );
-
 		}
 
 
@@ -396,13 +383,10 @@ if ( ! class_exists( 'acf_form_taxonomy' ) ) :
 					$_search
 				)
 			);
-
 		}
-
 	}
 
 	new acf_form_taxonomy();
-
 endif;
 
 

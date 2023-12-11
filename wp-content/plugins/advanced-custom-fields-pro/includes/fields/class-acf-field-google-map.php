@@ -42,7 +42,7 @@ if ( ! class_exists( 'acf_field_google_map' ) ) :
 		}
 
 
-		 /*
+		/*
 		*  input_admin_enqueue_scripts
 		*
 		*  description
@@ -142,7 +142,7 @@ if ( ! class_exists( 'acf_field_google_map' ) ) :
 
 			?>
 <div <?php echo acf_esc_attrs( $attrs ); ?>>
-
+	
 			<?php
 			acf_hidden_input(
 				array(
@@ -151,25 +151,24 @@ if ( ! class_exists( 'acf_field_google_map' ) ) :
 				)
 			);
 			?>
-
+	
 	<div class="title">
-
+		
 		<div class="acf-actions -hover">
 			<a href="#" data-name="search" class="acf-icon -search grey" title="<?php _e( 'Search', 'acf' ); ?>"></a>
 			<a href="#" data-name="clear" class="acf-icon -cancel grey" title="<?php _e( 'Clear location', 'acf' ); ?>"></a>
 			<a href="#" data-name="locate" class="acf-icon -location grey" title="<?php _e( 'Find current location', 'acf' ); ?>"></a>
 		</div>
-
+		
 		<input class="search" type="text" placeholder="<?php _e( 'Search for address...', 'acf' ); ?>" value="<?php echo esc_attr( $search ); ?>" />
 		<i class="acf-loading"></i>
-
+				
 	</div>
-
+	
 	<div class="canvas" style="<?php echo esc_attr( 'height: ' . $field['height'] . 'px' ); ?>"></div>
-
+	
 </div>
 			<?php
-
 		}
 
 
@@ -239,7 +238,6 @@ if ( ! class_exists( 'acf_field_google_map' ) ) :
 					'placeholder'  => $this->default_values['height'],
 				)
 			);
-
 		}
 
 		/**
@@ -385,7 +383,6 @@ if ( ! class_exists( 'acf_field_google_map' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_google_map' );
-
 endif; // class_exists check
 
 ?>

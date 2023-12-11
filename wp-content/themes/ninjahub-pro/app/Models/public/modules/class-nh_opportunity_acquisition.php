@@ -128,7 +128,7 @@
 
 
             // get relative opp ID's
-            $relative_opportunities = [$opp_id];
+            $relative_opportunities = [ $opp_id ];
             foreach (Nh_Public::get_available_languages() as $lang) {
                 if ($lang['code'] !== NH_lANG) {
                     // Get the term's ID in the French language
@@ -146,7 +146,7 @@
             $acquisition_obj->set_meta_data('opportunity', $relative_opportunities);
 
             // TODO:: RECAP
-            $acquisition_obj->set_meta_data('acquisitions_stage', 'open');
+            $acquisition_obj->set_meta_data('acquisitions_stage', 'pending');
             $insert = $acquisition_obj->insert();
 
             if (is_wp_error($insert)) {
@@ -168,7 +168,7 @@
 
             //TODO:: SEND EMAILS
 
-            new Nh_Ajax_Response(TRUE, sprintf(__('Your request for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
+            new Nh_Ajax_Response(TRUE, sprintf(__('Your request for <strong>%s</strong> has been sent successfully, Page will be reloaded after 5 seconds...', 'ninja'), $opportunity->title), [
                 'button_text' => __('Done', 'ninja')
             ]);
         }
@@ -217,7 +217,7 @@
                     'relation' => 'AND',
                     [
                         'key'     => 'acquisitions_stage',
-                        'value'   => 'closed',
+                        'value'   => 'accepted',
                         'compare' => '=',
                     ],
                     [
@@ -237,10 +237,13 @@
             $Nh_acquisitions = [];
 
             foreach ($acquisitions->get_posts() as $acquisition) {
-                $single_acquisition              = $this->convert($acquisition, $this->meta_data);
-                $opportunity_obj                 = new Nh_Opportunity();
-                $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$single_acquisition->meta_data['opportunity']);
-                $Nh_acquisitions[]               = $single_acquisition;
+                $single_acquisition = $this->convert($acquisition, $this->meta_data);
+                $opportunity_obj    = new Nh_Opportunity();
+                foreach ($single_acquisition->meta_data['opportunity'] as $opp_id) {
+                    $translated_opp_id               = wpml_object_id_filter($opp_id, 'post', FALSE, NH_lANG);
+                    $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$translated_opp_id);
+                }
+                $Nh_acquisitions[] = $single_acquisition;
             }
 
             return $Nh_acquisitions;
@@ -263,14 +266,7 @@
                 'post_status'  => 'publish',
                 'orderby'      => 'ID',
                 'order'        => 'DESC',
-                "post__not_in" => $not_in,
-                'meta_query'   => [
-                    [
-                        'key'     => 'acquisitions_stage',
-                        'value'   => 'closed',
-                        'compare' => '=',
-                    ],
-                ],
+                "post__not_in" => $not_in
             ];
 
             if ($current) {
@@ -283,10 +279,13 @@
             $Nh_acquisitions = [];
 
             foreach ($acquisitions->get_posts() as $acquisition) {
-                $single_acquisition              = $this->convert($acquisition, $this->meta_data);
-                $opportunity_obj                 = new Nh_Opportunity();
-                $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$single_acquisition->meta_data['opportunity']);
-                $Nh_acquisitions[]               = $single_acquisition;
+                $single_acquisition = $this->convert($acquisition, $this->meta_data);
+                $opportunity_obj    = new Nh_Opportunity();
+                foreach ($single_acquisition->meta_data['opportunity'] as $opp_id) {
+                    $translated_opp_id               = wpml_object_id_filter($opp_id, 'post', FALSE, NH_lANG);
+                    $single_acquisition->opportunity = $opportunity_obj->get_by_id((int)$translated_opp_id);
+                }
+                $Nh_acquisitions[] = $single_acquisition;
             }
 
             return $Nh_acquisitions;

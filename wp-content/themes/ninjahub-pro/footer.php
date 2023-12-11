@@ -22,6 +22,8 @@ $dashboard = [
 	'my-ignored-opportunities',
 	'my-notifications',
 	'my-opportunities',
+	'my-investments',
+	'my-bids',
 	'my-widgets',
 	'create-opportunity',
 	'create-opportunity-step-2',

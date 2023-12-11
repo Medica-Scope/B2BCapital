@@ -22,7 +22,7 @@
     <li>
         <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-opportunities'))) ?>"
            class="btn-link <?= $acquisition_or_opportunities ? 'active' : ''; ?>">
-            <?= Nh_User::get_user_role() === Nh_User::INVESTOR ? __('Acquisition', 'ninja') : __('Opportunities', 'ninja'); ?>
+            <?= __('Opportunities', 'ninja'); ?>
         </a>
     </li>
 

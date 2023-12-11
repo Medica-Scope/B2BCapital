@@ -31,7 +31,7 @@ if ( is_singular( 'post' ) ) {
 
 			<?php
 
-			$landing = [ 
+			$landing = [
 				'contact-us',
 				'about',
 				'choose-type',
@@ -39,11 +39,13 @@ if ( is_singular( 'post' ) ) {
 				'opportunity-provider',
 			];
 
-			$dashboard = [ 
+			$dashboard = [
 				'blogs',
 				'my-account',
 				'change-password',
 				'my-opportunities',
+				'my-investments',
+				'my-bids',
 				'my-widgets',
 				'my-notifications',
 				'my-favorite-opportunities',
@@ -55,7 +57,7 @@ if ( is_singular( 'post' ) ) {
 				'create-opportunity-step-2',
 			];
 
-			$my_account = [ 
+			$my_account = [
 				'login',
 				'industry',
 				'reset-password',

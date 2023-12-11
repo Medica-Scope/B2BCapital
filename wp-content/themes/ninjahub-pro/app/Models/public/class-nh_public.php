@@ -75,14 +75,14 @@ class Nh_Public {
 		$is_single_service = is_single() && 'service' == get_post_type();
 
 		// Vendors
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-popper', Nh_Hooks::PATHS['public']['vendors'] . '/js/popper.min.js', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-popper', Nh_Hooks::PATHS['public']['vendors'] . '/js/popper.min.js', [
 			'jquery'
 		], Nh::_VERSION, NULL, TRUE );
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
 			'jquery'
 		], Nh::_VERSION, NULL, TRUE );
 
-		if ( is_front_page() || is_page( [ 
+		if ( is_front_page() || is_page( [
 			'login',
 			'registration',
 			'forgot-password'
@@ -93,17 +93,17 @@ class Nh_Public {
 		}
 
 
-		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [ 
+		$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
 			'jquery',
 			Nh::_DOMAIN_NAME . '-public-script-bs5'
 		] );
 
-		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [ 
+		$this->hooks->add_localization( Nh::_DOMAIN_NAME . '-public-script-main', 'nhGlobals', [
 			'domain_key'  => Nh::_DOMAIN_NAME,
 			'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
 			'environment' => Nh::_ENVIRONMENT,
 			'publicKey'   => isset( $gglcptch_options ) ? $gglcptch_options['public_key'] : '',
-			'phrases'     => [ 
+			'phrases'     => [
 				'default'        => __( "This field is required.", "ninja" ),
 				'email'          => __( "Please enter a valid email address.", "ninja" ),
 				'number'         => __( "Please enter a valid number.", "ninja" ),
@@ -126,10 +126,12 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front' );
 		}
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
+            'my-investments',
+            'my-bids',
 			'my-widgets',
 			'my-notifications',
 			'my-favorite-opportunities',
@@ -157,10 +159,12 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front' );
 		}
 
-		if ( is_page( [ 
+		if ( is_page( [
 			'my-account',
 			'change-password',
 			'my-opportunities',
+			'my-investments',
+			'my-bids',
 			'my-widgets',
 			'my-notifications',
 			'my-favorite-opportunities',
@@ -222,7 +226,7 @@ class Nh_Public {
 
 		if ( ! empty( $languages ) ) {
 			foreach ( $languages as $l ) {
-				$languages_codes[] = [ 
+				$languages_codes[] = [
 					'code' => $l['language_code'],
 					'name' => $l['translated_name']
 				];

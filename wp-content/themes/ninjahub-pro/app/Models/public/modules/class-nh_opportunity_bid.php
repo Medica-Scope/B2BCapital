@@ -138,7 +138,7 @@
 
 
             // get relative opp ID's
-            $relative_opportunities = [$opp_id];
+            $relative_opportunities = [ $opp_id ];
             foreach (Nh_Public::get_available_languages() as $lang) {
                 if ($lang['code'] !== NH_lANG) {
                     // Get the term's ID in the French language
@@ -154,6 +154,7 @@
             $bidding_obj->title  = 'New Bidding From - ' . $current_user->profile->title . ' - ON - ' . $opportunity->title;
             $bidding_obj->author = $current_user->ID;
             $bidding_obj->set_meta_data('opportunity', $relative_opportunities);
+            $bidding_obj->set_meta_data('bidding_stage', 'pending');
             $insert = $bidding_obj->insert();
 
             if (is_wp_error($insert)) {
@@ -171,11 +172,11 @@
             }
 
             $notifications = new Nh_Notification();
-            $notifications->send($current_user->ID, $opportunity->author, 'bidding', ['opportunity_id' => $opportunity->ID]);
+            $notifications->send($current_user->ID, $opportunity->author, 'bidding', [ 'opportunity_id' => $opportunity->ID ]);
 
             //TODO:: SEND EMAILS
 
-            new Nh_Ajax_Response(TRUE, sprintf(__('Your bid for <strong>%s</strong> has been sent successfully.', 'ninja'), $opportunity->title), [
+            new Nh_Ajax_Response(TRUE, sprintf(__('Your bid for <strong>%s</strong> has been sent successfully, Page will be reloaded after 5 seconds...', 'ninja'), $opportunity->title), [
                 'button_text' => __('Done', 'ninja')
             ]);
         }
@@ -200,5 +201,47 @@
             }
 
             return FALSE;
+        }
+
+        public function get_profile_bids(bool $current = FALSE): array
+        {
+            global $user_ID;
+
+            if ($user_ID) {
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!is_wp_error($profile)) {
+                    $not_in = ($profile->meta_data['ignored_opportunities']) ? $profile->meta_data['ignored_opportunities'] : [];  // for ignored opportunities
+                }
+            }
+            $args = [
+                'post_type'    => $this->module,
+                'post_status'  => 'publish',
+                'orderby'      => 'ID',
+                'order'        => 'DESC',
+                "post__not_in" => $not_in
+            ];
+
+            if ($current) {
+                $args['author'] = $user_ID;
+                unset($args['meta_query']);
+            }
+
+            $bids = new \WP_Query($args);
+
+            $Nh_bids = [];
+
+            foreach ($bids->get_posts() as $bid) {
+                $single_bid      = $this->convert($bid, $this->meta_data);
+                $opportunity_obj = new Nh_Opportunity();
+                foreach ($single_bid->meta_data['opportunity'] as $opp_id) {
+                    $translated_opp_id       = wpml_object_id_filter($opp_id, 'post', FALSE, NH_lANG);
+                    $single_bid->opportunity = $opportunity_obj->get_by_id((int)$translated_opp_id);
+                }
+                $Nh_bids[] = $single_bid;
+            }
+
+            return $Nh_bids;
         }
     }

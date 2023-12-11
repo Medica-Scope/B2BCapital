@@ -5,7 +5,6 @@ $disabled = false;
 
 // empty
 if ( empty( $field['conditional_logic'] ) ) {
-
 	$disabled                   = true;
 	$field['conditional_logic'] = array(
 
@@ -43,7 +42,13 @@ if ( empty( $field['conditional_logic'] ) ) {
 
 		</div>
 	</div>
-	<div class="rule-groups" <?php if ( $disabled ) echo ' style="display:none"'; ?>>
+	<div class="rule-groups" 
+	<?php
+	if ( $disabled ) {
+		echo ' style="display:none"';
+	}
+	?>
+	>
 		<?php
 		foreach ( $field['conditional_logic'] as $group_id => $group ) :
 
@@ -169,5 +174,5 @@ if ( empty( $field['conditional_logic'] ) ) {
 		<h4><?php _e( 'or', 'acf' ); ?></h4>
 
 		<a href="#" class="button add-conditional-group"><?php _e( 'Add rule group', 'acf' ); ?></a>
-	</div>
+	</div>							
 </div>

@@ -37,7 +37,6 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 			// extra
 			add_action( 'wp_ajax_acf/fields/oembed/search', array( $this, 'ajax_query' ) );
 			add_action( 'wp_ajax_nopriv_acf/fields/oembed/search', array( $this, 'ajax_query' ) );
-
 		}
 
 
@@ -66,7 +65,6 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 
 			// return
 			return $field;
-
 		}
 
 		/**
@@ -125,7 +123,6 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 
 			// return
 			wp_send_json( $response );
-
 		}
 
 
@@ -170,7 +167,6 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 
 			// return
 			return $response;
-
 		}
 
 
@@ -202,7 +198,7 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 
 			?>
 <div <?php echo acf_esc_attrs( $atts ); ?>>
-
+	
 			<?php
 			acf_hidden_input(
 				array(
@@ -212,7 +208,7 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 				)
 			);
 			?>
-
+	
 	<div class="title">
 			<?php
 			acf_text_input(
@@ -228,7 +224,7 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 			<a data-name="clear-button" href="#" class="acf-icon -cancel grey"></a>
 		</div>
 	</div>
-
+	
 	<div class="canvas">
 		<div class="canvas-media">
 			<?php
@@ -239,10 +235,9 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 		</div>
 		<i class="acf-icon -picture hide-if-value"></i>
 	</div>
-
+	
 </div>
 			<?php
-
 		}
 
 
@@ -333,7 +328,6 @@ if ( ! class_exists( 'acf_field_oembed' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_oembed' );
-
 endif; // class_exists check
 
 ?>

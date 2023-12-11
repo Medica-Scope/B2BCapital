@@ -986,6 +986,8 @@
                     'my-account',
                     'change-password',
                     'my-opportunities',
+                    'my-bids',
+                    'my-investments',
                     'my-widgets',
                     'my-notifications',
                     'my-favorite-opportunities',

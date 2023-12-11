@@ -109,7 +109,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			// has value?
 			if ( $field['value'] ) {
-
 				$attachment = acf_get_attachment( $field['value'] );
 				if ( $attachment ) {
 
@@ -164,11 +163,11 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 	</div>
 	<div class="hide-if-value">
 			<?php if ( $uploader == 'basic' ) : ?>
-
+			
 				<?php if ( $field['value'] && ! is_numeric( $field['value'] ) ) : ?>
 				<div class="acf-error-message"><p><?php echo acf_esc_html( $field['value'] ); ?></p></div>
 			<?php endif; ?>
-
+			
 			<label class="acf-basic-uploader">
 				<?php
 				acf_file_input(
@@ -180,17 +179,16 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 				);
 				?>
 			</label>
-
+			
 		<?php else : ?>
-
+			
 			<p><?php _e( 'No file selected', 'acf' ); ?> <a data-name="add" class="acf-button button" href="#"><?php _e( 'Add File', 'acf' ); ?></a></p>
-
+			
 		<?php endif; ?>
-
+		
 	</div>
 </div>
 			<?php
-
 		}
 
 		/*
@@ -254,7 +252,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 			);
 
 			foreach ( $clear as $k ) {
-
 				if ( empty( $field[ $k ] ) ) {
 					$field[ $k ] = '';
 				}
@@ -328,11 +325,8 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			// format
 			if ( $field['return_format'] == 'url' ) {
-
 				return wp_get_attachment_url( $value );
-
 			} elseif ( $field['return_format'] == 'array' ) {
-
 				return acf_get_attachment( $value );
 			}
 
@@ -358,7 +352,6 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 
 			$vars['send'] = true;
 			return( $vars );
-
 		}
 
 
@@ -540,13 +533,11 @@ if ( ! class_exists( 'acf_field_file' ) ) :
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_file' );
-
 endif; // class_exists check
 
 ?>

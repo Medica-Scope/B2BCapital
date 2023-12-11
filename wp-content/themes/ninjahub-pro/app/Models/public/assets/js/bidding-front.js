@@ -40,7 +40,7 @@ class NhBiddingFront extends NhBidding
 
     initialization()
     {
-        // this.CreateBidFront();
+        this.CreateBidFront();
     }
 
     CreateBidFront()
