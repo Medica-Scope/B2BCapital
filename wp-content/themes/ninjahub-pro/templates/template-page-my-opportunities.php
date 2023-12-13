@@ -43,86 +43,94 @@
                 <?php get_template_part('app/Views/template-parts/dashboard-submenus/main-nav', NULL, [ 'active_link' => 'opportunities' ]); ?>
                 <?php get_template_part('app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'opportunities' ]); ?>
             </nav>
-
-            <div class="opportunities-filter">
-                <?php
-                    $form_tags = [
-                        'class' => Nh::_DOMAIN_NAME . '-filter-opportunity-form',
-                        'id'    => Nh::_DOMAIN_NAME . '_filter_opportunity_form'
-                    ];
-
-                    $opportunities_type_terms = $opportunity_obj->get_taxonomy_terms('opportunity-type');
-                    $form_fields              = [];
-                    if (!empty($opportunities_type_terms)) {
-                        $form_fields['opportunity_type'] = [
-                            'class'             => 'col-12',
-                            'type'              => 'select',
-                            'label'             => __('Opportunity Type', 'ninja'),
-                            'name'              => 'opportunity_type',
-                            'placeholder'       => __('Select opportunity type', 'ninja'),
-                            'options'           => [],
-                            'default_option'    => '',
-                            'select_option'     => [],
-                            'extra_option_attr' => [],
-                            'before'            => '',
-                            'order'             => 10,
-                        ];
-                        foreach ($opportunities_type_terms as $key => $term) {
-                            $status = get_term_meta($term->term_id, 'status', TRUE);
-                            if (intval($status) !== 1) {
-                                continue;
-                            }
-                            $form_fields['opportunity_type']['options'][$term->term_id]           = $term->name;
-                            $form_fields['opportunity_type']['extra_option_attr'][$term->term_id] = [
-                                'data-target' => get_term_meta($term->term_id, 'unique_type_name', TRUE),
+            <div class="filters">
+                <button class="btn btn-outline-warning opportunity-adv-filter" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                    <i class="bbc-sliders"></i> <?= __('Advanced Filters', 'ninja') ?>
+                </button>
+                <div class="collapse" id="collapseFilter">
+                <div class="filter-con">
+                    <div class="opportunities-filter">
+                        <?php
+                            $form_tags = [
+                                'class' => Nh::_DOMAIN_NAME . '-filter-opportunity-form',
+                                'id'    => Nh::_DOMAIN_NAME . '_filter_opportunity_form'
                             ];
-                        }
-                    }
-                    $form_fields['opportunity_status']       = [
-                        'class'             => 'col-12',
-                        'type'              => 'select',
-                        'label'             => __('Opportunity Status', 'ninja'),
-                        'name'              => 'opportunity_status',
-                        'placeholder'       => __('Select opportunity status', 'ninja'),
-                        'default_option'    => '',
-                        'options'           => [
-                            'new'              => __('New', 'ninja'),
-                            'cancel'           => __('Cancel', 'ninja'),
-                            'hold'             => __('Hold', 'ninja'),
-                            'approved'         => __('Approved', 'ninja'),
-                            'content-verified' => __('Content Verified', 'ninja'),
-                            'content-rejected' => __('Content Rejected', 'ninja'),
-                            'seo-verified'     => __('Seo Verified', 'ninja'),
-                            'translated'       => __('Translated', 'ninja'),
-                            'publish'          => __('Publish', 'ninja'),
-                        ],
-                        'select_option'     => [],
-                        'extra_option_attr' => [],
-                        'before'            => '',
-                        'order'             => 20,
-                    ];
-                    $form_fields['filter_opportunity_nonce'] = [
-                        'class' => '',
-                        'type'  => 'nonce',
-                        'name'  => 'filter_opportunity_nonce',
-                        'value' => Nh::_DOMAIN_NAME . "_filter_opportunity_form",
-                        'order' => 30
-                    ];
-                    $form_fields['submit']                   = [
-                        'class'               => 'btn-lg text-uppercase',
-                        'type'                => 'submit',
-                        'id'                  => Nh::_DOMAIN_NAME . '_filter_opportunity_submit',
-                        'value'               => '<i class="bbc-save pe-1"></i> ' . __('Filter', 'ninja'),
-                        'before'              => '',
-                        'after'               => '',
-                        'recaptcha_form_name' => 'frontend_filter_opportunity',
-                        'order'               => 40
-                    ];
-                    if ($form_fields) {
-                        echo Nh_Forms::get_instance()
-                                     ->create_form($form_fields, $form_tags);
-                    }
-                ?>
+
+                            $opportunities_type_terms = $opportunity_obj->get_taxonomy_terms('opportunity-type');
+                            $form_fields              = [];
+                            if (!empty($opportunities_type_terms)) {
+                                $form_fields['opportunity_type'] = [
+                                    'class'             => 'col-12',
+                                    'type'              => 'select',
+                                    'label'             => __('Opportunity Type', 'ninja'),
+                                    'name'              => 'opportunity_type',
+                                    'placeholder'       => __('Select opportunity type', 'ninja'),
+                                    'options'           => [],
+                                    'default_option'    => '',
+                                    'select_option'     => [],
+                                    'extra_option_attr' => [],
+                                    'before'            => '',
+                                    'order'             => 10,
+                                ];
+                                foreach ($opportunities_type_terms as $key => $term) {
+                                    $status = get_term_meta($term->term_id, 'status', TRUE);
+                                    if (intval($status) !== 1) {
+                                        continue;
+                                    }
+                                    $form_fields['opportunity_type']['options'][$term->term_id]           = $term->name;
+                                    $form_fields['opportunity_type']['extra_option_attr'][$term->term_id] = [
+                                        'data-target' => get_term_meta($term->term_id, 'unique_type_name', TRUE),
+                                    ];
+                                }
+                            }
+                            $form_fields['opportunity_status']       = [
+                                'class'             => 'col-12',
+                                'type'              => 'select',
+                                'label'             => __('Opportunity Status', 'ninja'),
+                                'name'              => 'opportunity_status',
+                                'placeholder'       => __('Select opportunity status', 'ninja'),
+                                'default_option'    => '',
+                                'options'           => [
+                                    'new'              => __('New', 'ninja'),
+                                    'cancel'           => __('Cancel', 'ninja'),
+                                    'hold'             => __('Hold', 'ninja'),
+                                    'approved'         => __('Approved', 'ninja'),
+                                    'content-verified' => __('Content Verified', 'ninja'),
+                                    'content-rejected' => __('Content Rejected', 'ninja'),
+                                    'seo-verified'     => __('Seo Verified', 'ninja'),
+                                    'translated'       => __('Translated', 'ninja'),
+                                    'publish'          => __('Publish', 'ninja'),
+                                ],
+                                'select_option'     => [],
+                                'extra_option_attr' => [],
+                                'before'            => '',
+                                'order'             => 20,
+                            ];
+                            $form_fields['filter_opportunity_nonce'] = [
+                                'class' => '',
+                                'type'  => 'nonce',
+                                'name'  => 'filter_opportunity_nonce',
+                                'value' => Nh::_DOMAIN_NAME . "_filter_opportunity_form",
+                                'order' => 30
+                            ];
+                            $form_fields['submit']                   = [
+                                'class'               => 'btn-lg text-uppercase',
+                                'type'                => 'submit',
+                                'id'                  => Nh::_DOMAIN_NAME . '_filter_opportunity_submit',
+                                'value'               => '<i class="bbc-save pe-1"></i> ' . __('Filter', 'ninja'),
+                                'before'              => '',
+                                'after'               => '',
+                                'recaptcha_form_name' => 'frontend_filter_opportunity',
+                                'order'               => 40
+                            ];
+                            if ($form_fields) {
+                                echo Nh_Forms::get_instance()
+                                            ->create_form($form_fields, $form_tags);
+                            }
+                        ?>
+                    </div>
+                </div>
+                </div>
             </div>
 
             <section class="my-opportunities container">

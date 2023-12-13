@@ -516,15 +516,18 @@ class Nh_Opportunity extends Nh_Module {
 			'post_status'  => 'publish',
 			'orderby'      => 'ID',
 			'order'        => 'DESC',
-			'author'       => $user_ID
+			'author'       => $user_ID,
+			'tax_query'	   => [
+				'relation' => 'AND',
+			]
 		];
 		if($opportunity_status){
 			$args['meta_key'] = 'opportunity_stage';
 			$args['meta_value'] = $opportunity_status;
 		}
 		if($opportunity_type){
-			$args['tax_query'] = [
-				'taxonomy'	=> 'opportunity_type',
+			$args['tax_query'][] = [
+				'taxonomy'	=> 'opportunity-type',
 				'terms'    => $opportunity_type,
 				'field'    => 'term_id',
 			];
@@ -662,20 +665,30 @@ class Nh_Opportunity extends Nh_Module {
 			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
 				$args['tax_query'][] = [
 					'taxonomy' => 'business-type',
-					'terms'    => (int) $search_fields['business_type'],
-					'field'    => 'term_id',
+					'terms'    => $search_fields['business_type'],
+					'field'    => 'slug',
 				];
-				unset( $search_fields['business_type'] );
 			}
+			unset( $search_fields['business_type'] );
 			if ( isset( $search_fields['search'] ) && ! empty( $search_fields['search'] ) ) {
 				$args['s'] = $search_fields['search'];
-				unset( $search_fields['search'] );
 			}
+			unset( $search_fields['search'] );
 			foreach ( $search_fields as $key => $value ) {
-				$args['meta_query'][] = [
-					'key'   => $key,
-					'value' => $value,
-				];
+				if(is_numeric($value)){
+					$args['meta_query'][] = [
+						'key'   => $key,
+						'value' => $value,
+						'compare' => '<='
+					];
+				}
+				else{
+					$args['meta_query'][] = [
+						'key'   => $key,
+						'value' => $value,
+					];
+				}
+				
 			}
 		}
 		if ( ! empty( $tax_query ) ) {
