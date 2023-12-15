@@ -126,13 +126,14 @@ class NhAuthentication extends NhAuth {
             const input = $('#ninja_phone_number')[0];
 
             window.ITIOBJ.registration = intlTelInput(input, {
-                // initialCountry: 'EG',
+                // initialCountry: 'eg',
                 separateDialCode: false,
                 autoInsertDialCode: true,
                 nationalMode: true,
                 allowDropdown: true,
                 autoPlaceholder:"polite",
                 utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
+                preferredCountries: ["eg","us"],
             });
         }
 

@@ -71,7 +71,7 @@ $user     = $user_obj::get_current_user();
 				'type'        => 'text',
 				'label'       => __( 'Phone number', 'ninja' ),
 				'name'        => 'phone_number',
-				'value'       => $user->user_meta['phone_number'],
+				'value'       => (!empty($user->user_meta['phone_number']))?'+'.$user->user_meta['phone_number']:'',
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your phone number', 'ninja' ),
 //				'extra_attr'  => [ 'disabled' => 'disable' ],

@@ -516,15 +516,18 @@ class Nh_Opportunity extends Nh_Module {
 			'post_status'  => 'publish',
 			'orderby'      => 'ID',
 			'order'        => 'DESC',
-			'author'       => $user_ID
+			'author'       => $user_ID,
+			'tax_query'	   => [
+				'relation' => 'AND',
+			]
 		];
 		if($opportunity_status){
 			$args['meta_key'] = 'opportunity_stage';
 			$args['meta_value'] = $opportunity_status;
 		}
 		if($opportunity_type){
-			$args['tax_query'] = [
-				'taxonomy'	=> 'opportunity_type',
+			$args['tax_query'][] = [
+				'taxonomy'	=> 'opportunity-type',
 				'terms'    => $opportunity_type,
 				'field'    => 'term_id',
 			];
@@ -627,7 +630,7 @@ class Nh_Opportunity extends Nh_Module {
 	 * @author Ahmed Gamal
 	 * @return array
 	 */
-	public function get_all_custom( array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [], int $user_id = 0, int $page = 1, array $in = [], array $search_fields = [] ): array {
+	public function get_all_custom( array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ], array $tax_query = [], int $user_id = 0, int $page = 1, array $in = [], array $search_fields = [], string $fields = '' ): array {
 		if ( $user_id ) {
 			$profile_id  = get_user_meta( $user_id, 'profile_id', TRUE );
 			$profile_obj = new Nh_Profile();
@@ -662,20 +665,30 @@ class Nh_Opportunity extends Nh_Module {
 			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
 				$args['tax_query'][] = [
 					'taxonomy' => 'business-type',
-					'terms'    => (int) $search_fields['business_type'],
-					'field'    => 'term_id',
+					'terms'    => $search_fields['business_type'],
+					'field'    => 'slug',
 				];
-				unset( $search_fields['business_type'] );
 			}
+			unset( $search_fields['business_type'] );
 			if ( isset( $search_fields['search'] ) && ! empty( $search_fields['search'] ) ) {
 				$args['s'] = $search_fields['search'];
-				unset( $search_fields['search'] );
 			}
+			unset( $search_fields['search'] );
 			foreach ( $search_fields as $key => $value ) {
-				$args['meta_query'][] = [
-					'key'   => $key,
-					'value' => $value,
-				];
+				if(is_numeric($value)){
+					$args['meta_query'][] = [
+						'key'   => $key,
+						'value' => $value,
+						'compare' => '<='
+					];
+				}
+				else{
+					$args['meta_query'][] = [
+						'key'   => $key,
+						'value' => $value,
+					];
+				}
+				
 			}
 		}
 		if ( ! empty( $tax_query ) ) {
@@ -684,6 +697,9 @@ class Nh_Opportunity extends Nh_Module {
 		if ( ! empty( $in ) ) {
 			$args['post__in'] = $in;
 		}
+		// if ( ! empty( $fields ) ) {
+		// 	$args['fields'] = $fields;
+		// }
 		$posts    = new \WP_Query( $args );
 		$Nh_Posts = [];
 
@@ -832,7 +848,7 @@ class Nh_Opportunity extends Nh_Module {
 		$opp_id                        = (int) sanitize_text_field( $form_data['opp_id'] );
 		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
 		$_POST["g-recaptcha-response"] = $recaptcha_response;
-
+		$opportunity = $this->get_by_id($opp_id);
 		if ( ! wp_verify_nonce( $form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form" ) ) {
 			new Nh_Ajax_Response( FALSE, __( "Something went wrong!.", 'ninja' ) );
 		}
@@ -857,9 +873,10 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count - 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been unfavored', 'ninja'), $opportunity->title), [
 					'fav_active'   => 1,
-					'updated_text' => __( 'Favorite', 'ninja' )
+					'updated_text' => __( 'Favorite', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
 				$favorites[] = $opp_id;
@@ -867,13 +884,14 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count + 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been Favorite', 'ninja'), $opportunity->title), [
 					'fav_active'   => 0,
-					'updated_text' => __( 'Unfavored', 'ninja' )
+					'updated_text' => __( 'Unfavored', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			}
 		} else {
-			new Nh_Ajax_Response( TRUE, __( 'Something went wrong!', 'ninja' ), [
+			new Nh_Ajax_Response( FALSE, __( 'Something went wrong!', 'ninja' ), [
 				'status'     => FALSE,
 				'msg'        => 'Invalid profile ID',
 				'fav_active' => 1
@@ -920,6 +938,7 @@ class Nh_Opportunity extends Nh_Module {
 		$opp_id                        = (int) sanitize_text_field( $form_data['opp_id'] );
 		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
 		$_POST["g-recaptcha-response"] = $recaptcha_response;
+		$opportunity = $this->get_by_id($opp_id);
 
 		if ( ! wp_verify_nonce( $form_data['ignore_opportunity_nonce'], Nh::_DOMAIN_NAME . "_ignore_opportunity_nonce_form" ) ) {
 			new Nh_Ajax_Response( FALSE, __( "Something went wrong!.", 'ninja' ) );
@@ -944,12 +963,10 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$ignore_count = get_post_meta( $opp_id, 'ignore_count', TRUE );
 				update_post_meta( $opp_id, 'ignore_count', (int) $ignore_count + 1 );
-
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
-					'status'        => TRUE,
-					'msg'           => 'post un-ignored',
-					'ignore_active' => 1,
-					'updated_text'  => __( 'Ignore', 'ninja' )
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been un-ignored', 'ninja'), $opportunity->title), [
+					'ignore_active'   => 1,
+					'updated_text' => __( 'Ignore', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
 				$ignored_opportunities[] = $opp_id;
@@ -957,16 +974,14 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$ignore_count = get_post_meta( $opp_id, 'ignore_count', TRUE );
 				update_post_meta( $opp_id, 'ignore_count', (int) $ignore_count - 1 );
-
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [
-					'status'        => TRUE,
-					'msg'           => 'post ignored!',
-					'ignore_active' => 0,
-					'updated_text'  => __( 'Ignored', 'ninja' )
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been ignored', 'ninja'), $opportunity->title), [
+					'ignore_active'   => 1,
+					'updated_text' => __( 'Ignored', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			}
 		} else {
-			new Nh_Ajax_Response( TRUE, __( 'Error Response!', 'ninja' ), [
+			new Nh_Ajax_Response( FALSE, __( 'Error Response!', 'ninja' ), [
 				'status'        => FALSE,
 				'msg'           => 'You must have profile',
 				'ignore_active' => 1,

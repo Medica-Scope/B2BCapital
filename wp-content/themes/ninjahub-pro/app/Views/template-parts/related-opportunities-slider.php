@@ -13,7 +13,11 @@
             $opportunities_obj = new Nh_Opportunity();
             $opportunities     = isset($args['related_opportunities']) && is_array($args['related_opportunities']) ? $args['related_opportunities'] : [];
             foreach ($opportunities as $opportunity_id) {
-                $opportunity = $opportunities_obj->get_by_id($opportunity_id);
+                if(!is_object($opportunity_id)){
+                    $opportunity = $opportunities_obj->get_by_id($opportunity_id); // opp ID sent
+                }else{
+                    $opportunity = $opportunity_id; // opp object as a whole sent
+                }
                 if (!in_array($opportunity->meta_data['opportunity_stage'], ['publish', 'closed'])) {
                     continue;
                 }

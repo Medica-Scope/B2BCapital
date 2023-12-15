@@ -11,6 +11,7 @@
 import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
 import Nh     from './Nh';
+import _      from 'lodash';
 
 class NhOpportunity extends Nh
 {
@@ -329,7 +330,15 @@ class NhOpportunity extends Nh
                         $('.fav-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
-
+                    if($('#opportunitySuccess').length){
+                        $('#opportunitySuccess').remove();
+                    }
+                    $('body').append(_.template($('#ninja_modal_opp_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+                    let successModal = new bootstrap.Modal(document.getElementById('opportunitySuccess'), {});
+                    successModal.show();
                 }
             },
             error: function (xhr) {
@@ -365,7 +374,18 @@ class NhOpportunity extends Nh
                         $('.ignore-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
-
+                    if($('#ninja_modal_opp_request_success').length){
+                        $('#ninja_modal_opp_request_success').remove();
+                    }
+                    if($('#opportunitySuccess').length){
+                        $('#opportunitySuccess').remove();
+                    }
+                    $('body').append(_.template($('#ninja_modal_opp_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+                    let successModal = new bootstrap.Modal(document.getElementById('opportunitySuccess'), {});
+                    successModal.show();
                 }
             },
             error: function (xhr) {
