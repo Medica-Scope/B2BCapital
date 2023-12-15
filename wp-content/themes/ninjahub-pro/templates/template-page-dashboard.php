@@ -31,6 +31,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-dashboard', Nh_H
 
 $opportunities_obj = new Nh_Opportunity();
 $acquisitions_obj  = new Nh_Opportunity_Acquisition();
+$paged             = 1;
+	if (get_query_var('paged')) {
+		$paged = get_query_var('paged');
+	}
 
 ?>
 
@@ -83,14 +87,59 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 									<div class="filter-con">
 										<?php
 										$business_type_terms = $opportunities_obj->get_taxonomy_terms( 'business-type' );
-										$business_options    = [];
+										$business_options    = [ "" => __("All", "ninja") ];
 										foreach ( $business_type_terms as $key => $term ) {
 											$status = get_term_meta( $term->term_id, 'status', TRUE );
 											if ( intval( $status ) !== 1 ) {
 												continue;
 											}
-											$business_options[ $term->term_id ] = $term->name;
+											$business_options[ $term->slug ] = $term->name;
 										}
+										$args = array(
+											'post_type'      => 'opportunity',
+											'fields'		 => 'ids',
+											'posts_per_page' => 1,
+											'meta_key'       => 'net_profit_group_net_profit',
+											'orderby'        => 'meta_value_num',
+											'order'          => 'DESC',
+										);
+										
+										$highest_net_profit = get_posts($args);
+
+										$args = array(
+											'post_type'      => 'opportunity',
+											'fields'		 => 'ids',
+											'posts_per_page' => 1,
+											'meta_key'       => 'annual_accounting_revenue_group_annual_accounting_revenue',
+											'orderby'        => 'meta_value_num',
+											'order'          => 'DESC',
+										);
+										
+										$highest_annual_accounting_revenue = get_posts($args);
+
+										$args = array(
+											'post_type'      => 'opportunity',
+											'fields'		 => 'ids',
+											'posts_per_page' => 1,
+											'meta_key'       => 'annual_growth_rate_group_annual_growth_rate',
+											'orderby'        => 'meta_value_num',
+											'order'          => 'DESC',
+										);
+										
+										$highest_annual_growth_rate = get_posts($args);
+
+										$args = array(
+											'post_type'      => 'opportunity',
+											'fields'		 => 'ids',
+											'posts_per_page' => 1,
+											'meta_key'       => 'asking_price_in_usd_group_asking_price_in_usd',
+											'orderby'        => 'meta_value_num',
+											'order'          => 'DESC',
+										);
+										
+										$highest_asking_price_in_usd = get_posts($args);
+
+
 										echo Nh_Forms::get_instance()
 											->create_form( [
 												'business_type'          => [
@@ -103,17 +152,19 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 													'options'        => $business_options,
 													'order'          => 0
 												],
-												'based_in'               => [
+												'location_group_location'               => [
 													'type'           => 'select',
 													'label'          => 'Based in',
-													'name'           => 'location',
+													'name'           => 'location_group_location',
 													'before'         => '',
 													'after'          => '',
-													'value'          => isset( $_GET['location'] ) ? $_GET['location'] : '',
-													'default_option' => isset( $_GET['location'] ) ? $_GET['location'] : '',
+													'value'          => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : '',
+													'default_option' => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : '',
 													'options'        => [
-														'Egypt'  => 'Egypt',
-														'Russia' => 'Russia',
+														''  => __("All", "ninja"),
+														'Egypt'  => __("Egypt", "ninja"),
+														'Russia' => __("Russia", "ninja"),
+														'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
 													],
 													'order'          => 10
 												],
@@ -128,48 +179,48 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												// 	'value'  => isset($_GET['ttm_gross_revenue'])?$_GET['ttm_gross_revenue']:'',
 												// 	'order'  => 20
 												// ],
-												'ttm_net_profit'         => [
+												'net_profit_group_net_profit'         => [
 													'type'   => 'range',
 													'label'  => 'TTM Net Profit',
 													'from'   => 50,
-													'to'     => 500000,
-													'name'   => 'net_profit',
+													'to'     => (!empty($highest_net_profit))?get_post_meta($highest_net_profit[0], 'net_profit_group_net_profit', true):500000,
+													'name'   => 'net_profit_group_net_profit',
 													'before' => '',
 													'after'  => '',
-													'value'  => isset( $_GET['net_profit'] ) ? $_GET['net_profit'] : '',
+													'value'  => isset( $_GET['net_profit_group_net_profit'] ) ? $_GET['net_profit_group_net_profit'] : '',
 													'order'  => 30
 												],
-												'ttm_accruing_revenue'   => [
+												'annual_accounting_revenue_group_annual_accounting_revenue'   => [
 													'type'   => 'range',
 													'label'  => 'TTM Accruing Revenue',
-													'from'   => 50,
-													'to'     => 500000,
-													'name'   => 'annual_accounting_revenue',
+													'from'   => 1,
+													'to'     => (!empty($highest_annual_accounting_revenue))?get_post_meta($highest_annual_accounting_revenue[0], 'annual_accounting_revenue_group_annual_accounting_revenue', true):500000,
+													'name'   => 'annual_accounting_revenue_group_annual_accounting_revenue',
 													'before' => '',
 													'after'  => '',
-													'value'  => isset( $_GET['annual_accounting_revenue'] ) ? $_GET['annual_accounting_revenue'] : '',
+													'value'  => isset( $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] ) ? $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] : '',
 													'order'  => 40
 												],
-												'annual_growth_rate'     => [
+												'annual_growth_rate_group_annual_growth_rate'     => [
 													'type'   => 'range',
 													'label'  => 'Annual Growth Rate',
-													'from'   => 50,
-													'to'     => 500000,
-													'name'   => 'annual_growth_rate',
+													'from'   => 1,
+													'to'     => (!empty($highest_annual_growth_rate))?get_post_meta($highest_annual_growth_rate[0], 'annual_growth_rate_group_annual_growth_rate', true):500000,
+													'name'   => 'annual_growth_rate_group_annual_growth_rate',
 													'before' => '',
 													'after'  => '',
-													'value'  => isset( $_GET['annual_growth_rate'] ) ? $_GET['annual_growth_rate'] : '',
+													'value'  => isset( $_GET['annual_growth_rate_group_annual_growth_rate'] ) ? $_GET['annual_growth_rate_group_annual_growth_rate'] : '',
 													'order'  => 50
 												],
-												'asking_price'           => [
+												'asking_price_in_usd_group_asking_price_in_usd'           => [
 													'type'   => 'range',
 													'label'  => 'Asking Price',
-													'from'   => 50,
-													'to'     => 500000,
-													'name'   => 'asking_price_in_usd',
+													'from'   => 1,
+													'to'     => (!empty($highest_asking_price_in_usd))?get_post_meta($highest_asking_price_in_usd[0], 'asking_price_in_usd_group_asking_price_in_usd', true):500000,
+													'name'   => 'asking_price_in_usd_group_asking_price_in_usd',
 													'before' => '',
 													'after'  => '',
-													'value'  => isset( $_GET['asking_price_in_usd'] ) ? $_GET['asking_price_in_usd'] : '',
+													'value'  => isset( $_GET['asking_price_in_usd_group_asking_price_in_usd'] ) ? $_GET['asking_price_in_usd_group_asking_price_in_usd'] : '',
 													'order'  => 60
 												],
 												'search_input'           => [
@@ -198,6 +249,7 @@ $acquisitions_obj  = new Nh_Opportunity_Acquisition();
 												],
 											], [
 												'class' => Nh::_DOMAIN_NAME . '-filters-form',
+												'id' => Nh::_DOMAIN_NAME . '_filters_form',
 											] );
 										?>
 									</div>

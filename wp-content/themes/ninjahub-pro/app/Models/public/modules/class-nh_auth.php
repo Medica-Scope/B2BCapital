@@ -65,7 +65,7 @@
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_edit_password_ajax', $this, 'edit_password_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax');
 
-            $this->hooks->add_action('nsl_register_new_user', $this, 'custom_function_after_nextend_register');
+            $this->hooks->add_action('nsl_register_new_user', $this, 'after_nextend_register');
 
         }
 
@@ -82,6 +82,7 @@
 
         public function wp_body_close(): void
         {
+            global $wp;
             if (is_page([
                 'verification',
                 'authentication',
@@ -89,8 +90,11 @@
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
             }
 
-            if (is_singular('opportunity')) {
+            if (is_singular('opportunity') || is_page(['dashboard', 'my-favorite-opportunities', 'my-opportunities', 'my-ignored-opportunities'])) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/opportunity-response.php';
+            }
+            if (preg_match( '#^my-account/my-favorite-articles(/.+)?$#', $wp->request ) || preg_match( '#^my-account/my-ignored-articles(/.+)?$#', $wp->request ) || preg_match( '#^blogs(/.+)?$#', $wp->request ) || is_post_type_archive( 'post' ) || is_singular( 'post' )) {
+                require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/article-response.php';
             }
         }
 
@@ -1099,12 +1103,14 @@
 
         }
 
-        public function custom_function_after_nextend_register($user_id)
+        public function after_nextend_register($user_id)
         {
             $profile_obj         = new Nh_Profile();
             $profile_obj->author = $user_id;
             $wp_user_obj         = get_user_by('id', $user_id);
-            $wp_user_obj->set_role(static::INVESTOR);
+            if(!empty($_COOKIE['user_type'])){
+                $wp_user_obj->set_role($_COOKIE['user_type']);
+            }
             $profile_obj->title = $wp_user_obj->display_name;
             $profile_obj->insert();
             $user = Nh_User::get_user_by('id', $user_id);

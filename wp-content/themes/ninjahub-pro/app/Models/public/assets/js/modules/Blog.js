@@ -11,6 +11,7 @@
 import $      from 'jquery';
 import UiCtrl from '../inc/UiCtrl';
 import Nh     from './Nh';
+import _      from 'lodash';
 
 class NhBlog extends Nh
 {
@@ -46,7 +47,15 @@ class NhBlog extends Nh
                         $('.fav-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
-
+                    if($('#articleSuccess').length){
+                        $('#articleSuccess').remove();
+                    }
+                    $('body').append(_.template($('#ninja_modal_article_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+                    let successModal = new bootstrap.Modal(document.getElementById('articleSuccess'), {});
+                    successModal.show();
                 }
             },
             error: function (xhr) {
@@ -82,7 +91,15 @@ class NhBlog extends Nh
                         $('.ignore-text').html(res.data.updated_text);
                     }
                     UiCtrl.blockUI($el, false);
-
+                    if($('#articleSuccess').length){
+                        $('#articleSuccess').remove();
+                    }
+                    $('body').append(_.template($('#ninja_modal_article_request_success').html())({
+                        msg: res.msg,
+                        button_text: res.data.button_text,
+                    }));
+                    let successModal = new bootstrap.Modal(document.getElementById('articleSuccess'), {});
+                    successModal.show();
                 }
             },
             error: function (xhr) {

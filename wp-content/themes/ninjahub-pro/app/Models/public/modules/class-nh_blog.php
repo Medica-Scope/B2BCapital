@@ -88,6 +88,7 @@ class Nh_Blog extends Nh_Module {
 		$post_id                       = (int) sanitize_text_field( $form_data['post_id'] );
 		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
 		$_POST["g-recaptcha-response"] = $recaptcha_response;
+		$article = $this->get_by_id($post_id);
 
 
 		if ( ! wp_verify_nonce( $form_data['add_to_fav_nonce_nonce'], Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form" ) ) {
@@ -114,11 +115,10 @@ class Nh_Blog extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $post_id, 'fav_count', TRUE );
 				update_post_meta( $post_id, 'fav_count', (int) $fav_count - 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
-					'status'       => TRUE,
-					'msg'          => 'post removed',
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been unfavored', 'ninja'), $article->title), [
 					'fav_active'   => 1,
-					'updated_text' => __( 'Favorite', 'ninja' )
+					'updated_text' => __( 'Favorite', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
 				$favorites[] = $post_id;
@@ -126,15 +126,14 @@ class Nh_Blog extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $post_id, 'fav_count', TRUE );
 				update_post_meta( $post_id, 'fav_count', (int) $fav_count + 1 );
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
-					'status'       => TRUE,
-					'msg'          => 'post added',
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been favorite', 'ninja'), $article->title), [
 					'fav_active'   => 0,
-					'updated_text' => __( 'Added to favorites', 'ninja' )
+					'updated_text' => __( 'Added to favorites', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			}
 		} else {
-			new Nh_Ajax_Response( TRUE, __( 'Error Response!', 'ninja' ), [ 
+			new Nh_Ajax_Response( FALSE, __( 'Error Response!', 'ninja' ), [ 
 				'status'     => FALSE,
 				'msg'        => 'You must have profile',
 				'fav_active' => 1
@@ -209,6 +208,7 @@ class Nh_Blog extends Nh_Module {
 		$post_id                       = (int) sanitize_text_field( $form_data['post_id'] );
 		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
 		$_POST["g-recaptcha-response"] = $recaptcha_response;
+		$article = $this->get_by_id($post_id);
 
 		if ( ! wp_verify_nonce( $form_data['ignore_article_nonce'], Nh::_DOMAIN_NAME . "_ignore_article_nonce_form" ) ) {
 			new Nh_Ajax_Response( FALSE, __( "Something went wrong!.", 'ninja' ) );
@@ -234,12 +234,10 @@ class Nh_Blog extends Nh_Module {
 				$profile->update();
 				$ignore_count = get_post_meta( $post_id, 'ignore_count', TRUE );
 				update_post_meta( $post_id, 'ignore_count', (int) $ignore_count + 1 );
-
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
-					'status'        => TRUE,
-					'msg'           => 'post un-ignored',
-					'ignore_active' => 1,
-					'updated_text'  => __( 'Ignore', 'ninja' )
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been un-ignored', 'ninja'), $article->title), [
+					'ignore_active'   => 1,
+					'updated_text' => __( 'Ignore', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
 				$ignored_articles[] = $post_id;
@@ -248,11 +246,10 @@ class Nh_Blog extends Nh_Module {
 				$ignore_count = get_post_meta( $post_id, 'ignore_count', TRUE );
 				update_post_meta( $post_id, 'ignore_count', (int) $ignore_count - 1 );
 
-				new Nh_Ajax_Response( TRUE, __( 'Successful Response!', 'ninja' ), [ 
-					'status'        => TRUE,
-					'msg'           => 'post ignored!',
-					'ignore_active' => 0,
-					'updated_text'  => __( 'Ignored', 'ninja' )
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been ignored', 'ninja'), $article->title), [
+					'ignore_active'   => 0,
+					'updated_text' => __( 'Ignored', 'ninja' ),
+					'button_text' => __('Done', 'ninja')
 				] );
 			}
 		} else {

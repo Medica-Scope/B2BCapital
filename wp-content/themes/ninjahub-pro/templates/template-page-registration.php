@@ -16,10 +16,14 @@
 use NH\APP\CLASSES\Nh_User;
 use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\HELPERS\Nh_Hooks;
+use NH\APP\MODELS\FRONT\MODULES\Nh_Auth;
 use NH\Nh;
 
 $user_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
-
+$user_type_cookie = "user_type";
+if($user_type == Nh_Auth::INVESTOR || $user_type == Nh_Auth::OWNER){
+	setcookie($user_type_cookie, $user_type, time() + (86400 * 30), "/");
+}
 get_header();
 
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/register' );
