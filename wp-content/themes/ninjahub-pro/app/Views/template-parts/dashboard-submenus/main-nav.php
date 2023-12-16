@@ -25,14 +25,14 @@
             <?= __('Opportunities', 'ninja'); ?>
         </a>
     </li>
-
+<?php /*
     <li>
         <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-widgets'))) ?>"
            class="btn-link <?= $active_link === 'my_widgets' ? 'active' : ''; ?>">
             <?= __('My Widgets', 'ninja') ?>
         </a>
     </li>
-
+*/ ?>
     <li>
         <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-favorite-articles'))) ?>"
            class="btn-link <?= $active_link === 'my_favorite_article' ? 'active' : ''; ?>">
