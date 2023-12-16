@@ -76,6 +76,7 @@ class NhAuthentication extends NhAuth {
                 form: $(`#${KEY}_edit_profile_form`),
                 parent: $(`#${KEY}_edit_profile_form`).parent(),
                 selectBoxes: $('select'),
+                btnMyAccountEdit: $('.btn-my-account-edit'),
             },
             editPassword: {
                 form: $(`#${KEY}_edit_password_form`),
@@ -428,6 +429,16 @@ class NhAuthentication extends NhAuth {
         //         allowHTML: true,
         //     });
         // });
+
+        $editProfile.btnMyAccountEdit.on('click', function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget);
+            $editProfile.form.find("[data-edit='disable']").prop('disabled', false);
+            $this.hide();
+            $editProfile.form.find(`#${KEY}_edit_profile_submit`).show();
+            $('.nh-form-disabled').removeClass('nh-form-disabled');
+
+        });
 
         // Initialize international telephone input for phone number
         if ($('#ninja_phone_number').length > 0) {
