@@ -37,8 +37,8 @@ $single_post       = $post_obj->convert( $post );
 	</div>
 	<div class="search-form search-con col-md-4">
 		<?= Nh_Forms::get_instance()
-			->create_form( [ 
-				'search'    => [ 
+			->create_form( [
+				'search'    => [
 					'class'       => 'ninja-search-input-group',
 					'type'        => 'text',
 					'name'        => 's_ajax',
@@ -47,7 +47,7 @@ $single_post       = $post_obj->convert( $post );
 					'after'       => '<i class="bbc-search2 ninja-search-icon"></i>',
 					'order'       => 0,
 				],
-				'post_type' => [ 
+				'post_type' => [
 					'class'  => 'ninja-search-type',
 					'type'   => 'hidden',
 					'name'   => 'search_post_type',
@@ -56,15 +56,12 @@ $single_post       = $post_obj->convert( $post );
 					'value'  => get_post_type(),
 					'order'  => 0,
 				]
-			], [ 
+			], [
 				'action' => apply_filters( 'nhml_permalink', home_url() ),
 				'class'  => Nh::_DOMAIN_NAME . '-search-form-ajax',
 				'id'     => Nh::_DOMAIN_NAME . '_search_form_ajax'
 			] ); ?>
 		<div class="search-body">
-			<small><i>
-					<?= __( "Find topics by entering terms in the search box.", "ninja" ); ?>
-				</i></small>
 		</div>
 	</div>
 </div>
@@ -77,7 +74,7 @@ if ( have_posts() ) {
 	} else {
 		$exclude_term = $exclude_term->term_id;
 	}
-	$faq_categories = get_terms( [ 
+	$faq_categories = get_terms( [
 		'taxonomy'   => 'faq-category',
 		'hide_empty' => FALSE,
 		'exclude'    => [ $exclude_term ]
@@ -131,7 +128,7 @@ if ( have_posts() ) {
 	}
 
 	$faqs_obj = new Nh_Faq();
-	$faqs     = $faqs_obj->get_all( [ 'publish' ], 14, 'menu_order', 'ASC', [], [ 
+	$faqs     = $faqs_obj->get_all( [ 'publish' ], 14, 'menu_order', 'ASC', [], [
 		'taxonomy' => 'faq-category',
 		'field'    => 'slug',
 		'terms'    => 'popular-questions'
