@@ -736,6 +736,7 @@
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
                     $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
 
                     if (is_wp_error($opportunity)) {
                         $notification->delete();
@@ -752,7 +753,7 @@
 
                     if (Nh_User::get_user_role() === Nh_User::REVIEWER) {
                         $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
-                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title, $notification->meta_data['notification_data']['from']);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title, $from);
                     } elseif (Nh_User::get_user_role() === Nh_User::ADMIN) {
                         $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
                         $formatted->content = __($notification->content, 'ninja');
@@ -897,6 +898,7 @@
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
                     $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
 
                     if (is_wp_error($opportunity)) {
                         $notification->delete();
@@ -916,7 +918,8 @@
                         $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
                     } elseif (Nh_User::get_user_role() === Nh_User::ADMIN) {
                         $formatted->title   = __($notification->title, 'ninja');
-                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from->first_name,
+                            $opportunity->title);
                     } elseif (Nh_User::get_user_role() === Nh_User::INVESTOR) {
                         $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
                         $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
@@ -932,6 +935,7 @@
                 case 'bidding':
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
 
                     if (!$opportunity_id) {
                         $notification->delete();
@@ -956,7 +960,7 @@
 
                     if (Nh_User::get_user_role() === Nh_User::ADMIN) {
                         $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
-                        $formatted->content = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title);
                     }
 
                     break;
@@ -964,6 +968,7 @@
                 case 'acquisition':
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
 
                     if (!$opportunity_id) {
                         $notification->delete();
@@ -988,7 +993,7 @@
 
                     if (Nh_User::get_user_role() === Nh_User::ADMIN) {
                         $formatted->title   = __($notification->title, 'ninja');
-                        $formatted->content = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title);
                     }
 
                     break;

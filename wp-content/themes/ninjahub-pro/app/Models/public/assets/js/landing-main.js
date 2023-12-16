@@ -1,6 +1,5 @@
 /* Imports */
 // import '../../../../../node_modules/';
-console.log('landing-main.js');
 /* Functions Declaration */
 /* Handle Show/Hide Next & Prev Buttons Based On Active Carousel Item */
 const handleCarouselAnimation = () => {
