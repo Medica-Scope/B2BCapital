@@ -58,10 +58,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 
 		if ( is_user_logged_in() ) {
 			?>
-			<div class="bbc-logged-in-actions">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<?php
+		<div class="bbc-logged-in-actions">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<?php
 						echo Nh_Forms::get_instance()
 							->create_form( [ 
 								'search' => [ 
@@ -79,67 +79,67 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 								'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
 							] );
 						?>
-					</li>
-					<li class="nav-item">
-						<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
-					</li>
-					<li class="nav-item bbc-user-profile-btn dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-							data-bs-toggle="dropdown" data-bs-auto-close="true">
-							<span class="btn-profile-title">
-								<?= sprintf( _x( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
-							</span>
-							<span class="btn-profile-desc">
-								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
-							</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
-									<?= __( 'My Profile', 'ninja' ) ?>
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-opportunities' ) ) ) ?>">
-									<?= __( 'My Opportunities', 'ninja' ) ?>
-								</a>
-							</li>
+				</li>
+				<li class="nav-item">
+					<?php get_template_part( 'app/Views/template-parts/notifications/notification' ); ?>
+				</li>
+				<li class="nav-item bbc-user-profile-btn dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+						data-bs-toggle="dropdown" data-bs-auto-close="true">
+						<span class="btn-profile-title">
+							<?= sprintf( _x( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
+						</span>
+						<span class="btn-profile-desc">
+							<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
+						</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
+								<?= __( 'My Account', 'ninja' ) ?>
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-opportunities' ) ) ) ?>">
+								<?= __( 'Opportunities', 'ninja' ) ?>
+							</a>
+						</li>
 
-							<?php if ( Nh_User::get_user_role() === Nh_User::OWNER ) { ?>
-								<li>
-									<a class="dropdown-item"
-										href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ) ?>">
-										<?= __( 'Create Opportunities', 'ninja' ) ?>
-									</a>
-								</li>
-							<?php } ?>
+						<?php if ( Nh_User::get_user_role() === Nh_User::OWNER ) { ?>
+						<li>
+							<a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard/create-opportunity' ) ) ) ?>">
+								<?= __( 'Create Opportunities', 'ninja' ) ?>
+							</a>
+						</li>
+						<?php } ?>
 
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-widgets' ) ) ) ?>">
-									<?= __( 'My Widgets', 'ninja' ) ?>
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-favorite-articles' ) ) ) ?>">
-									<?= __( 'My Articles', 'ninja' ) ?>
-								</a>
-							</li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout"><i
-										class="bbc-log-out text-danger"></i></i>
-									<?= __( 'Logout', 'ninja' ); ?>
-								</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<?php
+						<li>
+							<a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-widgets' ) ) ) ?>">
+								<?= __( 'Widgets', 'ninja' ) ?>
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item"
+								href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-favorite-articles' ) ) ) ?>">
+								<?= __( 'Articles', 'ninja' ) ?>
+							</a>
+						</li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item text-danger" href="/nh_account/nh_logout"><i
+									class="bbc-log-out text-danger"></i></i>
+								<?= __( 'Logout', 'ninja' ); ?>
+							</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<?php
 		}
 		?>
 
