@@ -345,7 +345,7 @@ class Nh_Opportunity extends Nh_Module {
 		}
 
 		if ( ! $this->can_create_opportunity() ) {
-			new Nh_Ajax_Response( FALSE, __( "You have exceeded your creation limit for this month.", 'ninja' ) );
+			new Nh_Ajax_Response( FALSE, sprintf(__( "Sorry you can create only one opportunity in month please try again on %s.", 'ninja' ), $this->next_opportunity_date()) );
 		}
 
 		$this->title           = $project_name;
@@ -688,7 +688,7 @@ class Nh_Opportunity extends Nh_Module {
 						'value' => $value,
 					];
 				}
-				
+
 			}
 		}
 		if ( ! empty( $tax_query ) ) {
@@ -1172,11 +1172,11 @@ class Nh_Opportunity extends Nh_Module {
 			$date = new \DateTime( $opportunities->post->post_date );
 
 			// Add one month to the current date
-			$oneMonthLater = clone $now;
+			$oneMonthLater = clone $date;
 			$oneMonthLater->add( new \DateInterval( 'P1M' ) );
 
 			// Check if the input date is more than one month from today
-			if ( $date > $oneMonthLater ) {
+			if ( $now > $oneMonthLater ) {
 				return TRUE;
 			}
 
@@ -1186,6 +1186,30 @@ class Nh_Opportunity extends Nh_Module {
 		}
 
 	}
+
+    public function next_opportunity_date(): string {
+        global $user_ID;
+
+        $opportunities = new \WP_Query( [
+            'post_type'      => $this->module,
+            'post_status'    => 'publish',
+            'orderby'        => 'ID',
+            'order'          => 'DESC',
+            'author'         => $user_ID,
+            'posts_per_page' => 1
+        ] );
+
+            $now  = new \DateTime();
+            $date = new \DateTime( $opportunities->post->post_date );
+
+            // Add one month to the current date
+            $oneMonthLater = clone $date;
+            $oneMonthLater->add( new \DateInterval( 'P1M' ) );
+
+            return $oneMonthLater->format('F j, Y - h:i A');
+
+
+    }
 
 	public function get_opportunity_bids( int $opp_id = 0, $count = FALSE ): int|array {
 		$id                      = $opp_id ? $opp_id : $this->ID;

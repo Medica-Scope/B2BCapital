@@ -51,6 +51,10 @@ class NhValidator
             unhighlight: function (element) {
                 $(element).removeClass(`${KEY}-error-input`);
             },
+            success: function (label, element) {
+                // Add a class to the valid input element
+                $(element).addClass(`${KEY}-valid-input`);
+            }
         });
 
 
@@ -64,7 +68,7 @@ class NhValidator
             return this.optional(element) || re.test(value);
         }, this.phrases.email_regex);
         $.validator.addMethod('phone_regex', function (value, element, regexp) {
-            let re = new RegExp(/^(01)[0125][0-9]{8}$/);
+            let re = new RegExp(/^\+?\d{7,16}$/);
             // let re = new RegExp(regexp);
             return this.optional(element) || re.test(value);
         }, this.phrases.phone_regex);
@@ -212,6 +216,7 @@ class NhValidator
                         rules: {
                             user_email_phone: {
                                 required: true,
+                                email_regex: true,
                             },
                         },
                     });
@@ -301,87 +306,6 @@ class NhValidator
                             confirm_new_password: {
                                 required: true,
                                 equalTo: $el.new_password,
-                            },
-                        },
-                    });
-                }
-            },
-        };
-
-        if (_.has(forms, type)) {
-            _.invoke(forms, type);
-        }
-    }
-
-    static initCompetitionValidation($el, type)
-    {
-
-        let that = this;
-
-        const forms = {
-            competition: function () {
-                if ($el.form.length > 0) {
-                    $el.form.validate({
-                        normalizer: function (value) {
-                            return $.trim(value);
-                        },
-                        rules: {
-                            team_leader_name: {
-                                required: true,
-                            },
-                            team_leader_email: {
-                                required: true,
-                                email_regex: true,
-                            },
-                            team_leader_mobile: {
-                                required: true,
-                                phone_regex: true,
-                            },
-                            country: {
-                                required: true,
-                            },
-                            city: {
-                                required: true,
-                            },
-                            university: {
-                                required: true,
-                            },
-                            faculty: {
-                                required: true,
-                            },
-                            team_name: {
-                                required: true,
-                            },
-                            team_member1_name: {
-                                required: true,
-                            },
-                            team_member1_email: {
-                                required: true,
-                                email_regex: true,
-                            },
-                            team_member2_email: {
-                                email_regex: true,
-                            },
-                            team_member3_email: {
-                                email_regex: true,
-                            },
-                            team_member4_email: {
-                                email_regex: true,
-                            },
-                            project_description: {
-                                required: true,
-                                maxlength: 1000,
-                            },
-                            advisory_contact_name: {
-                                required: true,
-                            },
-                            advisory_contact_email: {
-                                required: true,
-                                email_regex: true,
-                            },
-                            advisory_contact_mobile: {
-                                required: true,
-                                phone_regex: true,
                             },
                         },
                     });
@@ -546,7 +470,7 @@ class NhValidator
                             opportunity_status: {
                                 required: false,
                             },
-                            
+
                         },
                     });
                 }
@@ -584,8 +508,7 @@ class NhValidator
                             },
                             mobile: {
                                 required: true,
-                                maxlength: 16,
-                                minlength: 11,
+                                phone_regex: true,
                             },
                             timeslot: {
                                 required: true,

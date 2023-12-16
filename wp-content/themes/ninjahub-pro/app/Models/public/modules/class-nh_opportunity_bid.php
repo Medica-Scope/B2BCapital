@@ -203,6 +203,30 @@
             return FALSE;
         }
 
+        public function get_bid_by_user($user_ID, $opp_ID): bool|Nh_Opportunity_Bid
+        {
+            $bids = new \WP_Query([
+                'post_type'   => $this->module,
+                'post_status' => 'publish',
+                'author'      => $user_ID,
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => serialize($opp_ID),
+                        'compare' => 'LIKE',
+                    ],
+                ],
+            ]);
+
+            if ($bids->have_posts()) {
+                $convert = $this->convert($bids->post);
+                $assign = $this->assign($convert);
+                return $assign;
+            }
+
+            return FALSE;
+        }
+
         public function get_profile_bids(bool $current = FALSE): array
         {
             global $user_ID;
