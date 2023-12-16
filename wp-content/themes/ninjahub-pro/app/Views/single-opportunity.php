@@ -242,11 +242,20 @@
                                     </div>
                                     <?php
                                 } else {
-                                    ?>
-                                    <button type="button" class="btn btn-primary">
-                                        <?= __('Bid Sent', 'ninja') ?>
-                                    </button>
-                                    <?php
+                                    $bids = $opportunity_bids_obj->get_bid_by_user($user_ID, $opportunity->ID);
+                                    if ($bids) {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= sprintf(__("Your bid status is %s", 'ninja'), $bids->meta_data['bidding_stage']) ?>
+                                        </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= __('Bid Sent', 'ninja') ?>
+                                        </button>
+                                        <?php
+                                    }
                                 }
                             }
 
@@ -312,11 +321,20 @@
                                     <?php
 
                                 } else {
-                                    ?>
-                                    <button type="button" class="btn btn-primary">
-                                        <?= __('Acquisition Request Sent', 'ninja') ?>
-                                    </button>
-                                    <?php
+                                    $acquisition = $opportunity_acquisition_obj->get_acquisition_by_user($user_ID, $opportunity->ID);
+                                    if ($acquisition) {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= sprintf(__("Your request is %s", 'ninja'), $acquisition->meta_data['acquisitions_stage']) ?>
+                                        </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= __('Acquisition Request Sent', 'ninja') ?>
+                                        </button>
+                                        <?php
+                                    }
                                 }
                             }
 
@@ -381,11 +399,20 @@
                                     </div>
                                     <?php
                                 } else {
-                                    ?>
-                                    <button type="button" class="btn btn-primary">
-                                        <?= __('Investment Request Sent', 'ninja') ?>
-                                    </button>
-                                    <?php
+                                    $investment = $opportunity_investments_obj->get_investment_by_user($user_ID, $opportunity->ID);
+                                    if ($investment) {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= sprintf(__("Your request is %s", 'ninja'), $investment->meta_data['investments_stage']) ?>
+                                        </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button type="button" class="btn btn-primary">
+                                            <?= __('Investment Request Sent', 'ninja') ?>
+                                        </button>
+                                        <?php
+                                    }
                                 }
                             }
                         }
@@ -746,24 +773,23 @@
                 <?= __('Related Opportunities', 'ninja'); ?>
             </h3>
             <?php
-            $profile_id            = get_user_meta( $user_ID, 'profile_id', TRUE );
-            $profile_obj           = new Nh_Profile();
-            $profile               = $profile_obj->get_by_id( (int) $profile_id );
-            if ( ! is_wp_error( $profile ) && isset($profile->meta_data['preferred_opportunities_cat_list']) && !empty($profile->meta_data['preferred_opportunities_cat_list']) ) {
-                $related_opportunities = $opportunity_obj->get_all_custom(['publish'], -1, 'date', 'desc', [], 
-                [
-                'taxonomy' => 'opportunity-category',
-                'terms'    => $profile->meta_data['preferred_opportunities_cat_list'],
-                'field'    => 'term_id'
-                ], $user_ID, 1, [], [], 'ids');
-                if(!empty($related_opportunities['posts'])){
-                    get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $related_opportunities['posts'] ]); 
-                }else{
+                $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
+                $profile_obj = new Nh_Profile();
+                $profile     = $profile_obj->get_by_id((int)$profile_id);
+                if (!is_wp_error($profile) && isset($profile->meta_data['preferred_opportunities_cat_list']) && !empty($profile->meta_data['preferred_opportunities_cat_list'])) {
+                    $related_opportunities = $opportunity_obj->get_all_custom([ 'publish' ], -1, 'date', 'desc', [], [
+                        'taxonomy' => 'opportunity-category',
+                        'terms'    => $profile->meta_data['preferred_opportunities_cat_list'],
+                        'field'    => 'term_id'
+                    ], $user_ID, 1, [], [], 'ids');
+                    if (!empty($related_opportunities['posts'])) {
+                        get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $related_opportunities['posts'] ]);
+                    } else {
+                        get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]);
+                    }
+                } else {
                     get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]);
                 }
-            }else{
-             get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]); 
-            }
             ?>
         </div>
     </main><!-- #main -->
