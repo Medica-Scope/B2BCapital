@@ -52,7 +52,7 @@
                             if (is_array($user->profile->meta_data['widget_list'])) {
                                 foreach ($user->profile->meta_data['widget_list'] as $widget) {
 
-                                    $language_info = wpml_get_language_information((int)$widget);
+                                    $language_info = wpml_get_language_information(null, (int)$widget);
 
                                     if ($language_info['language_code'] !== NH_lANG) {
                                         continue;
