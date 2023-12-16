@@ -11,7 +11,7 @@ use NH\APP\MODELS\FRONT\MODULES\Nh_Notification;
 global $user_ID;
 $notifications_obj = new Nh_Notification();
 
-$notifications = $notifications_obj->get_notifications(10);
+$notifications = $notifications_obj->get_notifications( 10 );
 $count         = $notifications['new_count'];
 $found_posts   = $notifications['found_posts'];
 
@@ -32,51 +32,54 @@ $found_posts   = $notifications['found_posts'];
 			<?php
 			if ( ! empty( $notifications['notifications'] ) ) {
 				?>
-				<div class="ninja-notification-clear-parent">
-					<button class="ninja-notification-clear">
-						<?= __( 'clear all' ) ?>
-					</button>
-				</div>
-				<div class="ninja-notifications-group">
-					<?php
+			<div class="ninja-notification-clear-parent">
+				<button class="btn btn-sm btn-outline-secondary ninja-notification-clear text-uppercase">
+					<i class="bbc-trash-2"></i>
+					<?= __( 'clear all' ) ?>
+				</button>
+			</div>
+			<div class="ninja-notifications-group">
+				<?php
 					foreach ( $notifications['notifications'] as $notification ) {
 						?>
-						<div class="ninja-notification-item <?= $notification->new ? 'ninjanew-notification' : '' ?>"
-							data-id="<?= $notification->ID ?>">
-							<a href="<?= $notification->url ?>">
-								<div class="row">
-									<div class="col-sm-2">
-										<div class="ninja-notification-image">
-											<img src="<?= $notification->thumbnail ?>"
-												alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
-										</div>
-									</div>
-									<div class="col-sm-10">
-										<div class="ninja-notification-content">
-											<h6>
-												<?= $notification->title ?>
-											</h6>
-											<p>
-												<?= $notification->content ?>
-											</p>
-											<span>
-												<?= $notification->date ?>
-											</span>
-										</div>
-									</div>
+				<div class="ninja-notification-item <?= $notification->new ? 'ninjanew-notification' : '' ?>"
+					data-id="<?= $notification->ID ?>">
+					<a href="<?= $notification->url ?>">
+						<div class="row">
+							<div class="col-sm-2">
+								<div class="ninja-notification-image">
+									<img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
 								</div>
-							</a>
+							</div>
+							<div class="col-sm-10">
+								<div class="ninja-notification-content">
+									<h6>
+										<?= $notification->title ?>
+									</h6>
+									<p>
+										<?= $notification->content ?>
+									</p>
+									<span>
+										<?= $notification->date ?>
+									</span>
+								</div>
+							</div>
 						</div>
-						<?php
-					}
-					?>
+					</a>
 				</div>
 				<?php
-				if($found_posts>20){
+					}
 					?>
-					<div class="ninja-show-more d-none"><a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/my-notifications'))) ?>"><?= __("Show more", "ninja") ?></a></div>
-				<?php } ?>
-				<?php
+			</div>
+			<?php
+				if ( $found_posts > 20 ) {
+					?>
+			<div class="ninja-show-more d-none"><a
+					href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-notifications' ) ) ) ?>">
+					<?= __( "Show more", "ninja" ) ?>
+				</a></div>
+			<?php } ?>
+			<?php
 			} else {
 				get_template_part( 'app/Views/template-parts/notifications/notification', 'empty' );
 			}

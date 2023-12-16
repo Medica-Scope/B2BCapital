@@ -44,10 +44,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 					}
 					?>
 					<!-- <a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a> -->
-					<a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
-						LinkedIn</a>
-					<a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
-						Facebook</a>
+					<!-- <a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
+						LinkedIn</a> -->
+					<!-- <a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
+						Facebook</a> -->
 				</div>
 
 				<div class="or-separator">
@@ -131,7 +131,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-login-landing', Nh_Ho
 
 			<div class="section-footer">
 				<p class="text-start mb-5">
-					<?= sprintf( __( "Don't have an account? <a href='%s' class='btn-link text-danger'>New Account!</a>", 'ninja' ), apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) ) ?>
+					<?= sprintf( __( "Don't have an account? <a href='%s' class='btn-link text-accent'>New Account!</a>", 'ninja' ), apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) ) ?>
 
 				</p>
 				<p>
