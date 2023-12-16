@@ -138,6 +138,7 @@
             $forms['frontend_add_bid']             = [ "form_name" => "Front End Add Bid" ];
             $forms['frontend_create_acquisitions'] = [ "form_name" => "Front End Create Acquisitions" ];
             $forms['frontend_create_investments']  = [ "form_name" => "Front End Create Investment" ];
+            $forms['frontend_forex']  = [ "form_name" => "Front End forex" ];
             return $forms;
         }
 

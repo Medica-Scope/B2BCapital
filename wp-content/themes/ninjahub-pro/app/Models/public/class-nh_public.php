@@ -184,6 +184,10 @@ class Nh_Public {
 			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front' );
 		}
 
+		if ( is_page( 'dashboard' ) ) {
+			$this->hooks->add_script( Nh::_DOMAIN_NAME . '-public-script-profile-widgets', Nh_Hooks::PATHS['public']['js'] . '/profile-widgets-front' );
+		}
+
 		$this->hooks->run();
 	}
 
