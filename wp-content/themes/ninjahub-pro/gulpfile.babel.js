@@ -325,5 +325,5 @@ gulp.task('default', gulp.parallel('publicStyles', 'publicScripts', 'publicImage
     gulp.watch(paths.images.admin.watch, gulp.parallel('adminImages'));
 
     // Translation
-    // gulp.watch(paths.php.watch, gulp.parallel('translate'));
+    gulp.watch(paths.php.watch, gulp.parallel('translate'));
 }));
