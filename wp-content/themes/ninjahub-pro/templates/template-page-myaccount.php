@@ -54,6 +54,7 @@ $user     = $user_obj::get_current_user();
 				'value'       => $user->first_name,
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your first name', 'ninja' ),
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'       => 5,
 			],
 			'last_name'                        => [
@@ -64,6 +65,7 @@ $user     = $user_obj::get_current_user();
 				'value'       => $user->last_name,
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your last name', 'ninja' ),
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'       => 10,
 			],
 			'phone_number'                     => [
@@ -74,6 +76,7 @@ $user     = $user_obj::get_current_user();
 				'value'       => (!empty($user->user_meta['phone_number']))?'+'.$user->user_meta['phone_number']:'',
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your phone number', 'ninja' ),
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 //				'extra_attr'  => [ 'disabled' => 'disable' ],
 				'order'       => 15,
 			],
@@ -85,6 +88,7 @@ $user     = $user_obj::get_current_user();
 				'value'       => $user->email,
 				'required'    => TRUE,
 				'placeholder' => __( 'Enter your email', 'ninja' ),
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'       => 20,
 			],
 			'site_language'                    => [
@@ -97,6 +101,7 @@ $user     = $user_obj::get_current_user();
 				'default_option' => '',
 				'select_option'  => [ $user->user_meta['site_language'] ],
 				'before'         => '',
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'          => 25,
 			],
 			'widget_list'                      => [
@@ -110,6 +115,7 @@ $user     = $user_obj::get_current_user();
 				'default_option' => '',
 				'select_option'  => $user->profile->meta_data['widget_list'],
 				'before'         => '',
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'          => 30,
 			],
 			'preferred_opportunities_cat_list' => [
@@ -123,6 +129,7 @@ $user     = $user_obj::get_current_user();
 				'default_option' => '',
 				'select_option'  => $user->profile->meta_data['preferred_opportunities_cat_list'],
 				'before'         => '',
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'          => 35,
 			],
 			'preferred_articles_cat_list'      => [
@@ -136,6 +143,7 @@ $user     = $user_obj::get_current_user();
 				'default_option' => '',
 				'select_option'  => $user->profile->meta_data['preferred_articles_cat_list'],
 				'before'         => '',
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'          => 40,
 			],
 			'verification_type'  => [
@@ -152,6 +160,7 @@ $user     = $user_obj::get_current_user();
 				],
 				'default_option' => '',
 				'select_option'  => [ $user->user_meta['verification_type'] ],
+				'extra_attr'  => [ 'data-edit' => 'disable' , 'disabled' => 'disable'],
 				'order'          => 43,
 			],
 			'custom-html-3'                    => [
@@ -166,9 +175,19 @@ $user     = $user_obj::get_current_user();
 				'value' => Nh::_DOMAIN_NAME . "_edit_profile_form",
 				'order' => 50
 			],
+			'custom-html-4'                    => [
+				'type'    => 'html',
+				'content' => '
+							<div class="form-field ">
+                                <button class="form-action btn btn-primary ninja-btn btn-lg btn-success text-uppercase btn-my-account-edit" type="button">
+									<i class="bbc-save pe-1"></i>'.__('Edit', 'ninja').'
+								</button>
+                            </div>',
+				'order'   => 53,
+			],
 			'submit'                           => [
 				'parent_class'        => '',
-				'class'               => 'btn-lg text-uppercase',
+				'class'               => 'btn-lg text-uppercase nh-hidden',
 				'type'                => 'submit',
 				'id'                  => Nh::_DOMAIN_NAME . '_edit_profile_submit',
 				'value'               => '<i class="bbc-save pe-1"></i> ' . __( 'Save', 'ninja' ),
@@ -179,7 +198,7 @@ $user     = $user_obj::get_current_user();
 			],
 		];
 		$form_tags   = [
-			'class' => Nh::_DOMAIN_NAME . '-edit-profile-form',
+			'class' => Nh::_DOMAIN_NAME . '-edit-profile-form nh-form-disabled',
 			'id'    => Nh::_DOMAIN_NAME . '_edit_profile_form'
 		];
 
