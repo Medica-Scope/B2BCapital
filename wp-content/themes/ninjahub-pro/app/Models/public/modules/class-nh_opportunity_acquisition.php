@@ -195,6 +195,30 @@
             return FALSE;
         }
 
+        public function get_acquisition_by_user($user_ID, $opp_ID): bool|Nh_Opportunity_Acquisition
+        {
+            $acquisitions = new \WP_Query([
+                'post_type'   => $this->module,
+                'post_status' => 'publish',
+                'author'      => $user_ID,
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => serialize($opp_ID),
+                        'compare' => 'LIKE',
+                    ],
+                ],
+            ]);
+
+            if ($acquisitions->have_posts()) {
+                $convert = $this->convert($acquisitions->post);
+                $assign = $this->assign($convert);
+                return $assign;
+            }
+
+            return FALSE;
+        }
+
         public function get_dashboard_sidebar_acquisitions(bool $current = FALSE): array
         {
             global $user_ID;

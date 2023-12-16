@@ -193,6 +193,30 @@
             return FALSE;
         }
 
+        public function get_investment_by_user($user_ID, $opp_ID): bool|Nh_Opportunity_Investments
+        {
+            $investments = new \WP_Query([
+                'post_type'   => $this->module,
+                'post_status' => 'publish',
+                'author'      => $user_ID,
+                'meta_query'  => [
+                    [
+                        'key'     => 'opportunity',
+                        'value'   => serialize($opp_ID),
+                        'compare' => 'LIKE',
+                    ],
+                ],
+            ]);
+
+            if ($investments->have_posts()) {
+                $convert = $this->convert($investments->post);
+                $assign = $this->assign($convert);
+                return $assign;
+            }
+
+            return FALSE;
+        }
+
         public function get_dashboard_sidebar_investments(bool $current = FALSE): array
         {
             global $user_ID;
