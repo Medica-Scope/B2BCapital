@@ -40,6 +40,7 @@ class NhSearch extends Nh
                 $el.find('input, button').prop('disabled', false);
                 NhUiCtrl.blockUI($el, false);
                 $('.search-con').find('.search-body').html(res.data.html);
+                $('.search-body').show();
             },
             error: function (xhr) {
                 let errorMessage = `${xhr.status}: ${xhr.statusText}`;

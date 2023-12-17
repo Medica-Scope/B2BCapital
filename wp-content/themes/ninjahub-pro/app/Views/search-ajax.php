@@ -20,7 +20,7 @@ $key = $args['data']['key'];
 
 <div class="search-result">
 	<p>
-		<?= sprintf( __( 'نتائج البحث عن: `%s`', 'nh' ), $key ); ?>
+		<?= sprintf( __( 'Search results for: `%s`', 'ninja' ), $key ); ?>
 	</p>
 	<div class="search-data">
 		<?php
@@ -62,7 +62,7 @@ $key = $args['data']['key'];
 		<div class="search-empty">
 			<div class="result">
 				<p><i class="fas fal fa-info-circle"></i>
-					<?= __( 'نآسف! لم يتم العثور على نتيجة يرجى المحاولة بطريقة أخرى.', 'nh' ) ?>
+					<?= __( 'Sorry! No results found, please try another way.', 'ninja' ) ?>
 				</p>
 			</div>
 		</div>
