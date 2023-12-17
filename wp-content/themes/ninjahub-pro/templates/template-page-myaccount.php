@@ -155,8 +155,8 @@ $user     = $user_obj::get_current_user();
 				'placeholder'    => __( 'Enter your verification type', 'ninja' ),
 				'options'        => [
 					Nh_User::VERIFICATION_TYPES['email'] => __( 'Email', 'ninja' ),
-					Nh_User::VERIFICATION_TYPES['mobile'] => __( 'Phone Number', 'ninja' ),
-					Nh_User::VERIFICATION_TYPES['whatsapp'] => __( 'Whatsapp', 'ninja' ),
+//					Nh_User::VERIFICATION_TYPES['mobile'] => __( 'Phone Number', 'ninja' ),
+//					Nh_User::VERIFICATION_TYPES['whatsapp'] => __( 'Whatsapp', 'ninja' ),
 				],
 				'default_option' => '',
 				'select_option'  => [ $user->user_meta['verification_type'] ],

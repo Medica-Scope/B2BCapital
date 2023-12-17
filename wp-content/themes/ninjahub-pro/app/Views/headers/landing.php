@@ -18,7 +18,7 @@ $active_link = ! empty( $args['active_link'] ) ? $args['active_link'] : FALSE;
  * TODO: $args not working
  */
 
-global $post;
+global $post, $wp;
 
 // if ( $post->post_type == 'page' ) { // Checking if the current post is a page
 // 	$slug        = get_post_field( 'post_name', $post->ID ); // Retrieving the slug of the current page
@@ -45,13 +45,14 @@ $active_link  = $current_slug;
 		<!-- App Language Switcher -->
 		<div class="language-link">
 			<?php
-			if ( ! is_user_logged_in() ) {
-				do_action( 'wpml_language_switcher', [ 
-					'display_names_in_native_lang'   => 0,
-					'display_names_in_current_lang ' => 1,
-					'display_link_for_current_lang'  => 0,
-				] );
-			}
+				// TODO:: ENABLE AFTER DEMO
+//			if ( ! is_user_logged_in() ) {
+//				do_action( 'wpml_language_switcher', [
+//					'display_names_in_native_lang'   => 0,
+//					'display_names_in_current_lang ' => 1,
+//					'display_link_for_current_lang'  => 0,
+//				] );
+//			}
 			?>
 		</div>
 		<!-- App Navigation -->
