@@ -86,7 +86,7 @@ class NhSearchFront extends NhSearch
         });
 
         $(document).on("click",`.${KEY}-search-icon`,function(e){
-            $search.keyword_input.trigger(jQuery.Event('keyup', {which: 13}))
+            $search.keyword_input.trigger(jQuery.Event('keyup', {keyCode: 13}))
         });
 
         
@@ -106,7 +106,6 @@ class NhSearchFront extends NhSearch
             if (typeof ajaxRequests.search !== 'undefined') {
                 ajaxRequests.search.abort();
             }
-
             if ((e.type === 'keyup' && e.keyCode === 13 && formData.length > 0) || (e.type === 'blur' && formData.length > 0)) {
                 that.search(formData, type, $search.form);
             }
