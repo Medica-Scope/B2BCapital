@@ -3,6 +3,9 @@
 
 .card {
 	padding: 1rem;
+	&.opportunity-item{
+		min-height: 500px;
+	}
 	&.card-horizontal {
 		.card-image {
 			width: auto;
@@ -23,23 +26,9 @@
 			background-color: transparent;
 		}
 	}
-	.card-image {
+	.card-image-top, .card-image{
 		position: relative;
-		display: flex;
-		justify-content: center;
-		background-color: $gray-light;
-		padding: 1rem;
-		border-radius: 3px;
-		a {
-			display: block;
-			width: 250px;
-			height: 250px;
-		}
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: contain;
-		}
+
 		.opportunity-item-controllers {
 			display: flex;
 			position: absolute;
@@ -62,8 +51,26 @@
 			}
 			.bbc-star,
 			.bbc-star-o {
-				color: $highlight;
+				color: $success;
 			}
+		}
+	}
+	.card-image {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		background-color: $gray-light;
+		padding: 1rem;
+		border-radius: 3px;
+		a {
+			display: block;
+			width: 250px;
+			height: 250px;
+		}
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
 		}
 	}
 	.card-body {

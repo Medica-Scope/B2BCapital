@@ -2,7 +2,7 @@
 @import './submenus/submenus.scss';
 @import '../../components/cards/card';
 
-.ninja_form_container:not(.ninja-header-search-form-container, .ninja-add-to-fav-form-container),
+.ninja_form_container:not(.ninja-header-search-form-container, .ninja-add-to-fav-form-container, .ninja-create-ignore-article-form-container),
 .acf-form {
 	background-color: $layout-light;
 	max-width: 920px;

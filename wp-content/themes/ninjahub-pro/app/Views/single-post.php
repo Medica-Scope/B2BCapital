@@ -76,8 +76,8 @@ if ( $user_ID ) {
 
 				<?php if ( ! empty( $user_ID ) ) :
 					echo Nh_Forms::get_instance()
-						->create_form( [ 
-							'post_id'                   => [ 
+						->create_form( [
+							'post_id'                   => [
 								'type'   => 'hidden',
 								'name'   => 'post_id',
 								'before' => '',
@@ -85,14 +85,14 @@ if ( $user_ID ) {
 								'value'  => $single_post->ID,
 								'order'  => 0
 							],
-							'add_to_fav_nonce'          => [ 
+							'add_to_fav_nonce'          => [
 								'class' => '',
 								'type'  => 'nonce',
 								'name'  => 'add_to_fav_nonce_nonce',
 								'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 								'order' => 5
 							],
-							'submit_add_to_fav_request' => [ 
+							'submit_add_to_fav_request' => [
 								'class'               => 'btn-light bg-white article-to-favorite ninja-add-to-fav ms-4 me-2',
 								'id'                  => 'submit_add_to_fav_request',
 								'type'                => 'submit',
@@ -100,12 +100,12 @@ if ( $user_ID ) {
 								'recaptcha_form_name' => 'frontend_add_to_fav',
 								'order'               => 10
 							],
-						], [ 
+						], [
 							'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 						] );
 					echo Nh_Forms::get_instance()
-						->create_form( [ 
-							'post_id'              => [ 
+						->create_form( [
+							'post_id'              => [
 								'type'   => 'hidden',
 								'name'   => 'post_id',
 								'before' => '',
@@ -113,14 +113,14 @@ if ( $user_ID ) {
 								'value'  => $single_post->ID,
 								'order'  => 0
 							],
-							'ignore_article_nonce' => [ 
+							'ignore_article_nonce' => [
 								'class' => '',
 								'type'  => 'nonce',
 								'name'  => 'ignore_article_nonce',
 								'value' => Nh::_DOMAIN_NAME . "_ignore_article_nonce_form",
 								'order' => 5
 							],
-							'submit_ignore'        => [ 
+							'submit_ignore'        => [
 								'class'               => 'btn-light bg-white',
 								'id'                  => 'submit_submit_ignore',
 								'type'                => 'submit',
@@ -128,26 +128,26 @@ if ( $user_ID ) {
 								'recaptcha_form_name' => 'frontend_ignore',
 								'order'               => 10
 							],
-						], [ 
+						], [
 							'class' => Nh::_DOMAIN_NAME . '-create-ignore-article-form',
 						] );
 				endif; ?>
 			</div>
 
 			<?php if ( ! empty( $opportunity ) ) : ?>
-				<div class="opportunity">
-					<a href="<?= $opportunity->link ?>">
-						<?= $opportunity->name; ?>
-					</a>
-				</div>
-				<div class="opportunity-short-description">
-					<p>
-						<?= $opportunity->meta_data['short_description']; ?>
-					</p>
-				</div>
+			<div class="opportunity">
+				<a href="<?= $opportunity->link ?>">
+					<?= $opportunity->name; ?>
+				</a>
+			</div>
+			<div class="opportunity-short-description">
+				<p>
+					<?= $opportunity->meta_data['short_description']; ?>
+				</p>
+			</div>
 			<?php endif; ?>
 
-			<div class="content">
+			<div class="content d-flex flex-column">
 				<?= $single_post->content ?>
 			</div>
 
