@@ -1,11 +1,16 @@
 <?php
 
     /**
-     * @Filename: single.php
-     * @Description:
-     * @User: Mustafa Shaaban
+     * Represents a single opportunity page in the application.
+     *
+     * This script handles the server-side logic for displaying a single opportunity,
+     * including loading necessary classes and preparing data for the front-end.
+     *
+     * @Filename: single-opportunity.php
+     * @Author: Mustafa Shaaban
      * @Date: 9/21/2023
      */
+
 
     use NH\APP\CLASSES\Nh_Init;
     use NH\APP\CLASSES\Nh_User;
