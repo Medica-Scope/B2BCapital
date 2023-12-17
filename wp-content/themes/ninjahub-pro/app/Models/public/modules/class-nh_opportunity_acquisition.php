@@ -182,7 +182,7 @@
                 'meta_query'  => [
                     [
                         'key'     => 'opportunity',
-                        'value'   => serialize($opp_ID),
+                        'value'   => $opp_ID,
                         'compare' => 'LIKE',
                     ],
                 ],
@@ -204,7 +204,7 @@
                 'meta_query'  => [
                     [
                         'key'     => 'opportunity',
-                        'value'   => serialize($opp_ID),
+                        'value'   => $opp_ID,
                         'compare' => 'LIKE',
                     ],
                 ],
