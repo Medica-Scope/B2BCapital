@@ -2,11 +2,15 @@
 @import '../../base/typography';
 
 .blog-item {
-	min-height: 340px;
+	min-height: 360px;
 	border: none;
+	.card{
+		height: 100%;
+	}
 	.card-image-top {
 		display: flex;
 		align-items: center;
+		position: relative;
 		width: 100%;
 		min-height: 184px;
 		padding: 3rem 1.5rem;
@@ -70,7 +74,7 @@
 				margin-top: 2rem;
 				.tags-title {
 					font-weight: bold;
-					margin-inline-start: 0.5rem;
+					margin-inline-end: 0.5rem;
 				}
 				.tags-items {
 					span {
