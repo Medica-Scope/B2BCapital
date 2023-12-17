@@ -86,7 +86,6 @@ class NhSearchFront extends NhSearch
         });
 
         $(document).on("click",`.${KEY}-search-icon`,function(e){
-            console.log("clicked");
             $search.keyword_input.trigger("keyup")
         });
 
@@ -95,6 +94,9 @@ class NhSearchFront extends NhSearch
             e.preventDefault();
         });
 
+        $search.keyword_input.on("focus", function() {
+            $('.search-body').hide()
+        });
         $search.keyword_input.on('keyup', function (e) {
             e.preventDefault();
             let $this = $(e.currentTarget),
