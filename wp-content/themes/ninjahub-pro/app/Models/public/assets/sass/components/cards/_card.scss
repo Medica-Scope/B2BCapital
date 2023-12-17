@@ -3,6 +3,9 @@
 
 .card {
 	padding: 1rem;
+	&.opportunity-item{
+		min-height: 500px;
+	}
 	&.card-horizontal {
 		.card-image {
 			width: auto;
@@ -48,7 +51,7 @@
 			}
 			.bbc-star,
 			.bbc-star-o {
-				color: $highlight;
+				color: $success;
 			}
 		}
 	}

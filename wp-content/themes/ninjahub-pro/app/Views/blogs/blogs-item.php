@@ -35,7 +35,7 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 		<div class="card-image-top bg-gradient bg-primary">
 			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
 				alt="B2B Capital Abstract Logo" />
-			<a href="<?= $single_post->link ?>" class="img">
+			<a href="<?= $single_post->link ?>">
 				<h3 class="title">
 					<?= $single_post->title ?>
 				</h3>
@@ -79,8 +79,11 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
 			</p>
 		</div>
-		<div class="short-description text-break">
-			<?= $single_post->excerpt ?>
-		</div>
+
+		<a href="<?= $single_post->link ?>">
+			<div class="short-description text-break">
+				<?= mb_strimwidth( $single_post->excerpt, 0, 80, '...' ); ?>
+			</div>
+		</a>
 	</div>
 </div>

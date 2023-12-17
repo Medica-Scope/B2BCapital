@@ -65,27 +65,27 @@
     }
 ?>
 
-    <main class="container container-xxl">
-        <div class="row align-items-end">
-            <div class="col-8">
-                <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
-                   class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
-                    <?= __('Back', 'ninja'); ?>
-                </a>
-                <h3 class="mb-4">
-                    <?= $opportunity->title; ?>
-                </h3>
+<main class="container container-xxl">
+	<div class="row align-items-end">
+		<div class="col-8">
+			<a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
+				class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+				<?= __('Back', 'ninja'); ?>
+			</a>
+			<h3 class="mb-4">
+				<?= $opportunity->title; ?>
+			</h3>
 
-                <h3 class="text-warning">
-                    <?= __('Business Type', 'ninja'); ?>
-                </h3>
+			<h3 class="text-warning">
+				<?= __('Business Type', 'ninja'); ?>
+			</h3>
 
-                <p>
-                    <?= $opportunity->taxonomy['business-type'][0]->name ?>
-                </p>
-            </div>
-            <div class="col-4 actions">
-                <?php
+			<p>
+				<?= $opportunity->taxonomy['business-type'][0]->name ?>
+			</p>
+		</div>
+		<div class="col-4 actions">
+			<?php
 
                     echo Nh_Forms::get_instance()
                                  ->create_form([
@@ -105,7 +105,7 @@
                                          'order' => 5
                                      ],
                                      'submit_add_to_fav_request' => [
-                                         'class'               => 'btn-success',
+                                         'class'               => 'btn btn-light bg-white opportunity-to-favorite ninja-add-to-fav',
                                          'id'                  => 'submit_add_to_fav_request',
                                          'type'                => 'submit',
                                          'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
@@ -154,43 +154,44 @@
                             if ($unique_type_name === 'bidding') {
                                 if ($opportunity_bids_obj->user_can_bid($user_ID, $opportunity->ID)) {
                                     ?>
-                                    <div class="bidding-modal">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBidModal">
-                                            <?= __('Add Bid', 'ninja') ?>
-                                        </button>
+			<div class="bidding-modal">
+				<!-- Button trigger modal -->
+				<button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#addBidModal">
+					<?= __('Add Bid', 'ninja') ?>
+				</button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="addBidModal" tabindex="-1" aria-labelledby="addBidModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="addBidModalLabel">
-                                                            <?= __('Add Bid', 'ninja') ?>
-                                                        </h1>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div>
-                                                            <div>
-                                                                <p>
-                                                                    <?= __('Start bidding amount', 'ninja') ?>
-                                                                </p>
-                                                                <span> $
-															<?= $opportunity->meta_data['start_bidding_amount'] ?>
-														</span>
-                                                            </div>
-                                                            <div>
-                                                                <p>
-                                                                    <?= __('Target amount', 'ninja') ?>
-                                                                </p>
-                                                                <span> $
-															<?= $opportunity->meta_data['target_amount'] ?>
-														</span>
-                                                            </div>
-                                                        </div>
+				<!-- Modal -->
+				<div class="modal fade" id="addBidModal" tabindex="-1" aria-labelledby="addBidModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="addBidModalLabel">
+									<?= __('Add Bid', 'ninja') ?>
+								</h1>
+							</div>
+							<div class="modal-body">
+								<div>
+									<div>
+										<p>
+											<?= __('Start bidding amount', 'ninja') ?>
+										</p>
+										<span> $
+											<?= $opportunity->meta_data['start_bidding_amount'] ?>
+										</span>
+									</div>
+									<div>
+										<p>
+											<?= __('Target amount', 'ninja') ?>
+										</p>
+										<span> $
+											<?= $opportunity->meta_data['target_amount'] ?>
+										</span>
+									</div>
+								</div>
 
-                                                        <div>
-                                                            <?= Nh_Forms::get_instance()
+								<div>
+									<?= Nh_Forms::get_instance()
                                                                         ->create_form([
                                                                             'bid_amount'    => [
                                                                                 'class'       => '',
@@ -234,27 +235,27 @@
                                                                             'class' => Nh::_DOMAIN_NAME . '-add-bid-form',
                                                                             'id'    => Nh::_DOMAIN_NAME . '_add_bid_form'
                                                                         ]); ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
                                 } else {
                                     $bids = $opportunity_bids_obj->get_bid_by_user($user_ID, $opportunity->ID);
                                     if ($bids) {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= sprintf(__("Your bid status is %s", 'ninja'), $bids->meta_data['bidding_stage']) ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= sprintf(__("Your bid status is %s", 'ninja'), $bids->meta_data['bidding_stage']) ?>
+			</button>
+			<?php
                                     } else {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= __('Bid Sent', 'ninja') ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= __('Bid Sent', 'ninja') ?>
+			</button>
+			<?php
                                     }
                                 }
                             }
@@ -262,23 +263,25 @@
                             if ($unique_type_name === 'acquisition') {
                                 if ($opportunity_acquisition_obj->user_can_acquire($user_ID, $opportunity->ID)) {
                                     ?>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" id="createAcquisitionBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAcquisitionModal">
-                                        <?= __('Acquisition', 'ninja') ?>
-                                    </button>
+			<!-- Button trigger modal -->
+			<button type="button" id="createAcquisitionBtn" class="btn btn-primary" data-bs-toggle="modal"
+				data-bs-target="#createAcquisitionModal">
+				<?= __('Acquisition', 'ninja') ?>
+			</button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="createAcquisitionModal" tabindex="-1" aria-labelledby="createAcquisitionLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="createAcquisitionLabel">
-                                                        <?= __('Acquisition', 'ninja') ?>
-                                                    </h1>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
-                                                    <?php
+			<!-- Modal -->
+			<div class="modal fade" id="createAcquisitionModal" tabindex="-1" aria-labelledby="createAcquisitionLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="createAcquisitionLabel">
+								<?= __('Acquisition', 'ninja') ?>
+							</h1>
+						</div>
+						<div class="modal-body">
+							<p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
+							<?php
                                                         echo Nh_Forms::get_instance()
                                                                      ->create_form([
                                                                          'opp_id'                      => [
@@ -309,31 +312,32 @@
                                                                          'id'    => Nh::_DOMAIN_NAME . '_create_acquisition_form'
                                                                      ]);
                                                     ?>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-dismiss" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
-                                                    <button type="button" class="btn btn-primary" id="modalFormSubmit"
-                                                            data-target="submit_acquisitions_request"><?= __('Acquisition', 'ninja') ?></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-dismiss"
+								data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
+							<button type="button" class="btn btn-primary" id="modalFormSubmit"
+								data-target="submit_acquisitions_request"><?= __('Acquisition', 'ninja') ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
 
                                 } else {
                                     $acquisition = $opportunity_acquisition_obj->get_acquisition_by_user($user_ID, $opportunity->ID);
                                     if ($acquisition) {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= sprintf(__("Your request is %s", 'ninja'), $acquisition->meta_data['acquisitions_stage']) ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= sprintf(__("Your request is %s", 'ninja'), $acquisition->meta_data['acquisitions_stage']) ?>
+			</button>
+			<?php
                                     } else {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= __('Acquisition Request Sent', 'ninja') ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= __('Acquisition Request Sent', 'ninja') ?>
+			</button>
+			<?php
                                     }
                                 }
                             }
@@ -341,23 +345,25 @@
                             if ($unique_type_name === 'regular') {
                                 if ($opportunity_investments_obj->user_can_invest($user_ID, $opportunity->ID)) {
                                     ?>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" id="createInvestBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createInvestModal">
-                                        <?= __('Invest Request', 'ninja') ?>
-                                    </button>
+			<!-- Button trigger modal -->
+			<button type="button" id="createInvestBtn" class="btn btn-primary" data-bs-toggle="modal"
+				data-bs-target="#createInvestModal">
+				<?= __('Invest Request', 'ninja') ?>
+			</button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="createInvestModal" tabindex="-1" aria-labelledby="createInvestLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="createInvestLabel">
-                                                        <?= __('Invest Request', 'ninja') ?>
-                                                    </h1>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
-                                                    <?php
+			<!-- Modal -->
+			<div class="modal fade" id="createInvestModal" tabindex="-1" aria-labelledby="createInvestLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="createInvestLabel">
+								<?= __('Invest Request', 'ninja') ?>
+							</h1>
+						</div>
+						<div class="modal-body">
+							<p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
+							<?php
                                                         echo Nh_Forms::get_instance()
                                                                      ->create_form([
                                                                          'opp_id'                     => [
@@ -388,30 +394,31 @@
                                                                          'id'    => Nh::_DOMAIN_NAME . '_create_investment_form'
                                                                      ]);
                                                     ?>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-dismiss" data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
-                                                    <button type="button" class="btn btn-primary" id="modalFormSubmit"
-                                                            data-target="submit_investments_request"><?= __('Invest Request', 'ninja') ?></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-dismiss"
+								data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
+							<button type="button" class="btn btn-primary" id="modalFormSubmit"
+								data-target="submit_investments_request"><?= __('Invest Request', 'ninja') ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
                                 } else {
                                     $investment = $opportunity_investments_obj->get_investment_by_user($user_ID, $opportunity->ID);
                                     if ($investment) {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= sprintf(__("Your request is %s", 'ninja'), $investment->meta_data['investments_stage']) ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= sprintf(__("Your request is %s", 'ninja'), $investment->meta_data['investments_stage']) ?>
+			</button>
+			<?php
                                     } else {
                                         ?>
-                                        <button type="button" class="btn btn-primary">
-                                            <?= __('Investment Request Sent', 'ninja') ?>
-                                        </button>
-                                        <?php
+			<button type="button" class="btn btn-primary">
+				<?= __('Investment Request Sent', 'ninja') ?>
+			</button>
+			<?php
                                     }
                                 }
                             }
@@ -420,26 +427,26 @@
                         if (Nh_User::get_user_role() === Nh_User::OWNER) {
                             if ($unique_type_name === 'bidding') {
                                 ?>
-                                <span class="text-dark">
-                                    <?= sprintf(_n('%s Bid', '%s Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
-                                </span>
-                                <?php
+			<span class="text-dark">
+				<?= sprintf(_n('%s Bid', '%s Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
+			</span>
+			<?php
                             }
 
                             if ($unique_type_name === 'acquisition') {
                                 ?>
-                                <span class="text-dark">
-                                    <?= sprintf(_n('%s Request', '%s Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
-                                </span>
-                                <?php
+			<span class="text-dark">
+				<?= sprintf(_n('%s Request', '%s Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
+			</span>
+			<?php
                             }
 
                             if ($unique_type_name === 'regular') {
                                 ?>
-                                <span class="text-dark">
-                                    <?= sprintf(_n('%s Request', '%s Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
-                                </span>
-                                <?php
+			<span class="text-dark">
+				<?= sprintf(_n('%s Request', '%s Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
+			</span>
+			<?php
                             }
                         }
 
@@ -455,170 +462,170 @@
                         }
                     }
                 ?>
-            </div>
-        </div>
+		</div>
+	</div>
 
-        <div class="opportunity-details row row-cols-1 row-cols-md-2 g-4 mt-2">
-            <div class="col details-items">
-                <div class="card shadow">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="<?= $opportunity->thumbnail ?>" class="img-fluid rounded-start"
-                                 alt="<?= esc_attr($opportunity->title); ?>">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">
-                                    <?= __('About', 'ninja') ?>
-                                </h5>
-                                <div class="card-text">
-                                    <?= wp_html_excerpt($opportunity->meta_data['short_description'], 140, '...'); ?>
-                                </div>
-                                <div class="card-extra-info">
+	<div class="opportunity-details row row-cols-1 row-cols-md-2 g-4 mt-2">
+		<div class="col details-items">
+			<div class="card shadow">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="<?= $opportunity->thumbnail ?>" class="img-fluid rounded-start"
+							alt="<?= esc_attr($opportunity->title); ?>">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title text-primary">
+								<?= __('About', 'ninja') ?>
+							</h5>
+							<div class="card-text">
+								<?= wp_html_excerpt($opportunity->meta_data['short_description'], 140, '...'); ?>
+							</div>
+							<div class="card-extra-info">
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_date_founded'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Date Founded', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_date_founded'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Date Founded', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['date_founded_group_appearance'] === 1) {
                                                         echo date('F j, Y', strtotime($opportunity->meta_data['date_founded_group_date_founded']));
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_asking_price_in_usd'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('$ Asked Price', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold text-success">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_asking_price_in_usd'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('$ Asked Price', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold text-success">
+										<?php
                                                     if ((int)$opportunity->meta_data['asking_price_in_usd_group_appearance'] === 1) {
                                                         echo '$ ' . $opportunity->meta_data['asking_price_in_usd_group_asking_price_in_usd'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_number_of_customers'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Customers', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_number_of_customers'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Customers', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['number_of_customers_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['number_of_customers_group_number_of_customers'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_business_team_size'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Team size', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_business_team_size'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Team size', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['business_team_size_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['business_team_size_group_business_team_size'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col details-items">
-                <div class="card shadow">
-                    <div class="row g-0">
-                        <div class="col-12">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">
-                                    <?= __('Financial Details', 'ninja') ?>
-                                </h5>
-                                <div class="card-extra-info">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col details-items">
+			<div class="card shadow">
+				<div class="row g-0">
+					<div class="col-12">
+						<div class="card-body">
+							<h5 class="card-title text-primary">
+								<?= __('Financial Details', 'ninja') ?>
+							</h5>
+							<div class="card-extra-info">
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_net_profit'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Net Profit', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold text-success">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_net_profit'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Net Profit', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold text-success">
+										<?php
                                                     if ((int)$opportunity->meta_data['net_profit_group_appearance'] === 1) {
                                                         echo '$ ' . $opportunity->meta_data['net_profit_group_net_profit'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Valuation', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold text-success">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_valuation_in_usd'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Valuation', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold text-success">
+										<?php
                                                     if ((int)$opportunity->meta_data['valuation_in_usd_group_appearance'] === 1) {
                                                         echo '$ ' . $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Stake to be sold', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Stake to be sold', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['stake_to_be_sold_percentage_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['stake_to_be_sold_percentage_group_stake_to_be_sold_percentage'] . '%';
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Conversion rate in $', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Conversion rate in $', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion'];
                                                     } else {
@@ -626,153 +633,153 @@
                                                     }
                                                 ?>
 
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                </div>
-                                <div class="card-extra-info">
+							</div>
+							<div class="card-extra-info">
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_accounting_revenue'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Annual Accounting Revenue', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold text-success">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_accounting_revenue'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Annual Accounting Revenue', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold text-success">
+										<?php
                                                     if ((int)$opportunity->meta_data['annual_accounting_revenue_group_appearance'] === 1) {
                                                         echo '$ ' . $opportunity->meta_data['annual_accounting_revenue_group_annual_accounting_revenue'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Annual Growth Rate', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Annual Growth Rate', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['annual_growth_rate_percentage_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['annual_growth_rate_percentage_group_annual_growth_rate_percentage'] . '%';
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Annual Growth Rate', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold text-success">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_annual_growth_rate'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Annual Growth Rate', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold text-success">
+										<?php
                                                     if ((int)$opportunity->meta_data['annual_growth_rate_group_appearance'] === 1) {
                                                         echo '$ ' . $opportunity->meta_data['annual_growth_rate_group_annual_growth_rate'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col details-items">
-                <div class="card shadow">
-                    <div class="row g-0">
-                        <div class="col-12">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary">
-                                    <?= __('Business Overview', 'ninja') ?>
-                                </h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col details-items">
+			<div class="card shadow">
+				<div class="row g-0">
+					<div class="col-12">
+						<div class="card-body">
+							<h5 class="card-title text-primary">
+								<?= __('Business Overview', 'ninja') ?>
+							</h5>
 
-                                <div class="card-extra-info">
-                                    <div class="card-info-item">
-                                        <small class="text-body-secondary">
-                                            <?= __('Business model', 'ninja') ?>
-                                        </small>
-                                        <p class="card-text fw-bold">
-                                            <?= $business_model ?>
-                                        </p>
-                                    </div>
+							<div class="card-extra-info">
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Business model', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?= $business_model ?>
+									</p>
+								</div>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_tech_stack_this_product_is_built_on'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Tech stack', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_tech_stack_this_product_is_built_on'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Tech stack', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['tech_stack_this_product_is_built_on_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['tech_stack_this_product_is_built_on_group_tech_stack_this_product_is_built_on'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_product_competitors'] === 1) { ?>
-                                        <div class="card-info-item">
-                                            <small class="text-body-secondary">
-                                                <?= __('Product competitors', 'ninja') ?>
-                                            </small>
-                                            <p class="card-text fw-bold">
-                                                <?php
+								<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_product_competitors'] === 1) { ?>
+								<div class="card-info-item">
+									<small class="text-body-secondary">
+										<?= __('Product competitors', 'ninja') ?>
+									</small>
+									<p class="card-text fw-bold">
+										<?php
                                                     if ((int)$opportunity->meta_data['product_competitors_group_appearance'] === 1) {
                                                         echo $opportunity->meta_data['product_competitors_group_product_competitors'];
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }
                                                 ?>
-                                            </p>
-                                        </div>
-                                    <?php } ?>
+									</p>
+								</div>
+								<?php } ?>
 
-                                </div>
+							</div>
 
-                                <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_extra_details'] === 1) { ?>
-                                    <div class="extra-info">
-                                        <?php
+							<?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_extra_details'] === 1) { ?>
+							<div class="extra-info">
+								<?php
                                             if ((int)$opportunity->meta_data['extra_details_group_appearance'] === 1) {
                                                 echo $opportunity->meta_data['extra_details_group_extra_details'];
                                             } else {
                                                 _ex('<span class="">BUSINESS INFORMATION ARE HIDDEN</span>', 'ninja');
                                             }
                                         ?>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col details-items">
-                <?php get_template_part('app/Views/template-parts/cards/faq-help-card', NULL, []); ?>
-            </div>
-        </div>
+							</div>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col details-items">
+			<?php get_template_part('app/Views/template-parts/cards/faq-help-card', NULL, []); ?>
+		</div>
+	</div>
 
-        <div class="related-opportunities mb-4">
-            <h3>
-                <?= __('Related Opportunities', 'ninja'); ?>
-            </h3>
-            <?php
+	<div class="related-opportunities mb-4">
+		<h3>
+			<?= __('Related Opportunities', 'ninja'); ?>
+		</h3>
+		<?php
                 $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
                 $profile_obj = new Nh_Profile();
                 $profile     = $profile_obj->get_by_id((int)$profile_id);
@@ -791,8 +798,8 @@
                     get_template_part('app/Views/template-parts/related-opportunities-slider', NULL, [ 'related_opportunities' => $opportunity->meta_data['related_opportunities'] ]);
                 }
             ?>
-        </div>
-    </main><!-- #main -->
+	</div>
+</main><!-- #main -->
 
 <?php get_template_part('app/Views/js-templates/horizontal-scroll', NULL, [ 'scrollable_container' => '.related-opportunities-slider .overflow-x-auto' ]); ?>
 
