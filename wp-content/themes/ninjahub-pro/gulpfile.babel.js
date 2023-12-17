@@ -28,12 +28,12 @@ const paths = {
     styles: {
         admin: {
             watch: 'app/Models/admin/assets/sass/**/*.scss',
-            src: 'app/Models/admin/assets/sass/style.scss',
+            src: 'app/Models/admin/assets/sass/**/*.scss',
             dest: 'app/Models/admin/css',
         },
         public: {
             watch: 'app/Models/public/assets/sass/**/*.scss',
-            src: 'app/Models/public/assets/sass/theme.scss',
+            src: 'app/Models/public/assets/sass/**/*.scss',
             dest: 'app/Models/public/css',
         }
     },
@@ -97,7 +97,7 @@ gulp.task('publicStyles', () => {
                .pipe(sourcemaps.write('.'))
                .pipe(gulp.dest(paths.styles.public.dest))
                .pipe(notify({
-                   message: '\n\n=================================================\n====== STYLES PUBLIC RTL TASK — COMPLETED!' + ' ======\n=================================================\n',
+                   message: '\n\n=================================================\n====== STYLES PUBLIC TASK — COMPLETED!' + ' ======\n=================================================\n',
                    onLast: true,
                }));
 });
