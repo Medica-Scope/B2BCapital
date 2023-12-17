@@ -8,6 +8,7 @@
  */
 
 use NH\APP\HELPERS\Nh_Forms;
+use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Opportunity;
 use NH\Nh;
@@ -31,47 +32,43 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 ?>
 <div class="blog-item">
 	<div class="card">
-		<div class="card-image">
+		<div class="card-image-top bg-gradient bg-primary">
+			<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-abstract-logo.webp"
+				alt="B2B Capital Abstract Logo" />
 			<a href="<?= $single_post->link ?>" class="img">
-				<img src="<?= $single_post->thumbnail ?>" alt="B2B" />
-				<span class="dots"></span>
+				<h3 class="title">
+					<?= $single_post->title ?>
+				</h3>
 			</a>
 
 
 			<?php if ( ! empty( $user_ID ) ) : ?>
-				<div class="opportunity-item-controllers">
-					<?php
+			<div class="opportunity-item-controllers">
+				<?php
 					echo $args['fav_form'];
 					echo $args['ignore_form'];
 					?>
-				</div>
-				<?php
+			</div>
+			<?php
 			endif;
 			?>
 		</div>
 
-		<div class="title">
-			<a href="<?= $single_post->link ?>">
-				<?= $single_post->title ?>
-			</a>
-		</div>
-
-
 		<?php if ( ! empty( $single_post->taxonomy['category'] ) ) : ?>
-			<div class="category">
-				<small class="text-muted">
-					<?= $single_post->taxonomy['category'][0]->name ?>
-				</small>
-			</div>
+		<div class="category">
+			<small class="text-muted">
+				<?= $single_post->taxonomy['category'][0]->name ?>
+			</small>
+		</div>
 		<?php endif; ?>
 
 
 		<?php if ( ! empty( $opportunity ) ) : ?>
-			<div class="opportunity">
-				<a href="<?= $opportunity->link ?>">
-					<?= $opportunity->name; ?>
-				</a>
-			</div>
+		<div class="opportunity">
+			<a href="<?= $opportunity->link ?>">
+				<?= $opportunity->name; ?>
+			</a>
+		</div>
 		<?php endif; ?>
 
 
