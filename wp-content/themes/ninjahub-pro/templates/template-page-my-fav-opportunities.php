@@ -55,8 +55,8 @@ $user_obj        = Nh_User::get_current_user();
 								$fav_class = 'bbc-star-o';
 							}
 							$args['fav_form']     = Nh_Forms::get_instance()
-								->create_form( [
-									'opp_id'                    => [
+								->create_form( [ 
+									'opp_id'                    => [ 
 										'type'   => 'hidden',
 										'name'   => 'opp_id',
 										'before' => '',
@@ -64,14 +64,14 @@ $user_obj        = Nh_User::get_current_user();
 										'value'  => $opportunity->ID,
 										'order'  => 0
 									],
-									'add_to_fav_nonce'          => [
+									'add_to_fav_nonce'          => [ 
 										'class' => '',
 										'type'  => 'nonce',
 										'name'  => 'add_to_fav_nonce_nonce',
 										'value' => Nh::_DOMAIN_NAME . "_add_to_fav_nonce_form",
 										'order' => 5
 									],
-									'submit_add_to_fav_request' => [
+									'submit_add_to_fav_request' => [ 
 										'class'               => 'btn btn-light bg-white opportunity-to-favorite ninja-add-to-fav',
 										'id'                  => 'submit_add_to_fav_request',
 										'type'                => 'submit',
@@ -79,17 +79,17 @@ $user_obj        = Nh_User::get_current_user();
 										'recaptcha_form_name' => 'frontend_add_to_fav',
 										'order'               => 10
 									],
-								], [
+								], [ 
 									'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 								] );
 							$args['current_page'] = 'my-favorite-opportunities';
 							$args['opportunity']  = $opportunity;
 							?>
-					<div class="col">
-						<?php get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL?>
-						<?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); // KHALED?>
-					</div>
-					<?php
+							<div class="col">
+								<?php get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL?>
+								<?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); // KHALED?>
+							</div>
+							<?php
 						}
 					} else {
 						get_template_part( 'app/Views/opportunities/opportunities', 'empty' );

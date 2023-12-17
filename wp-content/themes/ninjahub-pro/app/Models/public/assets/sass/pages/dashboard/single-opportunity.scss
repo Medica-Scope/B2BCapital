@@ -9,6 +9,7 @@
 			border-radius: 10px;
 			&.faq-help-card {
 				align-items: center;
+				max-height: 240px;
 			}
 		}
 	}
@@ -34,6 +35,11 @@
 	// .ninja_form_container {
 	// 	width: 49%;
 	// }
+
+	.bbc-star,
+	.bbc-star-o {
+		color: $success;
+	}
 }
 .card-body {
 	padding-top: 0;

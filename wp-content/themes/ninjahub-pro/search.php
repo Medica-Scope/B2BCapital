@@ -14,11 +14,11 @@ get_header();
 
 ?>
 <style>
-	#ninja_s {
+	.search-result-page #ninja_s {
 		padding-inline-start: 2.5rem;
 	}
 
-	.ninja-header-search-icon {
+	.search-result-page .ninja-header-search-icon {
 		position: absolute;
 		top: 50%;
 		left: 1rem;
@@ -26,7 +26,7 @@ get_header();
 		transform: translateY(-50%);
 	}
 </style>
-<div class="container container-xxl">
+<div class="search-result-page container container-xxl">
 	<header class="page-header">
 
 		<?= Nh_Forms::get_instance()

@@ -152,14 +152,16 @@
 	margin-bottom: 1rem;
 }
 
-.social-login {
-	display: flex;
+.social-login,
+.nsl-container-buttons {
+	display: flex !important;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 1rem;
 	margin-block: 2rem;
+
 	i[class^='bbc-'],
 	i[class*=' bbc-'] {
 		font-size: 20px;
@@ -192,7 +194,19 @@
 		}
 	}
 }
-
+.social-login {
+	div.nsl-container {
+		width: 100%;
+		.nsl-container-buttons {
+			padding: 0 !important;
+			a {
+				width: fit-content !important;
+				flex: 1 !important;
+				min-width: 170px !important;
+			}
+		}
+	}
+}
 .login-animation {
 	background-color: #ced4d9;
 	padding-block: 3rem;

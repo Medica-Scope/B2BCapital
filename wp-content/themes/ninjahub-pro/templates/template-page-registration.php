@@ -19,10 +19,10 @@ use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Auth;
 use NH\Nh;
 
-$user_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
+$user_type        = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 $user_type_cookie = "user_type";
-if($user_type == Nh_Auth::INVESTOR || $user_type == Nh_Auth::OWNER){
-	setcookie($user_type_cookie, $user_type, time() + (86400 * 30), "/");
+if ( $user_type == Nh_Auth::INVESTOR || $user_type == Nh_Auth::OWNER ) {
+	setcookie( $user_type_cookie, $user_type, time() + ( 86400 * 30 ), "/" );
 }
 get_header();
 
@@ -56,10 +56,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 					}
 					?>
 					<!-- <a href="#" class="bbc-btn medium has-icon google"><i class="bbc-google-plus"></i> Google</a> -->
-					<a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
-						LinkedIn</a>
-					<a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
-						Facebook</a>
+					<!-- <a href="#" class="bbc-btn medium has-icon linkedin"><i class="bbc-linkedin-square"></i>
+						LinkedIn</a> -->
+					<!-- <a href="#" class="bbc-btn medium has-icon facebook"><i class="bbc-facebook-square"></i>
+						Facebook</a> -->
 				</div>
 
 				<div class="or-separator">
@@ -72,13 +72,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 			</div>
 			<?php
 			echo Nh_Forms::get_instance()
-				->create_form( [
-					'custom-html-1'      => [
+				->create_form( [ 
+					'custom-html-1'      => [ 
 						'type'    => 'html',
 						'content' => '<div class="d-flex flex-row flex-wrap col-12">',
 						'order'   => 0,
 					],
-					'first_name'         => [
+					'first_name'         => [ 
 						'class'       => 'form-field col-6 pe-3',
 						'type'        => 'text',
 						'label'       => __( 'First Name', 'ninja' ),
@@ -87,7 +87,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'placeholder' => __( 'Enter your first name', 'ninja' ),
 						'order'       => 5,
 					],
-					'last_name'          => [
+					'last_name'          => [ 
 						'class'       => 'form-field col-6 ps-3',
 						'type'        => 'text',
 						'label'       => __( 'Last Name', 'ninja' ),
@@ -96,7 +96,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'placeholder' => __( 'Enter your last name', 'ninja' ),
 						'order'       => 10,
 					],
-					'phone_number'       => [
+					'phone_number'       => [ 
 						'class'       => 'form-field col-12 col-md-6 pe-md-3',
 						'type'        => 'text',
 						'label'       => __( 'Phone Number', 'ninja' ),
@@ -105,7 +105,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'placeholder' => __( 'Enter your phone number', 'ninja' ),
 						'order'       => 15,
 					],
-					'user_email'         => [
+					'user_email'         => [ 
 						'class'       => 'form-field col-12 col-md-6 ps-md-3',
 						'type'        => 'email',
 						'label'       => __( 'Email', 'ninja' ),
@@ -114,7 +114,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'placeholder' => __( 'Enter your email', 'ninja' ),
 						'order'       => 20,
 					],
-					'user_password'      => [
+					'user_password'      => [ 
 						'class'       => 'form-field col-6 pe-3',
 						'type'        => 'password',
 						'label'       => __( 'Password', 'ninja' ),
@@ -124,7 +124,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . Nh::_DOMAIN_NAME . '_user_password"></i>',
 						'order'       => 25,
 					],
-					'confirm_password'   => [
+					'confirm_password'   => [ 
 						'class'       => 'form-field col-6 ps-3',
 						'type'        => 'password',
 						'label'       => __( 'Confirm Password', 'ninja' ),
@@ -134,13 +134,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'before'      => '<i class="fa-sharp fa-solid fa-eye-slash showPassIcon" data-target ="#' . Nh::_DOMAIN_NAME . '_confirm_password"></i>',
 						'order'       => 30,
 					],
-					'user_type'          => [
+					'user_type'          => [ 
 						'type'           => 'select',
 						'label'          => __( 'User Type', 'ninja' ),
 						'name'           => 'user_type',
 						'required'       => TRUE,
 						'placeholder'    => __( 'Enter your user type', 'ninja' ),
-						'options'        => [
+						'options'        => [ 
 							'owner'    => __( 'I am Owner', 'ninja' ),
 							'investor' => __( 'I am Investor', 'ninja' ),
 						],
@@ -149,13 +149,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'class'          => 'form-field col-6 pe-3',
 						'order'          => 35,
 					],
-					'verification_type'  => [
+					'verification_type'  => [ 
 						'type'           => 'select',
 						'label'          => __( 'Account Verification Type', 'ninja' ),
 						'name'           => 'verification_type',
 						'required'       => TRUE,
 						'placeholder'    => __( 'Enter your verification type', 'ninja' ),
-						'options'        => [
+						'options'        => [ 
 							Nh_User::VERIFICATION_TYPES['email'] => __( 'Email', 'ninja' ),
 							Nh_User::VERIFICATION_TYPES['mobile'] => __( 'Phone Number', 'ninja' ),
 							Nh_User::VERIFICATION_TYPES['whatsapp'] => __( 'Whatsapp', 'ninja' ),
@@ -165,19 +165,19 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'class'          => 'form-field col-6 ps-3',
 						'order'          => 40,
 					],
-					'custom-html-3'      => [
+					'custom-html-3'      => [ 
 						'type'    => 'html',
 						'content' => '</div>',
 						'order'   => 45,
 					],
-					'registration_nonce' => [
+					'registration_nonce' => [ 
 						'class' => '',
 						'type'  => 'nonce',
 						'name'  => 'registration_nonce',
 						'value' => Nh::_DOMAIN_NAME . "_registration_form",
 						'order' => 50
 					],
-					'submit'             => [
+					'submit'             => [ 
 						'class'               => 'form-action bbc-btn btn-primary large apply',
 						'type'                => 'submit',
 						'value'               => __( 'Create Account', 'ninja' ),
@@ -186,7 +186,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-register-landing', Nh
 						'recaptcha_form_name' => 'frontend_registration',
 						'order'               => 55
 					],
-				], [
+				], [ 
 					'class' => Nh::_DOMAIN_NAME . '-registration-form',
 					'id'    => Nh::_DOMAIN_NAME . '_registration_form'
 				] );

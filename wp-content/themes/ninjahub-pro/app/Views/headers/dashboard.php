@@ -27,18 +27,16 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 
 		<?php
 		function get_wp_nav_menu( $theme_location = 'dashboard-guest-menu', $container_class = '' ) {
-			return wp_nav_menu(
-				[ 
-					'theme_location'  => $theme_location,
-					'container_class' => 'bbc-default-menu-container ' . $container_class,
-					'container_id'    => 'bbc-default-menu-container',
-					'menu_class'      => 'navbar-nav',
-					'menu_id'         => 'bbc-default-navbar-nav',
-					'fallback_cb'     => '',
-					'depth'           => 2,
-					'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
-				]
-			);
+			return wp_nav_menu( [ 
+				'theme_location'  => $theme_location,
+				'container_class' => 'bbc-default-menu-container ' . $container_class,
+				'container_id'    => 'bbc-default-menu-container',
+				'menu_class'      => 'navbar-nav',
+				'menu_id'         => 'bbc-default-navbar-nav',
+				'fallback_cb'     => '',
+				'depth'           => 2,
+				'walker'          => new \NH\APP\HELPERS\Nh_Bootstrap_Navwalker(),
+			] );
 		}
 
 		switch ( Nh_User::get_user_role() ) {
@@ -97,13 +95,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 							<li>
 								<a class="dropdown-item"
 									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account' ) ) ) ?>">
-									<?= __( 'My Profile', 'ninja' ) ?>
+									<?= __( 'My Account', 'ninja' ) ?>
 								</a>
 							</li>
 							<li>
 								<a class="dropdown-item"
 									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-opportunities' ) ) ) ?>">
-									<?= __( 'My Opportunities', 'ninja' ) ?>
+									<?= __( 'Opportunities', 'ninja' ) ?>
 								</a>
 							</li>
 
@@ -115,17 +113,20 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 									</a>
 								</li>
 							<?php } ?>
-
-							<li>
-								<a class="dropdown-item"
-									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-widgets' ) ) ) ?>">
-									<?= __( 'My Widgets', 'ninja' ) ?>
-								</a>
-							</li>
+							<?php
+							/*
+																			<li>
+																				<a class="dropdown-item"
+																					href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-widgets' ) ) ) ?>">
+											 <?= __( 'Widgets', 'ninja' ) ?>
+											 </a>
+									 </li>
+									 */
+							?>
 							<li>
 								<a class="dropdown-item"
 									href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-favorite-articles' ) ) ) ?>">
-									<?= __( 'My Articles', 'ninja' ) ?>
+									<?= __( 'Articles', 'ninja' ) ?>
 								</a>
 							</li>
 							<li>
@@ -155,7 +156,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 						alt="B2B Capital Logo" class="img-fluid">
 				</a>
 			</h5>
-			<button type="button" class="btn btn-outline-light" data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+			<button type="button" class="btn btn-outline-light" data-bs-dismiss="offcanvas"
+				aria-label="Close">X</button>
 		</div>
 		<div class="offcanvas-body">
 			<?php

@@ -27,7 +27,7 @@ $stages_string = [
 	'seo-verified'     => __( 'SEO Verified', 'ninja' ),
 	'translated'       => __( 'Translated', 'ninja' ),
 	'publish'          => __( 'Published', 'ninja' ),
-	'draft'          => __( 'Drafted', 'ninja' ),
+	'draft'            => __( 'Drafted', 'ninja' ),
 ];
 
 $opportunity_stage_key = str_replace( ' ', '_', strtolower( $opportunity_stage ) );
@@ -36,12 +36,12 @@ $badge_status_class    = array_key_exists( $opportunity_stage_key, $badge_status
 <div class="my-opportunities-card">
 	<div class="opportunities-card-header row p-0 position-relative">
 
-		<h3 class="col-8">
+		<h3 class="col-md-10">
 			<a href="<?= $opportunity_link ?>">
-				<?= $opportunity_title; ?>
+				<?= mb_strimwidth( $opportunity_title, 0, 80, '...' ); ?>
 			</a>
 		</h3>
-		<div class="col-4 d-flex justify-content-end align-items-start">
+		<div class="col-md-2 d-flex justify-content-end align-items-start">
 			<span class="status badge <?= $badge_status_class; ?>">
 				<?= $stages_string[ $opportunity_stage ]; ?>
 			</span>
@@ -53,8 +53,8 @@ $badge_status_class    = array_key_exists( $opportunity_stage_key, $badge_status
 			<?= date( 'F jS, Y', strtotime( $opportunity_created_date ) ); ?>
 		</small>
 
-		<p class="short-description">
-			<?= wp_html_excerpt( $opportunity_short_description, 140, '...' ); ?>
+		<p class="short-description text-break">
+			<?= mb_strimwidth( $opportunity_short_description, 0, 140, '...' ); ?>
 		</p>
 	</div>
 </div>
