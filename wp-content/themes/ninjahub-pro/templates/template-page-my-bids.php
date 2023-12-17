@@ -33,7 +33,7 @@
     $opportunity_obj = new Nh_Opportunity();
     $bids_obj        = new Nh_Opportunity_Bid();
     $opportunities   = $opportunity_obj->get_profile_opportunities();
-    $bids            = $bids_obj->get_profile_bids();
+    $bids            = $bids_obj->get_profile_bids(true);
 
 ?>
     <main class="my-opportunities">
