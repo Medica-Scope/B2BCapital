@@ -160,7 +160,7 @@ class Nh_Blog extends Nh_Module {
 		$profile     = $profile_obj->get_by_id( (int) $profile_id );
 		$favorites   = [];
 		if ( ! is_wp_error( $profile ) ) {
-			$favorites = is_array( $profile->meta_data['favorite_opportunities'] ) ? $profile->meta_data['favorite_opportunities'] : [];
+			$favorites = is_array( $profile->meta_data['favorite_articles'] ) ? $profile->meta_data['favorite_articles'] : [];
 			$favorites = array_combine( $favorites, $favorites );
 		}
 		return isset( $favorites[ $post_id ] );

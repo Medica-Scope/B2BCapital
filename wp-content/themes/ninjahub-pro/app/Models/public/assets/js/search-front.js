@@ -85,6 +85,12 @@ class NhSearchFront extends NhSearch
             $('.open-search').toggleClass('show')
         });
 
+        $(document).on("click",`.${KEY}-search-icon`,function(e){
+            console.log("clicked");
+            $search.keyword_input.trigger("keyup")
+        });
+
+        
         $search.form.on('submit', function (e) {
             e.preventDefault();
         });
