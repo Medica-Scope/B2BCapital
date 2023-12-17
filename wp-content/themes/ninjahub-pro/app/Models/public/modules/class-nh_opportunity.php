@@ -1222,7 +1222,7 @@ class Nh_Opportunity extends Nh_Module {
 			'meta_query'  => [
 				[
 					'key'     => 'opportunity',
-					'value'   => serialize($id),
+					'value'   => $id,
 					'compare' => 'LIKE',
 				],
 			],
@@ -1253,7 +1253,7 @@ class Nh_Opportunity extends Nh_Module {
 			'meta_query'  => [
 				[
 					'key'     => 'opportunity',
-                    'value'   => serialize($id),
+                    'value'   => $id,
                     'compare' => 'LIKE',
 				],
 			],
@@ -1284,7 +1284,7 @@ class Nh_Opportunity extends Nh_Module {
             'meta_query'  => [
                 [
                     'key'     => 'opportunity',
-                    'value'   => serialize($id),
+                    'value'   => $id,
                     'compare' => 'LIKE',
                 ],
             ],

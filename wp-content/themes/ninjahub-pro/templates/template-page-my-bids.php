@@ -71,7 +71,7 @@
                                             </p>
 
                                             <span class="status">
-                                            <?= $bid->meta_data['bids_stage']; ?>
+                                            <?= $bid->meta_data['bidding_stage']; ?>
                                         </span>
 
                                         </div>
