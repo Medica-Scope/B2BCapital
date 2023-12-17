@@ -68,7 +68,7 @@ if ( $user_ID ) {
 		</div>
 		<div class="container-md content-container">
 			<div class="date">
-				<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
+				<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp" alt="B2B" />
 				<small class="text-muted mr-auto">
 					<?= __( 'on', 'ninja' ) ?>
 					<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
