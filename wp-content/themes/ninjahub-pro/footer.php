@@ -39,7 +39,7 @@ $my_account = [
 	'authentication',
 ];
 
-if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] )) {
+if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) || is_tax('faq-category')) {
 	get_template_part( 'app/Views/footers/dashboard' );
 } elseif ( is_page( $my_account ) ) {
 	get_template_part( 'app/Views/footers/my-account' );

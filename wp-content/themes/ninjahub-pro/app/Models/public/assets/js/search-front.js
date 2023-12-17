@@ -86,7 +86,7 @@ class NhSearchFront extends NhSearch
         });
 
         $(document).on("click",`.${KEY}-search-icon`,function(e){
-            $search.keyword_input.trigger("keyup")
+            $search.keyword_input.trigger(jQuery.Event('keyup', {which: 13}))
         });
 
         

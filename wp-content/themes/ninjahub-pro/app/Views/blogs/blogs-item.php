@@ -73,7 +73,9 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 
 		<div class="date">
-			<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
+			
+			<!-- <img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" /> -->
+			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp" alt="B2B" />
 			<p>
 				<?= __( 'on', 'ninja' ) ?>
 				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
