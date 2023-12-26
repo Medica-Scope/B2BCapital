@@ -86,12 +86,219 @@ $user = Nh_User::get_current_user();
 
 
 		<section class="dashboard-body">
+			<div class="collapse shadow" id="collapseFilter">
+				<div class="filter-con">
+					<?php
+					$business_type_terms = $opportunities_obj->get_taxonomy_terms( 'business-type' );
+					$business_options    = [ "" => __( "All", "ninja" ) ];
+					foreach ( $business_type_terms as $key => $term ) {
+						$status = get_term_meta( $term->term_id, 'status', TRUE );
+						if ( intval( $status ) !== 1 ) {
+							continue;
+						}
+						$business_options[ $term->slug ] = $term->name;
+					}
+					$args = [
+						'post_type'      => 'opportunity',
+						'fields'         => 'ids',
+						'posts_per_page' => 1,
+						'meta_key'       => 'net_profit_group_net_profit',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'DESC',
+					];
+
+					$highest_net_profit = get_posts( $args );
+
+					$args = [
+						'post_type'      => 'opportunity',
+						'fields'         => 'ids',
+						'posts_per_page' => 1,
+						'meta_key'       => 'annual_accounting_revenue_group_annual_accounting_revenue',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'DESC',
+					];
+
+					$highest_annual_accounting_revenue = get_posts( $args );
+
+					$args = [
+						'post_type'      => 'opportunity',
+						'fields'         => 'ids',
+						'posts_per_page' => 1,
+						'meta_key'       => 'annual_growth_rate_group_annual_growth_rate',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'DESC',
+					];
+
+					$highest_annual_growth_rate = get_posts( $args );
+
+					$args = [
+						'post_type'      => 'opportunity',
+						'fields'         => 'ids',
+						'posts_per_page' => 1,
+						'meta_key'       => 'asking_price_in_usd_group_asking_price_in_usd',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'DESC',
+					];
+
+					$highest_asking_price_in_usd = get_posts( $args );
+
+					echo Nh_Forms::get_instance()
+						->create_form( [
+							'filter_fields_container_start'                             => [
+								'type'    => 'html',
+								'content' => '<div class="filter-fields-container">',
+								'before'  => '',
+								'after'   => '',
+								'order'   => 0
+							],
+							'business_type'                                             => [
+								'type'           => 'select',
+								'label'          => 'Business type',
+								'name'           => 'business_type',
+								'before'         => '',
+								'after'          => '',
+								'default_option' => isset( $_GET['business_type'] ) ? $_GET['business_type'] : 'All',
+								'options'        => $business_options,
+								'order'          => 10
+							],
+							'location_group_location'                                   => [
+								'type'           => 'select',
+								'label'          => 'Based in',
+								'name'           => 'location_group_location',
+								'before'         => '',
+								'after'          => '',
+								'value'          => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : '',
+								'default_option' => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : 'All',
+								'options'        => [
+									'All'          => __( "All", "ninja" ),
+									'Egypt'        => __( "Egypt", "ninja" ),
+									'Russia'       => __( "Russia", "ninja" ),
+									'Sheikh Zayed' => __( "Sheikh Zayed", "ninja" ),
+								],
+								'order'          => 20
+							],
+							// 'ttm_gross_revenue'    => [
+							// 	'type'   => 'range',
+							// 	'label'  => 'TTM Gross Revenue',
+							// 	'from'   => 50,
+							// 	'to'     => 500000,
+							// 	'name'   => 'ttm_gross_revenue',
+							// 	'before' => '',
+							// 	'after'  => '',
+							// 	'value'  => isset($_GET['ttm_gross_revenue'])?$_GET['ttm_gross_revenue']:'',
+							// 	'order'  => 20
+							// ],
+							'net_profit_group_net_profit'                               => [
+								'type'   => 'range',
+								'label'  => 'TTM Net Profit',
+								'from'   => 50,
+								'to'     => ( ! empty( $highest_net_profit ) ) ? get_post_meta( $highest_net_profit[0], 'net_profit_group_net_profit', TRUE ) : 500000,
+								'name'   => 'net_profit_group_net_profit',
+								'before' => '',
+								'after'  => '',
+								'value'  => isset( $_GET['net_profit_group_net_profit'] ) ? $_GET['net_profit_group_net_profit'] : '',
+								'order'  => 30
+							],
+							'annual_accounting_revenue_group_annual_accounting_revenue' => [
+								'type'   => 'range',
+								'label'  => 'TTM Accruing Revenue',
+								'from'   => 1,
+								'to'     => ( ! empty( $highest_annual_accounting_revenue ) ) ? get_post_meta( $highest_annual_accounting_revenue[0], 'annual_accounting_revenue_group_annual_accounting_revenue', TRUE ) : 500000,
+								'name'   => 'annual_accounting_revenue_group_annual_accounting_revenue',
+								'before' => '',
+								'after'  => '',
+								'value'  => isset( $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] ) ? $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] : '',
+								'order'  => 40
+							],
+							'annual_growth_rate_group_annual_growth_rate'               => [
+								'type'   => 'range',
+								'label'  => 'Annual Growth Rate',
+								'from'   => 1,
+								'to'     => ( ! empty( $highest_annual_growth_rate ) ) ? get_post_meta( $highest_annual_growth_rate[0], 'annual_growth_rate_group_annual_growth_rate', TRUE ) : 500000,
+								'name'   => 'annual_growth_rate_group_annual_growth_rate',
+								'before' => '',
+								'after'  => '',
+								'value'  => isset( $_GET['annual_growth_rate_group_annual_growth_rate'] ) ? $_GET['annual_growth_rate_group_annual_growth_rate'] : '',
+								'order'  => 50
+							],
+							'asking_price_in_usd_group_asking_price_in_usd'             => [
+								'type'   => 'range',
+								'label'  => 'Asking Price',
+								'from'   => 1,
+								'to'     => ( ! empty( $highest_asking_price_in_usd ) ) ? get_post_meta( $highest_asking_price_in_usd[0], 'asking_price_in_usd_group_asking_price_in_usd', TRUE ) : 500000,
+								'name'   => 'asking_price_in_usd_group_asking_price_in_usd',
+								'before' => '',
+								'after'  => '',
+								'value'  => isset( $_GET['asking_price_in_usd_group_asking_price_in_usd'] ) ? $_GET['asking_price_in_usd_group_asking_price_in_usd'] : '',
+								'order'  => 60
+							],
+							'filter_fields_container_end'                               => [
+								'type'    => 'html',
+								'content' => '</div>',
+								'before'  => '',
+								'after'   => '',
+								'order'   => 70
+							],
+							'filter_actions_container_start'                            => [
+								'type'    => 'html',
+								'content' => '<div class="filter-actions-container">',
+								'before'  => '',
+								'after'   => '',
+								'order'   => 80
+							],
+							'search_input'                                              => [
+								'type'        => 'text',
+								'name'        => 'search',
+								'before'      => '',
+								'after'       => '<i class="bbc-search2"></i>',
+								'placeholder' => 'Find topics by entering terms in the search box',
+								'value'       => isset( $_GET['search'] ) ? $_GET['search'] : '',
+								'order'       => 90
+							],
+							// 'filters_nonce'          => [
+							// 	'class' => '',
+							// 	'type'  => 'nonce',
+							// 	'name'  => 'filters_nonce',
+							// 	'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
+							// 	'order' => 80
+							// ],
+							'submit_filters_request'                                    => [
+								'class'               => 'btn ms-2 filter-opportunities ninja-filter-opportunities text-uppercase fw-bold',
+								'id'                  => 'submit_filters_request',
+								'type'                => 'submit',
+								'value'               => 'Search',
+								'recaptcha_form_name' => 'frontend_filters',
+								'order'               => 100
+							],
+							'reset_filters'                                             => [
+								// 'type'  => 'reset',
+								'type'    => 'html',
+								'content' => '<a class="reset-btn btn btn-link text-dark text-uppercase ms-2 p-0">' . __( "Reset Filters", "ninja" ) . '</a>',
+								// 'class' => 'btn btn-link',
+								// 'id'    => 'reset_filters_request',
+								// 'value' => 'Reset filters',
+								'order'   => 110
+							],
+							'filter_actions_container_end'                              => [
+								'type'    => 'html',
+								'content' => '</div>',
+								'before'  => '',
+								'after'   => '',
+								'order'   => 120
+							],
+						], [
+							'class' => Nh::_DOMAIN_NAME . '-filters-form',
+							'id'    => Nh::_DOMAIN_NAME . '_filters_form',
+						] );
+					?>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-8">
 					<div class="dashboard-opportunity-list-container">
 						<div class="opportunity-list-header row justify-content-between align-items-center">
 							<div class="opportunity-title col-6">
-								<h3 class="fs-3 text-primary">
+								<h3 class="fs-3 text-primary mb-3">
 									<?= __( 'Latest Opportunities', 'ninja' ) ?>
 								</h3>
 								<p>
@@ -105,177 +312,6 @@ $user = Nh_User::get_current_user();
 										<i class="bbc-sliders"></i>
 										<?= __( 'Advanced Filters', 'ninja' ) ?>
 									</button>
-									<div class="collapse" id="collapseFilter">
-										<div class="filter-con">
-											<?php
-											$business_type_terms = $opportunities_obj->get_taxonomy_terms( 'business-type' );
-											$business_options    = [ "" => __( "All", "ninja" ) ];
-											foreach ( $business_type_terms as $key => $term ) {
-												$status = get_term_meta( $term->term_id, 'status', TRUE );
-												if ( intval( $status ) !== 1 ) {
-													continue;
-												}
-												$business_options[ $term->slug ] = $term->name;
-											}
-											$args = [
-												'post_type'      => 'opportunity',
-												'fields'         => 'ids',
-												'posts_per_page' => 1,
-												'meta_key'       => 'net_profit_group_net_profit',
-												'orderby'        => 'meta_value_num',
-												'order'          => 'DESC',
-											];
-
-											$highest_net_profit = get_posts( $args );
-
-											$args = [
-												'post_type'      => 'opportunity',
-												'fields'         => 'ids',
-												'posts_per_page' => 1,
-												'meta_key'       => 'annual_accounting_revenue_group_annual_accounting_revenue',
-												'orderby'        => 'meta_value_num',
-												'order'          => 'DESC',
-											];
-
-											$highest_annual_accounting_revenue = get_posts( $args );
-
-											$args = [
-												'post_type'      => 'opportunity',
-												'fields'         => 'ids',
-												'posts_per_page' => 1,
-												'meta_key'       => 'annual_growth_rate_group_annual_growth_rate',
-												'orderby'        => 'meta_value_num',
-												'order'          => 'DESC',
-											];
-
-											$highest_annual_growth_rate = get_posts( $args );
-
-											$args = [
-												'post_type'      => 'opportunity',
-												'fields'         => 'ids',
-												'posts_per_page' => 1,
-												'meta_key'       => 'asking_price_in_usd_group_asking_price_in_usd',
-												'orderby'        => 'meta_value_num',
-												'order'          => 'DESC',
-											];
-
-											$highest_asking_price_in_usd = get_posts( $args );
-
-
-											echo Nh_Forms::get_instance()
-												->create_form( [
-													'business_type'                                             => [
-														'type'           => 'select',
-														'label'          => 'Business type',
-														'name'           => 'business_type',
-														'before'         => '',
-														'after'          => '',
-														'default_option' => isset( $_GET['business_type'] ) ? $_GET['business_type'] : '',
-														'options'        => $business_options,
-														'order'          => 0
-													],
-													'location_group_location'                                   => [
-														'type'           => 'select',
-														'label'          => 'Based in',
-														'name'           => 'location_group_location',
-														'before'         => '',
-														'after'          => '',
-														'value'          => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : '',
-														'default_option' => isset( $_GET['location_group_location'] ) ? $_GET['location_group_location'] : '',
-														'options'        => [
-															''             => __( "All", "ninja" ),
-															'Egypt'        => __( "Egypt", "ninja" ),
-															'Russia'       => __( "Russia", "ninja" ),
-															'Sheikh Zayed' => __( "Sheikh Zayed", "ninja" ),
-														],
-														'order'          => 10
-													],
-													// 'ttm_gross_revenue'    => [
-													// 	'type'   => 'range',
-													// 	'label'  => 'TTM Gross Revenue',
-													// 	'from'   => 50,
-													// 	'to'     => 500000,
-													// 	'name'   => 'ttm_gross_revenue',
-													// 	'before' => '',
-													// 	'after'  => '',
-													// 	'value'  => isset($_GET['ttm_gross_revenue'])?$_GET['ttm_gross_revenue']:'',
-													// 	'order'  => 20
-													// ],
-													'net_profit_group_net_profit'                               => [
-														'type'   => 'range',
-														'label'  => 'TTM Net Profit',
-														'from'   => 50,
-														'to'     => ( ! empty( $highest_net_profit ) ) ? get_post_meta( $highest_net_profit[0], 'net_profit_group_net_profit', TRUE ) : 500000,
-														'name'   => 'net_profit_group_net_profit',
-														'before' => '',
-														'after'  => '',
-														'value'  => isset( $_GET['net_profit_group_net_profit'] ) ? $_GET['net_profit_group_net_profit'] : '',
-														'order'  => 30
-													],
-													'annual_accounting_revenue_group_annual_accounting_revenue' => [
-														'type'   => 'range',
-														'label'  => 'TTM Accruing Revenue',
-														'from'   => 1,
-														'to'     => ( ! empty( $highest_annual_accounting_revenue ) ) ? get_post_meta( $highest_annual_accounting_revenue[0], 'annual_accounting_revenue_group_annual_accounting_revenue', TRUE ) : 500000,
-														'name'   => 'annual_accounting_revenue_group_annual_accounting_revenue',
-														'before' => '',
-														'after'  => '',
-														'value'  => isset( $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] ) ? $_GET['annual_accounting_revenue_group_annual_accounting_revenue'] : '',
-														'order'  => 40
-													],
-													'annual_growth_rate_group_annual_growth_rate'               => [
-														'type'   => 'range',
-														'label'  => 'Annual Growth Rate',
-														'from'   => 1,
-														'to'     => ( ! empty( $highest_annual_growth_rate ) ) ? get_post_meta( $highest_annual_growth_rate[0], 'annual_growth_rate_group_annual_growth_rate', TRUE ) : 500000,
-														'name'   => 'annual_growth_rate_group_annual_growth_rate',
-														'before' => '',
-														'after'  => '',
-														'value'  => isset( $_GET['annual_growth_rate_group_annual_growth_rate'] ) ? $_GET['annual_growth_rate_group_annual_growth_rate'] : '',
-														'order'  => 50
-													],
-													'asking_price_in_usd_group_asking_price_in_usd'             => [
-														'type'   => 'range',
-														'label'  => 'Asking Price',
-														'from'   => 1,
-														'to'     => ( ! empty( $highest_asking_price_in_usd ) ) ? get_post_meta( $highest_asking_price_in_usd[0], 'asking_price_in_usd_group_asking_price_in_usd', TRUE ) : 500000,
-														'name'   => 'asking_price_in_usd_group_asking_price_in_usd',
-														'before' => '',
-														'after'  => '',
-														'value'  => isset( $_GET['asking_price_in_usd_group_asking_price_in_usd'] ) ? $_GET['asking_price_in_usd_group_asking_price_in_usd'] : '',
-														'order'  => 60
-													],
-													'search_input'                                              => [
-														'type'        => 'text',
-														'name'        => 'search',
-														'before'      => '',
-														'after'       => '<div class="reset"><span class="reset-btn">Reset form</span></div>',
-														'placeholder' => 'Find topics by entering terms in the search box',
-														'value'       => isset( $_GET['search'] ) ? $_GET['search'] : '',
-														'order'       => 70
-													],
-													// 'filters_nonce'          => [
-													// 	'class' => '',
-													// 	'type'  => 'nonce',
-													// 	'name'  => 'filters_nonce',
-													// 	'value' => Nh::_DOMAIN_NAME . "_filters_nonce_form",
-													// 	'order' => 80
-													// ],
-													'submit_filters_request'                                    => [
-														'class'               => 'btn btn-light bg-white filter-opportunities ninja-filter-opportunities',
-														'id'                  => 'submit_filters_request',
-														'type'                => 'submit',
-														'value'               => 'Search',
-														'recaptcha_form_name' => 'frontend_filters',
-														'order'               => 90
-													],
-												], [
-													'class' => Nh::_DOMAIN_NAME . '-filters-form',
-													'id'    => Nh::_DOMAIN_NAME . '_filters_form',
-												] );
-											?>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
