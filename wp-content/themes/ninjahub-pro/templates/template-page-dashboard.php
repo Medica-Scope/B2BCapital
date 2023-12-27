@@ -52,7 +52,7 @@ $user = Nh_User::get_current_user();
 					if ( is_array( $user->profile->meta_data['widget_list'] ) ) {
 						foreach ( $user->profile->meta_data['widget_list'] as $widget ) {
 
-							$language_info = wpml_get_language_information( null, (int) $widget );
+							$language_info = wpml_get_language_information( NULL, (int) $widget );
 
 							if ( is_wp_error( $language_info ) || $language_info['language_code'] !== NH_lANG ) {
 								continue;

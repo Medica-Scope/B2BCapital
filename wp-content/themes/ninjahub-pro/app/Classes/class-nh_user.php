@@ -14,6 +14,7 @@
     use NH\APP\HELPERS\Nh_Mail;
     use NH\APP\MODELS\FRONT\MODULES\Nh_Profile;
     use NH\Nh;
+    use stdClass;
     use WP_Error;
     use WP_User;
 
@@ -215,39 +216,6 @@
         }
 
         /**
-         * Magic method to retrieve the value of a property.
-         *
-         * @param string $name The name of the property.
-         *
-         * @return mixed The value of the property if it exists, or FALSE otherwise.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        public function __get($name)
-        {
-            return property_exists($this, $name) ? $this->{$name} : FALSE;
-        }
-
-        /**
-         * Magic method to set the value of a property.
-         *
-         * @param string $name The name of the property.
-         * @param mixed  $value The value to set.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        public function __set($name, $value)
-        {
-            $this->{$name} = sanitize_text_field($value);
-        }
-
-        /**
          * Retrieves the instance of the Nh_User class.
          *
          * @return Nh_User The instance of the Nh_User class.
@@ -324,6 +292,218 @@
         {
             global $current_user;
             return self::get_user($current_user);
+        }
+
+        /**
+         * Get user as a Nh User object
+         *
+         * @param \WP_User $user The WP_User object
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @return \NH\APP\CLASSES\Nh_User The Nh User object
+         */
+        public static function get_user(WP_User $user): Nh_User
+        {
+            $class          = __CLASS__;
+            self::$instance = new $class();
+
+            return self::$instance->convert($user);
+        }
+
+        /**
+         * Convert the default WP user object to a Nh User object
+         *
+         * @param \WP_User $user The WP_User object to convert
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @return \NH\APP\CLASSES\Nh_User The converted Nh User object
+         */
+        private function convert(WP_User $user): Nh_User
+        {
+            $class    = __CLASS__;
+            $new_user = new $class(); // Create a new Nh User object
+
+            $new_user->ID             = $user->ID;
+            $new_user->username       = $user->data->user_login;
+            $new_user->password       = $user->data->user_pass;
+            $new_user->email          = $user->data->user_email;
+            $new_user->first_name     = $this->first_name;
+            $new_user->last_name      = $this->last_name;
+            $new_user->nickname       = $this->nickname;
+            $new_user->display_name   = $user->data->display_name;
+            $new_user->role           = (!empty($user->roles) && is_array($user->roles)) ? reset($user->roles) : '';
+            $new_user->status         = $user->data->user_status;
+            $new_user->registered     = $user->data->user_registered;
+            $new_user->activation_key = $user->data->user_activation_key;
+
+            $new_user->user_meta = array_merge($new_user->user_meta, self::USER_DEFAULTS);
+
+            foreach ($new_user->user_meta as $key => $meta) {
+                $new_user->user_meta[$key] = get_user_meta($user->ID, $key, TRUE);
+            }
+
+            $new_user->first_name = $new_user->user_meta['first_name'];
+            $new_user->last_name  = $new_user->user_meta['last_name'];
+            $new_user->nickname   = $new_user->user_meta['nickname'];
+            $new_user->avatar     = $new_user->get_avatar();
+
+            if (class_exists('\NH\APP\MODELS\FRONT\MODULES\Nh_Profile')) {
+                $profile_obj       = new Nh_Profile();
+                $new_user->profile = $profile_obj;
+                $profile           = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                if (!is_wp_error($profile)) {
+                    $new_user->profile = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
+                }
+            }
+
+            return $new_user;
+        }
+
+        /**
+         * Returns the avatar URL for the user.
+         *
+         * @return string The URL of the avatar image.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         */
+        private function get_avatar(): string
+        {
+            $url = wp_get_attachment_image_url($this->user_meta['avatar_id'], 'thumbnail');
+            return empty($url) ? Nh_Hooks::PATHS['public']['img'] . '/default-profile.webp' : $url;
+        }
+
+        /**
+         * Check the OTP code validity
+         *
+         * @param array  $data The data containing the OTP code and type
+         * @param string $type The type of OTP code (authentication or verification)
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @return bool|\WP_Error Returns true if the OTP code is valid, otherwise returns a WP_Error object
+         */
+        public static function check_otp_code(array $data, string $type): bool|WP_Error
+        {
+            $error             = new WP_Error(); // Create a new WP_Error object
+            $current_timestamp = time(); // Get the current Unix timestamp
+            $expire_date       = $type === 'authentication' ? $data['authentication_expire_date'] : $data['verification_expire_date'];
+
+            //TODO:: REMOVE ON PRODUCTION
+            //            if (Nh::_ENVIRONMENT === 'development') {
+            //            if ($data['incoming_code'] == 2468) {
+            //                return TRUE;
+            //            }
+            //            }
+            //TODO:: REMOVE ON PRODUCTION
+
+
+            if ($expire_date >= $current_timestamp) {
+                if ($data['incoming_code'] === $data['current_code']) {
+                    return TRUE; // The OTP code is valid
+                } else {
+                    // The OTP code is invalid
+                    $error->add('invalid_key', __("Your key is invalid!.", 'ninja'), [
+                        'status' => FALSE
+                    ]);
+                    return $error; // Return the WP_Error object
+                }
+            } else {
+                // The OTP code has expired
+                $error->add('expire_date', __("Your key is expired.", 'ninja'), [
+                    'status' => FALSE
+                ]);
+                return $error; // Return the WP_Error object
+            }
+        }
+
+        /**
+         * Description...
+         *
+         * @param array $role
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package b2b
+         * @author Mustafa Shaaban
+         * @return array
+         */
+        public static function get_users_by_role(array $role = []): array
+        {
+            $args = [
+                'role__in' => $role,
+                'orderby'  => 'user_nicename',
+                'order'    => 'ASC'
+            ];
+
+            $users = get_users($args);
+
+            $nh_users = [];
+
+            if ($users && !is_wp_error($users)) {
+                foreach ($users as $user) {
+                    $nh_users[] = self::get_user($user);
+                }
+            }
+
+            return $nh_users;
+
+        }
+
+        /**
+         * Description...
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @return void
+         */
+        public static function logout()
+        {
+
+        }
+
+        /**
+         * Magic method to retrieve the value of a property.
+         *
+         * @param string $name The name of the property.
+         *
+         * @return mixed The value of the property if it exists, or FALSE otherwise.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         */
+        public function __get($name)
+        {
+            return property_exists($this, $name) ? $this->{$name} : FALSE;
+        }
+
+        /**
+         * Magic method to set the value of a property.
+         *
+         * @param string $name The name of the property.
+         * @param mixed  $value The value to set.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         */
+        public function __set($name, $value)
+        {
+            $this->{$name} = sanitize_text_field($value);
         }
 
         /**
@@ -422,72 +602,6 @@
             }
 
             do_action(Nh::_DOMAIN_NAME . "_after_create_user", $this); // Trigger an action after user creation.
-
-            return $this; // Return the current user object.
-        }
-
-        /**
-         * Updates the user's information.
-         *
-         * @return \NH\APP\CLASSES\Nh_User|\WP_Error The updated user object or an error object.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        public function update(): Nh_User|WP_Error
-        {
-            global $current_user;
-
-            $error = new WP_Error(); // Create a new WordPress error object.
-
-            if (strtolower($current_user->data->user_login) !== strtolower($this->username)) {
-                // Check if the current user's username is different from the username being updated.
-
-                if (username_exists($this->username)) { // Check if the new username already exists.
-                    $error->add('username_exists', __('Sorry, this phone number already exists!', 'ninja'), [
-                        'status'  => FALSE,
-                        'details' => [ 'username' => $this->username ]
-                    ]); // Add an error message to the error object.
-                    return $error; // Return the error object.
-                }
-
-                global $wpdb;
-
-                // Update the user's username in the WordPress database using $wpdb.
-                $wpdb->update($wpdb->users, [ 'user_login' => $this->username ], [ 'user_login' => $current_user->data->user_login ]);
-            }
-
-            $user_id = wp_update_user([
-                'ID'           => $this->ID,
-                'user_email'   => $this->email,
-                'first_name'   => ucfirst(strtolower($this->first_name)),
-                'last_name'    => ucfirst(strtolower($this->last_name)),
-                'display_name' => ucfirst(strtolower($this->first_name)) . ' ' . ucfirst(strtolower($this->last_name)),
-                'role'         => $this->role
-            ]); // Update the user's information using wp_update_user function.
-
-            if (is_wp_error($user_id)) { // Check if there was an error during user update.
-                return $user_id; // Return the error object.
-            }
-
-            if (is_array($this->avatar) && !empty($this->avatar)) {
-                // Check if the avatar property is an array and not empty.
-
-                $avatar = $this->set_avatar(); // Set the avatar for the user.
-
-                if ($avatar->has_errors()) { // Check if there were errors setting the avatar.
-                    return $avatar;
-                }
-            }
-
-            $this->profile->title = $this->display_name; // Update the profile title.
-            $this->profile->update(); // Update the profile information.
-
-            foreach ($this->user_meta as $key => $value) {
-                update_user_meta($this->ID, $key, $value); // Update the user meta data.
-            }
 
             return $this; // Return the current user object.
         }
@@ -608,6 +722,364 @@
             }
 
             return FALSE;
+        }
+
+        /**
+         * Sets up the verification process based on the given type.
+         *
+         * @param string $type The type of verification process.
+         *
+         * @return \stdClass|\WP_Error|bool The WP_Error object or a boolean value indicating the success of the verification setup.
+         *
+         * @throws \Exception
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         */
+        public function setup_verification(string $type): stdClass|WP_Error|bool
+        {
+            $error = new WP_Error(); // Create a new WordPress error object.
+
+            if ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['mobile']) {
+                // If the verification type is mobile, send the phone OTP code.
+                $verification = $this->send_phone_otp_code($type);
+
+                if (is_wp_error($verification)) {
+                    // If sending the phone OTP code resulted in an error, add the error to the error object and return it.
+                    $error->add('mobile_error', __($verification->get_error_message(), 'ninja'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'e' => '',
+                        ]
+                    ]);
+                    return $error;
+                }
+            } elseif ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['whatsapp']) {
+                // If the verification type is WhatsApp, send the WhatsApp OTP code.
+                $verification = $this->send_whatsapp_otp_code($type);
+
+                if (is_wp_error($verification)) {
+                    // If sending the WhatsApp OTP code resulted in an error, add the error to the error object and return it.
+                    $error->add('whatsapp_error', __($verification->get_error_message(), 'ninja'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'e' => '',
+                        ]
+                    ]);
+                    return $error;
+                }
+            } else {
+                // For other verification types, send the email OTP code.
+                $verification = $this->send_email_otp_code($type);
+
+                if (!$verification) {
+                    // If sending the email OTP code failed, add the error to the error object and return it.
+                    $error->add('email_error', __("The verification code didn't send!", 'ninja'), [
+                        'status'  => FALSE,
+                        'details' => [
+                            'email_error' => 'email error',
+                        ]
+                    ]);
+                    return $error;
+                }
+            }
+
+            return $verification; // Return the verification result.
+        }
+
+        /**
+         * Sends the phone OTP code.
+         *
+         * @param string $type The type of OTP code.
+         * @param string $to The receiver number.
+         *
+         * @return \WP_Error|bool The WP_Error object or a boolean value indicating the success of sending the OTP code.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @throws \Exception
+         */
+        public function send_phone_otp_code(string $type, string $to = ''): stdClass|WP_Error|bool
+        {
+            $error        = new WP_Error(); // Create a new WordPress error object.
+            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
+            $to           = empty($to) ? $this->username : $to;
+
+            if ($type === 'authentication') {
+                // If the type is authentication, send the authentication code via phone.
+                $send = $this->send_by_twilio([
+                    'to'   => '+' . $to,
+                    'from' => '+12109608261',
+                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
+                ]);
+
+                if (!is_wp_error($send)) {
+                    // If sending the code was successful, update the user meta data.
+                    $this->set_user_meta('account_authentication_status', 0, TRUE);
+                    $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                    $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
+                }
+            } else {
+                // If the type is verification, send the verification code via phone.
+                $send = $this->send_by_twilio([
+                    'to'   => '+' . $to,
+                    'from' => '+12109608261',
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
+                ]);
+
+                if (!is_wp_error($send)) {
+                    // If sending the code was successful, update the user meta data.
+                    $this->set_user_meta('account_verification_status', 0, TRUE);
+                    $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                    $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+                }
+            }
+
+            return $send; // Return the result of sending the OTP code.
+        }
+
+        /**
+         * Sends the message using Twilio.
+         *
+         * @param array $data The data required to send the message.
+         *
+         * @return \stdClass|\WP_Error The stdClass object or WP_Error object indicating the success of sending the message.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @throws \Exception
+         */
+        public function send_by_twilio(array $data): stdClass|WP_Error
+        {
+            $error      = new WP_Error(); // Create a new WordPress error object.
+            $account_ID = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
+            $username   = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
+            $password   = '86e8940f1af42f710f89ddcb20c22146';
+            $to         = $data['to'];
+            $from       = $data['from'];
+            $body       = $data['body'];
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/$account_ID/Messages.json");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username" . ':' . "$password");
+
+            $data = [
+                'To'   => $to,
+                'From' => $from,
+                'Body' => $body
+            ];
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+            $result = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                // If there was a cURL error, add the error to the error object and return it.
+                $error->add('sending_error', __("Response Error!", 'ninja'), [
+                    'status'  => FALSE,
+                    'details' => [
+                        'details' => 'Error:' . curl_error($ch)
+                    ]
+                ]);
+                return $error;
+            }
+
+            curl_close($ch);
+
+            $response = json_decode($result);
+
+            if ($response->status === 400) {
+                // If the response status is 400, add the error to the error object and return it.
+                $error->add('sending_error', __("Response Error!", 'ninja'), [
+                    'status'  => FALSE,
+                    'details' => [
+                        'details' => $response
+                    ]
+                ]);
+                return $error;
+            }
+
+            return $response; // Return the response object.
+        }
+
+        /**
+         * Sends the WhatsApp OTP code.
+         *
+         * @param string $type The type of OTP code.
+         * @param string $to The receiver number.
+         *
+         * @return \stdClass|\WP_Error The stdClass object or WP_Error object indicating the success of sending the OTP code.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         * @throws \Exception
+         */
+        public function send_whatsapp_otp_code(string $type, string $to = ''): stdClass|WP_Error|bool
+        {
+            $error        = new WP_Error(); // Create a new WordPress error object.
+            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
+            $to           = empty($to) ? $this->username : $to;
+
+            if ($type === 'authentication') {
+                // If the type is authentication, send the authentication code via WhatsApp.
+                $send = $this->send_by_twilio([
+                    'to'   => 'whatsapp:+' . $to,
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
+                ]);
+
+                if (!is_wp_error($send)) {
+                    // If sending the code was successful, update the user metadata.
+                    $this->set_user_meta('account_authentication_status', 0, TRUE);
+                    $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                    $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
+                }
+            } else {
+                // If the type is verification, send the verification code via WhatsApp.
+                $send = $this->send_by_twilio([
+                    'to'   => 'whatsapp:+' . $to,
+                    'from' => 'whatsapp:+14155238886',
+                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
+                ]);
+
+                if (!is_wp_error($send)) {
+                    // If sending the code was successful, update the user metadata.
+                    $this->set_user_meta('account_verification_status', 0, TRUE);
+                    $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                    $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+                }
+            }
+
+            return $send; // Return the result of sending the OTP code.
+        }
+
+        /**
+         * Sends the email OTP code.
+         *
+         * @param string $type The type of OTP code.
+         *
+         * @return bool The boolean value indicating the success of sending the OTP code.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @throws \Exception
+         */
+        public function send_email_otp_code(string $type): bool
+        {
+            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
+
+            if ($type === 'authentication') {
+                // If the type is authentication, update the user meta data and send the authentication email.
+                $this->set_user_meta('account_authentication_status', 0, TRUE);
+                $this->set_user_meta('authentication_key', $randomNumber, TRUE);
+                $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
+
+                $email = Nh_Mail::init()
+                                ->to($this->email)
+                                ->subject('Welcome to B2b - Please Authenticate Your Email')
+                                ->template('account-authentication/body', [
+                                    'data' => [
+                                        'user'   => $this,
+                                        'digits' => $randomNumber
+                                    ]
+                                ])
+                                ->send();
+            } else {
+                // If the type is verification, update the user meta data and send the verification email.
+                $this->set_user_meta('account_verification_status', 0, TRUE);
+                $this->set_user_meta('verification_key', $randomNumber, TRUE);
+                $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
+
+                $email = Nh_Mail::init()
+                                ->to($this->email)
+                                ->subject('Welcome to B2b - Please Verify Your Email')
+                                ->template('account-verification/body', [
+                                    'data' => [
+                                        'user'   => $this,
+                                        'digits' => $randomNumber
+                                    ]
+                                ])
+                                ->send();
+            }
+
+            return $email; // Return the result of sending the email.
+        }
+
+        /**
+         * Updates the user's information.
+         *
+         * @return \NH\APP\CLASSES\Nh_User|\WP_Error The updated user object or an error object.
+         *
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         * @author Mustafa Shaaban
+         */
+        public function update(): Nh_User|WP_Error
+        {
+            global $current_user;
+
+            $error = new WP_Error(); // Create a new WordPress error object.
+
+            if (strtolower($current_user->data->user_login) !== strtolower($this->username)) {
+                // Check if the current user's username is different from the username being updated.
+
+                if (username_exists($this->username)) { // Check if the new username already exists.
+                    $error->add('username_exists', __('Sorry, this phone number already exists!', 'ninja'), [
+                        'status'  => FALSE,
+                        'details' => [ 'username' => $this->username ]
+                    ]); // Add an error message to the error object.
+                    return $error; // Return the error object.
+                }
+
+                global $wpdb;
+
+                // Update the user's username in the WordPress database using $wpdb.
+                $wpdb->update($wpdb->users, [ 'user_login' => $this->username ], [ 'user_login' => $current_user->data->user_login ]);
+            }
+
+            $user_id = wp_update_user([
+                'ID'           => $this->ID,
+                'user_email'   => $this->email,
+                'first_name'   => ucfirst(strtolower($this->first_name)),
+                'last_name'    => ucfirst(strtolower($this->last_name)),
+                'display_name' => ucfirst(strtolower($this->first_name)) . ' ' . ucfirst(strtolower($this->last_name)),
+                'role'         => $this->role
+            ]); // Update the user's information using wp_update_user function.
+
+            if (is_wp_error($user_id)) { // Check if there was an error during user update.
+                return $user_id; // Return the error object.
+            }
+
+            if (is_array($this->avatar) && !empty($this->avatar)) {
+                // Check if the avatar property is an array and not empty.
+
+                $avatar = $this->set_avatar(); // Set the avatar for the user.
+
+                if ($avatar->has_errors()) { // Check if there were errors setting the avatar.
+                    return $avatar;
+                }
+            }
+
+            $this->profile->title = $this->display_name; // Update the profile title.
+            $this->profile->update(); // Update the profile information.
+
+            foreach ($this->user_meta as $key => $value) {
+                update_user_meta($this->ID, $key, $value); // Update the user meta data.
+            }
+
+            return $this; // Return the current user object.
         }
 
         /**
@@ -757,7 +1229,6 @@
             }
         }
 
-
         /**
          * Check the reset code validity
          *
@@ -828,71 +1299,6 @@
         }
 
         /**
-         * Check the OTP code validity
-         *
-         * @param array  $data The data containing the OTP code and type
-         * @param string $type The type of OTP code (authentication or verification)
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @return bool|\WP_Error Returns true if the OTP code is valid, otherwise returns a WP_Error object
-         */
-        public static function check_otp_code(array $data, string $type): bool|WP_Error
-        {
-            $error             = new WP_Error(); // Create a new WP_Error object
-            $current_timestamp = time(); // Get the current Unix timestamp
-            $expire_date       = $type === 'authentication' ? $data['authentication_expire_date'] : $data['verification_expire_date'];
-
-            //TODO:: REMOVE ON PRODUCTION
-            //            if (Nh::_ENVIRONMENT === 'development') {
-//            if ($data['incoming_code'] == 2468) {
-//                return TRUE;
-//            }
-            //            }
-            //TODO:: REMOVE ON PRODUCTION
-
-
-            if ($expire_date >= $current_timestamp) {
-                if ($data['incoming_code'] === $data['current_code']) {
-                    return TRUE; // The OTP code is valid
-                } else {
-                    // The OTP code is invalid
-                    $error->add('invalid_key', __("Your key is invalid!.", 'ninja'), [
-                        'status' => FALSE
-                    ]);
-                    return $error; // Return the WP_Error object
-                }
-            } else {
-                // The OTP code has expired
-                $error->add('expire_date', __("Your key is expired.", 'ninja'), [
-                    'status' => FALSE
-                ]);
-                return $error; // Return the WP_Error object
-            }
-        }
-
-        /**
-         * Get user as a Nh User object
-         *
-         * @param \WP_User $user The WP_User object
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @return \NH\APP\CLASSES\Nh_User The Nh User object
-         */
-        public static function get_user(WP_User $user): Nh_User
-        {
-            $class          = __CLASS__;
-            self::$instance = new $class();
-
-            return self::$instance->convert($user);
-        }
-
-        /**
          * Get user by a specific field and value
          *
          * @param string $field The field to search by (e.g., 'ID', 'login', 'email')
@@ -922,126 +1328,6 @@
                 ]);
                 return $error; // Return the WP_Error object
             }
-        }
-
-        /**
-         * Description...
-         *
-         * @param array $role
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package b2b
-         * @author Mustafa Shaaban
-         * @return array
-         */
-        public static function get_users_by_role(array $role = []): array
-        {
-            $args = [
-                'role__in' => $role,
-                'orderby'  => 'user_nicename',
-                'order'    => 'ASC'
-            ];
-
-            $users = get_users($args);
-
-            $nh_users = [];
-
-            if ($users && !is_wp_error($users)) {
-                foreach ($users as $user) {
-                    $nh_users[] = self::get_user($user);
-                }
-            }
-
-            return $nh_users;
-
-        }
-
-        /**
-         * Convert the default WP user object to a Nh User object
-         *
-         * @param \WP_User $user The WP_User object to convert
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @return \NH\APP\CLASSES\Nh_User The converted Nh User object
-         */
-        private function convert(WP_User $user): Nh_User
-        {
-            $class    = __CLASS__;
-            $new_user = new $class(); // Create a new Nh User object
-
-            $new_user->ID             = $user->ID;
-            $new_user->username       = $user->data->user_login;
-            $new_user->password       = $user->data->user_pass;
-            $new_user->email          = $user->data->user_email;
-            $new_user->first_name     = $this->first_name;
-            $new_user->last_name      = $this->last_name;
-            $new_user->nickname       = $this->nickname;
-            $new_user->display_name   = $user->data->display_name;
-            $new_user->role           = (!empty($user->roles) && is_array($user->roles)) ? reset($user->roles) : '';
-            $new_user->status         = $user->data->user_status;
-            $new_user->registered     = $user->data->user_registered;
-            $new_user->activation_key = $user->data->user_activation_key;
-
-            $new_user->user_meta = array_merge($new_user->user_meta, self::USER_DEFAULTS);
-
-            foreach ($new_user->user_meta as $key => $meta) {
-                $new_user->user_meta[$key] = get_user_meta($user->ID, $key, TRUE);
-            }
-
-            $new_user->first_name = $new_user->user_meta['first_name'];
-            $new_user->last_name  = $new_user->user_meta['last_name'];
-            $new_user->nickname   = $new_user->user_meta['nickname'];
-            $new_user->avatar     = $new_user->get_avatar();
-
-            if (class_exists('\NH\APP\MODELS\FRONT\MODULES\Nh_Profile')) {
-                $profile_obj       = new Nh_Profile();
-                $new_user->profile = $profile_obj;
-                $profile           = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
-                if (!is_wp_error($profile)) {
-                    $new_user->profile = $profile_obj->get_by_id((int)$new_user->user_meta['profile_id']);
-                }
-            }
-
-            return $new_user;
-        }
-
-        /**
-         * Assign WP_User properties to Nh_User
-         *
-         * @param \WP_User $user The WP_User object to assign properties from
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @return void
-         */
-        private function assign(WP_User $user): void
-        {
-            $this->ID             = $user->ID;
-            $this->username       = $user->data->user_login;
-            $this->password       = $user->data->user_pass;
-            $this->email          = $user->data->user_email;
-            $this->display_name   = $user->data->display_name;
-            $this->role           = $user->roles[0];
-            $this->status         = $user->data->user_status;
-            $this->registered     = $user->data->user_registered;
-            $this->activation_key = $user->data->user_activation_key;
-
-            $this->user_meta = array_merge($this->user_meta, self::USER_DEFAULTS);
-
-            foreach ($this->user_meta as $key => $meta) {
-                $this->user_meta[$key] = get_user_meta($user->ID, $key, TRUE);
-            }
-
-            $this->first_name = $this->user_meta['first_name'];
-            $this->last_name  = $this->user_meta['last_name'];
-            $this->nickname   = $this->user_meta['nickname'];
-            $this->avatar     = $this->get_avatar();
         }
 
         /**
@@ -1189,326 +1475,39 @@
             return $this;
         }
 
-
         /**
-         * Description...
+         * Assign WP_User properties to Nh_User
+         *
+         * @param \WP_User $user The WP_User object to assign properties from
+         *
          * @version 1.0
          * @since 1.0.0
          * @package NinjaHub
          * @author Mustafa Shaaban
          * @return void
          */
-        public static function logout()
+        private function assign(WP_User $user): void
         {
+            $this->ID             = $user->ID;
+            $this->username       = $user->data->user_login;
+            $this->password       = $user->data->user_pass;
+            $this->email          = $user->data->user_email;
+            $this->display_name   = $user->data->display_name;
+            $this->role           = $user->roles[0];
+            $this->status         = $user->data->user_status;
+            $this->registered     = $user->data->user_registered;
+            $this->activation_key = $user->data->user_activation_key;
 
-        }
+            $this->user_meta = array_merge($this->user_meta, self::USER_DEFAULTS);
 
-        /**
-         * Sets up the verification process based on the given type.
-         *
-         * @param string $type The type of verification process.
-         *
-         * @return \stdClass|\WP_Error|bool The WP_Error object or a boolean value indicating the success of the verification setup.
-         *
-         * @throws \Exception
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        public function setup_verification(string $type): \stdClass|WP_Error|bool
-        {
-            $error = new WP_Error(); // Create a new WordPress error object.
-
-            if ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['mobile']) {
-                // If the verification type is mobile, send the phone OTP code.
-                $verification = $this->send_phone_otp_code($type);
-
-                if (is_wp_error($verification)) {
-                    // If sending the phone OTP code resulted in an error, add the error to the error object and return it.
-                    $error->add('mobile_error', __($verification->get_error_message(), 'ninja'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'e' => '',
-                        ]
-                    ]);
-                    return $error;
-                }
-            } elseif ($this->user_meta['verification_type'] === self::VERIFICATION_TYPES['whatsapp']) {
-                // If the verification type is WhatsApp, send the WhatsApp OTP code.
-                $verification = $this->send_whatsapp_otp_code($type);
-
-                if (is_wp_error($verification)) {
-                    // If sending the WhatsApp OTP code resulted in an error, add the error to the error object and return it.
-                    $error->add('whatsapp_error', __($verification->get_error_message(), 'ninja'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'e' => '',
-                        ]
-                    ]);
-                    return $error;
-                }
-            } else {
-                // For other verification types, send the email OTP code.
-                $verification = $this->send_email_otp_code($type);
-
-                if (!$verification) {
-                    // If sending the email OTP code failed, add the error to the error object and return it.
-                    $error->add('email_error', __("The verification code didn't send!", 'ninja'), [
-                        'status'  => FALSE,
-                        'details' => [
-                            'email_error' => 'email error',
-                        ]
-                    ]);
-                    return $error;
-                }
+            foreach ($this->user_meta as $key => $meta) {
+                $this->user_meta[$key] = get_user_meta($user->ID, $key, TRUE);
             }
 
-            return $verification; // Return the verification result.
-        }
-
-        /**
-         * Sends the phone OTP code.
-         *
-         * @param string $type The type of OTP code.
-         * @param string $to The receiver number.
-         *
-         * @return \WP_Error|bool The WP_Error object or a boolean value indicating the success of sending the OTP code.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @throws \Exception
-         */
-        public function send_phone_otp_code(string $type, string $to = ''): \stdClass|WP_Error|bool
-        {
-            $error        = new WP_Error(); // Create a new WordPress error object.
-            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
-            $to           = empty($to) ? $this->username : $to;
-
-            if ($type === 'authentication') {
-                // If the type is authentication, send the authentication code via phone.
-                $send = $this->send_by_twilio([
-                    'to'   => '+' . $to,
-                    'from' => '+12109608261',
-                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
-                ]);
-
-                if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user meta data.
-                    $this->set_user_meta('account_authentication_status', 0, TRUE);
-                    $this->set_user_meta('authentication_key', $randomNumber, TRUE);
-                    $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
-                }
-            } else {
-                // If the type is verification, send the verification code via phone.
-                $send = $this->send_by_twilio([
-                    'to'   => '+' . $to,
-                    'from' => '+12109608261',
-                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
-                ]);
-
-                if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user meta data.
-                    $this->set_user_meta('account_verification_status', 0, TRUE);
-                    $this->set_user_meta('verification_key', $randomNumber, TRUE);
-                    $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
-                }
-            }
-
-            return $send; // Return the result of sending the OTP code.
-        }
-
-        /**
-         * Sends the WhatsApp OTP code.
-         *
-         * @param string $type The type of OTP code.
-         * @param string $to The receiver number.
-         *
-         * @return \stdClass|\WP_Error The stdClass object or WP_Error object indicating the success of sending the OTP code.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         * @throws \Exception
-         */
-        public function send_whatsapp_otp_code(string $type, string $to = ''): \stdClass|\WP_Error|bool
-        {
-            $error        = new WP_Error(); // Create a new WordPress error object.
-            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
-            $to           = empty($to) ? $this->username : $to;
-
-            if ($type === 'authentication') {
-                // If the type is authentication, send the authentication code via WhatsApp.
-                $send = $this->send_by_twilio([
-                    'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+14155238886',
-                    'body' => sprintf(__('Your authentication code for B2b is %s', 'ninja'), $randomNumber)
-                ]);
-
-                if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user metadata.
-                    $this->set_user_meta('account_authentication_status', 0, TRUE);
-                    $this->set_user_meta('authentication_key', $randomNumber, TRUE);
-                    $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
-                }
-            } else {
-                // If the type is verification, send the verification code via WhatsApp.
-                $send = $this->send_by_twilio([
-                    'to'   => 'whatsapp:+' . $to,
-                    'from' => 'whatsapp:+14155238886',
-                    'body' => sprintf(__('Your verification code for B2b is %s', 'ninja'), $randomNumber)
-                ]);
-
-                if (!is_wp_error($send)) {
-                    // If sending the code was successful, update the user metadata.
-                    $this->set_user_meta('account_verification_status', 0, TRUE);
-                    $this->set_user_meta('verification_key', $randomNumber, TRUE);
-                    $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
-                }
-            }
-
-            return $send; // Return the result of sending the OTP code.
-        }
-
-        /**
-         * Sends the message using Twilio.
-         *
-         * @param array $data The data required to send the message.
-         *
-         * @return \stdClass|\WP_Error The stdClass object or WP_Error object indicating the success of sending the message.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @throws \Exception
-         */
-        public function send_by_twilio(array $data): \stdClass|\WP_Error
-        {
-            $error      = new WP_Error(); // Create a new WordPress error object.
-            $account_ID = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
-            $username   = 'AC7e2468ebcb24a1bc4f3aba37adda49e9';
-            $password   = '86e8940f1af42f710f89ddcb20c22146';
-            $to         = $data['to'];
-            $from       = $data['from'];
-            $body       = $data['body'];
-
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, "https://api.twilio.com/2010-04-01/Accounts/$account_ID/Messages.json");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_USERPWD, "$username" . ':' . "$password");
-
-            $data = [
-                'To'   => $to,
-                'From' => $from,
-                'Body' => $body
-            ];
-
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-            $result = curl_exec($ch);
-
-            if (curl_errno($ch)) {
-                // If there was a cURL error, add the error to the error object and return it.
-                $error->add('sending_error', __("Response Error!", 'ninja'), [
-                    'status'  => FALSE,
-                    'details' => [
-                        'details' => 'Error:' . curl_error($ch)
-                    ]
-                ]);
-                return $error;
-            }
-
-            curl_close($ch);
-
-            $response = json_decode($result);
-
-            if ($response->status === 400) {
-                // If the response status is 400, add the error to the error object and return it.
-                $error->add('sending_error', __("Response Error!", 'ninja'), [
-                    'status'  => FALSE,
-                    'details' => [
-                        'details' => $response
-                    ]
-                ]);
-                return $error;
-            }
-
-            return $response; // Return the response object.
-        }
-
-        /**
-         * Sends the email OTP code.
-         *
-         * @param string $type The type of OTP code.
-         *
-         * @return bool The boolean value indicating the success of sending the OTP code.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @throws \Exception
-         */
-        public function send_email_otp_code(string $type): bool
-        {
-            $randomNumber = mt_rand(1000, 9999); // Generate a random OTP code.
-
-            if ($type === 'authentication') {
-                // If the type is authentication, update the user meta data and send the authentication email.
-                $this->set_user_meta('account_authentication_status', 0, TRUE);
-                $this->set_user_meta('authentication_key', $randomNumber, TRUE);
-                $this->set_user_meta('authentication_expire_date', time() + (5 * 60), TRUE);
-
-                $email = Nh_Mail::init()
-                                ->to($this->email)
-                                ->subject('Welcome to B2b - Please Authenticate Your Email')
-                                ->template('account-authentication/body', [
-                                    'data' => [
-                                        'user'   => $this,
-                                        'digits' => $randomNumber
-                                    ]
-                                ])
-                                ->send();
-            } else {
-                // If the type is verification, update the user meta data and send the verification email.
-                $this->set_user_meta('account_verification_status', 0, TRUE);
-                $this->set_user_meta('verification_key', $randomNumber, TRUE);
-                $this->set_user_meta('verification_expire_date', time() + (5 * 60), TRUE);
-
-                $email = Nh_Mail::init()
-                                ->to($this->email)
-                                ->subject('Welcome to B2b - Please Verify Your Email')
-                                ->template('account-verification/body', [
-                                    'data' => [
-                                        'user'   => $this,
-                                        'digits' => $randomNumber
-                                    ]
-                                ])
-                                ->send();
-            }
-
-            return $email; // Return the result of sending the email.
-        }
-
-        /**
-         * Returns the avatar URL for the user.
-         *
-         * @return string The URL of the avatar image.
-         *
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         * @author Mustafa Shaaban
-         */
-        private function get_avatar(): string
-        {
-            $url = wp_get_attachment_image_url($this->user_meta['avatar_id'], 'thumbnail');
-            return empty($url) ? Nh_Hooks::PATHS['public']['img'] . '/default-profile.webp' : $url;
+            $this->first_name = $this->user_meta['first_name'];
+            $this->last_name  = $this->user_meta['last_name'];
+            $this->nickname   = $this->user_meta['nickname'];
+            $this->avatar     = $this->get_avatar();
         }
 
         /**

@@ -432,7 +432,7 @@
                     $notification_obj->insert();
 
                     // SEND EMAIL
-                    $this->send_email('opportunity_content_verified', [
+                    $this->send_email('opportunity_seo_verified', [
                         'to_email'    => $user->email,
                         'role'        => Nh_User::ADMIN,
                         'user'        => $user,
@@ -455,7 +455,7 @@
                         $notification_obj->insert();
 
                         // SEND EMAIL
-                        $this->send_email('opportunity_content_verified', [
+                        $this->send_email('opportunity_seo_verified', [
                             'to_email'    => $user->email,
                             'role'        => Nh_User::ADMIN,
                             'user'        => $user,
@@ -599,7 +599,7 @@
                         $notification_obj->content                        = __("<strong>%s</strong> bid on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
-                            'type'           => 'opportunity_published',
+                            'type'           => 'bidding',
                             'from'           => $from,
                             'opportunity_id' => $data['opportunity_id'],
                         ];
@@ -645,7 +645,7 @@
                         $notification_obj->content                        = __("New acquisition request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
-                            'type'           => 'opportunity_published',
+                            'type'           => 'acquisition',
                             'from'           => $from,
                             'opportunity_id' => $data['opportunity_id'],
                         ];
@@ -693,7 +693,7 @@
                         $notification_obj->content                        = __("New investment request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
                         $notification_obj->author                         = $user->ID;
                         $notification_obj->meta_data['notification_data'] = [
-                            'type'           => 'opportunity_published',
+                            'type'           => 'investment',
                             'from'           => $from,
                             'opportunity_id' => $data['opportunity_id'],
                         ];
@@ -898,7 +898,8 @@
                     $opportunity_obj = new Nh_Opportunity();
                     $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
                     $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
-                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+                    $user_obj = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+                    $from = is_wp_error($user_obj) ? 'B2B' : $user_obj->first_name;
 
                     if (is_wp_error($opportunity)) {
                         $notification->delete();
@@ -918,8 +919,7 @@
                         $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
                     } elseif (Nh_User::get_user_role() === Nh_User::ADMIN) {
                         $formatted->title   = __($notification->title, 'ninja');
-                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from->first_name,
-                            $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title  );
                     } elseif (Nh_User::get_user_role() === Nh_User::INVESTOR) {
                         $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
                         $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
