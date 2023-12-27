@@ -111,28 +111,20 @@
         }
 
         /**
-         * Magic method to get a property value.
+         * Reformat the metadata array by renaming keys.
          *
-         * @param string $name The name of the property.
+         * @param array $meta_data The metadata array to reformat.
          *
-         * @return mixed The value of the property or FALSE if the property doesn't exist.
+         * @return array The reformatted metadata array.
          */
-        public function __get($name)
+        private function reformat_metadata($meta_data): array
         {
-            return property_exists($this, $name) ? $this->{$name} : FALSE;
-        }
+            foreach ($meta_data as $k => $meta) {
+                $meta_data[$meta] = '';
+                unset($meta_data[$k]);
+            }
 
-        /**
-         * Magic method to set a property value.
-         *
-         * @param string $name The name of the property.
-         * @param mixed  $value The value to set.
-         *
-         * @return void
-         */
-        public function __set($name, $value)
-        {
-            $this->{$name} = $value;
+            return $meta_data;
         }
 
         /**
@@ -213,6 +205,31 @@
         }
 
         /**
+         * Magic method to get a property value.
+         *
+         * @param string $name The name of the property.
+         *
+         * @return mixed The value of the property or FALSE if the property doesn't exist.
+         */
+        public function __get($name)
+        {
+            return property_exists($this, $name) ? $this->{$name} : FALSE;
+        }
+
+        /**
+         * Magic method to set a property value.
+         *
+         * @param string $name The name of the property.
+         * @param mixed  $value The value to set.
+         *
+         * @return void
+         */
+        public function __set($name, $value)
+        {
+            $this->{$name} = $value;
+        }
+
+        /**
          * Inserts the post into the database.
          *
          * @return int|WP_Error|Nh_Post The inserted post ID, WP_Error object on failure, or the Nh_Post instance.
@@ -238,8 +255,8 @@
 
             if ($insert) {
                 $this->ID = $insert;
-                if(!empty($this->thumbnail)){
-                    set_post_thumbnail( $this->ID, $this->thumbnail);
+                if (!empty($this->thumbnail)) {
+                    set_post_thumbnail($this->ID, $this->thumbnail);
                 }
                 foreach ($this->meta_data as $key => $meta) {
                     add_post_meta($insert, $key, $meta);
@@ -247,7 +264,7 @@
                 foreach ($this->taxonomy as $tax_name => $taxonomies) {
                     wp_set_post_terms($this->ID, $taxonomies, $tax_name, FALSE);
                 }
-//                $this->ID = $insert;
+                //                $this->ID = $insert;
 
                 do_action(Nh::_DOMAIN_NAME . "_after_insert_" . $this->type, $this);
             }
@@ -311,23 +328,6 @@
             do_action(Nh::_DOMAIN_NAME . "_after_delete_" . $this->type, $this->ID);
             return $delete;
 
-        }
-
-        /**
-         * Reformat the metadata array by renaming keys.
-         *
-         * @param array $meta_data The metadata array to reformat.
-         *
-         * @return array The reformatted metadata array.
-         */
-        private function reformat_metadata($meta_data): array
-        {
-            foreach ($meta_data as $k => $meta) {
-                $meta_data[$meta] = '';
-                unset($meta_data[$k]);
-            }
-
-            return $meta_data;
         }
 
         /**

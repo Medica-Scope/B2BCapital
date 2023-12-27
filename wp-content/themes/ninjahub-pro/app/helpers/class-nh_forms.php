@@ -256,7 +256,7 @@
 
             <?= $input_data['before_wrapper'] ?>
             <div
-                class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                    class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
                 <label for="<?= $input_data['id'] ?>" class="<?= Nh::_DOMAIN_NAME ?>-label">
@@ -328,24 +328,6 @@
                 }
             }
 
-            return $attrs;
-        }
-
-        /**
-         * This function responsible for create extra html attributes.
-         *
-         * @param array $args
-         *
-         * @return string
-         */
-        public function create_standard_attr(array $args = []): string
-        {
-            $attrs = '';
-            foreach ($args as $name => $value) {
-                if ($value) {
-                    $attrs .= " $name='$value' ";
-                }
-            }
             return $attrs;
         }
 
@@ -427,7 +409,7 @@
             echo $input_data['before_wrapper'];
             ?>
             <div
-                class="input-group <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                    class="input-group <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <label class="buttonLow buttonLow-id" for="<?= $input_data['id'] ?>">
                     <?= __('Upload Image', 'ninja') ?>
@@ -759,7 +741,7 @@
             $input_data = array_merge($defaults, $args);
             ?>
             <div
-                class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                    class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
                 <label for="<?= $input_data['id'] ?>" class="<?= Nh::_DOMAIN_NAME ?>-label">
@@ -838,7 +820,7 @@
 
             ?>
             <div
-                class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
+                    class="form-field <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
                 <label for="<?= $input_data['id'] ?>" class="<?= Nh::_DOMAIN_NAME ?>-label">
@@ -893,6 +875,24 @@
             </div>
             <?php
             return ob_get_clean();
+        }
+
+        /**
+         * This function responsible for create extra html attributes.
+         *
+         * @param array $args
+         *
+         * @return string
+         */
+        public function create_standard_attr(array $args = []): string
+        {
+            $attrs = '';
+            foreach ($args as $name => $value) {
+                if ($value) {
+                    $attrs .= " $name='$value' ";
+                }
+            }
+            return $attrs;
         }
 
         public function range_inputs(array $args = []): string
