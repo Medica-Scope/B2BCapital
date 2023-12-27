@@ -37,7 +37,7 @@
         /**
          * @var array|false|mixed
          */
-        public static array  $_NH_CONFIGURATION;
+        public static array $_NH_CONFIGURATION;
         /**
          * @var array
          */
@@ -114,74 +114,74 @@
 
                 ],
                 'admin'  => [
-                    'Opportunity'         => [
+                    'Opportunity' => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\ADMIN\MODULES',
                         'path'      => THEME_PATH . '/app/Models/admin/modules/class-nh_opportunity_admin.php'
                     ],
                 ],
                 'public' => [
-                    'Appointment'         => [
+                    'Appointment'             => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_appointment.php'
                     ],
-                    'Auth'         => [
+                    'Auth'                    => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_auth.php'
                     ],
-                    'Blog'         => [
+                    'Blog'                    => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_blog.php'
                     ],
-                    'Faq'          => [
+                    'Faq'                     => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_faq.php'
                     ],
-                    'Notification' => [
+                    'Notification'            => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_notification.php'
                     ],
-                    'Opportunity'  => [
+                    'Opportunity'             => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity.php'
                     ],
-                    'Opportunity_Acquisition'  => [
+                    'Opportunity_Acquisition' => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity_acquisition.php'
                     ],
-                    'Opportunity_Bid'  => [
+                    'Opportunity_Bid'         => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity_bid.php'
                     ],
-                    'Opportunity_Investments'  => [
+                    'Opportunity_Investments' => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_opportunity_investments.php'
                     ],
-                    'Profile'      => [
+                    'Profile'                 => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_profile.php'
                     ],
-                    'Search'      => [
+                    'Search'                  => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_search.php'
                     ],
-                    'Profile_Widget'      => [
+                    'Profile_Widget'          => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_profile_widget.php'
                     ],
-                    'Service'      => [
+                    'Service'                 => [
                         'type'      => 'class',
                         'namespace' => 'NH\APP\MODELS\FRONT\MODULES',
                         'path'      => THEME_PATH . '/app/Models/public/modules/class-nh_service.php'
