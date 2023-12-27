@@ -12,6 +12,9 @@
 
     use NH\APP\HELPERS\Nh_Ajax_Response;
     use NH\APP\HELPERS\Nh_Hooks;
+    use WP_Error;
+    use WP_Query;
+    use WP_Term;
 
     /**
      * The abstract class Nh_Module is the base module for NH applications.
@@ -58,21 +61,6 @@
         }
 
         /**
-         * Returns the singleton instance of the Nh_Module class.
-         *
-         * @return Nh_Module The Nh_Module instance.
-         */
-        public static function get_instance(): Nh_Module
-        {
-            $class = __CLASS__;
-            if (!self::$instance instanceof $class) {
-                self::$instance = new $class;
-            }
-
-            return self::$instance;
-        }
-
-        /**
          * Sets up the actions for the module.
          *
          * @param string $module_name The name of the module.
@@ -97,6 +85,21 @@
         abstract protected function filters(string $module_name): void;
 
         /**
+         * Returns the singleton instance of the Nh_Module class.
+         *
+         * @return Nh_Module The Nh_Module instance.
+         */
+        public static function get_instance(): Nh_Module
+        {
+            $class = __CLASS__;
+            if (!self::$instance instanceof $class) {
+                self::$instance = new $class;
+            }
+
+            return self::$instance;
+        }
+
+        /**
          * Retrieves all posts of the module.
          *
          * @param array  $status The post statuses to retrieve.
@@ -112,7 +115,7 @@
          */
         public function get_all(array $status = [ 'any' ], int $limit = 10, string $orderby = 'ID', string $order = 'DESC', array $not_in = [ '0' ]): array
         {
-            $posts     = new \WP_Query([
+            $posts    = new WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,
@@ -139,9 +142,9 @@
          * @package NinjaHub
          * @version 1.0
          */
-        public function get_by_id(int $post_id = 0): Nh_Post|\WP_Error
+        public function get_by_id(int $post_id = 0): Nh_Post|WP_Error
         {
-            $error = new \WP_Error();
+            $error = new WP_Error();
 
             if ($post_id <= 0) {
                 $error->add('invalid_id', __("No invalid post id", 'ninja'), [
@@ -164,57 +167,6 @@
             }
 
             return $this->assign($Nh_Posts);
-        }
-
-        /**
-         * Retrieves posts of the module by their IDs.
-         *
-         * @param array $post_ids The IDs of the posts to retrieve.
-         * @param array $status The post statuses to retrieve.
-         *
-         * @return array An array of Nh_Post objects representing the retrieved posts.
-         * @since 1.0.0
-         * @package NinjaHub
-         * @version 1.0
-         */
-        public function get_by_ids(array $post_ids = [], array $status = [ 'publish' ]): array
-        {
-            $Nh_Posts = [];
-
-            if (empty($post_ids)) {
-                return $Nh_Posts;
-            }
-
-            $posts = new \WP_Query([
-                "post__in"    => $post_ids,
-                "post_type"   => $this->module,
-                "post_status" => $status,
-            ]);
-
-            foreach ($posts->get_posts() as $post) {
-                $Nh_Posts[] = $this->convert($post, $this->meta_data);
-            }
-
-            return $Nh_Posts;
-        }
-
-        /**
-         * Retrieves the terms of a taxonomy.
-         *
-         * @param string $tax_name The name of the taxonomy.
-         *
-         * @return int|string|array|\WP_Error|\WP_Term The retrieved terms.
-         * @version 1.0
-         * @since 1.0.0
-         * @package NinjaHub
-         */
-        public function get_taxonomy_terms(string $tax_name): int|string|array|\WP_Error|\WP_Term
-        {
-            return get_terms([
-                'taxonomy'   => $tax_name,
-                'hide_empty' => FALSE,
-                // TODO:: Switch to TRUE on production
-            ]);
         }
 
         /**
@@ -246,6 +198,57 @@
             }
 
             return $this;
+        }
+
+        /**
+         * Retrieves posts of the module by their IDs.
+         *
+         * @param array $post_ids The IDs of the posts to retrieve.
+         * @param array $status The post statuses to retrieve.
+         *
+         * @return array An array of Nh_Post objects representing the retrieved posts.
+         * @since 1.0.0
+         * @package NinjaHub
+         * @version 1.0
+         */
+        public function get_by_ids(array $post_ids = [], array $status = [ 'publish' ]): array
+        {
+            $Nh_Posts = [];
+
+            if (empty($post_ids)) {
+                return $Nh_Posts;
+            }
+
+            $posts = new WP_Query([
+                "post__in"    => $post_ids,
+                "post_type"   => $this->module,
+                "post_status" => $status,
+            ]);
+
+            foreach ($posts->get_posts() as $post) {
+                $Nh_Posts[] = $this->convert($post, $this->meta_data);
+            }
+
+            return $Nh_Posts;
+        }
+
+        /**
+         * Retrieves the terms of a taxonomy.
+         *
+         * @param string $tax_name The name of the taxonomy.
+         *
+         * @return int|string|array|\WP_Error|\WP_Term The retrieved terms.
+         * @version 1.0
+         * @since 1.0.0
+         * @package NinjaHub
+         */
+        public function get_taxonomy_terms(string $tax_name): int|string|array|WP_Error|WP_Term
+        {
+            return get_terms([
+                'taxonomy'   => $tax_name,
+                'hide_empty' => FALSE,
+                // TODO:: Switch to TRUE on production
+            ]);
         }
 
         /**
@@ -299,7 +302,7 @@
          */
         public function load_more(array $status = [ 'any' ], int $page = 1, int $limit = 10, string $order = 'DESC', array $author = []): array
         {
-            $posts     = new \WP_Query([
+            $posts    = new WP_Query([
                 "post_type"      => $this->module,
                 "post_status"    => $status,
                 "posts_per_page" => $limit,

@@ -40,7 +40,7 @@
                 'js'      => THEME_URI . '/app/Models/public/js',
                 'img'     => THEME_URI . '/app/Models/public/img',
                 'images'  => THEME_URI . '/app/Models/public/assets/images',
-                'video'     => THEME_URI . '/app/Models/public/video',
+                'video'   => THEME_URI . '/app/Models/public/video',
                 'vendors' => THEME_URI . '/app/Models/public/vendors'
             ],
             'views'  => THEME_PATH . '/app/Views'
@@ -94,7 +94,89 @@
         public function __construct()
         {
             $this->prefix = "production" === Nh::_ENVIRONMENT ? ".min" : "";
-            add_filter('script_loader_tag', [$this, 'add_type_attribute'] , 10, 3);
+            add_filter('script_loader_tag', [
+                $this,
+                'add_type_attribute'
+            ], 10, 3);
+        }
+
+        public static function enqueue_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
+        {
+            self::get_instance()
+                ->add_style($script_name, $path, $is_vendor, $dependencies, $version, $media)
+                ->run();
+        }
+
+        /**
+         * Register the filters and actions with WordPress.
+         *
+         * @since    1.0.0
+         */
+        public function run(): void
+        {
+            if (!empty($this->filters)) {
+                foreach ($this->filters as $hook) {
+                    add_filter($hook['hook'], [
+                        $hook['component'],
+                        $hook['callback']
+                    ], $hook['priority'], $hook['accepted_args']);
+                }
+            }
+
+            if (!empty($this->actions)) {
+                foreach ($this->actions as $hook) {
+                    add_action($hook['hook'], [
+                        $hook['component'],
+                        $hook['callback']
+                    ], $hook['priority'], $hook['accepted_args']);
+                }
+            }
+
+            if (!empty($this->short_codes)) {
+                foreach ($this->short_codes as $hook) {
+                    add_shortcode($hook['hook'], [
+                        $hook['component'],
+                        $hook['callback']
+                    ]);
+                }
+            }
+
+            if (!empty($this->styles)) {
+                foreach ($this->styles as $hook) {
+                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.css';
+                    wp_enqueue_style($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['media']);
+                }
+            }
+
+            if (!empty($this->scripts)) {
+                foreach ($this->scripts as $hook) {
+                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.js';
+                    wp_enqueue_script($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['position']);
+                }
+            }
+
+            if (!empty($this->localizations)) {
+                foreach ($this->localizations as $hook) {
+                    wp_localize_script($hook['handle'], $hook['object_name'], $hook['object_values']);
+                }
+            }
+
+        }
+
+        /**
+         * Add a new style to the collection to be registered with WordPress.
+         *
+         * @param string $script_name
+         * @param string $path
+         * @param array  $dependencies
+         * @param null   $version
+         * @param null   $media
+         * @param bool   $is_vendor
+         */
+        public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): static
+        {
+            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
+            return $this;
         }
 
         public static function get_instance()
@@ -205,22 +287,6 @@
         }
 
         /**
-         * Add a new style to the collection to be registered with WordPress.
-         *
-         * @param string $script_name
-         * @param string $path
-         * @param array  $dependencies
-         * @param null   $version
-         * @param null   $media
-         * @param bool   $is_vendor
-         */
-        public function add_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): static
-        {
-            $this->styles = $this->enqueue($this->styles, $script_name, $path, $dependencies, $version, $media, $is_vendor);
-            return $this;
-        }
-
-        /**
          * Add a new script to the collection to be registered with WordPress.
          *
          * @param string $script_name
@@ -231,8 +297,7 @@
          * @param bool   $is_vendor
          * @param array  $extra_attr
          */
-        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE, array $extra_attr =
-        []): void
+        public function add_script(string $script_name, string $path, array $dependencies = [], $version = NULL, $position = NULL, bool $is_vendor = FALSE, array $extra_attr = []): void
         {
             $this->scripts = $this->enqueue($this->scripts, $script_name, $path, $dependencies, $version, $position, $is_vendor, $extra_attr);
         }
@@ -252,8 +317,7 @@
          *
          * @return array
          */
-        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, bool $is_vendor = FALSE, array
-        $extra_attr = []): array
+        private function enqueue(array $hooks, string $script_name, string $path, array $dependencies, $version = NULL, $position_media = NULL, bool $is_vendor = FALSE, array $extra_attr = []): array
         {
 
             $hooks[] = [
@@ -306,75 +370,15 @@
 
         }
 
-        /**
-         * Register the filters and actions with WordPress.
-         *
-         * @since    1.0.0
-         */
-        public function run(): void
+        public function add_type_attribute($tag, $handle, $src)
         {
-            if (!empty($this->filters)) {
-                foreach ($this->filters as $hook) {
-                    add_filter($hook['hook'], [
-                        $hook['component'],
-                        $hook['callback']
-                    ], $hook['priority'], $hook['accepted_args']);
-                }
-            }
-
-            if (!empty($this->actions)) {
-                foreach ($this->actions as $hook) {
-                    add_action($hook['hook'], [
-                        $hook['component'],
-                        $hook['callback']
-                    ], $hook['priority'], $hook['accepted_args']);
-                }
-            }
-
-            if (!empty($this->short_codes)) {
-                foreach ($this->short_codes as $hook) {
-                    add_shortcode($hook['hook'], [
-                        $hook['component'],
-                        $hook['callback']
-                    ]);
-                }
-            }
-
-            if (!empty($this->styles)) {
-                foreach ($this->styles as $hook) {
-                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.css';
-                    wp_enqueue_style($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['media']);
-                }
-            }
-
-            if (!empty($this->scripts)) {
-                foreach ($this->scripts as $hook) {
-                    $path = $hook['is_vendor'] ? $hook['path'] : $hook['path'] . $this->prefix . '.js';
-                    wp_enqueue_script($hook['script_name'], $path, $hook['dependencies'], $hook['version'], $hook['position']);
-                }
-            }
-
-            if (!empty($this->localizations)) {
-                foreach ($this->localizations as $hook) {
-                    wp_localize_script($hook['handle'], $hook['object_name'], $hook['object_values']);
-                }
-            }
-
-        }
-
-        public static function enqueue_style(string $script_name, string $path, bool $is_vendor = FALSE, array $dependencies = [], $version = NULL, $media = NULL): void
-        {
-            self::get_instance()->add_style($script_name, $path, $is_vendor,$dependencies, $version, $media)->run();
-        }
-
-        public function add_type_attribute($tag, $handle, $src) {
             foreach ($this->scripts as $script) {
                 if (!empty($script['extra_attr'])) {
                     $extra_attr = '';
                     foreach ($script['extra_attr'] as $attr_name => $attr_value) {
-                        $extra_attr .= $attr_name . '="' .$attr_value .'"';
+                        $extra_attr .= $attr_name . '="' . $attr_value . '"';
                     }
-                    $tag = '<script '.$extra_attr.' src="' . esc_url( $src ) . '"></script>';
+                    $tag = '<script ' . $extra_attr . ' src="' . esc_url($src) . '"></script>';
                 }
             }
 
