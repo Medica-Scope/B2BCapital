@@ -191,7 +191,7 @@
             $labels = [];
             $values = [];
             foreach ($data as $key => $value) {
-                $labels[] = date('j F Y', strtotime($key));
+                $labels[] = date('j M Y', strtotime($key));
                 $values[] = $value;
             }
 
@@ -216,7 +216,7 @@
             $labels = [];
             $values = [];
             foreach ($data as $key => $value) {
-                $labels[] = date_i18n('j F Y', strtotime($key));
+                $labels[] = date_i18n('j M Y', strtotime($key));
                 $values[] = $value;
             }
 
