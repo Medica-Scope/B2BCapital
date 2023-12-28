@@ -10,14 +10,32 @@
 		.single-widget {
 			display: flex;
 			flex-direction: row;
+			.ninja-form-notice {
+				.error {
+					display: none !important;
+				}
+			}
 			.widget-container {
-				width: 350px;
+				width: 380px;
 				height: 300px;
 				background-color: white;
 				padding: 1rem;
 				margin-inline-end: 1rem;
 				border-radius: 4px;
 				box-shadow: var(--bs-box-shadow) !important;
+
+				// Currency widget styles
+				.from,
+				.to {
+					font-weight: bold;
+				}
+				.to {
+					margin-bottom: 2rem;
+					border-bottom: 1px solid rgba($gray-medium, 0.3);
+					padding-bottom: 0.5rem;
+				}
+
+				// Calendar widget styles
 				.calendar {
 					padding-inline: 1.5rem;
 					.day-week {
@@ -25,7 +43,7 @@
 						margin-inline: 0.5rem;
 					}
 					.month-year {
-						border-bottom: 1px solid lightgray;
+						border-bottom: 1px solid rgba($gray-medium, 0.3);
 						margin: 0.3rem 0.5rem;
 						font-size: 16px;
 						font-weight: bold;
