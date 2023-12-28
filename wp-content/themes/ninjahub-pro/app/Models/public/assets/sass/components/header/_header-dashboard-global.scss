@@ -1,4 +1,5 @@
 @import '../../base/variables';
+@import '../../base/typography';
 
 .site-header {
 	nav {
@@ -30,10 +31,13 @@
 				align-items: center;
 				gap: 2rem;
 				.nav-item {
+					.nav-link{
+						font-weight: bold;
+					}
 					&.active {
 						position: relative;
 						.nav-link {
-							font-weight: bold;
+							font-family: $bbc-primary-en-font-bold;
 						}
 						&::after {
 							content: '';
