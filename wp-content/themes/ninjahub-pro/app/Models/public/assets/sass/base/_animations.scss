@@ -1,0 +1,95 @@
+/* B2B Capital Animations Styles Start Here */
+// Bounce Animation
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+  37% {
+    transform: translateX(5px);
+    animation-timing-function: ease-out;
+  }
+  55% {
+    transform: translateX(-5px);
+    animation-timing-function: ease-in;
+  }
+  73% {
+    transform: translateX(4px);
+    animation-timing-function: ease-out;
+  }
+  82% {
+    transform: translateX(-4px);
+    animation-timing-function: ease-in;
+  }
+  91% {
+    transform: translateX(2px);
+    animation-timing-function: ease-out;
+  }
+  96% {
+    transform: translateX(-2px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0px);
+    animation-timing-function: ease-in;
+  }
+}
+// Scale Down Animation
+@keyframes scaleDown {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+// Arrow Sliding English Animation
+@keyframes arrowEnglishSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+}
+// Arrow Sliding Arabic Animation
+@keyframes arrowArabicSliding {
+  0% {
+    opacity: 0;
+    transform: translateX(5px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+}
+// Arrow Move English Animation
+@keyframes arrowEnglishMove {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(20px);
+  }
+}
+// Arrow Move Arabic Animation
+@keyframes arrowArabicMove {
+  0%,
+  100% {
+    transform: translateX(40px) scaleX(-1);
+  }
+
+  50% {
+    transform: translateX(20px) scaleX(-1);
+  }
+}

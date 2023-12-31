@@ -1,41 +1,26 @@
 <?php
-    /**
-     * @Filename: default.php
-     * @Description:
-     * @User: NINJA MASTER - Mustafa Shaaban
-     * @Date: 4/26/2023
-     */
+	/**
+	 * @Filename: default.php
+	 * @Description:
+	 * @User: NINJA MASTER - Mustafa Shaaban
+	 * @Date: 4/26/2023
+	 */
 
-    use NH\Nh;
+	use NH\APP\HELPERS\Nh_Hooks;
+	use NH\Nh;
 
+	/**
+	 * Include Header Style File.
+	 */
+	Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh_Hooks::PATHS['public']['css'] . '/components/header/header-dashboard' );
 ?>
 
-<header id="masthead" class="site-header">
-    <nav id="site-navigation" class="main-navigation d-flex justify-content-around align-items-center">
+<header id="masthead" class="site-header container-fluid container-xxl">
+	<nav id="site-navigation" class="main-navigation">
 
-        <div class="site-branding">
-            <a href="<?= home_url() ?>"><img src="<?= Nh::get_site_logo('second_logo'); ?>" alt="Nh Site Logo" /></a>
-        </div>
+		<div class="site-branding">
+			<a href="<?= home_url(); ?>"><img src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo"/></a>
+		</div>
 
-        <?php
-            wp_nav_menu([
-                'theme_location' => 'default-menu',
-                'menu_id'        => 'main-menu',
-            ]);
-        ?>
-
-        <?php
-            if (is_user_logged_in()) {
-                wp_nav_menu([
-                    'theme_location' => 'profile-menu-login',
-                    'menu_id'        => 'account-menu-login',
-                ]);
-            } else {
-                wp_nav_menu([
-                    'theme_location' => 'profile-menu-logout',
-                    'menu_id'        => 'account-menu-logout',
-                ]);
-            }
-        ?>
-    </nav><!-- #site-navigation -->
+	</nav><!-- #site-navigation -->
 </header><!-- #masthead -->

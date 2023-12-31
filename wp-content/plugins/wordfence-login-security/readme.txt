@@ -3,8 +3,8 @@ Contributors: wfryan, wfmattr, mmaunder, wfmatt
 Tags: security, login security, 2fa, two factor authentication, captcha, xml-rpc, mfa, 2 factor
 Requires at least: 4.5
 Requires PHP: 5.5
-Tested up to: 6.2
-Stable tag: 1.1.4
+Tested up to: 6.4
+Stable tag: 1.1.7
 
 Secure your website with Wordfence Login Security, providing two-factor authentication, login and registration CAPTCHA, and XML-RPC protection.
 
@@ -57,6 +57,19 @@ Secure your website with Wordfence Login Security.
 3. Configuration options include XML-RPC protection and login page CAPTCHA.
 
 == Changelog ==
+
+= 1.1.7 - November 6, 2023 =
+* Fix: Compatibility fix for WordPress 6.4 on the login page styling
+
+= 1.1.6 - October 30, 2023 =
+* Fix: Addressed an issue with multisite installations when the wp_options tables had different encodings/collations
+
+= 1.1.5 - October 23, 2023 =
+* Fix: 2FA AJAX calls now use an absolute path rather than a full URL to avoid CORS issues on sites that do not canonicalize www and non-www requests
+* Fix: Addressed a race condition where multiple concurrent hits on multisite could trigger overlapping role sync tasks
+* Fix: Improved performance when viewing the user list on large multisites
+* Fix: Fixed a UI bug where an invalid code on 2FA activation would leave the activate button disabled
+* Fix: Reverted a change on error modals to bring back the additional close button for better accessibility
 
 = 1.1.4 - July 12, 2023 =
 * Fix: Changed text domain to wordfence-login-security to match plugin slug as required by WordPress

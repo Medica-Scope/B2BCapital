@@ -37,7 +37,7 @@
             $this->actions();
             $this->filters();
             Nh_Init::get_instance()
-                    ->run('public');
+                   ->run('public');
 
         }
 
@@ -58,28 +58,46 @@
         public function enqueue_styles(): void
         {
 
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-fontawesome', Nh_Hooks::PATHS['public']['vendors'] . '/css/fontawesome/css/all.min', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bbcicons', Nh_Hooks::PATHS['public']['vendors'] . '/css/bbc-icons/style.css', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min.css', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min.css', TRUE);
 
-            if (NH_lANG === 'ar') {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min', TRUE);
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style-rtl');
-            } else {
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min', TRUE);
-                $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style');
-            }
+            // if ( NH_lANG === 'ar' ) {
+            // 	$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min.css', TRUE );
+            // } else {
+            // 	$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.min.css', TRUE );
+            // }
+
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-main', Nh_Hooks::PATHS['root']['css'] . '/style');
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-theme', Nh_Hooks::PATHS['public']['css'] . '/theme');
+
 
             $this->hooks->run();
         }
 
         public function enqueue_scripts(): void
         {
-            global $gglcptch_options;
+            global $gglcptch_options, $wp;
+            $is_single_service = is_single() && 'service' == get_post_type();
 
-            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min', [
+            // Vendors
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-popper', Nh_Hooks::PATHS['public']['vendors'] . '/js/popper.min.js', [
                 'jquery'
             ], Nh::_VERSION, NULL, TRUE);
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
+                'jquery'
+            ], Nh::_VERSION, NULL, TRUE);
+
+            if (is_front_page() || is_page([
+                    'login',
+                    'registration',
+                    'forgot-password'
+                ]) || $is_single_service || is_404()) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player');
+
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ]);
+            }
+
 
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-main', Nh_Hooks::PATHS['public']['js'] . '/main', [
                 'jquery',
@@ -90,37 +108,72 @@
                 'domain_key'  => Nh::_DOMAIN_NAME,
                 'ajaxUrl'     => admin_url('admin-ajax.php'),
                 'environment' => Nh::_ENVIRONMENT,
-                'publicKey'   => $gglcptch_options['public_key'],
+                'publicKey'   => isset($gglcptch_options) ? $gglcptch_options['public_key'] : '',
                 'phrases'     => [
-                    'default'        => __("This field is required.", "nh"),
-                    'email'          => __("Please enter a valid email address.", "nh"),
-                    'number'         => __("Please enter a valid number.", "nh"),
-                    'equalTo'        => __("Please enter the same value again.", "nh"),
-                    'maxlength'      => __("Please enter no more than {0} characters.", "nh"),
-                    'minlength'      => __("Please enter at least {0} characters.", "nh"),
-                    'max'            => __("Please enter a value less than or equal to {0}.", "nh"),
-                    'min'            => __("Please enter a value greater than or equal to {0}.", "nh"),
-                    'pass_regex'     => __("Password doesn't complexity.", "nh"),
-                    'phone_regex'    => __("Please enter a valid Phone number.", "nh"),
-                    'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "nh"),
-                    'email_regex'    => __("Please enter a valid email address.", "nh"),
-                    'file_extension' => __("Please upload an image with a valid extension.", "nh"),
-                    'choices_select' => __("Press to select", "nh"),
-                    'noChoicesText'  => __("'No choices to choose from'", "nh"),
+                    'default'        => __("This field is required.", "ninja"),
+                    'email'          => __("Please enter a valid email address.", "ninja"),
+                    'number'         => __("Please enter a valid number.", "ninja"),
+                    'equalTo'        => __("Please enter the same value again.", "ninja"),
+                    'maxlength'      => __("Please enter no more than {0} characters.", "ninja"),
+                    'minlength'      => __("Please enter at least {0} characters.", "ninja"),
+                    'max'            => __("Please enter a value less than or equal to {0}.", "ninja"),
+                    'min'            => __("Please enter a value greater than or equal to {0}.", "ninja"),
+                    'pass_regex'     => __("Your password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character from the following: ! @ # $ % ^ & *.", "ninja"),
+                    'phone_regex'    => __("Please enter a valid Phone number.", "ninja"),
+                    'intlTelNumber'  => __("Please enter a valid International Telephone Number.", "ninja"),
+                    'email_regex'    => __("Please enter a valid email address.", "ninja"),
+                    'file_extension' => __("Please upload an image with a valid extension.", "ninja"),
+                    'choices_select' => __("Press to select", "ninja"),
+                    'noChoicesText'  => __("'No choices to choose from'", "ninja"),
                 ]
             ]);
 
+            if (preg_match('#^my-account/my-favorite-articles(/.+)?$#', $wp->request) || preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive('post') || is_singular('post')) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-blog', Nh_Hooks::PATHS['public']['js'] . '/blog-front');
+            }
+
             if (is_page([
+                'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-investments',
+                'my-bids',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
+                'my-ignored-opportunities',
                 'dashboard',
-                'create-opportunity'
+                'create-opportunity',
+                'blogs'
             ])) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
             }
 
+            if (is_singular([ 'opportunity' ])) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-opportunity', Nh_Hooks::PATHS['public']['js'] . '/opportunity-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bidding', Nh_Hooks::PATHS['public']['js'] . '/bidding-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-acquisition', Nh_Hooks::PATHS['public']['js'] . '/acquisition-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-investment', Nh_Hooks::PATHS['public']['js'] . '/investment-front');
+            }
+
+            if (is_post_type_archive('faq') || is_home() || is_singular() || isset($_GET['s'])) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-notifications', Nh_Hooks::PATHS['public']['js'] . '/notification-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-search', Nh_Hooks::PATHS['public']['js'] . '/search-front');
+            }
+
             if (is_page([
                 'my-account',
+                'change-password',
+                'my-opportunities',
+                'my-investments',
+                'my-bids',
+                'my-widgets',
+                'my-notifications',
+                'my-favorite-opportunities',
                 'login',
                 'industry',
                 'reset-password',
@@ -130,6 +183,15 @@
                 'authentication',
             ])) {
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-authentication', Nh_Hooks::PATHS['public']['js'] . '/authentication');
+            }
+
+            if (is_post_type_archive('service') || is_singular('service') || is_tax('service-category')) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-service', Nh_Hooks::PATHS['public']['js'] . '/service-front');
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-appointment', Nh_Hooks::PATHS['public']['js'] . '/appointment-front');
+            }
+
+            if (is_page('dashboard')) {
+                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-profile-widgets', Nh_Hooks::PATHS['public']['js'] . '/profile-widgets-front');
             }
 
             $this->hooks->run();
@@ -184,5 +246,45 @@
                 }
             }
             return $languages_codes;
+        }
+
+        public static function breadcrumbs(): void
+        {
+            global $post, $wp;
+
+            $separator = Nh_Init::$_NH_lANG === 'ar' ? ' <i class="bbc-chevron-left"></i> ' : ' <i class="bbc-chevron-right"></i> ';
+
+            echo '<div class="breadcrumbs">';
+            if (preg_match('#my-account#', $wp->request)) {
+                $page_link = get_the_permalink(get_page_by_path('dashboard'));
+                echo '<a href="' . apply_filters('nhml_permalink', $page_link) . '">' . __('Dashboard', 'ninja') . '</a>';
+            } else {
+                echo '<a href="' . apply_filters('nhml_permalink', home_url()) . '">' . __('Home', 'ninja') . '</a>';
+            }
+            echo $separator;
+
+            if (is_category() || is_single()) {
+                if (is_single()) {
+                    the_category($separator);
+                    echo $separator;
+                    the_title();
+                } else {
+                    single_cat_title();
+                }
+            } elseif (is_page()) {
+                if ($post->post_parent) {
+                    $anc    = get_post_ancestors($post->ID);
+                    $output = '';
+                    foreach ($anc as $ancestor) {
+                        $output = '<a href="' . apply_filters('nhml_permalink', get_permalink($ancestor)) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> ' . $separator;
+                    }
+                    echo $output;
+                }
+                the_title();
+            } elseif (is_archive()) {
+                echo post_type_archive_title();
+            }
+
+            echo '</div>'; // End breadcrumbs
         }
     }

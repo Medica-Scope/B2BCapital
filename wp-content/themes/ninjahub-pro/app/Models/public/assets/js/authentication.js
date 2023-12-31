@@ -64,6 +64,9 @@ class NhAuthentication extends NhAuth {
                 selectedNumbersSpan: $(`#${KEY}_industries_form`).find(`.selected-number`),
                 showTags: $(`#${KEY}_industries_form`).find(`.show-tags`),
                 parent: $(`#${KEY}_industries_form`).parent(),
+                wizard: $(`.step-wizard`),
+                step_header_1: $(`.after-registration-step-1`),
+                step_header_2: $(`.after-registration-step-2`),
             },
             forgot: {
                 form: $(`#${KEY}_forgot_form`),
@@ -73,6 +76,7 @@ class NhAuthentication extends NhAuth {
                 form: $(`#${KEY}_edit_profile_form`),
                 parent: $(`#${KEY}_edit_profile_form`).parent(),
                 selectBoxes: $('select'),
+                btnMyAccountEdit: $('.btn-my-account-edit'),
             },
             editPassword: {
                 form: $(`#${KEY}_edit_password_form`),
@@ -92,6 +96,7 @@ class NhAuthentication extends NhAuth {
 
     // Perform necessary initializations
     initialization() {
+        this.globalEvents();
         this.registrationFront();
         this.loginFront();
         this.verificationFront();
@@ -105,6 +110,12 @@ class NhAuthentication extends NhAuth {
         this.codeCountDown();
     }
 
+    globalEvents() {
+        $('input[type="password"]').on('copy paste', function(e){
+            e.preventDefault();
+        });
+    }
+
     // Front-end code for the registration form
     registrationFront() {
         let that          = this,
@@ -116,11 +127,14 @@ class NhAuthentication extends NhAuth {
             const input = $('#ninja_phone_number')[0];
 
             window.ITIOBJ.registration = intlTelInput(input, {
-                initialCountry: 'EG',
-                separateDialCode: true,
+                // initialCountry: 'eg',
+                separateDialCode: false,
                 autoInsertDialCode: true,
+                nationalMode: true,
                 allowDropdown: true,
+                autoPlaceholder:"polite",
                 utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
+                preferredCountries: ["eg","us"],
             });
         }
 
@@ -321,6 +335,19 @@ class NhAuthentication extends NhAuth {
             $showTags    = $industries.showTags,
             ajaxRequests = this.ajaxRequests;
 
+        $industries.wizard.on('click', function (e) {
+            e.preventDefault();
+            let $this = $(e.currentTarget),
+                stepTarget = $this.attr('data-target');
+
+            if ($("input[name='industries']").valid()) {
+                $('.form-steps').hide();
+                $(`.${stepTarget}`).show();
+            }
+
+        })
+
+
         // Handle change event on industry tags inputs
         $tagsInputs.on('change', $industries.form, function (e) {
             let $this        = $(e.currentTarget),
@@ -403,12 +430,22 @@ class NhAuthentication extends NhAuth {
         //     });
         // });
 
+        $editProfile.btnMyAccountEdit.on('click', function (e) {
+            e.preventDefault();
+            let $this    = $(e.currentTarget);
+            $editProfile.form.find("[data-edit='disable']").prop('disabled', false);
+            $this.hide();
+            $editProfile.form.find(`#${KEY}_edit_profile_submit`).show();
+            $('.nh-form-disabled').removeClass('nh-form-disabled');
+
+        });
+
         // Initialize international telephone input for phone number
         if ($('#ninja_phone_number').length > 0) {
             const input = $('#ninja_phone_number')[0];
 
             window.ITIOBJ.editProfile = intlTelInput(input, {
-                initialCountry: 'EG',
+                // initialCountry: 'EG',
                 separateDialCode: true,
                 autoInsertDialCode: true,
                 allowDropdown: true,
@@ -497,16 +534,16 @@ class NhAuthentication extends NhAuth {
         $('.showPassIcon').on('click', function (e) {
             let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');
-            $this.removeClass('fa-solid fa-eye');
-            $this.addClass('fa-sharp fa-solid fa-eye-slash');
+            $this.removeClass('bbc-eye1');
+            $this.addClass('bbc-eye-off');
             if ($($target_element).attr('type') === 'password') {
                 $($target_element).attr('type', 'text');
-                $this.removeClass('fa-sharp fa-solid fa-eye-slash');
-                $this.addClass('fa-solid fa-eye');
+                $this.removeClass('bbc-eye-off');
+                $this.addClass('bbc-eye1');
             } else {
                 $($target_element).attr('type', 'password');
-                $this.removeClass('fa-solid fa-eye');
-                $this.addClass('fa-sharp fa-solid fa-eye-slash');
+                $this.removeClass('bbc-eye1');
+                $this.addClass('bbc-eye-off');
             }
         });
     }

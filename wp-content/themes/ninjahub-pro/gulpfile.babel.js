@@ -28,14 +28,14 @@ const paths = {
     styles: {
         admin: {
             watch: 'app/Models/admin/assets/sass/**/*.scss',
-            src: 'app/Models/admin/assets/sass/style.scss',
+            src: 'app/Models/admin/assets/sass/**/*.scss',
             dest: 'app/Models/admin/css',
         },
         public: {
             watch: 'app/Models/public/assets/sass/**/*.scss',
-            src: 'app/Models/public/assets/sass/style.scss',
-            dest: './',
-        },
+            src: 'app/Models/public/assets/sass/**/*.scss',
+            dest: 'app/Models/public/css',
+        }
     },
     scripts: {
         admin: {
@@ -97,31 +97,31 @@ gulp.task('publicStyles', () => {
                .pipe(sourcemaps.write('.'))
                .pipe(gulp.dest(paths.styles.public.dest))
                .pipe(notify({
-                   message: '\n\n=================================================\n====== STYLES PUBLIC RTL TASK — COMPLETED!' + ' ======\n=================================================\n',
+                   message: '\n\n=================================================\n====== STYLES PUBLIC TASK — COMPLETED!' + ' ======\n=================================================\n',
                    onLast: true,
                }));
 });
 
-gulp.task('publicStylesRtl', () => {
-    'use strict';
-
-    return gulp.src(paths.styles.public.src)
-               .pipe(sourcemaps.init())
-               .pipe(sass()
-                   .on('error', sass.logError))
-               .pipe(autoprefixer())
-               .pipe(rtlCss())
-               .pipe(rename({ suffix: '-rtl' }))
-               .pipe(gulp.dest(paths.styles.public.dest))
-               .pipe(rename({ suffix: '.min' }))
-               .pipe(cleanCss())
-               .pipe(sourcemaps.write('.'))
-               .pipe(gulp.dest(paths.styles.public.dest))
-               .pipe(notify({
-                   message: '\n\n=============================================\n====== STYLES PUBLIC TASK — COMPLETED!' + ' ======\n=============================================\n',
-                   onLast: true,
-               }));
-});
+// gulp.task('publicStylesRtl', () => {
+//     'use strict';
+//
+//     return gulp.src(paths.styles.public.src)
+//                .pipe(sourcemaps.init())
+//                .pipe(sass()
+//                    .on('error', sass.logError))
+//                .pipe(autoprefixer())
+//                .pipe(rtlCss())
+//                .pipe(rename({ suffix: '-rtl' }))
+//                .pipe(gulp.dest(paths.styles.public.dest))
+//                .pipe(rename({ suffix: '.min' }))
+//                .pipe(cleanCss())
+//                .pipe(sourcemaps.write('.'))
+//                .pipe(gulp.dest(paths.styles.public.dest))
+//                .pipe(notify({
+//                    message: '\n\n=============================================\n====== STYLES PUBLIC TASK — COMPLETED!' + ' ======\n=============================================\n',
+//                    onLast: true,
+//                }));
+// });
 
 gulp.task('publicScripts', (done) => {
     'use strict';
@@ -237,7 +237,7 @@ gulp.task('adminScripts', (done) => {
             if (err) throw err;
 
             array.map(function (singlePath) {
-                let explodePathNames = singlePath.split('\\'),
+                let explodePathNames = singlePath.includes('\\') ? singlePath.split('\\') : singlePath.split('/'),
                     scriptFileName   = explodePathNames[explodePathNames.length - 1];
 
                 browserify({
@@ -305,14 +305,14 @@ gulp.task('translate', () => {
 });
 
 
-gulp.task('default', gulp.parallel('publicStyles', 'publicStylesRtl', 'publicScripts', 'publicImages', 'adminStyles', 'adminStylesRtl', 'adminScripts', 'adminImages', 'translate', () => {
+gulp.task('default', gulp.parallel('publicStyles', 'publicScripts', 'publicImages', 'adminStyles', 'adminStylesRtl', 'adminScripts', 'adminImages', 'translate', () => {
     'use strict';
 
     /**
      * Start watching public assets
      */
     gulp.watch(paths.styles.public.watch, gulp.parallel('publicStyles'));
-    gulp.watch(paths.styles.public.watch, gulp.parallel('publicStylesRtl'));
+    // gulp.watch(paths.styles.public.watch, gulp.parallel('publicStylesRtl'));
     gulp.watch(paths.scripts.public.watch, gulp.parallel('publicScripts'));
     gulp.watch(paths.images.public.watch, gulp.parallel('publicImages'));
 

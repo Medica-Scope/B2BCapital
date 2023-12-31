@@ -13,6 +13,8 @@
     use NH\APP\CLASSES\Nh_Post;
     use NH\APP\CLASSES\Nh_User;
     use NH\APP\HELPERS\Nh_Ajax_Response;
+    use NH\APP\HELPERS\Nh_Hooks;
+    use NH\APP\HELPERS\Nh_Mail;
     use NH\Nh;
 
     /**
@@ -87,6 +89,8 @@
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_read_notifications_ajax', $this, 'read_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_clear_notifications_ajax', $this, 'clear_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_item_clear_notifications_ajax', $this, 'item_clear_notifications_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_item_clear_notifications_ajax', $this, 'item_clear_notifications_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_loadmore_notifications_ajax', $this, 'loadmore_notifications_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_read_new_notifications_ajax', $this, 'read_new_notifications_ajax');
@@ -120,11 +124,11 @@
          * @author Mustafa Shaaban
          * @throws \Exception
          */
-        public function get_notifications(): array
+        public function get_notifications(int $limit = 10): array
         {
             global $wpdb, $user_ID;
 
-            $all      = $this->get_all_custom([ 'publish' ]);
+            $all      = $this->get_all_custom([ 'publish' ], $limit);
             $html_obj = [
                 'notifications' => []
             ];
@@ -197,7 +201,7 @@
             foreach ($posts->get_posts() as $post) {
                 $class
 
-                                      = __CLASS__;
+                                     = __CLASS__;
                 $nh_module           = new $class;
                 $Nh_Posts['posts'][] = $nh_module->assign($this->convert($post, $this->meta_data));
             }
@@ -226,18 +230,484 @@
             $class            = __CLASS__;
             $notification_obj = new $class();
             switch ($type) {
-                case 'bidding':
-                    $user                                             = Nh_User::get_user_by('ID', $from);
-                    $notification_obj->title                          = __("New Bidding", 'ninja');
-                    $notification_obj->content                        = __('You have a new bidding from <strong>%s</strong> on your project <strong>%s</strong>', 'ninja');
+                case 'opportunity_new':
+                    $users = Nh_User::get_users_by_role([ Nh_User::REVIEWER ]);
+                    foreach ($users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity - <strong>%s</strong> Issued", 'ninja');
+                        $notification_obj->content                        = __('A new opportunity <strong>%s</strong> from <strong>%s</strong> has been issued and it is waiting for reviewing.', 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_new',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_new', [
+                            'to_email'          => $user->email,
+                            'role'              => Nh_User::REVIEWER,
+                            'user'              => $user,
+                            'opportunity_id'    => $data['opportunity_id'],
+                            'opportunity_title' => $data['opportunity_title'],
+                        ]);
+                    }
+
+                    $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
+                    foreach ($admin_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity - <strong>%s</strong>", 'ninja');
+                        $notification_obj->content                        = __("New opportunity assigned to reviewers and it's waiting for reviewing.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_new',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_new', [
+                            'to_email'          => $user->email,
+                            'role'              => Nh_User::ADMIN,
+                            'user'              => $user,
+                            'opportunity_id'    => $data['opportunity_id'],
+                            'opportunity_title' => $data['opportunity_title'],
+                        ]);
+                    }
+                    break;
+
+                case 'opportunity_approve':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj                                 = new $class();
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> Approved", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> has been approved and waiting for the verification.', 'ninja');
                     $notification_obj->author                         = $to;
                     $notification_obj->meta_data['notification_data'] = [
-                        'type'       => 'bidding',
-                        'from'       => $user->display_name,
-                        'project_id' => $data['project_id'],
+                        'type'           => 'opportunity_approve',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
                     ];
                     $notification_obj->meta_data['new']               = 1;
                     $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_approve', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+
+                    $cms_users = Nh_User::get_users_by_role([ Nh_User::CMS ]);
+                    foreach ($cms_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification", 'ninja');
+                        $notification_obj->content                        = __("New opportunity assigned to you to be verified.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_approve',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_approve', [
+                            'to_email'    => $user->email,
+                            'role'        => Nh_User::ADMIN,
+                            'user'        => $user,
+                            'opportunity' => $data['opportunity'],
+                        ]);
+                    }
+                    break;
+                case 'opportunity_hold':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> is on hold", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> is on hold.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_hold',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_hold', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+
+                    break;
+                case 'opportunity_cancel':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> is canceled", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> is canceled.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_cancel',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_cancel', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+                    break;
+                case 'opportunity_content_verified':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj                                 = new $class();
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> Content Verified", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> has been verified and waiting for the seo verification.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_content_verified',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_content_verified', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+
+                    $seo_users = Nh_User::get_users_by_role([ Nh_User::SEO ]);
+                    foreach ($seo_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your verification", 'ninja');
+                        $notification_obj->content                        = __("New opportunity assigned to you to be verified.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_content_verified',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_content_verified', [
+                            'to_email'    => $user->email,
+                            'role'        => Nh_User::ADMIN,
+                            'user'        => $user,
+                            'opportunity' => $data['opportunity'],
+                        ]);
+                    }
+                    break;
+                case 'opportunity_seo_verified':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj                                 = new $class();
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> SEO Verified", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> has been verified as SEO and waiting for being translated.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_seo_verified',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_seo_verified', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+
+                    $translators_users = Nh_User::get_users_by_role([ Nh_User::TRANSLATOR ]);
+                    foreach ($translators_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity <strong>%s</strong> is waiting for your translation", 'ninja');
+                        $notification_obj->content                        = __("New opportunity assigned to you to be translated.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_seo_verified',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_seo_verified', [
+                            'to_email'    => $user->email,
+                            'role'        => Nh_User::ADMIN,
+                            'user'        => $user,
+                            'opportunity' => $data['opportunity'],
+                        ]);
+                    }
+                    break;
+                case 'opportunity_translated':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj                                 = new $class();
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> Translated", 'ninja');
+                    $notification_obj->content                        = __('Your opportunity <strong>%s</strong> has been translated and waiting for the final review to be published.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_translated',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_translated', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+
+                    $cms_users = Nh_User::get_users_by_role([ Nh_User::CMS ]);
+                    foreach ($cms_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Opportunity - <strong>%s</strong> is waiting for your action", 'ninja');
+                        $notification_obj->content                        = __("New opportunity assigned to you to be published.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_translated',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_translated', [
+                            'to_email'    => $user->email,
+                            'role'        => Nh_User::ADMIN,
+                            'user'        => $user,
+                            'opportunity' => $data['opportunity'],
+                        ]);
+                    }
+                    break;
+                case 'opportunity_published':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj                                 = new $class();
+                    $notification_obj->title                          = __("Opportunity <strong>%s</strong> is Published", 'ninja');
+                    $notification_obj->content                        = __('Congrats!, Your opportunity <strong>%s</strong> has been published now.', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'opportunity_published',
+                        'from'           => __('B2B', "ninja"),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('opportunity_published', [
+                        'to_email'    => $user->email,
+                        'role'        => Nh_User::ADMIN,
+                        'user'        => $user,
+                        'opportunity' => $data['opportunity'],
+                    ]);
+
+                    $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
+                    foreach ($admin_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("Opportunity Published", 'ninja');
+                        $notification_obj->content                        = __("The opportunity <strong>%s</strong> is published and ready.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_published',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('opportunity_published', [
+                            'to_email'    => $user->email,
+                            'role'        => Nh_User::ADMIN,
+                            'user'        => $user,
+                            'opportunity' => $data['opportunity'],
+                        ]);
+                    }
+
+
+                    $investor_users = Nh_User::get_users_by_role([ Nh_User::INVESTOR ]);
+                    foreach ($investor_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("A New Opportunity <strong>%s</strong> is published!", 'ninja');
+                        $notification_obj->content                        = __("opportunity <strong>%s</strong> is published check it now!.", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'opportunity_published',
+                            'from'           => __('B2B', "ninja"),
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+                    }
+                    break;
+                case 'bidding':
+                    $user                                             = Nh_User::get_user_by('ID', $from);
+                    $notification_obj->title                          = __("New Bidding", 'ninja');
+                    $notification_obj->content                        = __('You have a new bidding on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'bidding',
+                        'from'           => $user->display_name,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('bidding', [
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ]);
+
+
+                    $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
+                    foreach ($admin_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New bid for <strong>%s</strong>", 'ninja');
+                        $notification_obj->content                        = __("<strong>%s</strong> bid on <strong>%s</strong>", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'bidding',
+                            'from'           => $from,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('bidding', [
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ]);
+                    }
+
+                    break;
+                case 'acquisition':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj->title                          = __("New Acquisition Request", 'ninja');
+                    $notification_obj->content                        = __('You have a new acquisition request on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'acquisition',
+                        'from'           => __('B2B', 'ninja'),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('acquisition', [
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ]);
+
+
+                    $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
+                    foreach ($admin_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Acquisition Request", 'ninja');
+                        $notification_obj->content                        = __("New acquisition request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'acquisition',
+                            'from'           => $from,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('acquisition', [
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ]);
+
+                    }
+
+                    break;
+                case 'investment':
+                    $user                                             = Nh_User::get_user_by('ID', $to);
+                    $notification_obj->title                          = __("New Investment Request", 'ninja');
+                    $notification_obj->content                        = __('You have a new investment request on your project <strong>%s</strong>', 'ninja');
+                    $notification_obj->author                         = $to;
+                    $notification_obj->meta_data['notification_data'] = [
+                        'type'           => 'investment',
+                        'from'           => __('B2B', 'ninja'),
+                        'opportunity_id' => $data['opportunity_id'],
+                    ];
+                    $notification_obj->meta_data['new']               = 1;
+                    $notification_obj->insert();
+
+                    // SEND EMAIL
+                    $this->send_email('investment', [
+                        'to_email'       => $user->email,
+                        'role'           => Nh_User::ADMIN,
+                        'user'           => $user,
+                        'opportunity_id' => $data['opportunity_id'],
+                    ]);
+
+
+                    $admin_users = Nh_User::get_users_by_role([ Nh_User::ADMIN ]);
+
+                    foreach ($admin_users as $user) {
+                        $notification_obj                                 = new $class();
+                        $notification_obj->title                          = __("New Investment Request", 'ninja');
+                        $notification_obj->content                        = __("New investment request from <strong>%s</strong> on <strong>%s</strong>", 'ninja');
+                        $notification_obj->author                         = $user->ID;
+                        $notification_obj->meta_data['notification_data'] = [
+                            'type'           => 'investment',
+                            'from'           => $from,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ];
+                        $notification_obj->meta_data['new']               = 1;
+                        $notification_obj->insert();
+
+                        // SEND EMAIL
+                        $this->send_email('investment', [
+                            'to_email'       => $user->email,
+                            'role'           => Nh_User::ADMIN,
+                            'user'           => $user,
+                            'opportunity_id' => $data['opportunity_id'],
+                        ]);
+                    }
                     break;
                 default:
                     break;
@@ -262,18 +732,270 @@
             $formatted = new \stdClass();
 
             switch ($type) {
-                case 'bidding':
+                case 'opportunity_new':
                     $opportunity_obj = new Nh_Opportunity();
-                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['project_id'], $opportunity_obj->type, FALSE, NH_lANG);
-                    $opportunity     = $opportunity_obj->get_by_id($opportunity_id);
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+
+                    if (Nh_User::get_user_role() === Nh_User::REVIEWER) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title, $from);
+                    } elseif (Nh_User::get_user_role() === Nh_User::ADMIN) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = __($notification->content, 'ninja');
+                    }
 
                     $formatted->ID        = $notification->ID;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+                    break;
+
+                case 'opportunity_translated':
+                case 'opportunity_approve':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+
+                    if (Nh_User::get_user_role() === Nh_User::OWNER) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    } elseif (Nh_User::get_user_role() === Nh_User::CMS) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = __($notification->content, 'ninja');
+                    }
+
+                    $formatted->ID        = $notification->ID;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+                    break;
+
+                case 'opportunity_hold':
+                case 'opportunity_cancel':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+                    $formatted->ID        = $notification->ID;
+                    $formatted->title     = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+
+                    break;
+
+                case 'opportunity_content_verified':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+
+                    if (Nh_User::get_user_role() === Nh_User::OWNER) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    } elseif (Nh_User::get_user_role() === Nh_User::SEO) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = __($notification->content, 'ninja');
+                    }
+
+                    $formatted->ID        = $notification->ID;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+                    break;
+
+                case 'opportunity_seo_verified':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+
+                    if (Nh_User::get_user_role() === Nh_User::OWNER) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    } elseif (Nh_User::get_user_role() === Nh_User::TRANSLATOR) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = __($notification->content, 'ninja');
+                    }
+
+                    $formatted->ID        = $notification->ID;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+                    break;
+
+                case 'opportunity_published':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $opportunity     = $opportunity_obj->get_by_id((int)$opportunity_id);
+                    $user_obj = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+                    $from = is_wp_error($user_obj) ? 'B2B' : $user_obj->first_name;
+
+                    if (is_wp_error($opportunity)) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+
+                    if (Nh_User::get_user_role() === Nh_User::OWNER) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    } elseif (Nh_User::get_user_role() === Nh_User::ADMIN) {
+                        $formatted->title   = __($notification->title, 'ninja');
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title  );
+                    } elseif (Nh_User::get_user_role() === Nh_User::INVESTOR) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    }
+
+                    $formatted->ID        = $notification->ID;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->thumbnail = Nh_Hooks::PATHS['public']['img'] . "/brand/b2b-capital-dark-logo.webp";
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+                    break;
+
+                case 'bidding':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+
+                    if (!$opportunity_id) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+                    $opportunity          = $opportunity_obj->get_by_id($opportunity_id);
+                    $formatted->ID        = $notification->ID;
                     $formatted->title     = __($notification->title, 'ninja');
-                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $notification->meta_data['notification_data']['from'], $opportunity->title);
+                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $opportunity->title);
                     $formatted->thumbnail = $opportunity->thumbnail;
                     $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
                     $formatted->date      = $this->time_elapsed_string($notification->created_date);
                     $formatted->new       = (int)$notification->meta_data['new'];
+
+                    if (Nh_User::get_user_role() === Nh_User::ADMIN) {
+                        $formatted->title   = sprintf(__($notification->title, 'ninja'), $opportunity->title);
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title);
+                    }
+
+                    break;
+                case 'investment':
+                case 'acquisition':
+                    $opportunity_obj = new Nh_Opportunity();
+                    $opportunity_id  = wpml_object_id_filter($notification->meta_data['notification_data']['opportunity_id'], $opportunity_obj->type, FALSE, NH_lANG);
+                    $from = Nh_User::get_user_by('ID', (int)$notification->meta_data['notification_data']['from']);
+
+                    if (!$opportunity_id) {
+                        $notification->delete();
+                        $formatted->ID        = 0;
+                        $formatted->title     = __('Unavailable', 'ninja');
+                        $formatted->content   = __('Content is Unavailable', 'ninja');
+                        $formatted->thumbnail = '#';
+                        $formatted->url       = 'javascript(0);';
+                        $formatted->date      = '';
+                        $formatted->new       = 0;
+                        break;
+                    }
+
+                    $opportunity          = $opportunity_obj->get_by_id($opportunity_id);
+                    $formatted->ID        = $notification->ID;
+                    $formatted->title     = __($notification->title, 'ninja');
+                    $formatted->content   = sprintf(__($notification->content, 'ninja'), $opportunity->title);
+                    $formatted->thumbnail = $opportunity->thumbnail;
+                    $formatted->url       = apply_filters('nhml_permalink', $opportunity->link);
+                    $formatted->date      = $this->time_elapsed_string($notification->created_date);
+                    $formatted->new       = (int)$notification->meta_data['new'];
+
+                    if (Nh_User::get_user_role() === Nh_User::ADMIN) {
+                        $formatted->title   = __($notification->title, 'ninja');
+                        $formatted->content = sprintf(__($notification->content, 'ninja'), $from, $opportunity->title);
+                    }
+
                     break;
                 default:
                     break;
@@ -361,11 +1083,9 @@
 
             $notifications = $this->load_more([ 'publish' ], $page, 10, 'DESC', [ $user_ID ]);
 
-            $last = FALSE;
-
-            if ($page * 10 >= $notifications['count']) {
-                $last = TRUE;
-            }
+            // if ($page * 10 >= $notifications['count']) {
+            $last = TRUE;
+            // }
 
             ob_start();
             foreach ($notifications as $key => $notification) {
@@ -463,5 +1183,202 @@
                 $string = array_slice($string, 0, 1);
 
             return $string ? implode(', ', $string) . ' ' . __('ago', 'ninja') : __('just now', 'ninja');
+        }
+
+        public function item_clear_notifications_ajax(): void
+        {
+            global $user_ID;
+            $form_data                     = $_POST['data'];
+            $post_id                       = (int)sanitize_text_field($form_data['post_id']);
+            $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
+            $_POST["g-recaptcha-response"] = $recaptcha_response;
+
+            if (!wp_verify_nonce($form_data['notification_item_clear_nonce'], Nh::_DOMAIN_NAME . "_notification_item_clear_nonce_form")) {
+                new Nh_Ajax_Response(FALSE, __("Something went wrong!.", 'ninja'));
+            }
+
+            $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_notification_item_clear');
+
+            if ($check_result !== TRUE) {
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+            }
+
+            wp_delete_post($post_id, TRUE);
+
+            $posts = new \WP_Query([
+                "post_type"      => $this->module,
+                "post_status"    => 'any',
+                "posts_per_page" => -1,
+                'author'         => $user_ID
+            ]);
+
+            ob_start();
+            if (!empty($posts->get_posts())) {
+                foreach ($posts->get_posts() as $notification) {
+                    $notification = $this->convert($notification);
+                    get_template_part('app/Views/template-parts/notifications/notification', 'list-ajax', [ 'data' => $notification ]);
+
+                }
+            } else {
+                get_template_part('app/Views/template-parts/notifications/notification', 'empty');
+            }
+
+            $html = ob_get_clean();
+
+            new Nh_Ajax_Response(TRUE, __('Successful Response!', 'ninja'), [
+                'html' => $html,
+            ]);
+        }
+
+        public function send_email(string $type = '', array $data = []): void
+        {
+            switch ($type) {
+                case 'opportunity_new':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('New Opportunity')
+                                    ->template('opportunity-new/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_approve':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-approve/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_hold':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-hold/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_cancel':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-cancel/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_content_verified':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-content-verified/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_seo_verified':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-seo-verified/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_translated':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Status')
+                                    ->template('opportunity-translated/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'opportunity_published':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject('Opportunity Published')
+                                    ->template('opportunity-published/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'bidding':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject(sprintf('New Bidding - %s', $data['opportunity']->title))
+                                    ->template('opportunity-bidding/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+
+                    break;
+                case 'acquisition':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject(sprintf('New Acquisition - %s', $data['opportunity']->title))
+                                    ->template('opportunity-acquisition/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                case 'investment':
+                    $email = Nh_Mail::init()
+                                    ->to($data['to_email'])
+                                    ->subject(sprintf('New Investment - %s', $data['opportunity']->title))
+                                    ->template('opportunity-investment/body', [
+                                        'data' => [
+                                            'role'        => $data['role'],
+                                            'user'        => $data['user'],
+                                            'opportunity' => $data['opportunity']
+                                        ]
+                                    ])
+                                    ->send();
+                    break;
+                default:
+                    break;
+            }
         }
     }

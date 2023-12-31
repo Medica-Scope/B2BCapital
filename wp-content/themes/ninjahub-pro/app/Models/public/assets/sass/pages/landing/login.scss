@@ -1,0 +1,28 @@
+@import '../../base/variables';
+
+/* Login Page Styles Start Here */
+body {
+	color: $primary-dark;
+	footer {
+		display: none !important;
+	}
+}
+main {
+	height: 100%;
+	.login-section {
+		height: 100vh;
+		max-width: 920px;
+		overflow-y: scroll;
+		background-color: $layout-light;
+		.form-check {
+			padding: 0;
+		}
+		.section-footer {
+			margin-top: 3rem;
+			border-top: 1px solid $layout;
+		}
+	}
+	.login-animation {
+		height: 100vh;
+	}
+}

@@ -12,7 +12,7 @@
     <?= $data['user']->first_name ?>,
 </p>
 
-<p>We have received a request to reset your password for Nh. To ensure the security of your account, please
+<p>We have received a request to reset your password for B2b. To ensure the security of your account, please
    follow the instructions below to reset your password: </p>
 
 <p>Click on the following link to access the password reset page: <a href="<?= $data['url_query'] ?>"><?= $data['url_query'] ?></a>

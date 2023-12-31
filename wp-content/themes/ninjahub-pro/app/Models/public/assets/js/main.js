@@ -11,12 +11,13 @@
 import $ from 'jquery';
 
 // import theme modules
+// import '@dotlottie/player-component';
 
 class NhMain
 {
     constructor()
     {
-        window.KEY = nhGlobals.domain_key;
+        window.KEY    = nhGlobals.domain_key;
         window.ITIOBJ = {};
         this.initialization();
     }
@@ -48,4 +49,3 @@ class NhMain
 }
 
 new NhMain();
-

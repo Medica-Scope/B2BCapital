@@ -110,7 +110,7 @@ if ( ! function_exists( 'gglcptch_init' ) ) {
 
 		$is_user_edit_page = isset( $pagenow ) && 'user-edit.php' == $pagenow;
 		$is_admin = is_admin() && ( ! defined( 'DOING_AJAX' ) || ! $is_user_edit_page );
-		
+
 		/* Call register settings function */
 		if ( ! $is_admin || ( isset( $_GET['page'] ) && 'google-captcha.php' == $_GET['page'] ) ) {
 			register_gglcptch_settings();
@@ -292,7 +292,7 @@ if ( ! function_exists( 'gglcptch_add_scripts' ) ) {
 
 		$options = array(
 			'version'	=> $gglcptch_options['recaptcha_version'],
-			'sitekey'	=> $gglcptch_options['public_key'],			
+			'sitekey'	=> $gglcptch_options['public_key'],
 			'error'		=> sprintf( '<strong>%s</strong>:&nbsp;%s', __( 'Warning', 'google-captcha' ), gglcptch_get_message( 'multiple_blocks' ) ),
             'disable'   => $gglcptch_options['disable_submit_button']
 		);
@@ -519,7 +519,7 @@ if ( ! function_exists( 'gglcptch_add_settings_page' ) ) {
 		global $gglcptch_plugin_info;
 		/*pls */
 		require_once( dirname( __FILE__ ) . '/includes/pro_banners.php' );
-		/* pls*/ 
+		/* pls*/
 		if ( 'google-captcha.php' == $_GET['page'] ) {
 			if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
 				require_once( dirname( __FILE__ ) . '/bws_menu/class-bws-settings.php' );

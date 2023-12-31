@@ -1,155 +1,148 @@
-/**
- * @Filename: _notifications.scss
- * @Description:
- * @User: NINJA MASTER - Mustafa Shaaban
- * @Date: 7/6/2023
- */
-
+@import '../../base/variables';
 .ninja-notifications {
-  position: relative;
+	position: relative;
 
-  .ninja-notification-list {
-    display: none;
-    position: absolute;
-    left: 0;
-    width: 365px;
-    height: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 100;
-    background-color: #FFF;
-    border: 1px solid #CCC;
-    padding: 15px 0;
+	.ninja-notification-list {
+		display: none;
+		position: absolute;
+		right: 0;
+		width: 400px;
+		height: 400px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		z-index: 100;
+		background-color: $layout-light;
+		border: none;
+		border-radius: 5px;
+		padding: 15px;
 
-    .ninja-notification-group-container {
-      height: 100%;
+		.ninja-notification-group-container {
+			height: 100%;
 
-      .ninja-notification-clear-parent {
-        text-align: right;
-        border-bottom: .2px solid #ccc;
-        padding-bottom: 15px;
-      }
+			.ninja-notification-clear-parent {
+				text-align: right;
+				border-bottom: 2px dashed $gray-light;
+				padding-bottom: 15px;
+				i {
+					font-size: 14px;
+				}
+			}
 
-      .ninja-notification-item {
-        padding: 10px;
+			.ninja-notification-item {
+				padding: 10px;
 
-        .ninja-notification-image {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
+				.ninja-notification-image {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100%;
 
-          img {
-            width: 100%;
-            border-radius: 50%;
-          }
-        }
+					img {
+						width: 100%;
+						border-radius: 50%;
+					}
+				}
 
-        a {
-          text-decoration: none;
-          color: #000;
+				a {
+					text-decoration: none;
+					color: $black;
+				}
 
-        }
+				&:hover {
+					background-color: $gray-light;
+				}
+			}
 
-        &:hover {
-          background-color: #CCC;
-        }
-      }
+			.ninja-notification-item-load {
+				background-color: $layout-light;
+				width: 100%;
+			}
 
-      .ninja-notification-item-load {
-        background-color: #fff;
-        width: 100%;
-      }
+			.ninja-notification-item-load p {
+				width: 100%;
+				height: 80px;
+			}
 
-      .ninja-notification-item-load p {
-        width: 100%;
-        height: 80px;
-      }
+			.ninja-notification-item-load span {
+				display: block;
+				width: 30%;
+				height: 25px;
+			}
 
-      .ninja-notification-item-load span {
-        display: block;
-        width: 30%;
-        height: 25px;
-      }
+			.ninja-notification-item-load .ninja-notification-image span {
+				display: block;
+				width: 100%;
+				height: 35px;
+			}
 
-      .ninja-notification-item-load .ninja-notification-image span {
-        display: block;
-        width: 100%;
-        height: 35px;
-      }
+			.ninja-notification-item-load h6 {
+				width: 75%;
+				height: 25px;
+			}
 
-      .ninja-notification-item-load h6 {
-        width: 75%;
-        height: 25px;
-      }
+			.ninja-notification-item-load p,
+			.ninja-notification-item-load span,
+			.ninja-notification-item-load h6 {
+				animation: fbLoading 1s infinite;
+				border-radius: 20px;
+			}
 
-      .ninja-notification-item-load p,
-      .ninja-notification-item-load span,
-      .ninja-notification-item-load h6 {
-        animation: fbLoading 1s infinite;
-        border-radius: 20px;
-      }
+			.ninja-notification-item:not(:last-child) {
+				border-bottom: 2px dashed $gray-medium;
+			}
 
-      .ninja-notification-item:not(:last-child) {
-        border-bottom: .2px solid #CCC;
+			.ninja-new-notification {
+				background-color: $gray-medium;
+			}
 
-      }
-
-      .ninja-new-notification {
-        background-color: #EFEFEF;
-      }
-
-      .ninja-notification-group-empty {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-      }
-
-    }
-  }
+			.ninja-notification-group-empty {
+				display: flex;
+				width: 100%;
+				height: 100%;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
 }
 
-
-
 @keyframes fbLoading {
-  0% {
-    background-color: #F6F7F8;
-  }
-  50% {
-    background-color: #EAEDEF;
-  }
-  100% {
-    background-color: #F6F7F8;
-  }
+	0% {
+		background-color: #f6f7f8;
+	}
+	50% {
+		background-color: #eaedef;
+	}
+	100% {
+		background-color: #f6f7f8;
+	}
 }
 
 .ninja-notification-item-load p {
-  width: 100%;
-  height: 80px;
+	width: 100%;
+	height: 80px;
 }
 
 .ninja-notification-item-load span {
-  display: block;
-  width: 30%;
-  height: 25px;
+	display: block;
+	width: 30%;
+	height: 25px;
 }
 
 .ninja-notification-item-load .ninja-notification-image span {
-  display: block;
-  width: 100%;
-  height: 35px;
+	display: block;
+	width: 100%;
+	height: 35px;
 }
 
 .ninja-notification-item-load h6 {
-  width: 75%;
-  height: 25px;
+	width: 75%;
+	height: 25px;
 }
 
 .ninja-notification-item-load p,
 .ninja-notification-item-load span,
 .ninja-notification-item-load h6 {
-  animation: fbLoading 1s infinite;
-  border-radius: 20px;
+	animation: fbLoading 1s infinite;
+	border-radius: 20px;
 }

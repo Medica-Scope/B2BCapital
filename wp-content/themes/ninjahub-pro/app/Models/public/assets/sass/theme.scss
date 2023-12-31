@@ -1,0 +1,177 @@
+/* Imports */
+
+/* Imports to customize bootstrap START */
+// Colors
+@import './base/variables';
+// Bootstrap
+@import '../../../../../node_modules//bootstrap/scss/bootstrap.scss';
+/* Imports to customize bootstrap END */
+
+// Badges
+@import './base/badges';
+// Buttons
+@import './base/buttons';
+// Spacing
+@import './base/spacing';
+// Fonts
+@import './base/typography';
+// Mixins
+@import './base/mixins';
+// Forms
+@import './base/forms';
+// Animations
+@import './base/animations';
+
+@import './components/footer.scss';
+
+/* Some Resets */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	&:link,
+	&:hover,
+	&:visited,
+	&:active {
+		text-decoration: none;
+	}
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+/* HTML Styles Start Here */
+html {
+	width: 100vw;
+	height: 100vh;
+	font-size: 10px;
+	@include normal-screen {
+		font-size: 14px;
+	}
+	@include large-screen {
+		font-size: 16px;
+	}
+}
+
+/* Body Styles Start Here */
+body {
+	direction: ltr;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	color: $primary-dark;
+	line-height: 1.5;
+	background-color: $layout;
+	font-family: $bbc-primary-en-font-regular;
+
+	.otgs-development-site-front-end {
+		display: none !important;
+	}
+
+	/* Body Arabic Styles Start Here */
+	&.rtl {
+		direction: rtl;
+		text-align: right;
+	}
+}
+
+/***** All Scrollbars Styles Start Here *****/
+/* Any Scrollbar Width & Height */
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+/* Any Scrollbar Track Color */
+::-webkit-scrollbar-track {
+	//border-radius: 2px;
+	background: rgba($layout-medium, 0.25);
+}
+
+/* Vertical Scrollbar Handle Color */
+::-webkit-scrollbar-thumb {
+	//border-radius: 2px;
+	background: $primary;
+}
+
+/* Vertical Scrollbar Handle Color On Hover */
+::-webkit-scrollbar-thumb:hover {
+	background: darken($primary, 15%);
+}
+
+.app-brand {
+	display: inline-block;
+	width: 5rem;
+	margin-bottom: 1.5rem;
+	@include large-screen {
+		width: 8.8rem;
+	}
+}
+
+.section-header {
+	margin-bottom: 3rem;
+}
+
+.section-title {
+	font-family: $bbc-primary-en-font-regular;
+	font-size: 34px;
+}
+
+.container-xxl {
+	@include xLarge-screen {
+		max-width: 1600px;
+	}
+}
+
+.nh-hidden {
+	display: none;
+}
+
+.rc-anchor,
+.hidden-tag {
+	display: none !important;
+}
+
+.breadcrumbs {
+	color: $gray-medium;
+	a {
+		color: $gray-medium;
+	}
+	.bbc-chevron-right,
+	.bbc-chevron-left {
+		font-size: 0.8rem;
+		color: rgba($gray-medium, 0.5);
+	}
+}
+
+.offcanvas {
+	background-color: $primary-semi-dark;
+	.offcanvas-header {
+		padding-top: 6rem;
+	}
+	.offcanvas-body {
+		.bbc-default-menu-container {
+			width: fit-content;
+			.menu-item {
+				margin-bottom: 1rem;
+				.nav-link {
+					color: $layout-light;
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+		}
+	}
+}

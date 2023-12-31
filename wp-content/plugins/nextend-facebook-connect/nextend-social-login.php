@@ -20,9 +20,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.9';
+    public static $version = '3.1.11';
 
-    public static $nslPROMinVersion = '3.1.9';
+    public static $nslPROMinVersion = '3.1.11';
 
     public static $proxyPage = false;
 
@@ -497,11 +497,12 @@ class NextendSocialLogin {
             add_filter('jetpack_sso_bypass_login_forward_wpcom', '__return_false');
 
             /**
-             * Fix: our autologin after the registration prevents WooRewards (MyRewards) plugin from awarding the points for the registration
-             * so we need to make our autologin happen after WooRewards have already awarded the points. They use 999999 priority.
+             * Fix: our autologin after the registration prevents WooRewards (MyRewards) and Ultimate Affiliate Pro plugins from awarding the points for the registration
+             * so we need to make our autologin happen after they have already awarded the points. They use 999999 and 99 priority respectively.
              * @url https://plugins.longwatchstudio.com/product/woorewards/
+             * @url2 https://affiliate.wpindeed.com/
              */
-            if (class_exists('LWS_WooRewards')) {
+            if (class_exists('LWS_WooRewards') || class_exists('UAP_Main')) {
                 add_filter('nsl_autologin_priority', function () {
                     return 10000000;
                 });
@@ -528,8 +529,8 @@ class NextendSocialLogin {
             if (defined('WP_2FA_VERSION')) {
                 if (self::$settings->get('login_restriction')) {
                     add_filter('wp_2fa_skip_2fa_login_form', function ($skip, $user) {
-                        if (class_exists('WP2FA\Authenticator\Login', false)) {
-                            $is_user_using_two_factor = WP2FA\Authenticator\Login::is_user_using_two_factor($user->ID);
+                        if (class_exists('WP2FA\Admin\Helpers\User_Helper', false) && method_exists(WP2FA\Admin\Helpers\User_Helper::class, 'is_user_using_two_factor')) {
+                            $is_user_using_two_factor = WP2FA\Admin\Helpers\User_Helper::is_user_using_two_factor($user->ID);
                             if ($is_user_using_two_factor) {
                                 return $skip;
                             }
@@ -1051,7 +1052,7 @@ class NextendSocialLogin {
             'link'     => 0,
             'unlink'   => 0,
             'heading'  => false,
-            'align'    => 'left',
+            'align'    => 'left'
         ), $atts);
 
         $providers  = false;
@@ -1069,10 +1070,11 @@ class NextendSocialLogin {
             $atts = array_merge(array(
                 'redirect'    => false,
                 'trackerdata' => false,
-                'labeltype'   => 'login'
+                'labeltype'   => 'login',
+                'customlabel' => false
             ), $atts);
 
-            return self::renderButtonsWithContainerAndTitle($atts['heading'], $atts['style'], $providers, $atts['redirect'], $atts['trackerdata'], $atts['align'], $atts['labeltype']);
+            return self::renderButtonsWithContainerAndTitle($atts['heading'], $atts['style'], $providers, $atts['redirect'], $atts['trackerdata'], $atts['align'], $atts['labeltype'], $atts['customlabel']);
         }
 
         $link   = filter_var($atts['link'], FILTER_VALIDATE_BOOLEAN);
@@ -1099,7 +1101,7 @@ class NextendSocialLogin {
         return self::renderButtonsWithContainerAndTitle(false, $style, $providers, $redirect_to, $trackerData, $align, $labelType);
     }
 
-    private static function renderButtonsWithContainerAndTitle($heading = false, $style = 'default', $providers = false, $redirect_to = false, $trackerData = false, $align = 'left', $labelType = 'login') {
+    private static function renderButtonsWithContainerAndTitle($heading = false, $style = 'default', $providers = false, $redirect_to = false, $trackerData = false, $align = 'left', $labelType = 'login', $customLabel = false) {
         if (!is_user_logged_in()) {
 
             /**
@@ -1134,7 +1136,7 @@ class NextendSocialLogin {
             if (count($enabledProviders)) {
                 $buttons = '';
                 foreach ($enabledProviders as $provider) {
-                    $buttons .= $provider->getConnectButton($style, $redirect_to, $trackerData, $labelType);
+                    $buttons .= $provider->getConnectButton($style, $redirect_to, $trackerData, $labelType, $customLabel);
                 }
 
                 if (!empty($heading)) {
@@ -1191,6 +1193,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         }
 
         if ($alternateLoginPage !== false) {
+
             return $alternateLoginPage;
         }
 
@@ -1382,7 +1385,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         static $registerFlowPage = null;
         if ($registerFlowPage === null) {
             $registerFlowPage = intval(self::$settings->get('register-flow-page'));
-            if (empty($registerFlowPage) || get_post($registerFlowPage) === null) {
+            if (empty($registerFlowPage) || get_post($registerFlowPage) === null || get_post_status($registerFlowPage) !== 'publish') {
                 $registerFlowPage = false;
             }
         }
@@ -1394,7 +1397,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         static $proxyPage = null;
         if ($proxyPage === null) {
             $proxyPage = intval(self::$settings->get('proxy-page'));
-            if (empty($proxyPage) || get_post($proxyPage) === null) {
+            if (empty($proxyPage) || get_post($proxyPage) === null || get_post_status($proxyPage) !== 'publish') {
                 $proxyPage = false;
             }
         }

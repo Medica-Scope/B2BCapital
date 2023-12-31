@@ -62,19 +62,26 @@
     "adminScripts": "gulp adminScripts",
     "adminImages": "gulp adminImages",
     "translate": "gulp translate",
-    "all": "gulp publicStyles publicStylesRtl publicScripts publicImages adminStyles adminStylesRtl adminScripts adminImages translate",
+    "all": "gulp publicStyles publicScripts publicImages adminStyles adminStylesRtl adminScripts adminImages translate",
     "bundle": "dir-archiver --src . --dest ../nh.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map yarn.lock"
   },
   "dependencies": {
+    "@dotlottie/player-component": "^2.7.0",
+    "@popperjs/core": "^2.11.8",
+    "@wordpress/data": "^9.13.1",
     "babelify": "^10.0.0",
+    "bootstrap": "^5.3.2",
     "browserify": "^17.0.0",
+    "chart.js": "^4.4.1",
     "event-stream": "^4.0.1",
     "gulp-notify": "^4.0.0",
     "intl-tel-input": "^18.1.6",
     "jquery": "^3.6.4",
     "jquery-validation": "^1.19.5",
     "lodash": "^4.17.21",
+    "tinymce": "^6.7.0",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "wordpress": "^1.4.2"
   }
 }

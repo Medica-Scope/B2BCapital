@@ -1,0 +1,112 @@
+@import '../../base/variables';
+
+.site-header {
+	nav {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+		background-color: $layout-light;
+		border-radius: 4px;
+		padding: 1.5rem;
+		margin-block: 1rem;
+
+		.site-branding {
+			a {
+				display: flex;
+				width: 90px;
+				img {
+					width: 100%;
+					object-fit: contain;
+					-o-object-fit: contain;
+				}
+			}
+		}
+		.bbc-default-menu-container {
+			.navbar-nav {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 2rem;
+				.nav-item {
+					&.active {
+						position: relative;
+						.nav-link {
+							font-weight: bold;
+						}
+						&::after {
+							content: '';
+							position: absolute;
+							height: 3px;
+							width: 24px;
+							background-color: $primary;
+						}
+					}
+					.nav-link {
+						transition: all 0.3s ease-in-out;
+						color: #000;
+						&:hover {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+		}
+		.bbc-logged-in-actions {
+			.navbar-nav {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 1.5rem;
+				i[class^='bbc-'],
+				i[class*=' bbc-'] {
+					font-size: 20px;
+					font-weight: bold;
+				}
+				i[class^='bbc-'],
+				i[class*=' bbc-'],
+				span {
+					color: $primary-dark;
+				}
+				.nav-item {
+					.dropdown-toggle::after{
+						display: none;
+					}
+					.nav-link {
+						span {
+							display: block;
+						}
+					}
+					.btn-profile-desc {
+						font-size: 12px;
+					}
+					&.bbc-user-profile-btn {
+						border-left: 1px solid $layout;
+						padding-left: 1.5rem;
+					}
+				}
+				.ninja-notification-bell {
+					.ninja-notification-count {
+						position: absolute;
+						right: 1px;
+						top: 4px;
+						font-size: 0;
+						line-height: 0;
+						background-color: #0e9cfb;
+						border-radius: 50%;
+						width: 7px;
+						height: 7px;
+					}
+				}
+			}
+		}
+	}
+}
+.page-template-template-page-registration,
+.page-template-template-page-login,
+.page-template-template-page-forgot-password {
+	.site-header {
+		display: none !important;
+	}
+}

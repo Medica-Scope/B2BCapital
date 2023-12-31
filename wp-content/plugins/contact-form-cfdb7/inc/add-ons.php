@@ -35,7 +35,7 @@ function cfdb7_add_ons_get_feed(){
 					'sslverify' => false,
 					'timeout'     => 30,
 				) );
-		
+
 		if ( ! is_wp_error( $feed ) ) {
 			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
 				$cache = wp_remote_retrieve_body( $feed );

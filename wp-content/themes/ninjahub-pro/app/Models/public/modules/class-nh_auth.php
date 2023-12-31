@@ -64,6 +64,9 @@
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_edit_profile_ajax', $this, 'edit_profile_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_edit_password_ajax', $this, 'edit_password_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_logout_ajax', $this, 'logout_ajax');
+
+            $this->hooks->add_action('nsl_register_new_user', $this, 'after_nextend_register');
+
         }
 
         private function filters(): void
@@ -79,11 +82,19 @@
 
         public function wp_body_close(): void
         {
+            global $wp;
             if (is_page([
                 'verification',
                 'authentication',
             ])) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
+            }
+
+            if (is_singular('opportunity') || is_page(['dashboard', 'my-favorite-opportunities', 'my-opportunities', 'my-ignored-opportunities'])) {
+                require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/opportunity-response.php';
+            }
+            if (preg_match( '#^my-account/my-favorite-articles(/.+)?$#', $wp->request ) || preg_match( '#^my-account/my-ignored-articles(/.+)?$#', $wp->request ) || preg_match( '#^blogs(/.+)?$#', $wp->request ) || is_post_type_archive( 'post' ) || is_singular( 'post' )) {
+                require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/article-response.php';
             }
         }
 
@@ -171,7 +182,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_registration');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $this->username     = $phone_number;
@@ -249,7 +260,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_login');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
 
@@ -269,6 +280,11 @@
             if (is_wp_error($user)) {
                 if ($user->get_error_code() === 'account_verification') {
                     $redirect_url = get_permalink(get_page_by_path('my-account/verification'));
+                    new Nh_Ajax_Response(TRUE, __('You have been logged in successfully.', 'ninja'), [
+                        'redirect_url' => apply_filters('nhml_permalink', $redirect_url)
+                    ]);
+                } elseif ($user->get_error_code() === 'empty_industry') {
+                    $redirect_url = get_permalink(get_page_by_path('my-account/industry'));
                     new Nh_Ajax_Response(TRUE, __('You have been logged in successfully.', 'ninja'), [
                         'redirect_url' => apply_filters('nhml_permalink', $redirect_url)
                     ]);
@@ -340,7 +356,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_verification');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user     = self::get_current_user();
@@ -367,7 +383,7 @@
 
             new Nh_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'ninja'), [
                 'redirect_text' => __('GO TO DASHBOARD'),
-                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/industry')))
+                'redirect_url'  => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/industry')))
             ]);
         }
 
@@ -397,7 +413,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_verification');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user = self::get_current_user();
@@ -464,7 +480,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_authentication');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user     = self::get_current_user();
@@ -518,7 +534,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_authentication');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user = self::get_current_user();
@@ -547,7 +563,9 @@
         {
 
             $form_data                     = $_POST['data'];
-            $industries                    = $form_data['industries'];
+            $industries                    = !empty($form_data['industries']) && !is_array($form_data['industries']) ? [ $form_data['industries'] ] : $form_data['industries'];
+            $expected_value                = $form_data['expected_value'];
+            $entity_legal_type             = $form_data['entity_legal_type'];
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -568,14 +586,24 @@
                 new Nh_Ajax_Response(FALSE, __("You have to select at least one industry.", 'ninja'));
             }
 
+            if (empty($expected_value)) {
+                new Nh_Ajax_Response(FALSE, __("Expected value field can't be empty!.", 'ninja'));
+            }
+
+            if (empty($entity_legal_type)) {
+                new Nh_Ajax_Response(FALSE, __("Entity legal type can't be empty!.", 'ninja'));
+            }
+
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_industries');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user                                = Nh_User::get_current_user();
             $user->profile->taxonomy['industry'] = $industries;
+            $user->profile->set_meta_data('expected_value', $expected_value);
+            $user->profile->set_meta_data('entity_legal_type', $entity_legal_type);
             $user->profile->update();
 
 
@@ -620,7 +648,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_forgot_password');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user = $this->forgot_password($user_email_phone);
@@ -678,7 +706,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_reset_password');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             $user = $this->change_password();
@@ -707,15 +735,16 @@
             $form_data                        = $_POST['data'];
             $first_name                       = sanitize_text_field($form_data['first_name']);
             $last_name                        = sanitize_text_field($form_data['last_name']);
-//            $phone_number                     = sanitize_text_field($form_data['phone_number']);
+            $phone_number                     = sanitize_text_field($form_data['phone_number']);
             $user_email                       = sanitize_text_field($form_data['user_email']);
             $site_language                    = sanitize_text_field($form_data['site_language']);
-            $widget_list                      = !is_array($form_data['widget_list']) ? [] : $form_data['widget_list'];
-            $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
-            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [] : $form_data['preferred_opportunities_cat_list'];
+            $widget_list                      = !is_array($form_data['widget_list']) ? [ $form_data['widget_list'] ] : $form_data['widget_list'];
+            $preferred_opportunities_cat_list = !is_array($form_data['preferred_opportunities_cat_list']) ? [ $form_data['preferred_opportunities_cat_list'] ] : $form_data['preferred_opportunities_cat_list'];
+            $preferred_articles_cat_list      = !is_array($form_data['preferred_articles_cat_list']) ? [ $form_data['preferred_articles_cat_list'] ] : $form_data['preferred_articles_cat_list'];
+            $verification_type                = empty(sanitize_text_field($form_data['verification_type'])) ? 'email' : sanitize_text_field($form_data['verification_type']);
             $recaptcha_response               = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"]    = $recaptcha_response;
-
+            $redirect                         = FALSE;
             if (empty($form_data)) {
                 new Nh_Ajax_Response(FALSE, __("Profile data can't be empty.", 'ninja'));
             }
@@ -732,10 +761,9 @@
                 new Nh_Ajax_Response(FALSE, __("The last name field is empty!.", 'ninja'));
             }
 
-            // TODO:: To be enabled in version 2
-//            if (empty($phone_number)) {
-//                new Nh_Ajax_Response(FALSE, __("The phone number field is empty!.", 'ninja'));
-//            }
+            if (empty($phone_number)) {
+                new Nh_Ajax_Response(FALSE, __("The phone number field is empty!.", 'ninja'));
+            }
 
             if (empty($user_email)) {
                 new Nh_Ajax_Response(FALSE, __("The E-mail field shouldn't be empty!.", 'ninja'));
@@ -744,7 +772,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_edit_profile');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
 
@@ -780,10 +808,37 @@
             }
 
             // TODO:: Widget Lists
+            $relative_widget_list = $widget_list;
+            foreach ($relative_widget_list as $widget) {
+                foreach (Nh_Public::get_available_languages() as $lang) {
+                    if ($lang['code'] !== NH_lANG) {
+                        // Get the term's ID in the French language
+                        $translated_term_id = wpml_object_id_filter($widget, 'post', FALSE, $lang['code']);
+                        if ($translated_term_id) {
+                            $relative_widget_list[] = $translated_term_id;
+                        }
+                    }
 
+                }
 
-            $current_user_obj               = Nh_User::get_current_user();
-//            $current_user_obj->username     = $phone_number;
+            }
+
+            $current_user_obj = Nh_User::get_current_user();
+
+            if ($current_user_obj->profile->ID === 0) {
+                $profile         = new Nh_Profile(); // Create a new Nh_Profile object.
+                $profile->title  = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)); // Set the profile title.
+                $profile->author = $current_user_obj->ID; // Set the profile author.
+                $profile->insert(); // Insert the profile into the system.
+                update_user_meta($current_user_obj->ID, 'profile_id', $profile->ID);
+            }
+
+            $current_user_obj = Nh_User::get_current_user();
+
+            if ($current_user_obj->user_meta['site_language'] !== $site_language) {
+                $redirect = TRUE;
+            }
+            $current_user_obj->username     = $phone_number;
             $current_user_obj->email        = $user_email;
             $current_user_obj->display_name = ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name));
             $current_user_obj->first_name   = ucfirst(strtolower($first_name));
@@ -792,9 +847,10 @@
             $current_user_obj->set_user_meta('first_name', ucfirst(strtolower($first_name)));
             $current_user_obj->set_user_meta('last_name', ucfirst(strtolower($last_name)));
             $current_user_obj->set_user_meta('nickname', ucfirst(strtolower($first_name)) . ' ' . ucfirst(strtolower($last_name)));
-//            $current_user_obj->set_user_meta('phone_number', $phone_number);
+            $current_user_obj->set_user_meta('phone_number', $phone_number);
             $current_user_obj->set_user_meta('site_language', $site_language);
-            $current_user_obj->profile->set_meta_data('widget_list', $widget_list);
+            $current_user_obj->set_user_meta('verification_type', $verification_type);
+            $current_user_obj->profile->set_meta_data('widget_list', $relative_widget_list);
             $current_user_obj->profile->set_meta_data('preferred_opportunities_cat_list', $relative_preferred_opportunities_cat_list);
             $current_user_obj->profile->set_meta_data('preferred_articles_cat_list', $relative_preferred_articles_cat_list);
 
@@ -812,7 +868,8 @@
             }
 
             new Nh_Ajax_Response(TRUE, __('Your profile has been updated successfully', 'ninja'), [
-                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account')))
+                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account'))),
+                'redirect'     => $redirect
             ]);
         }
 
@@ -872,7 +929,7 @@
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_edit_profile');
 
             if ($check_result !== TRUE) {
-                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja'));/* the reCAPTCHA answer  */
+                new Nh_Ajax_Response(FALSE, __($check_result, 'ninja')); /* the reCAPTCHA answer  */
             }
 
             wp_set_password($new_password, $current_user->ID);
@@ -931,10 +988,19 @@
             // prevent accessing the sensitive pages
             if (is_page([
                     'my-account',
+                    'change-password',
+                    'my-opportunities',
+                    'my-bids',
+                    'my-investments',
+                    'my-widgets',
+                    'my-notifications',
+                    'my-favorite-opportunities',
                     'verification',
                     'authentication',
                     'industry',
-                    'dashboard'
+                    'dashboard',
+                    'create-opportunity',
+                    'create-opportunity-step-2'
                 ]) && !is_user_logged_in()) {
                 $url = apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/login')));
                 wp_safe_redirect($url);
@@ -1017,21 +1083,43 @@
 
             /**
              * Temp if there is an error wit redirections
-             */ //            if (is_user_logged_in()) {
-            //                $site_language = get_user_meta($user_ID, 'site_language', TRUE);
-            //                $current_url = home_url(add_query_arg([], $wp->request)); // Get the current URL
-            //
-            //                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
-            //                if (!str_contains($current_url, "/$site_language/") && !str_contains($current_url, "?lang=$site_language")) {
-            //                    $current_protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-            //                    $full_url  = $current_protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            //                    $redirect_url = apply_filters('wpml_permalink', $full_url, $site_language); // Get the Arabic version of the current page or post URL.
-            //                    if ($redirect_url) {
-            //                        wp_redirect($redirect_url);
-            //                        exit;
-            //                    }
-            //                }
-            //            }
+             */
+            if (is_user_logged_in()) {
+                $site_language     = get_user_meta($user_ID, 'site_language', TRUE);
+                $default_site_lang = apply_filters('wpml_default_language', NULL);
+                $current_url       = home_url(add_query_arg([], $wp->request)); // Get the current URL
+
+                // Check if the current URL contains the Arabic slug ("/ar/") or the language parameter ("?lang=ar").
+                if (!str_contains($current_url, "/$site_language/") && !str_contains($current_url, "?lang=$site_language") && $site_language !== $default_site_lang) {
+                    $current_protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+                    $full_url         = $current_protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                    $redirect_url     = apply_filters('wpml_permalink', $full_url, $site_language); // Get the Arabic version of the current page or post URL.
+                    if ($redirect_url) {
+                        wp_safe_redirect($redirect_url);
+                        exit;
+                    }
+                }
+            }
+
+        }
+
+        public function after_nextend_register($user_id)
+        {
+            $profile_obj         = new Nh_Profile();
+            $profile_obj->author = $user_id;
+            $wp_user_obj         = get_user_by('id', $user_id);
+            if(!empty($_COOKIE['user_type'])){
+                $wp_user_obj->set_role($_COOKIE['user_type']);
+            }
+            $profile_obj->title = $wp_user_obj->display_name;
+            $profile_obj->insert();
+            $user = Nh_User::get_user_by('id', $user_id);
+            $user->set_user_meta('email_verification_status', 1, TRUE);
+            $user->set_user_meta('account_authentication_status', 1, TRUE);
+            $user->set_user_meta('account_verification_status', 1, TRUE);
+            $user->set_user_meta('verification_key', '', TRUE);
+            $user->set_user_meta('verification_expire_date', '', TRUE);
+            $user->update();
 
         }
     }

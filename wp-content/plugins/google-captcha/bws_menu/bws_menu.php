@@ -314,7 +314,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 				<div class="bws-menu-item-icon">&#8226;&#8226;&#8226;</div>
 				<div class="bws-nav-tab-wrapper">
 					<?php if ( $is_main_page ) { ?>
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( 'bws_panel' === $page ) {
 							echo esc_attr( ' bws-nav-tab-active' );
@@ -326,14 +326,14 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 							?>
 						</a>
 						<!-- pls -->
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( 'bws_themes' === $page ) {
 							echo esc_attr( ' bws-nav-tab-active' );
 						}
 						?>
 						" href="<?php echo esc_url( self_admin_url( 'admin.php?page=bws_themes' ) ); ?>"><?php esc_html_e( 'Themes', 'bestwebsoft' ); ?></a>
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( 'bws_system_status' === $page ) {
 							echo esc_attr( ' bws-nav-tab-active' );
@@ -345,7 +345,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 							?>
 						</a>
 					<?php } else { ?>
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( ! isset( $_GET['tab'] ) ) {
 							echo esc_attr( ' bws-nav-tab-active' );
@@ -356,7 +356,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 							esc_html_e( 'Plugins', 'bestwebsoft' );
 							?>
 						</a>
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( 'themes' === $tab ) {
 							echo esc_attr( ' bws-nav-tab-active' );
@@ -367,7 +367,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 							esc_html_e( 'Themes', 'bestwebsoft' );
 							?>
 						</a>
-						<a class="bws-nav-tab 
+						<a class="bws-nav-tab
 						<?php
 						if ( 'system-status' === $tab ) {
 							echo esc_attr( ' bws-nav-tab-active' );
@@ -407,13 +407,13 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 								<input disabled="disabled" type="submit" class="bws-button" value="<?php esc_html_e( 'Check license key', 'bestwebsoft' ); ?>" />
 							<?php } else { ?>
 								<div class="bws_form_input_wrap">
-									<input 
+									<input
 									<?php
 									if ( '' !== $error ) {
 										echo 'class="bws_input_error"';}
 									?>
 										type="text" placeholder="<?php esc_html_e( 'Enter your license key', 'bestwebsoft' ); ?>" maxlength="100" name="bws_license_key" value="<?php echo esc_attr( $bws_license_key ); ?>" />
-									<div class="bws_error" 
+									<div class="bws_error"
 									<?php
 									if ( '' === $error ) {
 										echo 'style="display:none"';}
@@ -437,7 +437,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 			<!-- end pls -->
 			<div class="bws-wrap-content wrap">
 				<?php if ( 'bws_panel' === $page || ( ! isset( $_GET['tab'] ) && ! $is_main_page ) ) { ?>
-					<div class="updated notice is-dismissible inline" 
+					<div class="updated notice is-dismissible inline"
 					<?php
 					if ( '' === $message || '' !== $error ) {
 						echo 'style="display:none"';}
@@ -474,7 +474,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 
 						$url = $plugins_array[ $bws_license_plugin ]['link'] . '&download_from=5';
 						?>
-						<h2><?php esc_html_e( 'Download Pro Plugin', 'bestwebsoft' ); ?></h2>		
+						<h2><?php esc_html_e( 'Download Pro Plugin', 'bestwebsoft' ); ?></h2>
 						<p>
 							<strong><?php esc_html_e( 'Your Pro plugin is ready', 'bestwebsoft' ); ?></strong>
 							<br>
@@ -488,7 +488,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 							<strong><?php esc_html_e( 'Need help installing the plugin?', 'bestwebsoft' ); ?></strong>
 							<br>
 							<a target="_blank" href="https://bestwebsoft.com/documentation/how-to-install-a-wordpress-product/how-to-install-a-wordpress-plugin/"><?php esc_html_e( 'How to install WordPress plugin from your admin Dashboard (ZIP archive)', 'bestwebsoft' ); ?></a>
-						</p>						
+						</p>
 						<p>
 							<strong><?php esc_html_e( 'Get Started', 'bestwebsoft' ); ?></strong>
 							<br>
@@ -518,7 +518,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 						?>
 						<ul class="subsubsub">
 							<li>
-								<a 
+								<a
 								<?php
 								if ( ! isset( $_GET['sub'] ) ) {
 									echo 'class="current" ';}
@@ -526,7 +526,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 								href="<?php echo esc_url( self_admin_url( $category_href ) ); ?>"><?php esc_html_e( 'All', 'bestwebsoft' ); ?></a>
 							</li> |
 							<li>
-								<a 
+								<a
 								<?php
 								if ( isset( $_GET['sub'] ) && 'installed' === sanitize_text_field( wp_unslash( $_GET['sub'] ) ) ) {
 									echo 'class="current" ';}
@@ -534,7 +534,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 								href="<?php echo esc_url( self_admin_url( $category_href . '&sub=installed' ) ); ?>"><?php esc_html_e( 'Installed', 'bestwebsoft' ); ?></a>
 							</li> |
 							<li>
-								<a 
+								<a
 								<?php
 								if ( isset( $_GET['sub'] ) && 'not_installed' === sanitize_text_field( wp_unslash( $_GET['sub'] ) ) ) {
 									echo 'class="current" ';}
@@ -553,7 +553,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 								<ul class="bws-category">
 									<li>
 										<?php $sub_in_url = ( isset( $_GET['sub'] ) && in_array( sanitize_text_field( wp_unslash( $_GET['sub'] ) ), array( 'installed', 'not_installed' ) ) ) ? '&sub=' . sanitize_text_field( wp_unslash( $_GET['sub'] ) ) : ''; ?>
-										<a 
+										<a
 										<?php
 										if ( 'all' === $plugin_category ) {
 											echo ' class="bws-active"';}
@@ -564,7 +564,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 									</li>
 									<?php foreach ( $bws_plugins_category as $category_key => $category_value ) { ?>
 										<li>
-											<a 
+											<a
 											<?php
 											if ( $category_key === $plugin_category ) {
 												echo ' class="bws-active"';}
@@ -726,7 +726,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 								<ul class="bws-category">
 									<li>
 										<?php $sub_in_url = ( isset( $_GET['sub'] ) && in_array( sanitize_text_field( wp_unslash( $_GET['sub'] ) ), array( 'installed', 'not_installed' ) ) ) ? '&sub=' . sanitize_text_field( wp_unslash( $_GET['sub'] ) ) : ''; ?>
-										<a 
+										<a
 										<?php
 										if ( 'all' === $plugin_category ) {
 											echo ' class="bws-active"';}
@@ -737,7 +737,7 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 									</li>
 									<?php foreach ( $bws_plugins_category as $category_key => $category_value ) { ?>
 										<li>
-											<a 
+											<a
 											<?php
 											if ( $category_key === $plugin_category ) {
 												echo ' class="bws-active"';}
@@ -793,13 +793,13 @@ if ( ! function_exists( 'bws_add_menu_render' ) ) {
 					</div>
 				<?php } elseif ( 'bws_system_status' === $page || 'system-status' === $tab ) { ?>
 					<h1><?php esc_html_e( 'System status', 'bestwebsoft' ); ?></h1>
-					<div class="updated fade notice is-dismissible inline" 
+					<div class="updated fade notice is-dismissible inline"
 					<?php
 					if ( ! ( isset( $_REQUEST['bwsmn_form_submit'] ) || isset( $_REQUEST['bwsmn_form_submit_custom_email'] ) ) || '' !== $error ) {
 						echo 'style="display:none"';}
 					?>
 					><p><strong><?php echo esc_html( $message ); ?></strong></p></div>
-					<div class="error" 
+					<div class="error"
 					<?php
 					if ( '' === $error ) {
 						echo 'style="display:none"';}

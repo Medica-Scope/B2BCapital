@@ -208,4 +208,22 @@ class User {
 	public static function isAdministrator( \WP_User $user = null ) {
 		return self::hasCap( self::CAP_ADMINISTRATOR, $user );
 	}
+
+	/**
+	 * @param \WP_User|null $user User to check. Using current user if not defined.
+	 *
+	 * @return bool
+	 */
+	public static function isEditor(\WP_User $user = null) {
+		return self::hasCap( 'editor', $user );
+	}
+
+	/**
+	 * @param \WP_User|null $user User to check. Using current user if not defined.
+	 *
+	 * @return bool
+	 */
+	public static function isTranslator( \WP_User $user = null ) {
+		return self::hasCap( self::CAP_TRANSLATE, $user );
+	}
 }

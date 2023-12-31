@@ -22,7 +22,7 @@ class NhNotification extends Nh
 
     read(formData, $el)
     {
-        let that                      = this;
+        let that                        = this;
         this.ajaxRequests.notifications = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
@@ -46,18 +46,18 @@ class NhNotification extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
     clear($el)
     {
-        let that                      = this;
+        let that                              = this;
         this.ajaxRequests.clear_notifications = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
             data: {
-                action: `${KEY}_clear_notifications_ajax`
+                action: `${KEY}_clear_notifications_ajax`,
             },
             beforeSend: function () {
                 UiCtrl.beforeSendPrepare($el);
@@ -75,13 +75,41 @@ class NhNotification extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
+        });
+    }
+
+    item_clear(formData, $el)
+    {
+        let that                              = this;
+        this.ajaxRequests.clear_notifications = $.ajax({
+            url: nhGlobals.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: `${KEY}_item_clear_notifications_ajax`,
+                data: formData,
+            },
+            beforeSend: function () {
+                UiCtrl.beforeSendPrepare($el);
+            },
+            success: function (res) {
+                if (res.success) {
+                    $el.html(res.data.html);
+                    UiCtrl.blockUI($el, false);
+                }
+            },
+            error: function (xhr) {
+                let errorMessage = `${xhr.status}: ${xhr.statusText}`;
+                if (xhr.statusText !== 'abort') {
+                    console.error(errorMessage);
+                }
+            },
         });
     }
 
     loadMoreNotification(formData, $el)
     {
-        let that                      = this;
+        let that                                = this;
         this.ajaxRequests.notificationsLoadMore = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
@@ -90,7 +118,7 @@ class NhNotification extends Nh
                 data: formData,
             },
             beforeSend: function () {
-                let $temp = $(`<div class="${KEY}-notification-item ${KEY}-notification-item-load"> <div class="row"> <div class="col-sm-2"> <div class="${KEY}-notification-image"> <span></span> </div> </div> <div class="col-sm-10"> <div class="${KEY}-notification-content"> <h6></h6> <p></p> <span></span> </div> </div> </div> </div>`)
+                let $temp = $(`<div class="${KEY}-notification-item ${KEY}-notification-item-load"> <div class="row"> <div class="col-sm-2"> <div class="${KEY}-notification-image"> <span></span> </div> </div> <div class="col-sm-10"> <div class="${KEY}-notification-content"> <h6></h6> <p></p> <span></span> </div> </div> </div> </div>`);
                 $(`.${KEY}-notification-item-load`).remove();
                 $el.append($temp);
                 $('.ninja-notification-list').animate({ scrollTop: $('.ninja-notification-list')[0].scrollHeight - 450 }, 250);
@@ -102,7 +130,11 @@ class NhNotification extends Nh
                     $(`.${KEY}-notification-item-load`).remove();
                     $(`.${KEY}-notification-bell`).attr('data-count', res.data.count);
                     $(`.${KEY}-notification-count`).html(res.data.count);
-                    $(`.${KEY}-notifications-group`).append(res.data.html);
+                    $(`.${KEY}-notification-list .${KEY}-notifications-group`).append(res.data.html);
+                    if ($(`.${KEY}-show-more.d-none`).length) {
+                        $(`.${KEY}-show-more.d-none`).removeClass('d-none');
+                    }
+
                 }
             },
             error: function (xhr) {
@@ -110,7 +142,7 @@ class NhNotification extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
         });
     }
 
@@ -120,7 +152,7 @@ class NhNotification extends Nh
      */
     changeNewNotificationsStatus(formData)
     {
-        let that                      = this;
+        let that                        = this;
         this.ajaxRequests.notifications = $.ajax({
             url: nhGlobals.ajaxUrl,
             type: 'POST',
@@ -142,7 +174,17 @@ class NhNotification extends Nh
                 if (xhr.statusText !== 'abort') {
                     console.error(errorMessage);
                 }
-            }
+            },
+        });
+    }
+
+    // Method for creating a new token
+    createNewToken()
+    {
+        grecaptcha.ready(function () {
+            grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                $('input[name="g-recaptcha-response"]').val(token);
+            });
         });
     }
 }
