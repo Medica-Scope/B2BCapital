@@ -338,7 +338,7 @@ class NhOpportunityFront extends NhOpportunity
         return null;
     }
     reset_form(){
-        $(document).on("click", ".reset", function(e){
+        $(document).on("click", ".reset-btn", function(e){
             $('#ninja_filters_form :input').val('');
         });
     }
