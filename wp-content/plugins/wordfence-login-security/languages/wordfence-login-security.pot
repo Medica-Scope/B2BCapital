@@ -1,22 +1,22 @@
-# Copyright (C) 2023 Wordfence
+# Copyright (C) 2024 Wordfence
 # This file is distributed under the same license as the Wordfence Login Security plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wordfence Login Security 1.1.7\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordfence-login-security-zip-sC8guTXqo\n"
+"Project-Id-Version: Wordfence Login Security 1.1.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordfence-login-security-zip-TFOK8vqll\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-06T16:57:25+00:00\n"
+"POT-Creation-Date: 2024-01-02T16:37:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: wordfence-login-security\n"
 
 #. Plugin Name of the plugin
 #. Description of the plugin
-#: classes/controller/wordfencels.php:479
+#: classes/controller/wordfencels.php:483
 msgid "Wordfence Login Security"
 msgstr ""
 
@@ -265,7 +265,7 @@ msgid "An error was encountered while validating the reCAPTCHA site key: %s"
 msgstr ""
 
 #: classes/controller/users.php:518
-#: classes/controller/wordfencels.php:482
+#: classes/controller/wordfencels.php:486
 msgid "2FA Status"
 msgstr ""
 
@@ -282,7 +282,7 @@ msgid "Not Allowed"
 msgstr ""
 
 #: classes/controller/users.php:539
-#: classes/controller/wordfencels.php:486
+#: classes/controller/wordfencels.php:490
 msgid "Active"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgid "Locked Out<small class=\"wfls-sub-status\">(Grace Period Exceeded)</small
 msgstr ""
 
 #: classes/controller/users.php:548
-#: classes/controller/wordfencels.php:486
+#: classes/controller/wordfencels.php:490
 msgid "Inactive"
 msgstr ""
 
@@ -392,192 +392,208 @@ msgid "<strong>ERROR</strong>: An error was encountered while trying to send the
 msgstr ""
 
 #: classes/controller/wordfencels.php:344
-msgid "Wordfence 2FA Code"
+msgid "Login failed with status code 403. Please contact the site administrator."
 msgstr ""
 
 #: classes/controller/wordfencels.php:345
-msgid "Remember for 30 days"
+msgid "<strong>ERROR</strong>: Login failed with status code 403. Please contact the site administrator."
 msgstr ""
 
 #: classes/controller/wordfencels.php:346
-msgid "Log In"
+msgid "Login failed with status code 503. Please contact the site administrator."
 msgstr ""
 
 #: classes/controller/wordfencels.php:347
-msgid "<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again."
+msgid "<strong>ERROR</strong>: Login failed with status code 503. Please contact the site administrator."
 msgstr ""
 
 #: classes/controller/wordfencels.php:348
+msgid "Wordfence 2FA Code"
+msgstr ""
+
+#: classes/controller/wordfencels.php:349
+msgid "Remember for 30 days"
+msgstr ""
+
+#: classes/controller/wordfencels.php:350
+msgid "Log In"
+msgstr ""
+
+#: classes/controller/wordfencels.php:351
+msgid "<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:352
 msgid "The Wordfence 2FA Code can be found within the authenticator app you used when first activating two-factor authentication. You may also use one of your recovery codes."
 msgstr ""
 
-#: classes/controller/wordfencels.php:369
-#: classes/controller/wordfencels.php:372
+#: classes/controller/wordfencels.php:373
+#: classes/controller/wordfencels.php:376
 msgid "Close"
 msgstr ""
 
-#: classes/controller/wordfencels.php:371
+#: classes/controller/wordfencels.php:375
 msgid "Reload"
 msgstr ""
 
-#: classes/controller/wordfencels.php:396
+#: classes/controller/wordfencels.php:400
 msgid "You have unsaved changes to your options. If you leave this page, those changes will be lost."
 msgstr ""
 
-#: classes/controller/wordfencels.php:486
-#: classes/controller/wordfencels.php:848
+#: classes/controller/wordfencels.php:490
+#: classes/controller/wordfencels.php:852
 #: views/manage/grace-period.php:22
 msgid "Locked Out"
 msgstr ""
 
-#: classes/controller/wordfencels.php:488
+#: classes/controller/wordfencels.php:492
 #: views/manage/grace-period.php:44
 msgid "Two-factor authentication is required for your account, but has not been configured."
 msgstr ""
 
-#: classes/controller/wordfencels.php:488
+#: classes/controller/wordfencels.php:492
 #: views/manage/grace-period.php:45
 msgid "Two-factor authentication is required for this account, but has not been configured."
 msgstr ""
 
-#: classes/controller/wordfencels.php:489
+#: classes/controller/wordfencels.php:493
 msgid "Wordfence 2FA is active."
 msgstr ""
 
-#: classes/controller/wordfencels.php:489
+#: classes/controller/wordfencels.php:493
 msgid "Wordfence 2FA is inactive."
 msgstr ""
 
-#: classes/controller/wordfencels.php:490
-#: classes/controller/wordfencels.php:502
+#: classes/controller/wordfencels.php:494
+#: classes/controller/wordfencels.php:506
 #: views/options/option-roles.php:62
 msgid "Learn More"
 msgstr ""
 
-#: classes/controller/wordfencels.php:494
+#: classes/controller/wordfencels.php:498
 msgid "Two-factor authentication must be activated for your account prior to %s to avoid losing access."
 msgstr ""
 
-#: classes/controller/wordfencels.php:495
+#: classes/controller/wordfencels.php:499
 msgid "Two-factor authentication must be activated for this account prior to %s."
 msgstr ""
 
-#: classes/controller/wordfencels.php:498
+#: classes/controller/wordfencels.php:502
 msgid "Manage 2FA"
 msgstr ""
 
-#: classes/controller/wordfencels.php:498
+#: classes/controller/wordfencels.php:502
 msgid "Activate 2FA"
 msgstr ""
 
-#: classes/controller/wordfencels.php:502
+#: classes/controller/wordfencels.php:506
 #: views/options/option-roles.php:8
 msgid "Disabled"
 msgstr ""
 
-#: classes/controller/wordfencels.php:502
+#: classes/controller/wordfencels.php:506
 msgid "Two-factor authentication is not currently enabled for this account type. To enable it, visit the Wordfence 2FA Settings page."
 msgstr ""
 
-#: classes/controller/wordfencels.php:519
+#: classes/controller/wordfencels.php:523
 msgid "Manage 2FA Settings"
 msgstr ""
 
-#: classes/controller/wordfencels.php:665
+#: classes/controller/wordfencels.php:669
 msgid "Login Verification Required"
 msgstr ""
 
-#: classes/controller/wordfencels.php:667
+#: classes/controller/wordfencels.php:671
 msgid "<strong>VERIFICATION REQUIRED</strong>: Additional verification is required for login. Please check the email address associated with the account for a verification link."
 msgstr ""
 
-#: classes/controller/wordfencels.php:685
+#: classes/controller/wordfencels.php:689
 msgid "<strong>CODE INVALID</strong>: The 2FA code provided is either expired or invalid. Please try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:694
+#: classes/controller/wordfencels.php:698
 msgid "<strong>CODE REQUIRED</strong>: Please enter your 2FA code immediately after your password in the same field."
 msgstr ""
 
-#: classes/controller/wordfencels.php:696
+#: classes/controller/wordfencels.php:700
 msgid "<strong>CODE REQUIRED</strong>: Please provide your 2FA code when prompted."
 msgstr ""
 
-#: classes/controller/wordfencels.php:699
+#: classes/controller/wordfencels.php:703
 msgid "<strong>LOGIN BLOCKED</strong>: 2FA is required to be active on your account. Please contact the site administrator."
 msgstr ""
 
-#: classes/controller/wordfencels.php:702
+#: classes/controller/wordfencels.php:706
 msgid "You do not currently have two-factor authentication active on your account, which will be required beginning %s. <a href=\"%s\">Configure 2FA</a>"
 msgstr ""
 
-#: classes/controller/wordfencels.php:752
+#: classes/controller/wordfencels.php:756
 msgid "Email verification succeeded. Please continue logging in."
 msgstr ""
 
-#: classes/controller/wordfencels.php:755
+#: classes/controller/wordfencels.php:759
 msgid "Email verification invalid or expired. Please try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:809
-#: classes/controller/wordfencels.php:812
+#: classes/controller/wordfencels.php:813
+#: classes/controller/wordfencels.php:816
 msgid "Login Security"
 msgstr ""
 
-#: classes/controller/wordfencels.php:840
+#: classes/controller/wordfencels.php:844
 #: views/settings/options.php:23
 #: views/settings/user-stats.php:33
 msgid "Super Administrator"
 msgstr ""
 
-#: classes/controller/wordfencels.php:844
+#: classes/controller/wordfencels.php:848
 #: views/manage/grace-period.php:22
 #: views/options/option-roles.php:57
 msgid "Grace Period"
 msgstr ""
 
-#: classes/controller/wordfencels.php:863
+#: classes/controller/wordfencels.php:867
 msgid "Users without 2FA active (%s)"
 msgstr ""
 
-#: classes/controller/wordfencels.php:881
-#: classes/controller/wordfencels.php:882
+#: classes/controller/wordfencels.php:885
+#: classes/controller/wordfencels.php:886
 msgid "Two-Factor Authentication"
 msgstr ""
 
-#: classes/controller/wordfencels.php:882
+#: classes/controller/wordfencels.php:886
 msgid "Learn more<span class=\"wfls-hidden-xs\"> about Two-Factor Authentication</span>"
 msgstr ""
 
-#: classes/controller/wordfencels.php:891
+#: classes/controller/wordfencels.php:895
 msgid "Settings"
 msgstr ""
 
-#: classes/controller/wordfencels.php:892
+#: classes/controller/wordfencels.php:896
 msgid "Login Security Settings"
 msgstr ""
 
-#: classes/controller/wordfencels.php:892
+#: classes/controller/wordfencels.php:896
 msgid "Learn more<span class=\"wfls-hidden-xs\"> about Login Security</span>"
 msgstr ""
 
-#: classes/controller/wordfencels.php:918
+#: classes/controller/wordfencels.php:922
 msgid "<strong>REGISTRATION ATTEMPT BLOCKED</strong>: This site requires a security token created when the page loads for all registration attempts. Please ensure JavaScript is enabled and try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:925
+#: classes/controller/wordfencels.php:929
 msgid "<strong>REGISTRATION ATTEMPT BLOCKED</strong>: The security token for the login attempt was invalid or expired. Please reload the page and try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:938
+#: classes/controller/wordfencels.php:942
 msgid "<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or <a href=\"#\" class=\"wfls-registration-captcha-contact\" data-token=\"%s\">contact the site owner</a> for help."
 msgstr ""
 
-#: classes/controller/wordfencels.php:941
+#: classes/controller/wordfencels.php:945
 msgid "<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or contact the site owner for help."
 msgstr ""
 
-#: classes/controller/wordfencels.php:1011
+#: classes/controller/wordfencels.php:1015
 msgid "Wordfence 2FA"
 msgstr ""
 
