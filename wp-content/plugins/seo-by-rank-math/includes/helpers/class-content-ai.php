@@ -113,15 +113,11 @@ trait Content_AI {
 			return 0;
 		}
 
-		$data                  = json_decode( $data, true );
-		$total_monthly_credits = intval( $data['totalMonthlyCredits'] ?? 0 );
-		$additional_credits    = intval( $data['additionalMonthlyCredits'] ?? 0 ) + intval( $data['additionalMonthOnlyCredits'] ?? 0 );
-		$credits_used          = intval( $data['creditsUsed'] ?? 0 );
-
+		$data = json_decode( $data, true );
 		$data = [
-			'credits'      => $total_monthly_credits + $additional_credits - $credits_used,
-			'plan'         => ! empty( $data['plan'] ) ? $data['plan'] : 0,
-			'refresh_date' => ! empty( $data['nextResetDate'] ) ? $data['nextResetDate'] : '',
+			'credits'      => intval( $data['availableCredits'] ?? 0 ),
+			'plan'         => $data['plan'] ?? '',
+			'refresh_date' => $data['nextResetDate'] ?? '',
 		];
 
 		self::update_credits( $data );

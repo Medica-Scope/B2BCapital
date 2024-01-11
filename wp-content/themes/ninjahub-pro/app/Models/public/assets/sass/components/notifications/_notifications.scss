@@ -1,4 +1,5 @@
 @import '../../base/variables';
+
 .ninja-notifications {
 	position: relative;
 
@@ -21,11 +22,15 @@
 
 			.ninja-notification-clear-parent {
 				text-align: right;
-				border-bottom: 2px dashed $gray-light;
+				border-bottom: 1px dashed rgba($gray-medium, 0.3);
 				padding-bottom: 15px;
-				i {
-					font-size: 14px;
+				.ninja-notification-clear, i {
+					font-size: 12px;
 				}
+			}
+
+			.ninja-notifications-group{
+				padding-bottom: 1rem;
 			}
 
 			.ninja-notification-item {
@@ -88,7 +93,11 @@
 			}
 
 			.ninja-notification-item:not(:last-child) {
-				border-bottom: 2px dashed $gray-medium;
+				border-bottom: 1px dashed rgba($gray-medium, 0.3);
+			}
+
+			.ninja-notification-item:last-child {
+				padding-bottom: 1rem;
 			}
 
 			.ninja-new-notification {

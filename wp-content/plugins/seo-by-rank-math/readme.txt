@@ -5,7 +5,7 @@ Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
 Tested up to: 6.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.208.1
+Stable tag: 1.0.210
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,15 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.208 [Dec 07, 2023] =
-- Improved: Content AI is now optimized to deliver results quickly
-- Improved: [Bulk Generate SEO Meta tags](https://rankmath.com/kb/bulk-generate-seo-meta-tags/) feature is now restricted to Paid Content AI users
-- Fixed: [Sitemap Index](https://rankmath.com/kb/sitemaps-seo-benefits/#xml-sitemap) was incorrectly using noindexed post data for `Last Modified` date
-- Fixed: [Update SEO Score tool](https://rankmath.com/kb/seo-score-not-available/#update-seo-scores) now handles encoded characters in Post URL correctly
-- Removed: Google Mobile-Friendly tool from the [Quick Actions admin menu](https://rankmath.com/kb/quick-actions/) as Google deprecated it
-
-= 1.0.208.1 [Dec 07, 2023] =
-- Fixed: Cache issue was causing Content AI to not work properly.
+= 1.0.210 [Jan 03, 2024] =
+- Added: New filter to customize the [Author Sitemap](https://rankmath.com/kb/filters-hooks-api-developer/#change-sitemap-slug) slug
+- Improved: [Author Sitemap](https://rankmath.com/kb/configure-sitemaps/#authors) query
+- Fixed: PHP error occurred when importing focus keywords from [Yoast](https://rankmath.com/kb/yoast-seo-migration/) that are stored in an incorrect format
+- Fixed: Incorrect error message displayed when [refreshing the Content AI credits](https://rankmath.com/kb/how-to-use-content-ai/#credits-left)
+- Fixed: Missing Content AI after [disabling the Gutenberg integration](https://rankmath.com/kb/filters-hooks-api-developer/#disable-gutenberg-sidebar)
+- Fixed: Error when using the [Content AI Bulk Editing process](https://rankmath.com/kb/bulk-editing-in-rank-math/)
+- Fixed: [Capitalize Titles](https://rankmath.com/kb/titles-and-meta/#capitalize-titles) option was not working properly in some languages after the last update
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
