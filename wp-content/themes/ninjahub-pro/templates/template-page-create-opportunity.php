@@ -36,10 +36,10 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 
 		<div class="row d-flex flex-column justify-content-center align-items-center">
 			<div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-				<h3 class="text-primary">
-					<?= __( 'Create New Opportunity', 'ninja' ); ?>
+				<h3 class="text-primary Opportunity-title">
+					<?= __( 'Create New Opportunity ', 'ninja' ); ?>
 				</h3>
-				<p class="w-50 text-wrap text-center">Long established fact that a reader will be distracted by the readable
+				<p class="text-wrap text-center">Long established fact that a reader will be <br> distracted by the readable
 					content
 				</p>
 			</div>
