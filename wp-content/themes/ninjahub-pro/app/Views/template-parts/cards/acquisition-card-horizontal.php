@@ -17,7 +17,7 @@ $valuation                = ! empty( $args['valuation'] ) ? $args['valuation'] :
 $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['valuation_appearance'] : FALSE;
 ?>
 <div class="opportunity-item card card-horizontal shadow border p-0">
-	<div class="row g-0">
+	<div class="row g-0 d-flex card-content">
 		<div class="card-image col-md-4">
 			<a href="<?= esc_url( $opportunity_link ); ?>"><img src="<?= esc_url( $opportunity_thumbnail ); ?>" alt="<?= esc_attr( $opportunity_title ); ?>"></a>
 			<?php
@@ -99,12 +99,7 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 		</div>
 		<div class="col-md-8">
 			<div class="card-body p-0">
-				<p class="card-text">
-					<small class="text-body-secondary">
-						<?= __( 'Business Type', 'ninja' ); ?>
-					</small>
-					<?= $business_type ?>
-				</p>
+			
 
 				<a href="<?= esc_url( $opportunity_link ); ?>" class="card-title btn btn-link btn-link-dark">
 					<?= $opportunity_title; ?>
@@ -115,6 +110,13 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 						<?= date( 'F j, Y', strtotime( $opportunity_created_date ) );
 						; ?>
 					</small>
+				</p>
+				<p class="card-text mt-4">
+					<strong class="text-body-secondary">
+						<?= __( 'Business Type', 'ninja' ); ?>
+					</strong>
+					<br>
+					<?= $business_type ?>
 				</p>
 			</div>
 		</div>
