@@ -504,7 +504,7 @@
 
                                                     ?>
                                                     <div class="col">
-                                                        <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                        <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                     </div>
                                                     <?php
                                                 }
@@ -574,7 +574,7 @@
                                                 ];
                                                 ?>
                                                 <div class="col">
-                                                    <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                    <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                 </div>
                                                 <?php
                                             }
