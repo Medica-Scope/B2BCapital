@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.4.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-11-24 10:35:39+0000\n"
+"PO-Revision-Date: 2023-12-25 17:57:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -289,10 +289,29 @@ msgstr "."
 msgid "Uncategorized"
 msgstr "غير مصنف"
 
+#: wp-includes/blocks/post-date/block.json
+msgctxt "block title"
+msgid "Date"
+msgstr "التاريخ"
+
+#: wp-includes/blocks/post-content/block.json
+msgctxt "block title"
+msgid "Content"
+msgstr "المحتوى"
+
+#: wp-includes/blocks/post-author/block.json
+msgctxt "block title"
+msgid "Author"
+msgstr "الكاتب"
+
 #: wp-includes/js/dist/edit-site.js:36176
 #: wp-admin/includes/class-wp-posts-list-table.php:1562
 msgid "Export as JSON"
 msgstr "تصدير بصيغة JSON"
+
+#: wp-includes/js/dist/edit-site.js:26939 wp-admin/menu.php:67
+msgid "Library"
+msgstr "المكتبة"
 
 #: wp-includes/blocks/post-title/block.json
 msgctxt "block title"
@@ -393,6 +412,13 @@ msgctxt "Template name"
 msgid "Search Results"
 msgstr "نتائج البحث"
 
+#: wp-includes/admin-bar.php:1091
+#: wp-admin/includes/class-custom-background.php:67
+#: wp-admin/includes/class-custom-background.php:68 wp-admin/menu.php:236
+msgctxt "custom background"
+msgid "Background"
+msgstr "خلفية"
+
 #: wp-includes/block-editor.php:52
 msgctxt "block category"
 msgid "Patterns"
@@ -402,6 +428,10 @@ msgstr "الأنماط"
 msgctxt "template part area"
 msgid "General"
 msgstr "عام"
+
+#: wp-includes/block-template-utils.php:159
+msgid "Attachment Pages"
+msgstr "صفحات المرفقات"
 
 #: wp-includes/block-template-utils.php:115
 msgctxt "Template name"
@@ -429,6 +459,13 @@ msgstr "تذييل"
 msgctxt "custom image header"
 msgid "Header"
 msgstr "الترويسة"
+
+#: wp-includes/admin-bar.php:171 wp-admin/about.php:43
+#: wp-admin/contribute.php:13 wp-admin/contribute.php:24
+#: wp-admin/contribute.php:36 wp-admin/credits.php:39 wp-admin/freedoms.php:42
+#: wp-admin/privacy.php:36
+msgid "Get Involved"
+msgstr "شارك بالمساهمة معنا"
 
 #: wp-includes/block-template-utils.php:168
 msgid "Displays your site's Privacy Policy page."
@@ -618,6 +655,10 @@ msgstr ": %s"
 #: wp-includes/block-patterns.php:156
 msgid "A variety of header designs displaying your site title and navigation."
 msgstr "مجموعة من تصميمات الترويسات تعرض عنوان موقعك والتنقل فيه."
+
+#: wp-includes/block-patterns.php:121
+msgid "Showcase your latest work."
+msgstr "اعرض أحدث أعمالك."
 
 #: wp-includes/block-patterns.php:58
 msgid "Patterns containing mostly text."
@@ -943,6 +984,11 @@ msgstr "النبذة التعريفيّة للكاتب."
 msgctxt "block description"
 msgid "Create a link that always points to the homepage of the site. Usually not necessary if there is already a site title link present in the header."
 msgstr "قم بإنشاء رابط يشير دائمًا إلى الصفحة الرئيسية للموقع. غالبًا لا حاجة لذلك إذا كان رابط عنوان الموقع موجود في الترويسة بالفعل."
+
+#: wp-includes/blocks/post-author-biography/block.json
+msgctxt "block title"
+msgid "Author Biography"
+msgstr "سيرة الكاتب"
 
 #: wp-includes/blocks/comments-title/block.json
 msgctxt "block title"

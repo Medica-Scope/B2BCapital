@@ -15,6 +15,7 @@ $badge_status_classes_arr      = [
 	'seo-verified'     => 'text-bg-primary',
 	'content-verified' => 'text-bg-primary',
 	'content-rejected' => 'text-bg-warning',
+	'closed' => 'text-bg-success',
 ];
 
 $stages_string = [ 
@@ -28,6 +29,7 @@ $stages_string = [
 	'translated'       => __( 'Translated', 'ninja' ),
 	'publish'          => __( 'Published', 'ninja' ),
 	'draft'            => __( 'Drafted', 'ninja' ),
+	'closed'            => __( 'Closed', 'ninja' ),
 ];
 
 $opportunity_stage_key = str_replace( ' ', '_', strtolower( $opportunity_stage ) );

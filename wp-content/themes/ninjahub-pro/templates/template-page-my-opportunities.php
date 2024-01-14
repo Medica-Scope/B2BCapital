@@ -43,7 +43,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/main-nav', NULL, [ 'active_link' => 'opportunities' ] ); ?>
 			<?php get_template_part( 'app/Views/template-parts/dashboard-submenus/opportunities-sub-nav', NULL, [ 'active_link' => 'opportunities' ] ); ?>
 		</nav>
-		<div class="filters">
+		<div class="filters mb-5">
 			<button class="btn btn-outline-warning opportunity-adv-filter" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
 				<i class="bbc-sliders"></i>
