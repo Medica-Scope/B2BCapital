@@ -111,7 +111,7 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 						; ?>
 					</small>
 				</p>
-				<p class="card-text mt-4">
+				<p class="card-text mt-2">
 					<strong class="text-body-secondary">
 						<?= __( 'Business Type', 'ninja' ); ?>
 					</strong>
