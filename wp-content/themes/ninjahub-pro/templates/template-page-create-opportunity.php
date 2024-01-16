@@ -48,7 +48,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 		$form_fields = [
 			'custom-html-1'                        => [
 				'type'    => 'html',
-				'content' => '<div class="row">',
+				'content' => '<div class="row"> <h3>'.__('General Information','ninja').'</h3>',
 				'order'   => 0,
 			],
 			'project_name'                         => [
