@@ -1,79 +1,89 @@
-@import '../../base/variables';
-@import '../../components/cards/card';
+@import "../../base/variables";
+@import "../../components/cards/card";
 
 .opportunity-details {
-	.details-items {
-		min-height: 240px;
-		.card {
-			height: 100%;
-			border-radius: 10px;
-			&.faq-help-card {
-				align-items: center;
-				max-height: 240px;
-			}
-		}
-	}
+  .details-items {
+    min-height: 240px;
+    .card {
+      height: 100%;
+      border-radius: 10px;
+      &.faq-help-card {
+        align-items: center;
+        max-height: 240px;
+      }
+    }
+  }
 }
 .related-opportunities {
-	margin-top: 4rem;
-	padding-top: 4rem;
-	border-top: 1px dashed rgba($gray-medium, 0.75);
-	h3 {
-		margin-bottom: 2rem;
-	}
-	.overflow-x-auto {
-		padding-bottom: 2rem;
-		cursor: grabbing;
-		cursor: -webkit-grabbing;
-	}
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px dashed rgba($gray-medium, 0.75);
+  h3 {
+    margin-bottom: 2rem;
+  }
+  .overflow-x-auto {
+    padding-bottom: 2rem;
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+  }
 }
 .actions {
-	display: flex;
-	gap: 1rem;
-	justify-content: flex-end;
-	align-items: center;
-	// .ninja_form_container {
-	// 	width: 49%;
-	// }
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  // .ninja_form_container {
+  // 	width: 49%;
+  // }
 
-	.bbc-star,
-	.bbc-star-o {
-		color: $success;
-	}
+  .bbc-star,
+  .bbc-star-o {
+    color: $success;
+  }
 }
 .card-body {
-	padding-top: 0;
-	padding-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 // new style
 
-.single-opportunity{
-.btn-back{
-	background-color: #e5e5ea;
+.single-opportunity {
+  .btn-back {
+    background-color: #e5e5ea;
     align-items: center;
     display: inline-flex;
-	i{
-		margin-inline-end: 10px;
-	}
-}
-.title-page{
-	font-weight: 600;
+    i {
+      margin-inline-end: 10px;
+    }
+  }
+  .title-page {
+    font-weight: 600;
     margin-top: 10px;
-}
-.tax-title{
-	font-weight: 600;
+  }
+  .tax-title {
+    font-weight: 600;
     font-size: 17px;
-	color: #fe6500 !important;
-}
-.tax-paragraph{
-	font-weight: 600;
+    color: #fe6500 !important;
+  }
+  .tax-paragraph {
+    font-weight: 600;
     font-size: 17px;
-}
-.details-items{
-img{
-		object-fit: contain;
-		padding: 30px;
-		background:#f9f9f9;
-}
-}
+  }
+  .details-items {
+    img {
+      object-fit: contain;
+      padding: 30px;
+      background: #f9f9f9;
+    }
+  }
+  .opportunity-to-favorite {
+    color: $blue-dark;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+	font-size: 18px;
+	span{
+		margin-inline-end: 5px;
+	}
+  }
 }
