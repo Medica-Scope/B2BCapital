@@ -56,12 +56,12 @@
             $fav_text  = __('Unfavored', 'ninja');
         } else {
             $fav_class = 'bbc-star-o';
-            $fav_text  = __('Favorite', 'ninja');
+            $fav_text  = __('Add To Favorite', 'ninja');
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
             $ignore_class = 'controll-icon bbc-thumbs-up text-success';
-            $ignore_text  = __('Ignored', 'ninja');
+            $ignore_text  = __('Unignore', 'ninja');
 
         } else {
             $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
