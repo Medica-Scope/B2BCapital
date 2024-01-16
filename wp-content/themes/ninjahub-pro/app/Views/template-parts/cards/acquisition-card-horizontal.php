@@ -16,7 +16,7 @@ $location_appearance      = ! empty( $args['location_appearance'] ) ? $args['loc
 $valuation                = ! empty( $args['valuation'] ) ? $args['valuation'] : FALSE;
 $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['valuation_appearance'] : FALSE;
 ?>
-<div class="opportunity-item card card-horizontal shadow border p-0">
+<div class="opportunity-item card new-acquisition-item-card card-horizontal border p-0">
 	<div class="row g-0 d-flex card-content">
 		<div class="card-image col-md-4">
 			<a href="<?= esc_url( $opportunity_link ); ?>"><img src="<?= esc_url( $opportunity_thumbnail ); ?>" alt="<?= esc_attr( $opportunity_title ); ?>"></a>
@@ -97,7 +97,7 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 			}
 			?>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8 cardRight-content">
 			<div class="card-body p-0">
 			
 
@@ -105,18 +105,19 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 					<?= $opportunity_title; ?>
 				</a>
 
-				<p class="card-text">
-					<small class="text-body-secondary">
-						<?= date( 'F j, Y', strtotime( $opportunity_created_date ) );
-						; ?>
-					</small>
-				</p>
-				<p class="card-text mt-4">
+			
+				<p class="card-text business_type ">
 					<strong class="text-body-secondary">
 						<?= __( 'Business Type', 'ninja' ); ?>
 					</strong>
 					<br>
 					<?= $business_type ?>
+				</p>
+				<p class="card-text">
+					<small class="text-body-secondary date">
+						<?= date( 'F j, Y', strtotime( $opportunity_created_date ) );
+						; ?>
+					</small>
 				</p>
 			</div>
 		</div>

@@ -41,7 +41,7 @@
 ?>
 
     <main class="site-dashboard-home">
-        <div class="container">
+        <div class="container-xxl">
             <div class="dashboard-overview">
                 <h3 class="fs-3 mt-5 mb-3 text-primary">
                     <?= __('Overview', 'ninja') ?>

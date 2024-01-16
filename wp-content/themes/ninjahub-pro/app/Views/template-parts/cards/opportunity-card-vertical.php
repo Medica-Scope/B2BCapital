@@ -18,7 +18,7 @@ $valuation                = ! empty( $args['valuation'] ) ? $args['valuation'] :
 $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['valuation_appearance'] : FALSE;
 
 ?>
-<div class="opportunity-item card shadow border-0">
+<div class="opportunity-item card shadow border-0 new-opportunity-item-card-vertical">
 	<div class="row g-0">
 		<div class="card-image <?= $is_card_horizontal ? 'col-md-4' : ''; ?>">
 			<a href="<?= esc_url( $opportunity_link ); ?>"><img src="<?= esc_url( $opportunity_thumbnail ); ?>"

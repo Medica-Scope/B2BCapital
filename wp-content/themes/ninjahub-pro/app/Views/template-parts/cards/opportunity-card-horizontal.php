@@ -17,9 +17,9 @@
     $valuation                = !empty($args['valuation']) ? $args['valuation'] : FALSE;
     $valuation_appearance     = !empty($args['valuation_appearance']) ? $args['valuation_appearance'] : FALSE;
 ?>
-<div class="opportunity-item card card-horizontal shadow border p-0">
+<div class="opportunity-item card new-opportunity-item-card card-horizontal  border p-0">
     <div class="row g-0">
-        <div class="card-image col-md-4">
+        <!-- <div class="card-image col-md-4 ninja-hidden">
 
             <?php
                 if ($is_item_controllers) {
@@ -97,23 +97,21 @@
                     <?php
                 }
             ?>
-        </div>
-        <div class="col-md-8">
+        </div> -->
+        <div class="col-md-12">
             <div class="card-body p-0">
                 <a href="<?= esc_url($opportunity_link); ?>" class="card-title btn btn-link btn-link-dark">
                     <?= $opportunity_title; ?>
                 </a>
 
                 <p class="card-text">
-                    <small class="text-body-secondary">
+                    <small class="text-body-secondary date">
                         <?= $opportunity_created_date; ?>
                     </small>
                 </p>
 
                 <p class="card-text">
-                    <small class="text-body-secondary">
                         <?= $short_description ?>
-                    </small>
                 </p>
             </div>
         </div>
