@@ -49,23 +49,28 @@
     $ignore_class                = '';
     $fav_text                    = '';
     $ignore_text                 = '';
+    $fav_full_text               = '';
+    $ignore_full_text            = '';
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class = 'bbc-star';
-            $fav_text  = __('Unfavored', 'ninja');
+            $fav_class     = 'bbc-bookmark';
+            $fav_text      = __('Unfavored', 'ninja');
+            $fav_full_text = _x("<span class='fav-text'>Unfavored</span> " . '<i class="bbc-bookmark fav-star"></i>', 'ninja');
         } else {
-            $fav_class = 'bbc-star-o';
-            $fav_text  = __('Favorite', 'ninja');
+            $fav_class     = 'bbc-bookmark-o';
+            $fav_text      = __('Add To Favorite', 'ninja');
+            $fav_full_text = _x("<span class='fav-text'>Add To Favorite</span> " . '<i class="bbc-bookmark-o fav-star"></i>', 'ninja');
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
-            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
-            $ignore_text  = __('Ignored', 'ninja');
-
+            $ignore_class     = 'controll-icon bbc-thumbs-up text-success';
+            $ignore_text      = __('Unignore', 'ninja');
+            $ignore_full_text = _x("<span class='ignore-text'>Unignore</span> " . '<i class="controll-icon bbc-thumbs-up text-success ignore-star"></i>', 'ninja');
         } else {
-            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
-            $ignore_text  = __('Ignore', 'ninja');
+            $ignore_class     = 'controll-icon bbc-thumbs-down text-danger';
+            $ignore_text      = __('Ignore', 'ninja');
+            $ignore_full_text = _x("<span class='ignore-text'>Ignore</span> " . '<i class="controll-icon bbc-thumbs-down text-danger ignore-star"></i>', 'ninja');
         }
     }
 ?>
@@ -74,18 +79,18 @@
         <div class="row align-items-end">
             <div class="col-8">
                 <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
-                   class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+                   class="btn btn-light text-uppercase mb-2 btn-back"><i class="bbc-chevron-left"></i>
                     <?= __('Back', 'ninja'); ?>
                 </a>
-                <h3 class="mb-4">
+                <h3 class="mb-4 title-page">
                     <?= $opportunity->title; ?>
                 </h3>
 
-                <h3 class="text-warning">
+                <h3 class="text-warning tax-title">
                     <?= __('Business Type', 'ninja'); ?>
                 </h3>
 
-                <p>
+                <p class="tax-paragraph">
                     <?= $opportunity->taxonomy['business-type'][0]->name ?>
                 </p>
             </div>
@@ -113,7 +118,7 @@
                                          'class'               => 'btn btn-light bg-white opportunity-to-favorite ninja-add-to-fav',
                                          'id'                  => 'submit_add_to_fav_request',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
+                                         'value'               => $fav_full_text,
                                          'recaptcha_form_name' => 'frontend_add_to_fav',
                                          'order'               => 10
                                      ],
@@ -144,7 +149,7 @@
                                          'class'               => 'btn-light bg-white',
                                          'id'                  => 'submit_submit_ignore',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
+                                         'value'               => $ignore_full_text,
                                          'recaptcha_form_name' => 'frontend_ignore',
                                          'order'               => 10
                                      ],
