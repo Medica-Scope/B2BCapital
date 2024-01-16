@@ -576,7 +576,7 @@
             $verification = $this->setup_verification('verification'); // Set up user verification.
 
             if (is_wp_error($verification)) {
-                $error->add('auth_code', __("Couldn't send the verification code", 'ninja'), [
+                $error->add('verify_code', __("Couldn't send the verification code", 'ninja'), [
                     'status' => FALSE,
                 ]);
                 wp_logout();
@@ -1421,7 +1421,7 @@
                     $verification = $this->setup_verification('verification');
 
                     if (is_wp_error($verification)) {
-                        $error->add('auth_code', __("Couldn't send the verification code", 'ninja'), [
+                        $error->add('verify_code', __("Couldn't send the verification code", 'ninja'), [
                             'status' => FALSE,
                         ]);
                         wp_logout();
