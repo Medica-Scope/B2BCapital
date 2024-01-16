@@ -662,6 +662,7 @@ class Nh_Opportunity extends Nh_Module {
 				]
 		];
 		if ( ! empty( $search_fields ) ) {
+
 			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
 				$args['tax_query'][] = [
 					'taxonomy' => 'business-type',
@@ -675,18 +676,20 @@ class Nh_Opportunity extends Nh_Module {
 			}
 			unset( $search_fields['search'] );
 			foreach ( $search_fields as $key => $value ) {
-				if(is_numeric($value)){
-					$args['meta_query'][] = [
-						'key'   => $key,
-						'value' => $value,
-						'compare' => '<='
-					];
-				}
-				else{
-					$args['meta_query'][] = [
-						'key'   => $key,
-						'value' => $value,
-					];
+				if(!empty($value)){
+					if(is_numeric($value)){
+						$args['meta_query'][] = [
+							'key'   => $key,
+							'value' => $value,
+							'compare' => '<='
+						];
+					}
+					else{
+						$args['meta_query'][] = [
+							'key'   => $key,
+							'value' => $value,
+						];
+					}
 				}
 
 			}

@@ -90,7 +90,8 @@
                     <div class="filter-con">
                         <?php
                             $business_type_terms = $opportunities_obj->get_taxonomy_terms('business-type');
-                            $business_options    = [ "" => __("All", "ninja") ];
+                            $business_options = [];
+                            $business_options[''] = __("All", "ninja") ;
                             foreach ($business_type_terms as $key => $term) {
                                 $status = get_term_meta($term->term_id, 'status', TRUE);
                                 if (intval($status) !== 1) {
@@ -157,7 +158,7 @@
                                                  'name'           => 'business_type',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'default_option' => isset($_GET['business_type']) ? $_GET['business_type'] : 'All',
+                                                 'default_option' => isset($_GET['business_type']) && !empty($_GET['business_type']) ? $_GET['business_type'] : 'All',
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
@@ -167,10 +168,10 @@
                                                  'name'           => 'location_group_location',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
-                                                 'default_option' => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
+                                                //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
+                                                 'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
                                                  'options'        => [
-                                                     'All'          => __("All", "ninja"),
+                                                     ''          => __("All", "ninja"),
                                                      'Egypt'        => __("Egypt", "ninja"),
                                                      'Russia'       => __("Russia", "ninja"),
                                                      'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),

@@ -120,7 +120,7 @@ class NhOpportunity extends Nh
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     if(res.data.html){
-                        $('.my-opportunities.container .row').html(res.data.html);
+                        $('.my-opportunities .content-ajax').html(res.data.html);
                     }
                     // window.location.href = res.data.redirect_url;
                 } else {
