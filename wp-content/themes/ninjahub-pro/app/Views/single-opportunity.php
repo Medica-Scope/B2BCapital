@@ -49,23 +49,28 @@
     $ignore_class                = '';
     $fav_text                    = '';
     $ignore_text                 = '';
+    $fav_full_text               = '';
+    $ignore_full_text            = '';
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class = 'bbc-bookmark';
-            $fav_text  = __('Unfavored', 'ninja');
+            $fav_class     = 'bbc-bookmark';
+            $fav_text      = __('Unfavored', 'ninja');
+            $fav_full_text = _x("<span class='fav-text'>Unfavored</span> " . '<i class="bbc-bookmark fav-star"></i>', 'ninja');
         } else {
-            $fav_class = 'bbc-bookmark-o';
-            $fav_text  = __('Add To Favorite', 'ninja');
+            $fav_class     = 'bbc-bookmark-o';
+            $fav_text      = __('Add To Favorite', 'ninja');
+            $fav_full_text = _x("<span class='fav-text'>Add To Favorite</span> " . '<i class="bbc-bookmark-o fav-star"></i>', 'ninja');
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
-            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
-            $ignore_text  = __('Unignore', 'ninja');
-
+            $ignore_class     = 'controll-icon bbc-thumbs-up text-success';
+            $ignore_text      = __('Unignore', 'ninja');
+            $ignore_full_text = _x("<span class='ignore-text'>Unignore</span> " . '<i class="controll-icon bbc-thumbs-up text-success ignore-star"></i>', 'ninja');
         } else {
-            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
-            $ignore_text  = __('Ignore', 'ninja');
+            $ignore_class     = 'controll-icon bbc-thumbs-down text-danger';
+            $ignore_text      = __('Ignore', 'ninja');
+            $ignore_full_text = _x("<span class='ignore-text'>Ignore</span> " . '<i class="controll-icon bbc-thumbs-down text-danger ignore-star"></i>', 'ninja');
         }
     }
 ?>
@@ -113,7 +118,7 @@
                                          'class'               => 'btn btn-light bg-white opportunity-to-favorite ninja-add-to-fav',
                                          'id'                  => 'submit_add_to_fav_request',
                                          'type'                => 'submit',
-                                         'value'               => "<span class='fav-text'>$fav_text</span>" . '<i class="' . $fav_class . ' fav-star"></i>',
+                                         'value'               => $fav_full_text,
                                          'recaptcha_form_name' => 'frontend_add_to_fav',
                                          'order'               => 10
                                      ],
@@ -144,7 +149,7 @@
                                          'class'               => 'btn-light bg-white',
                                          'id'                  => 'submit_submit_ignore',
                                          'type'                => 'submit',
-                                         'value'               => "<span class='ignore-text'>$ignore_text</span>" . '<i class="' . $ignore_class . ' ignore-star"></i>',
+                                         'value'               => $ignore_full_text,
                                          'recaptcha_form_name' => 'frontend_ignore',
                                          'order'               => 10
                                      ],
