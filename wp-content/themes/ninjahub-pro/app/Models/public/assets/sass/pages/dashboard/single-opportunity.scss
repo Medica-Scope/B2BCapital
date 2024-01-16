@@ -45,3 +45,35 @@
 	padding-top: 0;
 	padding-bottom: 0;
 }
+// new style
+
+.single-opportunity{
+.btn-back{
+	background-color: #e5e5ea;
+    align-items: center;
+    display: inline-flex;
+	i{
+		margin-inline-end: 10px;
+	}
+}
+.title-page{
+	font-weight: 600;
+    margin-top: 10px;
+}
+.tax-title{
+	font-weight: 600;
+    font-size: 17px;
+	color: #fe6500 !important;
+}
+.tax-paragraph{
+	font-weight: 600;
+    font-size: 17px;
+}
+.details-items{
+img{
+		object-fit: contain;
+		padding: 30px;
+		background:#f9f9f9;
+}
+}
+}

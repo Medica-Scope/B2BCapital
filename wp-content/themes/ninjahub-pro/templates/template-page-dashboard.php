@@ -495,6 +495,7 @@
                                                         'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
                                                         'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
@@ -504,7 +505,7 @@
 
                                                     ?>
                                                     <div class="col">
-                                                        <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                        <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                     </div>
                                                     <?php
                                                 }
@@ -520,6 +521,7 @@
                                                         'opportunity_created_date' => $opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
                                                         'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
@@ -566,6 +568,7 @@
                                                     'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
+                                                    'short_description'        => $acquisition->opportunity->meta_data['short_description'],
                                                     'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
                                                     'location'                 => $acquisition->opportunity->meta_data['location_group_location'],
                                                     'location_appearance'      => $acquisition->opportunity->meta_data['location_group_appearance'],
@@ -574,7 +577,7 @@
                                                 ];
                                                 ?>
                                                 <div class="col">
-                                                    <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                    <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                 </div>
                                                 <?php
                                             }

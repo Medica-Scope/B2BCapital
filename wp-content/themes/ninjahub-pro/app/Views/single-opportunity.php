@@ -74,18 +74,18 @@
         <div class="row align-items-end">
             <div class="col-8">
                 <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
-                   class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+                   class="btn btn-light text-uppercase mb-2 btn-back"><i class="bbc-chevron-left"></i>
                     <?= __('Back', 'ninja'); ?>
                 </a>
-                <h3 class="mb-4">
+                <h3 class="mb-4 title-page">
                     <?= $opportunity->title; ?>
                 </h3>
 
-                <h3 class="text-warning">
+                <h3 class="text-warning tax-title">
                     <?= __('Business Type', 'ninja'); ?>
                 </h3>
 
-                <p>
+                <p class="tax-paragraph">
                     <?= $opportunity->taxonomy['business-type'][0]->name ?>
                 </p>
             </div>
