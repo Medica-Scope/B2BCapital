@@ -257,7 +257,7 @@
             ?>
             <div class="calendar">
                 <p class="day-week"><?= date('l') ?></p>
-                <p class="month-year"><?= date('j F Y', $first_day_of_month) ?></p>
+                <p class="month-year pb-2"><?= date('j F Y', $first_day_of_month) ?></p>
                 <table>
                     <thead>
                         <tr>

@@ -55,7 +55,7 @@
             $fav_class = 'bbc-star';
             $fav_text  = __('Unfavored', 'ninja');
         } else {
-            $fav_class = 'bbc-star-o';
+            $fav_class = 'bbc-bookmark';
             $fav_text  = __('Favorite', 'ninja');
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
