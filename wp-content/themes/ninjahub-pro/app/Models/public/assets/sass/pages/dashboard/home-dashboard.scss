@@ -139,7 +139,7 @@
 
     .sidebar-my-opportunities,
     .sidebar-latest-acquisitions {
-      padding: 2rem;
+      padding: 1rem;
       margin-bottom: 2rem;
       border-radius: 3px;
       background-color: $layout-light;
@@ -322,5 +322,82 @@
         }
       }
     }
+  }
+}
+.new-opportunity-item-card {
+  a {
+    color: $blue-medium !important;
+    text-align: left;
+    font-size: 18px !important;
+  }
+  .date {
+    color: $blue-medium !important;
+    font-weight: 600;
+    margin-bottom: 3px !important;
+    display: block;
+    font-size: 14px;
+  }
+  p {
+    color: $blue-dark;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .opportunity-item {
+    border-color: #f4f4f4 !important;
+  }
+}
+.new-acquisition-item-card {
+  min-height: fit-content !important;
+  .card-content{
+    padding: 8px;
+  }
+  .card-image {
+    margin-inline-end: 12px;
+    width: 117px !important;
+    height: 117px;
+    padding: 10px;
+    a {
+      width: 100% !important;
+      height: 100% !important;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+  a {
+    color: $blue-medium !important;
+    text-align: left;
+    font-size: 17px !important;
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
+  }
+  .date {
+    color: $blue-dark !important;
+    margin-bottom: 3px !important;
+    display: block;
+    font-size: 14px;
+  }
+  .cardRight-content {
+    width: calc(100% - 142px);
+  }
+  .business_type{
+    font-size: 14px;
+    color: $blue-dark;
+    font-weight: 700;
+    line-height: 19px;
+    margin-bottom: 10px;
+    strong{
+      font-weight: 100;
+      font-size: 15px;
+    }
+  }
+  .card-footer{
+    border: none;
+    padding-top: 0 !important;
+  }
+}
+.new-opportunity-item-card-vertical{
+  .card-image a{
+    
   }
 }

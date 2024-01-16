@@ -17,9 +17,9 @@
     $valuation                = !empty($args['valuation']) ? $args['valuation'] : FALSE;
     $valuation_appearance     = !empty($args['valuation_appearance']) ? $args['valuation_appearance'] : FALSE;
 ?>
-<div class="opportunity-item card card-horizontal shadow border p-0">
+<div class="opportunity-item card new-opportunity-item-card card-horizontal  border p-0">
     <div class="row g-0">
-        <div class="card-image col-md-4">
+        <!-- <div class="card-image col-md-4 ninja-hidden">
 
             <?php
                 if ($is_item_controllers) {
@@ -97,65 +97,21 @@
                     <?php
                 }
             ?>
-        </div>
-        <div class="col-md-8">
+        </div> -->
+        <div class="col-md-12">
             <div class="card-body p-0">
                 <a href="<?= esc_url($opportunity_link); ?>" class="card-title btn btn-link btn-link-dark">
                     <?= $opportunity_title; ?>
                 </a>
 
-				<p class="card-text">
-					<small class="text-body-secondary">
-						<?= date( 'F j, Y', strtotime( $opportunity_created_date ) );
-						; ?>
-					</small>
-				</p>
-				<p class="card-text mt-2">
-					<strong class="text-body-secondary">
-						<?= __( 'Business Type', 'ninja' ); ?>
-					</strong>
-					<br>
-					<?= $business_type ?>
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="card-footer card-extra-info">
-		<div class="card-info-item">
-			<?php if ( (int) NH_CONFIGURATION['opportunities_fields'][ Nh::_DOMAIN_NAME . '_location' ] === 1 ) { ?>
-					<small class="text-body-secondary"><?= __( 'Location', 'ninja' ) ?></small>
-					<?php
-					if ( (int) $location_appearance === 1 ) {
-						?><p class="card-text fw-bold"><?= $location; ?></p><?php
-					} else {
-						_ex( '<p class="card-text fw-bold">HIDDEN</p>', 'ninja' );
-					}
-					?>
-			<?php } ?>
-		</div>
-		<div class="card-info-item">
-			<?php if ( (int) NH_CONFIGURATION['opportunities_fields'][ Nh::_DOMAIN_NAME . '_valuation_in_usd' ] === 1 ) { ?>
-					<small class="text-body-secondary"><?= __( 'Valuation', 'ninja' ) ?></small>
-					<?php
-					if ( (int) $valuation_appearance === 1 ) {
-						?><p class="card-text fw-bold"><?= '$ ' . $valuation; ?></p><?php
-					} else {
-						_ex( '<p class="card-text fw-bold">HIDDEN</p>', 'ninja' );
-					}
-					?>
-			<?php } ?>
-		</div>
-	</div>
                 <p class="card-text">
-                    <small class="text-body-secondary">
+                    <small class="text-body-secondary date">
                         <?= $opportunity_created_date; ?>
                     </small>
                 </p>
 
                 <p class="card-text">
-                    <small class="text-body-secondary">
                         <?= $short_description ?>
-                    </small>
                 </p>
             </div>
         </div>
