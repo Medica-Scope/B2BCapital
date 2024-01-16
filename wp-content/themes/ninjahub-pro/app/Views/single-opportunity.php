@@ -144,7 +144,7 @@
                                          'class'               => 'btn-light bg-white',
                                          'id'                  => 'submit_submit_ignore',
                                          'type'                => 'submit',
-                                         'value'               => "<span class='fav-text'>$ignore_text</span>" . '<i class="' . $ignore_class . ' ignore-star"></i>',
+                                         'value'               => "<span class='ignore-text'>$ignore_text</span>" . '<i class="' . $ignore_class . ' ignore-star"></i>',
                                          'recaptcha_form_name' => 'frontend_ignore',
                                          'order'               => 10
                                      ],
