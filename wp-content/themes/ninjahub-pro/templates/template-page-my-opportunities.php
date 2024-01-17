@@ -140,7 +140,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 			if ( Nh_User::get_user_role() === Nh_User::INVESTOR ) {
 				if ( ! empty( $acquisitions ) ) {
 					?>
-			<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="row content-ajax row-cols-1 row-cols-md-3 g-4">
 				<?php foreach ( $acquisitions as $acquisition ) { ?>
 				<div class="opportunity-card">
 
@@ -172,7 +172,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 			} else {
 				if ( ! empty( $opportunities ) ) {
 					?>
-			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			<div class="row row-cols-1 content-ajax row-cols-md-2 row-cols-lg-3 g-4">
 				<?php
 						foreach ( $opportunities as $opportunity ) {
 							?>

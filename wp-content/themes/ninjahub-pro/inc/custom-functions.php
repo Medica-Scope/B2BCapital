@@ -135,7 +135,7 @@
 
     // $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
     // for ($i = 0; $i < 7; $i++) {
-    //     $notifications->send(18, 1, 'bidding', [ 'opportunity_id' => '1762' ]);
+    //     $notifications->send(46, 1, 'opportunity_new', [ 'opportunity_id' => '2583' ]);
     // }
 
 

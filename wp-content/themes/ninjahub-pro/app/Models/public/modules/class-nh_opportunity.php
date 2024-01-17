@@ -662,6 +662,7 @@ class Nh_Opportunity extends Nh_Module {
 				]
 		];
 		if ( ! empty( $search_fields ) ) {
+
 			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
 				$args['tax_query'][] = [
 					'taxonomy' => 'business-type',
@@ -675,18 +676,20 @@ class Nh_Opportunity extends Nh_Module {
 			}
 			unset( $search_fields['search'] );
 			foreach ( $search_fields as $key => $value ) {
-				if(is_numeric($value)){
-					$args['meta_query'][] = [
-						'key'   => $key,
-						'value' => $value,
-						'compare' => '<='
-					];
-				}
-				else{
-					$args['meta_query'][] = [
-						'key'   => $key,
-						'value' => $value,
-					];
+				if(!empty($value)){
+					if(is_numeric($value)){
+						$args['meta_query'][] = [
+							'key'   => $key,
+							'value' => $value,
+							'compare' => '<='
+						];
+					}
+					else{
+						$args['meta_query'][] = [
+							'key'   => $key,
+							'value' => $value,
+						];
+					}
 				}
 
 			}
@@ -976,7 +979,7 @@ class Nh_Opportunity extends Nh_Module {
 				update_post_meta( $opp_id, 'ignore_count', (int) $ignore_count - 1 );
 				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been ignored', 'ninja'), $opportunity->title), [
 					'ignore_active'   => 1,
-					'updated_text' => __( 'Ignored', 'ninja' ),
+					'updated_text' => __( 'Un-ignore', 'ninja' ),
 					'button_text' => __('Done', 'ninja')
 				] );
 			}

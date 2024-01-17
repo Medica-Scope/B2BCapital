@@ -120,7 +120,7 @@ class NhOpportunity extends Nh
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
                     if(res.data.html){
-                        $('.my-opportunities.container .row').html(res.data.html);
+                        $('.my-opportunities .content-ajax').html(res.data.html);
                     }
                     // window.location.href = res.data.redirect_url;
                 } else {
@@ -367,8 +367,10 @@ class NhOpportunity extends Nh
                 if (res.success) {
                     if (res.data.ignore_active == 0) {
                         $el.find('.ignore-star').toggleClass('bbc-thumbs-down bbc-thumbs-up');
+                        $el.find('.ignore-star').toggleClass('text-danger text-success');
                     } else {
                         $el.find('.ignore-star').toggleClass('bbc-thumbs-up bbc-thumbs-down');
+                        $el.find('.ignore-star').toggleClass('text-success text-danger');
                     }
                     if (res.data.updated_text && $('.ignore-text').length) {
                         $('.ignore-text').html(res.data.updated_text);
