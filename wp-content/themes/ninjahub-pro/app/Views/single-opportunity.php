@@ -54,23 +54,23 @@
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class     = 'bbc-bookmark';
+            $fav_class     = 'bbc-bookmark fav-star';
             $fav_text      = __('Unfavored', 'ninja');
-            $fav_full_text = _x("<span class='fav-text'>Unfavored</span> " . '<i class="bbc-bookmark fav-star"></i>', 'ninja');
+            $fav_full_text = '<span class="fav-text">'.$fav_text.'</span><i class="'.$fav_class.'"></i>';
         } else {
-            $fav_class     = 'bbc-bookmark-o';
+            $fav_class     = 'bbc-bookmark-o fav-star';
             $fav_text      = __('Add To Favorite', 'ninja');
-            $fav_full_text = _x("<span class='fav-text'>Add To Favorite</span> " . '<i class="bbc-bookmark-o fav-star"></i>', 'ninja');
+            $fav_full_text = '<span class="fav-text">'.$fav_text.'</span><i class="'.$fav_class.'"></i>';
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
-            $ignore_class     = 'controll-icon bbc-thumbs-up text-success';
-            $ignore_text      = __('Unignore', 'ninja');
-            $ignore_full_text = _x("<span class='ignore-text'>Unignore</span> " . '<i class="controll-icon bbc-thumbs-up text-success ignore-star"></i>', 'ninja');
+            $ignore_class     = 'controll-icon bbc-thumbs-up text-success ignore-star';
+            $ignore_text      = __('Un-ignore', 'ninja');
+            $ignore_full_text = '<span class="ignore-text">'.$ignore_text.'</span><i class="'.$ignore_class.'"></i>';
         } else {
-            $ignore_class     = 'controll-icon bbc-thumbs-down text-danger';
+            $ignore_class     = 'controll-icon bbc-thumbs-down text-danger ignore-star';
             $ignore_text      = __('Ignore', 'ninja');
-            $ignore_full_text = _x("<span class='ignore-text'>Ignore</span> " . '<i class="controll-icon bbc-thumbs-down text-danger ignore-star"></i>', 'ninja');
+            $ignore_full_text = '<span class="ignore-text">'.$ignore_text.'</span><i class="'.$ignore_class.'"></i>';
         }
     }
 ?>
