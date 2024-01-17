@@ -46,9 +46,11 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 		</div>
 		<?php
 		$form_fields = [
+
+                // Start Of General Information
 			'custom-html-1'                        => [
 				'type'    => 'html',
-				'content' => '<div class="row"> <h3>'.__('General Information','ninja').'</h3>',
+				'content' => '<div class="row"> <h3>'.__('General Information','ninja').'</h3> <small>'.__('*All fields are required.', 'ninja').'</small>',
 				'order'   => 0,
 			],
 			'project_name'                         => [
@@ -159,7 +161,6 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 				'placeholder' => __( 'Enter your location', 'ninja' ),
 				'order'       => 50,
 			],
-
 			'media_file'                           => [
 				'class'      => 'form-group col-md-6',
 				'type'       => 'file',
@@ -182,18 +183,37 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 				'after'    => '',
 				'order'    => 60,
 			],
-
+            'business_model'                       => [
+                'class'             => 'col-sm-12',
+                'type'              => 'select',
+                'label'             => __( 'Business Model & Pricing', 'ninja' ),
+                'name'              => 'business_model',
+                'placeholder'       => __( 'Enter your business model & pricing', 'ninja' ),
+                'multiple'          => 'multiple',
+                'options'           => [],
+                'default_option'    => '',
+                'select_option'     => [],
+                'extra_option_attr' => [],
+                'before'            => '',
+                'order'             => 61,
+            ],
 			'custom-html-2'                        => [
 				'type'    => 'html',
 				'content' => '</div>',
-				'order'   => 61,
+				'order'   => 62,
 			],
 
 
+                // Start Of Opportunity Types
+            'custom-html-opp-types-start'                        => [
+                'type'    => 'html',
+                'content' => '<div class="mt-5"> <h3>'.__('Opportunity Types','ninja').'</h3> <small>'.__('*All fields are required.', 'ninja').'</small>',
+                'order'   => 63,
+            ],
 			'opportunity_type'                     => [
 				'class'             => 'col-12',
 				'type'              => 'select',
-				'label'             => __( 'Opportunity Type', 'ninja' ),
+				'label'             => __( 'Type', 'ninja' ),
 				'name'              => 'opportunity_type',
 				'placeholder'       => __( 'Enter your opportunity type', 'ninja' ),
 				'options'           => [],
@@ -303,13 +323,20 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 				'content' => '</div></div>',
 				'order'   => 115,
 			],
+            'custom-html-opp-types-end'                        => [
+                'type'    => 'html',
+                'content' => '</div>',
+                'order'   => 116,
+            ],
 
+
+
+                // Start Of Financial Information
 			'custom-html-3'                        => [
 				'type'    => 'html',
-				'content' => '<div class="row">',
+				'content' => '<div class="row mt-5"> <h3>'.__('Financial Information','ninja').'</h3> <small>'.__('*All fields are required.', 'ninja').'</small>',
 				'order'   => 120,
 			],
-
 			'net_profit'                           => [
 				'class'       => 'col-6',
 				'type'        => 'number',
@@ -386,24 +413,13 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 				'order'   => 166,
 			],
 
+
+
+                // Start Of Business Overview
 			'custom-html-5'                        => [
 				'type'    => 'html',
-				'content' => '<div class="row">',
+				'content' => '<div class="row mt-5"> <h3>'.__('Business Overview','ninja').'</h3>',
 				'order'   => 167,
-			],
-			'business_model'                       => [
-				'class'             => 'col-sm-12',
-				'type'              => 'select',
-				'label'             => __( 'Business Model & Pricing', 'ninja' ),
-				'name'              => 'business_model',
-				'placeholder'       => __( 'Enter your business model & pricing', 'ninja' ),
-				'multiple'          => 'multiple',
-				'options'           => [],
-				'default_option'    => '',
-				'select_option'     => [],
-				'extra_option_attr' => [],
-				'before'            => '',
-				'order'             => 170,
 			],
 			'tech_stack_this_product_is_built_on'  => [
 				'class'       => 'col-6',
@@ -449,7 +465,6 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks
 				'value' => Nh::_DOMAIN_NAME . "_create_opportunity_form",
 				'order' => 189
 			],
-
 			'submit'                               => [
 				'class'               => 'btn-lg text-uppercase',
 				'type'                => 'submit',
