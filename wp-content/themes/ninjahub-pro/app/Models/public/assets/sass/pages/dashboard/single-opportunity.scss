@@ -81,9 +81,21 @@
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-	font-size: 18px;
-	span{
-		margin-inline-end: 5px;
-	}
+    font-size: 18px;
+    span {
+      margin-inline-start: 5px;
+    }
+  }
+  .ninja-create-ignore-opportunity-form {
+    button {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      font-size: 18px;
+      color: #e11f26;
+      span {
+        margin-inline-start: 5px;
+      }
+    }
   }
 }
