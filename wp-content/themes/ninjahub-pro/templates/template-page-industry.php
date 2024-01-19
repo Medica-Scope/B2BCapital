@@ -29,7 +29,7 @@ $opportunity_obj = new Nh_Opportunity();
 ?>
 <main class="container-fluid h-100">
 	<div class="row h-100">
-		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
+		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6 new-industries">
 			<!-- App Brand -->
 			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo"
 					class="img-fluid" /></a>

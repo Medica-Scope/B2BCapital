@@ -48,48 +48,60 @@ main {
     margin-bottom: 1rem;
   }
 }
-.ninja-login-form {
-  input {
-    padding-inline-start: 50px !important;
-  }
-  .form-field {
-    i {
-      top: 57px !important;
+.page-template-template-page-login {
+  .ninja-login-form {
+    input {
+      padding-inline-start: 50px !important;
+    }
+    .form-field {
+      i {
+        top: 57px !important;
+      }
+    }
+
+    .form-check.ninja-input-wrapper {
+      display: flex;
+      align-items: center;
     }
   }
-}
-div.nsl-container .nsl-button-default {
-  height: 54px;
-}
-div.nsl-container .nsl-button-default div.nsl-button-label-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
- input[type=checkbox] {
-  width: 30px;
-  height: 30px;
-  margin-inline-end: 8px !important;
-  margin-bottom: 11px !important;
-}
- input[type=checkbox]:after {
-  content: "";
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  display: block;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid #e3e5e7;
-}
- input[type=checkbox]:checked::before {
-  content: "";
-  border: 2px solid #FE6500;
-  width: 20px;
-  height: 7px;
-  position: absolute;
-  border-top: 0;
-  border-right: 0;
-  transform: rotate(-45deg);
-  top: 10px;
-  left: 6px;
+  div.nsl-container .nsl-button-default {
+    height: 54px;
+  }
+  div.nsl-container .nsl-button-default div.nsl-button-label-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    margin-inline-end: 8px !important;
+    position: relative;
+  }
+  input[type="checkbox"]:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: block;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #e3e5e7;
+  }
+  input[type="checkbox"]:checked::before {
+    content: "";
+    border: 3px solid #fe6500;
+    width: 20px;
+    height: 7px;
+    position: absolute;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg);
+    top: 10px;
+    left: 6px;
+  }
+  .section-footer {
+    a {
+      color: #fe6500;
+    }
+  }
 }

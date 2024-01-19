@@ -209,7 +209,7 @@ form {
   }
 
   input[type="checkbox"]:checked::before {
-	content: "";
+    content: "";
     border: 2px solid $orange;
     width: 20px;
     height: 7px;
@@ -219,5 +219,69 @@ form {
     transform: rotate(-45deg);
     top: 10px;
     left: 6px;
+  }
+}
+.new-industries {
+  .section-title {
+    font-size: 24px !important;
+  }
+  .ninja-industries-form-container {
+    .form-check {
+      label {
+        padding: 9px 23px;
+        font-weight: 400 !important;
+      }
+    }
+    .form-action {
+      font-size: 20px;
+      height: 60px;
+      margin-top: 90px;
+      color: #fff !important;
+    }
+  }
+  .form-steps.form-step-2 {
+    label {
+      color: #024e7f;
+      font-size: 20px;
+      margin-bottom: 30px !important;
+    }
+    .form-check label {
+      font-size: 16px;
+      font-weight: 400 !important;
+      margin-bottom: 0 !important;
+    }
+    .form-field button.btn-success {
+      background-color: #234d33;
+    }
+    .form-field button.step-wizard {
+      background-color: transparent;
+      border: 1px solid #596673;
+      color: black !important;
+    }
+    input[type="radio"] {
+      border: 1px solid #dee2e6 !important;
+      outline: none;
+      box-shadow: none !important;
+    }
+    input[type="radio"]:checked {
+      background-color: white;
+      position: relative;
+      &::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background-color: #fe6500;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+    }
+  }
+}
+form {
+  #ninja_phone_number {
+    padding-left: 86px !important;
   }
 }
