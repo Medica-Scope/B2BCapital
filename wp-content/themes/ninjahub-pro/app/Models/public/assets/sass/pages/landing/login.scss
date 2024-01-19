@@ -1,28 +1,95 @@
-@import '../../base/variables';
+@import "../../base/variables";
 
 /* Login Page Styles Start Here */
 body {
-	color: $primary-dark;
-	footer {
-		display: none !important;
-	}
+  color: $primary-dark;
+  footer {
+    display: none !important;
+  }
 }
 main {
-	height: 100%;
-	.login-section {
-		height: 100vh;
-		max-width: 920px;
-		overflow-y: scroll;
-		background-color: $layout-light;
-		.form-check {
-			padding: 0;
-		}
-		.section-footer {
-			margin-top: 3rem;
-			border-top: 1px solid $layout;
-		}
-	}
-	.login-animation {
-		height: 100vh;
-	}
+  height: 100%;
+  .login-section {
+    height: 100vh;
+    max-width: 920px;
+    overflow-y: scroll;
+    background-color: $layout-light;
+    .form-check {
+      padding: 0;
+    }
+    .section-footer {
+      margin-top: 3rem;
+      border-top: 1px solid $layout;
+    }
+  }
+  .login-animation {
+    height: 100vh;
+  }
+}
+.page-template-template-page-authentication {
+  background-color: #ced4d9;
+  .container-fluid {
+    height: 100vh !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.new-authenticate-page {
+  height: fit-content !important;
+  overflow: hidden !important;
+  box-shadow: 0px 0px 20px 0px #0000004d;
+  border-radius: 5px;
+  .section-title {
+    font-size: 24px;
+    margin-top: 27px;
+  }
+  .section-header {
+    margin-bottom: 1rem;
+  }
+}
+.ninja-login-form {
+  input {
+    padding-inline-start: 50px !important;
+  }
+  .form-field {
+    i {
+      top: 57px !important;
+    }
+  }
+}
+div.nsl-container .nsl-button-default {
+  height: 54px;
+}
+div.nsl-container .nsl-button-default div.nsl-button-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ input[type=checkbox] {
+  width: 30px;
+  height: 30px;
+  margin-inline-end: 8px !important;
+  margin-bottom: 11px !important;
+}
+ input[type=checkbox]:after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: block;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #e3e5e7;
+}
+ input[type=checkbox]:checked::before {
+  content: "";
+  border: 2px solid #FE6500;
+  width: 20px;
+  height: 7px;
+  position: absolute;
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 6px;
 }
