@@ -99,3 +99,156 @@
     }
   }
 }
+// Popups
+.new-addBidModal {
+  .start-bidding {
+    p {
+      color: #2c476c;
+      font-size: 14px;
+    }
+    span {
+      color: $orange;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  .target-amount {
+    p {
+      color: #2c476c;
+      font-size: 14px;
+    }
+    span {
+      color: $green;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  button.form-action {
+    height: 60px;
+    font-size: 20px;
+  }
+
+  .ninja-add-bid-form {
+    label {
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      margin-top: 20px;
+    }
+  }
+  .modal-content {
+    padding: 35px;
+    .modal-body,
+    .modal-header {
+      padding: 0;
+      input {
+        box-shadow: inset 4px 1px 20px 6px #0000000d;
+        color: $orange;
+        font-weight: 600;
+        font-size: 14px !important;
+      }
+    }
+    .modal-header {
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      border-color: #70707017;
+      h1 {
+        font-weight: 900;
+        font-size: 34px;
+      }
+    }
+  }
+}
+#addBidModalBtn,#createAcquisitionBtn {
+  background-color: $green !important;
+  border: none;
+  i {
+    border-radius: 50%;
+    border: 1px solid;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 6px;
+    padding: 8px 4px;
+  }
+}
+
+.single-opportunity {
+  .col-6.actions {
+    button {
+      padding: 15px 20px !important;
+      text-transform: capitalize;
+      font-size: 18px;
+      box-shadow: 0 0 5px 1px #0000002b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        margin-inline-end: 8px;
+        font-size: 21px;
+      }
+    }
+  }
+  .ninja-add-to-fav {
+    background-color: transparent !important;
+    border: 1px solid #071b2e;
+  }
+  #createInvestBtn {
+    background-color: $green !important;
+    border: none;
+    color: $white;
+  }
+  #createInvestModal,#createAcquisitionModal {
+    .modal-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 50px 5px;
+
+      .modal-header {
+        padding: 0;
+        border: none !important;
+        .circle {
+          background-color: #0740ff;
+          color: #ffffff;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 55px;
+          font-size: 30px;
+          position: relative;
+          &::before,
+          &::after {
+            content: "";
+            width: 65px;
+            height: 65px;
+            border: 1px solid #0740ff;
+            border-radius: 50%;
+            position: absolute;
+          }
+          &::after {
+            border-width: 3px;
+            width: 80px;
+            height: 80px;
+          }
+        }
+      }
+      .modal-body {
+        padding: 0;
+        p {
+          font-weight: 600;
+        }
+        .gglcptch,.form-field {
+   margin: 0 !important;
+        }
+      }
+    }
+  }
+ #createAcquisitionModal .modal-content .modal-header .circle::after{
+  display: none !important;
+ }
+}
