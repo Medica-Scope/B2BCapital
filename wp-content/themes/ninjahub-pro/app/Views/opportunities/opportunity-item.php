@@ -41,7 +41,7 @@
                     ?>
 			</div>
 		</div>
-		<div class="card-body p-0">
+		<div class="card-body p-0 mt-3">
 			<p class="card-text">
 				<small class="text-body-secondary">
 					<?= __('Business Type', 'ninja'); ?>

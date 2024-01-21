@@ -1,1 +1,15 @@
-@import '../../components/cards/my-opportunities-card';
+@import "../../components/cards/my-opportunities-card";
+@media screen and (min-width: 767px) {
+  #ninja_filter_opportunity_form {
+    display: flex;
+    flex-wrap: wrap;
+    .ninja-form-notice.result {
+      width: 100%;
+    }
+  }
+
+  .form-select,
+  input {
+    padding: 1rem !important;
+  }
+}

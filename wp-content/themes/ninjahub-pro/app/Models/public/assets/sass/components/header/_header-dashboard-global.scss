@@ -106,6 +106,17 @@
 			}
 		}
 	}
+	ul.dropdown-menu {
+   li{
+	a{
+		display: flex;
+		align-items: center;
+		i{
+			margin-inline-end: 5px;
+		}
+	}
+   }
+	}
 }
 .page-template-template-page-registration,
 .page-template-template-page-login,

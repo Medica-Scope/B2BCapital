@@ -1,31 +1,73 @@
-@import '../../base/variables';
+@import "../../base/variables";
 .my-opportunities-card {
-	background-color: $layout-light;
-	padding: 2rem 1rem 1.5rem 1rem;
-	border-radius: 5px;
-	min-height: 205px;
-	.badge {
-		&.text-bg-success,
-		&.text-bg-primary {
-			color: $layout-light !important;
-		}
-	}
-	.opportunities-card-header {
-		h3 {
-			color: $primary-medium;
-			font-size: 1.2rem;
-			font-weight: bold;
-			margin-bottom: 1.5rem;
-		}
-	}
-	.opportunities-card-body {
-		.date{
-			display: inline-block;
-			color: $primary-medium;
-			margin-bottom: 0.5rem;
-		}
-		.short-description {
-			font-size: 0.9rem;
-		}
-	}
+  background-color: $gray-lightV2;
+  padding: 2rem 1rem 1.5rem 1rem;
+  border-radius: 5px;
+  min-height: 205px;
+  .badge {
+    &.text-bg-success,
+    &.text-bg-primary {
+      color: $layout-light !important;
+    }
+  }
+  .opportunities-card-header {
+    h3 {
+      color: $primary-medium;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      a {
+        color: $primary-medium;
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-height: 25px;
+        height: 44px;
+      }
+    }
+  }
+  .opportunities-card-body {
+    .date {
+      display: inline-block;
+      color: $primary-medium;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .short-description {
+      font-size: 0.9rem;
+      color: $blue-dark;
+      font-weight: 600;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+    }
+  }
+  .status.badge.text-bg-success {
+    background-color: #d9f0e2 !important;
+    color: #6cc48d !important;
+  }
+  .status.badge.text-bg-primary {
+	background-color: #e2f1fb !important;
+    color: #0e9cfb !important;
+  }
+  .status.badge.text-bg-secondary {
+	background-color: #e0e2e4!important;
+    color: $blue-dark !important;
+  }
+}
+@media screen and (max-width: 1450px) {
+  .page-template-template-page-my-opportunities {
+    .my-opportunities {
+      .row-cols-lg-3 > * {
+        width: 50%;
+      }
+    }
+  }
 }
