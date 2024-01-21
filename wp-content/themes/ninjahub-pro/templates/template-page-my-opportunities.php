@@ -62,7 +62,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 						$form_fields              = [];
 						if ( ! empty( $opportunities_type_terms ) ) {
 							$form_fields['opportunity_type'] = [
-								'class'             => 'col-12',
+								'class'             => 'col-6 pe-2',
 								'type'              => 'select',
 								'label'             => __( 'Opportunity Type', 'ninja' ),
 								'name'              => 'opportunity_type',
@@ -86,7 +86,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 							}
 						}
 						$form_fields['opportunity_status']       = [
-							'class'             => 'col-12',
+							'class'             => 'col-6 ps-2',
 							'type'              => 'select',
 							'label'             => __( 'Opportunity Status', 'ninja' ),
 							'name'              => 'opportunity_status',
@@ -116,7 +116,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 							'order' => 30
 						];
 						$form_fields['submit']                   = [
-							'class'               => 'btn-lg text-uppercase',
+							'class'               => 'btn-lg text-uppercase ',
 							'type'                => 'submit',
 							'id'                  => Nh::_DOMAIN_NAME . '_filter_opportunity_submit',
 							'value'               => '<i class="bbc-save pe-1"></i> ' . __( 'Filter', 'ninja' ),
