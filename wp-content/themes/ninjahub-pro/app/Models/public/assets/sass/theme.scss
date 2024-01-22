@@ -285,3 +285,62 @@ form {
     padding-left: 86px !important;
   }
 }
+html body .new-contact-us {
+  .wpcf7 {
+    padding-bottom: 0 !important;
+  }
+  ::placeholder {
+    color: $white;
+    font-size: 16px;
+  }
+  input {
+    padding-left: 0 !important;
+    border-bottom: 1px solid #ffffff24 !important;
+    font-size: 16px !important;
+    &[type="submit"] {
+      background-color: $blue-light;
+      color: $white;
+      border-bottom: none !important;
+      font-size: 20px !important;
+    }
+    &:focus-visible {
+      border-bottom: 1px solid #ffffff24 !important;
+    }
+  }
+  input:focus {
+    border-bottom: 1px solid #ffffff24 !important;
+  }
+  .form-header {
+    margin-bottom: 30px;
+  }
+  .form-title {
+    font-size: 33px !important;
+  }
+  .form-help {
+    font-size: 16px !important;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 18px !important;
+    }
+  }
+}
+.service-subscription-form {
+  background-color: #1d3348 !important;
+  padding-bottom: 0 !important;
+  input {
+    padding-bottom: 11px !important;
+    border-radius: 0;
+  }
+  .form-field {
+    padding-bottom: 0px !important;
+  }
+  .time-slots {
+    .time-slots-title {
+      font-size: 18px !important;
+      font-family: inherit !important;
+      font-weight: 400 !important;
+      margin-top: 20px;
+    }
+  }
+}

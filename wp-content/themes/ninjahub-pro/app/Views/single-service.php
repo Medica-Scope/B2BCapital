@@ -89,28 +89,28 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 				?>
 			</div>
 
-			<div class="ninja_form_container service-subscription-form ninja-appointment-form-container">
+			<div class="ninja_form_container service-subscription-form ninja-appointment-form-container new-contact-us">
 				<form class="ninja_form ninja-appointment-form" id="ninja_appointment_form">
 					<h3 class="form-title">
 						<?= __( 'Subscribe Now!', 'ninja' ) ?>
 					</h3>
 					<div class="form-field">
-						<label for="name" class="form-control-label">
+						<!-- <label for="name" class="form-control-label">
 							<?= __( 'Name', 'ninja' ) ?>
-						</label>
-						<input type="text" id="name" name="name" class="form-control" required>
+						</label> -->
+						<input type="text" id="name" name="name" placeholder="<?= __( 'Name', 'ninja' ) ?>" class="form-control" required>
 					</div>
 					<div class="form-field">
-						<label for="email" class="form-control-label">
+						<!-- <label for="email" class="form-control-label">
 							<?= __( 'Email', 'ninja' ) ?>
-						</label>
-						<input type="email" id="email" name="email" class="form-control" required>
+						</label> -->
+						<input type="email" id="email" name="email" placeholder="<?= __( 'Email', 'ninja' ) ?>" class="form-control" required>
 					</div>
 					<div class="form-field">
-						<label for="mobile" class="form-control-label">
+						<!-- <label for="mobile" class="form-control-label">
 							<?= __( 'Mobile', 'ninja' ) ?>
-						</label>
-						<input type="text" id="mobile" name="mobile" class="form-control" required>
+						</label> -->
+						<input type="text" id="mobile" name="mobile" placeholder="<?= __( 'Mobile', 'ninja' ) ?>" class="form-control" required>
 					</div>
 					<div class="time-slots">
 						<h4 class="time-slots-title">
