@@ -473,3 +473,15 @@
 		}
 	}
 }
+.page-content
+  .service-content-wrapper
+  .service-content
+  .service-subscription-form
+  .form-field
+  .form-control {
+  padding-bottom: 11px !important;
+  border-radius: 0;
+}
+.page-content .service-content-wrapper .service-content .service-subscription-form .time-slots{
+	border-bottom: 0;
+}

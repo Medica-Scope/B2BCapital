@@ -330,8 +330,6 @@ html body .new-contact-us {
   padding-bottom: 0 !important;
   height: fit-content;
   input {
-    padding-bottom: 11px !important;
-    border-radius: 0;
   }
   .form-field {
     padding-bottom: 0px !important;
@@ -344,4 +342,28 @@ html body .new-contact-us {
       margin-top: 20px;
     }
   }
+  .checkout-price {
+    border-top: 1px solid #ffffff24 !important;
+    padding-top: 11px;
+  }
+}
+.page-content
+  .service-content-wrapper
+  .service-content
+  .service-subscription-form
+  .form-field
+  .form-control {
+  padding-bottom: 11px !important;
+  border-radius: 0;
+}
+.page-content
+  .service-content-wrapper
+  .service-content
+  .service-subscription-form
+  .time-slots
+  .time-slots-group
+  .time-slot
+  .form-check-input:checked
+  + .time-slot-details {
+  border: 3px solid #58bd7d !important;
 }
