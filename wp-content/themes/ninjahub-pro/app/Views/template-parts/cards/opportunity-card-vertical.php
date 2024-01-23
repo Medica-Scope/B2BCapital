@@ -31,7 +31,8 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 					$fav_class = 'bbc-star-o';
 				}
 				?>
-					<div class="opportunity-item-controllers">
+			<button class="show-controllers" type="button">...</button>
+			<div class="opportunity-item-controllers ninja-hidden">
 						<?php
 						echo Nh_Forms::get_instance()
 							->create_form( [ 
