@@ -65,6 +65,7 @@ class NhOpportunityFront extends NhOpportunity
         this.ignore_opportunity();
         this.list_grid_switch();
         this.reset_form();
+        this.toggleControllers();
     }
 
     CreateOpportunityFormFieldsFront()
@@ -340,6 +341,11 @@ class NhOpportunityFront extends NhOpportunity
     reset_form(){
         $(document).on("click", ".reset-btn", function(e){
             $('#ninja_filters_form :input').val('');
+        });
+    }
+    toggleControllers(){
+        $(document).on("click", ".show-controllers", function(e){
+            $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
         });
     }
 }

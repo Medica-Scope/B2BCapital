@@ -122,7 +122,7 @@ class NhNotificationFront extends NhNotification
                 if (typeof ajaxRequests.clear_notifications !== 'undefined') {
                     ajaxRequests.clear_notifications.abort();
                 }
-                    that.item_clear(formData, $notifications.my_notification_group_container);
+                    that.item_clear(formData, $this);
             });
 
         // $notifications.ItemClearBtn.on('click', $notifications.ItemClearBtn.parent(), function (e) {

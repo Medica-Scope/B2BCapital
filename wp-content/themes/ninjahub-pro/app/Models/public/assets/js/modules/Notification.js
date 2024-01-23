@@ -94,8 +94,8 @@ class NhNotification extends Nh
             },
             success: function (res) {
                 if (res.success) {
-                    $el.html(res.data.html);
                     UiCtrl.blockUI($el, false);
+                    $el.parent().parent().parent().parent().parent().remove();
                 }
             },
             error: function (xhr) {
