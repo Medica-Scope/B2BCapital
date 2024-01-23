@@ -43,6 +43,8 @@ class NhMain
     {
         let that = this;
 
+        that.refreshToken();
+
         $(window).on('load', function () {
             setInterval(function() {
                 that.refreshToken()
