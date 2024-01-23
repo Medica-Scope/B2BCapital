@@ -30,7 +30,8 @@
 		<div class="card-image">
 			<a href="<?= esc_url($opportunity_link); ?>"><img src="<?= esc_url($opportunity_thumbnail); ?>"
 					alt="<?= esc_attr($opportunity_title); ?>"></a>
-			<div class="opportunity-item-controllers">
+                    <button class="show-controllers" type="button">...</button>
+			<div class="opportunity-item-controllers ninja-hidden">
 				<?php
                         if (!empty($user_ID)) :
                             echo ($current_page == 'my-ignored-opportunities') ? '' : $args['fav_form'];

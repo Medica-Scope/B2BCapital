@@ -39,6 +39,7 @@ class NhBlogFront extends NhBlog
     {
         this.toggleFav();
         this.ignore_article();
+        this.toggleControllers();
     }
 
     toggleFav()
@@ -77,6 +78,11 @@ class NhBlogFront extends NhBlog
 
                     that.ignoreArticle(formData, $this);
             });
+    }
+    toggleControllers(){
+        $(document).on("click", ".show-controllers", function(e){
+            $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
+        });
     }
 }
 

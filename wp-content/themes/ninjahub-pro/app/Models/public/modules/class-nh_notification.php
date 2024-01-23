@@ -1218,37 +1218,38 @@ use NH\APP\HELPERS\Nh_Hooks;
                 foreach ($posts->get_posts() as $notification) {
                     $data = [];
                     $data['notification'] = $this->convert($notification);
-                    $data['item_clear_form'] = Nh_Forms::get_instance()
-                    ->create_form([
-                        'post_id'                      => [
-                            'type'   => 'hidden',
-                            'name'   => 'post_id',
-                            'before' => '',
-                            'after'  => '',
-                            'value'  => $notification->ID,
-                            'order'  => 0
-                        ],
-                        'notification_item_clear_nonce'               => [
-                            'class' => '',
-                            'type'  => 'nonce',
-                            'name'  => 'notification_item_clear_nonce',
-                            'value' => Nh::_DOMAIN_NAME . "_notification_item_clear_nonce_form",
-                            'order' => 5
-                        ],
-                        'submit_notification_item_clear_request' => [
-                            'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
-                            'id'                  => 'submit_notification_item_clear_request',
-                            'type'                => 'submit',
-                            'value'               => __('Clear', 'ninja'),
-                            'recaptcha_form_name' => 'frontend_notification_item_clear',
-                            'order'               => 10
-                        ],
-                    ], [
-                        'class' => Nh::_DOMAIN_NAME . '-notification-item-clear-form',
-                    ]);
-                    get_template_part('app/Views/template-parts/notifications/notification', 'list-ajax', [ 'data' => $data ]);
-
                 }
+            //         $data['item_clear_form'] = Nh_Forms::get_instance()
+            //         ->create_form([
+            //             'post_id'                      => [
+            //                 'type'   => 'hidden',
+            //                 'name'   => 'post_id',
+            //                 'before' => '',
+            //                 'after'  => '',
+            //                 'value'  => $notification->ID,
+            //                 'order'  => 0
+            //             ],
+            //             'notification_item_clear_nonce'               => [
+            //                 'class' => '',
+            //                 'type'  => 'nonce',
+            //                 'name'  => 'notification_item_clear_nonce',
+            //                 'value' => Nh::_DOMAIN_NAME . "_notification_item_clear_nonce_form",
+            //                 'order' => 5
+            //             ],
+            //             'submit_notification_item_clear_request' => [
+            //                 'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
+            //                 'id'                  => 'submit_notification_item_clear_request',
+            //                 'type'                => 'submit',
+            //                 'value'               => __('Clear', 'ninja'),
+            //                 'recaptcha_form_name' => 'frontend_notification_item_clear',
+            //                 'order'               => 10
+            //             ],
+            //         ], [
+            //             'class' => Nh::_DOMAIN_NAME . '-notification-item-clear-form',
+            //         ]);
+            //         get_template_part('app/Views/template-parts/notifications/notification', 'list-ajax', [ 'data' => $data ]);
+
+            //     }
             } else {
                 get_template_part('app/Views/template-parts/notifications/notification', 'empty');
             }

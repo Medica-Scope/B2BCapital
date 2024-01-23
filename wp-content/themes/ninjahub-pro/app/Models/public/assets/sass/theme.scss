@@ -2,6 +2,7 @@
 
 /* Imports to customize bootstrap START */
 // Colors
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 @import "./base/variables";
 // Bootstrap
 @import "../../../../../node_modules//bootstrap/scss/bootstrap.scss";
@@ -25,6 +26,10 @@
 @import "./components/footer.scss";
 
 /* Some Resets */
+body {
+  font-family: $bbc-Space-Grotesk !important;
+}
+
 h1,
 h2,
 h3,
@@ -284,4 +289,200 @@ form {
   #ninja_phone_number {
     padding-left: 86px !important;
   }
+}
+html body .new-contact-us {
+  .wpcf7 {
+    padding-bottom: 0 !important;
+  }
+  ::placeholder {
+    color: $white;
+    font-size: 16px;
+  }
+  input {
+    padding-left: 0 !important;
+    border-bottom: 1px solid #ffffff24 !important;
+    font-size: 16px !important;
+    &[type="submit"] {
+      background-color: $blue-light;
+      color: $white;
+      border-bottom: none !important;
+      font-size: 20px !important;
+    }
+    &:focus-visible {
+      border-bottom: 1px solid #ffffff24 !important;
+    }
+  }
+  input:focus {
+    border-bottom: 1px solid #ffffff24 !important;
+  }
+  .form-header {
+    margin-bottom: 30px;
+  }
+  .form-title {
+    font-size: 33px !important;
+  }
+  .form-help {
+    font-size: 16px !important;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 18px !important;
+    }
+  }
+}
+.service-subscription-form {
+  background-color: #1d3348 !important;
+  padding-bottom: 0 !important;
+  height: fit-content;
+  input {
+  }
+  .form-field {
+    padding-bottom: 0px !important;
+  }
+  .time-slots {
+    .time-slots-title {
+      font-size: 18px !important;
+      font-family: inherit !important;
+      font-weight: 400 !important;
+      margin-top: 20px;
+    }
+  }
+  .checkout-price {
+    border-top: 1px solid #ffffff24 !important;
+    padding-top: 11px;
+  }
+}
+.page-content
+  .service-content-wrapper
+  .service-content
+  .service-subscription-form
+  .form-field
+  .form-control {
+  padding-bottom: 11px !important;
+  border-radius: 0;
+}
+.page-content
+  .service-content-wrapper
+  .service-content
+  .service-subscription-form
+  .time-slots
+  .time-slots-group
+  .time-slot
+  .form-check-input:checked
+  + .time-slot-details {
+  border: 3px solid #58bd7d !important;
+}
+
+.landing-page.main
+  main
+  .layout
+  .page-content
+  .landing-page-content
+  .carousel
+  .carousel-indicators {
+  @include large-screen {
+    bottom: 14vh !important;
+  }
+}
+.landing-page.main
+  main
+  .layout
+  .page-content
+  .landing-page-content
+  .carousel
+  .carousel-inner
+  .carousel-item
+  .slide
+  .slide-content
+  .slide-title {
+  @include large-screen {
+    margin: 1rem 0 0.8rem !important;
+  }
+}
+.landing-page.main
+  main
+  .layout
+  .page-content
+  .landing-page-content
+  .carousel
+  .carousel-inner
+  .carousel-item
+  .slide
+  .slide-content
+  .statistics
+  .statistic
+  .statistic-count {
+  @include large-screen {
+    font-size: 2.1rem !important;
+  }
+}
+
+.ninja-header-search-form .ninja-input-wrapper #ninja_s {
+  padding-top: 13px !important;
+}
+.dashboard-body #collapseFilter #ninja_filters_form #ninja_search {
+  padding-inline-start: 2.5rem !important;
+}
+.landing-page.main
+  main
+  .layout
+  .page-content
+  .user-type-content
+  .user-types
+  .user-type
+  .user-type-link
+  .know-more
+  .icon {
+  font-size: 1rem;
+}
+.blogs-list,
+.single-post {
+  .blog-item {
+    .card {
+      border: none;
+      box-shadow: -1px 1px 4px 0px #00000008;
+      padding-bottom: 35px;
+      .card-image-top {
+        height: 281px;
+      }
+      .category {
+        display: none;
+      }
+      .date {
+        img {
+          width: 50px;
+          height: 50px;
+          background-color: #045e98;
+          object-fit: contain;
+          padding: 5px;
+        }
+        p {
+          font-size: 14px;
+          font-weight: 300;
+          font-family: $bbc-Space-Grotesk !important;
+          strong {
+            color: #045e98;
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+      }
+      .short-description {
+        color: #071b2e;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: $bbc-Space-Grotesk !important;
+      }
+    }
+  }
+}
+.dashboard-body
+  .sidebar-container
+  .sidebar-latest-acquisitions
+  .acquisitions-list,
+.dashboard-body
+  .sidebar-container
+  .sidebar-my-opportunities
+  .acquisitions-list {
+  margin-top: 0 !important;
 }

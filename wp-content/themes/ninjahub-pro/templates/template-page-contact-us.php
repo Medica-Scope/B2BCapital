@@ -31,7 +31,7 @@ $inner_title = get_field( 'inner_title', $contact->ID );
 
 <!-- Page Content -->
 <section class="page-content">
-	<div class="contact-us-content">
+	<div class="contact-us-content new-contact-us">
 		<!-- Contact Us Intro -->
 		<div class="contact-us-intro">
 			<h1 class="contact-us-title">
