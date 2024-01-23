@@ -1,6 +1,9 @@
 @import './landing-theme';
 
 /* Landing Page Styles Start Here */
+body{
+	font-family: "Space Grotesk", sans-serif;
+}
 .landing-page {
 	display: flex;
 	width: 100%;

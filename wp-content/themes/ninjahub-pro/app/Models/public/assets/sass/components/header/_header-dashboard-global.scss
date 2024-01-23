@@ -37,7 +37,7 @@
 					&.active {
 						position: relative;
 						.nav-link {
-							font-family: $bbc-primary-en-font-bold;
+							font-family: $bbc-Space-Grotesk !important;
 						}
 						&::after {
 							content: '';

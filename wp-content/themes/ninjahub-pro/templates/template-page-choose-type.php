@@ -42,7 +42,7 @@ get_header();
 					</div>
 					<span class="know-more">
 						Know More
-						<i class="icon bbc-right"></i>
+						<i class="icon bbc-chevrons-right"></i>
 						<i class="icon bbc-right"></i>
 					</span>
 				</a>
@@ -61,7 +61,7 @@ get_header();
 					</div>
 					<span class="know-more">
 						Know More
-						<i class="icon bbc-right"></i>
+						<i class="icon bbc-chevrons-right"></i>
 						<i class="icon bbc-right"></i>
 					</span>
 				</a>
