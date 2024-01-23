@@ -39,7 +39,7 @@ get_header();
 					</span>
 					<span class="other-user-title">
 						Investor
-						<i class="icon bbc-right"></i>
+						<i class="icon bbc-chevrons-right"></i>
 						<i class="icon bbc-right"></i>
 					</span>
 				</a>
