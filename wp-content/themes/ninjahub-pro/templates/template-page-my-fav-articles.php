@@ -27,7 +27,7 @@ get_header();
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-blogs', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/blogs' );
 
-global $user_ID;
+global $user_ID, $wp_query;
 $Blog_obj = new Nh_Blog();
 // $blogs    = $Blog_obj->get_profile_favorite_articles();
 $favorite_articles = [];

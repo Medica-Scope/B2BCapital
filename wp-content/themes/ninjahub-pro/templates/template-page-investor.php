@@ -27,7 +27,7 @@ get_header();
 <section class="page-content">
 	<!-- User Type Content -->
 	<div class="user-type-content">
-		<h2 class="types-title">B2B Is To Regulate<br>The Relationship Between</h2>
+		<?= _x('<h2 class="types-title">B2B Is To Regulate<br>The Relationship Between</h2>', 'ninja')?>
 		<!-- Investor Type Content -->
 		<div class="active-user-type">
 			<div class="user-type-video investor">
@@ -38,25 +38,18 @@ get_header();
 				</div>
 			</div>
 			<div class="active-user-type-content">
-				<h2 class="user-type-title">Investor</h2>
+				<h2 class="user-type-title"><?= __('Investor', 'ninja') ?></h2>
 				<p class="user-type-description">
-					B2B represents a real opportunity for me to pump my investments into a number of projects owned by
-					government
-					authorities and startups.
+					<?= __('B2B represents a real opportunity for me to pump my investments into a number of projects owned by government authorities and startups.', 'ninja') ?>
 				</p>
 				<p class="user-type-description">
-					Where the platform provides me with an marketplace through which I can roam and move within the
-					opportunities
-					offered completely freely.
+					<?= __('Where the platform provides me with an marketplace through which I can roam and move within the opportunities offered completely freely.', 'ninja') ?>
 				</p>
 				<p class="user-type-description">
-					with valuable advisory and technical services provided by the platform through the financial and
-					stock market
-					consultants who are present in it for a fair and true evaluation of the promoted investment
-					opportunities.
+					<?= __('with valuable advisory and technical services provided by the platform through the financial and stock market consultants who are present in it for a fair and true evaluation of the promoted investment opportunities.', 'ninja') ?>
 				</p>
 				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/registration' ) ) ) . '/?type=investor'; ?>"
-					class="user-type-action bbc-btn outline success">Join as Investor</a>
+					class="user-type-action bbc-btn outline success"><?= __('Join as Investor', 'ninja') ?></a>
 			</div>
 			<div class="other-user-type owner">
 				<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'home/opportunity-provider' ) ) ); ?>"
@@ -66,7 +59,7 @@ get_header();
 							class="img-fluid">
 					</span>
 					<span class="other-user-title">
-						Opportunity Provider
+						<?= __('Opportunity Provider', 'ninja') ?>
 						<i class="icon chevrons-right"></i>
 						<i class="icon bbc-right"></i>
 					</span>
