@@ -410,6 +410,11 @@
 /* ACF Forms Styles END*/
 .page-template-template-page-create-opportunity {
   .ninja-create-opportunity-form-container {
+    small{
+      color: $orange;
+      margin: 10px 0;
+      display: inline-block;
+    }
     label {
       font-weight: 600;
       margin-bottom: 5px;
@@ -423,4 +428,7 @@
   p.text-wrap.text-center {
     color: #b1b1b1;
   }
+}
+form .success{
+  color: $green;
 }

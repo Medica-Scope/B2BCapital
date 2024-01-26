@@ -30,7 +30,7 @@
 		<div class="card-image">
 			<a href="<?= esc_url($opportunity_link); ?>"><img src="<?= esc_url($opportunity_thumbnail); ?>"
 					alt="<?= esc_attr($opportunity_title); ?>"></a>
-                    <button class="show-controllers" type="button">...</button>
+                    <button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
 			<div class="opportunity-item-controllers ninja-hidden">
 				<?php
                         if (!empty($user_ID)) :
