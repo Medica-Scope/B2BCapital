@@ -486,3 +486,107 @@ html body .new-contact-us {
   .acquisitions-list {
   margin-top: 0 !important;
 }
+.opportunity-item-controllers.ninja-hidden {
+  display: none !important;
+}
+.opportunity-item-controllers {
+  margin-top: 39px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  button {
+    margin: 0 !important;
+    border-radius: 0;
+    border: none;
+    margin-bottom: 2px !important;
+  }
+}
+.show-controllers {
+  position: absolute;
+  right: 8px;
+  top: 9px;
+  background-color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 5px;
+  i {
+    font-size: 20px;
+  }
+}
+// footer
+.wp-block-social-links {
+  .wp-social-link {
+    background-color: #024e7f !important;
+    border-radius: 4px;
+    a {
+      padding: 0;
+      svg {
+        font-size: 30px;
+      }
+    }
+  }
+}
+footer {
+  h5 {
+    font-size: 16px !important;
+  }
+  ul li {
+    a {
+      font-size: 14px;
+      color: #252b39;
+      font-weight: 400;
+    }
+    i {
+      color: #024e7f !important;
+      font-size: 22px;
+    }
+  }
+}
+#ninja_filter_opportunity_form {
+  .form-field {
+    button {
+      margin-top: 30px;
+      margin-left: 15px;
+    }
+  }
+  .gglcptch_error_text {
+    position: absolute;
+    left: 0;
+    bottom: -21px;
+  }
+}
+.pagination-con{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  .next.page-numbers,.prev.page-numbers{
+    position: absolute;
+    right: 40px;
+    width: 80px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .prev.page-numbers{
+    right: auto;
+    left: 40px;
+  }
+}
+footer .widget_block .menu li{
+  list-style: none;
+  &::before{
+    content: '-';
+    margin-right: 6px;
+  }
+}

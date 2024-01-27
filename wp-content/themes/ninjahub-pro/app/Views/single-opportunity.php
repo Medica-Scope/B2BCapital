@@ -77,7 +77,7 @@
 
     <main class="container container-xxl">
         <div class="row align-items-end">
-            <div class="col-6">
+            <div class="col-4">
                 <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
                    class="btn btn-light text-uppercase mb-2 btn-back"><i class="bbc-chevron-left"></i>
                     <?= __('Back', 'ninja'); ?>
@@ -94,7 +94,7 @@
                     <?= $opportunity->taxonomy['business-type'][0]->name ?>
                 </p>
             </div>
-            <div class="col-6 actions">
+            <div class="col-8 actions">
                 <?php
 
                     echo Nh_Forms::get_instance()
