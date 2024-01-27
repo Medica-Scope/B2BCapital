@@ -43,7 +43,7 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 
 			<?php if ( ! empty( $user_ID ) ) : ?>
-			<button class="show-controllers" type="button">...</button>
+			<button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
 			<div class="opportunity-item-controllers ninja-hidden">
 				<?php
 					echo $args['fav_form'];

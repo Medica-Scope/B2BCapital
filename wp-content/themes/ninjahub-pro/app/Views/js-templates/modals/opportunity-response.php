@@ -1,10 +1,10 @@
 <?php
-    /**
-     * @Filename: opportunity-response.php
-     * @Description:
-     * @User: NINJA MASTER - Mustafa Shaaban
-     * @Date: 7/14/2023
-     */
+/**
+ * @Filename: opportunity-response.php
+ * @Description:
+ * @User: NINJA MASTER - Mustafa Shaaban
+ * @Date: 7/14/2023
+ */
 ?>
 
 <script type="text/template" id="ninja_modal_opp_request_success">
@@ -12,6 +12,11 @@
          aria-labelledby="opportunitySuccessLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+            <div class="modal-header">
+                    <div class="circle">
+                        <i class="bbc-check"></i>
+                        </div>
+                    </div>
                 <div class="modal-body">
                     <p><%= msg %></p>
                 </div>

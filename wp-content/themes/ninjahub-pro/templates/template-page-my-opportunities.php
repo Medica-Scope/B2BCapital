@@ -62,7 +62,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 						$form_fields              = [];
 						if ( ! empty( $opportunities_type_terms ) ) {
 							$form_fields['opportunity_type'] = [
-								'class'             => 'col-6 pe-2',
+								'class'             => 'col-5 pe-2',
 								'type'              => 'select',
 								'label'             => __( 'Opportunity Type', 'ninja' ),
 								'name'              => 'opportunity_type',
@@ -86,7 +86,7 @@ $acquisitions     = $acquisitions_obj->get_profile_acquisitions( TRUE );
 							}
 						}
 						$form_fields['opportunity_status']       = [
-							'class'             => 'col-6 ps-2',
+							'class'             => 'col-5 ps-2',
 							'type'              => 'select',
 							'label'             => __( 'Opportunity Status', 'ninja' ),
 							'name'              => 'opportunity_status',
