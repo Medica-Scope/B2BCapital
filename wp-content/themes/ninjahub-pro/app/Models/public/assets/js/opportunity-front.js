@@ -340,7 +340,13 @@ class NhOpportunityFront extends NhOpportunity
     }
     reset_form(){
         $(document).on("click", ".reset-btn", function(e){
-            $('#ninja_filters_form :input').val('');
+            $('#ninja_filters_form :input').not('input[type=range]').val('');
+            $('#ninja_filters_form input[type=range]').each(function() {
+                var defaultValue = this.min;
+                $(this).val(defaultValue);
+                var rangeId = $(this).attr('id');
+                $('#rangeValue-' + rangeId).text(defaultValue);
+            });
         });
     }
     toggleControllers(){
