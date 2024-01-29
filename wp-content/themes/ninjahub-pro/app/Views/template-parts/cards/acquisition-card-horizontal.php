@@ -23,9 +23,9 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 			<?php
 			if ( $is_item_controllers ) {
 				if ( $is_fav ) {
-					$fav_class = 'bbc-star';
+					$fav_class = 'bbc-bookmark fav-star';
 				} else {
-					$fav_class = 'bbc-star-o';
+					$fav_class = 'bbc-bookmark-o fav-star';
 				}
 				?>
 			<button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
