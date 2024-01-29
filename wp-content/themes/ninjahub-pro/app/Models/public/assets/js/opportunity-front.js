@@ -347,6 +347,10 @@ class NhOpportunityFront extends NhOpportunity
                 var rangeId = $(this).attr('id');
                 $('#rangeValue-' + rangeId).text(defaultValue);
             });
+            if (history.pushState) {
+                var reset_url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.pushState({path:reset_url}, '', reset_url);
+            }
         });
     }
     toggleControllers(){
