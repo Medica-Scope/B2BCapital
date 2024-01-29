@@ -69,7 +69,8 @@ if ( is_singular( 'post' ) ) {
 
 			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' ) ) {
 				get_template_part( 'app/Views/headers/landing' );
-			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) || is_tax('faq-category') ) {
+			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [
+				'opportunity', 'faq' ] ) || is_tax('faq-category') ) {
 				get_template_part( 'app/Views/headers/dashboard' );
 			} elseif ( is_page( $my_account ) ) {
 				get_template_part( 'app/Views/headers/my-account' );
