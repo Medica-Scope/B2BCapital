@@ -60,9 +60,9 @@ if ($results['posts']) { ?>
             $fav_chk            = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
             $ignore_chk         = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
             if ($fav_chk) {
-                $fav_class = 'bbc-star';
+                $fav_class = 'bbc-bookmark fav-star';
             } else {
-                $fav_class = 'bbc-star-o';
+                $fav_class = 'bbc-bookmark-o fav-star';
             }
             $args['fav_form'] = Nh_Forms::get_instance()
                 ->create_form([
@@ -93,9 +93,9 @@ if ($results['posts']) { ?>
                     'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                 ]);
             if ($ignore_chk) {
-                $ignore_class = 'bbc-star';
+                $ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
             } else {
-                $ignore_class = 'bbc-star-o';
+                $ignore_class = 'controll-icon bbc-thumbs-down text-success ignore-star';
             }
             $args['ignore_form'] = Nh_Forms::get_instance()
                 ->create_form([

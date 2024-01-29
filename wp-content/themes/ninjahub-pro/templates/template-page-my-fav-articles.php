@@ -73,7 +73,7 @@ $user_obj = Nh_User::get_current_user();
 								$args['ignore_form'] = '';
 								if ( ! empty( $user_ID ) ) {
 									$args['fav_chk']  = true;
-									$fav_class        = 'bbc-star';
+									$fav_class        = 'bbc-bookmark fav-star';
 									$args['fav_form'] = Nh_Forms::get_instance()
 										->create_form( [ 
 											'post_id'                   => [ 

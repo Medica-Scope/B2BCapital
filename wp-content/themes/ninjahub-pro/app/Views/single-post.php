@@ -32,23 +32,23 @@ $ignore_text     = '';
 if ( ( $single_post->meta_data['opportunity'] ) ) {
 	$opportunity = $opportunity_obj->get_by_id( $single_post->meta_data['opportunity'] );
 }
-$fav_class = 'bbc-star-o';
+$fav_class = 'bbc-bookmark-o fav-star';
 if ( $user_ID ) {
 	$fav_chk = $post_obj->is_post_in_user_favorites( $single_post->ID );
 	if ( $fav_chk ) {
-		$fav_class = 'bbc-star text-success';
+		$fav_class = 'bbc-bookmark fav-star';
 		$fav_text  = __( 'Unfavored', 'ninja' );
 	} else {
-		$fav_class = 'bbc-star-o text-danger';
+		$fav_class = 'bbc-bookmark-o fav-star';
 		$fav_text  = __( 'Favorite', 'ninja' );
 	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );
 	if ( $ignore_chk ) {
-		$ignore_class = 'controll-icon bbc-thumbs-up text-success';
+		$ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
 		$ignore_text  = __( 'Ignored', 'ninja' );
 
 	} else {
-		$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+		$ignore_class = 'controll-icon bbc-thumbs-down text-danger ignore-star';
 		$ignore_text  = __( 'Ignore', 'ninja' );
 	}
 }

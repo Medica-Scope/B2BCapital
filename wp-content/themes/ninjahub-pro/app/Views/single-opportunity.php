@@ -54,7 +54,7 @@
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class     = 'bbc-bookmark fav-star';
+            $fav_class     = '0 fav-star';
             $fav_text      = __('Unfavored', 'ninja');
             $fav_full_text = '<span class="fav-text">'.$fav_text.'</span><i class="'.$fav_class.'"></i>';
         } else {
