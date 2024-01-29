@@ -51,9 +51,9 @@ $user_obj        = Nh_User::get_current_user();
 							$fav_check = $opportunity_obj->is_opportunity_in_user_favorites( $opportunity->ID );
 							$fav_class = '';
 							if ( $fav_check ) {
-								$fav_class = 'bbc-star';
+								$fav_class = 'bbc-bookmark fav-star';
 							} else {
-								$fav_class = 'bbc-star-o';
+								$fav_class = 'bbc-bookmark-o fav-star';
 							}
 							$args['fav_form']     = Nh_Forms::get_instance()
 								->create_form( [ 

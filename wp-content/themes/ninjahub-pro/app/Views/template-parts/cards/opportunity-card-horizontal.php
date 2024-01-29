@@ -24,9 +24,9 @@
             <?php
                 if ($is_item_controllers) {
                     if ($is_fav) {
-                        $fav_class = 'bbc-star';
+                        $fav_class = 'bbc-bookmark fav-star';
                     } else {
-                        $fav_class = 'bbc-star-o';
+                        $fav_class = 'bbc-bookmark-o fav-star';
                     }
                     ?>
                     <div class="opportunity-item-controllers">
