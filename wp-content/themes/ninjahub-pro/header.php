@@ -63,8 +63,6 @@ if ( is_singular( 'post' ) ) {
 				'reset-password',
 				'forgot-password',
 				'registration',
-				'verification',
-				'authentication',
 			];
 
 			$no_header = [
