@@ -546,6 +546,31 @@ footer {
       font-size: 22px;
     }
   }
+  .coby-right {
+    border-top: 1px solid #252b391c;
+    padding-bottom: 15px !important;
+    padding-top: 20px !important;
+    @include medium-screen-max {
+      flex-direction: column-reverse;
+    }
+    #menu-footer {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      li {
+        margin-inline-end: 20px;
+        a {
+          color: #252b39;
+        }
+        &::before {
+          display: none !important;
+        }
+      }
+    }
+  }
+  #block-8 {
+    margin-top: 0 !important;
+  }
 }
 #ninja_filter_opportunity_form {
   .form-field {
@@ -560,13 +585,14 @@ footer {
     bottom: -21px;
   }
 }
-.pagination-con{
+.pagination-con {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
-  .next.page-numbers,.prev.page-numbers{
+  .next.page-numbers,
+  .prev.page-numbers {
     position: absolute;
     right: 40px;
     width: 80px;
@@ -576,17 +602,55 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-
   }
-  .prev.page-numbers{
+  .prev.page-numbers {
     right: auto;
     left: 40px;
   }
 }
-footer .widget_block .menu li{
+footer .widget_block .menu li {
   list-style: none;
-  &::before{
-    content: '-';
+  &::before {
+    content: "-";
     margin-right: 6px;
+  }
+}
+.ninja-header-search-form .ninja-input-wrapper #ninja_s,
+.search-result-page #ninja_s {
+  padding-inline-start: 40px !important;
+}
+.dashboard-overview .widget-list .single-widget .widget-container {
+  min-width: 320px;
+  width: 320px;
+}
+.dashboard-overview .widget-list .single-widget {
+  overflow: auto;
+}
+.search-result-page {
+  .page-title {
+    font-size: 21px;
+    margin-bottom: 14px !important;
+    margin-top: 35px !important;
+  }
+  article {
+    padding: 20px 20px !important;
+    background-color: #fbfbfb;
+    border: none !important;
+    .entry-title {
+      line-height: 17px;
+      a {
+        color: #024e7f;
+        font-size: 18px;
+      }
+    }
+    .entry-summary {
+      p {
+        padding-left: 0;
+        margin-top: 5px;
+        font-size: 13px;
+        color: #07090a;
+        font-weight: 600;
+      }
+    }
   }
 }
