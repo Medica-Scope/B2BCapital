@@ -106,7 +106,7 @@
 
                 <p class="card-text">
                     <small class="text-body-secondary date">
-                        <?= $opportunity_created_date; ?>
+                        <?= date( 'F j, Y', strtotime( $opportunity_created_date ) ); ?>
                     </small>
                 </p>
 
