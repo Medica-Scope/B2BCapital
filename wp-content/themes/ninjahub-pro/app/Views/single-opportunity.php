@@ -54,23 +54,23 @@
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class     = 'bbc-bookmark fav-star';
+            $fav_class     = '0 fav-star';
             $fav_text      = __('Unfavored', 'ninja');
-            $fav_full_text = '<span class="fav-text">'.$fav_text.'</span><i class="'.$fav_class.'"></i>';
+            $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         } else {
             $fav_class     = 'bbc-bookmark-o fav-star';
             $fav_text      = __('Add To Favorite', 'ninja');
-            $fav_full_text = '<span class="fav-text">'.$fav_text.'</span><i class="'.$fav_class.'"></i>';
+            $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
             $ignore_class     = 'controll-icon bbc-thumbs-up text-success ignore-star';
             $ignore_text      = __('Un-ignore', 'ninja');
-            $ignore_full_text = '<span class="ignore-text">'.$ignore_text.'</span><i class="'.$ignore_class.'"></i>';
+            $ignore_full_text = '<span class="ignore-text">' . $ignore_text . '</span><i class="' . $ignore_class . '"></i>';
         } else {
             $ignore_class     = 'controll-icon bbc-thumbs-down text-danger ignore-star';
             $ignore_text      = __('Ignore', 'ninja');
-            $ignore_full_text = '<span class="ignore-text">'.$ignore_text.'</span><i class="'.$ignore_class.'"></i>';
+            $ignore_full_text = '<span class="ignore-text">' . $ignore_text . '</span><i class="' . $ignore_class . '"></i>';
         }
     }
 ?>
@@ -210,7 +210,7 @@
                                                                                 'placeholder' => __('Add Bid', 'ninja'),
                                                                                 'before'      => '',
                                                                                 'order'       => 0,
-                                                                                'label'        => 'Add Bid Amount',
+                                                                                'label'       => 'Add Bid Amount',
                                                                             ],
                                                                             'opp_id'        => [
                                                                                 'type'   => 'hidden',
@@ -277,7 +277,7 @@
                                     <!-- Button trigger modal -->
                                     <button type="button" id="createAcquisitionBtn" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#createAcquisitionModal">
-                                      <i class="bbc-plus"></i>  <?= __('Acquisition', 'ninja') ?>
+                                        <i class="bbc-plus"></i> <?= __('Acquisition', 'ninja') ?>
                                     </button>
 
                                     <!-- Modal -->
@@ -286,8 +286,8 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                <div class="circle">
-                                                    <i class="bbc-check"></i>
+                                                    <div class="circle">
+                                                        <i class="bbc-check"></i>
                                                     </div>
                                                 </div>
                                                 <div class="modal-body">
@@ -359,7 +359,7 @@
                                     <!-- Button trigger modal -->
                                     <button type="button" id="createInvestBtn" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#createInvestModal">
-                                      <i class="bbc-send-o"></i>   <?= __('Invest Request', 'ninja') ?>
+                                        <i class="bbc-send-o"></i> <?= __('Invest Request', 'ninja') ?>
                                     </button>
 
                                     <!-- Modal -->
@@ -369,7 +369,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div class="circle">
-                                                    <i class="bbc-check"></i>
+                                                        <i class="bbc-check"></i>
                                                     </div>
                                                 </div>
                                                 <div class="modal-body">
@@ -439,7 +439,7 @@
                             if ($unique_type_name === 'bidding') {
                                 ?>
                                 <span class="text-dark">
-									<?= sprintf(_n('%s Bid', '%s Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
+									<?= sprintf(_n('%s Number of Bid', '%s Number of Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
 								</span>
                                 <?php
                             }
@@ -447,7 +447,7 @@
                             if ($unique_type_name === 'acquisition') {
                                 ?>
                                 <span class="text-dark">
-									<?= sprintf(_n('%s Request', '%s Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
+									<?= sprintf(_n('%s Number of Request', '%s Number of Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
 								</span>
                                 <?php
                             }
@@ -455,8 +455,8 @@
                             if ($unique_type_name === 'regular') {
                                 ?>
                                 <span class="text-dark">
-				<?= sprintf(_n('%s Request', '%s Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
-			</span>
+                                    <?= sprintf(_n('%s Number of Request', '%s Number of Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
+                                </span>
                                 <?php
                             }
                         }

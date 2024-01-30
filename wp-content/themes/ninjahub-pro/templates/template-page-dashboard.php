@@ -335,9 +335,9 @@
                                                         $args['fav_chk']    = $fav_chk;
                                                         $args['ignore_chk'] = $ignore_chk;
                                                         if ($fav_chk) {
-                                                            $fav_class = 'controll-icon bbc-star';
+                                                            $fav_class = 'bbc-bookmark fav-star';
                                                         } else {
-                                                            $fav_class = 'controll-icon bbc-star-o';
+                                                            $fav_class = 'bbc-bookmark-o fav-star';
                                                         }
                                                         $args['fav_form'] = Nh_Forms::get_instance()
                                                                                     ->create_form([
@@ -368,9 +368,9 @@
                                                                                         'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                                                                                     ]);
                                                         if ($ignore_chk) {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
                                                         } else {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger ignore-star';
                                                         }
                                                         $args['ignore_form'] = Nh_Forms::get_instance()
                                                                                        ->create_form([
