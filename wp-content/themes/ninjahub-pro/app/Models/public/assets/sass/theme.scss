@@ -550,6 +550,9 @@ footer {
     border-top: 1px solid #252b391c;
     padding-bottom: 15px !important;
     padding-top: 20px !important;
+    @include medium-screen-max {
+      flex-direction: column-reverse;
+    }
     #menu-footer {
       display: flex;
       align-items: center;
@@ -612,6 +615,42 @@ footer .widget_block .menu li {
     margin-right: 6px;
   }
 }
-.ninja-header-search-form .ninja-input-wrapper #ninja_s {
+.ninja-header-search-form .ninja-input-wrapper #ninja_s,
+.search-result-page #ninja_s {
   padding-inline-start: 40px !important;
+}
+.dashboard-overview .widget-list .single-widget .widget-container {
+  min-width: 320px;
+  width: 320px;
+}
+.dashboard-overview .widget-list .single-widget {
+  overflow: auto;
+}
+.search-result-page {
+  .page-title {
+    font-size: 21px;
+    margin-bottom: 14px !important;
+    margin-top: 35px !important;
+  }
+  article {
+    padding: 20px 20px !important;
+    background-color: #fbfbfb;
+    border: none !important;
+    .entry-title {
+      line-height: 17px;
+      a {
+        color: #024e7f;
+        font-size: 18px;
+      }
+    }
+    .entry-summary {
+      p {
+        padding-left: 0;
+        margin-top: 5px;
+        font-size: 13px;
+        color: #07090a;
+        font-weight: 600;
+      }
+    }
+  }
 }

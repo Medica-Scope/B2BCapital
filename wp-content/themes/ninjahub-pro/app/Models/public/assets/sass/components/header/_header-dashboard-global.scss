@@ -12,6 +12,7 @@
 		border-radius: 4px;
 		padding: 1.5rem;
 		margin-block: 1rem;
+	
 
 		.site-branding {
 			a {
@@ -84,6 +85,7 @@
 					}
 					.btn-profile-desc {
 						font-size: 12px;
+						white-space: normal;
 					}
 					&.bbc-user-profile-btn {
 						border-left: 1px solid $layout;
