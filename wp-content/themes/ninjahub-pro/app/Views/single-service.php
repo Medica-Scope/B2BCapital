@@ -99,6 +99,7 @@ $available_slots = array_chunk( $service->available_slots, 4 );
 							<?= __( 'Name', 'ninja' ) ?>
 						</label> -->
 						<input type="text" id="name" name="name" placeholder="<?= __( 'Name', 'ninja' ) ?>" class="form-control" required>
+						<i class="bbc-check"></i>
 					</div>
 					<div class="form-field">
 						<!-- <label for="email" class="form-control-label">

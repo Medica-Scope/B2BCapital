@@ -100,7 +100,7 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 											</p>
 											<a href="<?= $service->link ?>" class="service-link">
 												<?= __( 'Read more', 'ninja' ) ?>
-												<span class="service-link-icons"><i class="icon bbc-right"></i><i
+												<span class="service-link-icons"><i class="icon bbc-chevrons-right"></i><i
 														class="icon bbc-right"></i></span>
 											</a>
 										</div>

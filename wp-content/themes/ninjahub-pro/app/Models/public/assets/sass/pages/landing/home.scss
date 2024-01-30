@@ -41,6 +41,8 @@ body{
 			display: inline-block;
 			width: 4rem;
 			margin-bottom: 1.5rem;
+			position: relative;
+			z-index: 999;
 			@include large-screen {
 				width: 4.6875rem;
 			}
