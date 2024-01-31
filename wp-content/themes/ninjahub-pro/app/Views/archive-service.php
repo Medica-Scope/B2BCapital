@@ -50,7 +50,7 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 						<button type="button" class="nav-link <?= $active ?>" data-bs-toggle="tab"
 							data-bs-target="#category-<?= $key ?>">
 							<span class="category-number">
-								<?= $key + 1 ?>.
+								0 <?= $key + 1 ?>.
 							</span>
 							<span class="category-name">
 								<?= $term->name ?>
@@ -100,7 +100,7 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 											</p>
 											<a href="<?= $service->link ?>" class="service-link">
 												<?= __( 'Read more', 'ninja' ) ?>
-												<span class="service-link-icons"><i class="icon bbc-right"></i><i
+												<span class="service-link-icons"><i class="icon bbc-chevrons-right"></i><i
 														class="icon bbc-right"></i></span>
 											</a>
 										</div>
@@ -127,7 +127,7 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 										</p>
 										<a href="<?= $service->link ?>" class="service-link">
 											<?= __( 'Read more', 'ninja' ) ?>
-											<span class="service-link-icons"><i class="icon bbc-right"></i><i
+											<span class="service-link-icons"><i class="icon bbc-chevrons-right"></i><i
 													class="icon bbc-right"></i></span>
 										</a>
 									</div>
