@@ -125,7 +125,7 @@ $user = Nh_User::get_current_user();
 						'class'               => 'btn',
 						'id'                  => 'authenticationSubmit',
 						'type'                => 'submit',
-						'value'               => __( 'Authenticate', 'ninja' ),
+						'value'               => __( 'Submit', 'ninja' ),
 						'recaptcha_form_name' => 'frontend_authentication',
 						'order'               => 45
 					],

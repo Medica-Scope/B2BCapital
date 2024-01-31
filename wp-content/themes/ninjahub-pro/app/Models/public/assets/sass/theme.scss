@@ -810,3 +810,60 @@ footer .widget_block .menu li {
     }
   }
 }
+// page contact us
+.page-template-template-page-contact-us {
+  .landing-page {
+    background: $blue-dark !important;
+  }
+  .back-texture {
+    display: none !important;
+  }
+  .page-content {
+    @include large-screen {
+      overflow: hidden;
+    }
+  }
+}
+// page authentication
+.page-template-template-page-authentication {
+  .site .site-header {
+    display: block !important;
+    height: fit-content !important;
+    .main-navigation {
+      background-color: transparent;
+      padding: 0.5rem !important;
+    }
+    @include large-screen {
+      margin-top: 50px;
+    }
+  }
+  .section-title {
+    font-weight: 900;
+  }
+  .container-fluid.h-100 {
+    height: fit-content !important;
+
+    .section-footer {
+      margin-top: auto;
+    }
+    .section-header {
+      margin-bottom: 0;
+    }
+  }
+  .new-authenticate-page {
+    min-width: 790px !important;
+    padding-right: 64px !important;
+    padding-left: 64px !important;
+    @include large-screen {
+      margin-top: 100px;
+    }
+    p.text-center {
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+  #authenticationSubmit {
+    padding: 17px 37px;
+    border-radius: 5px;
+  }
+}
