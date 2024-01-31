@@ -42,7 +42,7 @@ body{
 			width: 4rem;
 			margin-bottom: 1.5rem;
 			position: relative;
-			z-index: 999;
+			z-index: 0;
 			@include large-screen {
 				width: 4.6875rem;
 			}
