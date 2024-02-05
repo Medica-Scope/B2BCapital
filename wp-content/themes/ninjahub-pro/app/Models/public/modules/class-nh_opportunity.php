@@ -878,7 +878,7 @@ class Nh_Opportunity extends Nh_Module {
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count - 1 );
 				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been unfavored', 'ninja'), $opportunity->title), [
 					'fav_active'   => 1,
-					'updated_text' => __( 'Favorite', 'ninja' ),
+					'updated_text' => __( 'Add to favorite', 'ninja' ),
 					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
