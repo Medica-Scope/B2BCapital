@@ -48,18 +48,18 @@
                 'name' => 'google-captcha',
                 'slug' => 'google-captcha'
             ],
-            [
-//                'name' => 'wp-optimize',
-//                'slug' => 'wp-optimize'
-            ],
+            // [
+            //    'name' => 'wp-optimize',
+            //    'slug' => 'wp-optimize'
+            // ],
             [
                 'name' => 'health-check',
                 'slug' => 'health-check'
             ],
-            [
-//                'name' => 'updraftplus',
-//                'slug' => 'updraftplus'
-            ],
+            // [
+            //    'name' => 'updraftplus',
+            //    'slug' => 'updraftplus'
+            // ],
             [
                 'name' => 'wp-mail-smtp',
                 'slug' => 'wp-mail-smtp'
