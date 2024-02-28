@@ -1,10 +1,10 @@
 === Advanced Access Manager - Restricted Content, Users & Roles, Enhanced Security and More ===
 Contributors: vasyltech
 Tags: access control, membership, backend menu, user role, restricted content, security, jwt
-Requires at least: 5.0.0
+Requires at least: 5.2.0
 Requires PHP: 5.6.0
-Tested up to: 6.4.2
-Stable tag: 6.9.20
+Tested up to: 6.4.3
+Stable tag: 6.9.23
 
 All you need to manage access to WordPress websites on the frontend, backend and API levels for any role, user or visitors.
 
@@ -80,6 +80,22 @@ We take security and privacy very seriously, that is why there are several non-n
 11. Improve your website security
 
 == Changelog ==
+
+= 6.9.23 =
+* Fixed: Type E_Error in Visibility.php [https://github.com/aamplugin/advanced-access-manager/issues/347](https://github.com/aamplugin/advanced-access-manager/issues/347)
+* Fixed: The previous selected role does not visually uncheck if switched to manage visitors or default [https://github.com/aamplugin/advanced-access-manager/issues/348](https://github.com/aamplugin/advanced-access-manager/issues/348)
+* Changed: The minimum required WordPress version was lifted from 5.0.0 to 5.2.0.
+
+= 6.9.22 =
+* Fixed: Redirect to login page for visitors does not work [https://github.com/aamplugin/advanced-access-manager/issues/346](https://github.com/aamplugin/advanced-access-manager/issues/346)
+* Fixed: Fatal error: Uncaught TypeError: method_exists() [https://github.com/aamplugin/advanced-access-manager/issues/344](https://github.com/aamplugin/advanced-access-manager/issues/344)
+* Changed: Added "mergeAlign.limit" property [https://github.com/aamplugin/advanced-access-manager/issues/345](https://github.com/aamplugin/advanced-access-manager/issues/345)
+* Changed: Change how ${USER.ip} marker works [https://github.com/aamplugin/advanced-access-manager/issues/338](https://github.com/aamplugin/advanced-access-manager/issues/338)
+
+= 6.9.21 =
+* Fixed: Content visibility issue with multi-role setup [https://github.com/aamplugin/advanced-access-manager/issues/342](https://github.com/aamplugin/advanced-access-manager/issues/342)
+* Fixed: URL Access feature does not save "Redirect to page" [https://github.com/aamplugin/advanced-access-manager/issues/339](https://github.com/aamplugin/advanced-access-manager/issues/339)
+* Changed: Enhance plugins security pasture [https://github.com/aamplugin/advanced-access-manager/issues/341](https://github.com/aamplugin/advanced-access-manager/issues/341)
 
 = 6.9.20 =
 * Fixed: When deleting URL Access rule, the "Unexpected Application Error" is displayed [https://github.com/aamplugin/advanced-access-manager/issues/337](https://github.com/aamplugin/advanced-access-manager/issues/337)

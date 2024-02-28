@@ -25,11 +25,11 @@ class CFDB7_Form_Details
         $table_name    = $cfdb->prefix.'db7_forms';
         $upload_dir    = wp_upload_dir();
         $cfdb7_dir_url = $upload_dir['baseurl'].'/cfdb7_uploads';
-        $rm_underscore = apply_filters('cfdb7_remove_underscore_data', true);
+        $rm_underscore = apply_filters('cfdb7_remove_underscore_data', true); 
 
 
         $results    = $cfdb->get_results( "SELECT * FROM $table_name WHERE form_post_id = $this->form_post_id AND form_id = $this->form_id LIMIT 1", OBJECT );
-
+        
 
         if ( empty($results) ) {
             wp_die( $message = 'Not valid contact form' );
