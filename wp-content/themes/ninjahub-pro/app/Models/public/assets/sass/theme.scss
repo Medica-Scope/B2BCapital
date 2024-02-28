@@ -867,3 +867,29 @@ footer .widget_block .menu li {
     border-radius: 5px;
   }
 }
+.page-content.opportunity-content {
+  min-height: 600px;
+}
+.fav-star.fav-star.bbc-bookmark-o,
+.bbc-bookmark {
+  color: #6cc48d;
+}
+.single-post .content img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.ninja-notification-clear-parent .ninja-notification-clear i {
+  margin-inline-end: 6px;
+}
+.golobal-page-content {
+  background-color: white;
+  padding: 63px;
+  h1 {
+    margin-bottom: 30px;
+  }
+  h2,
+  .wp-block-heading {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+}
