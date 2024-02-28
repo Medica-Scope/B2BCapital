@@ -88,12 +88,13 @@
                 'jquery'
             ], Nh::_VERSION, NULL, TRUE);
 
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player');
+
             if (is_front_page() || is_page([
                     'login',
                     'registration',
                     'forgot-password'
                 ]) || $is_single_service || is_404()) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player');
 
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ]);
             }
@@ -291,9 +292,9 @@
             }
             elseif (is_tax()) {
                 $term = get_queried_object();
-                $taxonomy = $term->taxonomy; 
-                $post_types = get_taxonomy($taxonomy)->object_type;            
-                if (!empty($post_types)) { 
+                $taxonomy = $term->taxonomy;
+                $post_types = get_taxonomy($taxonomy)->object_type;
+                if (!empty($post_types)) {
                     $post_type = array_shift($post_types);
                     $archive_link = get_post_type_archive_link($post_type);
                     echo '<a href="' . apply_filters('nhml_permalink', $archive_link) . '" title="' . $post_type . '">' . strtoupper($post_type) . '</a> ' . $separator;
