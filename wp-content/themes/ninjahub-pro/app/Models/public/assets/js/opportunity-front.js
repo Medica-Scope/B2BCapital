@@ -357,7 +357,7 @@ class NhOpportunityFront extends NhOpportunity
     toggleControllers(){
         $(document).on("click", ".show-controllers", function(e){
             $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
-        });
+        }); 
     }
     rangeInputsAdjust(){
           let that = this;

@@ -265,7 +265,11 @@
 
             if (is_category() || is_single()) {
                 if (is_single()) {
-                    the_category($separator);
+                    if(is_singular(['faq'])){
+                        echo '<a href="' . apply_filters('nhml_permalink', get_post_type_archive_link('faq')) . '" title="faq">FAQ</a> ';
+                    }else{
+                        the_category($separator);
+                    }
                     echo $separator;
                     the_title();
                 } else {
@@ -292,7 +296,7 @@
                 if (!empty($post_types)) { 
                     $post_type = array_shift($post_types);
                     $archive_link = get_post_type_archive_link($post_type);
-                    echo '<a href="' . apply_filters('nhml_permalink', $archive_link) . '" title="' . $post_type . '">' . $post_type . '</a> ' . $separator;
+                    echo '<a href="' . apply_filters('nhml_permalink', $archive_link) . '" title="' . $post_type . '">' . strtoupper($post_type) . '</a> ' . $separator;
                 }
                 echo single_term_title('', false);
             }
