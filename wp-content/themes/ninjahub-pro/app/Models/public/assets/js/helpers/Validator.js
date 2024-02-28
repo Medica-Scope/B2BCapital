@@ -334,7 +334,7 @@ class NhValidator
                             project_name: {
                                 required: true,
                                 maxlength: 150,
-                                minlength: 10,
+                                minlength: 1,
                             },
                             category: {
                                 required: true,
