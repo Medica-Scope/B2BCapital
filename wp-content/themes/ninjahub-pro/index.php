@@ -134,7 +134,7 @@ global $wp_query, $post, $user_ID;
 					 */
 					get_template_part( 'app/Views/blogs/blogs-item', NULL, $args );
 				}
-
+				if(!empty($results['pagination'])){
 				?>
 					<div class="pagination-con">
 						<?php
@@ -142,6 +142,7 @@ global $wp_query, $post, $user_ID;
 						?>
 					</div>
 					<?php
+				}
 
 			} else {
 				get_template_part( 'app/Views/none' );

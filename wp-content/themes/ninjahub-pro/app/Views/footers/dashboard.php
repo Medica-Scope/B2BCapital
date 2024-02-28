@@ -38,4 +38,5 @@ $whatsapp_logo   = Nh_Hooks::PATHS['public']['img'] . '/whatsapp-logo.webp';
 		?>
 	</div>
 	<?php dynamic_sidebar( 'footer' ); ?>
+	<p><?= __('Copyright © 2024 B2B All rights reserved.', 'ninja'); ?></p>
 </footer>
