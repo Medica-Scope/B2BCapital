@@ -281,8 +281,20 @@
                     echo $output;
                 }
                 the_title();
-            } elseif (is_archive()) {
+            }
+             elseif (is_archive() && !is_tax()) {
                 echo post_type_archive_title();
+            }
+            elseif (is_tax()) {
+                $term = get_queried_object();
+                $taxonomy = $term->taxonomy; 
+                $post_types = get_taxonomy($taxonomy)->object_type;            
+                if (!empty($post_types)) { 
+                    $post_type = array_shift($post_types);
+                    $archive_link = get_post_type_archive_link($post_type);
+                    echo '<a href="' . apply_filters('nhml_permalink', $archive_link) . '" title="' . $post_type . '">' . $post_type . '</a> ' . $separator;
+                }
+                echo single_term_title('', false);
             }
 
             echo '</div>'; // End breadcrumbs

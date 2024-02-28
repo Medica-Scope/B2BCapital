@@ -36,10 +36,10 @@ $fav_class = 'bbc-star-o';
 if ( $user_ID ) {
 	$fav_chk = $post_obj->is_post_in_user_favorites( $single_post->ID );
 	if ( $fav_chk ) {
-		$fav_class = 'bbc-star text-success';
+		$fav_class = 'bbc-star';
 		$fav_text  = __( 'Unfavored', 'ninja' );
 	} else {
-		$fav_class = 'bbc-star-o text-danger';
+		$fav_class = 'bbc-star-o';
 		$fav_text  = __( 'Favorite', 'ninja' );
 	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );

@@ -406,6 +406,7 @@ class NhOpportunity extends Nh
             });
         });
     }
+
 }
 
 export default NhOpportunity;

@@ -65,6 +65,7 @@ class NhOpportunityFront extends NhOpportunity
         this.ignore_opportunity();
         this.list_grid_switch();
         this.reset_form();
+        this.rangeInputsAdjust();
     }
 
     CreateOpportunityFormFieldsFront()
@@ -342,6 +343,23 @@ class NhOpportunityFront extends NhOpportunity
             $('#ninja_filters_form :input').val('');
         });
     }
+    rangeInputsAdjust(){
+          let that = this;
+        if($(`.${KEY}-range`).length){
+          document.querySelectorAll(`.${KEY}-range`).forEach(function(rangeInput) {
+              rangeInput.addEventListener('input', function() {
+              // Find the immediately following sibling with the class 'rangeValue'
+              const rangeValue = this.nextElementSibling;
+              if (rangeValue && rangeValue.classList.contains('rangeValue')) {
+                  rangeValue.innerText = that.formatNumber(this.value);
+              }
+              });                
+          });
+      }
+  }
+  formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }
 
 new NhOpportunityFront();
