@@ -447,7 +447,7 @@
                                         <i class="bbc-lightbulb-o"></i>
                                         <?= __('Please Note You Can Add Only', 'ninja'); ?>
                                         <span class="text-warning">
-									<?= __('One Opportunity In Month', 'ninja') ?>
+									<?= __('One Opportunity Per Month', 'ninja') ?>
 								</span>
                                     </small>
                                 </div>
