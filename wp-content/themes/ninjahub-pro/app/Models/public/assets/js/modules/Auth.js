@@ -481,8 +481,8 @@ class NhAuth extends Nh
             // Update the countdown timer every second
             let countdownInterval = setInterval(function () {
                 // Calculate minutes and seconds
-                let minutes = Math.floor(difference / 60),
-                    seconds = difference % 60;
+                let minutes = that.formatNumber(Math.floor(difference / 60)),
+                    seconds = that.formatNumber(difference % 60);
 
                 // Display the countdown
                 $CodeCountDown.text(`${minutes}:${seconds}`);
@@ -498,6 +498,10 @@ class NhAuth extends Nh
                 }
             }, 1000);
         }
+    }
+
+    formatNumber(number) {
+        return number < 10 ? '0' + number : number.toString();
     }
 
     // Method for creating a new token
