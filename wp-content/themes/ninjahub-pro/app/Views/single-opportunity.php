@@ -49,47 +49,52 @@
     $ignore_class                = '';
     $fav_text                    = '';
     $ignore_text                 = '';
+    $fav_full_text               = '';
+    $ignore_full_text            = '';
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class = 'bbc-star';
-            $fav_text  = __('Unfavored', 'ninja');
+            $fav_class     = '0 fav-star';
+            $fav_text      = __('Unfavored', 'ninja');
+            $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         } else {
-            $fav_class = 'bbc-star-o';
-            $fav_text  = __('Favorite', 'ninja');
+            $fav_class     = 'bbc-bookmark-o fav-star';
+            $fav_text      = __('Add To Favorite', 'ninja');
+            $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
         if ($ignore_chk) {
-            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
-            $ignore_text  = __('Ignored', 'ninja');
-
+            $ignore_class     = 'controll-icon bbc-thumbs-up text-success ignore-star';
+            $ignore_text      = __('Un-ignore', 'ninja');
+            $ignore_full_text = '<span class="ignore-text">' . $ignore_text . '</span><i class="' . $ignore_class . '"></i>';
         } else {
-            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
-            $ignore_text  = __('Ignore', 'ninja');
+            $ignore_class     = 'controll-icon bbc-thumbs-down text-danger ignore-star';
+            $ignore_text      = __('Ignore', 'ninja');
+            $ignore_full_text = '<span class="ignore-text">' . $ignore_text . '</span><i class="' . $ignore_class . '"></i>';
         }
     }
 ?>
 
     <main class="container container-xxl">
         <div class="row align-items-end">
-            <div class="col-8">
+            <div class="col-4">
                 <a href="<?= apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))) ?>"
-                   class="btn btn-light text-uppercase mb-2"><i class="bbc-chevron-left"></i>
+                   class="btn btn-light text-uppercase mb-2 btn-back"><i class="bbc-chevron-left"></i>
                     <?= __('Back', 'ninja'); ?>
                 </a>
-                <h3 class="mb-4">
+                <h3 class="mb-4 title-page">
                     <?= $opportunity->title; ?>
                 </h3>
 
-                <h3 class="text-warning">
+                <h3 class="text-warning tax-title">
                     <?= __('Business Type', 'ninja'); ?>
                 </h3>
 
-                <p>
+                <p class="tax-paragraph">
                     <?= $opportunity->taxonomy['business-type'][0]->name ?>
                 </p>
             </div>
-            <div class="col-4 actions">
+            <div class="col-8 actions">
                 <?php
 
                     echo Nh_Forms::get_instance()
@@ -113,7 +118,7 @@
                                          'class'               => 'btn btn-light bg-white opportunity-to-favorite ninja-add-to-fav',
                                          'id'                  => 'submit_add_to_fav_request',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="' . $fav_class . ' fav-star"></i>',
+                                         'value'               => $fav_full_text,
                                          'recaptcha_form_name' => 'frontend_add_to_fav',
                                          'order'               => 10
                                      ],
@@ -144,7 +149,7 @@
                                          'class'               => 'btn-light bg-white',
                                          'id'                  => 'submit_submit_ignore',
                                          'type'                => 'submit',
-                                         'value'               => '<i class="' . $ignore_class . ' ignore-star"></i>',
+                                         'value'               => $ignore_full_text,
                                          'recaptcha_form_name' => 'frontend_ignore',
                                          'order'               => 10
                                      ],
@@ -163,11 +168,11 @@
                                         <!-- Button trigger modal -->
                                         <button type="button" id="addBidModalBtn" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#addBidModal">
-                                            <?= __('Add Bid', 'ninja') ?>
+                                            <i class="bbc-plus"></i> <?= __('Add Bid', 'ninja') ?>
                                         </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="addBidModal" tabindex="-1" aria-labelledby="addBidModalLabel" aria-hidden="true">
+                                        <div class="modal fade new-addBidModal" id="addBidModal" tabindex="-1" aria-labelledby="addBidModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -176,8 +181,8 @@
                                                         </h1>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div>
-                                                            <div>
+                                                        <div class="d-flex ">
+                                                            <div class="me-5 start-bidding">
                                                                 <p>
                                                                     <?= __('Start bidding amount', 'ninja') ?>
                                                                 </p>
@@ -185,7 +190,7 @@
 											<?= $opportunity->meta_data['start_bidding_amount'] ?>
 										</span>
                                                             </div>
-                                                            <div>
+                                                            <div class="target-amount">
                                                                 <p>
                                                                     <?= __('Target amount', 'ninja') ?>
                                                                 </p>
@@ -205,6 +210,7 @@
                                                                                 'placeholder' => __('Add Bid', 'ninja'),
                                                                                 'before'      => '',
                                                                                 'order'       => 0,
+                                                                                'label'       => 'Add Bid Amount',
                                                                             ],
                                                                             'opp_id'        => [
                                                                                 'type'   => 'hidden',
@@ -271,7 +277,7 @@
                                     <!-- Button trigger modal -->
                                     <button type="button" id="createAcquisitionBtn" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#createAcquisitionModal">
-                                        <?= __('Acquisition', 'ninja') ?>
+                                        <i class="bbc-plus"></i> <?= __('Acquisition', 'ninja') ?>
                                     </button>
 
                                     <!-- Modal -->
@@ -280,12 +286,12 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="createAcquisitionLabel">
-                                                        <?= __('Acquisition', 'ninja') ?>
-                                                    </h1>
+                                                    <div class="circle">
+                                                        <i class="bbc-check"></i>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
+                                                    <p><?= __('Acquisitions request sent', 'ninja') ?></p>
                                                     <?php
                                                         echo Nh_Forms::get_instance()
                                                                      ->create_form([
@@ -308,7 +314,7 @@
                                                                              'class'               => 'btn nh-hidden',
                                                                              'id'                  => 'submit_acquisitions_request',
                                                                              'type'                => 'submit',
-                                                                             'value'               => __('Acquisition', 'ninja'),
+                                                                             'value'               => __('Done', 'ninja'),
                                                                              'recaptcha_form_name' => 'frontend_create_acquisitions',
                                                                              'order'               => 15
                                                                          ],
@@ -318,12 +324,12 @@
                                                                      ]);
                                                     ?>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-dismiss"
                                                             data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
                                                     <button type="button" class="btn btn-primary" id="modalFormSubmit"
                                                             data-target="submit_acquisitions_request"><?= __('Acquisition', 'ninja') ?></button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -353,7 +359,7 @@
                                     <!-- Button trigger modal -->
                                     <button type="button" id="createInvestBtn" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#createInvestModal">
-                                        <?= __('Invest Request', 'ninja') ?>
+                                        <i class="bbc-send-o"></i> <?= __('Invest Request', 'ninja') ?>
                                     </button>
 
                                     <!-- Modal -->
@@ -362,12 +368,12 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="createInvestLabel">
-                                                        <?= __('Invest Request', 'ninja') ?>
-                                                    </h1>
+                                                    <div class="circle">
+                                                        <i class="bbc-check"></i>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p><?= __('Are you sure you want to send this request?', 'ninja') ?></p>
+                                                    <p><?= __('Invest Request Sent', 'ninja') ?></p>
                                                     <?php
                                                         echo Nh_Forms::get_instance()
                                                                      ->create_form([
@@ -390,7 +396,7 @@
                                                                              'class'               => 'btn nh-hidden',
                                                                              'id'                  => 'submit_investments_request',
                                                                              'type'                => 'submit',
-                                                                             'value'               => __('Invest Request', 'ninja'),
+                                                                             'value'               => __('Done', 'ninja'),
                                                                              'recaptcha_form_name' => 'frontend_create_investments',
                                                                              'order'               => 15
                                                                          ],
@@ -400,12 +406,12 @@
                                                                      ]);
                                                     ?>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-dismiss"
                                                             data-bs-dismiss="modal"><?= __('Cancel', 'ninja') ?></button>
                                                     <button type="button" class="btn btn-primary" id="modalFormSubmit"
                                                             data-target="submit_investments_request"><?= __('Invest Request', 'ninja') ?></button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -433,7 +439,7 @@
                             if ($unique_type_name === 'bidding') {
                                 ?>
                                 <span class="text-dark">
-									<?= sprintf(_n('%s Bid', '%s Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
+									<?= sprintf(_n('%s Number of Bid', '%s Number of Bids', $opportunity_bids, 'ninja'), "<span class='bids-numbers'>" . $opportunity_bids . "</span>") ?>
 								</span>
                                 <?php
                             }
@@ -441,7 +447,7 @@
                             if ($unique_type_name === 'acquisition') {
                                 ?>
                                 <span class="text-dark">
-									<?= sprintf(_n('%s Request', '%s Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
+									<?= sprintf(_n('%s Number of Request', '%s Number of Requests', $opportunity_acquisitions, 'ninja'), "<span class='acquisitions-numbers'>" . $opportunity_acquisitions . "</span>") ?>
 								</span>
                                 <?php
                             }
@@ -449,8 +455,8 @@
                             if ($unique_type_name === 'regular') {
                                 ?>
                                 <span class="text-dark">
-				<?= sprintf(_n('%s Request', '%s Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
-			</span>
+                                    <?= sprintf(_n('%s Number of Request', '%s Number of Requests', $opportunity_investments, 'ninja'), "<span class='regular-numbers'>" . $opportunity_investments . "</span>") ?>
+                                </span>
                                 <?php
                             }
                         }

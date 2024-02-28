@@ -43,7 +43,8 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 
 			<?php if ( ! empty( $user_ID ) ) : ?>
-			<div class="opportunity-item-controllers">
+			<button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
+			<div class="opportunity-item-controllers ninja-hidden">
 				<?php
 					echo $args['fav_form'];
 					echo $args['ignore_form'];
@@ -74,9 +75,12 @@ $opportunity = ( isset( $args['opportunity'] ) ) ? $args['opportunity'] : '';
 
 		<div class="date">
 			
-			<!-- <img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" /> -->
-			<img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp" alt="B2B" />
+			<img src="<?= get_avatar_url( $single_post->author ) ?>" alt="B2B" />
+			<!-- <img src="<?php echo Nh_Hooks::PATHS['public']['img']; ?>/brand/b2b-capital-light-logo.webp" alt="B2B" /> -->
 			<p>
+				<!-- <strong> <?= __( 'B2B', 'ninja' ) ?></strong> -->
+				<?php $author = get_user_by( 'ID', $single_post->author ); ?>
+				<strong><?= $author->display_name; ?></strong>
 				<?= __( 'on', 'ninja' ) ?>
 				<?= date( 'F d, Y', strtotime( $single_post->created_date ) ) ?>
 			</p>

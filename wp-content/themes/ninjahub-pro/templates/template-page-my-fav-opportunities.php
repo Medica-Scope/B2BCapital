@@ -25,6 +25,7 @@ use NH\Nh;
 get_header();
 
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-account', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-account' );
+Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-my-opportunities', Nh_Hooks::PATHS['public']['css'] . '/pages/dashboard/my-opportunities' );
 
 global $user_ID;
 $opportunity_obj = new Nh_Opportunity();
@@ -50,9 +51,9 @@ $user_obj        = Nh_User::get_current_user();
 							$fav_check = $opportunity_obj->is_opportunity_in_user_favorites( $opportunity->ID );
 							$fav_class = '';
 							if ( $fav_check ) {
-								$fav_class = 'bbc-star';
+								$fav_class = 'bbc-bookmark fav-star';
 							} else {
-								$fav_class = 'bbc-star-o';
+								$fav_class = 'bbc-bookmark-o fav-star';
 							}
 							$args['fav_form']     = Nh_Forms::get_instance()
 								->create_form( [ 
@@ -86,7 +87,19 @@ $user_obj        = Nh_User::get_current_user();
 							$args['opportunity']  = $opportunity;
 							?>
 							<div class="col">
-								<?php get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL?>
+								<?php 
+								
+								
+								//get_template_part( 'app/Views/opportunities/opportunity-item', NULL, $args ); // GAMAL
+								get_template_part( 'app/Views/template-parts/cards/my-opportunities-card', NULL, [
+									'opportunity_title'             => $opportunity->title,
+									'opportunity_link'              => $opportunity->link,
+									'opportunity_modified'          => $opportunity->modified,
+									'opportunity_created_date'      => $opportunity->created_date,
+									'opportunity_short_description' => $opportunity->meta_data['short_description'],
+									'opportunity_stage'             => $opportunity->meta_data['opportunity_stage'],
+								] );
+								?>
 								<?php // get_template_part('app/Views/template-parts/cards/opportunity-card-vertical', NULL, $args); // KHALED?>
 							</div>
 							<?php

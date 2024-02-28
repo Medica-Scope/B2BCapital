@@ -18,7 +18,7 @@ $valuation                = ! empty( $args['valuation'] ) ? $args['valuation'] :
 $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['valuation_appearance'] : FALSE;
 
 ?>
-<div class="opportunity-item card shadow border-0">
+<div class="opportunity-item card shadow border-0 new-opportunity-item-card-vertical">
 	<div class="row g-0">
 		<div class="card-image <?= $is_card_horizontal ? 'col-md-4' : ''; ?>">
 			<a href="<?= esc_url( $opportunity_link ); ?>"><img src="<?= esc_url( $opportunity_thumbnail ); ?>"
@@ -26,12 +26,13 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 			<?php
 			if ( $is_item_controllers ) {
 				if ( $is_fav ) {
-					$fav_class = 'bbc-star';
+					$fav_class = 'bbc-bookmark fav-star';
 				} else {
-					$fav_class = 'bbc-star-o';
+					$fav_class = 'bbc-bookmark-o fav-star';
 				}
 				?>
-					<div class="opportunity-item-controllers">
+			<button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
+			<div class="opportunity-item-controllers ninja-hidden">
 						<?php
 						echo Nh_Forms::get_instance()
 							->create_form( [ 

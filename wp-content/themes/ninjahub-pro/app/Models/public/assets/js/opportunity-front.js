@@ -65,6 +65,7 @@ class NhOpportunityFront extends NhOpportunity
         this.ignore_opportunity();
         this.list_grid_switch();
         this.reset_form();
+        this.toggleControllers();
         this.rangeInputsAdjust();
     }
 
@@ -340,7 +341,22 @@ class NhOpportunityFront extends NhOpportunity
     }
     reset_form(){
         $(document).on("click", ".reset-btn", function(e){
-            $('#ninja_filters_form :input').val('');
+            $('#ninja_filters_form :input').not('input[type=range]').val('');
+            $('#ninja_filters_form input[type=range]').each(function() {
+                var defaultValue = this.min;
+                $(this).val(defaultValue);
+                var rangeId = $(this).attr('id');
+                $('#rangeValue-' + rangeId).text(defaultValue);
+            });
+            if (history.pushState) {
+                var reset_url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.pushState({path:reset_url}, '', reset_url);
+            }
+        });
+    }
+    toggleControllers(){
+        $(document).on("click", ".show-controllers", function(e){
+            $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
         });
     }
     rangeInputsAdjust(){

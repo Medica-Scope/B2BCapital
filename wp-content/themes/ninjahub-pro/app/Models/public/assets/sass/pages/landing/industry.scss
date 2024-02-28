@@ -75,7 +75,7 @@
 			&:hover {
 				+ label {
 					background-color: $success;
-					color: $white;
+					color: $white !important;
 					img {
 						filter: brightness(100);
 					}

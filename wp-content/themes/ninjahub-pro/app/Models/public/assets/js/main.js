@@ -41,9 +41,30 @@ class NhMain
 
     onLoad()
     {
+        let that = this;
+
+        that.refreshToken();
+
         $(window).on('load', function () {
+            setInterval(function() {
+                that.refreshToken()
+            }, 60000);
         });
 
+    }
+
+    refreshToken()
+    {
+        if('undefined' !== typeof grecaptcha){
+            $('.gglcptch_error_text').remove();
+            grecaptcha.ready(function () {
+                grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                    $('input[name=g-recaptcha-response]').each(function(i, obj) {
+                        $(this).val(token)
+                    });
+                });
+            });
+        }
     }
 
 }

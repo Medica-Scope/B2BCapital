@@ -41,9 +41,9 @@
 ?>
 
     <main class="site-dashboard-home">
-        <div class="container">
+        <div class="container-xxl">
             <div class="dashboard-overview">
-                <h3 class="fs-3 text-primary">
+                <h3 class="fs-3 mt-5 mb-3 text-primary">
                     <?= __('Overview', 'ninja') ?>
                 </h3>
                 <div class="widget-list">
@@ -90,7 +90,8 @@
                     <div class="filter-con">
                         <?php
                             $business_type_terms = $opportunities_obj->get_taxonomy_terms('business-type');
-                            $business_options    = [ "" => __("All", "ninja") ];
+                            $business_options = [];
+                            $business_options[''] = __("All", "ninja") ;
                             foreach ($business_type_terms as $key => $term) {
                                 $status = get_term_meta($term->term_id, 'status', TRUE);
                                 if (intval($status) !== 1) {
@@ -157,7 +158,7 @@
                                                  'name'           => 'business_type',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'default_option' => isset($_GET['business_type']) ? $_GET['business_type'] : 'All',
+                                                 'default_option' => isset($_GET['business_type']) && !empty($_GET['business_type']) ? $_GET['business_type'] : 'All',
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
@@ -167,10 +168,10 @@
                                                  'name'           => 'location_group_location',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
-                                                 'default_option' => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
+                                                //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
+                                                 'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
                                                  'options'        => [
-                                                     'All'          => __("All", "ninja"),
+                                                     ''          => __("All", "ninja"),
                                                      'Egypt'        => __("Egypt", "ninja"),
                                                      'Russia'       => __("Russia", "ninja"),
                                                      'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
@@ -338,9 +339,9 @@
                                                         $args['fav_chk']    = $fav_chk;
                                                         $args['ignore_chk'] = $ignore_chk;
                                                         if ($fav_chk) {
-                                                            $fav_class = 'controll-icon bbc-star';
+                                                            $fav_class = 'bbc-bookmark fav-star';
                                                         } else {
-                                                            $fav_class = 'controll-icon bbc-star-o';
+                                                            $fav_class = 'bbc-bookmark-o fav-star';
                                                         }
                                                         $args['fav_form'] = Nh_Forms::get_instance()
                                                                                     ->create_form([
@@ -371,9 +372,9 @@
                                                                                         'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                                                                                     ]);
                                                         if ($ignore_chk) {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
                                                         } else {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger ignore-star';
                                                         }
                                                         $args['ignore_form'] = Nh_Forms::get_instance()
                                                                                        ->create_form([
@@ -499,6 +500,7 @@
                                                         'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
                                                         'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
@@ -508,7 +510,7 @@
 
                                                     ?>
                                                     <div class="col">
-                                                        <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                        <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                     </div>
                                                     <?php
                                                 }
@@ -524,6 +526,7 @@
                                                         'opportunity_created_date' => $opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
                                                         'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
@@ -570,6 +573,7 @@
                                                     'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
+                                                    'short_description'        => $acquisition->opportunity->meta_data['short_description'],
                                                     'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
                                                     'location'                 => $acquisition->opportunity->meta_data['location_group_location'],
                                                     'location_appearance'      => $acquisition->opportunity->meta_data['location_group_appearance'],
@@ -578,7 +582,7 @@
                                                 ];
                                                 ?>
                                                 <div class="col">
-                                                    <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                    <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                 </div>
                                                 <?php
                                             }
