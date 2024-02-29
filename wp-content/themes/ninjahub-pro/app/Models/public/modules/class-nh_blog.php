@@ -1,4 +1,4 @@
-<?phptoggle_opportunity_favorite
+<?php
 /**
  * @Filename: class-nh_blog.php
  * @Description:

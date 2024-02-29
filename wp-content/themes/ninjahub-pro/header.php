@@ -1,13 +1,16 @@
 <?php global $post;
 
+use NH\APP\HELPERS\Nh_Mail;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\Nh;
 
-/// to be reviewed with mostafa
-if ( is_singular( 'post' ) ) {
-	$post_obj = new Nh_Blog();
-	$post_obj->increment_read_count( get_the_ID() );
-}
+/////// Test email on production /////
+// Nh_Mail::init()->to('ahmedjemy918@gmail.com')
+//                                 ->subject('Welcome to B2b - Please Verify Your Email')
+//                                 ->template('account-verification/body', [
+                                    
+//                                 ])
+//                                 ->send();
 
 ?>
 <!doctype html>

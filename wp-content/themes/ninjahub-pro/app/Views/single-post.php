@@ -52,6 +52,8 @@ if ( $user_ID ) {
 		$ignore_text  = __( 'Ignore', 'ninja' );
 	}
 }
+
+// $post_obj->increment_read_count( $single_post->ID );
 ?>
 <div class="single-blog container container-xxl">
 	<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'blogs' ) ) ) ?>"
