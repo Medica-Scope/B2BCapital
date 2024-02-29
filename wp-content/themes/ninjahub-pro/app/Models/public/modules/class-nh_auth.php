@@ -318,7 +318,6 @@
          */
         public function verification_ajax(): void
         {
-            echo 'jimgssssss';
 
             $form_data                     = $_POST['data'];
             $code1                         = sanitize_text_field($form_data['code1']);
