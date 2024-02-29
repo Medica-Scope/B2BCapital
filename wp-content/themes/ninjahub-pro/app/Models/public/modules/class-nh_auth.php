@@ -55,6 +55,7 @@
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_registration_ajax', $this, 'registration_ajax');
             $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_login_ajax', $this, 'login_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_verification_ajax', $this, 'verification_ajax');
+            $this->hooks->add_action('wp_ajax_nopriv_' . Nh::_DOMAIN_NAME . '_verification_ajax', $this, 'verification_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_resendVerCode_ajax', $this, 'resendVerCode_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_authentication_ajax', $this, 'authentication_ajax');
             $this->hooks->add_action('wp_ajax_' . Nh::_DOMAIN_NAME . '_resendAuthCode_ajax', $this, 'resendAuthCode_ajax');
@@ -317,6 +318,8 @@
          */
         public function verification_ajax(): void
         {
+            echo 'jimgssssss';
+
             $form_data                     = $_POST['data'];
             $code1                         = sanitize_text_field($form_data['code1']);
             $code2                         = sanitize_text_field($form_data['code2']);
@@ -380,7 +383,6 @@
             } else {
                 new Nh_Ajax_Response(FALSE, __($validate->get_error_message(), 'ninja'));
             }
-
             new Nh_Ajax_Response(TRUE, __('Your account has been verified successfully!', 'ninja'), [
                 'redirect_text' => __('GO TO DASHBOARD'),
                 'redirect_url'  => apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/industry')))
