@@ -326,7 +326,7 @@
                 'dependencies' => !empty($dependencies) ? $dependencies : [],
                 'media'        => !empty($position_media) ? $position_media : FALSE,
                 'position'     => !empty($position_media) ? $position_media : 'all',
-                'version'      => !empty($version) ? $version : Nh::_VERSION,
+                'version'      => !empty($version) ? $version : Nh::$_VERSION,
                 'is_vendor'    => $is_vendor,
                 'extra_attr'   => $extra_attr
             ];

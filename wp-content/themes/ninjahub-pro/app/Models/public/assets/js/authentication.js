@@ -430,6 +430,10 @@ class NhAuthentication extends NhAuth {
         //     });
         // });
 
+        jQuery('#ninja_widget_list').chosen();
+        jQuery('#ninja_preferred_opportunities_cat_list').chosen();
+        jQuery('#ninja_preferred_articles_cat_list').chosen();
+
         $editProfile.btnMyAccountEdit.on('click', function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget);
@@ -437,6 +441,9 @@ class NhAuthentication extends NhAuth {
             $this.hide();
             $editProfile.form.find(`#${KEY}_edit_profile_submit`).show();
             $('.nh-form-disabled').removeClass('nh-form-disabled');
+            jQuery('#ninja_widget_list').trigger('chosen:updated');
+            jQuery('#ninja_preferred_opportunities_cat_list').trigger('chosen:updated');
+            jQuery('#ninja_preferred_articles_cat_list').trigger('chosen:updated');
 
         });
 
