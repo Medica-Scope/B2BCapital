@@ -46,12 +46,16 @@ locate_template( "inc/template-tags.php", TRUE );
  * @author Mustafa Shaaban
  */
 class Nh {
-	const _ENVIRONMENT = 'development';
+	const _ENVIRONMENT = 'production';
 	const _DOMAIN_NAME = 'ninja';
-	const _VERSION = '0.3.2';
+//	const _VERSION = '0.3.3';
+    public static string $_VERSION;
+
 
 	public function __construct() {
-		Nh_Init::get_instance()
+		self::$_VERSION = self::_ENVIRONMENT === 'development' ? rand(0, 10,) . '.' . rand(0, 10,) . '.' . rand(0, 10,) : '0.1.0';
+
+        Nh_Init::get_instance()
 			->run( 'core' );
 		$hooks = new Nh_Hooks();
 		$this->init_models( $hooks );

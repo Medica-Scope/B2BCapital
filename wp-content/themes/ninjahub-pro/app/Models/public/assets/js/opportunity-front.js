@@ -21,7 +21,7 @@ import 'tinymce/icons/default';  // Import the icons
 import 'tinymce/models/dom';  // Import the dom
 
 import Pikaday from 'pikaday';
-
+import 'chosen-js/chosen.jquery';
 
 class NhOpportunityFront extends NhOpportunity
 {
@@ -96,6 +96,8 @@ class NhOpportunityFront extends NhOpportunity
             // format: 'MM-DD-YYYY',
             minDate: new Date(),
         });
+
+        jQuery('#ninja_business_model').chosen();
 
         $opportunity.opportunity_type.on('change', $opportunity.parent, function (e) {
             let $this   = $(e.currentTarget),
