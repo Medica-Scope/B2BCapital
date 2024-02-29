@@ -522,7 +522,7 @@ class NextendSocialLoginAdmin {
 
         if (is_wp_error($request)) {
 
-            throw new Exception($request->get_error_message());
+            throw new NSLSanitizedRequestErrorMessageException($request->get_error_message());
         } else if (wp_remote_retrieve_response_code($request) !== 200) {
 
             $response = json_decode(wp_remote_retrieve_body($request), true);
@@ -534,7 +534,7 @@ class NextendSocialLoginAdmin {
                 return new WP_Error('error', $message);
             }
 
-            throw new Exception(sprintf(__('Unexpected response: %s', 'nextend-facebook-connect'), wp_remote_retrieve_body($request)));
+            throw new NSLSanitizedRequestErrorMessageException(sprintf(__('Unexpected response: %s', 'nextend-facebook-connect'), wp_remote_retrieve_body($request)));
         }
 
         $response = json_decode(wp_remote_retrieve_body($request), true);

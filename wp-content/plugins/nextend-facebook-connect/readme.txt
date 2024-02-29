@@ -4,7 +4,7 @@ Tags: social login, facebook, google, twitter, x, linkedin, register, login, soc
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
 Tested up to: 6.4.3
-Stable tag: 3.1.12
+Stable tag: 3.1.13
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Providers are the services which the visitors can use to register and log in to 
 * UserPro compatibility
 * Ultimate Member compatibility
 * Easy Digital Downloads compatibility
-* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack, TikTok, Steam, Twitch, Kakao, Reddit and more coming soon
+* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack, TikTok, Steam, Twitch, Kakao, Reddit, Spotify and more coming soon
 * Configure whether email address should be asked on registration at each provider
 * Configure whether username should be asked on registration at each provider
 * Choose from icons or wide buttons
@@ -124,6 +124,10 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 4. The Settings page of the Facebook provider.
 
 == Changelog ==
+
+= 3.1.13 =
+* Security fix: Error message sanitization.
+
 
 = 3.1.12 =
 * Fix: We will now delete the user avatar if the social media account which was used to set the avatar for the user gets unlinked.
