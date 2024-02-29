@@ -876,9 +876,9 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count - 1 );
-				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been unfavored', 'ninja'), $opportunity->title), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been removed from favorites', 'ninja'), $opportunity->title), [
 					'fav_active'   => 1,
-					'updated_text' => __( 'Favorite', 'ninja' ),
+					'updated_text' => __( 'Add to favorite', 'ninja' ),
 					'button_text' => __('Done', 'ninja')
 				] );
 			} else {
@@ -887,9 +887,9 @@ class Nh_Opportunity extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $opp_id, 'fav_count', TRUE );
 				update_post_meta( $opp_id, 'fav_count', (int) $fav_count + 1 );
-				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been Favorite', 'ninja'), $opportunity->title), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been added favorites', 'ninja'), $opportunity->title), [
 					'fav_active'   => 0,
-					'updated_text' => __( 'Unfavored', 'ninja' ),
+					'updated_text' => __( 'Added to favorites', 'ninja' ),
 					'button_text' => __('Done', 'ninja')
 				] );
 			}

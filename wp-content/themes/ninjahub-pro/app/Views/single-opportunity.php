@@ -54,12 +54,12 @@
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class     = '0 fav-star';
-            $fav_text      = __('Unfavored', 'ninja');
+            $fav_class     = 'bbc-bookmark fav-star';
+            $fav_text      = __('Added to favorites', 'ninja');
             $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         } else {
             $fav_class     = 'bbc-bookmark-o fav-star';
-            $fav_text      = __('Add To Favorite', 'ninja');
+            $fav_text      = __('Add to favorites', 'ninja');
             $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);
@@ -284,11 +284,16 @@
                                     <div class="modal fade" id="createAcquisitionModal" tabindex="-1" aria-labelledby="createAcquisitionLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
+                                            <div class="modal-content pt-0">
                                                 <div class="modal-header">
-                                                    <div class="circle">
-                                                        <i class="bbc-check"></i>
-                                                    </div>
+                                                <span class="icon-wrapper">
+                                                    <dotlottie-player
+                                                        src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/verifyed-verified-sign.json"
+                                                        background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
+                                                        autoplay>
+                                                    </dotlottie-player>
+                                                    
+					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p><?= __('Acquisitions request sent', 'ninja') ?></p>
@@ -366,11 +371,16 @@
                                     <div class="modal fade" id="createInvestModal" tabindex="-1" aria-labelledby="createInvestLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
+                                        <div class="modal-content pt-0">
                                                 <div class="modal-header">
-                                                    <div class="circle">
-                                                        <i class="bbc-check"></i>
-                                                    </div>
+                                                <span class="icon-wrapper">
+                                                    <dotlottie-player
+                                                        src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/verifyed-verified-sign.json"
+                                                        background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
+                                                        autoplay>
+                                                    </dotlottie-player>
+                                                    
+					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p><?= __('Invest Request Sent', 'ninja') ?></p>

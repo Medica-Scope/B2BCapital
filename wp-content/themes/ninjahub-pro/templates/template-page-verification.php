@@ -29,16 +29,23 @@ $user = Nh_User::get_current_user();
 
 <main class="container-fluid h-100">
 
-	<div class="row h-100">
+	<div class="row">
 
-		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
+		<section class="login-section new-authenticate-page container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
 			<!-- App Brand -->
 
-			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
-					alt="Nh Site Logo" class="img-fluid" /></a>
+			<!-- <a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>"
+					alt="Nh Site Logo" class="img-fluid" /></a> -->
 			<div class="section-header">
 				<div class="row justify-content-center">
-					<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user.webp" style="max-width:100px" />
+				<span class="icon-wrapper d-flex justify-content-center">
+							<dotlottie-player
+								src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/user.json"
+								background="transparent" speed="1" style="width: 130px; height: 100px" direction="1" mode="normal" loop
+								autoplay>
+							</dotlottie-player>
+							
+						</span>
 					<h1 class="section-title display-2 text-center mb-2">
 						<?= __( 'Verify your account', 'ninja' ); ?>
 					</h1>
@@ -61,7 +68,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code1',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 							'autofocus' => 'on',
@@ -73,7 +80,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code2',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],
@@ -84,7 +91,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code3',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],
@@ -95,7 +102,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code4',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],
@@ -142,14 +149,15 @@ $user = Nh_User::get_current_user();
 				] );
 
 			?>
-			<div class="section-footer">
+		
+		</section>
+		<div class="section-footer">
 				<p>
 					<?= __( 'Copyright © 2023 B2B All rights reserved.', 'ninja' ); ?>
 				</p>
 			</div>
-		</section>
 
-		<?php get_template_part( 'app/Views/template-parts/login-slider-part' ); ?>
+		<!-- <?php get_template_part( 'app/Views/template-parts/login-slider-part' ); ?> -->
 	</div>
 </main><!-- #main -->
 

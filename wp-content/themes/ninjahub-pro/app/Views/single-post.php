@@ -32,14 +32,14 @@ $ignore_text     = '';
 if ( ( $single_post->meta_data['opportunity'] ) ) {
 	$opportunity = $opportunity_obj->get_by_id( $single_post->meta_data['opportunity'] );
 }
-$fav_class = 'bbc-bookmark-o fav-star';
+$fav_class = 'bbc-bookmark-o';
 if ( $user_ID ) {
 	$fav_chk = $post_obj->is_post_in_user_favorites( $single_post->ID );
 	if ( $fav_chk ) {
-		$fav_class = 'bbc-bookmark fav-star';
+		$fav_class = 'bbc-bookmark';
 		$fav_text  = __( 'Unfavored', 'ninja' );
 	} else {
-		$fav_class = 'bbc-bookmark-o fav-star';
+		$fav_class = 'bbc-bookmark-o';
 		$fav_text  = __( 'Favorite', 'ninja' );
 	}
 	$ignore_chk = $post_obj->is_post_in_user_ignored( $single_post->ID );
@@ -52,6 +52,8 @@ if ( $user_ID ) {
 		$ignore_text  = __( 'Ignore', 'ninja' );
 	}
 }
+
+// $post_obj->increment_read_count( $single_post->ID );
 ?>
 <div class="single-blog container container-xxl">
 	<a href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'blogs' ) ) ) ?>"

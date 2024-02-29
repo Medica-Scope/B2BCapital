@@ -162,22 +162,22 @@
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
-                                             'location_group_location'                                   => [
-                                                 'type'           => 'select',
-                                                 'label'          => 'Based in',
-                                                 'name'           => 'location_group_location',
-                                                 'before'         => '',
-                                                 'after'          => '',
-                                                //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
-                                                 'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
-                                                 'options'        => [
-                                                     ''          => __("All", "ninja"),
-                                                     'Egypt'        => __("Egypt", "ninja"),
-                                                     'Russia'       => __("Russia", "ninja"),
-                                                     'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
-                                                 ],
-                                                 'order'          => 20
-                                             ],
+                                            //  'location_group_location'                                   => [
+                                            //      'type'           => 'select',
+                                            //      'label'          => 'Based in',
+                                            //      'name'           => 'location_group_location',
+                                            //      'before'         => '',
+                                            //      'after'          => '',
+                                            //     //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
+                                            //      'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
+                                            //      'options'        => [
+                                            //          ''          => __("All", "ninja"),
+                                            //          'Egypt'        => __("Egypt", "ninja"),
+                                            //          'Russia'       => __("Russia", "ninja"),
+                                            //          'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
+                                            //      ],
+                                            //      'order'          => 20
+                                            //  ],
                                              // 'ttm_gross_revenue'    => [
                                              // 	'type'   => 'range',
                                              // 	'label'  => 'TTM Gross Revenue',
@@ -194,6 +194,7 @@
                                                  'label'  => 'TTM Net Profit',
                                                  'from'   => 50,
                                                  'to'     => (!empty($highest_net_profit)) ? get_post_meta($highest_net_profit[0], 'net_profit_group_net_profit', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'net_profit_group_net_profit',
                                                  'before' => '',
                                                  'after'  => '',
@@ -205,6 +206,7 @@
                                                  'label'  => 'TTM Accruing Revenue',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_annual_accounting_revenue)) ? get_post_meta($highest_annual_accounting_revenue[0], 'annual_accounting_revenue_group_annual_accounting_revenue', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'annual_accounting_revenue_group_annual_accounting_revenue',
                                                  'before' => '',
                                                  'after'  => '',
@@ -216,6 +218,7 @@
                                                  'label'  => 'Annual Growth Rate',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_annual_growth_rate)) ? get_post_meta($highest_annual_growth_rate[0], 'annual_growth_rate_group_annual_growth_rate', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'annual_growth_rate_group_annual_growth_rate',
                                                  'before' => '',
                                                  'after'  => '',
@@ -227,6 +230,7 @@
                                                  'label'  => 'Asking Price',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_asking_price_in_usd)) ? get_post_meta($highest_asking_price_in_usd[0], 'asking_price_in_usd_group_asking_price_in_usd', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'asking_price_in_usd_group_asking_price_in_usd',
                                                  'before' => '',
                                                  'after'  => '',
@@ -443,7 +447,7 @@
                                         <i class="bbc-lightbulb-o"></i>
                                         <?= __('Please Note You Can Add Only', 'ninja'); ?>
                                         <span class="text-warning">
-									<?= __('One Opportunity In Month', 'ninja') ?>
+									<?= __('One Opportunity Per Month', 'ninja') ?>
 								</span>
                                     </small>
                                 </div>

@@ -119,11 +119,12 @@ class NhAuth extends Nh
                 if (res.success) {
                     $($el).append(_.template($('#ninja_modal_auth_verif').html())({
                         msg: res.msg,
-                        redirect_text: res.data.redirect_text,
-                        redirect_url: res.data.redirect_url,
+                        // redirect_text: res.data.redirect_text,
+                        // redirect_url: res.data.redirect_url,
                     }));
                     let successModal = new bootstrap.Modal(document.getElementById('authVerifySuccess'), {});
                     successModal.show();
+                    window.location.href = res.data.redirect_url;
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
@@ -480,8 +481,8 @@ class NhAuth extends Nh
             // Update the countdown timer every second
             let countdownInterval = setInterval(function () {
                 // Calculate minutes and seconds
-                let minutes = Math.floor(difference / 60),
-                    seconds = difference % 60;
+                let minutes = that.formatNumber(Math.floor(difference / 60)),
+                    seconds = that.formatNumber(difference % 60);
 
                 // Display the countdown
                 $CodeCountDown.text(`${minutes}:${seconds}`);
@@ -497,6 +498,10 @@ class NhAuth extends Nh
                 }
             }, 1000);
         }
+    }
+
+    formatNumber(number) {
+        return number < 10 ? '0' + number : number.toString();
     }
 
     // Method for creating a new token

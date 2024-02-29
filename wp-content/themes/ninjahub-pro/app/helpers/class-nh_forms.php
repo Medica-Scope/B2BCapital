@@ -412,11 +412,11 @@
                     class="input-group <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <label class="buttonLow buttonLow-id" for="<?= $input_data['id'] ?>">
-                    <?= __('Upload Image', 'ninja') ?>
+                    <?= $input_data['label'] ?>
                 </label>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
                 <label class="<?= Nh::_DOMAIN_NAME ?>-label" for="customFile">
-                    <?= $input_data['label'] ?>
+                    <?//= $input_data['label'] ?>
                 </label>
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 
@@ -905,6 +905,7 @@
                 'label_class' => '',
                 'from'        => 0,
                 'to'          => 0,
+                'step'        => 1,
                 'before'      => '',
                 'after'       => '',
                 'order'       => 0,
@@ -933,10 +934,11 @@
                            value="<?= $input_data['value'] ?>"
                            min="<?= $input_data['from'] ?>"
                            max="<?= $input_data['to'] ?>"
+                           step="<?= $input_data['step'] ?>"
                            oninput="document.getElementById('rangeValue-<?= $input_data['id'] ?>').innerText = this.value"
                         <?= $input_data['required'] ? 'required="required"' : '' ?> <?= $this->create_attr($input_data['extra_attr']) ?>
                     >
-                    <p id="rangeValue-<?= $input_data['id'] ?>"><?= $input_data['value'] ?></p>
+                    <p class="rangeValue" id="rangeValue-<?= $input_data['id'] ?>"><?= number_format(floatval($input_data['value']),0,'.',',') ?></p>
                     <?= $input_data['after'] ?>
                 </div>
             </div>

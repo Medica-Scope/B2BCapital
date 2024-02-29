@@ -5,7 +5,7 @@ $opportunity_modified          = ! empty( $args['opportunity_modified'] ) ? $arg
 $opportunity_created_date      = ! empty( $args['opportunity_created_date'] ) ? $args['opportunity_created_date'] : '';
 $opportunity_short_description = ! empty( $args['opportunity_short_description'] ) ? $args['opportunity_short_description'] : '';
 $opportunity_stage             = ! empty( $args['opportunity_stage'] ) ? $args['opportunity_stage'] : '';
-$badge_status_classes_arr      = [ 
+$badge_status_classes_arr      = [
 	'new'              => 'text-bg-primary',
 	'approved'         => 'text-bg-success',
 	'publish'          => 'text-bg-success',
@@ -18,7 +18,7 @@ $badge_status_classes_arr      = [
 	'closed' => 'text-bg-success',
 ];
 
-$stages_string = [ 
+$stages_string = [
 	'new'              => __( 'New', 'ninja' ),
 	'approved'         => __( 'Approved', 'ninja' ),
 	'hold'             => __( 'Held', 'ninja' ),
@@ -27,7 +27,7 @@ $stages_string = [
 	'content-rejected' => __( 'Content Rejected', 'ninja' ),
 	'seo-verified'     => __( 'SEO Verified', 'ninja' ),
 	'translated'       => __( 'Translated', 'ninja' ),
-	'publish'          => __( 'Published', 'ninja' ),
+	'publish'          => __( 'Live', 'ninja' ),
 	'draft'            => __( 'Drafted', 'ninja' ),
 	'closed'           => __( 'Closed', 'ninja' ),
 	'bidding-start'    => __( 'Bidding Start', 'ninja' ),

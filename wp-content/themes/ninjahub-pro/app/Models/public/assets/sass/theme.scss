@@ -617,7 +617,7 @@ footer .widget_block .menu li {
 }
 .ninja-header-search-form .ninja-input-wrapper #ninja_s,
 .search-result-page #ninja_s {
-  padding-inline-start: 40px !important;
+  padding-inline-start: 10px !important;
 }
 .dashboard-overview .widget-list .single-widget .widget-container {
   min-width: 320px;
@@ -810,3 +810,90 @@ footer .widget_block .menu li {
     }
   }
 }
+// page contact us
+.page-template-template-page-contact-us {
+  .landing-page {
+    background: $blue-dark !important;
+  }
+  .back-texture {
+    display: none !important;
+  }
+  .page-content {
+    @include large-screen {
+      overflow: hidden;
+    }
+  }
+}
+// page authentication
+.page-template-template-page-authentication,.page-template-template-page-verification {
+  .site .site-header {
+    display: block !important;
+    height: fit-content !important;
+    .main-navigation {
+      background-color: transparent;
+      padding: 0.5rem !important;
+    }
+    @include large-screen {
+      margin-top: 50px;
+    }
+  }
+  .section-title {
+    font-weight: 900;
+  }
+  .container-fluid.h-100 {
+    height: fit-content !important;
+
+    .section-footer {
+      margin-top: auto;
+    }
+    .section-header {
+      margin-bottom: 0;
+    }
+  }
+  .new-authenticate-page {
+    min-width: 790px !important;
+    padding-right: 64px !important;
+    padding-left: 64px !important;
+    @include large-screen {
+      margin-top: 100px;
+    }
+    p.text-center {
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+  #authenticationSubmit {
+    padding: 17px 37px;
+    border-radius: 5px;
+  }
+}
+.page-content.opportunity-content {
+  min-height: 600px;
+}
+.fav-star.fav-star.bbc-bookmark-o,
+.bbc-bookmark {
+  color: #6cc48d;
+}
+.single-post .content img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.ninja-notification-clear-parent .ninja-notification-clear i {
+  margin-inline-end: 6px;
+}
+.golobal-page-content {
+  background-color: white;
+  padding: 63px;
+  h1 {
+    margin-bottom: 30px;
+  }
+  h2,
+  .wp-block-heading {
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+}
+.single-opportunity .faq-help-card img{
+  padding: 0 !important;
+  background-color: transparent !important;
+}  

@@ -5,6 +5,9 @@
  * @User: NINJA MASTER - Mustafa Shaaban
  * @Date: 21/2/2023
  */
+
+use NH\APP\HELPERS\Nh_Hooks;
+
 ?>
 
 <div class="u-row-container social-footer" style="padding: 0px;background-color: transparent">
@@ -43,7 +46,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="Facebook" target="_blank">
-																	<img src="images/facebook.png" alt="Facebook" title="Facebook" width="32"
+																	<img src="<?= Nh_Hooks::PATHS['public']['images']; ?>/facebook.png" alt="Facebook" title="Facebook" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -60,7 +63,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="LinkedIn" target="_blank">
-																	<img src="images/linkedin.png" alt="LinkedIn" title="LinkedIn" width="32"
+																	<img src="<?= Nh_Hooks::PATHS['public']['images']; ?>/linkedin.png" alt="LinkedIn" title="LinkedIn" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -77,7 +80,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="Instagram" target="_blank">
-																	<img src="images/instagram.png" alt="Instagram" title="Instagram" width="32"
+																	<img src="<?= Nh_Hooks::PATHS['public']['images']; ?>/instagram.png" alt="Instagram" title="Instagram" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -180,7 +183,7 @@
 											<tr>
 												<td style="padding-right: 0px;padding-left: 0px;" align="right">
 
-													<img align="right" border="0" src="images/google-play.png" alt="" title=""
+													<img align="right" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/google-play.png" alt="" title=""
 														style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 60%;max-width: 168px;"
 														width="168" class="v-src-width v-src-max-width" />
 
@@ -220,7 +223,7 @@
 											<tr>
 												<td style="padding-right: 0px;padding-left: 0px;" align="left">
 
-													<img align="left" border="0" src="images/google-play.png" alt="" title=""
+													<img align="left" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/google-play.png" alt="" title=""
 														style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 60%;max-width: 168px;"
 														width="168" class="v-src-width v-src-max-width" />
 
