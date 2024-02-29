@@ -284,11 +284,16 @@
                                     <div class="modal fade" id="createAcquisitionModal" tabindex="-1" aria-labelledby="createAcquisitionLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
+                                            <div class="modal-content pt-0">
                                                 <div class="modal-header">
-                                                    <div class="circle">
-                                                        <i class="bbc-check"></i>
-                                                    </div>
+                                                <span class="icon-wrapper">
+                                                    <dotlottie-player
+                                                        src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/verifyed-verified-sign.json"
+                                                        background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
+                                                        autoplay>
+                                                    </dotlottie-player>
+                                                    
+					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p><?= __('Acquisitions request sent', 'ninja') ?></p>
@@ -366,11 +371,16 @@
                                     <div class="modal fade" id="createInvestModal" tabindex="-1" aria-labelledby="createInvestLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
+                                        <div class="modal-content pt-0">
                                                 <div class="modal-header">
-                                                    <div class="circle">
-                                                        <i class="bbc-check"></i>
-                                                    </div>
+                                                <span class="icon-wrapper">
+                                                    <dotlottie-player
+                                                        src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/verifyed-verified-sign.json"
+                                                        background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
+                                                        autoplay>
+                                                    </dotlottie-player>
+                                                    
+					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p><?= __('Invest Request Sent', 'ninja') ?></p>

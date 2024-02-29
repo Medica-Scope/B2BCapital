@@ -10,6 +10,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Service;
 use NH\Nh;
 
+
 get_header();
 
 Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-home-landing', Nh_Hooks::PATHS['public']['css'] . '/pages/landing/home' );
@@ -145,6 +146,14 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 			?>
 
 		</div>
+		<span class="icon-wrapper">
+		<dotlottie-player
+			src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/done-animation.json"
+			background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
+			autoplay>
+		</dotlottie-player>
+							
+		</span>
 	</div>
 </section>
 </div> <!-- </layout> -->

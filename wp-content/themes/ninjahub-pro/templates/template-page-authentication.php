@@ -36,7 +36,14 @@ $user = Nh_User::get_current_user();
 					alt="Nh Site Logo" class="img-fluid" /></a> -->
 			<div class="section-header">
 				<div class="row justify-content-center">
-					<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/user.webp" style="max-width:100px" />
+				<span class="icon-wrapper d-flex justify-content-center">
+							<dotlottie-player
+								src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/user.json"
+								background="transparent" speed="1" style="width: 130px; height: 100px" direction="1" mode="normal" loop
+								autoplay>
+							</dotlottie-player>
+							
+						</span>
 					<h1 class="section-title display-2 text-center mb-2">
 						<?= __( 'Authenticate your account', 'ninja' ); ?>
 					</h1>
@@ -125,7 +132,7 @@ $user = Nh_User::get_current_user();
 						'class'               => 'btn',
 						'id'                  => 'authenticationSubmit',
 						'type'                => 'submit',
-						'value'               => __( 'Authenticate', 'ninja' ),
+						'value'               => __( 'Submit', 'ninja' ),
 						'recaptcha_form_name' => 'frontend_authentication',
 						'order'               => 45
 					],
