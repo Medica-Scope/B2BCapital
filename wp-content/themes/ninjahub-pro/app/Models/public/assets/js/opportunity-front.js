@@ -20,6 +20,9 @@ import 'tinymce/plugins/link';   // Import a plugin
 import 'tinymce/icons/default';  // Import the icons
 import 'tinymce/models/dom';  // Import the dom
 
+import Pikaday from 'pikaday';
+
+
 class NhOpportunityFront extends NhOpportunity
 {
     constructor()
@@ -82,6 +85,17 @@ class NhOpportunityFront extends NhOpportunity
             menubar: false,
             height: 250
         }).then();
+
+        let date_founded = new Pikaday({
+            field: document.getElementById(`${KEY}_date_founded`),
+            // format: 'MM-DD-YYYY'
+        });
+
+        let project_start_date = new Pikaday({
+            field: document.getElementById(`${KEY}_project_start_date`),
+            // format: 'MM-DD-YYYY',
+            minDate: new Date(),
+        });
 
         $opportunity.opportunity_type.on('change', $opportunity.parent, function (e) {
             let $this   = $(e.currentTarget),
@@ -281,12 +295,12 @@ class NhOpportunityFront extends NhOpportunity
         let that         = this,
         $ignore   = this.$el.ignore,
         ajaxRequests = this.ajaxRequests;
-        
+
         $ignore.form.on('submit', $ignore.parent, function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget),
                 formData = $this.serializeObject();
-    
+
             // Abort any ongoing registration requests
             if (typeof ajaxRequests.ignoreOpportunity !== 'undefined') {
                 ajaxRequests.ignoreOpportunity.abort();
@@ -357,7 +371,7 @@ class NhOpportunityFront extends NhOpportunity
     toggleControllers(){
         $(document).on("click", ".show-controllers", function(e){
             $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
-        }); 
+        });
     }
     rangeInputsAdjust(){
           let that = this;
@@ -369,7 +383,7 @@ class NhOpportunityFront extends NhOpportunity
               if (rangeValue && rangeValue.classList.contains('rangeValue')) {
                   rangeValue.innerText = that.formatNumber(this.value);
               }
-              });                
+              });
           });
       }
   }

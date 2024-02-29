@@ -412,11 +412,11 @@
                     class="input-group <?= Nh::_DOMAIN_NAME ?>-input-wrapper <?= boolval($input_data['inline']) ? 'row' : '' ?> <?= $input_data['class'] ?>">
                 <?= $input_data['before'] ?>
                 <label class="buttonLow buttonLow-id" for="<?= $input_data['id'] ?>">
-                    <?= __('Upload Image', 'ninja') ?>
+                    <?= $input_data['label'] ?>
                 </label>
                 <?= boolval($input_data['inline']) ? '<div class="col-sm-2 ">' : '' ?>
                 <label class="<?= Nh::_DOMAIN_NAME ?>-label" for="customFile">
-                    <?= $input_data['label'] ?>
+                    <?//= $input_data['label'] ?>
                 </label>
                 <?= boolval($input_data['inline']) ? '</div>' : '' ?>
 

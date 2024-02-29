@@ -79,6 +79,8 @@
     "jquery": "^3.6.4",
     "jquery-validation": "^1.19.5",
     "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "pikaday": "^1.8.2",
     "tinymce": "^6.7.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
