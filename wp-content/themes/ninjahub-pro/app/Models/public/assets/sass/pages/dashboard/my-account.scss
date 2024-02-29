@@ -1,6 +1,7 @@
 @import "../../base/variables";
 @import "./submenus/submenus.scss";
 @import "../../components/cards/card";
+@import "../../../../../../../node_modules/pikaday/scss/pikaday";
 
 .ninja_form_container:not(.ninja-header-search-form-container, .ninja-add-to-fav-form-container, .ninja-create-ignore-article-form-container),
 .acf-form {
