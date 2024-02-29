@@ -206,7 +206,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 																	<tr>
 																		<td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-																			<img align="center" border="0" src="images/b2b-logo.png" alt="image" title="image"
+																			<img align="center" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/b2b-logo.png" alt="image" title="image"
 																				style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 16%;max-width: 92.8px;"
 																				width="92.8" class="v-src-width v-src-max-width" />
 

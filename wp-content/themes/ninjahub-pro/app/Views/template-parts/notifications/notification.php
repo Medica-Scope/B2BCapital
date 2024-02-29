@@ -21,9 +21,11 @@ $found_posts   = $notifications['found_posts'];
 <div class="ninja-notifications">
 	<div class="bell">
 		<a href="#" class="ninja-notification-bell" data-count="<?= $count ?>">
+			<?php if(!empty($count)){ ?>
 			<span class="ninja-notification-count">
 				<?= $count ?>
 			</span>
+			<?php } ?>
 			<i class="bbc-bell2"></i>
 		</a>
 	</div>
@@ -71,14 +73,11 @@ $found_posts   = $notifications['found_posts'];
 					}
 					?>
 				</div>
-				<?php
-				if ( $found_posts > 20 ) {
-					?>
-					<div class="ninja-show-more d-none"><a
-							href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-notifications' ) ) ) ?>">
-							<?= __( "Show more", "ninja" ) ?>
-						</a></div>
-				<?php } ?>
+				<div class="ninja-show-more d-none"><a
+						href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-notifications' ) ) ) ?>">
+						<?= __( "See all notifications", "ninja" ) ?>
+					</a>
+				</div>
 				<?php
 			} else {
 				get_template_part( 'app/Views/template-parts/notifications/notification', 'empty' );
