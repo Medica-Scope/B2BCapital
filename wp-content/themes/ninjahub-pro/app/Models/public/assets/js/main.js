@@ -43,9 +43,9 @@ class NhMain
     {
         let that = this;
 
-        that.refreshToken();
 
-        $(window).on('load', function () {
+        $(window).on('bind', function () {
+            that.refreshToken();
             setInterval(function() {
                 that.refreshToken()
             }, 60000);
@@ -55,16 +55,16 @@ class NhMain
 
     refreshToken()
     {
-        if('undefined' !== typeof grecaptcha || $('input[name=g-recaptcha-response]').length){
-            $('.gglcptch_error_text').remove();
-            grecaptcha.ready(function () {
-                grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
-                    $('input[name=g-recaptcha-response]').each(function(i, obj) {
-                        $(this).val(token)
+            if('undefined' !== typeof grecaptcha){
+                $('.gglcptch_error_text').remove();
+                grecaptcha.ready(function () {
+                    grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
+                        $('input[name=g-recaptcha-response]').each(function(i, obj) {
+                            $(this).val(token)
+                        });
                     });
                 });
-            });
-        }
+            }
     }
 
 }
