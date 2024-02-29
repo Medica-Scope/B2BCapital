@@ -162,22 +162,22 @@
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
-                                             'location_group_location'                                   => [
-                                                 'type'           => 'select',
-                                                 'label'          => 'Based in',
-                                                 'name'           => 'location_group_location',
-                                                 'before'         => '',
-                                                 'after'          => '',
-                                                //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
-                                                 'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
-                                                 'options'        => [
-                                                     ''          => __("All", "ninja"),
-                                                     'Egypt'        => __("Egypt", "ninja"),
-                                                     'Russia'       => __("Russia", "ninja"),
-                                                     'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
-                                                 ],
-                                                 'order'          => 20
-                                             ],
+                                            //  'location_group_location'                                   => [
+                                            //      'type'           => 'select',
+                                            //      'label'          => 'Based in',
+                                            //      'name'           => 'location_group_location',
+                                            //      'before'         => '',
+                                            //      'after'          => '',
+                                            //     //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
+                                            //      'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
+                                            //      'options'        => [
+                                            //          ''          => __("All", "ninja"),
+                                            //          'Egypt'        => __("Egypt", "ninja"),
+                                            //          'Russia'       => __("Russia", "ninja"),
+                                            //          'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
+                                            //      ],
+                                            //      'order'          => 20
+                                            //  ],
                                              // 'ttm_gross_revenue'    => [
                                              // 	'type'   => 'range',
                                              // 	'label'  => 'TTM Gross Revenue',

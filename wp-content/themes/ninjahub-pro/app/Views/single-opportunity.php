@@ -54,12 +54,12 @@
     if ($user_ID) {
         $fav_chk = $opportunity_obj->is_opportunity_in_user_favorites($opportunity->ID);
         if ($fav_chk) {
-            $fav_class     = '0 fav-star';
-            $fav_text      = __('Unfavored', 'ninja');
+            $fav_class     = 'bbc-bookmark fav-star';
+            $fav_text      = __('Added to favorites', 'ninja');
             $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         } else {
             $fav_class     = 'bbc-bookmark-o fav-star';
-            $fav_text      = __('Add To Favorite', 'ninja');
+            $fav_text      = __('Add to favorites', 'ninja');
             $fav_full_text = '<span class="fav-text">' . $fav_text . '</span><i class="' . $fav_class . '"></i>';
         }
         $ignore_chk = $opportunity_obj->is_opportunity_in_user_ignored($opportunity->ID);

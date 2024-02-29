@@ -44,10 +44,10 @@ if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) 
 } elseif ( is_page( $my_account ) ) {
 	get_template_part( 'app/Views/footers/my-account' );
 }
-//  else {
-// 	// TODO:: Will be used for Blogs later..
-// 	get_template_part( 'app/Views/footers/default' );
-// }
+ else {
+	// TODO:: Will be used for Blogs later..
+	get_template_part( 'app/Views/footers/dashboard' );
+}
 
 
 wp_body_close();
