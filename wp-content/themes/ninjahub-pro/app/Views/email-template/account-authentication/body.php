@@ -8,8 +8,10 @@
 
     $data = $variables['data'];
 ?>
-
-<p>Dear <?= $data['user']->first_name ?>,</p>
+<div style="background-color: white; padding: 0 50px;" class="">
+<p style="    font-weight: 800;
+    color: black;
+    margin-bottom: 10px;">Dear <?= $data['user']->first_name ?>,</p>
 
 <p>Thank you for choosing our platform! To ensure the security of your account, we have implemented an authentication process. As requested, we are providing you with your unique
    authentication code.</p>
@@ -24,6 +26,9 @@
 <p>If you encounter any issues during the authentication process or have any questions, please feel free to contact our support team at support@nh.org.
    We are here to assist you.</p>
 
-<p>Thank you for your cooperation.</p>
+<p style="    font-weight: 800;
+    color: black;
+    margin-top: 10px;">Thank You,</p>
+<p>Team B2B</p>
 
-<p>Best regards,</p>
+</div>
