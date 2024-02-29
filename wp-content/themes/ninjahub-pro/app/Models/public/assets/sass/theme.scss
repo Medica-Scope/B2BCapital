@@ -825,7 +825,8 @@ footer .widget_block .menu li {
   }
 }
 // page authentication
-.page-template-template-page-authentication,.page-template-template-page-verification {
+.page-template-template-page-authentication,
+.page-template-template-page-verification {
   .site .site-header {
     display: block !important;
     height: fit-content !important;
@@ -893,7 +894,47 @@ footer .widget_block .menu li {
     margin-bottom: 15px;
   }
 }
-.single-opportunity .faq-help-card img{
+.single-opportunity .faq-help-card img {
   padding: 0 !important;
   background-color: transparent !important;
-}  
+}
+
+#ninja_date_founded {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #f5f7f9;
+    width: 50px;
+    height: 50px;
+  }
+}
+form {
+  .chosen-choices {
+    background: #f5f7f9 !important;
+    height: 50px !important;
+    display: flex!important;
+    align-items: center !important;
+    border: none !important;
+    padding: 16px !important;
+    box-shadow: none !important;
+    .search-choice {
+      background-color: #0e9cfb !important;
+      background: #0e9cfb !important;
+      color: white !important;
+      border: none !important;
+      padding: 10px 24px 10px !important;
+    }
+  }
+  .chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
+    top: 11px;
+    right: 8px;
+    filter: brightness(2.3);
+  }
+  .chosen-container.chosen-with-drop .chosen-drop{
+    border: 1px solid #aaa !important;
+    box-shadow: none;
+  }
+}
