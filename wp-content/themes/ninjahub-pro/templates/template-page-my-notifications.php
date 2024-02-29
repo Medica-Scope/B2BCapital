@@ -75,7 +75,8 @@ $found_posts   = $notifications['found_posts'];
 
 							<div class="accordion-header d-flex align-items-center" id="flush-heading<?= $notification->ID ?>">
 								<div class="ninja-notification-image col-1">
-									<img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
+									<!-- <img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" /> -->
+									<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/notification-icon.webp" alt="notification icon" />
 								</div>
 								<div class="ninja-notification-content col-11">
 								<h3 class="accordion-button collapsed" data-bs-toggle="collapse"

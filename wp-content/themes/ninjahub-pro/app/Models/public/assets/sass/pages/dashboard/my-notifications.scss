@@ -81,11 +81,14 @@
   }
   .ninja-notification-image {
     img {
-      border-radius: 8px;
-      object-fit: cover;
-      width: 50px;
-      height: 50px;
-      box-shadow: var(--bs-box-shadow) !important;
+      border-radius: 3px;
+      -o-object-fit: contain;
+      object-fit: contain;
+      width: 53px;
+      height: 53px;
+      padding: 15px;
+      min-width: 53px;
+      box-shadow: 3px 3px 14px 0 #e7e7e7;
     }
   }
   .accordion-body {

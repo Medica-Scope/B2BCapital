@@ -9,13 +9,16 @@
     right: 0;
     width: 400px;
     height: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    // overflow-y: auto;
+    // overflow-x: hidden;
     z-index: 100;
     background-color: $layout-light;
     border: none;
     border-radius: 5px;
     padding: 15px;
+    &::after{
+      content: '';
+    }
 
     .ninja-notification-group-container {
       height: 100%;
@@ -37,16 +40,15 @@
 
       .ninja-notifications-group {
         padding-bottom: 1rem;
-        .ninja-show-more {
-          color: #071b2e;
-          font-size: 16px;
-          text-align: center;
-        }
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 80%;
+        height: 268px;
       }
 
       .ninja-notification-item {
         padding: 10px;
-        background-color: transparent;
+        background-color: transparent !important;
 
         .ninja-notification-image {
           display: flex;
@@ -144,6 +146,17 @@
         height: 100%;
         align-items: center;
         justify-content: center;
+      }
+    }
+    .ninja-show-more {
+      font-size: 16px;
+      text-align: center;
+      padding: 22px 0 22px;
+      border-top: 1px solid rgba(112, 112, 112, 0.2);
+      background-color: white;
+      a {
+        color: #071b2e;
+        text-transform: capitalize;
       }
     }
   }
