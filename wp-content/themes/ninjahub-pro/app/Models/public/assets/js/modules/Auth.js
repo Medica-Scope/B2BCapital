@@ -119,12 +119,10 @@ class NhAuth extends Nh
                 if (res.success) {
                     $($el).append(_.template($('#ninja_modal_auth_verif').html())({
                         msg: res.msg,
-                        // redirect_text: res.data.redirect_text,
-                        // redirect_url: res.data.redirect_url,
                     }));
                     let successModal = new bootstrap.Modal(document.getElementById('authVerifySuccess'), {});
                     successModal.show();
-                    window.location.href = res.data.redirect_url;
+                    // window.location.href = res.data.redirect_url;
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
