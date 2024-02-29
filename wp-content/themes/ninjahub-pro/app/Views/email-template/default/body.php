@@ -6,6 +6,8 @@
  * @Date: 21/2/2023
  */
 
+use NH\APP\HELPERS\Nh_Hooks;
+
 $data = $variables['data'];
 ?>
 
@@ -36,7 +38,7 @@ $data = $variables['data'];
 											<tr>
 												<td style="padding-right: 0px;padding-left: 0px; position:relative;" align="center">
 
-													<img align="center" border="0" src="images/hero-bg.jpeg" alt="image" title="image"
+													<img align="center" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/hero-bg.jpeg" alt="image" title="image"
 														style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
 														width="600" class="v-src-width v-src-max-width" />
 

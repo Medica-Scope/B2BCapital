@@ -147,11 +147,11 @@ $category    = $service_obj->get_taxonomy_terms( 'service-category' );
 
 		</div>
 		<span class="icon-wrapper">
-		<dotlottie-player
-			src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/done-animation.json"
+		<!-- <dotlottie-player
+			src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/impossible-hexagon.json"
 			background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
 			autoplay>
-		</dotlottie-player>
+		</dotlottie-player> -->
 							
 		</span>
 	</div>

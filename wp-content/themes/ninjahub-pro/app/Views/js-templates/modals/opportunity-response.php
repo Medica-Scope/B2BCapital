@@ -1,4 +1,5 @@
 <?php
+use NH\APP\HELPERS\Nh_Hooks;
 /**
  * @Filename: opportunity-response.php
  * @Description:
@@ -11,12 +12,17 @@
     <div class="modal fade" id="opportunitySuccess" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="opportunitySuccessLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content pt-0">
             <div class="modal-header">
-                    <div class="circle">
-                        <i class="bbc-check"></i>
-                        </div>
-                    </div>
+                <span class="icon-wrapper">
+                    <dotlottie-player
+                        src="<?= Nh_Hooks::PATHS['public']['vendors']; ?>/css/lottiefiles/verifyed-verified-sign.json"
+                        background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
+                        autoplay>
+                    </dotlottie-player>
+                    
+                </span>
+            </div>
                 <div class="modal-body">
                     <p><%= msg %></p>
                 </div>
@@ -26,4 +32,5 @@
             </div>
         </div>
     </div>
+
 </script>

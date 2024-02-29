@@ -617,7 +617,7 @@ footer .widget_block .menu li {
 }
 .ninja-header-search-form .ninja-input-wrapper #ninja_s,
 .search-result-page #ninja_s {
-  padding-inline-start: 40px !important;
+  padding-inline-start: 10px !important;
 }
 .dashboard-overview .widget-list .single-widget .widget-container {
   min-width: 320px;
@@ -893,3 +893,7 @@ footer .widget_block .menu li {
     margin-bottom: 15px;
   }
 }
+.single-opportunity .faq-help-card img{
+  padding: 0 !important;
+  background-color: transparent !important;
+}  

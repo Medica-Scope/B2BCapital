@@ -66,7 +66,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code1',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 							'autofocus' => 'on',
@@ -78,7 +78,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code2',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],
@@ -89,7 +89,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code3',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],
@@ -100,7 +100,7 @@ $user = Nh_User::get_current_user();
 						'type'        => 'tel',
 						'name'        => 'code4',
 						'required'    => TRUE,
-						'placeholder' => __( '0', 'ninja' ),
+						'placeholder' => __( ' ', 'ninja' ),
 						'extra_attr'  => [ 
 							'maxlength' => '1',
 						],

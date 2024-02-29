@@ -115,7 +115,7 @@ class Nh_Blog extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $post_id, 'fav_count', TRUE );
 				update_post_meta( $post_id, 'fav_count', (int) $fav_count - 1 );
-				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been unfavored', 'ninja'), $article->title), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been removed from favorites', 'ninja'), $article->title), [
 					'fav_active'   => 1,
 					'updated_text' => __( 'Favorite', 'ninja' ),
 					'button_text' => __('Done', 'ninja')
@@ -126,7 +126,7 @@ class Nh_Blog extends Nh_Module {
 				$profile->update();
 				$fav_count = get_post_meta( $post_id, 'fav_count', TRUE );
 				update_post_meta( $post_id, 'fav_count', (int) $fav_count + 1 );
-				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been favorite', 'ninja'), $article->title), [
+				new Nh_Ajax_Response( TRUE, sprintf(__('<strong>%s</strong> has been added to favorites', 'ninja'), $article->title), [
 					'fav_active'   => 0,
 					'updated_text' => __( 'Added to favorites', 'ninja' ),
 					'button_text' => __('Done', 'ninja')

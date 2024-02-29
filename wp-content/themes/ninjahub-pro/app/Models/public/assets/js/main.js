@@ -55,7 +55,7 @@ class NhMain
 
     refreshToken()
     {
-        if('undefined' !== typeof grecaptcha){
+        if('undefined' !== typeof grecaptcha || $('input[name=g-recaptcha-response]').length){
             $('.gglcptch_error_text').remove();
             grecaptcha.ready(function () {
                 grecaptcha.execute(nhGlobals.publicKey).then(function (token) {
