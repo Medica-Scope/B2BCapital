@@ -63,7 +63,7 @@ class NhSearchFront extends NhSearch
             let $this    = $(e.currentTarget);
 
             $search.input.animate({ opacity: 1, width: '250px' }, 250);
-            $search.input.parent().find('i').animate({ left: 'auto', right: '0' }, 250);
+            $search.input.parent().find('i').animate({ right: '0' }, 250);
             $search.input.focus();
             $search.input.val('');
 
@@ -73,7 +73,7 @@ class NhSearchFront extends NhSearch
             let $this = $(e.target);
                 if ($('#ninja_s').css('opacity') === '1' && !$this.hasClass('ninja-header-search-icon') && !$this.parent().hasClass('ninja-s')) {
                 $search.input.animate({ opacity: 0, width: '0' }, 250)
-                $search.input.parent().find('i').animate({ left: '0', right: 'auto' }, 250);
+                $search.input.parent().find('i').animate({ right: '0' }, 250);
             }
         })
     }
