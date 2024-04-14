@@ -41,7 +41,7 @@ class NextendSocialProviderSpotifyClient extends NextendSocialOauth2 {
      */
     protected function errorFromResponse($response) {
         if (isset($response['error']) && isset($response['error']['message'])) {
-            throw new Exception($response['error']['status'] . ' - ' . $response['error']['message']);
+            throw new NSLSanitizedRequestErrorMessageException($response['error']['status'] . ' - ' . $response['error']['message']);
         } else {
             parent::errorFromResponse($response);
         }

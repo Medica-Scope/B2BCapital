@@ -115,7 +115,7 @@ if ( have_posts() ) {
 								<?= __( "Email us", "ninja" ) ?>
 							</h6>
 						</a>
-						<a href="tel:<?= Nh_Init::$_NH_CONFIGURATION['contact'][ Nh::_DOMAIN_NAME . '_whatsapp_number' ] ?>" class="call shadow">
+						<a href="tel:+201033441999" class="call shadow">
 							<i class="bbc-phone2"></i>
 							<h6>
 								<?= __( "Call us", "ninja" ) ?>

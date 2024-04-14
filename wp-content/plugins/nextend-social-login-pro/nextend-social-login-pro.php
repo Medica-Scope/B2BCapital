@@ -3,7 +3,7 @@
 Plugin Name: Nextend Social Login Pro Addon
 Plugin URI: https://nextendweb.com/social-login/
 Description: Pro Addon for Nextend Social Login.
-Version: 3.1.12
+Version: 3.1.13
 Requires PHP: 7.0
 Requires at least: 4.9
 Author: Nextendweb
@@ -21,9 +21,9 @@ if (!defined('NSL_PRO_PATH')) {
 
 class NextendSocialLoginPRO {
 
-    public static $version = '3.1.12';
+    public static $version = '3.1.13';
 
-    public static $nslMinVersion = '3.1.12';
+    public static $nslMinVersion = '3.1.13';
 
     /**
      * @var NextendSocialProvider[]
