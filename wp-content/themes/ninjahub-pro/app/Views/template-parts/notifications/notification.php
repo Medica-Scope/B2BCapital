@@ -75,16 +75,16 @@ $found_posts   = $notifications['found_posts'];
 					}
 					?>
 				</div>
-				<div class="ninja-show-more"><a
-						href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-notifications' ) ) ) ?>">
-						<?= __( "See all notifications", "ninja" ) ?>
-					</a>
-				</div>
 				<?php
 			} else {
 				get_template_part( 'app/Views/template-parts/notifications/notification', 'empty' );
 			}
 			?>
+				<div class="ninja-show-more"><a
+						href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'my-account/my-notifications' ) ) ) ?>">
+						<?= __( "See all notifications", "ninja" ) ?>
+					</a>
+				</div>
 		</div>
 	</div>
 </div>

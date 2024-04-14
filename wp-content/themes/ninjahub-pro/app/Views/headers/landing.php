@@ -119,6 +119,8 @@ $active_link  = $current_slug;
 					<?php
 					if ( is_user_logged_in() ) {
 						?>
+						<a class="my-dashboard-link" href="<?= apply_filters( 'nhml_permalink', get_permalink( get_page_by_path( 'dashboard' ) ) ) ?>">
+											<?= __( 'My Dashboard', 'ninja' ); ?></a>
 						<a href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
 							aria-controls="staticBackdrop">
 							<span class="user-action user-menu">
