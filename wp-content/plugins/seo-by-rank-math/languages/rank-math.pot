@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rank Math SEO 1.0.214\n"
+"Project-Id-Version: Rank Math SEO 1.0.217\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-by-rank-math\n"
 "Last-Translator: Rank Math <support@rankmath.com>\n"
 "Language-Team: Rank Math <support@rankmath.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-07T15:14:34+00:00\n"
+"POT-Creation-Date: 2024-04-12T15:45:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: rank-math\n"
@@ -462,6 +462,9 @@ msgstr ""
 msgid "Settings could not be imported: Upload failed."
 msgstr ""
 
+msgid "No items found."
+msgstr ""
+
 #. Translators: placeholder is the post type name.
 msgid "Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a>."
 msgstr ""
@@ -632,6 +635,15 @@ msgid "Save Changes"
 msgstr ""
 
 msgid "Reset Options"
+msgstr ""
+
+msgid "$id variable required"
+msgstr ""
+
+msgid "Variable Required"
+msgstr ""
+
+msgid "$title variable required"
 msgstr ""
 
 msgid "SEO Details"
@@ -1399,6 +1411,7 @@ msgid "Choose your Sitemap configuration and select which type of posts or pages
 msgstr ""
 
 #. translators: Link to How to Setup Sitemap KB article
+#. Translators: placeholder is the KB link.
 msgid "Learn more."
 msgstr ""
 
@@ -1603,6 +1616,7 @@ msgstr ""
 msgid "Learn more about the benefits of connecting your account here."
 msgstr ""
 
+#. Translators: placeholder is the KB link.
 msgid "We do not store any of the data from your Google account on our servers, everything is processed & stored on your server. We take your privacy extremely seriously and ensure it is never misused. %s"
 msgstr ""
 
@@ -2849,6 +2863,7 @@ msgstr ""
 msgid "Warning:"
 msgstr ""
 
+#. translators: %s is the reconnect link.
 msgid "You have not given the permission to fetch this data. Please <a href=\"%s\">reconnect</a> with all required permissions."
 msgstr ""
 
@@ -3519,12 +3534,6 @@ msgstr ""
 msgid "Conversion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
-msgid "No data found to delete."
-msgstr ""
-
-msgid "Deletion started. A success message will be shown here once the process completes. You can close this page."
-msgstr ""
-
 msgid "Flush SEO Analyzer Data"
 msgstr ""
 
@@ -3613,15 +3622,6 @@ msgid "Are you sure you want to delete all the Redirection Rules? This action is
 msgstr ""
 
 msgid "Delete Redirections"
-msgstr ""
-
-msgid "Delete Old Schema Data"
-msgstr ""
-
-msgid "Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet."
-msgstr ""
-
-msgid "Are you sure you want to delete the old schema data? This action is irreversible."
 msgstr ""
 
 msgid "Update SEO Scores"
@@ -4663,6 +4663,7 @@ msgstr ""
 msgid "Competitor Analyzer"
 msgstr ""
 
+#. Translators: placeholder is the new Rank Math label.
 msgid "SEO Analyzer %s"
 msgstr ""
 
@@ -6703,14 +6704,6 @@ msgid "Remove schema data from %s."
 msgstr ""
 
 msgid "Error: Nonce verification failed"
-msgstr ""
-
-#. Translators: placeholders are the opening and closing anchor tags.
-msgid "Thank you for updating Rank Math! We've completely revamped our Analytics module with Google Analytics & Google Search Console integrations. For a seamless experience, please re-authenticate your Google account. %1$sClick here to Connect%2$s"
-msgstr ""
-
-#. Translators: placeholders are the opening and closing anchor tags.
-msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
 msgstr ""
 
 #. translators: WordPress Version
@@ -8898,18 +8891,6 @@ msgid "500 credits will be used."
 msgstr ""
 
 msgid "Research"
-msgstr ""
-
-msgid "Please connect your account to use this feature."
-msgstr ""
-
-msgid "All credits assigned to this site are used. Please add more credits from {{link1}}My Account{{/link1}} Page or {{link2}}upgrade your plan{{/link2}}."
-msgstr ""
-
-msgid "You don't have any credits left."
-msgstr ""
-
-msgid "Get More Credits"
 msgstr ""
 
 msgid "Credits"

@@ -1,11 +1,11 @@
-=== Rank Math SEO with AI SEO Tools ===
+=== Rank Math SEO with AI Best SEO Tools ===
 Contributors: rankmath
 Plugin link: https://rankmath.com/?utm_source=LP&utm_campaign=WP
 Tags: seo, sitemap, google search console, schema, redirection, WordPress SEO
-Tested up to: 6.4.1
+Tested up to: 6.5
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.214
+Stable tag: 1.0.217
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -583,12 +583,14 @@ Please drop us an email at support@rankmath.com and we would be more than happy 
 
 == Changelog ==
 
-= 1.0.214 [Mar 07, 2024] =
-- Added: New [Organization Schema properties]((https://rankmath.com/kb/local-seo/)) recently introduced by Google
-- Fixed: [About](https://rankmath.com/kb/local-seo/#about-page) & [Contact Page](https://rankmath.com/kb/local-seo/#contact-page) search fields were not working when the Local SEO Module was disabled
-- Fixed: [Headless CMS](https://rankmath.com/kb/general-settings/#headless-cms-support) issue with Japanese characters
-- Fixed: Wrong colors in the [SEO Performance Graph](https://rankmath.com/kb/analytics/#seo-performance)
-- Fixed: Deprecated warning related to the `getBlocks` function in the browser's console
+= 1.0.217 [Apr 12, 2024] =
+- Updated: [Minimum required PHP version](https://wordpress.org/about/requirements/) to 7.4
+- Improved: Strengthened the security of the plugin's FAQ Block. Thanks to WordFence for disclosing it responsibly.
+- Improved: Existing [Content AI Research](https://rankmath.com/kb/how-to-use-content-ai/#research-keywords) data will be visible even after the subscription expires
+- Fixed: Compatibility issues with WordPress 6.5
+- Fixed: Extra line breaks were added in the [Content AI shortcut command](https://rankmath.com/kb/using-content-ai-in-block-editor/#shortcode)
+- Fixed: [Analytics Stats in Frontend](https://rankmath.com/kb/analytics-stats-bar/) was not displaying the data from GSC when GA is not connected
+- Fixed: Content AI Compatibility issue with Avada Builder
 
 
 Full changelog can be found here - **[Rank Math changelog](https://rankmath.com/changelog/?utm_source=Plugin&utm_medium=Changelog&utm_campaign=WP)**
