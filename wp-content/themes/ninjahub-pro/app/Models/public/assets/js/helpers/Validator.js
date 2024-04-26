@@ -127,7 +127,19 @@ class NhValidator
                             'expected_value': {
                                 required: true
                             },
-                            'entity_legal_type': {
+                            'target_investment': {
+                                required: true
+                            },
+                            'size_of_investment': {
+                                required: true
+                            },
+                            'investment_criteria': {
+                                required: true
+                            },
+                            'external_or_long_term': {
+                                required: true
+                            },
+                            'buying_shares': {
                                 required: true
                             },
                         },
@@ -336,7 +348,7 @@ class NhValidator
                                 maxlength: 150,
                                 minlength: 5,
                             },
-                            category: {
+                            industry: {
                                 required: true,
                             },
                             description: {
@@ -433,6 +445,9 @@ class NhValidator
                             },
                             annual_growth_rate_percentage: {
                                 required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
                                 max: 100,
                             },
                             annual_growth_rate: {
@@ -458,6 +473,7 @@ class NhValidator
                                 number: true,
                                 step: 0.1,
                                 min: 0,
+                                max: 100,
                             },
                             risk_level: {
                                 required: true,

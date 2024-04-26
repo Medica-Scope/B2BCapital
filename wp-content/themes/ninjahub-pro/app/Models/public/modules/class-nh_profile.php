@@ -34,8 +34,11 @@
             'ignored_opportunities',
             'favorite_articles',
             'ignored_articles',
-            'expected_value',
-            'entity_legal_type',
+            'target_investment',
+            'size_of_investment',
+            'investment_criteria',
+            'external_or_long_term',
+            'buying_shares',
         ];
         public array $taxonomy = [
             'industry'

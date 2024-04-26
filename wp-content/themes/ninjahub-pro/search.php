@@ -15,7 +15,7 @@ get_header();
 ?>
 <style>
 	.search-result-page #ninja_s {
-		padding-inline-start: 2.5rem;
+		padding-inline-start: 2.5rem !important;
 	}
 
 	.search-result-page .ninja-header-search-icon {
@@ -30,8 +30,8 @@ get_header();
 	<header class="page-header">
 
 		<?= Nh_Forms::get_instance()
-			->create_form( [ 
-				'search' => [ 
+			->create_form( [
+				'search' => [
 					'class'       => 'mb-4 p-0 ninja-s position-relative shadow radius',
 					'type'        => 'text',
 					'name'        => 's',
@@ -40,7 +40,7 @@ get_header();
 					'after'       => '<i class="bbc-search2 ninja-header-search-icon"></i>',
 					'order'       => 0,
 				]
-			], [ 
+			], [
 				'action' => apply_filters( 'nhml_permalink', home_url() ),
 				'class'  => Nh::_DOMAIN_NAME . '-search-form',
 				'id'     => Nh::_DOMAIN_NAME . '_search_form'

@@ -18,9 +18,9 @@
 				<div class="modal-body justify-content-center">
 					<p><%= msg %></p>
 				</div>
-				<!-- <div class="modal-footer justify-content-center">
+				<div class="modal-footer justify-content-center">
 					<a href="<%= redirect_url %>" class="btn btn-success btn-"> <%= redirect_text %> </a>
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>

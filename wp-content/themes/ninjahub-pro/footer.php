@@ -11,7 +11,7 @@
 
 global $post;
 
-$dashboard = [ 
+$dashboard = [
 	'my-account',
 	'dashboard',
 	'authentication',
@@ -29,7 +29,7 @@ $dashboard = [
 	'create-opportunity-step-2',
 ];
 
-$my_account = [ 
+$my_account = [
 	'login',
 	'industry',
 	'reset-password',
@@ -46,7 +46,7 @@ if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) 
 }
  else {
 	// TODO:: Will be used for Blogs later..
-	get_template_part( 'app/Views/footers/dashboard' );
+//	get_template_part( 'app/Views/footers/dashboard' );
 }
 
 

@@ -98,18 +98,18 @@
                         'rows'        => '4',
                         'order'       => 20,
                     ],
-                    'category'                    => [
+                    'industry'                    => [
                         'class'             => 'col-6',
                         'type'              => 'select',
                         'label'             => __('Industry', 'ninja'),
-                        'name'              => 'category',
+                        'name'              => 'industry',
                         'placeholder'       => __('Enter your industry', 'ninja'),
                         'options'           => [],
                         'default_option'    => '',
                         'select_option'     => [],
                         'extra_option_attr' => [],
                         'before'            => '',
-                        'order'             => 10,
+                        'order'             => 25,
                     ],
                     'type_of_company'             => [
                         'class'             => 'col-sm-6',
@@ -127,7 +127,7 @@
                         'select_option'     => [],
                         'extra_option_attr' => [],
                         'before'            => '',
-                        'order'             => 25,
+                        'order'             => 30,
                     ],
                     'date_founded'                => [
                         'class'       => 'col-6',
@@ -137,7 +137,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your date founded', 'ninja'),
-                        'order'       => 30,
+                        'order'       => 35,
                     ],
                     'asking_price_in_usd'         => [
                         'class'       => 'col-6',
@@ -147,7 +147,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your asking price in USD', 'ninja'),
-                        'order'       => 35,
+                        'order'       => 40,
                     ],
                     'number_of_customers'         => [
                         'class'       => 'col-6',
@@ -157,7 +157,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your number of customers', 'ninja'),
-                        'order'       => 40,
+                        'order'       => 45,
                     ],
                     'business_team_size'          => [
                         'class'       => 'col-6',
@@ -167,7 +167,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your business team size', 'ninja'),
-                        'order'       => 45,
+                        'order'       => 50,
                     ],
                     'location'                    => [
                         'class'       => 'col-12',
@@ -177,7 +177,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your location', 'ninja'),
-                        'order'       => 50,
+                        'order'       => 55,
                     ],
                     'media_file'                  => [
                         'class'      => 'form-group col-md-6',
@@ -188,7 +188,7 @@
                         'accept'     => 'image/*',
                         'before'     => '',
                         'after'      => '',
-                        'order'      => 55,
+                        'order'      => 60,
                         'extra_attr' => [
                             'data-target' => "media_file_id"
                         ]
@@ -200,7 +200,7 @@
                         'required' => FALSE,
                         'before'   => '',
                         'after'    => '',
-                        'order'    => 60,
+                        'order'    => 65,
                     ],
                     'business_model'              => [
                         'class'             => 'col-sm-12',
@@ -214,12 +214,12 @@
                         'select_option'     => [],
                         'extra_option_attr' => [],
                         'before'            => '',
-                        'order'             => 61,
+                        'order'             => 70,
                     ],
                     'custom-html-2'               => [
                         'type'    => 'html',
                         'content' => '</div>',
-                        'order'   => 62,
+                        'order'   => 75,
                     ],
 
 
@@ -227,7 +227,7 @@
                     'custom-html-opp-types-start' => [
                         'type'    => 'html',
                         'content' => '<div class="mt-5"> <h3>' . __('Opportunity Types', 'ninja') . '</h3> <small>' . __('*All fields are required.', 'ninja') . '</small>',
-                        'order'   => 63,
+                        'order'   => 80,
                     ],
                     'opportunity_type'            => [
                         'class'             => 'col-12',
@@ -240,13 +240,13 @@
                         'select_option'     => [],
                         'extra_option_attr' => [],
                         'before'            => '',
-                        'order'             => 65,
+                        'order'             => 85,
                     ],
 
                     'custom-html-bidding-fields-1' => [
                         'type'    => 'html',
                         'content' => '<div id="bidding_target"  class="nh-opportunities-fields col-12 nh-hidden"><div class="row">',
-                        'order'   => 69,
+                        'order'   => 90,
                     ],
                     'start_bidding_amount'         => [
                         'class'       => 'col-6',
@@ -256,7 +256,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your start bidding amount', 'ninja'),
-                        'order'       => 70,
+                        'order'       => 95,
                     ],
                     'target_amount'                => [
                         'class'       => 'col-6',
@@ -266,18 +266,18 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your target amount', 'ninja'),
-                        'order'       => 75,
+                        'order'       => 100,
                     ],
                     'custom-html-bidding-fields-2' => [
                         'type'    => 'html',
                         'content' => '</div></div>',
-                        'order'   => 80,
+                        'order'   => 105,
                     ],
 
                     'custom-html-acquisition-fields-1'     => [
                         'type'    => 'html',
                         'content' => '<div id="acquisition_target" class="nh-opportunities-fields col-12 nh-hidden"><div class="row">',
-                        'order'   => 85,
+                        'order'   => 110,
                     ],
                     'project_phase'                        => [
                         'class'          => 'col-6',
@@ -295,7 +295,7 @@
                         'default_option' => '',
                         'select_option'  => [],
                         'before'         => '',
-                        'order'          => 90,
+                        'order'          => 115,
                     ],
                     'project_start_date'                   => [
                         'class'       => 'col-6',
@@ -305,7 +305,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your project start date', 'ninja'),
-                        'order'       => 95,
+                        'order'       => 120,
                     ],
                     'project_assets_amount'                => [
                         'class'       => 'col-6',
@@ -315,7 +315,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your project assets amount', 'ninja'),
-                        'order'       => 100,
+                        'order'       => 125,
                     ],
                     'project_yearly_cashflow_amount'       => [
                         'class'       => 'col-6',
@@ -325,7 +325,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your project yearly cashflow amount', 'ninja'),
-                        'order'       => 105,
+                        'order'       => 130,
                     ],
                     'project_yearly_net_profit_amount'     => [
                         'class'       => 'col-6',
@@ -335,17 +335,17 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your project yearly cashflow amount', 'ninja'),
-                        'order'       => 110,
+                        'order'       => 135,
                     ],
                     'custom-html-acquisition-fields-2'     => [
                         'type'    => 'html',
                         'content' => '</div></div>',
-                        'order'   => 115,
+                        'order'   => 140,
                     ],
                     'custom-html-opp-types-end'            => [
                         'type'    => 'html',
                         'content' => '</div>',
-                        'order'   => 116,
+                        'order'   => 145,
                     ],
 
 
@@ -353,7 +353,7 @@
                     'custom-html-3'                        => [
                         'type'    => 'html',
                         'content' => '<div class="row mt-5"> <h3>' . __('Financial Information', 'ninja') . '</h3> <small>' . __('*All fields are required.', 'ninja') . '</small>',
-                        'order'   => 120,
+                        'order'   => 150,
                     ],
                     'net_profit'                           => [
                         'class'       => 'col-6',
@@ -363,7 +363,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your net profit', 'ninja'),
-                        'order'       => 135,
+                        'order'       => 155,
                     ],
                     'valuation_in_usd'                     => [
                         'class'       => 'col-6',
@@ -373,7 +373,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your valuation in USD', 'ninja'),
-                        'order'       => 140,
+                        'order'       => 160,
                     ],
                     'shares_to_be_sold_percentage'          => [
                         'class'       => 'col-6',
@@ -383,7 +383,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your shares to be sold %', 'ninja'),
-                        'order'       => 145,
+                        'order'       => 165,
                     ],
                     'usd_exchange_rate_used_in_conversion' => [
                         'class'       => 'col-6',
@@ -393,7 +393,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your usd exchange rate used in conversion', 'ninja'),
-                        'order'       => 150,
+                        'order'       => 170,
                     ],
                     'annual_accounting_revenue'            => [
                         'class'       => 'col-6',
@@ -403,7 +403,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your annual accounting revenue', 'ninja'),
-                        'order'       => 155,
+                        'order'       => 175,
                     ],
                     'annual_growth_rate_percentage'        => [
                         'class'       => 'col-6',
@@ -413,7 +413,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your annual growth rate %', 'ninja'),
-                        'order'       => 160,
+                        'order'       => 180,
                     ],
                     'annual_growth_rate'                   => [
                         'class'       => 'col-6',
@@ -423,17 +423,17 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your annual growth rate', 'ninja'),
-                        'order'       => 165,
+                        'order'       => 185,
                     ],
                     'required_investment_amount'           => [
                         'class'       => 'col-6',
                         'type'        => 'number',
                         'label'       => __('Required Investment Amount', 'ninja'),
-                        'name'        => 'annual_growth_rate',
+                        'name'        => 'required_investment_amount',
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your required investment amount', 'ninja'),
-                        'order'       => 165,
+                        'order'       => 190,
                     ],
                     'currency'                             => [
                         'class'       => 'col-6',
@@ -443,7 +443,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your required investment currency', 'ninja'),
-                        'order'       => 165,
+                        'order'       => 195,
                     ],
                     'investment_term'                      => [
                         'class'          => 'col-6',
@@ -459,7 +459,7 @@
                         'default_option' => '',
                         'select_option'  => [],
                         'before'         => '',
-                        'order'          => 165,
+                        'order'          => 200,
                     ],
                     'expected_returns'                     => [
                         'class'       => 'col-6',
@@ -469,7 +469,7 @@
                         'value'       => '',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your expected returns %', 'ninja'),
-                        'order'       => 165,
+                        'order'       => 205,
                     ],
                     'risk_level'                           => [
                         'class'          => 'col-6',
@@ -485,7 +485,7 @@
                         'default_option' => '',
                         'select_option'  => [],
                         'before'         => '',
-                        'order'          => 165,
+                        'order'          => 210,
                     ],
                     'legal_structure'                      => [
                         'class'             => 'col-6',
@@ -498,7 +498,7 @@
                         'select_option'     => [],
                         'extra_option_attr' => [],
                         'before'            => '',
-                        'order'             => 165,
+                        'order'             => 215,
                     ],
                     'regulatory_compliance'                => [
                         'class'       => 'col-12',
@@ -509,12 +509,12 @@
                         'required'    => FALSE,
                         'placeholder' => __('Enter your regulatory compliance', 'ninja'),
                         'rows'        => '4',
-                        'order'       => 165,
+                        'order'       => 220,
                     ],
                     'custom-html-4'                        => [
                         'type'    => 'html',
                         'content' => '</div>',
-                        'order'   => 166,
+                        'order'   => 225,
                     ],
 
 
@@ -522,7 +522,7 @@
                     'custom-html-5'                        => [
                         'type'    => 'html',
                         'content' => '<div class="row mt-5"> <h3>' . __('Business Overview', 'ninja') . '</h3>',
-                        'order'   => 167,
+                        'order'   => 230,
                     ],
                     'tech_stack_this_product_is_built_on'  => [
                         'class'       => 'col-6',
@@ -532,7 +532,7 @@
                         'value'       => '-',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your tech stack this product is built on', 'ninja'),
-                        'order'       => 175,
+                        'order'       => 235,
                     ],
                     'product_competitors'                  => [
                         'class'       => 'col-6',
@@ -542,7 +542,7 @@
                         'value'       => '-',
                         'required'    => TRUE,
                         'placeholder' => __('Enter your product competitors', 'ninja'),
-                        'order'       => 180,
+                        'order'       => 240,
                     ],
                     'extra_details'                        => [
                         'class'       => 'col-12',
@@ -553,12 +553,12 @@
                         'required'    => FALSE,
                         'placeholder' => __('Enter your business extra details', 'ninja'),
                         'rows'        => '4',
-                        'order'       => 185,
+                        'order'       => 245,
                     ],
                     'custom-html-6'                        => [
                         'type'    => 'html',
                         'content' => '</div>',
-                        'order'   => 186,
+                        'order'   => 250,
                     ],
 
                     'create_opportunity_nonce' => [
@@ -566,7 +566,7 @@
                         'type'  => 'nonce',
                         'name'  => 'create_opportunity_nonce',
                         'value' => Nh::_DOMAIN_NAME . "_create_opportunity_form",
-                        'order' => 189
+                        'order' => 255
                     ],
                     'submit'                   => [
                         'class'               => 'btn-lg text-uppercase',
@@ -576,7 +576,7 @@
                         'before'              => '',
                         'after'               => '',
                         'recaptcha_form_name' => 'frontend_create_opportunity',
-                        'order'               => 190
+                        'order'               => 260
                     ],
                 ];
                 $form_tags   = [
@@ -585,18 +585,18 @@
                 ];
 
                 $opportunities_obj            = new Nh_Opportunity();
-                $opportunities_category_terms = $opportunities_obj->get_taxonomy_terms('opportunity-category');
+                $opportunities_industry_terms = $opportunities_obj->get_taxonomy_terms('industry');
                 $opportunities_type_terms     = $opportunities_obj->get_taxonomy_terms('opportunity-type');
                 $sectors_terms          = $opportunities_obj->get_taxonomy_terms('sectors');
                 $business_model_terms         = $opportunities_obj->get_taxonomy_terms('business-model');
                 $legal_structure              = $opportunities_obj->get_taxonomy_terms('legal-structure');
 
-                foreach ($opportunities_category_terms as $key => $term) {
+                foreach ($opportunities_industry_terms as $key => $term) {
                     $status = get_term_meta($term->term_id, 'status', TRUE);
                     if (intval($status) !== 1) {
                         continue;
                     }
-                    $form_fields['category']['options'][$term->term_id] = $term->name;
+                    $form_fields['industry']['options'][$term->term_id] = $term->name;
                 }
                 foreach ($opportunities_type_terms as $key => $term) {
                     $status = get_term_meta($term->term_id, 'status', TRUE);

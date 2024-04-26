@@ -34,6 +34,7 @@ class NhOpportunityFront extends NhOpportunity
                 form: $(`#${KEY}_create_opportunity_form`),
                 parent: $(`#${KEY}_create_opportunity_form`).parent(),
                 category: $(`#${KEY}_category`).parent(),
+                sectors: $(`#${KEY}_sectors`).parent(),
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
             filter_opportunity: {

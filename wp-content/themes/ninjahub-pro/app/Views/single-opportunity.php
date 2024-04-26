@@ -186,17 +186,13 @@
                                                                 <p>
                                                                     <?= __('Start bidding amount', 'ninja') ?>
                                                                 </p>
-                                                                <span> $
-											<?= $opportunity->meta_data['start_bidding_amount'] ?>
-										</span>
+                                                                <span> $<?= $opportunity->meta_data['start_bidding_amount'] ?></span>
                                                             </div>
                                                             <div class="target-amount">
                                                                 <p>
                                                                     <?= __('Target amount', 'ninja') ?>
                                                                 </p>
-                                                                <span> $
-											<?= $opportunity->meta_data['target_amount'] ?>
-										</span>
+                                                                <span> $<?= $opportunity->meta_data['target_amount'] ?></span>
                                                             </div>
                                                         </div>
 
@@ -292,7 +288,7 @@
                                                         background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
                                                         autoplay>
                                                     </dotlottie-player>
-                                                    
+
 					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
@@ -379,7 +375,7 @@
                                                         background="transparent" speed="1" style="width: 160px; height: 160px" direction="1" mode="normal" loop
                                                         autoplay>
                                                     </dotlottie-player>
-                                                    
+
 					                        	</span>
                                                 </div>
                                                 <div class="modal-body">
@@ -471,15 +467,18 @@
                             }
                         }
 
-                    } else {
-                        if (Nh_User::get_user_role() !== Nh_User::INVESTOR) {
-                            if ($opportunity->meta_data['opportunity_stage'] === 'cancel') {
-                                _ex('<p>Opportunity is canceled..</p>', 'ninja');
-                            } elseif ($opportunity->meta_data['opportunity_stage'] === 'hold') {
-                                _ex('<p>Opportunity is on hold..</p>', 'ninja');
-                            } else {
-                                _ex('<p>Opportunity is under reviewing..</p>', 'ninja');
-                            }
+                    }
+                ?>
+            </div>
+            <div class="offset-xl-10 offset-md-8 offset-sm-8">
+                <?php
+                    if (Nh_User::get_user_role() !== Nh_User::INVESTOR) {
+                        if ($opportunity->meta_data['opportunity_stage'] === 'cancel') {
+                            _ex('<p>Opportunity is canceled..</p>', 'ninja');
+                        } elseif ($opportunity->meta_data['opportunity_stage'] === 'hold') {
+                            _ex('<p>Opportunity is on hold..</p>', 'ninja');
+                        } else {
+                            _ex('<p>Opportunity is under reviewing..</p>', 'ninja');
                         }
                     }
                 ?>
@@ -806,7 +805,7 @@
                 $profile     = $profile_obj->get_by_id((int)$profile_id);
                 if (!is_wp_error($profile) && isset($profile->meta_data['preferred_opportunities_cat_list']) && !empty($profile->meta_data['preferred_opportunities_cat_list'])) {
                     $related_opportunities = $opportunity_obj->get_all_custom([ 'publish' ], -1, 'date', 'desc', [], [
-                        'taxonomy' => 'opportunity-category',
+                        'taxonomy' => 'sectors',
                         'terms'    => $profile->meta_data['preferred_opportunities_cat_list'],
                         'field'    => 'term_id'
                     ], $user_ID, 1, [], [], 'ids');

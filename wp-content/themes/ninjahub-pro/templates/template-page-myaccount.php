@@ -218,7 +218,7 @@ $user     = $user_obj::get_current_user();
 
 
 		$opportunities_obj       = new Nh_Opportunity();
-		$opportunities_tax_terms = $opportunities_obj->get_taxonomy_terms( 'opportunity-category' );
+		$opportunities_tax_terms = $opportunities_obj->get_taxonomy_terms( 'sectors' );
 
 		foreach ( $opportunities_tax_terms as $key => $term ) {
 			$form_fields['preferred_opportunities_cat_list']['options'][ $term->term_id ] = $term->name;

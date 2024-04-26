@@ -79,9 +79,9 @@
 
             $post_id = get_the_ID();
             $obj     = $this->get_by_id($post_id);
-            if (!empty($obj->taxonomy['opportunity-category'])) {
+            if (!empty($obj->taxonomy['sectors'])) {
 
-                $form_template = get_term_meta($obj->taxonomy['opportunity-category'][0]->term_id, 'form_template', TRUE);
+                $form_template = get_term_meta($obj->taxonomy['sectors'][0]->term_id, 'form_template', TRUE);
 
                 if (!empty($form_template)) {
 
