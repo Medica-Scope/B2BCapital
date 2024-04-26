@@ -213,6 +213,7 @@
             $form_data                        = $_POST['data'];
             $project_name                     = sanitize_text_field($form_data['project_name']);
             $sectors                          = (int)sanitize_text_field($form_data['sectors']);
+            $industry                          = (int)sanitize_text_field($form_data['industry']);
             $legal_structure                  = (int)sanitize_text_field($form_data['legal_structure']);
             $description                      = sanitize_text_field($form_data['description']);
             $short_description                = sanitize_text_field($form_data['short_description']);
@@ -272,6 +273,9 @@
             }
             if (empty($sectors)) {
                 new Nh_Ajax_Response(FALSE, __("The sectors field shouldn't be empty!.", 'ninja'));
+            }
+            if (empty($industry)) {
+                new Nh_Ajax_Response(FALSE, __("The industry field shouldn't be empty!.", 'ninja'));
             }
             if (empty($legal_structure)) {
                 new Nh_Ajax_Response(FALSE, __("The legal structure field shouldn't be empty!.", 'ninja'));
@@ -414,6 +418,7 @@
             $this->taxonomy        = [
                 'opportunity-type' => [ $opportunity_type ],
                 'sectors'          => [ $sectors ],
+                'industry'          => [ $industry ],
                 'legal-structure'  => [ $legal_structure ],
                 'business-model'   => array_map(function($ID) {
                     return (int)$ID;
