@@ -11,7 +11,7 @@ $opportunity_created_date = ! empty( $args['opportunity_created_date'] ) ? $args
 $is_item_controllers      = ! empty( $args['is_item_controllers'] ) ? $args['is_item_controllers'] : FALSE;
 $is_card_horizontal       = ! empty( $args['is_card_horizontal'] ) ? $args['is_card_horizontal'] : FALSE;
 $is_fav                   = ! empty( $args['is_fav'] ) ? $args['is_fav'] : FALSE;
-$business_type            = ! empty( $args['business_type'] ) ? $args['business_type'] : FALSE;
+$sectors            = ! empty( $args['sectors'] ) ? $args['sectors'] : FALSE;
 $location                 = ! empty( $args['location'] ) ? $args['location'] : FALSE;
 $location_appearance      = ! empty( $args['location_appearance'] ) ? $args['location_appearance'] : FALSE;
 $valuation                = ! empty( $args['valuation'] ) ? $args['valuation'] : FALSE;
@@ -104,9 +104,9 @@ $valuation_appearance     = ! empty( $args['valuation_appearance'] ) ? $args['va
 		<div class="card-body p-0 <?= $is_card_horizontal ? 'col-md-8' : ''; ?>">
 			<p class="card-text">
 				<small class="text-body-secondary">
-					<?= __( 'Business Type', 'ninja' ); ?>
+					<?= __( 'Sectors', 'ninja' ); ?>
 				</small>
-				<?= $business_type ?>
+				<?= $sectors ?>
 			</p>
 
 			<a href="<?= esc_url( $opportunity_link ); ?>" class="card-title btn btn-link btn-link-dark">

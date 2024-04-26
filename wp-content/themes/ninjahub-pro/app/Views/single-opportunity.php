@@ -87,11 +87,11 @@
                 </h3>
 
                 <h3 class="text-warning tax-title">
-                    <?= __('Business Type', 'ninja'); ?>
+                    <?= __('Sectors', 'ninja'); ?>
                 </h3>
 
                 <p class="tax-paragraph">
-                    <?= $opportunity->taxonomy['business-type'][0]->name ?>
+                    <?= $opportunity->taxonomy['sectors'][0]->name ?>
                 </p>
             </div>
             <div class="col-8 actions">
@@ -622,15 +622,15 @@
                                         </div>
                                     <?php } ?>
 
-                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage'] === 1) { ?>
+                                    <?php if ((int)NH_CONFIGURATION['opportunities_fields'][Nh::_DOMAIN_NAME . '_shares_to_be_sold_percentage'] === 1) { ?>
                                         <div class="card-info-item">
                                             <small class="text-body-secondary">
-                                                <?= __('Stake to be sold', 'ninja') ?>
+                                                <?= __('Shares To Be Sold', 'ninja') ?>
                                             </small>
                                             <p class="card-text fw-bold">
                                                 <?php
-                                                    if ((int)$opportunity->meta_data['stake_to_be_sold_percentage_group_appearance'] === 1) {
-                                                        echo $opportunity->meta_data['stake_to_be_sold_percentage_group_stake_to_be_sold_percentage'] . '%';
+                                                    if ((int)$opportunity->meta_data['shares_to_be_sold_percentage_group_appearance'] === 1) {
+                                                        echo $opportunity->meta_data['shares_to_be_sold_percentage_group_shares_to_be_sold_percentage'] . '%';
                                                     } else {
                                                         _ex('<span class="">HIDDEN</span>', 'ninja');
                                                     }

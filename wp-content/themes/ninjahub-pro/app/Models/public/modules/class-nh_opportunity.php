@@ -47,6 +47,9 @@ class Nh_Opportunity extends Nh_Module {
 		//            'business_team_size',
 		//            'location',
 
+        'type_of_company',
+        'type_of_company_appearance',
+
 		'date_founded_group_date_founded',
 		'date_founded_group_appearance',
 
@@ -65,7 +68,7 @@ class Nh_Opportunity extends Nh_Module {
 		// Financial Info
 		//            'net_profit',
 		//            'valuation_in_usd',
-		//            'stake_to_be_sold_percentage',
+		//            'shares_to_be_sold_percentage',
 		//            'usd_exchange_rate_used_in_conversion',
 		//            'annual_accounting_revenue',
 		//            'annual_growth_rate_percentage',
@@ -77,8 +80,8 @@ class Nh_Opportunity extends Nh_Module {
 		'valuation_in_usd_group_valuation_in_usd',
 		'valuation_in_usd_group_appearance',
 
-		'stake_to_be_sold_percentage_group_stake_to_be_sold_percentage',
-		'stake_to_be_sold_percentage_group_appearance',
+		'shares_to_be_sold_percentage_group_shares_to_be_sold_percentage',
+		'shares_to_be_sold_percentage_group_appearance',
 
 		'usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion',
 		'usd_exchange_rate_used_in_conversion_group_appearance',
@@ -91,6 +94,24 @@ class Nh_Opportunity extends Nh_Module {
 
 		'annual_growth_rate_group_annual_growth_rate',
 		'annual_growth_rate_group_appearance',
+
+        'required_investment_amount',
+        'required_investment_amount_appearance',
+
+        'currency',
+        'currency_appearance',
+
+        'investment_term',
+        'investment_term_appearance',
+
+        'expected_returns',
+        'expected_returns_appearance',
+
+        'risk_level',
+        'risk_level_appearance',
+
+        'regulatory_compliance',
+        'regulatory_compliance_appearance',
 
 
 		// Business Information
@@ -124,8 +145,9 @@ class Nh_Opportunity extends Nh_Module {
 		'opportunity-category',
 		'opportunity-type',
 		'industry',
-		'business-type',
-		'business-model'
+		'sectors',
+		'business-model',
+        'legal-structure'
 	];
 
 	public function __construct() {
@@ -204,7 +226,7 @@ class Nh_Opportunity extends Nh_Module {
 		$location                             = sanitize_text_field( $form_data['location'] );
 		$net_profit                           = sanitize_text_field( $form_data['net_profit'] );
 		$valuation_in_usd                     = sanitize_text_field( $form_data['valuation_in_usd'] );
-		$stake_to_be_sold_percentage          = sanitize_text_field( $form_data['stake_to_be_sold_percentage'] );
+		$shares_to_be_sold_percentage          = sanitize_text_field( $form_data['shares_to_be_sold_percentage'] );
 		$usd_exchange_rate_used_in_conversion = sanitize_text_field( $form_data['usd_exchange_rate_used_in_conversion'] );
 		$annual_accounting_revenue            = sanitize_text_field( $form_data['annual_accounting_revenue'] );
 		$annual_growth_rate_percentage        = sanitize_text_field( $form_data['annual_growth_rate_percentage'] );
@@ -213,7 +235,7 @@ class Nh_Opportunity extends Nh_Module {
 		$product_competitors                  = sanitize_text_field( $form_data['product_competitors'] );
 		$allowed_tags                         = '<p><h1><h2><h3><h4><h5><h6><a><abbr><b><bdi><br><code><em><i><mark><q><s><samp><small><span><strong><sub><sup><u><var><wbr>';
 		$extra_details                        = strip_tags( $form_data['extra_details'], $allowed_tags );
-		$business_type                        = (int) sanitize_text_field( $form_data['business_type'] );
+		$sectors                        = (int) sanitize_text_field( $form_data['sectors'] );
 		$business_model                       = ! is_array( $form_data['business_model'] ) ? [ $form_data['business_model'] ] : $form_data['business_model'];
 
 		$recaptcha_response            = sanitize_text_field( $form_data['g-recaptcha-response'] );
@@ -304,9 +326,9 @@ class Nh_Opportunity extends Nh_Module {
 			new Nh_Ajax_Response( FALSE, __( "The valuation in usd field shouldn't be empty!.", 'ninja' ) );
 		}
 
-		if ( (int) NH_CONFIGURATION['opportunities_fields'][ Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage' ] === 1 && $stake_to_be_sold_percentage != 0 && empty
-		( $stake_to_be_sold_percentage ) ) {
-			new Nh_Ajax_Response( FALSE, __( "The stake to be sold percentage field shouldn't be empty!.", 'ninja' ) );
+		if ( (int) NH_CONFIGURATION['opportunities_fields'][ Nh::_DOMAIN_NAME . '_shares_to_be_sold_percentage' ] === 1 && $shares_to_be_sold_percentage != 0 && empty
+		( $shares_to_be_sold_percentage ) ) {
+			new Nh_Ajax_Response( FALSE, __( "The Shares To Be Sold percentage field shouldn't be empty!.", 'ninja' ) );
 		}
 
 		if ( (int) NH_CONFIGURATION['opportunities_fields'][ Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion' ] === 1 && empty( $usd_exchange_rate_used_in_conversion ) ) {
@@ -355,7 +377,7 @@ class Nh_Opportunity extends Nh_Module {
 		$this->taxonomy        = [
 			'opportunity-category' => [ $category ],
 			'opportunity-type'     => [ $opportunity_type ],
-			'business-type'        => [ $business_type ],
+			'sectors'        => [ $sectors ],
 			'business-model'       => array_map( function ($ID) {
 				return (int) $ID;
 			}, $business_model )
@@ -388,8 +410,8 @@ class Nh_Opportunity extends Nh_Module {
 			'valuation_in_usd_group_valuation_in_usd'                                         => $valuation_in_usd,
 			'valuation_in_usd_group_appearance'                                               => '1',
 
-			'stake_to_be_sold_percentage_group_stake_to_be_sold_percentage'                   => $stake_to_be_sold_percentage,
-			'stake_to_be_sold_percentage_group_appearance'                                    => '1',
+			'shares_to_be_sold_percentage_group_shares_to_be_sold_percentage'                   => $shares_to_be_sold_percentage,
+			'shares_to_be_sold_percentage_group_appearance'                                    => '1',
 
 			'usd_exchange_rate_used_in_conversion_group_usd_exchange_rate_used_in_conversion' => $usd_exchange_rate_used_in_conversion,
 			'usd_exchange_rate_used_in_conversion_group_appearance'                           => '1',
@@ -663,14 +685,14 @@ class Nh_Opportunity extends Nh_Module {
 		];
 		if ( ! empty( $search_fields ) ) {
 
-			if ( isset( $search_fields['business_type'] ) && $search_fields['business_type'] ) {
+			if ( isset( $search_fields['sectors'] ) && $search_fields['sectors'] ) {
 				$args['tax_query'][] = [
-					'taxonomy' => 'business-type',
-					'terms'    => $search_fields['business_type'],
+					'taxonomy' => 'sectors',
+					'terms'    => $search_fields['sectors'],
 					'field'    => 'slug',
 				];
 			}
-			unset( $search_fields['business_type'] );
+			unset( $search_fields['sectors'] );
 			if ( isset( $search_fields['search'] ) && ! empty( $search_fields['search'] ) ) {
 				$args['s'] = $search_fields['search'];
 			}
