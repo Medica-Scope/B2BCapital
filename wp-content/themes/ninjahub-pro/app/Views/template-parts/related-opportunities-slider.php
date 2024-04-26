@@ -26,7 +26,7 @@
                     'opportunity_title'        => $opportunity->title,
                     'opportunity_thumbnail'    => $opportunity->thumbnail,
                     'opportunity_created_date' => $opportunity->created_date,
-                    'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
+                    'sectors'            => $opportunity->taxonomy['sectors'][0]->name,
                     'is_item_controllers'      => TRUE,
                     'location'                 => $opportunity->meta_data['location_group_location'],
                     'location_appearance'      => $opportunity->meta_data['location_group_appearance'],

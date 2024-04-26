@@ -127,7 +127,19 @@ class NhValidator
                             'expected_value': {
                                 required: true
                             },
-                            'entity_legal_type': {
+                            'target_investment': {
+                                required: true
+                            },
+                            'size_of_investment': {
+                                required: true
+                            },
+                            'investment_criteria': {
+                                required: true
+                            },
+                            'external_or_long_term': {
+                                required: true
+                            },
+                            'buying_shares': {
                                 required: true
                             },
                         },
@@ -336,7 +348,7 @@ class NhValidator
                                 maxlength: 150,
                                 minlength: 5,
                             },
-                            category: {
+                            industry: {
                                 required: true,
                             },
                             description: {
@@ -412,7 +424,7 @@ class NhValidator
                                 step: 0.1,
                                 min: 0,
                             },
-                            stake_to_be_sold_percentage: {
+                            shares_to_be_sold_percentage: {
                                 required: true,
                                 number: true,
                                 step: 0.1,
@@ -433,6 +445,9 @@ class NhValidator
                             },
                             annual_growth_rate_percentage: {
                                 required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
                                 max: 100,
                             },
                             annual_growth_rate: {
@@ -441,13 +456,44 @@ class NhValidator
                                 step: 0.1,
                                 min: 0,
                             },
+                            required_investment_amount: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                            },
+                            currency: {
+                                required: true,
+                            },
+                            investment_term: {
+                                required: true,
+                            },
+                            expected_returns: {
+                                required: true,
+                                number: true,
+                                step: 0.1,
+                                min: 0,
+                                max: 100,
+                            },
+                            risk_level: {
+                                required: true,
+                            },
+                            legal_structure: {
+                                required: true,
+                            },
+                            regulatory_compliance: {
+                                required: true,
+                            },
                             tech_stack_this_product_is_built_on: {
                                 required: true,
                             },
                             product_competitors: {
                                 required: true,
                             },
-                            business_type: {
+                            sectors: {
+                                required: true,
+                            },
+                            type_of_company: {
                                 required: true,
                             },
                             business_model: {

@@ -10,7 +10,7 @@
     $opportunity_created_date = !empty($args['opportunity_created_date']) ? $args['opportunity_created_date'] : FALSE;
     $is_item_controllers      = !empty($args['is_item_controllers']) ? $args['is_item_controllers'] : FALSE;
     $is_fav                   = !empty($args['is_fav']) ? $args['is_fav'] : FALSE;
-    $business_type            = !empty($args['business_type']) ? $args['business_type'] : FALSE;
+    $sectors            = !empty($args['sectors']) ? $args['sectors'] : FALSE;
     $short_description        = !empty($args['short_description']) ? $args['short_description'] : '';
     $location                 = !empty($args['location']) ? $args['location'] : FALSE;
     $location_appearance      = !empty($args['location_appearance']) ? $args['location_appearance'] : FALSE;

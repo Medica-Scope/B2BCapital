@@ -49,7 +49,7 @@
                 Nh::_DOMAIN_NAME . '_location' => 0,
                 Nh::_DOMAIN_NAME . '_net_profit' => 0,
                 Nh::_DOMAIN_NAME . '_valuation_in_usd' => 0,
-                Nh::_DOMAIN_NAME . '_stake_to_be_sold_percentage' => 0,
+                Nh::_DOMAIN_NAME . '_shares_to_be_sold_percentage' => 0,
                 Nh::_DOMAIN_NAME . '_usd_exchange_rate_used_in_conversion' => 0,
                 Nh::_DOMAIN_NAME . '_annual_accounting_revenue' => 0,
                 Nh::_DOMAIN_NAME . '_annual_growth_rate_percentage' => 0,

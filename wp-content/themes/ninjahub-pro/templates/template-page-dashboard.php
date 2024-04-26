@@ -89,10 +89,10 @@
                 <div class="collapse shadow" id="collapseFilter">
                     <div class="filter-con">
                         <?php
-                            $business_type_terms = $opportunities_obj->get_taxonomy_terms('business-type');
+                            $sectors_terms = $opportunities_obj->get_taxonomy_terms('sectors');
                             $business_options = [];
                             $business_options[''] = __("All", "ninja") ;
-                            foreach ($business_type_terms as $key => $term) {
+                            foreach ($sectors_terms as $key => $term) {
                                 $status = get_term_meta($term->term_id, 'status', TRUE);
                                 if (intval($status) !== 1) {
                                     continue;
@@ -152,13 +152,13 @@
                                                  'after'   => '',
                                                  'order'   => 0
                                              ],
-                                             'business_type'                                             => [
+                                             'sectors'                                             => [
                                                  'type'           => 'select',
-                                                 'label'          => 'Business type',
-                                                 'name'           => 'business_type',
+                                                 'label'          => 'Sectors',
+                                                 'name'           => 'sectors',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'default_option' => isset($_GET['business_type']) && !empty($_GET['business_type']) ? $_GET['business_type'] : 'All',
+                                                 'default_option' => isset($_GET['sectors']) && !empty($_GET['sectors']) ? $_GET['sectors'] : 'All',
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
@@ -501,7 +501,7 @@
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
                                                         'short_description'        => $opportunity->meta_data['short_description'],
-                                                        'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
+                                                        'sectors'            => $acquisition->opportunity->taxonomy['sectors'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
                                                         'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -527,7 +527,7 @@
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
                                                         'short_description'        => $opportunity->meta_data['short_description'],
-                                                        'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
+                                                        'sectors'            => $opportunity->taxonomy['sectors'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
                                                         'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -574,7 +574,7 @@
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
                                                     'short_description'        => $acquisition->opportunity->meta_data['short_description'],
-                                                    'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
+                                                    'sectors'            => $acquisition->opportunity->taxonomy['sectors'][0]->name,
                                                     'location'                 => $acquisition->opportunity->meta_data['location_group_location'],
                                                     'location_appearance'      => $acquisition->opportunity->meta_data['location_group_appearance'],
                                                     'valuation'                => $acquisition->opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],

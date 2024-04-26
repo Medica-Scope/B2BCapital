@@ -117,12 +117,12 @@ class NhAuth extends Nh
             success: function (res) {
                 $('input').prop('disabled', false);
                 if (res.success) {
-                    $($el).append(_.template($('#ninja_modal_auth_verif').html())({
-                        msg: res.msg,
-                    }));
-                    let successModal = new bootstrap.Modal(document.getElementById('authVerifySuccess'), {});
-                    successModal.show();
-                    // window.location.href = res.data.redirect_url;
+                    // $($el).append(_.template($('#ninja_modal_auth_verif').html())({
+                    //     msg: res.msg,
+                    // }));
+                    // let successModal = new bootstrap.Modal(document.getElementById('authVerifySuccess'), {});
+                    // successModal.show();
+                    window.location.href = res.data.redirect_url;
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }

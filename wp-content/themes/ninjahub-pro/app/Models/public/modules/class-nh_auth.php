@@ -91,10 +91,15 @@
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/auth-verif.php';
             }
 
-            if (is_singular('opportunity') || is_page(['dashboard', 'my-favorite-opportunities', 'my-opportunities', 'my-ignored-opportunities'])) {
+            if (is_singular('opportunity') || is_page([
+                    'dashboard',
+                    'my-favorite-opportunities',
+                    'my-opportunities',
+                    'my-ignored-opportunities'
+                ])) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/opportunity-response.php';
             }
-            if (preg_match( '#^my-account/my-favorite-articles(/.+)?$#', $wp->request ) || preg_match( '#^my-account/my-ignored-articles(/.+)?$#', $wp->request ) || preg_match( '#^blogs(/.+)?$#', $wp->request ) || is_post_type_archive( 'post' ) || is_singular( 'post' )) {
+            if (preg_match('#^my-account/my-favorite-articles(/.+)?$#', $wp->request) || preg_match('#^my-account/my-ignored-articles(/.+)?$#', $wp->request) || preg_match('#^blogs(/.+)?$#', $wp->request) || is_post_type_archive('post') || is_singular('post')) {
                 require_once Nh_Hooks::PATHS['views'] . '/js-templates/modals/article-response.php';
             }
         }
@@ -565,8 +570,11 @@
 
             $form_data                     = $_POST['data'];
             $industries                    = !empty($form_data['industries']) && !is_array($form_data['industries']) ? [ $form_data['industries'] ] : $form_data['industries'];
-            $expected_value                = $form_data['expected_value'];
-            $entity_legal_type             = $form_data['entity_legal_type'];
+            $target_investment             = $form_data['target_investment'];
+            $size_of_investment            = $form_data['size_of_investment'];
+            $investment_criteria           = $form_data['investment_criteria'];
+            $external_or_long_term         = $form_data['external_or_long_term'];
+            $buying_shares                 = $form_data['buying_shares'];
             $recaptcha_response            = sanitize_text_field($form_data['g-recaptcha-response']);
             $_POST["g-recaptcha-response"] = $recaptcha_response;
 
@@ -587,12 +595,24 @@
                 new Nh_Ajax_Response(FALSE, __("You have to select at least one industry.", 'ninja'));
             }
 
-            if (empty($expected_value)) {
-                new Nh_Ajax_Response(FALSE, __("Expected value field can't be empty!.", 'ninja'));
+            if (empty($target_investment)) {
+                new Nh_Ajax_Response(FALSE, __("Target investment field can't be empty!.", 'ninja'));
             }
 
-            if (empty($entity_legal_type)) {
-                new Nh_Ajax_Response(FALSE, __("Entity legal type can't be empty!.", 'ninja'));
+
+            if (self::get_user_role() === self::INVESTOR) {
+                if (empty($size_of_investment)) {
+                    new Nh_Ajax_Response(FALSE, __("size of investment can't be empty!.", 'ninja'));
+                }
+                if (empty($investment_criteria)) {
+                    new Nh_Ajax_Response(FALSE, __("investment criteria can't be empty!.", 'ninja'));
+                }
+                if (empty($external_or_long_term)) {
+                    new Nh_Ajax_Response(FALSE, __("External or long term can't be empty!.", 'ninja'));
+                }
+                if (empty($buying_shares)) {
+                    new Nh_Ajax_Response(FALSE, __("Buying shares can't be empty!.", 'ninja'));
+                }
             }
 
             $check_result = apply_filters('gglcptch_verify_recaptcha', TRUE, 'string', 'frontend_industries');
@@ -603,8 +623,11 @@
 
             $user                                = Nh_User::get_current_user();
             $user->profile->taxonomy['industry'] = $industries;
-            $user->profile->set_meta_data('expected_value', $expected_value);
-            $user->profile->set_meta_data('entity_legal_type', $entity_legal_type);
+            $user->profile->set_meta_data('target_investment', $target_investment);
+            $user->profile->set_meta_data('size_of_investment', $size_of_investment);
+            $user->profile->set_meta_data('investment_criteria', $investment_criteria);
+            $user->profile->set_meta_data('external_or_long_term', $external_or_long_term);
+            $user->profile->set_meta_data('buying_shares', $buying_shares);
             $user->profile->update();
 
 
@@ -782,7 +805,7 @@
                 foreach (Nh_Public::get_available_languages() as $lang) {
                     if ($lang['code'] !== NH_lANG) {
                         // Get the term's ID in the French language
-                        $translated_term_id = wpml_object_id_filter($term, 'opportunity-category', FALSE, $lang['code']);
+                        $translated_term_id = wpml_object_id_filter($term, 'sectors', FALSE, $lang['code']);
                         if ($translated_term_id) {
                             $relative_preferred_opportunities_cat_list[] = $translated_term_id;
                         }
@@ -1109,7 +1132,7 @@
             $profile_obj         = new Nh_Profile();
             $profile_obj->author = $user_id;
             $wp_user_obj         = get_user_by('id', $user_id);
-            if(!empty($_COOKIE['user_type'])){
+            if (!empty($_COOKIE['user_type'])) {
                 $wp_user_obj->set_role($_COOKIE['user_type']);
             }
             $profile_obj->title = $wp_user_obj->display_name;

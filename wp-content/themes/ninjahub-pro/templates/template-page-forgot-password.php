@@ -75,7 +75,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-forgot-password', Nh_
 			?>
 
 			<div class="section-footer">
-				<p><?= __('Copyright © 2023 B2B All rights reserved.', 'ninja'); ?></p>
+				<p class="text-center p-2"><?= __('Copyright © 2023 B2B All rights reserved.', 'ninja'); ?></p>
 			</div>
 		</section>
 
