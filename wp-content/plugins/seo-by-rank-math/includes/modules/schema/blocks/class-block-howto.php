@@ -187,12 +187,12 @@ class Block_HowTo extends Block {
 	 * @return string
 	 */
 	public static function markup( $attributes = [] ) {
-		$list_style          = isset( $attributes['listStyle'] ) ? $attributes['listStyle'] : '';
-		$list_css_classes    = isset( $attributes['listCssClasses'] ) ? $attributes['listCssClasses'] : '';
-		$title_wrapper       = isset( $attributes['titleWrapper'] ) ? $attributes['titleWrapper'] : 'h2';
-		$title_css_classes   = isset( $attributes['titleCssClasses'] ) ? $attributes['titleCssClasses'] : '';
-		$content_css_classes = isset( $attributes['contentCssClasses'] ) ? $attributes['contentCssClasses'] : '';
-		$size_slug           = isset( $attributes['sizeSlug'] ) ? $attributes['sizeSlug'] : '';
+		$list_style          = isset( $attributes['listStyle'] ) ? esc_attr( $attributes['listStyle'] ) : '';
+		$list_css_classes    = isset( $attributes['listCssClasses'] ) ? esc_attr( $attributes['listCssClasses'] ) : '';
+		$title_wrapper       = isset( $attributes['titleWrapper'] ) ? esc_attr( $attributes['titleWrapper'] ) : 'h3';
+		$title_css_classes   = isset( $attributes['titleCssClasses'] ) ? esc_attr( $attributes['titleCssClasses'] ) : '';
+		$content_css_classes = isset( $attributes['contentCssClasses'] ) ? esc_attr( $attributes['contentCssClasses'] ) : '';
+		$size_slug           = isset( $attributes['sizeSlug'] ) ? esc_attr( $attributes['sizeSlug'] ) : '';
 
 		$list_tag = self::get()->get_list_style( $list_style );
 		$item_tag = self::get()->get_list_item_style( $list_style );
@@ -230,14 +230,14 @@ class Block_HowTo extends Block {
 				continue;
 			}
 
-			$step_id = isset( $step['id'] ) ? $step['id'] : '';
+			$step_id = isset( $step['id'] ) ? esc_attr( $step['id'] ) : '';
 
 			$out[] = sprintf( '<%1$s id="%2$s" class="rank-math-step">', $item_tag, $step_id );
 
 			if ( ! empty( $step['title'] ) ) {
 				$out[] = sprintf(
 					'<%1$s class="rank-math-step-title %2$s">%3$s</%1$s>',
-					$title_wrapper,
+					self::get()->get_title_wrapper( $title_wrapper, 'howto' ),
 					$title_css_classes,
 					$step['title']
 				);
@@ -247,8 +247,7 @@ class Block_HowTo extends Block {
 			$step_image   = ! empty( $step['imageUrl'] ) ? '<img src="' . esc_url( $step['imageUrl'] ) . '" />' : self::get()->get_image( $step, $size_slug, '' );
 
 			$out[] = sprintf(
-				'<div class="rank-math-step-content %2$s">%4$s%3$s</div>',
-				$title_wrapper,
+				'<div class="rank-math-step-content %1$s">%3$s%2$s</div>',
 				$content_css_classes,
 				$step_content,
 				$step_image
@@ -373,7 +372,7 @@ class Block_HowTo extends Block {
 	 * @param array $step        The step block data.
 	 */
 	private function add_step_image( &$schema_step, $step ) {
-		if ( ! isset( $step['imageID'] ) ) {
+		if ( empty( $step['imageID'] ) ) {
 			return false;
 		}
 
@@ -460,7 +459,7 @@ class Block_HowTo extends Block {
 	 * @return string
 	 */
 	private function build_duration( $attrs ) {
-		if ( ! isset( $attrs['hasDuration'] ) || ! $attrs['hasDuration'] ) {
+		if ( empty( $attrs['hasDuration'] ) ) {
 			return '';
 		}
 
@@ -496,7 +495,7 @@ class Block_HowTo extends Block {
 		return sprintf(
 			'<p class="rank-math-howto-duration"><strong>%2$s</strong> <span>%1$s</span></p>',
 			isset( $formats[ $count ] ) ? vsprintf( $formats[ $count ], $elements ) : '',
-			empty( $attrs['timeLabel'] ) ? __( 'Total Time:', 'rank-math' ) : $attrs['timeLabel']
+			empty( $attrs['timeLabel'] ) ? __( 'Total Time:', 'rank-math' ) : esc_html( $attrs['timeLabel'] )
 		);
 	}
 
