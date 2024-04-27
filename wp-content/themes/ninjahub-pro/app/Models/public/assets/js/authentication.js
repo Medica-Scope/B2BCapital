@@ -11,16 +11,18 @@
 import $ from 'jquery';
 
 // import theme modules
-import NhValidator from './helpers/Validator';
-import NhUiCtrl    from './inc/UiCtrl';
-import NhAuth      from './modules/Auth';
+import NhValidator  from './helpers/Validator';
+import NhUiCtrl     from './inc/UiCtrl';
+import NhAuth       from './modules/Auth';
 import intlTelInput from 'intl-tel-input';
 import 'intl-tel-input/build/js/utils.js';
 // import Choices      from 'choices.js';
 
 // Define a class named NhAuthentication which extends NhAuth class
-class NhAuthentication extends NhAuth {
-    constructor() {
+class NhAuthentication extends NhAuth
+{
+    constructor()
+    {
         // Call the constructor of the parent class (NhAuth)
         super();
 
@@ -87,7 +89,7 @@ class NhAuthentication extends NhAuth {
                 form: $(`#${KEY}_change_password_form`),
                 parent: $(`#${KEY}_change_password_form`).parent(),
                 user_password: $(`#${KEY}_user_password`),
-            }
+            },
         };
 
         // Call the initialization method
@@ -95,7 +97,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Perform necessary initializations
-    initialization() {
+    initialization()
+    {
         this.globalEvents();
         this.registrationFront();
         this.loginFront();
@@ -110,14 +113,16 @@ class NhAuthentication extends NhAuth {
         this.codeCountDown();
     }
 
-    globalEvents() {
-        $('input[type="password"]').on('copy paste', function(e){
+    globalEvents()
+    {
+        $('input[type="password"]').on('copy paste', function (e) {
             e.preventDefault();
         });
     }
 
     // Front-end code for the registration form
-    registrationFront() {
+    registrationFront()
+    {
         let that          = this,
             $registration = this.$el.registration,
             ajaxRequests  = this.ajaxRequests;
@@ -132,9 +137,12 @@ class NhAuthentication extends NhAuth {
                 autoInsertDialCode: true,
                 nationalMode: true,
                 allowDropdown: true,
-                autoPlaceholder:"polite",
+                autoPlaceholder: 'polite',
                 utilsScript: 'node_modules/intl-tel-input/build/js/utils.js',
-                preferredCountries: ["eg","us"],
+                preferredCountries: [
+                    'eg',
+                    'us',
+                ],
             });
         }
 
@@ -161,7 +169,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the login form
-    loginFront() {
+    loginFront()
+    {
         let that         = this,
             $login       = this.$el.login,
             ajaxRequests = this.ajaxRequests;
@@ -188,7 +197,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the verification form
-    verificationFront() {
+    verificationFront()
+    {
         let that          = this,
             $verification = this.$el.verification,
             ajaxRequests  = this.ajaxRequests;
@@ -258,7 +268,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the authentication form
-    authenticationFront() {
+    authenticationFront()
+    {
         let that            = this,
             $authentication = this.$el.authentication,
             ajaxRequests    = this.ajaxRequests;
@@ -328,7 +339,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the industries form
-    industriesFront() {
+    industriesFront()
+    {
         let that         = this,
             $industries  = this.$el.industries,
             $tagsInputs  = $industries.tags.find('input'),
@@ -337,15 +349,15 @@ class NhAuthentication extends NhAuth {
 
         $industries.wizard.on('click', function (e) {
             e.preventDefault();
-            let $this = $(e.currentTarget),
+            let $this      = $(e.currentTarget),
                 stepTarget = $this.attr('data-target');
 
-            if ($("input[name='industries']").valid()) {
+            if ($('input[name=\'industries\']').valid()) {
                 $('.form-steps').hide();
                 $(`.${stepTarget}`).show();
             }
 
-        })
+        });
 
 
         // Handle change event on industry tags inputs
@@ -386,7 +398,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the forgot password form
-    forgotPasswordFront() {
+    forgotPasswordFront()
+    {
         let that         = this,
             $forgot      = this.$el.forgot,
             ajaxRequests = this.ajaxRequests;
@@ -413,7 +426,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the edit profile form
-    editProfileFront() {
+    editProfileFront()
+    {
         let that         = this,
             $editProfile = this.$el.editProfile,
             $selectBoxes = $editProfile.selectBoxes,
@@ -430,13 +444,27 @@ class NhAuthentication extends NhAuth {
         //     });
         // });
 
+
+        if ($('#ninja_widget_list').length > 0) {
+            jQuery('#ninja_widget_list').chosen();
+        }
+        if ($('#ninja_preferred_opportunities_cat_list').length > 0) {
+            jQuery('#ninja_preferred_opportunities_cat_list').chosen();
+        }
+        if ($('#ninja_preferred_articles_cat_list').length > 0) {
+            jQuery('#ninja_preferred_articles_cat_list').chosen();
+        }
+
         $editProfile.btnMyAccountEdit.on('click', function (e) {
             e.preventDefault();
-            let $this    = $(e.currentTarget);
-            $editProfile.form.find("[data-edit='disable']").prop('disabled', false);
+            let $this = $(e.currentTarget);
+            $editProfile.form.find('[data-edit=\'disable\']').prop('disabled', false);
             $this.hide();
             $editProfile.form.find(`#${KEY}_edit_profile_submit`).show();
             $('.nh-form-disabled').removeClass('nh-form-disabled');
+            jQuery('#ninja_widget_list').trigger('chosen:updated');
+            jQuery('#ninja_preferred_opportunities_cat_list').trigger('chosen:updated');
+            jQuery('#ninja_preferred_articles_cat_list').trigger('chosen:updated');
 
         });
 
@@ -459,8 +487,8 @@ class NhAuthentication extends NhAuth {
         // Handle form submission
         $editProfile.form.on('submit', $editProfile.parent, function (e) {
             e.preventDefault();
-            let $this    = $(e.currentTarget),
-                formData = $this.serializeObject();
+            let $this             = $(e.currentTarget),
+                formData          = $this.serializeObject();
             formData.phone_number = window.ITIOBJ.editProfile.getNumber().replace('+', '');
 
             // Abort any ongoing edit profile requests
@@ -476,7 +504,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the edit password form
-    editPasswordFront() {
+    editPasswordFront()
+    {
         let that          = this,
             $editPassword = this.$el.editPassword,
             ajaxRequests  = this.ajaxRequests;
@@ -503,7 +532,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Front-end code for the change password form
-    changePasswordFront() {
+    changePasswordFront()
+    {
         let that             = this,
             $change_password = this.$el.change_password,
             ajaxRequests     = this.ajaxRequests;
@@ -530,7 +560,8 @@ class NhAuthentication extends NhAuth {
     }
 
     // Show/hide password when the show password icon is clicked
-    showPassword() {
+    showPassword()
+    {
         $('.showPassIcon').on('click', function (e) {
             let $this           = $(e.currentTarget),
                 $target_element = $this.attr('data-target');

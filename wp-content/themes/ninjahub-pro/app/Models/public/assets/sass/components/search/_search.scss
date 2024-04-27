@@ -17,13 +17,13 @@
     #ninja_s {
       opacity: 0;
       width: 0;
-      padding-left: 32px;
+      padding-left: 40px;
     }
 
     .ninja-header-search-icon {
       cursor: pointer;
       position: absolute;
-      left: 0;
+      // left: 0;
       bottom: 0;
       padding: 8px 10px;
 			@include large-screen{

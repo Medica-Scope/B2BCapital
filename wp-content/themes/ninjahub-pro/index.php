@@ -59,9 +59,9 @@ global $wp_query, $post, $user_ID;
 						$args['fav_chk']    = $fav_chk;
 						$args['ignore_chk'] = $ignore_chk;
 						if ( $fav_chk ) {
-							$fav_class = 'bbc-star';
+							$fav_class = 'bbc-bookmark fav-star';
 						} else {
-							$fav_class = 'bbc-star-o';
+							$fav_class = 'bbc-bookmark-o fav-star';
 						}
 						$args['fav_form'] = Nh_Forms::get_instance()
 							->create_form( [ 
@@ -92,9 +92,9 @@ global $wp_query, $post, $user_ID;
 								'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
 							] );
 						if ( $ignore_chk ) {
-							$ignore_class = 'controll-icon bbc-thumbs-up text-success';
+							$ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
 						} else {
-							$ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+							$ignore_class = 'controll-icon bbc-thumbs-down text-danger ignore-star';
 						}
 						$args['ignore_form'] = Nh_Forms::get_instance()
 							->create_form( [ 
@@ -134,7 +134,7 @@ global $wp_query, $post, $user_ID;
 					 */
 					get_template_part( 'app/Views/blogs/blogs-item', NULL, $args );
 				}
-
+				if(!empty($results['pagination'])){
 				?>
 					<div class="pagination-con">
 						<?php
@@ -142,6 +142,7 @@ global $wp_query, $post, $user_ID;
 						?>
 					</div>
 					<?php
+				}
 
 			} else {
 				get_template_part( 'app/Views/none' );

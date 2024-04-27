@@ -5,7 +5,10 @@
  * @Date: 11/24/2023
  */
 
-.editor-post-publish-button, .editor-post-switch-to-draft, .editor-post-trash {
+.editor-post-publish-button,
+.editor-post-switch-to-draft,
+.editor-post-trash {
   display: none !important;
   pointer-events: none;
 }
+

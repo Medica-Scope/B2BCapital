@@ -1,6 +1,9 @@
 @import './landing-theme';
 
 /* Landing Page Styles Start Here */
+body{
+	font-family: "Space Grotesk", sans-serif;
+}
 .landing-page {
 	display: flex;
 	width: 100%;
@@ -38,6 +41,8 @@
 			display: inline-block;
 			width: 4rem;
 			margin-bottom: 1.5rem;
+			position: relative;
+			z-index: 0;
 			@include large-screen {
 				width: 4.6875rem;
 			}
@@ -145,7 +150,7 @@
 					padding: 1.625rem 2.75rem;
 				}
 				@include xLarge-screen {
-					padding: 4rem 2.5rem;
+					padding: 1.625rem 2.75rem;
 				}
 				/* Social Links Styles Start Here */
 				.social-links {

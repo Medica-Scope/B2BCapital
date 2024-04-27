@@ -5,9 +5,12 @@
  * @User: NINJA MASTER - Mustafa Shaaban
  * @Date: 21/2/2023
  */
+
+use NH\APP\HELPERS\Nh_Hooks;
+
 ?>
 
-<div class="u-row-container social-footer" style="padding: 0px;background-color: transparent">
+<div class="u-row-container social-footer" style="padding: 0px;background-color: #ffffff">
 	<div class="u-row"
 		style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
 		<div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
@@ -43,7 +46,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="Facebook" target="_blank">
-																	<img src="images/facebook.png" alt="Facebook" title="Facebook" width="32"
+																	<img src="https://btob.capital/wp-content/uploads/2024/02/facebook.png" title="Facebook" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -60,7 +63,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="LinkedIn" target="_blank">
-																	<img src="images/linkedin.png" alt="LinkedIn" title="LinkedIn" width="32"
+																	<img src="https://btob.capital/wp-content/uploads/2024/02/instagram-1.png" alt="LinkedIn" title="LinkedIn" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -77,7 +80,7 @@
 															<td align="left" valign="middle"
 																style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 																<a href="#" title="Instagram" target="_blank">
-																	<img src="images/instagram.png" alt="Instagram" title="Instagram" width="32"
+																	<img src="https://btob.capital/wp-content/uploads/2024/02/instagram.png" alt="Instagram" title="Instagram" width="32"
 																		style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
 																</a>
 															</td>
@@ -133,8 +136,9 @@
 										<!--[if mso]><table width="100%"><tr><td><![endif]-->
 										<h3 class="v-font-size"
 											style="margin: 0px; color: #000000; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 18px; font-weight: 700;">
-											<span>Download Our App</span>
+											<!-- <span>Download Our App</span> -->
 										</h3>
+
 										<!--[if mso]></td></tr></table><![endif]-->
 
 									</td>
@@ -180,7 +184,7 @@
 											<tr>
 												<td style="padding-right: 0px;padding-left: 0px;" align="right">
 
-													<img align="right" border="0" src="images/google-play.png" alt="" title=""
+													<img align="right" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/google-play.png" alt="" title=""
 														style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 60%;max-width: 168px;"
 														width="168" class="v-src-width v-src-max-width" />
 
@@ -220,7 +224,7 @@
 											<tr>
 												<td style="padding-right: 0px;padding-left: 0px;" align="left">
 
-													<img align="left" border="0" src="images/google-play.png" alt="" title=""
+													<img align="left" border="0" src="<?= Nh_Hooks::PATHS['public']['images']; ?>/google-play.png" alt="" title=""
 														style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 60%;max-width: 168px;"
 														width="168" class="v-src-width v-src-max-width" />
 

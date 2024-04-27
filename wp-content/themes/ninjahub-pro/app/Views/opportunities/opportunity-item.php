@@ -30,7 +30,8 @@
 		<div class="card-image">
 			<a href="<?= esc_url($opportunity_link); ?>"><img src="<?= esc_url($opportunity_thumbnail); ?>"
 					alt="<?= esc_attr($opportunity_title); ?>"></a>
-			<div class="opportunity-item-controllers">
+                    <button class="show-controllers" type="button"><i class="bbc-more-vertical"></i></button>
+			<div class="opportunity-item-controllers ninja-hidden">
 				<?php
                         if (!empty($user_ID)) :
                             echo ($current_page == 'my-ignored-opportunities') ? '' : $args['fav_form'];
@@ -41,12 +42,12 @@
                     ?>
 			</div>
 		</div>
-		<div class="card-body p-0">
+		<div class="card-body p-0 mt-3">
 			<p class="card-text">
 				<small class="text-body-secondary">
-					<?= __('Business Type', 'ninja'); ?>
+					<?= __('Sectors', 'ninja'); ?>
 				</small>
-				<?= $opportunity->taxonomy['business-type'][0]->name ?>
+				<?= isset($opportunity->taxonomy['sectors']) ? $opportunity->taxonomy['sectors'][0]->name : ''?>
 			</p>
 
 			<a href="<?= $opportunity_link ?>" class="card-title btn btn-link btn-link-dark text-start">

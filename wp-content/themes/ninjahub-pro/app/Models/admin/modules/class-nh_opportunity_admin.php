@@ -79,9 +79,9 @@
 
             $post_id = get_the_ID();
             $obj     = $this->get_by_id($post_id);
-            if (!empty($obj->taxonomy['opportunity-category'])) {
+            if (!empty($obj->taxonomy['sectors'])) {
 
-                $form_template = get_term_meta($obj->taxonomy['opportunity-category'][0]->term_id, 'form_template', TRUE);
+                $form_template = get_term_meta($obj->taxonomy['sectors'][0]->term_id, 'form_template', TRUE);
 
                 if (!empty($form_template)) {
 
@@ -206,7 +206,7 @@
 
                     $taxonomy_name = 'opportunity-type';
 
-                
+
                     if (!empty($_GET[$meta_key])) {
                         $query->set('meta_key', $meta_key);
                         $query->set('meta_value', $_GET[$meta_key]);
@@ -362,7 +362,7 @@
 
 
             ////////// display opportunity stage filter ////////
-            if ('opportunity' === $post_type && 'edit.php' === $pagenow) {  
+            if ('opportunity' === $post_type && 'edit.php' === $pagenow) {
                 $current_user = wp_get_current_user();
                 $roles        = $current_user->roles;
 
@@ -420,7 +420,7 @@
 
 
                 ////////// display opportunity type filter ////////
-                $taxonomy_name = 'opportunity-type'; 
+                $taxonomy_name = 'opportunity-type';
                 $selected = isset($_GET[$taxonomy_name]) ? $_GET[$taxonomy_name] : '';
                 $info_taxonomy = get_taxonomy($taxonomy_name);
                 wp_dropdown_categories(array(
@@ -443,7 +443,7 @@
             $new_columns = array();
             $column_key = 'opp_stage'; // The key for your column
             $column_label = 'Opportunity Stage'; // The label for your column
-        
+
             foreach ($columns as $key => $label) {
                 // Add your column before the 'Date' column
                 if ($key == 'date') {
@@ -451,14 +451,14 @@
                 }
                 $new_columns[$key] = $label;
             }
-        
+
             return $new_columns;
         }
 
         public function fill_opportunity_stage_column_with_data($column, $post_id): void {
             if ($column == 'opp_stage') {
                 $meta_value = get_post_meta($post_id, 'opportunity_stage', true);
-                echo $meta_value ? '<strong>'.$meta_value.'</strong>' : 'N/A';
+                echo $meta_value ? '<strong>'.$meta_value.'</strong>' : '-';
             }
         }
 

@@ -39,9 +39,9 @@ class NhBlog extends Nh
                     console.log('el', $el);
                     console.log('active', res.data.fav_active);
                     if (res.data.fav_active == 0) {
-                        $el.find('.fav-star').toggleClass('bbc-star-o bbc-star');
+                        $el.find('.fav-star').toggleClass('bbc-bookmark-o bbc-bookmark');
                     } else {
-                        $el.find('.fav-star').toggleClass('bbc-star bbc-star-o');
+                        $el.find('.fav-star').toggleClass('bbc-bookmark bbc-bookmark-o');
                     }
                     if (res.data.updated_text && $('.fav-text').length) {
                         $('.fav-text').html(res.data.updated_text);

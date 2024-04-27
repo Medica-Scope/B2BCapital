@@ -7,6 +7,7 @@
  * @Date: 9/21/2023
  */
 
+use NH\APP\CLASSES\Nh_Init;
 use NH\APP\CLASSES\Nh_Post;
 use NH\APP\HELPERS\Nh_Forms;
 use NH\APP\HELPERS\Nh_Hooks;
@@ -32,13 +33,13 @@ $single_post       = $post_obj->convert( $post );
 			<?= __( "Frequently asked questions", "ninja" ); ?>
 		</h1>
 		<p class="count">
-			<?php printf( __( 'There are %d articles in our base.', 'ninja' ), $wp_query->found_posts ); ?>
+			<?php printf( __( 'There are %d articles in our database.', 'ninja' ), $wp_query->found_posts ); ?>
 		</p>
 	</div>
 	<div class="search-form search-con col-md-4">
 		<?= Nh_Forms::get_instance()
-			->create_form( [ 
-				'search'    => [ 
+			->create_form( [
+				'search'    => [
 					'class'       => 'ninja-search-input-group',
 					'type'        => 'text',
 					'name'        => 's_ajax',
@@ -47,7 +48,7 @@ $single_post       = $post_obj->convert( $post );
 					'after'       => '<i class="bbc-search2 ninja-search-icon"></i>',
 					'order'       => 0,
 				],
-				'post_type' => [ 
+				'post_type' => [
 					'class'  => 'ninja-search-type',
 					'type'   => 'hidden',
 					'name'   => 'search_post_type',
@@ -56,7 +57,7 @@ $single_post       = $post_obj->convert( $post );
 					'value'  => get_post_type(),
 					'order'  => 0,
 				]
-			], [ 
+			], [
 				'action' => apply_filters( 'nhml_permalink', home_url() ),
 				'class'  => Nh::_DOMAIN_NAME . '-search-form-ajax',
 				'id'     => Nh::_DOMAIN_NAME . '_search_form_ajax'
@@ -74,9 +75,9 @@ if ( have_posts() ) {
 	} else {
 		$exclude_term = $exclude_term->term_id;
 	}
-	$faq_categories = get_terms( [ 
+	$faq_categories = get_terms( [
 		'taxonomy'   => 'faq-category',
-		'hide_empty' => FALSE,
+		'hide_empty' => TRUE,
 		'exclude'    => [ $exclude_term ]
 		// TODO:: Switch to TRUE on production
 	] );
@@ -108,13 +109,13 @@ if ( have_posts() ) {
 						<?= __( "Can't find an answer?", "ninja" ) ?>
 					</h6>
 					<div class="info-con">
-						<a href="mailto:" class="email shadow">
+						<a href="mailto:connect@btob.platform" class="email shadow">
 							<i class="bbc-mail1"></i>
 							<h6>
 								<?= __( "Email us", "ninja" ) ?>
 							</h6>
 						</a>
-						<a href="tel:" class="call shadow">
+						<a href="tel:+201033441999" class="call shadow">
 							<i class="bbc-phone2"></i>
 							<h6>
 								<?= __( "Call us", "ninja" ) ?>
@@ -128,7 +129,7 @@ if ( have_posts() ) {
 	}
 
 	$faqs_obj = new Nh_Faq();
-	$faqs     = $faqs_obj->get_all( [ 'publish' ], 14, 'menu_order', 'ASC', [], [ 
+	$faqs     = $faqs_obj->get_all( [ 'publish' ], 14, 'menu_order', 'ASC', [], [
 		'taxonomy' => 'faq-category',
 		'field'    => 'slug',
 		'terms'    => 'popular-questions'

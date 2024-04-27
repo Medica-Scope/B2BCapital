@@ -1,4 +1,34 @@
 // import login styles because the register is almost same.
-@import './login.scss';
+@import "./login.scss";
 
 /* Register Page Styles Start Here */
+.ninja_form.ninja-registration-form {
+  #ninja_phone_number {
+	padding-left: 82px !important;
+    padding-right: 10px !important;
+  }
+}
+div.nsl-container .nsl-button-default div.nsl-button-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.nsl-container .nsl-button-default {
+  height: 54px;
+}
+.new-industries {
+	.section-title {
+	  font-size: 24px !important;
+	}
+	.ninja-industries-form-container {
+	  .form-check {
+		label {
+		  padding: 9px 23px;
+		}
+	  }
+	}
+	 .form-check .btn-check.active + label, .site .form-check .btn-check:checked + label, .site .form-check .btn-check:hover + label{
+	  color: #fff !important;
+	}
+  }
+  

@@ -8,7 +8,10 @@
 
     $data = $variables['data'];
 ?>
-<p>Dear <?= $data['user']->first_name ?>,</p>
+<div style="background-color: white;     padding: 0 50px;" class="">
+<p style="    font-weight: 800;
+    color: black;
+    margin-bottom: 10px;">Dear <?= $data['user']->first_name ?>,</p>
 
 <p>Thank you for choosing to register with NH! We're excited to have you join our growing community of businesses.</p>
 
@@ -23,6 +26,12 @@
 
 <p>We look forward to supporting your business needs!</p>
 
-<p>Best Regards,</p>
-
 <p>P.S: Never share your verification code with anyone. We will never ask for this information via email, phone, or any other communication method.</p>
+
+<p style="    font-weight: 800;
+    color: black;
+    margin-top: 10px;">Thank You,</p>
+
+<p>Team B2B</p>
+
+</div>

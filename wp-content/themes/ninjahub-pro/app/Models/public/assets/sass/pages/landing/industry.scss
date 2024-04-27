@@ -75,7 +75,7 @@
 			&:hover {
 				+ label {
 					background-color: $success;
-					color: $white;
+					color: $white !important;
 					img {
 						filter: brightness(100);
 					}
@@ -95,4 +95,10 @@
 	--bs-btn-border-color: var(--bs-gray-300);
 	--bs-btn-active-color: var(--bs-white);
 	--bs-btn-active-bg: var(--bs-btn-hover-color);
+}
+
+#ninja_industries_form .ninja-error {
+	font-size: 16px;
+	font-weight: 400 !important;
+	margin-bottom: 0 !important;
 }

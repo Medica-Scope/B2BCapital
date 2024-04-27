@@ -48,6 +48,7 @@ var WP_Optimize = function () {
 	var optimization_force = false;
 	var optimization_logged_warnings = false;
 	var force_single_table_optimization = false;
+	var heartbeat = WP_Optimize_Heartbeat();
 
 	/*
 	 * Enable select all checkbox for optimizations list.
@@ -694,20 +695,20 @@ var WP_Optimize = function () {
 					}
 				}
 			});
-		} else if (additional_data_length > 0) {
+		} else {
 			// check if additional data passed for optimization.
 			data = {
 				optimization_id: id
 			};
 
-			for (var i in additional_data) {
-				if (!additional_data.hasOwnProperty(i)) continue;
-				data[i] = additional_data[i];
+			if (additional_data_length > 0) {
+				for (var i in additional_data) {
+					if (!additional_data.hasOwnProperty(i)) continue;
+					data[i] = additional_data[i];
+				}
 			}
 
 			queue.enqueue(data);
-		} else {
-			queue.enqueue(id);
 		}
 
 		// if new actions was not added in tasks queue then we don't process queue.
@@ -1961,6 +1962,9 @@ var WP_Optimize = function () {
 			$.unblockUI();
 		}
 	}
+
+	// Attach heartbeat API events
+	heartbeat.setup();
 
 	return {
 		send_command: send_command,

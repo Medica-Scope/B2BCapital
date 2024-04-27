@@ -12,6 +12,7 @@
 		border-radius: 4px;
 		padding: 1.5rem;
 		margin-block: 1rem;
+	
 
 		.site-branding {
 			a {
@@ -37,7 +38,7 @@
 					&.active {
 						position: relative;
 						.nav-link {
-							font-family: $bbc-primary-en-font-bold;
+							font-family: $bbc-Space-Grotesk !important;
 						}
 						&::after {
 							content: '';
@@ -84,6 +85,7 @@
 					}
 					.btn-profile-desc {
 						font-size: 12px;
+						white-space: normal;
 					}
 					&.bbc-user-profile-btn {
 						border-left: 1px solid $layout;
@@ -105,6 +107,17 @@
 				}
 			}
 		}
+	}
+	ul.dropdown-menu {
+   li{
+	a{
+		display: flex;
+		align-items: center;
+		i{
+			margin-inline-end: 5px;
+		}
+	}
+   }
 	}
 }
 .page-template-template-page-registration,

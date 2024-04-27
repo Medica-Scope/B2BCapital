@@ -60,7 +60,8 @@
 
             $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-bbcicons', Nh_Hooks::PATHS['public']['vendors'] . '/css/bbc-icons/style.css', TRUE);
             $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-itl', Nh_Hooks::PATHS['public']['vendors'] . '/css/intl-tel-input-18.1.6/css/intlTelInput.min.css', TRUE);
-            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min.css', TRUE);
+//            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-choices', Nh_Hooks::PATHS['public']['vendors'] . '/css/choices/choices.min.css', TRUE);
+            $this->hooks->add_style(Nh::_DOMAIN_NAME . '-public-style-chosen', Nh_Hooks::PATHS['public']['vendors'] . '/css/chosen/chosen.min.css', TRUE);
 
             // if ( NH_lANG === 'ar' ) {
             // 	$this->hooks->add_style( Nh::_DOMAIN_NAME . '-public-style-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/css/bootstrap5/bootstrap.rtl.min.css', TRUE );
@@ -83,17 +84,18 @@
             // Vendors
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-popper', Nh_Hooks::PATHS['public']['vendors'] . '/js/popper.min.js', [
                 'jquery'
-            ], Nh::_VERSION, NULL, TRUE);
+            ], Nh::$_VERSION, NULL, TRUE);
             $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-bs5', Nh_Hooks::PATHS['public']['vendors'] . '/js/bootstrap5/bootstrap.min.js', [
                 'jquery'
-            ], Nh::_VERSION, NULL, TRUE);
+            ], Nh::$_VERSION, NULL, TRUE);
+
+            $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player');
 
             if (is_front_page() || is_page([
                     'login',
                     'registration',
                     'forgot-password'
                 ]) || $is_single_service || is_404()) {
-                $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-dotlottie-player', Nh_Hooks::PATHS['public']['vendors'] . '/js/dotlottie-player');
 
                 $this->hooks->add_script(Nh::_DOMAIN_NAME . '-public-script-landing-main', Nh_Hooks::PATHS['public']['js'] . '/landing-main', [ Nh::_DOMAIN_NAME . '-public-script-dotlottie-player' ]);
             }
@@ -265,7 +267,11 @@
 
             if (is_category() || is_single()) {
                 if (is_single()) {
-                    the_category($separator);
+                    if(is_singular(['faq'])){
+                        echo '<a href="' . apply_filters('nhml_permalink', get_post_type_archive_link('faq')) . '" title="faq">FAQ</a> ';
+                    }else{
+                        the_category($separator);
+                    }
                     echo $separator;
                     the_title();
                 } else {
@@ -281,8 +287,20 @@
                     echo $output;
                 }
                 the_title();
-            } elseif (is_archive()) {
+            }
+             elseif (is_archive() && !is_tax()) {
                 echo post_type_archive_title();
+            }
+            elseif (is_tax()) {
+                $term = get_queried_object();
+                $taxonomy = $term->taxonomy;
+                $post_types = get_taxonomy($taxonomy)->object_type;
+                if (!empty($post_types)) {
+                    $post_type = array_shift($post_types);
+                    $archive_link = get_post_type_archive_link($post_type);
+                    echo '<a href="' . apply_filters('nhml_permalink', $archive_link) . '" title="' . $post_type . '">' . strtoupper($post_type) . '</a> ' . $separator;
+                }
+                echo single_term_title('', false);
             }
 
             echo '</div>'; // End breadcrumbs

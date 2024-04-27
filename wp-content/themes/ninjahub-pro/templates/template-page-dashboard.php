@@ -41,9 +41,9 @@
 ?>
 
     <main class="site-dashboard-home">
-        <div class="container">
+        <div class="container-xxl">
             <div class="dashboard-overview">
-                <h3 class="fs-3 text-primary">
+                <h3 class="fs-3 mt-5 mb-3 text-primary">
                     <?= __('Overview', 'ninja') ?>
                 </h3>
                 <div class="widget-list">
@@ -89,9 +89,10 @@
                 <div class="collapse shadow" id="collapseFilter">
                     <div class="filter-con">
                         <?php
-                            $business_type_terms = $opportunities_obj->get_taxonomy_terms('business-type');
-                            $business_options    = [ "" => __("All", "ninja") ];
-                            foreach ($business_type_terms as $key => $term) {
+                            $sectors_terms = $opportunities_obj->get_taxonomy_terms('sectors');
+                            $business_options = [];
+                            $business_options[''] = __("All", "ninja") ;
+                            foreach ($sectors_terms as $key => $term) {
                                 $status = get_term_meta($term->term_id, 'status', TRUE);
                                 if (intval($status) !== 1) {
                                     continue;
@@ -151,32 +152,32 @@
                                                  'after'   => '',
                                                  'order'   => 0
                                              ],
-                                             'business_type'                                             => [
+                                             'sectors'                                             => [
                                                  'type'           => 'select',
-                                                 'label'          => 'Business type',
-                                                 'name'           => 'business_type',
+                                                 'label'          => 'Sectors',
+                                                 'name'           => 'sectors',
                                                  'before'         => '',
                                                  'after'          => '',
-                                                 'default_option' => isset($_GET['business_type']) ? $_GET['business_type'] : 'All',
+                                                 'default_option' => isset($_GET['sectors']) && !empty($_GET['sectors']) ? $_GET['sectors'] : 'All',
                                                  'options'        => $business_options,
                                                  'order'          => 10
                                              ],
-                                             'location_group_location'                                   => [
-                                                 'type'           => 'select',
-                                                 'label'          => 'Based in',
-                                                 'name'           => 'location_group_location',
-                                                 'before'         => '',
-                                                 'after'          => '',
-                                                 'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
-                                                 'default_option' => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
-                                                 'options'        => [
-                                                     'All'          => __("All", "ninja"),
-                                                     'Egypt'        => __("Egypt", "ninja"),
-                                                     'Russia'       => __("Russia", "ninja"),
-                                                     'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
-                                                 ],
-                                                 'order'          => 20
-                                             ],
+                                            //  'location_group_location'                                   => [
+                                            //      'type'           => 'select',
+                                            //      'label'          => 'Based in',
+                                            //      'name'           => 'location_group_location',
+                                            //      'before'         => '',
+                                            //      'after'          => '',
+                                            //     //  'value'          => isset($_GET['location_group_location']) ? $_GET['location_group_location'] : '',
+                                            //      'default_option' => isset($_GET['location_group_location']) && !empty($_GET['location_group_location']) ? $_GET['location_group_location'] : 'All',
+                                            //      'options'        => [
+                                            //          ''          => __("All", "ninja"),
+                                            //          'Egypt'        => __("Egypt", "ninja"),
+                                            //          'Russia'       => __("Russia", "ninja"),
+                                            //          'Sheikh Zayed' => __("Sheikh Zayed", "ninja"),
+                                            //      ],
+                                            //      'order'          => 20
+                                            //  ],
                                              // 'ttm_gross_revenue'    => [
                                              // 	'type'   => 'range',
                                              // 	'label'  => 'TTM Gross Revenue',
@@ -193,6 +194,7 @@
                                                  'label'  => 'TTM Net Profit',
                                                  'from'   => 50,
                                                  'to'     => (!empty($highest_net_profit)) ? get_post_meta($highest_net_profit[0], 'net_profit_group_net_profit', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'net_profit_group_net_profit',
                                                  'before' => '',
                                                  'after'  => '',
@@ -204,6 +206,7 @@
                                                  'label'  => 'TTM Accruing Revenue',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_annual_accounting_revenue)) ? get_post_meta($highest_annual_accounting_revenue[0], 'annual_accounting_revenue_group_annual_accounting_revenue', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'annual_accounting_revenue_group_annual_accounting_revenue',
                                                  'before' => '',
                                                  'after'  => '',
@@ -215,6 +218,7 @@
                                                  'label'  => 'Annual Growth Rate',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_annual_growth_rate)) ? get_post_meta($highest_annual_growth_rate[0], 'annual_growth_rate_group_annual_growth_rate', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'annual_growth_rate_group_annual_growth_rate',
                                                  'before' => '',
                                                  'after'  => '',
@@ -226,6 +230,7 @@
                                                  'label'  => 'Asking Price',
                                                  'from'   => 1,
                                                  'to'     => (!empty($highest_asking_price_in_usd)) ? get_post_meta($highest_asking_price_in_usd[0], 'asking_price_in_usd_group_asking_price_in_usd', TRUE) : 500000,
+                                                 'step'   => 1000,
                                                  'name'   => 'asking_price_in_usd_group_asking_price_in_usd',
                                                  'before' => '',
                                                  'after'  => '',
@@ -334,9 +339,9 @@
                                                         $args['fav_chk']    = $fav_chk;
                                                         $args['ignore_chk'] = $ignore_chk;
                                                         if ($fav_chk) {
-                                                            $fav_class = 'controll-icon bbc-star';
+                                                            $fav_class = 'bbc-bookmark fav-star';
                                                         } else {
-                                                            $fav_class = 'controll-icon bbc-star-o';
+                                                            $fav_class = 'bbc-bookmark-o fav-star';
                                                         }
                                                         $args['fav_form'] = Nh_Forms::get_instance()
                                                                                     ->create_form([
@@ -367,9 +372,9 @@
                                                                                         'class' => Nh::_DOMAIN_NAME . '-add-to-fav-form',
                                                                                     ]);
                                                         if ($ignore_chk) {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-up text-success ignore-star';
                                                         } else {
-                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger';
+                                                            $ignore_class = 'controll-icon bbc-thumbs-down text-danger ignore-star';
                                                         }
                                                         $args['ignore_form'] = Nh_Forms::get_instance()
                                                                                        ->create_form([
@@ -442,7 +447,7 @@
                                         <i class="bbc-lightbulb-o"></i>
                                         <?= __('Please Note You Can Add Only', 'ninja'); ?>
                                         <span class="text-warning">
-									<?= __('One Opportunity In Month', 'ninja') ?>
+									<?= __('One Opportunity Per Month', 'ninja') ?>
 								</span>
                                     </small>
                                 </div>
@@ -495,7 +500,8 @@
                                                         'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
-                                                        'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
+                                                        'sectors'            => $acquisition->opportunity->taxonomy['sectors'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
                                                         'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -504,7 +510,7 @@
 
                                                     ?>
                                                     <div class="col">
-                                                        <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                        <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                     </div>
                                                     <?php
                                                 }
@@ -520,7 +526,8 @@
                                                         'opportunity_created_date' => $opportunity->created_date,
                                                         'is_item_controllers'      => FALSE,
                                                         'opportunity_id'           => $opportunity->ID,
-                                                        'business_type'            => $opportunity->taxonomy['business-type'][0]->name,
+                                                        'short_description'        => $opportunity->meta_data['short_description'],
+                                                        'sectors'            => $opportunity->taxonomy['sectors'][0]->name,
                                                         'location'                 => $opportunity->meta_data['location_group_location'],
                                                         'location_appearance'      => $opportunity->meta_data['location_group_appearance'],
                                                         'valuation'                => $opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -566,7 +573,8 @@
                                                     'opportunity_thumbnail'    => $acquisition->opportunity->thumbnail,
                                                     'opportunity_created_date' => $acquisition->opportunity->created_date,
                                                     'is_item_controllers'      => FALSE,
-                                                    'business_type'            => $acquisition->opportunity->taxonomy['business-type'][0]->name,
+                                                    'short_description'        => $acquisition->opportunity->meta_data['short_description'],
+                                                    'sectors'            => $acquisition->opportunity->taxonomy['sectors'][0]->name,
                                                     'location'                 => $acquisition->opportunity->meta_data['location_group_location'],
                                                     'location_appearance'      => $acquisition->opportunity->meta_data['location_group_appearance'],
                                                     'valuation'                => $acquisition->opportunity->meta_data['valuation_in_usd_group_valuation_in_usd'],
@@ -574,7 +582,7 @@
                                                 ];
                                                 ?>
                                                 <div class="col">
-                                                    <?php get_template_part('app/Views/template-parts/cards/opportunity-card-horizontal', NULL, $args); ?>
+                                                    <?php get_template_part('app/Views/template-parts/cards/acquisition-card-horizontal', NULL, $args); ?>
                                                 </div>
                                                 <?php
                                             }

@@ -1,290 +1,414 @@
-@import '../../base/mixins';
-@import '../../base/variables';
-@import '../../components/cards/card';
+@import "../../base/mixins";
+@import "../../base/variables";
+@import "../../components/cards/card";
 
 .dashboard-overview {
-	border-bottom: 1px dashed rgba($gray-medium, 0.75);
-	padding-bottom: 2rem;
-	margin-bottom: 4rem;
-	.widget-list {
-		.single-widget {
-			display: flex;
-			flex-direction: row;
-			.ninja-form-notice {
-				.error {
-					display: none !important;
-				}
-			}
-			.widget-container {
-				width: 380px;
-				height: 300px;
-				background-color: white;
-				padding: 1rem;
-				margin-inline-end: 1rem;
-				border-radius: 4px;
-				box-shadow: var(--bs-box-shadow) !important;
+  border-bottom: 1px dashed rgba($gray-medium, 0.75);
+  padding-bottom: 2rem;
+  margin-bottom: 4rem;
+  .widget-list {
+    .single-widget {
+      display: flex;
+      flex-direction: row;
+      @include medium-screen-max {
+      overflow: auto;
+      }
+      .ninja-form-notice {
+        .error {
+          display: none !important;
+        }
+      }
+      .widget-container {
+        width: 380px;
+        // height: 300px;
+        background-color: white;
+        padding: 1rem;
+        margin-inline-end: 1rem;
+        border-radius: 4px;
+        box-shadow: var(--bs-box-shadow) !important;
+        @include medium-screen-max {
+          min-width: 320px;
+          width: 320px;
+        }
+        // Currency widget styles
+        .from,
+        .to {
+          font-weight: bold;
+        }
+        .to {
+          margin-bottom: 2rem;
+          border-bottom: 1px solid rgba($gray-medium, 0.3);
+          padding-bottom: 0.5rem;
+        }
 
-				// Currency widget styles
-				.from,
-				.to {
-					font-weight: bold;
-				}
-				.to {
-					margin-bottom: 2rem;
-					border-bottom: 1px solid rgba($gray-medium, 0.3);
-					padding-bottom: 0.5rem;
-				}
-
-				// Calendar widget styles
-				.calendar {
-					padding-inline: 1.5rem;
-					.day-week {
-						font-size: 14px;
-						margin-inline: 0.5rem;
-					}
-					.month-year {
-						border-bottom: 1px solid rgba($gray-medium, 0.3);
-						margin: 0.3rem 0.5rem;
-						font-size: 16px;
-						font-weight: bold;
-					}
-					table {
-						table-layout: fixed;
-						border-collapse: separate;
-						width: 100%;
-						font-size: 14px;
-						tr {
-							th {
-								font-weight: bold;
-								color: $primary;
-								text-align: center;
-							}
-						}
-						.not-current-month {
-							color: rgba($gray-medium, 0.5);
-						}
-						tr {
-							td {
-								height: 30px;
-								text-align: center;
-								letter-spacing: 1px;
-								font-weight: bold;
-								font-size: 14px;
-							}
-						}
-						.today {
-							background-color: $orange;
-							border-radius: 50%;
-							color: white;
-						}
-					}
-				}
-			}
-		}
-	}
+        // Calendar widget styles
+        .calendar {
+          padding-inline: 1.5rem;
+          .day-week {
+            font-size: 14px;
+            margin-inline: 0.5rem;
+          }
+          .month-year {
+            border-bottom: 1px solid rgba($gray-medium, 0.3);
+            margin: 0.3rem 0.5rem;
+            font-size: 16px;
+            font-weight: bold;
+          }
+          table {
+            table-layout: fixed;
+            border-collapse: separate;
+            width: 100%;
+            font-size: 14px;
+            tr {
+              th {
+                font-weight: bold;
+                color: $primary;
+                text-align: center;
+              }
+            }
+            .not-current-month {
+              color: rgba($gray-medium, 0.5);
+            }
+            tr {
+              td {
+                height: 40px;
+                text-align: center;
+                letter-spacing: 1px;
+                font-weight: bold;
+                font-size: 14px;
+                min-width: 30px;
+                min-height: 30px;
+                max-width: 30px;
+                max-height: 30px;
+              }
+            }
+            .today {
+              background-color: $orange;
+              border-radius: 50%;
+              color: white;
+              height: 36px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .dashboard-body {
-	padding-bottom: 4rem;
-	.opportunity-actions {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-		justify-content: flex-end;
-		.opportunity-adv-filter {
-			margin-inline-start: 1rem;
-		}
-		.opportunity-list-sort {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			border: 1px solid rgba($gray-medium, 0.3);
-			border-radius: 3px;
-		}
-	}
-	.opportunity-list {
-		margin-top: 3rem;
-	}
-	.sidebar-container {
-		.sidebar-create-opportunity {
-			display: flex;
-			flex-direction: column;
-			position: fixed;
-			bottom: 4rem;
-			right: 1rem;
-			margin: 0;
-			background-color: transparent;
-			box-shadow: none !important;
+  padding-bottom: 4rem;
+  .opportunity-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    .opportunity-adv-filter {
+      margin-inline-start: 1rem;
+    }
+    .opportunity-list-sort {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      border: 1px solid rgba($gray-medium, 0.3);
+      border-radius: 3px;
+    }
+  }
+  .opportunity-list {
+    margin-top: 3rem;
+  }
+  .sidebar-container {
+    .sidebar-create-opportunity {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      bottom: 4rem;
+      right: 1rem;
+      margin: 0;
+      background-color: transparent;
+      box-shadow: none !important;
 
-			@include medium-screen {
-				position: initial;
-				padding: 2rem;
-				margin-bottom: 2rem;
-				border-radius: 3px;
-				background-color: $layout-light;
-				box-shadow: var(--bs-box-shadow) !important;
-			}
-			.btn-create-opportunity {
-				font-size: 0;
-				padding: 0.8rem 1rem;
-				@include medium-screen {
-					font-size: 1rem;
-				}
-				i {
-					font-size: 1rem !important;
-					margin-block-end: 0.5rem;
-				}
-			}
-		}
+      @include medium-screen {
+        position: initial;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 3px;
+        background-color: $layout-light;
+        box-shadow: var(--bs-box-shadow) !important;
+      }
+      .btn-create-opportunity {
+        font-size: 0;
+        padding: 0.8rem 1rem;
+        @include medium-screen {
+          font-size: 1rem;
+        }
+        i {
+          font-size: 1rem !important;
+          margin-block-end: 0.5rem;
+        }
+      }
+    }
 
-		.sidebar-my-opportunities,
-		.sidebar-latest-acquisitions {
-			padding: 2rem;
-			margin-bottom: 2rem;
-			border-radius: 3px;
-			background-color: $layout-light;
-		}
-		.sidebar-my-opportunities {
-		}
-		.sidebar-latest-acquisitions,
-		.sidebar-my-opportunities {
-			.acquisitions-list {
-				max-height: 380px;
-				overflow-y: auto;
-				overflow-x: hidden;
-				margin-top: 2rem;
-				padding-top: 1rem;
-				padding-inline-end: 0.5rem;
-			}
-		}
-	}
-	#collapseFilter {
-		background-color: white;
-		padding: 1rem 1.5rem;
-		border-radius: 6px;
-		margin-bottom: 4rem;
-		#ninja_filters_form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			.filter-actions-container {
-				margin-top: 2rem;
-				align-items: center;
-				.form-field {
-					display: flex;
-					flex-direction: row;
-					margin: 0;
-					padding: 0;
-					&.ninja-input-wrapper {
-						width: 100%;
-						position: relative;
-						.bbc-search2 {
-							position: absolute;
-							left: 1rem;
-							top: 50%;
-							transform: translateY(-50%);
-							font-size: 16px;
-							color: $gray-medium;
-						}
-					}
-				}
-			}
-			.filter-actions-container,
-			.filter-fields-container {
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				width: 100%;
-			}
-			.filter-fields-container {
-				.form-field:nth-of-type(1),
-				.form-field:nth-of-type(2) {
-					width: 150px !important;
-					min-width: 150px !important;
-				}
-			}
-			.form-field:last-of-type {
-				margin-inline-end: 0;
-			}
-			.form-field {
-				margin-top: 0;
-				margin-inline-end: 2rem;
-				width: 170px;
-				min-width: 170px;
-				font-size: 14px;
-				label {
-					font-size: 14px;
-				}
-				.form-select {
-					background-color: transparent;
-					padding: 0;
-				}
-				#submit_filters_request {
-					padding-inline: 3rem;
-					padding-block: 0.7rem;
-				}
-			}
-			#ninja_search {
-				background-color: white;
-				border: 1px solid rgba($gray-medium, 0.3);
-				border-radius: 4px;
-				padding-inline-start: 2.5rem;
-			}
-			#ninja_search:focus,
-			#ninja_search:focus-visible {
-				border: 1px solid rgba($gray-medium, 0.5) !important;
-			}
-			.reset-btn {
-				width: 150px;
-				font-size: 12px;
-				text-decoration: unset;
-			}
-			input[type='range'] {
-				-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-				width: 100%; /* Specific width is required for Firefox. */
-				height: 10px;
-				padding: 0;
-				background: transparent; /* Otherwise white in Chrome */
-			}
-			input[type='range' i]::-webkit-slider-runnable-track {
-				height: 5px;
-				background-color: $success;
-			}
-			input[type='range']::-webkit-slider-thumb {
-				-webkit-appearance: none;
-				border: 1px solid rgb(255 255 255 / 30%);
-				height: 14px;
-				width: 14px;
-				border-radius: 50%;
-				background: $success;
-				cursor: pointer;
-				margin-top: -5px;
-			}
-			/* All the same stuff for Firefox */
-			input[type='range']::-moz-range-thumb {
-				border: 1px solid rgba($gray-medium, 0.3);
-				height: 14px;
-				width: 14px;
-				border-radius: 50%;
-				background: $success;
-				cursor: pointer;
-			}
+    .sidebar-my-opportunities,
+    .sidebar-latest-acquisitions {
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 3px;
+      background-color: $layout-light;
+    }
+    .sidebar-my-opportunities {
+    }
+    .sidebar-latest-acquisitions,
+    .sidebar-my-opportunities {
+      .acquisitions-list {
+        max-height: 380px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        padding-inline-end: 0.5rem;
+      }
+    }
+  }
+  #collapseFilter {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 4rem;
+    #ninja_filters_form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .filter-actions-container {
+        margin-top: 2rem;
+        align-items: center;
+        .form-field {
+          display: flex;
+          flex-direction: row;
+          margin: 0;
+          padding: 0;
+          &.ninja-input-wrapper {
+            width: 100%;
+            position: relative;
+            .bbc-search2 {
+              position: absolute;
+              left: 1rem;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 16px;
+              color: $gray-medium;
+            }
+          }
+        }
+      }
+      .filter-actions-container,
+      .filter-fields-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .filter-fields-container {
+        .form-field:nth-of-type(1),
+        .form-field:nth-of-type(2) {
+          width: 150px !important;
+          min-width: 150px !important;
+        }
+      }
+      .form-field:last-of-type {
+        margin-inline-end: 0;
+      }
+      .form-field {
+        margin-top: 0;
+        margin-inline-end: 2rem;
+        width: 170px;
+        min-width: 170px;
+        font-size: 14px;
+        label {
+          font-size: 14px;
+        }
+        .form-select {
+          background-color: transparent;
+          padding: 0;
+        }
+        #submit_filters_request {
+          padding-inline: 3rem;
+          padding-block: 0.7rem;
+        }
+      }
+      #ninja_search {
+        background-color: white;
+        border: 1px solid rgba($gray-medium, 0.3);
+        border-radius: 4px;
+        padding-inline-start: 2.5rem;
+      }
+      #ninja_search:focus,
+      #ninja_search:focus-visible {
+        border: 1px solid rgba($gray-medium, 0.5) !important;
+      }
+      .reset-btn {
+        width: 150px;
+        font-size: 12px;
+        text-decoration: unset;
+      }
+      input[type="range"] {
+        -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+        width: 100%; /* Specific width is required for Firefox. */
+        height: 10px;
+        padding: 0;
+        background: transparent; /* Otherwise white in Chrome */
+      }
+      input[type="range" i]::-webkit-slider-runnable-track {
+        height: 5px;
+        background-color: $success;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid rgb(255 255 255 / 30%);
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background: $success;
+        cursor: pointer;
+        margin-top: -5px;
+      }
+      /* All the same stuff for Firefox */
+      input[type="range"]::-moz-range-thumb {
+        border: 1px solid rgba($gray-medium, 0.3);
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background: $success;
+        cursor: pointer;
+      }
 
-			input[type='range']:focus {
-				outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
-			}
+      input[type="range"]:focus {
+        outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+      }
 
-			input[type='range']::-ms-track {
-				width: 100%;
-				border: 1px solid rgba($gray-medium, 0.3);
-				height: 14px;
-				width: 14px;
-				border-radius: 50%;
-				background: $success;
-				cursor: pointer;
+      input[type="range"]::-ms-track {
+        width: 100%;
+        border: 1px solid rgba($gray-medium, 0.3);
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        background: $success;
+        cursor: pointer;
 
-				color: transparent;
-			}
-		}
-	}
+        color: transparent;
+      }
+    }
+  }
+}
+
+.sidebar-my-opportunities {
+  .opportunity-item.card {
+    padding: 15px !important;
+    background-color: #fbfbfb;
+    min-height: fit-content;
+    .card-content {
+      flex-wrap: nowrap;
+      .card-image {
+        padding: 0;
+        background-color: transparent;
+        margin-inline-end: 10px;
+      }
+      .card-text {
+        white-space: nowrap;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      a.card-title {
+        text-align: left;
+        font-size: 13px;
+        margin-bottom: 0;
+      }
+    }
+    .card-footer {
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 10px;
+      .card-info-item {
+        p {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+.new-opportunity-item-card {
+  a {
+    color: $blue-medium !important;
+    text-align: left;
+    font-size: 18px !important;
+  }
+  .date {
+    color: $blue-medium !important;
+    font-weight: 600;
+    margin-bottom: 3px !important;
+    display: block;
+    font-size: 14px;
+  }
+  p {
+    color: $blue-dark;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .opportunity-item {
+    border-color: #f4f4f4 !important;
+  }
+}
+.new-acquisition-item-card {
+  min-height: fit-content !important;
+  .card-content{
+    padding: 8px;
+  }
+  .card-image {
+    margin-inline-end: 12px;
+    width: 117px !important;
+    height: 117px;
+    padding: 10px;
+    a {
+      width: 100% !important;
+      height: 100% !important;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+  a {
+    color: $blue-medium !important;
+    text-align: left;
+    font-size: 17px !important;
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
+  }
+  .date {
+    color: $blue-dark !important;
+    margin-bottom: 3px !important;
+    display: block;
+    font-size: 14px;
+  }
+  .cardRight-content {
+    width: calc(100% - 142px);
+  }
+  .sectors{
+    font-size: 14px;
+    color: $blue-dark;
+    font-weight: 700;
+    line-height: 19px;
+    margin-bottom: 10px;
+    strong{
+      font-weight: 100;
+      font-size: 15px;
+    }
+  }
+  .card-footer{
+    border: none;
+    padding-top: 0 !important;
+  }
+}
+.new-opportunity-item-card-vertical{
+  .card-image a{
+
+  }
 }

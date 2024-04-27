@@ -16,10 +16,10 @@ $whatsapp_logo   = Nh_Hooks::PATHS['public']['img'] . '/whatsapp-logo.webp';
 ?>
 <style>
 .whatsapp-chat {
-	position: fixed;
-	bottom: 10rem;
-	right: 1rem;
-	width: 40px;
+    position: fixed;
+    bottom: 2rem;
+    left: 1rem;
+    width: 45px;
 }
 
 .whatsapp-chat img {
@@ -31,11 +31,12 @@ $whatsapp_logo   = Nh_Hooks::PATHS['public']['img'] . '/whatsapp-logo.webp';
 	<div class="whatsapp-chat">
 		<?php
 		echo sprintf(
-			'<a href="https://web.whatsapp.com/send?phone=%s&text=%s"><img src="%s" /></a>',
+			'<a href="https://web.whatsapp.com/send?phone=%s&text=%s" target="_blank"><img src="%s" /></a>',
 			$whatsapp_number,
 			$whatsapp_msg,
 			$whatsapp_logo );
 		?>
 	</div>
 	<?php dynamic_sidebar( 'footer' ); ?>
+	<p class="text-center p-2"><?= __('Copyright © 2024 B2B All rights reserved.', 'ninja'); ?></p>
 </footer>

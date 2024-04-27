@@ -29,7 +29,7 @@ $opportunity_obj = new Nh_Opportunity();
 ?>
 <main class="container-fluid h-100">
 	<div class="row h-100">
-		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6">
+		<section class="login-section container-xl col-12 col-md-6 py-5 px-5 px-xl-6 new-industries">
 			<!-- App Brand -->
 			<a href="<?= home_url(); ?>" class="app-brand mb-6"><img src="<?= Nh::get_site_logo(); ?>" alt="Nh Site Logo"
 					class="img-fluid" /></a>
@@ -107,71 +107,181 @@ $opportunity_obj = new Nh_Opportunity();
 					'content' => "<div class='form-steps form-step-2 nh-hidden'>",
 					'order'   => 25
 				],
-				'expected_value'                   => [
+
+				'target_investment'                   => [
 					'class'   => 'container',
 					'type'    => 'radio',
-					'name'    => 'expected_value',
-					'title'   => __( '- What is the expected value Of the investment amount?', 'ninja' ),
+					'name'    => 'target_investment',
+					'title'   => __( '- What is the targeted investment sector?', 'ninja' ),
 					'choices' => [
 						[
 							'class'      => '',
-							'label'      => __( 'Partnership', 'ninja' ),
+							'label'      => __( 'Real Estate', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
-							'value'      => 'partnership',
+							'value'      => 'real-estate',
 							'extra_attr' => [],
 							'checked'    => '',
 							'order'      => 0
 						],
 						[
 							'class'      => '',
-							'label'      => __( 'Stock joint', 'ninja' ),
+							'label'      => __( 'Startups', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
-							'value'      => 'stock-joint',
+							'value'      => 'startups',
 							'extra_attr' => [],
 							'checked'    => '',
-							'order'      => 5
+							'order'      => 0
 						],
 						[
 							'class'      => '',
-							'label'      => __( 'Investment Round', 'ninja' ),
+							'label'      => __( 'Opening foreign markets venture', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
-							'value'      => 'round-investment',
+							'value'      => 'opening-foreign-markets-venture',
 							'extra_attr' => [],
 							'checked'    => '',
-							'order'      => 10
+							'order'      => 0
 						],
 						[
 							'class'      => '',
-							'label'      => __( 'Franchise', 'ninja' ),
+							'label'      => __( 'Agriculture and food processing', 'ninja' ),
 							'before'     => '',
 							'after'      => '',
-							'value'      => 'franchise',
+							'value'      => 'agriculture-and-food-processing',
 							'extra_attr' => [],
 							'checked'    => '',
-							'order'      => 15
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Technology', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'technology',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Logistics', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'logistics',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Non-banking financial services', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'non-banking-financial-services',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Manufacturing', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'manufacturing',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Health Care Companies', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'health-care-companies',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Recycling', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'recycling',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Services Section', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'services-section',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Other', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'other',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
 						],
 					],
 					'order'   => 30,
 				],
-				'entity_legal_type'                => [
-					'class'          => 'container',
-					'type'           => 'select',
-					'label'          => __( "- What's you entity legal type?", 'ninja' ),
-					'name'           => 'entity_legal_type',
-					'placeholder'    => __( 'EX: private company limited by shares...', 'ninja' ),
-					'options'        => [
-						'public-limited-company'  => __( 'Public limited company', 'ninja' ),
-						'private-limited-company' => __( 'Private limited company', 'ninja' ),
-						'other'                   => __( 'Other', 'ninja' )
-					],
-					'default_option' => '',
-					'select_option'  => [],
-					'before'         => '',
-					'order'          => 35,
+
+				'size_of_investment'                => [
+					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'        => 'text',
+					'label'       => __('- Size of investment', 'ninja'),
+					'name'        => 'size_of_investment',
+					'value'       => '',
+					'required'    => TRUE,
+					'placeholder' => __('Enter your answer', 'ninja'),
+					'order'       => 35,
 				],
+
+				'investment_criteria'                => [
+					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'        => 'text',
+					'label'       => __('- What is Your Investment criteria?', 'ninja'),
+					'name'        => 'investment_criteria',
+					'value'       => '',
+					'required'    => TRUE,
+					'placeholder' => __('Enter your answer', 'ninja'),
+					'order'       => 35,
+				],
+				'external_or_long_term'                => [
+					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'        => 'text',
+					'label'       => __('- External or long-term?', 'ninja'),
+					'name'        => 'external_or_long_term',
+					'value'       => '',
+					'required'    => TRUE,
+					'placeholder' => __('Enter your answer', 'ninja'),
+					'order'       => 35,
+				],
+				'buying_shares'                => [
+					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'        => 'text',
+					'label'       => __('- Investing in companies by entering in a capital increase or buying shares from shareholders?', 'ninja'),
+					'name'        => 'buying_shares',
+					'value'       => '',
+					'required'    => TRUE,
+					'placeholder' => __('Enter your answer', 'ninja'),
+					'order'       => 35,
+				],
+
+
+
 				'industries_nonce'                 => [
 					'class' => '',
 					'type'  => 'nonce',

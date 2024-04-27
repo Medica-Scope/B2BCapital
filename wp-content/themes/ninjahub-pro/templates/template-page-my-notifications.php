@@ -37,7 +37,7 @@ $found_posts   = $notifications['found_posts'];
 ?>
 
 
-<main class="my-notifications">
+<main class="my-notifications page_my_notifications">
 	<div class="container container-xxl">
 		<?php Nh_Public::breadcrumbs(); ?>
 
@@ -73,10 +73,12 @@ $found_posts   = $notifications['found_posts'];
 						<div class="ninja-notification-item <?= $notification->new ? 'ninjanew-notification' : '' ?> accordion-item"
 							data-id="<?= $notification->ID ?>">
 
-							<div class="accordion-header" id="flush-heading<?= $notification->ID ?>">
-								<div class="ninja-notification-image">
-									<img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" />
+							<div class="accordion-header d-flex align-items-center" id="flush-heading<?= $notification->ID ?>">
+								<div class="ninja-notification-image col-1">
+									<!-- <img src="<?= $notification->thumbnail ?>" alt="<?= __( 'Notification Thumbnail', 'ninja' ) ?>" /> -->
+									<img src="<?= Nh_Hooks::PATHS['public']['img']; ?>/notification-icon.webp" alt="notification icon" />
 								</div>
+								<div class="ninja-notification-content col-11">
 								<h3 class="accordion-button collapsed" data-bs-toggle="collapse"
 									data-bs-target="#flush<?= $notification->ID ?>" aria-expanded="false"
 									aria-controls="flush<?= $notification->ID ?>">
@@ -85,6 +87,7 @@ $found_posts   = $notifications['found_posts'];
 								<span>
 									<?= $notification->date ?>
 								</span>
+								
 								<div class="ninja-notification-item-clear-parent">
 									<?php
 											echo Nh_Forms::get_instance()
@@ -108,7 +111,7 @@ $found_posts   = $notifications['found_posts'];
 														'class'               => 'btn btn-light bg-white article-to-favorite ninja-add-to-fav',
 														'id'                  => 'submit_notification_item_clear_request',
 														'type'                => 'submit',
-														'value'               => __( 'Clear', 'ninja' ),
+														'value'               => __(  '<i class="bbc-trash-2"></i>', 'ninja' ),
 														'recaptcha_form_name' => 'frontend_notification_item_clear',
 														'order'               => 10
 													],
@@ -118,11 +121,13 @@ $found_posts   = $notifications['found_posts'];
 
 											?>
 								</div>
-							</div>
+							
 							<div id="flush<?= $notification->ID ?>" class="accordion-collapse collapse"
 								aria-labelledby="flush-heading<?= $notification->ID ?>" data-bs-parent="#accordionFlush">
 								<div class="accordion-body">
 									<?= $notification->content ?>
+								</div>
+								</div>
 								</div>
 							</div>
 						</div>

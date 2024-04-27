@@ -11,7 +11,7 @@
 
 global $post;
 
-$dashboard = [ 
+$dashboard = [
 	'my-account',
 	'dashboard',
 	'authentication',
@@ -29,7 +29,7 @@ $dashboard = [
 	'create-opportunity-step-2',
 ];
 
-$my_account = [ 
+$my_account = [
 	'login',
 	'industry',
 	'reset-password',
@@ -39,15 +39,15 @@ $my_account = [
 	'authentication',
 ];
 
-if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) || is_tax( 'faq-category' ) ) {
+if ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity', 'faq' ] ) || is_tax( 'faq-category' ) ) {
 	get_template_part( 'app/Views/footers/dashboard' );
 } elseif ( is_page( $my_account ) ) {
 	get_template_part( 'app/Views/footers/my-account' );
 }
-//  else {
-// 	// TODO:: Will be used for Blogs later..
-// 	get_template_part( 'app/Views/footers/default' );
-// }
+ else {
+	// TODO:: Will be used for Blogs later..
+//	get_template_part( 'app/Views/footers/dashboard' );
+}
 
 
 wp_body_close();

@@ -20,6 +20,9 @@ import 'tinymce/plugins/link';   // Import a plugin
 import 'tinymce/icons/default';  // Import the icons
 import 'tinymce/models/dom';  // Import the dom
 
+import Pikaday from 'pikaday';
+import 'chosen-js/chosen.jquery';
+
 class NhOpportunityFront extends NhOpportunity
 {
     constructor()
@@ -31,6 +34,7 @@ class NhOpportunityFront extends NhOpportunity
                 form: $(`#${KEY}_create_opportunity_form`),
                 parent: $(`#${KEY}_create_opportunity_form`).parent(),
                 category: $(`#${KEY}_category`).parent(),
+                sectors: $(`#${KEY}_sectors`).parent(),
                 opportunity_type: $(`#${KEY}_opportunity_type`).parent(),
             },
             filter_opportunity: {
@@ -65,6 +69,8 @@ class NhOpportunityFront extends NhOpportunity
         this.ignore_opportunity();
         this.list_grid_switch();
         this.reset_form();
+        this.toggleControllers();
+        this.rangeInputsAdjust();
     }
 
     CreateOpportunityFormFieldsFront()
@@ -80,6 +86,19 @@ class NhOpportunityFront extends NhOpportunity
             menubar: false,
             height: 250
         }).then();
+
+        let date_founded = new Pikaday({
+            field: document.getElementById(`${KEY}_date_founded`),
+            // format: 'MM-DD-YYYY'
+        });
+
+        let project_start_date = new Pikaday({
+            field: document.getElementById(`${KEY}_project_start_date`),
+            // format: 'MM-DD-YYYY',
+            minDate: new Date(),
+        });
+
+        jQuery('#ninja_business_model').chosen();
 
         $opportunity.opportunity_type.on('change', $opportunity.parent, function (e) {
             let $this   = $(e.currentTarget),
@@ -279,12 +298,12 @@ class NhOpportunityFront extends NhOpportunity
         let that         = this,
         $ignore   = this.$el.ignore,
         ajaxRequests = this.ajaxRequests;
-        
+
         $ignore.form.on('submit', $ignore.parent, function (e) {
             e.preventDefault();
             let $this    = $(e.currentTarget),
                 formData = $this.serializeObject();
-    
+
             // Abort any ongoing registration requests
             if (typeof ajaxRequests.ignoreOpportunity !== 'undefined') {
                 ajaxRequests.ignoreOpportunity.abort();
@@ -339,9 +358,41 @@ class NhOpportunityFront extends NhOpportunity
     }
     reset_form(){
         $(document).on("click", ".reset-btn", function(e){
-            $('#ninja_filters_form :input').val('');
+            $('#ninja_filters_form :input').not('input[type=range]').val('');
+            $('#ninja_filters_form input[type=range]').each(function() {
+                var defaultValue = this.min;
+                $(this).val(defaultValue);
+                var rangeId = $(this).attr('id');
+                $('#rangeValue-' + rangeId).text(defaultValue);
+            });
+            if (history.pushState) {
+                var reset_url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.pushState({path:reset_url}, '', reset_url);
+            }
         });
     }
+    toggleControllers(){
+        $(document).on("click", ".show-controllers", function(e){
+            $(this).siblings('.opportunity-item-controllers').toggleClass('ninja-hidden');
+        });
+    }
+    rangeInputsAdjust(){
+          let that = this;
+        if($(`.${KEY}-range`).length){
+          document.querySelectorAll(`.${KEY}-range`).forEach(function(rangeInput) {
+              rangeInput.addEventListener('input', function() {
+              // Find the immediately following sibling with the class 'rangeValue'
+              const rangeValue = this.nextElementSibling;
+              if (rangeValue && rangeValue.classList.contains('rangeValue')) {
+                  rangeValue.innerText = that.formatNumber(this.value);
+              }
+              });
+          });
+      }
+  }
+  formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }
 
 new NhOpportunityFront();

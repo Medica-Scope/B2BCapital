@@ -129,6 +129,7 @@ $partners      = get_field( 'partners', $post->ID );
 								background="transparent" speed="1" style="width: 80px; height: 80px" direction="1" mode="normal" loop
 								autoplay>
 							</dotlottie-player>
+							
 						</span>
 					</span>
 					<span class="carousel-control prev d-none" data-bs-target="#landingPageCarousel" data-bs-slide="prev">

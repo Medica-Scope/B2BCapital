@@ -3,7 +3,7 @@
 Plugin Name: Nextend Social Login Pro Addon
 Plugin URI: https://nextendweb.com/social-login/
 Description: Pro Addon for Nextend Social Login.
-Version: 3.1.11
+Version: 3.1.13
 Requires PHP: 7.0
 Requires at least: 4.9
 Author: Nextendweb
@@ -21,9 +21,9 @@ if (!defined('NSL_PRO_PATH')) {
 
 class NextendSocialLoginPRO {
 
-    public static $version = '3.1.11';
+    public static $version = '3.1.13';
 
-    public static $nslMinVersion = '3.1.11';
+    public static $nslMinVersion = '3.1.13';
 
     /**
      * @var NextendSocialProvider[]
@@ -202,7 +202,7 @@ class NextendSocialLoginPRO {
 
                 // Stack Overflow and WordPress.com button labels do not fit in the default 320px wide form.
                 if (NextendSocialLogin::isProviderEnabled('stackoverflow') || NextendSocialLogin::isProviderEnabled('wordpress')) {
-                    add_action('login_enqueue_scripts', function() {
+                    add_action('login_enqueue_scripts', function () {
                         wp_add_inline_style('login', '#login {width: 100%; max-width: 400px;}');
                     });
                 }
@@ -276,21 +276,13 @@ class NextendSocialLoginPRO {
                     case 'after-checkout-registration':
                         add_action('woocommerce_after_checkout_registration_form', 'NextendSocialLoginPRO::woocommerce_after_checkout_billing_form');
                         break;
+                    case 'before-checkout-shipping-form':
+                        add_action('woocommerce_before_checkout_shipping_form', 'NextendSocialLoginPRO::woocommerce_before_checkout_billing_form');
+                        break;
+                    case 'after-checkout-shipping-form':
+                        add_action('woocommerce_after_checkout_shipping_form', 'NextendSocialLoginPRO::woocommerce_after_checkout_billing_form');
+                        break;
                 }
-
-                /**
-                 * Integration for "Checkout for WooCommerce" plugin:
-                 * When there is a shipping method enabled in WooCommerce, then the WooCommerce actions will be triggered at different positions.
-                 * We need to render the social buttons in the Customer information form.
-                 */
-                if (defined('CFW_MAIN_FILE')) {
-                    switch (NextendSocialLogin::$settings->get('woocommerce_cfw')) {
-                        case 'show':
-                            add_action('cfw_checkout_after_login', 'NextendSocialLoginPRO::woocommerce_cfw_form');
-                            break;
-                    }
-                }
-
 
                 switch (NextendSocialLogin::$settings->get('memberpress_login')) {
                     case 'before':
@@ -456,8 +448,6 @@ class NextendSocialLoginPRO {
                 case 'woocommerce_register':
                 case 'woocommerce_register_form_layout':
                 case 'woocommerce_billing':
-                case 'woocommerce_cfw':
-                case 'woocommerce_cfw_layout':
                 case 'woocommerce_billing_form_layout':
                 case 'woocommerce_account_details':
                 case 'woocoommerce_form_button_style':
@@ -573,15 +563,27 @@ class NextendSocialLoginPRO {
                 break;
             case 'billing':
                 $layout = NextendSocialLogin::$settings->get('woocommerce_billing_form_layout');
+                $layout = sanitize_file_name($layout);
                 if ($layout === 'default-separator') {
-                    $position = NextendSocialLogin::$settings->get('woocommerce_billing');
-                    if ($position === 'before' || $position === 'before-checkout-registration') {
-                        $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . sanitize_file_name($layout . '-before') . '.php');
-                    } else if ($position === 'after' || $position === 'after-checkout-registration') {
-                        $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . sanitize_file_name($layout . '-after') . '.php');
+                    $position        = NextendSocialLogin::$settings->get('woocommerce_billing');
+                    $positionsBefore = [
+                        'before',
+                        'before-checkout-registration',
+                        'before-checkout-shipping-form'
+                    ];
+                    $positionsAfter  = [
+                        'after',
+                        'after-checkout-registration',
+                        'after-checkout-shipping-form'
+                    ];
+
+                    if (in_array($position, $positionsBefore)) {
+                        $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . $layout . '-before.php');
+                    } elseif (in_array($position, $positionsAfter)) {
+                        $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . $layout . '-after.php');
                     }
                 } else {
-                    $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . sanitize_file_name($layout) . '.php');
+                    $template = NextendSocialLogin::get_template_part('woocommerce/billing/' . $layout . '.php');
                 }
                 break;
         }
@@ -692,20 +694,6 @@ class NextendSocialLoginPRO {
         if (!empty($template) && file_exists($template)) {
 
             $buttons = NextendSocialLogin::renderLinkAndUnlinkButtons(false, true, true, NextendSocialLogin::$settings->get('woocoommerce_form_button_align'), false, NextendSocialLogin::$settings->get('woocoommerce_form_button_style'));
-
-            include($template);
-        }
-    }
-
-    public static function woocommerce_cfw_form() {
-        $template = NextendSocialLogin::get_template_part('woocommerce/checkout-for-woocommerce/' . sanitize_file_name(NextendSocialLogin::$settings->get('woocommerce_cfw_layout')) . '.php');
-
-        if (!empty($template) && file_exists($template)) {
-            $index = NextendSocialLogin::$counter++;
-
-            $containerID = 'nsl-custom-login-form-' . $index;
-
-            echo '<div id="' . $containerID . '">' . NextendSocialLogin::renderButtonsWithContainer(NextendSocialLogin::$settings->get('woocoommerce_form_button_style'), false, false, false, NextendSocialLogin::$settings->get('woocoommerce_form_button_align')) . '</div>';
 
             include($template);
         }

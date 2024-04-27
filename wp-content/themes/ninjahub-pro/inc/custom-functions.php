@@ -48,18 +48,18 @@
                 'name' => 'google-captcha',
                 'slug' => 'google-captcha'
             ],
-            [
-                'name' => 'wp-optimize',
-                'slug' => 'wp-optimize'
-            ],
+            // [
+            //    'name' => 'wp-optimize',
+            //    'slug' => 'wp-optimize'
+            // ],
             [
                 'name' => 'health-check',
                 'slug' => 'health-check'
             ],
-            [
-                'name' => 'updraftplus',
-                'slug' => 'updraftplus'
-            ],
+            // [
+            //    'name' => 'updraftplus',
+            //    'slug' => 'updraftplus'
+            // ],
             [
                 'name' => 'wp-mail-smtp',
                 'slug' => 'wp-mail-smtp'
@@ -135,7 +135,7 @@
 
     // $notifications = new \NH\APP\MODELS\FRONT\MODULES\Nh_Notification();
     // for ($i = 0; $i < 7; $i++) {
-    //     $notifications->send(18, 1, 'bidding', [ 'opportunity_id' => '1762' ]);
+    //     $notifications->send(98, 1, 'new', [ 'opportunity_id' => '2549' ]);
     // }
 
 

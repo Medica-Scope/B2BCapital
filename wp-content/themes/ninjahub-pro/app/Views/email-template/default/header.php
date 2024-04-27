@@ -165,21 +165,21 @@ use NH\APP\HELPERS\Nh_Hooks;
 		</style>
 	</head>
 
-	<body class="clean-body u_body"
+	<body class="clean-body u_body ayman-hosny"
 		style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #f9f9f9;color: #777777">
 		<!--[if IE]><div class="ie-container"><![endif]-->
 		<!--[if mso]><div class="mso-container"><![endif]-->
 		<table id="u_body"
-			style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #f9f9f9;width:100%"
+			style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #f9f9f9;width:700px"
 			cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr style="vertical-align: top">
 					<td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 						<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #f9f9f9;"><![endif]-->
 
-						<div class="u-row-container" style="padding: 0px;background-color: transparent">
+						<div class="u-row-container" style="padding: 0px;background-color: transparent; margin-top: 26px;">
 							<div class="u-row"
-								style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
+								style="margin: 0 auto;min-width:100%;max-width:100%;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
 								<div
 									style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
 									<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: transparent;"><![endif]-->
@@ -206,7 +206,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 																	<tr>
 																		<td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-																			<img align="center" border="0" src="images/b2b-logo.png" alt="image" title="image"
+																			<img align="center" border="0" src="https://btob.capital/wp-content/uploads/2024/02/b2b-logo-1.png" alt="image" title="image"
 																				style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 16%;max-width: 92.8px;"
 																				width="92.8" class="v-src-width v-src-max-width" />
 
@@ -232,7 +232,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 
 						<div class="u-row-container" style="padding: 0px;background-color: transparent">
 							<div class="u-row"
-								style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
+								style="margin: 0 auto;min-width:100%;max-width:100%;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
 								<div
 									style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
 									<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: transparent;"><![endif]-->
@@ -297,6 +297,7 @@ use NH\APP\HELPERS\Nh_Hooks;
 														</tr>
 													</tbody>
 												</table>
+												<img style="width: 100%;     margin-bottom: 40px;" src="https://btob.capital/wp-content/uploads/2024/02/Group-31924.png" alt="">
 
 												<!--[if (!mso)&(!IE)]><!-->
 											</div>

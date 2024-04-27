@@ -102,6 +102,12 @@ trait Content_AI {
 
 		$is_error = self::is_content_ai_error( $response, $response_code );
 		if ( $is_error ) {
+
+			if ( in_array( $is_error, [ 'domain_limit_reached', 'account_limit_reached' ], true ) ) {
+				$credits = 0;
+				self::update_credits( 0 );
+			}
+
 			return ! $return_error ? $credits : [
 				'credits' => $credits,
 				'error'   => $is_error,
@@ -238,6 +244,7 @@ trait Content_AI {
 			$output
 		);
 
+		$output  = isset( $output['faqs'] ) ? [ current( $output ) ] : $output;
 		$outputs = array_merge( $output, $outputs );
 		$outputs = array_slice( $outputs, 0, 50 );
 		update_option( self::$output_key, $outputs, false );

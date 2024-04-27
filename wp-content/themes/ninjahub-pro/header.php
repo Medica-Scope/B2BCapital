@@ -1,13 +1,16 @@
 <?php global $post;
 
+use NH\APP\HELPERS\Nh_Mail;
 use NH\APP\MODELS\FRONT\MODULES\Nh_Blog;
 use NH\Nh;
 
-/// to be reviewed with mostafa
-if ( is_singular( 'post' ) ) {
-	$post_obj = new Nh_Blog();
-	$post_obj->increment_read_count( get_the_ID() );
-}
+/////// Test email on production /////
+// Nh_Mail::init()->to('ahmedjemy918@gmail.com')
+//                                 ->subject('Welcome to B2b - Please Verify Your Email')
+//                                 ->template('account-verification/body', [
+                                    
+//                                 ])
+//                                 ->send();
 
 ?>
 <!doctype html>
@@ -63,16 +66,22 @@ if ( is_singular( 'post' ) ) {
 				'reset-password',
 				'forgot-password',
 				'registration',
+			];
+
+			$no_header = [
 				'verification',
 				'authentication',
 			];
 
 			if ( is_front_page() || is_page( $landing ) || is_post_type_archive( 'service' ) || is_singular( 'service' ) || is_tax( 'service-category' ) ) {
 				get_template_part( 'app/Views/headers/landing' );
-			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [ 'opportunity' ] ) || is_tax('faq-category') ) {
+			} elseif ( is_page( $dashboard ) || ( isset( $post ) && $post->post_type === 'post' ) || is_post_type_archive( 'faq' ) || is_search() || is_singular( [
+				'opportunity', 'faq' ] ) || is_tax('faq-category') ) {
 				get_template_part( 'app/Views/headers/dashboard' );
 			} elseif ( is_page( $my_account ) ) {
 				get_template_part( 'app/Views/headers/my-account' );
+			} elseif ( is_page( $no_header ) ) {
+				get_template_part( 'app/Views/headers/no-header' );
 			} else {
 				// TODO:: Will be used for Blogs later..
 				get_template_part( 'app/Views/headers/default' );
