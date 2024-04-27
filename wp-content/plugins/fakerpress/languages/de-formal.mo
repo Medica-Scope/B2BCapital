@@ -18,16 +18,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-P24PF4B');</script>
 	<link rel='stylesheet' id='dashicons-css' href='https://s.w.org/wp-includes/css/dashicons.min.css?ver=6.6-alpha-58044' type='text/css' media='all' />
 <link rel='stylesheet' id='thickbox-css' href='https://translate.wordpress.org/wp-includes/js/thickbox/thickbox.css?ver=6.6-alpha-58044' type='text/css' media='all' />
-<link rel='stylesheet' id='gp-discussion-css-css' href='https://translate.wordpress.org/wp-content/plugins/gp-translation-helpers/css/discussion.css?ver=1702900016' type='text/css' media='all' />
-<link rel='stylesheet' id='gp-translation-helpers-editor-css' href='https://translate.wordpress.org/wp-content/plugins/gp-translation-helpers/css/editor.css?ver=1702900016' type='text/css' media='all' />
+<link rel='stylesheet' id='gp-discussion-css-css' href='https://translate.wordpress.org/wp-content/plugins/gp-translation-helpers/css/discussion.css?ver=1702900064' type='text/css' media='all' />
+<link rel='stylesheet' id='gp-translation-helpers-editor-css' href='https://translate.wordpress.org/wp-content/plugins/gp-translation-helpers/css/editor.css?ver=1702900064' type='text/css' media='all' />
 <link rel='stylesheet' id='admin-bar-css' href='https://translate.wordpress.org/wp-includes/css/admin-bar.min.css?ver=6.6-alpha-58044' type='text/css' media='all' />
 <style id='admin-bar-inline-css' type='text/css'>
 @media print { #wpadminbar { display:none; } }
 </style>
-<link rel='stylesheet' id='gp-base-css' href='https://translate.wordpress.org/wp-content/plugins/glotpress/assets/css/style.min.css?ver=1706270026-1' type='text/css' media='all' />
+<link rel='stylesheet' id='gp-base-css' href='https://translate.wordpress.org/wp-content/plugins/glotpress/assets/css/style.min.css?ver=1706270095-1' type='text/css' media='all' />
 <link rel='stylesheet' id='open-sans-css' href='https://fonts.googleapis.com/css2?family=Open+Sans%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C600%3B1%2C300%3B1%2C400%3B1%2C600&#038;display=swap' type='text/css' media='all' />
-<link rel='stylesheet' id='wporg-style-css' href='https://s.w.org/wp-content/themes/pub/wporg-main/css/style.css?ver=1701733805' type='text/css' media='all' />
-<link rel='stylesheet' id='wporg-translate-css' href='https://translate.wordpress.org/wp-content/plugins/wporg-gp-customizations/templates/style.css?ver=1709028028' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-style-css' href='https://s.w.org/wp-content/themes/pub/wporg-main/css/style.css?ver=1701733853' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-translate-css' href='https://translate.wordpress.org/wp-content/plugins/wporg-gp-customizations/templates/style.css?ver=1709028111' type='text/css' media='all' />
 <link rel='stylesheet' id='wp-block-library-css' href='https://translate.wordpress.org/wp-content/plugins/gutenberg/build/block-library/style.css?ver=18.0.1' type='text/css' media='all' />
 <style id='wp-block-library-inline-css' type='text/css'>
 .has-text-align-justify{text-align:justify;}
@@ -75,12 +75,12 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 .wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
 :where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
 </style>
-<link rel='stylesheet' id='translation-events-css-css' href='https://translate.wordpress.org/wp-content/plugins/wporg-gp-translation-events/assets/css/translation-events.css?ver=1713271452' type='text/css' media='all' />
-<link rel='stylesheet' id='wporg-global-fonts-css' href='https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/global-fonts/style.css?ver=1700434948' type='text/css' media='all' />
-<link rel='stylesheet' id='wporg-global-header-footer-css' href='https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/blocks/global-header-footer/build/style.css?ver=1709680874' type='text/css' media='all' />
+<link rel='stylesheet' id='translation-events-css-css' href='https://translate.wordpress.org/wp-content/plugins/wporg-gp-translation-events/assets/css/translation-events.css?ver=1713271507' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-global-fonts-css' href='https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/global-fonts/style.css?ver=1700435029' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-global-header-footer-css' href='https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/blocks/global-header-footer/build/style.css?ver=1709681084' type='text/css' media='all' />
 <script type="text/javascript" id="translation-events-js-js-extra">
 /* <![CDATA[ */
-var $translation_event = {"url":"https:\/\/translate.wordpress.org\/wp-admin\/admin-ajax.php","_event_nonce":"10c73ba07d"};
+var $translation_event = {"url":"https:\/\/translate.wordpress.org\/wp-admin\/admin-ajax.php","_event_nonce":"6230556b3d"};
 /* ]]> */
 </script>
 <script type='text/javascript' src='https://translate.wordpress.org/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core,jquery-migrate,wp-polyfill&amp;ver=6.6-alpha-58044'></script>
@@ -92,8 +92,8 @@ var $translation_event = {"url":"https:\/\/translate.wordpress.org\/wp-admin\/ad
 wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://translate.wordpress.org/wp-content/plugins/glotpress/assets/js/common.min.js?ver=1690294586-1" id="gp-common-js"></script>
-<script type="text/javascript" src="https://translate.wordpress.org/wp-content/plugins/wporg-gp-translation-events/assets/js/translation-events.js?ver=1713188441" id="translation-events-js-js"></script>
+<script type="text/javascript" src="https://translate.wordpress.org/wp-content/plugins/glotpress/assets/js/common.min.js?ver=1690294647-1" id="gp-common-js"></script>
+<script type="text/javascript" src="https://translate.wordpress.org/wp-content/plugins/wporg-gp-translation-events/assets/js/translation-events.js?ver=1713188505" id="translation-events-js-js"></script>
 <link rel="https://api.w.org/" href="https://translate.wordpress.org/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://translate.wordpress.org/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.6-alpha-58044" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Stream WordPress user activity plugin v4.0.0 -->
@@ -461,7 +461,7 @@ _stq.push([ "view", JSON.parse("{\"v\":\"ext\",\"blog\":\"124342649\",\"post\":\
 _stq.push([ "clickTrackerInit", "124342649", "0" ]);
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/blocks/global-header-footer/js/view.js?ver=1697687539" id="wporg-global-header-script-js"></script>
+<script type="text/javascript" src="https://translate.wordpress.org/wp-content/mu-plugins/pub-sync/blocks/global-header-footer/js/view.js?ver=1697687698" id="wporg-global-header-script-js"></script>
 <script type="text/javascript">
 		jQuery('.glossary-links').prepend('<a href="/projects/wp-plugins/fakerpress/dev/de-formal/default/export-translations/playground/" style="font-weight: 600;">Translate Live</a> <strong class="separator">•</strong> ');
 	</script>	<script>
