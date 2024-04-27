@@ -27,7 +27,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 
 		<?php
 		function get_wp_nav_menu( $theme_location = 'dashboard-guest-menu', $container_class = '' ) {
-			return wp_nav_menu( [ 
+			return wp_nav_menu( [
 				'theme_location'  => $theme_location,
 				'container_class' => 'bbc-default-menu-container ' . $container_class,
 				'container_id'    => 'bbc-default-menu-container',
@@ -47,6 +47,11 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 				get_wp_nav_menu( 'dashboard-investor-menu', 'd-none d-lg-block' );
 				break;
 			case Nh_User::ADMIN:
+			case Nh_User::CMS:
+			case Nh_User::SEO:
+			case Nh_User::WEBMASTER:
+			case Nh_User::REVIEWER:
+			case Nh_User::TRANSLATOR:
 				get_wp_nav_menu( 'dashboard-admin-menu', 'd-none d-lg-block' );
 				break;
 			default:
@@ -61,8 +66,8 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 					<li class="nav-item">
 						<?php
 						echo Nh_Forms::get_instance()
-							->create_form( [ 
-								'search' => [ 
+							->create_form( [
+								'search' => [
 									'class'       => 'm-0 p-0 ninja-s',
 									'type'        => 'text',
 									'name'        => 's',
@@ -71,7 +76,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 									'after'       => '<i class="bbc-search2 ninja-header-search-icon"></i>',
 									'order'       => 0,
 								],
-							], [ 
+							], [
 								'action' => apply_filters( 'nhml_permalink', home_url() ),
 								'class'  => Nh::_DOMAIN_NAME . '-header-search-form',
 								'id'     => Nh::_DOMAIN_NAME . '_header_search_form',
