@@ -632,7 +632,9 @@
 
 
             new Nh_Ajax_Response(TRUE, __('You have been logged in successfully.', 'ninja'), [
-                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard')))
+                'redirect_url' => apply_filters('nhml_permalink', get_permalink(get_page_by_path('dashboard'))),
+                'test' => $user->profile->taxonomy['industry'] ,
+                'test2' => $user->profile->meta_data,
             ]);
         }
 
