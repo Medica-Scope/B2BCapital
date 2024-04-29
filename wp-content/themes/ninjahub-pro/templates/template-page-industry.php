@@ -240,7 +240,7 @@ $opportunity_obj = new Nh_Opportunity();
 
 
 				'size_of_investment'                   => [
-					'class'   => 'container pt-4' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'class'   => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'container pt-4 d-none' : 'container pt-4',
 					'type'    => 'radio',
 					'name'    => 'size_of_investment',
 					'title'   => __( '- What is the size of your investment ?', 'ninja' ),
@@ -280,7 +280,7 @@ $opportunity_obj = new Nh_Opportunity();
 				],
 
 				'investment_criteria'                => [
-					'class'       => 'pt-1 ' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'pt-1 d-none' : 'pt-1',
 					'type'        => 'text',
 					'label'       => __('- What is Your Investment criteria?', 'ninja'),
 					'name'        => 'investment_criteria',
@@ -290,7 +290,7 @@ $opportunity_obj = new Nh_Opportunity();
 					'order'       => 35,
 				],
 				'external_or_long_term'                => [
-					'class'   => 'container pt-4' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'class'   => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'container pt-4 d-none' : 'container pt-4',
 					'type'    => 'radio',
 					'name'    => 'external_or_long_term',
 					'title'   => __( '- External or long-term?', 'ninja' ),
@@ -319,7 +319,7 @@ $opportunity_obj = new Nh_Opportunity();
 					'order'       => 35,
 				],
 				'buying_shares'                => [
-					'class'   => 'container pt-4' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'class'   => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'container pt-4 d-none' : 'container pt-4',
 					'type'    => 'radio',
 					'name'    => 'buying_shares',
 					'title'   => __( '- Investing in companies by entering in a capital increase or buying shares from shareholders?', 'ninja' ),
