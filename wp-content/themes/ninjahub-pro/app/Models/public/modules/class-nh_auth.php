@@ -1130,8 +1130,8 @@
         public function after_nextend_register($user_id)
         {
             $profile_obj         = new Nh_Profile();
-            $profile_obj->author = $user_id;
-            $wp_user_obj         = get_user_by('ID', $user_id);
+            $profile_obj->author = (int)$user_id;
+            $wp_user_obj         = get_user_by('id', $user_id);
             if (!empty($_COOKIE['user_type'])) {
                 $wp_user_obj->set_role($_COOKIE['user_type']);
             }
