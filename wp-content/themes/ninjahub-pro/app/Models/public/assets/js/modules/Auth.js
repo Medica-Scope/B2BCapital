@@ -280,7 +280,8 @@ class NhAuth extends Nh
                 $('input').prop('disabled', false);
                 if (res.success) {
                     UiCtrl.notices($el, res.msg, 'success');
-                    window.location.href = res.data.redirect_url;
+                    console.log(res);
+                    // window.location.href = res.data.redirect_url;
                 } else {
                     UiCtrl.notices($el, res.msg);
                 }
