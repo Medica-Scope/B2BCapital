@@ -1131,18 +1131,19 @@
         {
             $profile_obj         = new Nh_Profile();
             $profile_obj->author = (int)$user_id;
-            $wp_user_obj         = get_user_by('id', $user_id);
+            $wp_user_obj         = get_user_by('ID', $user_id);
             if (!empty($_COOKIE['user_type'])) {
                 $wp_user_obj->set_role($_COOKIE['user_type']);
             }
             $profile_obj->title = $wp_user_obj->display_name;
-            $profile_obj->insert();
-            $user = Nh_User::get_user_by('id', $user_id);
+            $profile_id = $profile_obj->insert();
+            $user = Nh_User::get_user_by('ID', $user_id);
             $user->set_user_meta('email_verification_status', 1, TRUE);
             $user->set_user_meta('account_authentication_status', 1, TRUE);
             $user->set_user_meta('account_verification_status', 1, TRUE);
             $user->set_user_meta('verification_key', '', TRUE);
             $user->set_user_meta('verification_expire_date', '', TRUE);
+            $user->set_user_meta('profile_id', $profile_id, TRUE);
             $user->update();
 
         }
