@@ -240,7 +240,7 @@ $opportunity_obj = new Nh_Opportunity();
 
 
 				'size_of_investment'                   => [
-					'class'   => 'container ' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '' . Nh_User::get_user_role(),
+					'class'   => 'container dasdasdasd' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '' . Nh_User::get_user_role(),
 					'type'    => 'radio',
 					'name'    => 'size_of_investment',
 					'title'   => __( '- What is the size of your investment ?', 'ninja' ),
