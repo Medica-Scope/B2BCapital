@@ -1097,11 +1097,11 @@
                 $profile_id  = get_user_meta($user_ID, 'profile_id', TRUE);
                 $profile_obj = new Nh_Profile();
                 $profile     = $profile_obj->get_by_id((int)$profile_id);
-                if (!isset($profile->taxonomy['industry']) || empty($profile->taxonomy['industry'])) {
-                    $url = apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/industry')));
-                    wp_safe_redirect($url);
-                    exit();
-                }
+//                if (!isset($profile->taxonomy['industry']) || empty($profile->taxonomy['industry'])) {
+//                    $url = apply_filters('nhml_permalink', get_permalink(get_page_by_path('my-account/industry')));
+//                    wp_safe_redirect($url);
+//                    exit();
+//                }
             }
 
 
