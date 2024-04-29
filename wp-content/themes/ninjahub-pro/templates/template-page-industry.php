@@ -238,15 +238,45 @@ $opportunity_obj = new Nh_Opportunity();
 					'order'   => 30,
 				],
 
-				'size_of_investment'                => [
-					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
-					'type'        => 'text',
-					'label'       => __('- Size of investment', 'ninja'),
-					'name'        => 'size_of_investment',
-					'value'       => '',
-					'required'    => TRUE,
-					'placeholder' => __('Enter your answer', 'ninja'),
-					'order'       => 35,
+
+				'size_of_investment'                   => [
+					'class'   => 'container ' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'    => 'radio',
+					'name'    => 'size_of_investment',
+					'title'   => __( '- Size of investment', 'ninja' ),
+					'choices' => [
+						[
+							'class'      => '',
+							'label'      => __( '0 - 1,000,000', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'tear-1',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( '1,000,000 - 10,000,000', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'tear-2',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( '> 10,000,000', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'tear-3',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						]
+					],
+					'order'   => 35,
 				],
 
 				'investment_criteria'                => [
@@ -260,28 +290,63 @@ $opportunity_obj = new Nh_Opportunity();
 					'order'       => 35,
 				],
 				'external_or_long_term'                => [
-					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
-					'type'        => 'text',
-					'label'       => __('- External or long-term?', 'ninja'),
-					'name'        => 'external_or_long_term',
-					'value'       => '',
-					'required'    => TRUE,
-					'placeholder' => __('Enter your answer', 'ninja'),
+					'class'   => 'container ' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'    => 'radio',
+					'name'    => 'external_or_long_term',
+					'title'   => __( '- External or long-term?', 'ninja' ),
+					'choices' => [
+						[
+							'class'      => '',
+							'label'      => __( 'External', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'external',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Long term', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'long-term',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						]
+					],
 					'order'       => 35,
 				],
 				'buying_shares'                => [
-					'class'       => Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
-					'type'        => 'text',
-					'label'       => __('- Investing in companies by entering in a capital increase or buying shares from shareholders?', 'ninja'),
-					'name'        => 'buying_shares',
-					'value'       => '',
-					'required'    => TRUE,
-					'placeholder' => __('Enter your answer', 'ninja'),
+					'class'   => 'container ' . Nh_User::get_user_role() !== Nh_User::INVESTOR ? 'd-none' : '',
+					'type'    => 'radio',
+					'name'    => 'buying_shares',
+					'title'   => __( '- Investing in companies by entering in a capital increase or buying shares from shareholders?', 'ninja' ),
+					'choices' => [
+						[
+							'class'      => '',
+							'label'      => __( 'Capital increase', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'capital-increase',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						],
+						[
+							'class'      => '',
+							'label'      => __( 'Buying shares from shareholders', 'ninja' ),
+							'before'     => '',
+							'after'      => '',
+							'value'      => 'buying-shares-from-shareholders',
+							'extra_attr' => [],
+							'checked'    => '',
+							'order'      => 0
+						]
+					],
 					'order'       => 35,
 				],
-
-
-
 				'industries_nonce'                 => [
 					'class' => '',
 					'type'  => 'nonce',
