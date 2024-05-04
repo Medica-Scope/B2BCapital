@@ -624,10 +624,12 @@
             $user                                = Nh_User::get_current_user();
             $user->profile->taxonomy['industry'] = $industries;
             $user->profile->set_meta_data('target_investment', $target_investment);
-            $user->profile->set_meta_data('size_of_investment', $size_of_investment);
-            $user->profile->set_meta_data('investment_criteria', $investment_criteria);
-            $user->profile->set_meta_data('external_or_long_term', $external_or_long_term);
-            $user->profile->set_meta_data('buying_shares', $buying_shares);
+            if (self::get_user_role() === self::INVESTOR) {
+                $user->profile->set_meta_data('size_of_investment', $size_of_investment);
+                $user->profile->set_meta_data('investment_criteria', $investment_criteria);
+                $user->profile->set_meta_data('external_or_long_term', $external_or_long_term);
+                $user->profile->set_meta_data('buying_shares', $buying_shares);
+            }
             $user->profile->update();
 
 

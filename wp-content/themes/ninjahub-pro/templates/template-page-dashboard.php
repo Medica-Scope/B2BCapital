@@ -307,7 +307,7 @@
                                         <?= __('Latest Opportunities', 'ninja') ?>
                                     </h3>
                                     <p>
-                                        <?= __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores eaque eos fuga neque, pariatur.', 'ninja') ?>
+                                        <?= __('Wonderful investment opportunities that you will have only through us!.', 'ninja') ?>
                                     </p>
                                 </div>
                                 <div class="opportunity-actions col-6">
