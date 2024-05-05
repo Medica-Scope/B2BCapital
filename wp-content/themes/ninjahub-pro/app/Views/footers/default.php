@@ -22,6 +22,6 @@
 
 <footer>
 	<div class="section-footer">
-		<p class="text-center p-2"><?= __('Copyright © 2024 B2B All rights reserved.', 'ninja'); ?></p>
+		<p class="text-center p-2"><?= __('Copyright © 2024 B2B All rights reserved. Powerd by MedicaScope', 'ninja'); ?></p>
 	</div>
 </footer>

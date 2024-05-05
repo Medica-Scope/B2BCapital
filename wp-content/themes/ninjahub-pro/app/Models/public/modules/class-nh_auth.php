@@ -624,10 +624,12 @@
             $user                                = Nh_User::get_current_user();
             $user->profile->taxonomy['industry'] = $industries;
             $user->profile->set_meta_data('target_investment', $target_investment);
-            $user->profile->set_meta_data('size_of_investment', $size_of_investment);
-            $user->profile->set_meta_data('investment_criteria', $investment_criteria);
-            $user->profile->set_meta_data('external_or_long_term', $external_or_long_term);
-            $user->profile->set_meta_data('buying_shares', $buying_shares);
+            if (self::get_user_role() === self::INVESTOR) {
+                $user->profile->set_meta_data('size_of_investment', $size_of_investment);
+                $user->profile->set_meta_data('investment_criteria', $investment_criteria);
+                $user->profile->set_meta_data('external_or_long_term', $external_or_long_term);
+                $user->profile->set_meta_data('buying_shares', $buying_shares);
+            }
             $user->profile->update();
 
 
@@ -1130,19 +1132,20 @@
         public function after_nextend_register($user_id)
         {
             $profile_obj         = new Nh_Profile();
-            $profile_obj->author = $user_id;
-            $wp_user_obj         = get_user_by('id', $user_id);
+            $profile_obj->author = (int)$user_id;
+            $wp_user_obj         = get_user_by('ID', $user_id);
             if (!empty($_COOKIE['user_type'])) {
                 $wp_user_obj->set_role($_COOKIE['user_type']);
             }
             $profile_obj->title = $wp_user_obj->display_name;
-            $profile_obj->insert();
-            $user = Nh_User::get_user_by('id', $user_id);
+            $profile = $profile_obj->insert();
+            $user = Nh_User::get_user_by('ID', $user_id);
             $user->set_user_meta('email_verification_status', 1, TRUE);
             $user->set_user_meta('account_authentication_status', 1, TRUE);
             $user->set_user_meta('account_verification_status', 1, TRUE);
             $user->set_user_meta('verification_key', '', TRUE);
             $user->set_user_meta('verification_expire_date', '', TRUE);
+            $user->set_user_meta('profile_id', $profile->ID, TRUE);
             $user->update();
 
         }

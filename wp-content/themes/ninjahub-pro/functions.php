@@ -53,7 +53,7 @@ class Nh {
 
 
 	public function __construct() {
-		self::$_VERSION = self::_ENVIRONMENT === 'development' ? rand(0, 10,) . '.' . rand(0, 10,) . '.' . rand(0, 10,) : '0.1.0';
+		self::$_VERSION = self::_ENVIRONMENT === 'development' ? rand(0, 10,) . '.' . rand(0, 10,) . '.' . rand(0, 10,) : '1.2.0';
 
         Nh_Init::get_instance()
 			->run( 'core' );

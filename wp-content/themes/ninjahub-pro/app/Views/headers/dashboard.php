@@ -93,7 +93,7 @@ Nh_Hooks::enqueue_style( Nh::_DOMAIN_NAME . '-public-style-header-dashboard', Nh
 								<?= sprintf( _x( 'Welcome, <b>%s</b>!', 'ninja' ), Nh_User::get_current_user()->display_name ); ?>
 							</span>
 							<span class="btn-profile-desc">
-								<?= __( 'Standard dummy text ever since the 1500s.', 'ninja' ); ?>
+								<?= __( 'Seize the world of opportunities.', 'ninja' ); ?>
 							</span>
 						</a>
 						<ul class="dropdown-menu">

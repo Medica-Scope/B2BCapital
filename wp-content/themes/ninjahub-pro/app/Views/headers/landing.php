@@ -95,10 +95,6 @@ $active_link  = $current_slug;
 						<a href="<?= Nh_Init::$_NH_CONFIGURATION['social']['ninja_social_ig']; ?>" target="_blank"
 							class="social-link"><i class="social-icon bbc-instagram"></i></a>
 					</li>
-					<li class="social-item">
-						<a href="<?= Nh_Init::$_NH_CONFIGURATION['social']['ninja_social_tw']; ?>" target="_blank"
-							class="social-link"><i class="social-icon bbc-twitter"></i></a>
-					</li>
 				</ul>
 				<div class="user-area">
 					<?php
